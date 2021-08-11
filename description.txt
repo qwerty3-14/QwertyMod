@@ -1,0 +1,57 @@
+A general content mod, I add whatever I feel like adding. I try to make content in the mod feel unique.
+Currently the mod has:
+-8 Bosses with plenty of drops
+-A new structure/Biome the sky fortress!
+-Rhuthinium and Lune ore
+-some other items scattered throughout
+
+I'm not that good of a spriter so here I'll give thanks to the spriters who helped!
+-Havoc
+-Liquidated Assets
+-SUS
+-Darkpuppey
+-FazerGamer
+-GamingWithZack
+-ShockedHorizon5
+-FailureOfMankind
+-Raz
+-Kerdo
+-Phobostar
+-Donmor
+-Olive
+
+Extra thanks
+-Turquiose (for writing custom themes)
+-musicman (polar exterminator theme)
+
+
+Changes from Qwerty's Bosses and Items 1
+-It's for Tmodloader 1.4!!
+-Divine Light's fight got a complete overhaul
+-2 new items: Mech Crossbow Staff and Discipline
+-Lune archer minions have new AI
+-Chloro sniper minions have a new AI
+-Lune staff has been reworked
+-Lune Boomerang has been reworked
+-Staff of Job has been reworked
+-Lune ore now generates in cresent moon shapedd structures high in the sky, requires nightmare pick or better to mine (experimental)
+-Quick morphs now do summon damage (experimental)
+
+Balance Changes:
+-Arcane armor breaker now only give 10 armor penetration and is more expensive
+-Rhtuhinium scepter use time 5->6 damage 14->15 (overall nerf)
+-The Massacre now grants immunity to hostile projectiles when killing enemies
+-Black hole staff 40->80 damage, attacks faster
+-Plasma cannon use time 25->12, mana cost 11->7
+-Possesing bow shoots much faster
+-Imperious The IV does more damage and is larger, but swings a bit slower
+-Leech rune staff damage increased
+-hydra head staff damage decreased
+
+
+Many of the features from Qwerty's bosses and items 1 still haven't been ported yet. Please be patient while I am working on them. Noteably:
+-The Dino militia event
+-Armor sets
+-Dungeon items
+-Dash items
+-Custom Music and Sounds (Tmodloader alpha doesn't support them yet)
