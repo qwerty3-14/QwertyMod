@@ -32,6 +32,14 @@ using QwertyMod.Content.Items.Equipment.Accessories.Sword;
 using QwertyMod.Content.Items.Weapon.Melee.Javelin.Imperium;
 using QwertyMod.Content.Items.Weapon.Morphs.Swordquake;
 using QwertyMod.Content.NPCs.Bosses.FortressBoss;
+using QwertyMod.Common.Playerlayers;
+using QwertyMod.Content.Items.Equipment.Armor.Hydra;
+using QwertyMod.Content.Items.Equipment.Armor.Shaman;
+using QwertyMod.Content.Items.Equipment.Armor.Rhuthinium;
+using QwertyMod.Content.Items.Equipment.Armor.Lune;
+using QwertyMod.Content.Items.Equipment.Armor.Caelite;
+using QwertyMod.Content.Items.Equipment.Armor.Gale;
+using QwertyMod.Content.Items.Equipment.Armor.Vitallum;
 
 namespace QwertyMod
 {
@@ -48,6 +56,21 @@ namespace QwertyMod
         public const string HydraHead2 = "QwertyMod/Content/NPCs/Bosses/Hydra/MapHead1";
         public const string HydraHead3 = "QwertyMod/Content/NPCs/Bosses/Hydra/MapHead1";
         public static ModKeybind YetAnotherSpecialAbility;
+
+        public static int hydraLegMale = 0;
+        public static int hydraLegFemale = 0;
+        public static int shamaLegMale = 0;
+        public static int shamanLegFemale = 0;
+        public static int LuneLegMale = 0;
+        public static int LuneLegFemale = 0;
+        public static int RhuthiniumLegMale = 0;
+        public static int RhuthiniumLegFemale = 0;
+        public static int CaeliteLegMale = 0;
+        public static int CaeliteLegFemale = 0;
+        public static int GaleLegMale = 0;
+        public static int GaleLegFemale = 0;
+        public static int VitLegMale = 0;
+        public static int VitLegFemale = 0;
         public override void Load()
         {
             AMLoot = new Deck<int>();
@@ -89,6 +112,20 @@ namespace QwertyMod
 
             if (!Main.dedServ)
             {
+                hydraLegMale = AddEquipTexture(GetModItem(ItemType<HydraLeggings>()), EquipType.Legs, "QwertyMod/Content/Items/Equipment/Armor/Hydra/HydraLeggings_Legs");
+                hydraLegFemale = AddEquipTexture(GetModItem(ItemType<HydraLeggings>()), EquipType.Legs, "QwertyMod/Content/Items/Equipment/Armor/Hydra/HydraLeggings_FemaleLegs");
+                shamaLegMale = AddEquipTexture(GetModItem(ItemType<ShamanLegs>()), EquipType.Legs, "QwertyMod/Content/Items/Equipment/Armor/Shaman/ShamanLegs_Legs");
+                shamanLegFemale = AddEquipTexture(GetModItem(ItemType<ShamanLegs>()), EquipType.Legs, "QwertyMod/Content/Items/Equipment/Armor/Shaman/ShamanLegs_FemaleLegs");
+                LuneLegMale = AddEquipTexture(GetModItem(ItemType<LuneLeggings>()), EquipType.Legs, "QwertyMod/Content/Items/Equipment/Armor/Lune/LuneLeggings_Legs");
+                LuneLegFemale = AddEquipTexture(GetModItem(ItemType<LuneLeggings>()), EquipType.Legs, "QwertyMod/Content/Items/Equipment/Armor/Lune/LuneLeggings_FemaleLegs");
+                RhuthiniumLegMale = AddEquipTexture(GetModItem(ItemType<RhuthiniumGreaves>()), EquipType.Legs, "QwertyMod/Content/Items/Equipment/Armor/Rhuthinium/RhuthiniumGreaves_Legs");
+                RhuthiniumLegFemale = AddEquipTexture(GetModItem(ItemType<RhuthiniumGreaves>()), EquipType.Legs, "QwertyMod/Content/Items/Equipment/Armor/Rhuthinium/RhuthiniumGreaves_FemaleLegs");
+                CaeliteLegMale = AddEquipTexture(GetModItem(ItemType<CaeliteGreaves>()), EquipType.Legs, "QwertyMod/Content/Items/Equipment/Armor/Caelite/CaeliteGreaves_Legs");
+                CaeliteLegFemale = AddEquipTexture(GetModItem(ItemType<CaeliteGreaves>()), EquipType.Legs, "QwertyMod/Content/Items/Equipment/Armor/Caelite/CaeliteGreaves_FemaleLegs");
+                GaleLegMale = AddEquipTexture(GetModItem(ItemType<GaleSwiftRobes>()), EquipType.Legs, "QwertyMod/Content/Items/Equipment/Armor/Gale/GaleSwiftRobes_Legs");
+                GaleLegFemale = AddEquipTexture(GetModItem(ItemType<GaleSwiftRobes>()), EquipType.Legs, "QwertyMod/Content/Items/Equipment/Armor/Gale/GaleSwiftRobes_FemaleLegs");
+                VitLegMale = AddEquipTexture(GetModItem(ItemType<VitallumJeans>()), EquipType.Legs, "QwertyMod/Content/Items/Equipment/Armor/Vitallum/VitallumJeans_Legs");
+                VitLegFemale = AddEquipTexture(GetModItem(ItemType<VitallumJeans>()), EquipType.Legs, "QwertyMod/Content/Items/Equipment/Armor/Vitallum/VitallumJeans_FemaleLegs");
                 Main.QueueMainThreadAction(() =>
                 {
                     RuneSprites.BuildRunes();
@@ -96,6 +133,18 @@ namespace QwertyMod
 
             }
 
+        }
+        public override void PostSetupContent()
+        {
+            if (!Main.dedServ)
+            {
+                Main.QueueMainThreadAction(() =>
+                {
+                    OnHeadDraw.RegisterHeads();
+                    OnLegDraw.RegisterLegs();
+                    OnBodyDraw.ReigsterBodies();
+                });
+            }
         }
         public static Vector2 GetLocalCursor(int id)
         {

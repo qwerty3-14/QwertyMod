@@ -1,3 +1,4 @@
+using QwertyMod.Content.Items.Equipment.Accessories.Expert.HyperRunestone;
 using QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls;
 using QwertyMod.Content.Items.Equipment.Vanity.BossMasks;
 using QwertyMod.Content.Items.MiscMaterials;
@@ -66,7 +67,7 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
                 player.QuickSpawnItem(ItemType<AggroScroll>());
             }
 
-            //player.QuickSpawnItem(mod.ItemType("ExpertItem"));
+            player.QuickSpawnItem(ItemType<HyperRunestone>());
             player.QuickSpawnItem(73, 35);
 
             player.QuickSpawnItem(ItemType<CraftingRune>(), runeCount);

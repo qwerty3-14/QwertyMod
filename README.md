@@ -1,2 +1,0 @@
-# QwertyMod
- My Mod

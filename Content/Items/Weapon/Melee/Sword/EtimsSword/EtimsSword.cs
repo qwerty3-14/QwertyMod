@@ -260,11 +260,11 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.EtimsSword
     }
     public class GiveAntiProjectileOnKill : GlobalProjectile
     {
-        public bool yes = true;
+        public bool yes = false;
         public override bool InstancePerEntity => true;
         public override void OnHitNPC(Projectile projectile, NPC target, int damage, float knockback, bool crit)
         {
-            if(damage > target.life && !target.SpawnedFromStatue)
+            if(damage > target.life && !target.SpawnedFromStatue && projectile.GetGlobalProjectile<GiveAntiProjectileOnKill>().yes)
             {
                 Main.player[projectile.owner].AddBuff(BuffType<AntiProjectile>(), 360);
             }
@@ -276,7 +276,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.EtimsSword
         {
             base.SetStaticDefaults();
         }
-        public override bool GetDefaultVisiblity(PlayerDrawSet drawInfo)
+        public override bool GetDefaultVisibility(PlayerDrawSet drawInfo)
         {
             return true;
         }

@@ -1,0 +1,48 @@
+using Microsoft.Xna.Framework;
+using QwertyMod.Content.Items.Consumable.Tile.Bars;
+using Terraria;
+using Terraria.GameContent.Creative;
+using Terraria.ID;
+using Terraria.ModLoader;
+using static Terraria.ModLoader.ModContent;
+
+namespace QwertyMod.Content.Items.Equipment.Armor.Lune
+{
+    [AutoloadEquip(EquipType.Head)]
+    public class LuneHat : ModItem
+    {
+        public override void SetStaticDefaults()
+        {
+            DisplayName.SetDefault("Lune Hat");
+            Tooltip.SetDefault("+8% ranged crit" + "\nImproves vision");
+            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+        }
+
+        public override void SetDefaults()
+        {
+            Item.value = 20000;
+            Item.rare = 1;
+
+            Item.width = 26;
+            Item.height = 16;
+            Item.defense = 3;
+        }
+        public override void AddRecipes()
+        {
+            CreateRecipe(1).AddIngredient(ItemType<LuneBar>(), 8)
+                .AddTile(TileID.Anvils)
+                .Register();
+        }
+
+        public override void UpdateEquip(Player player)
+        {
+            player.GetCritChance(DamageClass.Ranged) += 8;
+            player.nightVision = true;
+        }
+
+        public override void DrawHair(ref bool drawHair, ref bool drawAltHair)
+        {
+            drawAltHair = true;
+        }
+    }
+}

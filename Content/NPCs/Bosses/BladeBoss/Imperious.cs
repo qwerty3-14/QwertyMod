@@ -83,7 +83,7 @@ namespace QwertyMod.Content.NPCs.Bosses.BladeBoss
             bestiaryEntry.Info.AddRange(new List<IBestiaryInfoElement>
             {
                 new MoonLordPortraitBackgroundProviderBestiaryInfoElement(), //Plain black background
-                new FlavorTextBestiaryInfoElement("The day the great conquorer fell his sword took on a life of its own...")
+                new FlavorTextBestiaryInfoElement("The day the great Conqueror fell his sword took on a life of its own...")
             });
             /*
             NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers(0)

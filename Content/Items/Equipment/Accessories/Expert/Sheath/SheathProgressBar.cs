@@ -18,7 +18,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.Sheath
         {
             base.SetStaticDefaults();
         }
-        public override bool GetDefaultVisiblity(PlayerDrawSet drawInfo)
+        public override bool GetDefaultVisibility(PlayerDrawSet drawInfo)
         {
             return true;
         }

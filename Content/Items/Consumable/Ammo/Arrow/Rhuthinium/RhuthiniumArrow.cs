@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QwertyMod.Content.Items.Consumable.Tile.Bars;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -37,7 +38,8 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Rhuthinium
         }
         public override void AddRecipes()
         {
-            CreateRecipe(100).AddIngredient(ItemID.DirtBlock)
+            CreateRecipe(100).AddIngredient(ItemType<RhuthiniumBar>())
+                .AddTile(TileID.Anvils)
                 .Register();
         }
     }

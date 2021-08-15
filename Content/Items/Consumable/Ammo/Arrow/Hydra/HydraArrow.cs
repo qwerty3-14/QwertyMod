@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QwertyMod.Content.Items.MiscMaterials;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -37,7 +38,8 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Hydra
 
         public override void AddRecipes()
         {
-            CreateRecipe(100).AddIngredient(ItemID.DirtBlock)
+            CreateRecipe(111).AddIngredient(ItemType<HydraScale>())
+                .AddTile(TileID.MythrilAnvil)
                 .Register();
         }
     }

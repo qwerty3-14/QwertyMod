@@ -20,10 +20,10 @@ namespace QwertyMod.Common.PlayerLayers
         {
             base.SetStaticDefaults();
         }
-		public override bool GetDefaultVisiblity(PlayerDrawSet drawInfo)
-		{
-			return true;
-		}
+        public override bool GetDefaultVisibility(PlayerDrawSet drawInfo)
+        {
+            return true;
+        }
 		public override Position GetDefaultPosition() => new AfterParent(PlayerDrawLayers.HeldItem);
 
         protected override void Draw(ref PlayerDrawSet drawInfo)

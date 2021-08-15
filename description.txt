@@ -25,6 +25,32 @@ Extra thanks
 -musicman (polar exterminator theme)
 
 
+Changelog
+0.2.0
+-reintroduced Caelite Armor [No longer grants recovery since the stat has been removed, defense increased to compensate]
+-reintroduced Gale Armor [Robes no longer grant a dash, conflicted too much with crystal assassin's niche]
+-reintroduced Glass Armor
+-reintroduced Hydra Armor [Setbonus now additionally grants the autosummon effect previous granted by the hydra charm, hydra charm removed]
+-reintroduced Lune Armor [Jacket removed, hat now grants crit instead of ranged velocity]
+-reintroduced Rhuthinium Armor [attack speed bonuses changed to crit chance (was worried about rounding with low use time weapons)]
+-reintroduced Shaman Armor [skull no longer increases flask duration, pants no longer grant decay effect]
+-reintroduced Vitallum Armor
+-reintroduced Hyper Runestone [cooldown increased from 2sec -> 4sec, a bit less powerful when stack with another dash item]
+-reintroduced Lune Bracelet [now just as effective during the day as night]
+-reintroduced Rhuthinium Bracelet [effect changed to douple grabling hook pull speed (works with doppleganger)]
+
+-fixed rhuthinium darts, rhuthinium arrows, and hydra arrows being crafted from dirt
+
+
+0.1.2
+-fixed polar exterminator having twice the intended health and damage in expert mode
+
+0.1.1
+-fixed bug where are projectiles could give you the 'anti projectile' buff
+
+0.1.0
+-Initial release
+
 Changes from Qwerty's Bosses and Items 1
 -It's for Tmodloader 1.4!!
 -Divine Light's fight got a complete overhaul
@@ -47,11 +73,12 @@ Balance Changes:
 -Imperious The IV does more damage and is larger, but swings a bit slower
 -Leech rune staff damage increased
 -hydra head staff damage decreased
+-lune curse critical damage 50%->20%
+-Imperial courage grants crit chance instead of attack speed (concerned about rounding with low use time wepons)
 
 
 Many of the features from Qwerty's bosses and items 1 still haven't been ported yet. Please be patient while I am working on them. Noteably:
 -The Dino militia event
--Armor sets
+-Duke Fishron items
 -Dungeon items
--Dash items
 -Custom Music and Sounds (Tmodloader alpha doesn't support them yet)

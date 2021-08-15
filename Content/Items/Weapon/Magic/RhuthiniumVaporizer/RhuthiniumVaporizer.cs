@@ -191,7 +191,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RhuthiniumVaporizer
         {
             base.SetStaticDefaults();
         }
-        public override bool GetDefaultVisiblity(PlayerDrawSet drawInfo)
+        public override bool GetDefaultVisibility(PlayerDrawSet drawInfo)
         {
             return true;
         }

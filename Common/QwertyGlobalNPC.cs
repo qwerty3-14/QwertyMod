@@ -15,13 +15,9 @@ namespace QwertyMod.Common
         public override bool PreAI(NPC npc)
         {
             age++;
-            //Main.NewText(npc.lifeRegenExpectedLossPerSecond);
-            if ( npc.HasBuff(BuffType<Stunned>()))
+            if (npc.HasBuff(BuffType<Stunned>()))
             {
-                if (npc.HasBuff(BuffType<Stunned>()))
-                {
-                    npc.velocity = Vector2.Zero;
-                }
+                npc.velocity = Vector2.Zero;
                 return false;
             }
             return base.PreAI(npc);

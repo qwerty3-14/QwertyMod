@@ -63,8 +63,8 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
 
         public override void ScaleExpertStats(int numPlayers, float bossLifeScale)
         {
-            NPC.damage = 60;
-            NPC.lifeMax = (int)(2000 * bossLifeScale);
+            NPC.damage = 30;
+            NPC.lifeMax = (int)(1000 * bossLifeScale);
         }
 
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
