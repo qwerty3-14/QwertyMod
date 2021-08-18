@@ -26,6 +26,13 @@ Extra thanks
 
 
 Changelog
+0.3.0
+-The Dino Militia is back!
+
+-Crimson rod's clouds can now be destroyed by divine light's projectiles
+-Fixed bug where ammo wouldn't be consumed...
+
+
 0.2.0
 -reintroduced Caelite Armor [No longer grants recovery since the stat has been removed, defense increased to compensate]
 -reintroduced Gale Armor [Robes no longer grant a dash, conflicted too much with crystal assassin's niche]

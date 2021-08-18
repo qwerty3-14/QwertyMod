@@ -5,6 +5,7 @@ using QwertyMod.Content.Items.Consumable.Tile.Bars;
 using QwertyMod.Content.NPCs.Bosses.AncientMachine;
 using Terraria;
 using Terraria.Audio;
+using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
@@ -18,6 +19,7 @@ namespace QwertyMod.Content.Items.Consumable.BossSummon
         {
             Tooltip.SetDefault("Summons The Ancient Machine");
             ItemID.Sets.SortingPriorityBossSpawns[Item.type] = 13; // This helps sort inventory know this is a boss summoning Item.
+            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 3;
         }
 
 

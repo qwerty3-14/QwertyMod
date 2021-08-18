@@ -30,7 +30,7 @@ namespace QwertyMod.Common
             customDashRam = 0;
             hyperRune = false;
         }
-        public void SetDash(int speed)
+        public void SetDash(float speed)
         {
             if(speed > Base)
             {

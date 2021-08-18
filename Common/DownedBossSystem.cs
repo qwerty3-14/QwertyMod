@@ -18,6 +18,7 @@ namespace QwertyMod.Common
 		public static bool downedRuneGhost = false;
 		public static bool downedDivineLight = false;
 		public static bool downedOLORD = false;
+		public static bool downedDinos = false;
 		//public static bool downedOtherBoss = false;
 
 		public override void OnWorldLoad()
@@ -30,6 +31,7 @@ namespace QwertyMod.Common
             downedRuneGhost = false;
 			downedDivineLight = false;
 			downedOLORD = false;
+			downedDinos = false;
 			//downedOtherBoss = false;
 		}
 
@@ -43,6 +45,7 @@ namespace QwertyMod.Common
 			downedRuneGhost = false;
 			downedDivineLight = false;
 			downedOLORD = false;
+			downedDinos = false;
 			//downedOtherBoss = false;
 		}
 
@@ -82,6 +85,10 @@ namespace QwertyMod.Common
             {
 				downed.Add("downedOLORD");
             }
+			if(downedDinos)
+            {
+				downed.Add("downedDinos");
+            }
 			//if (downedOtherBoss) {
 			//	downed.Add("downedOtherBoss");
 			//}
@@ -104,6 +111,7 @@ namespace QwertyMod.Common
 			downedRuneGhost = downed.Contains("downedRuneGhost");
 			downedDivineLight = downed.Contains("downedDivineLight");
 			downedOLORD = downed.Contains("downedOLORD");
+			downedDinos = downed.Contains("downedDinos");
 			//downedOtherBoss = downed.Contains("downedOtherBoss");
 		}
 
@@ -121,7 +129,9 @@ namespace QwertyMod.Common
 			flags[7] = downedOLORD;
 			//flags[1] = downedOtherBoss;
 			writer.Write(flags);
-
+			flags = new BitsByte();
+			flags[0] = downedDinos;
+			writer.Write(flags);
 			/*
 			Remember that Bytes/BitsByte only have up to 8 entries. If you have more than 8 flags you want to sync, use multiple BitsByte:
 				This is wrong:
@@ -178,6 +188,8 @@ namespace QwertyMod.Common
 			downedRuneGhost = flags[5];
 			downedDivineLight = flags[6];
 			downedOLORD = flags[7];
+			flags = reader.ReadByte();
+			downedDinos = flags[0];
 			//downedOtherBoss = flags[1];
 
 			// As mentioned in NetSend, BitBytes can contain up to 8 values. If you have more, be sure to read the additional data:

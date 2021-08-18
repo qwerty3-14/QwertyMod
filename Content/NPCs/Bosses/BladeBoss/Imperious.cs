@@ -83,16 +83,8 @@ namespace QwertyMod.Content.NPCs.Bosses.BladeBoss
             bestiaryEntry.Info.AddRange(new List<IBestiaryInfoElement>
             {
                 new MoonLordPortraitBackgroundProviderBestiaryInfoElement(), //Plain black background
-                new FlavorTextBestiaryInfoElement("The day the great Conqueror fell his sword took on a life of its own...")
+                new FlavorTextBestiaryInfoElement("The day the Great Conqueror fell his sword took on a life of its own...")
             });
-            /*
-            NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers(0)
-            {
-                CustomTexturePath = "QwertyMod/Content/NPCs/Bosses/AncientMachine/AncientMissile_Checklist",
-                PortraitScale = 0.6f, //Portrait refers to the full picture when clicking on the icon in the bestiary
-                PortraitPositionYOverride = 0f,
-            };
-            */
         }
         public override bool? CanBeHitByItem(Player player, Item item)
         {

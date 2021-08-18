@@ -40,6 +40,7 @@ using QwertyMod.Content.Items.Equipment.Armor.Lune;
 using QwertyMod.Content.Items.Equipment.Armor.Caelite;
 using QwertyMod.Content.Items.Equipment.Armor.Gale;
 using QwertyMod.Content.Items.Equipment.Armor.Vitallum;
+using QwertyMod.Content;
 
 namespace QwertyMod
 {
@@ -183,6 +184,15 @@ namespace QwertyMod
                     Vector2 summonAt = reader.ReadVector2();
                     int npcID = NPC.NewNPC((int)summonAt.X, (int)summonAt.Y, NPCType<FortressBoss>());
                     break;
+                case ModMessageType.StartDinoEvent:
+                    DinoEvent.EventActive = true;
+                    DinoEvent.DinoKillCount = 0;
+                    if (Main.netMode == NetmodeID.Server)
+                    {
+                        NetMessage.SendData(MessageID.WorldData); // Immediately inform clients of new world state.
+                    }
+
+                    break;
             }
         }
     }
@@ -190,6 +200,7 @@ namespace QwertyMod
     {
 
         DivineCall,
-        UpdateLocalCursor
+        UpdateLocalCursor,
+        StartDinoEvent
     }
 }

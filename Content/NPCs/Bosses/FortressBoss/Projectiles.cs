@@ -54,7 +54,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
             for (int p = 0; p < 1000; p++)
             {
                 clearCheck = Main.projectile[p];
-                if (clearCheck.friendly && !clearCheck.sentry && clearCheck.minionSlots <= 0 && Collision.CheckAABBvAABBCollision(Projectile.position, Projectile.Size, clearCheck.position, clearCheck.Size))
+                if ((clearCheck.friendly || clearCheck.CountsAsClass(DamageClass.Magic) || clearCheck.type == ProjectileID.BloodCloudMoving || clearCheck.type == ProjectileID.BloodCloudRaining) && !clearCheck.sentry && clearCheck.minionSlots <= 0 && Collision.CheckAABBvAABBCollision(Projectile.position, Projectile.Size, clearCheck.position, clearCheck.Size))
                 {
                     clearCheck.Kill();
                 }
@@ -110,7 +110,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
             for (int p = 0; p < 1000; p++)
             {
                 clearCheck = Main.projectile[p];
-                if (clearCheck.friendly && !clearCheck.sentry && clearCheck.velocity != Vector2.Zero && clearCheck.damage > 0 && clearCheck.minionSlots <= 0 && Collision.CheckAABBvAABBCollision(Projectile.position, Projectile.Size, clearCheck.position, clearCheck.Size))
+                if ((clearCheck.friendly || clearCheck.CountsAsClass(DamageClass.Magic) || clearCheck.type == ProjectileID.BloodCloudMoving || clearCheck.type == ProjectileID.BloodCloudRaining) && !clearCheck.sentry && clearCheck.velocity != Vector2.Zero && clearCheck.damage > 0 && clearCheck.minionSlots <= 0 && Collision.CheckAABBvAABBCollision(Projectile.position, Projectile.Size, clearCheck.position, clearCheck.Size))
                 {
                     clearCheck.Kill();
                 }

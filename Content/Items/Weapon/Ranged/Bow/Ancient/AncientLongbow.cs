@@ -182,8 +182,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.Ancient
                 if (timer == 0)
                 {
                    
-                    int inAmmo;
-                    player.PickAmmo(player.HeldItem, ref Ammo, ref speed, ref firing, ref weaponDamage, ref weaponKnockback, out inAmmo);
+                    player.PickAmmo(player.HeldItem, ref Ammo, ref speed, ref firing, ref weaponDamage, ref weaponKnockback, out _);
 
                     if (Ammo == ProjectileID.WoodenArrowFriendly)
                     {
