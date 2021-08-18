@@ -24,6 +24,7 @@ using QwertyMod.Common;
 using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.DataStructures;
+using QwertyMod.Content.Items.MiscMaterials;
 
 namespace QwertyMod.Content.NPCs.Bosses.BladeBoss
 {
@@ -139,7 +140,7 @@ namespace QwertyMod.Content.NPCs.Bosses.BladeBoss
             LeadingConditionRule notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
 
             //Notice we use notExpertRule.OnSuccess instead of npcLoot.Add so it only applies in normal mode
-            notExpertRule.OnSuccess(ItemDropRule.OneFromOptionsNotScalingWithLuck(1, ItemType<SwordsmanBadge>(), ItemType<ImperiousTheIV>(), ItemType<Imperium>(), ItemType<SwordStormStaff>(), ItemType<Arsenal>(), ItemType<Discipline>(), ItemType<SwordMinionStaff>(), ItemType<Swordquake>()));
+            notExpertRule.OnSuccess(ItemDropRule.OneFromOptionsNotScalingWithLuck(1, ItemType<BladedArrowShaft>(), ItemType<ImperiousTheIV>(), ItemType<Imperium>(), ItemType<SwordStormStaff>(), ItemType<Arsenal>(), ItemType<Discipline>(), ItemType<SwordMinionStaff>(), ItemType<Swordquake>()));
             //Finally add the leading rule
             npcLoot.Add(notExpertRule);
 
@@ -147,11 +148,11 @@ namespace QwertyMod.Content.NPCs.Bosses.BladeBoss
             //notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
             //notExpertRule.OnSuccess(ItemDropRule.Common(ItemType<PolarMask>(), 7));
             //npcLoot.Add(notExpertRule);
-
+            npcLoot.Add(ItemDropRule.Common(ItemType<SwordsmanBadge>(), 5));
 
 
             //Trophies are spawned with 1/10 chance
-            npcLoot.Add(ItemDropRule.Common(ItemType<BladeBossTrophy>(), 1));
+            npcLoot.Add(ItemDropRule.Common(ItemType<BladeBossTrophy>(), 10));
 
 
             base.ModifyNPCLoot(npcLoot);

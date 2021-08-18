@@ -29,27 +29,26 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Sword
         {
             player.GetModPlayer<SkywardHiltEffect>().effect = true;
         }
+    }
+    public class SkywardHiltEffect : ModPlayer
+    {
+        public bool effect;
 
-        public class SkywardHiltEffect : ModPlayer
+        public override void ResetEffects()
         {
-            public bool effect;
+            effect = false;
+        }
 
-            public override void ResetEffects()
-            {
-                effect = false;
-            }
-
-            public override void ModifyHitNPC(Item item, NPC target, ref int damage, ref float knockback, ref bool crit)
-            {
-                Point origin = Player.Bottom.ToTileCoordinates();
-                Point point;
-                if (effect && !WorldUtils.Find(origin, Searches.Chain(new Searches.Down(3), new GenCondition[]
-                                            {
+        public override void ModifyHitNPC(Item item, NPC target, ref int damage, ref float knockback, ref bool crit)
+        {
+            Point origin = Player.Bottom.ToTileCoordinates();
+            Point point;
+            if (effect && !WorldUtils.Find(origin, Searches.Chain(new Searches.Down(3), new GenCondition[]
+                                        {
                                             new Conditions.IsSolid()
-                                            }), out point) && Player.grappling[0] == -1)
-                {
-                    damage *= 2;
-                }
+                                        }), out point) && Player.grappling[0] == -1)
+            {
+                damage *= 2;
             }
         }
     }

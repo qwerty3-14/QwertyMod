@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System.IO;
 using Terraria;
-using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ID;
 using QwertyMod.Common.RuneBuilder;
@@ -28,7 +27,6 @@ using QwertyMod.Content.Items.Weapon.Melee.Sword.ImperiousTheIV;
 using QwertyMod.Content.Items.Weapon.Whip.Discipline;
 using QwertyMod.Content.Items.Weapon.Minion.Longsword;
 using QwertyMod.Content.Items.Weapon.Melee.Yoyo.Arsenal;
-using QwertyMod.Content.Items.Equipment.Accessories.Sword;
 using QwertyMod.Content.Items.Weapon.Melee.Javelin.Imperium;
 using QwertyMod.Content.Items.Weapon.Morphs.Swordquake;
 using QwertyMod.Content.NPCs.Bosses.FortressBoss;
@@ -41,6 +39,7 @@ using QwertyMod.Content.Items.Equipment.Armor.Caelite;
 using QwertyMod.Content.Items.Equipment.Armor.Gale;
 using QwertyMod.Content.Items.Equipment.Armor.Vitallum;
 using QwertyMod.Content;
+using QwertyMod.Content.Items.MiscMaterials;
 
 namespace QwertyMod
 {
@@ -90,7 +89,7 @@ namespace QwertyMod
             ImperiousLoot.Add(ItemType<Discipline>());
             ImperiousLoot.Add(ItemType<SwordMinionStaff>());
             ImperiousLoot.Add(ItemType<Arsenal>());
-            ImperiousLoot.Add(ItemType<SwordsmanBadge>());
+            ImperiousLoot.Add(ItemType<BladedArrowShaft>());
             ImperiousLoot.Add(ItemType<Imperium>());
             ImperiousLoot.Add(ItemType<Swordquake>());
 

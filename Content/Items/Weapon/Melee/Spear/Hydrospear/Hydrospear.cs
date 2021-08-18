@@ -1,44 +1,44 @@
 ﻿using Microsoft.Xna.Framework;
-using QwertyMod.Content.Dusts;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
 
-namespace QwertyMod.Content.Items.Weapon.Melee.Spear.Hydrent
+namespace QwertyMod.Content.Items.Weapon.Melee.Spear.Hydrospear
 {
-    public class Hydrent : ModItem
+    public class Hydrospear : ModItem
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Fire Hydrent");
-            Tooltip.SetDefault("Shoots hydra breath");
+            DisplayName.SetDefault("Hydrospear");
+            Tooltip.SetDefault("");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()
         {
-            Item.damage = 100;
+            Item.damage = 30;
             Item.useStyle = 5;
-            Item.useAnimation = 18;
-            Item.useTime = 18;
-            Item.shootSpeed = 3.7f;
-            Item.knockBack = 6.5f;
-            Item.width = 104;
-            Item.height = 104;
+            Item.useAnimation = 40;
+            Item.useTime = 40;
+            Item.shootSpeed = 37f;
+            Item.knockBack = 6f;
+            Item.width = 70;
+            Item.height = 70;
             Item.scale = 1f;
-            Item.value = 250000;
-            Item.rare = 5;
+            Item.value = Item.sellPrice(silver: 54);
+            Item.rare = 2;
 
             Item.DamageType = DamageClass.Melee;
             Item.noMelee = true; // Important because the spear is actually a projectile instead of an Item. This prevents the melee hitbox of this Item.
             Item.noUseGraphic = true; // Important, it's kind of wired if people see two spears at one time. This prevents the melee animation of this Item.
+            //Item.autoReuse = true; // Most spears don't autoReuse, but it's possible when used in conjunction with CanUseItem()
             Item.channel = true;
             Item.UseSound = SoundID.Item1;
-            Item.shoot = ProjectileType<HydrentP>();
+            Item.shoot = ProjectileType<HydrospearP>();
         }
 
         public override bool CanUseItem(Player player)
@@ -48,11 +48,12 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Spear.Hydrent
         }
     }
 
-    public class HydrentP : ModProjectile
+    public class HydrospearP : ModProjectile
     {
+
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Fire Hydrent");
+            DisplayName.SetDefault("Hydrospear");
         }
 
         public override void SetDefaults()
@@ -80,13 +81,17 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Spear.Hydrent
 
         public int debugTimer;
         public float movefactSpeed = 1f;
-        public float maxDistance = 720;
+        public float maxDistance = 650;
         public float vel;
         public bool runOnce = true;
         private int streamCounter = 0;
-        float boost = 0f;
+
+        // It appears that for this AI, only the ai0 field is used!
+        private bool noDust = false;
+
         public override void AI()
         {
+            noDust = false;
             // Since we access the owner player instance so much, it's useful to create a helper local variable for this
             // Sadly, Projectile/ModProjectile does not have its own
             Player projOwner = Main.player[Projectile.owner];
@@ -116,10 +121,11 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Spear.Hydrent
                         projOwner.itemAnimation++;
                         if (Collision.CanHit(projOwner.Center, 0, 0, Projectile.Center, 0, 0))
                         {
+                            noDust = true;
                             streamCounter++;
-                            if (streamCounter % 6 == 0)
+                            if (streamCounter % (int)(16f * projOwner.meleeSpeed) == 0)
                             {
-                                Projectile.NewProjectile(new ProjectileSource_ProjectileParent(Projectile), Projectile.Center + QwertyMethods.PolarVector((Projectile.velocity * movementFactor).Length(), Projectile.rotation - (3 * (float)Math.PI / 4)) + QwertyMethods.PolarVector(-7f + (7f * ((streamCounter /6) % 3)), Projectile.rotation - (1 * (float)Math.PI / 4)), QwertyMethods.PolarVector(16f, Projectile.rotation - (3 * (float)Math.PI / 4)), ProjectileType<HydrentBreath>(), (int)(Projectile.damage * .4f), Projectile.knockBack, Projectile.owner);
+                                Projectile.NewProjectile(Projectile.GetProjectileSource_FromThis(), Projectile.Center + QwertyMethods.PolarVector(180, Projectile.rotation - (3 * (float)Math.PI / 4)) + QwertyMethods.PolarVector(5, Projectile.rotation - (1 * (float)Math.PI / 4)), QwertyMethods.PolarVector(1, Projectile.rotation - (3 * (float)Math.PI / 4)), ProjectileType<HydrospearStream>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
                             }
                         }
                     }
@@ -129,6 +135,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Spear.Hydrent
                         movementFactor -= movefactSpeed;
                     }
 
+                    //Main.NewText("Hi");
                 }
                 else // Otherwise, increase the movement factor
                 {
@@ -151,13 +158,11 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Spear.Hydrent
             {
                 Projectile.rotation -= MathHelper.ToRadians(90f);
             }
-            /*
             if (!noDust)
             {
                 Dust k = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(-4, Projectile.rotation - (3 * (float)Math.PI / 4)) + QwertyMethods.PolarVector(4, Projectile.rotation - (1 * (float)Math.PI / 4)), 172);
                 k.velocity = Vector2.Zero;
             }
-            */
         }
 
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
@@ -165,36 +170,42 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Spear.Hydrent
             Projectile.localNPCImmunity[target.whoAmI] = 10;
             target.immune[Projectile.owner] = 0;
         }
-    
     }
 
-    public class HydrentBreath : ModProjectile
+    public class HydrospearStream : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault("Hydrent Breath");
-        }
-
         public override void SetDefaults()
         {
-            Projectile.aiStyle = 1;
-            AIType = ProjectileID.Bullet;
-            Projectile.width = 14;
-            Projectile.height = 8;
+            Projectile.width = 4;
+            Projectile.height = 4;
+            Projectile.extraUpdates = 99;
+            Projectile.timeLeft = 1200;
             Projectile.friendly = true;
             Projectile.penetrate = 1;
+            Projectile.usesLocalNPCImmunity = true;
             Projectile.DamageType = DamageClass.Melee;
-            Projectile.tileCollide = true;
+        }
+
+        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        {
+            Projectile.localNPCImmunity[target.whoAmI] = -1;
+            target.immune[Projectile.owner] = 0;
+        }
+
+        public override bool PreDraw(ref Color lightColor)
+        {
+            return false;
         }
 
         public override void AI()
         {
-            CreateDust();
-        }
-
-        public virtual void CreateDust()
-        {
-            int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<HydraBreathGlow>());
+            if (Main.rand.Next(8) == 0)
+            {
+                Dust d = Main.dust[Dust.NewDust(Projectile.Center, 0, 0, 172)];
+                d.velocity *= .1f;
+                d.noGravity = true;
+                d.position = Projectile.Center;
+            }
         }
     }
 }

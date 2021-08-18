@@ -11,7 +11,7 @@ using Terraria.WorldBuilding;
 using static Terraria.ModLoader.ModContent;
 using QwertyMod.Content.Items.MiscMaterials;
 using Terraria.GameContent;
-using static QwertyMod.Content.Items.Equipment.Accessories.Sword.SkywardHilt;
+using QwertyMod.Content.Items.Equipment.Accessories.Sword;
 using QwertyMod.Content.Items.Weapon.Ranged.Gun.SoEF;
 
 namespace QwertyMod.Content.Items.Weapon.Melee.Sword.EtimsSword

@@ -1,4 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
+using Mono.Cecil.Cil;
+using MonoMod.Cil;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +22,47 @@ namespace QwertyMod.Common
         public bool damageBoostFromDodge = false;
         public float hookRange = 1f;
         public float hookSpeed = 1f;
+        public float weaponSize = 1f;
+        public override void SetStaticDefaults()
+        {
+            IL.Terraria.Player.GetAdjustedItemScale += HookSize;
+        }
+        private void HookSize(ILContext il)
+        {
+            var c = new ILCursor(il);
+
+            for (int i = 0; i < 2; i++)
+            {
+                if (!c.TryGotoNext(i => i.MatchLdloc(0)))
+                {
+                    return; // Patch unable to be applied
+                }
+            }
+
+            //EDIT: Pop the old value so we don't have stack issues
+            c.Index++;
+            c.Emit(OpCodes.Pop);
+
+            //push the item onto the stack
+            c.Emit(OpCodes.Ldarg_1);
+            //push the player onto the stack
+            c.Emit(OpCodes.Ldarg_0);
+            //push the local variable onto the stack
+            c.Emit(OpCodes.Ldloc_0);
+
+            c.EmitDelegate<Func<Item, Player, float, float>>((item, player, scale) =>
+            {
+                if (item.CountsAsClass(DamageClass.Melee))
+                {
+                    scale *= player.GetModPlayer<CommonStats>().weaponSize;
+                }
+                return scale;
+            });
+            //pop the variable at the top of the stack onto the local variable
+            c.Emit(OpCodes.Stloc_0);
+            //push the local variable onto the stack
+            c.Emit(OpCodes.Ldloc_0);
+        }
         public override void ResetEffects()
         {
             ammoReduction = 1f;
@@ -27,6 +70,7 @@ namespace QwertyMod.Common
             dodgeDamageBoost = false;
             hookRange = 1f;
             hookSpeed = 1f;
+            weaponSize = 1f;
         }
         public override void PreUpdate()
         {

@@ -1,4 +1,5 @@
 using QwertyMod.Content.Items.Equipment.Accessories.Expert.Sheath;
+using QwertyMod.Content.Items.Equipment.Accessories.Sword;
 using QwertyMod.Content.NPCs.Bosses.BladeBoss;
 using Terraria;
 using Terraria.ModLoader;
@@ -41,7 +42,10 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
             player.QuickSpawnItem((spawnThese[2]));
 
             player.QuickSpawnItem(73, 15);
-
+            if(Main.rand.Next(4) == 0)
+            {
+                player.QuickSpawnItem(ItemType<SwordsmanBadge>());
+            }
             player.QuickSpawnItem(ItemType<ImperiousSheath>());
         }
     }
