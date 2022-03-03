@@ -56,7 +56,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.RuneLongbow
             }
         }
 
-        public override bool Shoot(Player player, ProjectileSource_Item_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             position = player.Center;
             for (int l = 0; l < Main.projectile.Length; l++)
@@ -71,7 +71,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.RuneLongbow
             return false;
         }
 
-        public override bool ConsumeAmmo(Player player)
+        public override bool CanConsumeAmmo(Player player)
         {
             return false;
         }

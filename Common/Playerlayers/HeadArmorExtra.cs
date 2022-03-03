@@ -40,8 +40,6 @@ namespace QwertyMod.Common.Playerlayers
                 Texture2D texture = OnHeadDraw.HeadDictionary[drawPlayer.head].texture;
                 int useShader = OnHeadDraw.HeadDictionary[drawPlayer.head].useShader;
 
-                int drawX = (int)(drawPlayer.position.X - Main.screenPosition.X);
-                int drawY = (int)(drawPlayer.position.Y - Main.screenPosition.Y);
                 Vector2 Position = drawInfo.Position;
                 Vector2 origin = new Vector2((float)drawPlayer.legFrame.Width * 0.5f, (float)drawPlayer.legFrame.Height * 0.5f);
                 Vector2 pos = new Vector2((float)((int)(Position.X - Main.screenPosition.X - (float)(drawPlayer.bodyFrame.Width / 2) + (float)(drawPlayer.width / 2))), (float)((int)(Position.Y - Main.screenPosition.Y + (float)drawPlayer.height - (float)drawPlayer.bodyFrame.Height + 4f))) + drawPlayer.bodyPosition + new Vector2((float)(drawPlayer.bodyFrame.Width / 2), (float)(drawPlayer.bodyFrame.Height / 2));

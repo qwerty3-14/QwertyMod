@@ -55,13 +55,16 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
             if (effect)
             {
                 Player.spaceGun = false;
-                if (Player.HeldItem.type == ItemID.CrimsonRod || Player.HeldItem.type == ItemID.NimbusRod || Player.HeldItem.type == ItemID.MagnetSphere)
+                if (Player.HeldItem != null)
                 {
-                    Player.GetDamage(DamageClass.Magic) *= 1.4f;
-                }
-                else
-                {
-                    Player.GetDamage(DamageClass.Magic) *= 2f;
+                    if (Player.HeldItem.type == ItemID.CrimsonRod || Player.HeldItem.type == ItemID.NimbusRod || Player.HeldItem.type == ItemID.MagnetSphere)
+                    {
+                        Player.GetDamage(DamageClass.Magic) *= 1.4f;
+                    }
+                    else
+                    {
+                        Player.GetDamage(DamageClass.Magic) *= 2f;
+                    }
                 }
 
             }
@@ -100,7 +103,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (Main.LocalPlayer.GetModPlayer<BloodMedalionEffect>().effect)
+            if (!item.IsAir && Main.LocalPlayer.GetModPlayer<BloodMedalionEffect>().effect)
             {
                 foreach (TooltipLine line in tooltips) //runs through all tooltip lines
                 {

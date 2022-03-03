@@ -42,14 +42,14 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.B4Bow
             return new Vector2(-6, 0);
         }
 
-        public override bool ConsumeAmmo(Player player)
+        public override bool CanConsumeAmmo(Player player)
         {
             return !(player.itemAnimation < Item.useAnimation - 2);
         }
 
         public Projectile arrow;
 
-        public override bool Shoot(Player player, ProjectileSource_Item_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             Vector2 trueSpeed = velocity.RotatedByRandom(MathHelper.ToRadians(15));
             arrow = Main.projectile[Projectile.NewProjectile(source, position.X, position.Y, trueSpeed.X, trueSpeed.Y, type, damage, knockback, player.whoAmI)];

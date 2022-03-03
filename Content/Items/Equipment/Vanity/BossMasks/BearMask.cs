@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria.GameContent.Creative;
 using Terraria.ModLoader;
+using static Terraria.ID.ArmorIDs;
 
 namespace QwertyMod.Content.Items.Equipment.Vanity.BossMasks
 {
@@ -16,6 +17,7 @@ namespace QwertyMod.Content.Items.Equipment.Vanity.BossMasks
             DisplayName.SetDefault("Polar Exterminator Mask");
             Tooltip.SetDefault("");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+            Head.Sets.DrawHead[Item.headSlot] = false;
         }
 
         public override void SetDefaults()
@@ -25,11 +27,6 @@ namespace QwertyMod.Content.Items.Equipment.Vanity.BossMasks
             Item.vanity = true;
             Item.width = 20;
             Item.height = 20;
-        }
-
-        public override bool DrawHead()
-        {
-            return false;
         }
     }
 }

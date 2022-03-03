@@ -77,7 +77,7 @@ namespace QwertyMod.Common
                 }
                 else if(ProjectileID.Sets.MinionShot[projectile.type])
                 {
-                    Main.NewText("Item With Ammo: " + (projectile.GetProjectileSource_FromThis() is ProjectileSource_Item_WithAmmo));
+                    Main.NewText("Item With Ammo: " + (projectile.GetProjectileSource_FromThis() is EntitySource_ItemUse_WithAmmo));
                     Main.NewText("Item: " + (projectile.GetProjectileSource_FromThis() is ProjectileSource_Item));
                     Main.NewText("Projectile: " + (projectile.GetProjectileSource_FromThis() is ProjectileSource_ProjectileParent));
 

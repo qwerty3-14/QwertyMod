@@ -1,4 +1,4 @@
-using QwertyMod.Content.Items.Consumable.Tile.Bars;
+using QwertyMod.Content.Items.Consumable.Tiles.Bars;
 using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
@@ -33,11 +33,6 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
             player.GetDamage(DamageClass.Generic) += .08f;
         }
 
-        public override void DrawHands(ref bool drawHands, ref bool drawArms)
-        {
-            drawHands = true;
-            drawArms = true;
-        }
         public override void AddRecipes()
         {
             CreateRecipe(1).AddIngredient(ItemType<RhuthiniumBar>(), 18)

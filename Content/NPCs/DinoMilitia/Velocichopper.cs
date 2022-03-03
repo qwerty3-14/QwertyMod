@@ -1,6 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using QwertyMod.Content.Items.Consumable.Tile.Banners;
+using QwertyMod.Content.Items.Consumable.Tiles.Banners;
 using QwertyMod.Content.Items.Equipment.Accessories;
 using QwertyMod.Content.Items.Weapon.Ranged.Gun.DinoVulcan;
 using System.Collections.Generic;
@@ -48,7 +48,10 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
             //aiType = 86;
             //animationType = 3;
             NPC.buffImmune[BuffID.Confused] = false;
-            //music = mod.GetSoundSlot(SoundType.Music, "Sounds/Music/OldDinosNewGuns");
+            if (!Main.dedServ)
+            {
+                Music = MusicLoader.GetMusicSlot(Mod, "Assets/Music/OldDinosNewGuns");
+            }
             Banner = NPC.type;
             BannerItem = ItemType<VelocichopperBanner>();
         }
@@ -112,7 +115,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
                 }
                 if (bombTimer > bombReload && Main.netMode != 1)
                 {
-                    Projectile.NewProjectile(NPC.GetProjectileSpawnSource(), NPC.Center.X, NPC.Center.Y, 0, 0, ProjectileType<DinoBomb>(), damage, 3f, Main.myPlayer);
+                    Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), NPC.Center.X, NPC.Center.Y, 0, 0, ProjectileType<DinoBomb>(), damage, 3f, Main.myPlayer);
                     bombTimer = 0;
                 }
             }
@@ -143,7 +146,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
 
                     int Yvar = 50 - Xvar;
 
-                    Projectile.NewProjectile(NPC.GetProjectileSpawnSource(), NPC.Center.X + (100f * NPC.direction), NPC.Center.Y, 5.00f * (1 + Xvar * .01f) * NPC.direction, 5.00f * (1 + Yvar * .01f), 110, damage, 3f, Main.myPlayer);
+                    Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), NPC.Center.X + (100f * NPC.direction), NPC.Center.Y, 5.00f * (1 + Xvar * .01f) * NPC.direction, 5.00f * (1 + Yvar * .01f), 110, damage, 3f, Main.myPlayer);
 
                     Reload_Timer = 0;
                 }

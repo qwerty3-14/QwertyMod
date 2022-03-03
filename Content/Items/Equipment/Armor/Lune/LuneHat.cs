@@ -1,9 +1,10 @@
 using Microsoft.Xna.Framework;
-using QwertyMod.Content.Items.Consumable.Tile.Bars;
+using QwertyMod.Content.Items.Consumable.Tiles.Bars;
 using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static Terraria.ID.ArmorIDs;
 using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content.Items.Equipment.Armor.Lune
@@ -16,6 +17,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Lune
             DisplayName.SetDefault("Lune Hat");
             Tooltip.SetDefault("+8% ranged crit" + "\nImproves vision");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+            Head.Sets.DrawHatHair[Item.headSlot] = true;
         }
 
         public override void SetDefaults()
@@ -40,9 +42,5 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Lune
             player.nightVision = true;
         }
 
-        public override void DrawHair(ref bool drawHair, ref bool drawAltHair)
-        {
-            drawAltHair = true;
-        }
     }
 }

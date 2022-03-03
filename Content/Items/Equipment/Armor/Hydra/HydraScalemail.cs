@@ -35,12 +35,6 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Hydra
             player.maxMinions += 1;
         }
 
-        public override void DrawHands(ref bool drawHands, ref bool drawArms)
-        {
-            drawArms = false;
-            drawHands = false;
-        }
-
         public override void AddRecipes()
         {
             CreateRecipe(1).AddIngredient(ItemType<HydraScale>(), 24)

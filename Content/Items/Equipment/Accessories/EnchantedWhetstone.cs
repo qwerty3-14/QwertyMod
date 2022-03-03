@@ -72,7 +72,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
         {
             if (effect != 0f && proj.CountsAsClass(DamageClass.Melee))
             {
-                QwertyMethods.PokeNPC(Player, target, new ProjectileSource_ProjectileParent(proj),  proj.GetGlobalProjectile<MagicBonusOnProj>().magicBoost * Player.GetDamage(DamageClass.Magic).Multiplicative, DamageClass.Magic);
+                QwertyMethods.PokeNPC(Player, target, Projectile.InheritSource(proj),  proj.GetGlobalProjectile<MagicBonusOnProj>().magicBoost * Player.GetDamage(DamageClass.Magic).Multiplicative, DamageClass.Magic);
             }
         }
 
@@ -80,7 +80,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
         {
             if (effect != 0f && item.CountsAsClass(DamageClass.Melee))
             {
-                QwertyMethods.PokeNPC(Player, target, new ProjectileSource_Item(Player, item),  damage * effect * Player.GetDamage(DamageClass.Magic).Multiplicative, DamageClass.Magic);
+                QwertyMethods.PokeNPC(Player, target, Player.GetProjectileSource_Item(item),  damage * effect * Player.GetDamage(DamageClass.Magic).Multiplicative, DamageClass.Magic);
             }
         }
     }

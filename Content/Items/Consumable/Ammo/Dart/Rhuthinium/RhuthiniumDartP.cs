@@ -72,7 +72,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Dart.Rhuthinium
                     SoundEngine.PlaySound(SoundID.Item12, Projectile.Center);
                     Projectile.Center = player.Center + flyOffset;
                     Projectile.velocity = Vector2.Zero;
-                    Projectile.NewProjectile(new ProjectileSource_ProjectileParent(Projectile), Projectile.Center + QwertyMethods.PolarVector(10, Projectile.rotation - (float)Math.PI / 2), QwertyMethods.PolarVector(4, Projectile.rotation - (float)Math.PI / 2), ProjectileType<DartBeam>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                    Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center + QwertyMethods.PolarVector(10, Projectile.rotation - (float)Math.PI / 2), QwertyMethods.PolarVector(4, Projectile.rotation - (float)Math.PI / 2), ProjectileType<DartBeam>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
                     SetFlyOffset();
                     Projectile.penetrate--;
                 }

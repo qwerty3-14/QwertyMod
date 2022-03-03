@@ -1,8 +1,8 @@
 using Microsoft.Xna.Framework;
 using QwertyMod.Common.Fortress;
 using QwertyMod.Content.Dusts;
-using QwertyMod.Content.Items.Consumable.Tile.Banners;
-using QwertyMod.Content.Items.Consumable.Tile.Fortress.BuildingBlocks;
+using QwertyMod.Content.Items.Consumable.Tiles.Banners;
+using QwertyMod.Content.Items.Consumable.Tiles.Fortress.BuildingBlocks;
 using QwertyMod.Content.Items.Weapon.Minion.TileMinion;
 using System.Collections.Generic;
 using Terraria;

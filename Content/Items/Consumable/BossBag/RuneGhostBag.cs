@@ -45,32 +45,32 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
             int selectScroll = Main.rand.Next(1, 5);
             if (Main.rand.Next(7) == 0)
             {
-                player.QuickSpawnItem(ItemType<RuneGhostMask>());
+                player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),ItemType<RuneGhostMask>());
             }
 
 
 
             if (selectScroll == 1)
             {
-                player.QuickSpawnItem(ItemType<IceScroll>());
+                player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),ItemType<IceScroll>());
             }
             if (selectScroll == 2)
             {
-                player.QuickSpawnItem(ItemType<PursuitScroll>());
+                player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),ItemType<PursuitScroll>());
             }
             if (selectScroll == 3)
             {
-                player.QuickSpawnItem(ItemType<LeechScroll>());
+                player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),ItemType<LeechScroll>());
             }
             if (selectScroll == 4)
             {
-                player.QuickSpawnItem(ItemType<AggroScroll>());
+                player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),ItemType<AggroScroll>());
             }
 
-            player.QuickSpawnItem(ItemType<HyperRunestone>());
-            player.QuickSpawnItem(73, 35);
+            player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),ItemType<HyperRunestone>());
+            player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),73, 35);
 
-            player.QuickSpawnItem(ItemType<CraftingRune>(), runeCount);
+            player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),ItemType<CraftingRune>(), runeCount);
         }
     }
 }

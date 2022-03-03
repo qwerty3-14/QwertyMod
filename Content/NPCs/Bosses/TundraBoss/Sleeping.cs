@@ -48,7 +48,7 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
             FrozenDen.activeSleeper = false;
             if (Main.netMode == NetmodeID.Server)
                 NetMessage.SendData(MessageID.WorldData); // Immediately inform clients of new world state.
-            NPC.NewNPC((int)NPC.Center.X, (int)NPC.Center.Y, NPCType<PolarBear>());
+            NPC.NewNPC(NPC.GetSpawnSourceForNPCFromNPCAI(), (int)NPC.Center.X, (int)NPC.Center.Y, NPCType<PolarBear>());
         }
 
         private int frame;

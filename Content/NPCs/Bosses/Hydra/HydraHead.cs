@@ -39,7 +39,10 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
             NPC.noTileCollide = true;
             NPC.rotation = (float)Math.PI / 2;
             NPC.lifeMax = 2000;
-            //music = mod.GetSoundSlot(SoundType.Music, "Sounds/Music/BeastOfThreeHeads");
+            if (!Main.dedServ)
+            {
+                Music = MusicLoader.GetMusicSlot(Mod, "Assets/Music/BeastOfThreeHeads");
+            }
         }
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
         {
@@ -52,7 +55,7 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
         }
         public override void ScaleExpertStats(int numPlayers, float bossLifeScale)
         {
-            NPC.lifeMax = 1000;
+            NPC.lifeMax = 2000;
             NPC.damage = (int)(NPC.damage * .7f);
         }
 
@@ -89,6 +92,8 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
                 }
 
                 runOnce = false;
+                NPC.lifeMax = 2000;
+                NPC.life = NPC.lifeMax;
             }
 
             if (NPC.ai[0] == -1)
@@ -138,7 +143,7 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
                     {
                         if (!beamAttack)
                         {
-                            Projectile.NewProjectile(NPC.GetProjectileSpawnSource(), NPC.Center + QwertyMethods.PolarVector(50, NPC.rotation), QwertyMethods.PolarVector(5, NPC.rotation), ProjectileType<HydraBreath>(), projDamge, 0f, Main.myPlayer);
+                            Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), NPC.Center + QwertyMethods.PolarVector(50, NPC.rotation), QwertyMethods.PolarVector(5, NPC.rotation), ProjectileType<HydraBreath>(), projDamge, 0f, Main.myPlayer);
                         }
                     }
                     attacking = false;
@@ -176,7 +181,7 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
                     }
                     else if (attackTimer == -beamTime / 2)
                     {
-                        laser = Main.projectile[Projectile.NewProjectile(NPC.GetProjectileSpawnSource(), NPC.Center.X, NPC.Center.Y, 0f, 0f, ProjectileType<HydraBeamT>(), (int)(projDamge * 1.5f), 3f, Main.myPlayer, NPC.whoAmI, 420)];
+                        laser = Main.projectile[Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), NPC.Center.X, NPC.Center.Y, 0f, 0f, ProjectileType<HydraBeamT>(), (int)(projDamge * 1.5f), 3f, Main.myPlayer, NPC.whoAmI, 420)];
                     }
                     else
                     {
@@ -241,7 +246,7 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
                 {
                     if (Main.netMode != 1 && Body.active && Body.type == NPCType<Hydra>())
                     {
-                        NPC.NewNPC((int)NPC.Center.X, (int)NPC.Center.Y, NPCType<HydraHead>(), ai0: Body.whoAmI, ai1: NPC.ai[1]);
+                        NPC.NewNPC(NPC.GetSpawnSourceForNPCFromNPCAI(), (int)NPC.Center.X, (int)NPC.Center.Y, NPCType<HydraHead>(), ai0: Body.whoAmI, ai1: NPC.ai[1]);
                     }
                 }
             }

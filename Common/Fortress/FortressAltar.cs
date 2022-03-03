@@ -48,13 +48,14 @@ namespace QwertyMod.Common.Fortress
                         if (Main.netMode == 0)
                         {
                             //QwertyWorld.FortressBossQuotes();
-                            int npcID = NPC.NewNPC(i * 16, j * 16 - 200, NPCType<FortressBoss>());
+                            int npcID = NPC.NewNPC(NPC.GetBossSpawnSource(player.whoAmI),  i * 16, j * 16 - 200, NPCType<FortressBoss>());
                         }
                         else
                         {
                             ModPacket packet = Mod.GetPacket();
                             packet.Write((byte)ModMessageType.DivineCall);
                             packet.WriteVector2(new Vector2(i * 16 + 400, j * 16));
+                            packet.Write(player.whoAmI);
                             packet.Send();
                         }
 

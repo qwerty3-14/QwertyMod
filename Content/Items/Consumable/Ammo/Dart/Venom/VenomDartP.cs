@@ -38,7 +38,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Dart.Venom
             Projectile.localNPCImmunity[target.whoAmI] = -1;
             target.immune[Projectile.owner] = 0;
             target.AddBuff(BuffID.Venom, 60 * 30);
-            Projectile.NewProjectile(new ProjectileSource_ProjectileParent(Projectile), Projectile.Center, QwertyMethods.PolarVector(Main.rand.NextFloat(), Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI)), ProjectileType<VenomCloud>(), (int)(.5f * Projectile.damage), Projectile.knockBack, Projectile.owner);
+            Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, QwertyMethods.PolarVector(Main.rand.NextFloat(), Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI)), ProjectileType<VenomCloud>(), (int)(.5f * Projectile.damage), Projectile.knockBack, Projectile.owner);
         }
     }
 }

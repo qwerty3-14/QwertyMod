@@ -27,11 +27,6 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
             player.GetModPlayer<LifeGuardEffects>().effect = true;
         }
 
-        public override void DrawHands(ref bool drawHands, ref bool drawArms)
-        {
-            drawArms = true;
-            drawHands = true;
-        }
         public override void AddRecipes()
         {
             CreateRecipe(1).AddIngredient(ItemID.ChlorophyteBar, 24)
@@ -43,7 +38,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
 
         public override void OnCraft(Recipe recipe)
         {
-            Main.LocalPlayer.QuickSpawnItem(ItemType<VitallumCoreUncharged>(), 1);
+            Main.LocalPlayer.QuickSpawnItem(Main.LocalPlayer.GetItemSource_OpenItem(Item.type), ItemType<VitallumCoreUncharged>(), 1);
         }
     }
 

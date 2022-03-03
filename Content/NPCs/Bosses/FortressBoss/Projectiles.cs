@@ -33,6 +33,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
             Projectile.penetrate = -1;
             Projectile.timeLeft = 1200;
             Projectile.tileCollide = false;
+            Projectile.light = .6f;
         }
 
         public int dustTimer;

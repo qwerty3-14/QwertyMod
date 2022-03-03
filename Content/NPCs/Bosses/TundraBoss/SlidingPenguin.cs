@@ -101,7 +101,7 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
                 }
                 if (speed <= 0)
                 {
-                    NPC Penguin = Main.npc[NPC.NewNPC((int)NPC.Top.X, (int)NPC.Top.Y, NPCID.Penguin)];
+                    NPC Penguin = Main.npc[NPC.NewNPC(NPC.GetSpawnSourceForNPCFromNPCAI(), (int)NPC.Top.X, (int)NPC.Top.Y, NPCID.Penguin)];
                     NPC.active = false;
                 }
             }

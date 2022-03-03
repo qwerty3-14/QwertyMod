@@ -8,6 +8,7 @@ using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using static Terraria.ID.ArmorIDs;
 using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content.Items.Equipment.Armor.Shaman
@@ -20,6 +21,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Shaman
             DisplayName.SetDefault("Shaman Skull");
             Tooltip.SetDefault("6% increased minion damage and melee critical strike chance");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+            Head.Sets.DrawHatHair[Item.headSlot] = true;
         }
 
         public override void SetDefaults()
@@ -38,10 +40,6 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Shaman
             player.GetCritChance(DamageClass.Melee) += 6;
         }
 
-        public override void DrawHair(ref bool drawHair, ref bool drawAltHair)
-        {
-            drawAltHair = true;
-        }
 
         public override bool IsArmorSet(Item head, Item body, Item legs)
         {

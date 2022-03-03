@@ -1,5 +1,5 @@
 using Microsoft.Xna.Framework;
-using QwertyMod.Content.Items.Consumable.Tile.Fortress.BuildingBlocks;
+using QwertyMod.Content.Items.Consumable.Tiles.Fortress.BuildingBlocks;
 using QwertyMod.Content.NPCs.Bosses.FortressBoss;
 using System;
 using System.Collections.Generic;
@@ -17,7 +17,8 @@ namespace QwertyMod.Common.Fortress
     public class FortressBiome : ModBiome
     {
         public bool TheFortress = false;
-
+        // Select Music
+        public override int Music => MusicLoader.GetMusicSlot(Mod, "Assets/Music/HeavenlyFortress");
         public override bool IsBiomeActive(Player player)
         {
             return (SkyFortress.fortressBrick > 100) && (((Main.maxTilesX < 6000) && (player.Center.Y / 16) < 160) || ((Main.maxTilesX < 8000 && Main.maxTilesX > 6000) && (player.Center.Y / 16) < 250) || ((Main.maxTilesX > 8000) && (player.Center.Y / 16) < 350));

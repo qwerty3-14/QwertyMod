@@ -1,10 +1,11 @@
 using QwertyMod.Common;
-using QwertyMod.Content.Items.Consumable.Tile.Bars;
+using QwertyMod.Content.Items.Consumable.Tiles.Bars;
 using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using static Terraria.ID.ArmorIDs;
 using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
@@ -17,6 +18,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
             DisplayName.SetDefault("Rhuthinium Cap");
             Tooltip.SetDefault("10% increased ranged critical chance\n10% chance not to consume ammo");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+            Head.Sets.DrawHatHair[Item.headSlot] = true;
         }
 
         public override void SetDefaults()
@@ -35,10 +37,6 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
             player.GetModPlayer<CommonStats>().ammoReduction *= .9f;
         }
 
-        public override void DrawHair(ref bool drawHair, ref bool drawAltHair)
-        {
-            drawAltHair = true;
-        }
 
         public override bool IsArmorSet(Item head, Item body, Item legs)
         {

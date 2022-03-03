@@ -8,6 +8,7 @@ using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using static Terraria.ID.ArmorIDs;
 using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content.Items.Equipment.Armor.Hydra
@@ -20,6 +21,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Hydra
             DisplayName.SetDefault("Hydra Helmet");
             Tooltip.SetDefault("+0.5 life/sec regen rate" + "\n+10% summon damage");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+            Head.Sets.DrawHatHair[Item.headSlot] = true;
         }
 
 
@@ -40,10 +42,6 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Hydra
             player.GetDamage(DamageClass.Summon) += 0.1f;
         }
 
-        public override void DrawHair(ref bool drawHair, ref bool drawAltHair)
-        {
-            drawAltHair = true;
-        }
         
         public override bool IsArmorSet(Item head, Item body, Item legs)
         {

@@ -45,7 +45,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.Arsenal
 
         private Projectile yoyo;
 
-        public override bool Shoot(Player player, ProjectileSource_Item_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             for (int n = 0; n < 6; n++)
             {
@@ -92,7 +92,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.Arsenal
             Projectile.frameCounter++;
             if (Projectile.frameCounter % 20 == 0)
             {
-                Projectile.NewProjectile(new ProjectileSource_ProjectileParent(Projectile), Projectile.Center, QwertyMethods.PolarVector(4f + Main.rand.NextFloat(2f), (float)Math.PI * 2f * Main.rand.NextFloat()), ProjectileType<ArsenalSword>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, QwertyMethods.PolarVector(4f + Main.rand.NextFloat(2f), (float)Math.PI * 2f * Main.rand.NextFloat()), ProjectileType<ArsenalSword>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
             }
         }
     }

@@ -41,7 +41,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.StaffOfJob
 
 
 
-        public override bool Shoot(Player player, ProjectileSource_Item_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             NPC target = new NPC();
             if (QwertyMethods.ClosestNPC(ref target, 100, Main.MouseWorld, true))
@@ -79,7 +79,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.StaffOfJob
                 miseryCounter++;
                 if(miseryCounter % 6 == 0)
                 {
-                        QwertyMethods.PokeNPC(Main.player[MiseryCauser], npc, new ProjectileSource_NPC(npc), MiseryIntensity, DamageClass.Magic);
+                        QwertyMethods.PokeNPC(Main.player[MiseryCauser], npc, Projectile.GetNoneSource(), MiseryIntensity, DamageClass.Magic);
                 }
             }
             else

@@ -1,6 +1,6 @@
 using Microsoft.Xna.Framework;
 using QwertyMod.Content.Dusts;
-using QwertyMod.Content.Items.Consumable.Tile.Bars;
+using QwertyMod.Content.Items.Consumable.Tiles.Bars;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
@@ -45,7 +45,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.SkySpiral
                 .Register();
         }
 
-        public override bool Shoot(Player player, ProjectileSource_Item_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             player.SpawnMinionOnCursor(source, player.whoAmI, type, Item.damage, knockback);
             return false;

@@ -2,8 +2,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Common.Fortress;
 using QwertyMod.Content.Dusts;
-using QwertyMod.Content.Items.Consumable.Tile.Banners;
-using QwertyMod.Content.Items.Consumable.Tile.Fortress.BuildingBlocks;
+using QwertyMod.Content.Items.Consumable.Tiles.Banners;
+using QwertyMod.Content.Items.Consumable.Tiles.Fortress.BuildingBlocks;
 using System;
 using System.Collections.Generic;
 using Terraria;
@@ -192,7 +192,7 @@ namespace QwertyMod.Content.NPCs.Fortress
                     int children = Main.rand.Next(3);
                     for (int i = 0; i < children; i++)
                     {
-                        NPC.NewNPC((int)NPC.Center.X + Main.rand.Next(-40, 41), (int)NPC.Center.Y, NPCType<YoungTile>());
+                        NPC.NewNPC(NPC.GetSpawnSourceForNPCFromNPCAI(), (int)NPC.Center.X + Main.rand.Next(-40, 41), (int)NPC.Center.Y, NPCType<YoungTile>());
                     }
                 }
             }

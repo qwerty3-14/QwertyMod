@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 using Terraria.DataStructures;
 using static Terraria.ModLoader.ModContent;
 using Terraria.GameContent.ItemDropRules;
-using QwertyMod.Content.Items.Consumable.Tile.Fortress.BuildingBlocks;
+using QwertyMod.Content.Items.Consumable.Tiles.Fortress.BuildingBlocks;
 using QwertyMod.Content.Dusts;
 using Terraria.WorldBuilding;
 using Terraria.GameContent.Bestiary;

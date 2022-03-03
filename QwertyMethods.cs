@@ -382,7 +382,7 @@ namespace QwertyMod
                 }
             }
         }
-        public static List<Projectile> ProjectileSpread(IProjectileSource source, Vector2 position, int count, float speed, int type, int damage, float kb, int owner = 255, float ai0 = 0, float ai1 = 0, float rotation = 0f, float spread = (float)Math.PI * 2)
+        public static List<Projectile> ProjectileSpread(IEntitySource source, Vector2 position, int count, float speed, int type, int damage, float kb, int owner = 255, float ai0 = 0, float ai1 = 0, float rotation = 0f, float spread = (float)Math.PI * 2)
         {
             List<Projectile> me = new List<Projectile>();
             for (int r = 0; r < count; r++)
@@ -393,7 +393,7 @@ namespace QwertyMod
             return me;
         }
 
-        public static Projectile PokeNPC(Player player, NPC npc, IProjectileSource source, float damage, DamageClass damageClass, float knockback = 0f)
+        public static Projectile PokeNPC(Player player, NPC npc, IEntitySource source, float damage, DamageClass damageClass, float knockback = 0f)
         {
             Projectile p = Main.projectile[Projectile.NewProjectile(source, npc.Center, Vector2.Zero, ProjectileType<Poke>(), (int)damage, knockback, player.whoAmI)];
             for (int n = 0; n < 200; n++)
@@ -406,7 +406,7 @@ namespace QwertyMod
             p.DamageType = damageClass;
             return p;
         }
-        public static Projectile PokeNPCMinion(Player player, NPC npc, IProjectileSource source, float damage, float knockback = 0f)
+        public static Projectile PokeNPCMinion(Player player, NPC npc, IEntitySource source, float damage, float knockback = 0f)
         {
             Projectile p = Main.projectile[Projectile.NewProjectile(source, npc.Center, Vector2.Zero, ProjectileType<MinionPoke>(), (int)damage, knockback, player.whoAmI)];
             for (int n = 0; n < 200; n++)

@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Content.Items.MiscMaterials;
 using QwertyMod.Common;
 using QwertyMod.Content.Items.Consumable.BossBag;
-using QwertyMod.Content.Items.Consumable.Tile.Trophy.Hydra;
+using QwertyMod.Content.Items.Consumable.Tiles.Trophy.Hydra;
 using QwertyMod.Content.Items.Tool.FishingRod;
 using QwertyMod.Content.Items.Weapon.Morphs.HydraBarrage;
 using QwertyMod.Content.Items.Weapon.Magic.HydraBeam;
@@ -46,9 +46,13 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
             NPC.noGravity = true;
             NPC.noTileCollide = true;
             NPC.lifeMax = 12;
-            BossBag = ItemType<HydraBag>();
             NPC.immortal = true;
+            if (!Main.dedServ)
+            {
+                Music = MusicLoader.GetMusicSlot(Mod, "Assets/Music/BeastOfThreeHeads");
+            }
         }
+
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
         {
             database.Entries.Remove(bestiaryEntry);
@@ -137,16 +141,21 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
                     {
                         if (Main.player[p].active)
                         {
-                            NPC.lifeMax += 3;
+                            NPC.lifeMax += 4;
                         }
                     }
+                    if(Main.masterMode)
+                    {
+                        NPC.lifeMax += (int)(NPC.lifeMax * 0.5f);
+                    }
+
                     NPC.life = NPC.lifeMax;
                 }
                 for (int h = 0; h < 3; h++)
                 {
                     if (Main.netMode != 1)
                     {
-                        NPC.NewNPC((int)NPC.Center.X + h, (int)NPC.Center.Y, NPCType<HydraHead>(), ai0: NPC.whoAmI, ai1: h);
+                        NPC.NewNPC(NPC.GetSpawnSourceForNPCFromNPCAI(), (int)NPC.Center.X + h, (int)NPC.Center.Y, NPCType<HydraHead>(), ai0: NPC.whoAmI, ai1: h);
                     }
                 }
                 runOnce = false;
@@ -212,7 +221,7 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
             //Add the treasure bag (automatically checks for expert mode)
-            npcLoot.Add(ItemDropRule.BossBag(BossBag)); //this requires you to set BossBag in SetDefaults accordingly
+            npcLoot.Add(ItemDropRule.BossBag(ItemType<HydraBag>())); //this requires you to set BossBag in SetDefaults accordingly
 
             //All our drops here are based on "not expert", meaning we use .OnSuccess() to add them into the rule, which then gets added
             LeadingConditionRule notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());

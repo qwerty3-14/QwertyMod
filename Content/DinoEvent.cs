@@ -19,6 +19,7 @@ using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content
 {
+    
     class DinoEvent : ModSystem
     {
         public static bool EventActive = false;
@@ -139,6 +140,7 @@ namespace QwertyMod.Content
                 }
             }
         }
+        
     }
     public class DinoSpawnRates : GlobalNPC
     {

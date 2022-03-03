@@ -41,7 +41,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Misc
         }
 
 
-        public override bool Shoot(Player player, ProjectileSource_Item_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             position = new Vector2((Main.MouseWorld.X + player.Center.X)/2f + Main.rand.Next(-100, 100), position.Y - 600);
             float trueSpeed = velocity.Length();

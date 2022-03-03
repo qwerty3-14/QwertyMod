@@ -8,6 +8,7 @@ using Terraria.DataStructures;
 using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static Terraria.ID.ArmorIDs;
 using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
@@ -19,6 +20,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
         {
             DisplayName.SetDefault("Vitallum Headress");
             Tooltip.SetDefault("Increases max life by 80 \n7% increased damage \n Drain life from nearby enemies");
+            Head.Sets.DrawHatHair[Item.headSlot] = true;
         }
 
         public override void SetDefaults()
@@ -32,11 +34,6 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
             player.statLifeMax2 += 80;
             player.GetDamage(DamageClass.Generic) += .07f;
             player.GetModPlayer<HeadressEffects>().poisonHeal = true;
-        }
-
-        public override void DrawHair(ref bool drawHair, ref bool drawAltHair)
-        {
-            drawAltHair = true;
         }
 
         public override void AddRecipes()
@@ -65,7 +62,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
 
         public override void OnCraft(Recipe recipe)
         {
-            Main.LocalPlayer.QuickSpawnItem(ItemType<VitallumCoreUncharged>(), 1);
+            Main.LocalPlayer.QuickSpawnItem(Main.LocalPlayer.GetItemSource_OpenItem(Item.type), ItemType<VitallumCoreUncharged>(), 1);
         }
     }
 

@@ -1,9 +1,10 @@
-using QwertyMod.Content.Items.Consumable.Tile.Bars;
+using QwertyMod.Content.Items.Consumable.Tiles.Bars;
 using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using static Terraria.ID.ArmorIDs;
 using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
@@ -16,6 +17,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
             DisplayName.SetDefault("Rhuthinium Mask");
             Tooltip.SetDefault("+1 max minions \n5% increased critical strike chance");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+            Head.Sets.DrawFullHair[Item.headSlot] = true;
         }
 
         public override void SetDefaults()
@@ -32,11 +34,6 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
         {
             player.GetCritChance(DamageClass.Generic) += 5;
             player.maxMinions += 1;
-        }
-
-        public override void DrawHair(ref bool drawHair, ref bool drawAltHair)
-        {
-            drawHair = true;
         }
 
         public override bool IsArmorSet(Item head, Item body, Item legs)

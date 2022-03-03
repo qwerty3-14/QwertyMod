@@ -25,7 +25,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Hydra
             Projectile.aiStyle = 1;
             Projectile.width = 10;
             Projectile.height = 10;
-            Projectile.friendly = false;
+            Projectile.friendly = true;
             Projectile.penetrate = 1;
             Projectile.DamageType = DamageClass.Ranged;
             Projectile.arrow = true;
@@ -38,8 +38,8 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Hydra
             Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<HydraBeamGlow>());
             if (Projectile.owner == Main.myPlayer && Projectile.ai[1] == 0 && Projectile.timeLeft == 298)
             {
-                Projectile.NewProjectile(new ProjectileSource_ProjectileParent(Projectile), Projectile.Center, QwertyMethods.PolarVector(Projectile.velocity.Length(), Projectile.velocity.ToRotation() + (float)Math.PI / 8), Type, (int)(Projectile.damage * .5f), Projectile.knockBack * .5f, Projectile.owner, 1, 1);
-                Projectile.NewProjectile(new ProjectileSource_ProjectileParent(Projectile), Projectile.Center, QwertyMethods.PolarVector(Projectile.velocity.Length(), Projectile.velocity.ToRotation() - (float)Math.PI / 8), Type, (int)(Projectile.damage * .5f), Projectile.knockBack * .5f, Projectile.owner, 1, 1);
+                Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, QwertyMethods.PolarVector(Projectile.velocity.Length(), Projectile.velocity.ToRotation() + (float)Math.PI / 8), Type, (int)((float)Projectile.damage * .5f), Projectile.knockBack * .5f, Projectile.owner, 1, 1);
+                Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, QwertyMethods.PolarVector(Projectile.velocity.Length(), Projectile.velocity.ToRotation() - (float)Math.PI / 8), Type, (int)((float)Projectile.damage * .5f), Projectile.knockBack * .5f, Projectile.owner, 1, 1);
                 Projectile.ai[1] = 1;
             }
         }

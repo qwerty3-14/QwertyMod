@@ -63,12 +63,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.HydraHead
             }
             Projectile.rotation = (QwertyMod.GetLocalCursor(Projectile.owner) - Projectile.Center).ToRotation();
 
-            if (player.maxMinions - player.numMinions >= 1 && Main.netMode != 2 && player.GetModPlayer<MinionManager>().HydraHeadMinion && Main.myPlayer == Projectile.owner)
-            {
-                Projectile p = Main.projectile[player.SpawnMinionOnCursor(new ProjectileSource_ProjectileParent(Projectile), Projectile.owner, Projectile.type, Projectile.originalDamage, Projectile.knockBack)];
-                p.position = Projectile.position;
-
-            }
             if (cooldown > 0)
             {
                 cooldown--;
@@ -81,13 +75,13 @@ namespace QwertyMod.Content.Items.Weapon.Minion.HydraHead
             if (varTime == 30 && Projectile.owner == Main.myPlayer && cooldown > 0)
             {
 
-                Projectile.NewProjectile(new ProjectileSource_ProjectileParent(Projectile), Projectile.Center, QwertyMethods.PolarVector(10, Projectile.rotation), ProjectileType<MinionBreath>(), Projectile.damage, Projectile.knockBack, Projectile.owner, 0f, 0f);
+                Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, QwertyMethods.PolarVector(10, Projectile.rotation), ProjectileType<MinionBreath>(), Projectile.damage, Projectile.knockBack, Projectile.owner, 0f, 0f);
             }
             if (varTime >= 60)
             {
                 if (Projectile.owner == Main.myPlayer && cooldown > 0)
                 {
-                    Projectile.NewProjectile(new ProjectileSource_ProjectileParent(Projectile), Projectile.Center, QwertyMethods.PolarVector(10, Projectile.rotation), ProjectileType<MinionBreath>(), Projectile.damage, Projectile.knockBack, Projectile.owner, 0f, 0f);
+                    Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, QwertyMethods.PolarVector(10, Projectile.rotation), ProjectileType<MinionBreath>(), Projectile.damage, Projectile.knockBack, Projectile.owner, 0f, 0f);
                 }
                 varTime = 0;
                 if (Main.netMode != NetmodeID.Server && Main.myPlayer == Projectile.owner)
@@ -116,26 +110,29 @@ namespace QwertyMod.Content.Items.Weapon.Minion.HydraHead
 
         public override bool PreDraw(ref Color lightColor)
         {
-            Vector2 playerCenter = Main.player[Projectile.owner].MountedCenter;
-            Vector2 center = Projectile.Center;
-            Vector2 distToProj = playerCenter - Projectile.Center;
-            float projRotation = distToProj.ToRotation() - 1.57f;
-            float distance = distToProj.Length();
-            for (int i = 0; i < 1000; i++)
+            if (Main.player[Projectile.owner].active && !Main.player[Projectile.owner].dead)
             {
-                if (distance > 4f && !float.IsNaN(distance))
+                Vector2 playerCenter = Main.player[Projectile.owner].MountedCenter;
+                Vector2 center = Projectile.Center;
+                Vector2 distToProj = playerCenter - Projectile.Center;
+                float projRotation = distToProj.ToRotation() - 1.57f;
+                float distance = distToProj.Length();
+                for (int i = 0; i < 1000; i++)
                 {
-                    distToProj.Normalize();                 //get unit vector
-                    distToProj *= 8f;                      //speed = 12
-                    center += distToProj;                   //update draw position
-                    distToProj = playerCenter - center;    //update distance
-                    distance = distToProj.Length();
-                    Color drawColor = lightColor;
+                    if (distance > 4f && !float.IsNaN(distance))
+                    {
+                        distToProj.Normalize();                 //get unit vector
+                        distToProj *= 8f;                      //speed = 12
+                        center += distToProj;                   //update draw position
+                        distToProj = playerCenter - center;    //update distance
+                        distance = distToProj.Length();
+                        Color drawColor = lightColor;
 
-                    //Draw chain
-                    Main.EntitySpriteDraw(Request<Texture2D>("QwertyMod/Content/Items/Weapon/Minion/HydraHead/HydraHookChain").Value, new Vector2(center.X - Main.screenPosition.X, center.Y - Main.screenPosition.Y),
-                        new Rectangle(0, 0, 14, 8), drawColor, projRotation,
-                        new Vector2(14 * 0.5f, 8 * 0.5f), 1f, SpriteEffects.None, 0);
+                        //Draw chain
+                        Main.EntitySpriteDraw(Request<Texture2D>("QwertyMod/Content/Items/Weapon/Minion/HydraHead/HydraHookChain").Value, new Vector2(center.X - Main.screenPosition.X, center.Y - Main.screenPosition.Y),
+                            new Rectangle(0, 0, 14, 8), drawColor, projRotation,
+                            new Vector2(14 * 0.5f, 8 * 0.5f), 1f, SpriteEffects.None, 0);
+                    }
                 }
             }
             return true;

@@ -4,7 +4,7 @@ using QwertyMod.Common.Fortress;
 using QwertyMod.Content.Buffs;
 using QwertyMod.Content.Dusts;
 using QwertyMod.Content.Items.Consumable.Ammo.Bullet.Caelite;
-using QwertyMod.Content.Items.Consumable.Tile.Banners;
+using QwertyMod.Content.Items.Consumable.Tiles.Banners;
 using System;
 using System.Collections.Generic;
 using Terraria;
@@ -213,7 +213,7 @@ namespace QwertyMod.Content.NPCs.Fortress
                     {
                         float shootSpeed = 24;
 
-                        Projectile.NewProjectile(NPC.GetProjectileSpawnSource(), shootFrom.X, shootFrom.Y, (float)Math.Cos(aimDirection) * shootSpeed, (float)Math.Sin(aimDirection) * shootSpeed, ProjectileType<MollusketSnipe>(), 15, 0, player.whoAmI);
+                        Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), shootFrom.X, shootFrom.Y, (float)Math.Cos(aimDirection) * shootSpeed, (float)Math.Sin(aimDirection) * shootSpeed, ProjectileType<MollusketSnipe>(), 15, 0, player.whoAmI);
                         timer = 0;
                     }
                     if (timer > 60)

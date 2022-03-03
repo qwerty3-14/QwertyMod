@@ -135,7 +135,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.AncientNuke
         {
             if (timeLeft == 0)
             {
-                Projectile e = Main.projectile[Projectile.NewProjectile(new ProjectileSource_ProjectileParent(Projectile), Projectile.Center, Vector2.Zero, ProjectileType<AncientFallout>(), Projectile.damage, Projectile.knockBack, Projectile.owner)];
+                Projectile e = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ProjectileType<AncientFallout>(), Projectile.damage, Projectile.knockBack, Projectile.owner)];
             }
         }
 
@@ -143,13 +143,13 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.AncientNuke
         {
             Projectile.localNPCImmunity[target.whoAmI] = -1;
             target.immune[Projectile.owner] = 0;
-            Projectile e = Main.projectile[Projectile.NewProjectile(new ProjectileSource_ProjectileParent(Projectile), Projectile.Center, Vector2.Zero, ProjectileType<AncientFallout>(), Projectile.damage, Projectile.knockBack, Projectile.owner)];
+            Projectile e = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ProjectileType<AncientFallout>(), Projectile.damage, Projectile.knockBack, Projectile.owner)];
             e.localNPCImmunity[target.whoAmI] = -1;
         }
 
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            Projectile e = Main.projectile[Projectile.NewProjectile(new ProjectileSource_ProjectileParent(Projectile), Projectile.Center, Vector2.Zero, ProjectileType<AncientFallout>(), Projectile.damage, Projectile.knockBack, Projectile.owner)];
+            Projectile e = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ProjectileType<AncientFallout>(), Projectile.damage, Projectile.knockBack, Projectile.owner)];
             return true;
         }
 

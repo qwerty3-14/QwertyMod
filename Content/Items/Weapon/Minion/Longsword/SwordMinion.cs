@@ -177,7 +177,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.Longsword
             Player player = Main.player[Projectile.owner];
             if (player.GetModPlayer<MinionManager>().SwordMinion)
             {
-                Projectile p = Main.projectile[player.SpawnMinionOnCursor(new ProjectileSource_ProjectileParent(Projectile), Projectile.owner, Projectile.type, Projectile.originalDamage, Projectile.knockBack)];
+                Projectile p = Main.projectile[player.SpawnMinionOnCursor(Projectile.InheritSource(Projectile), Projectile.owner, Projectile.type, Projectile.originalDamage, Projectile.knockBack)];
                 p.minionSlots += player.maxMinions - player.slotsMinions - 1;
                 p.rotation = Projectile.rotation;
             }

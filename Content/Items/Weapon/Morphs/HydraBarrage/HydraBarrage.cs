@@ -88,7 +88,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.HydraBarrage
             {
                 for (int i = 0; i < 3; i++)
                 {
-                    Projectile.NewProjectile(new ProjectileSource_ProjectileParent(Projectile), Projectile.Center, Vector2.Zero, ProjectileType<HydraBarrageHead>(), Projectile.damage, Projectile.knockBack, Projectile.owner, 1f, 2);
+                    Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ProjectileType<HydraBarrageHead>(), Projectile.damage, Projectile.knockBack, Projectile.owner, 1f, 2);
                 }
                 runOnce = false;
             }
@@ -139,7 +139,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.HydraBarrage
             Projectile.rotation = (QwertyMod.GetLocalCursor(player.whoAmI) - Projectile.Center).ToRotation();
             if (Projectile.timeLeft == 10)
             {
-                Projectile.NewProjectile(new ProjectileSource_ProjectileParent(Projectile), Projectile.Center + QwertyMethods.PolarVector(57 * Projectile.scale, Projectile.rotation), QwertyMethods.PolarVector(10, Projectile.rotation), ProjectileType<HydraBarrageBreath>(), Projectile.damage, Projectile.knockBack, Projectile.owner, Projectile.ai[0], 0f);
+                Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center + QwertyMethods.PolarVector(57 * Projectile.scale, Projectile.rotation), QwertyMethods.PolarVector(10, Projectile.rotation), ProjectileType<HydraBarrageBreath>(), Projectile.damage, Projectile.knockBack, Projectile.owner, Projectile.ai[0], 0f);
             }
         }
 
@@ -149,7 +149,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.HydraBarrage
             {
                 for (int i = 0; i < 2; i++)
                 {
-                    Projectile.NewProjectile(new ProjectileSource_ProjectileParent(Projectile), Projectile.Center, Vector2.Zero, ProjectileType<HydraBarrageHead>(), (int)(Projectile.damage * .8f), Projectile.knockBack * .8f, Projectile.owner, Projectile.ai[0] * .8f, Projectile.ai[1] - 1);
+                    Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ProjectileType<HydraBarrageHead>(), (int)(Projectile.damage * .8f), Projectile.knockBack * .8f, Projectile.owner, Projectile.ai[0] * .8f, Projectile.ai[1] - 1);
                 }
             }
         }

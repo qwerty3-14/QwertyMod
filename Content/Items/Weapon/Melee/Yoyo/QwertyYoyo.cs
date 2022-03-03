@@ -486,7 +486,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo
                 vector *= 16f;
                 for (int y = 0; y < yoyoData.yoyoCount; y++)
                 {
-                    Projectile yoyo = Main.projectile[Projectile.NewProjectile(new ProjectileSource_ProjectileParent(parent), Player.Center.X, Player.Center.Y, vector.X, vector.Y, parent.type, parent.damage, parent.knockBack, Player.whoAmI, 1f, 0f)];
+                    Projectile yoyo = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(parent), Player.Center.X, Player.Center.Y, vector.X, vector.Y, parent.type, parent.damage, parent.knockBack, Player.whoAmI, 1f, 0f)];
                     yoyo.localAI[1] = yoyoData.yoyoCount + y;
                 }
             }
@@ -521,7 +521,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo
                             counterCount++;
                         }
                     }
-                    Projectile.NewProjectile(new ProjectileSource_ProjectileParent(parent), Player.Center.X, Player.Center.Y, vector2.X, vector2.Y, yoyoData.counterWeightId, (int)((double)dmg * 0.8), knockBack, Player.whoAmI, .5f + 1f * ((float)counterCount / (2f * yoyoData.yoyoCount)), 0f);
+                    Projectile.NewProjectile(Projectile.InheritSource(parent), Player.Center.X, Player.Center.Y, vector2.X, vector2.Y, yoyoData.counterWeightId, (int)((double)dmg * 0.8), knockBack, Player.whoAmI, .5f + 1f * ((float)counterCount / (2f * yoyoData.yoyoCount)), 0f);
                     farCounter = true;
                 }
             }

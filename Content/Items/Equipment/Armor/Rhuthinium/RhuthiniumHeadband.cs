@@ -1,7 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Common;
-using QwertyMod.Content.Items.Consumable.Tile.Bars;
+using QwertyMod.Content.Items.Consumable.Tiles.Bars;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
@@ -9,6 +9,7 @@ using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using static Terraria.ID.ArmorIDs;
 using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
@@ -19,8 +20,9 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Rhuthinium Headband");
-            Tooltip.SetDefault("10% increased melee critical strikw chance\nIncreases the size of swords by 10%");
+            Tooltip.SetDefault("10% increased melee critical strike chance\nIncreases the size of swords by 10%");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+            Head.Sets.DrawFullHair[Item.headSlot] = true;
         }
 
         public override void SetDefaults()
@@ -38,11 +40,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
             player.GetCritChance(DamageClass.Melee) += 10;
             player.GetModPlayer<CommonStats>().weaponSize += 0.1f;
         }
-
-        public override void DrawHair(ref bool drawHair, ref bool drawAltHair)
-        {
-            drawHair = true;
-        }
+        
 
         public override bool IsArmorSet(Item head, Item body, Item legs)
         {

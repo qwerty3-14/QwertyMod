@@ -4,7 +4,7 @@ using QwertyMod.Common.Fortress;
 using QwertyMod.Content.Buffs;
 using QwertyMod.Content.Dusts;
 using QwertyMod.Content.Items.Consumable.BossSummon;
-using QwertyMod.Content.Items.Consumable.Tile.Banners;
+using QwertyMod.Content.Items.Consumable.Tiles.Banners;
 using QwertyMod.Content.NPCs.Bosses.FortressBoss;
 using System;
 using System.Collections.Generic;
@@ -91,7 +91,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             ringProjectileCount = 2 - (int)((float)NPC.life / (float)NPC.lifeMax * 2) + 4;
             if (timer == GenerateRingTime)
             {
-                ring = Main.projectile[Projectile.NewProjectile(NPC.GetProjectileSpawnSource(), NPC.Center, Vector2.Zero, ProjectileType<RingCenter>(), 11, 0, player.whoAmI, ringProjectileCount, NPC.direction)];
+                ring = Main.projectile[Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), NPC.Center, Vector2.Zero, ProjectileType<RingCenter>(), 11, 0, player.whoAmI, ringProjectileCount, NPC.direction)];
                 castingFrames = true;
             }
             if (timer > GenerateRingTime && timer < GenerateRingTime + throwRingTime)
@@ -168,7 +168,7 @@ namespace QwertyMod.Content.NPCs.Fortress
                             {
                                 flag5 = false;
                             }
-                            if (flag5 && Main.tileSolid[(int)Main.tile[nearPlayerX, num93].type] && !Collision.SolidTiles(nearPlayerX - 1, nearPlayerX + 1, num93 - 4, num93 - 1))
+                            if (flag5 && Main.tileSolid[(int)Main.tile[nearPlayerX, num93].TileType] && !Collision.SolidTiles(nearPlayerX - 1, nearPlayerX + 1, num93 - 4, num93 - 1))
                             {
                                 NPC.ai[1] = 20f;
                                 NPC.ai[2] = (float)nearPlayerX;

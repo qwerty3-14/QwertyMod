@@ -60,7 +60,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.AncientMissile
             return base.CanUseItem(player);
         }
 
-        public override bool Shoot(Player player, ProjectileSource_Item_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             Vector2 muzzleOffset = Vector2.Normalize(velocity) * 70f;
             if (Collision.CanHit(position, 0, 0, position + muzzleOffset, 0, 0))
@@ -135,13 +135,13 @@ namespace QwertyMod.Content.Items.Weapon.Magic.AncientMissile
         {
             Projectile.localNPCImmunity[target.whoAmI] = -1;
             target.immune[Projectile.owner] = 0;
-            Projectile e = Main.projectile[Projectile.NewProjectile(new ProjectileSource_ProjectileParent(Projectile), Projectile.Center, Vector2.Zero, ProjectileType<AncientBlastFriendly>(), Projectile.damage, Projectile.knockBack, Projectile.owner, 1f)];
+            Projectile e = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ProjectileType<AncientBlastFriendly>(), Projectile.damage, Projectile.knockBack, Projectile.owner, 1f)];
             e.localNPCImmunity[target.whoAmI] = -1;
         }
 
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            Projectile.NewProjectile(new ProjectileSource_ProjectileParent(Projectile), Projectile.Center, Vector2.Zero, ProjectileType<AncientBlastFriendly>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+            Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ProjectileType<AncientBlastFriendly>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
             return true;
         }
 

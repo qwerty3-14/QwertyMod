@@ -12,7 +12,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Sword
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Swordmasters Seal");
-            Tooltip.SetDefault("Greatly enhances swordplay performance!" + "\nMakes your sword much larger" + "\nHitting things with your sword while airborne does more damage" + "\nStriking with a sword increases attack speed");
+            Tooltip.SetDefault("Greatly enhances swordplay performance!" + "\nMakes your sword much larger" + "\nHitting things with your sword while airborne does more damage" + "\nStriking with a sword increases critical chance");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 

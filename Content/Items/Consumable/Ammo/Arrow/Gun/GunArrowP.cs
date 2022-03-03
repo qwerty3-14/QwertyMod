@@ -45,7 +45,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Gun
             {
                 if (Projectile.UseAmmo(AmmoID.Bullet, ref bullet, ref speed, ref weaponDamage, ref weaponKnockback, false))
                 {
-                    Projectile b = Main.projectile[Projectile.NewProjectile(new ProjectileSource_ProjectileParent(Projectile), Projectile.Center, Projectile.velocity + QwertyMethods.PolarVector(speed, Projectile.velocity.ToRotation()), bullet, weaponDamage, weaponKnockback, Main.myPlayer)];
+                    Projectile b = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Projectile.velocity + QwertyMethods.PolarVector(speed, Projectile.velocity.ToRotation()), bullet, weaponDamage, weaponKnockback, Main.myPlayer)];
                     SoundEngine.PlaySound(SoundID.Item11, Projectile.Center);
                 }
 

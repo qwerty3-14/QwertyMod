@@ -36,6 +36,7 @@ namespace QwertyMod.Content.Items.Tool.Mining.Ancient
             Item.height = 16;
             //Item.crit = 5;
             Item.autoReuse = true;
+            Item.useTurn = true;
             Item.pick = 100;
             Item.tileBoost = 2;
             Item.GetGlobalItem<AoePick>().miningRadius = 1;

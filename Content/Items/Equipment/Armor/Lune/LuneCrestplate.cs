@@ -2,7 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Content.Buffs;
 using QwertyMod.Content.Dusts;
-using QwertyMod.Content.Items.Consumable.Tile.Bars;
+using QwertyMod.Content.Items.Consumable.Tiles.Bars;
 using System;
 using System.Collections.Generic;
 using Terraria;
@@ -12,6 +12,7 @@ using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using static Terraria.ID.ArmorIDs;
 using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content.Items.Equipment.Armor.Lune
@@ -86,12 +87,6 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Lune
             }
         }
 
-
-        public override void DrawHands(ref bool drawHands, ref bool drawArms)
-        {
-            drawArms = true;
-            drawHands = true;
-        }
     }
 
     public class LunePierce : GlobalProjectile

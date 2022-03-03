@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Content.Dusts;
-using QwertyMod.Content.Items.Consumable.Tile.Bars;
+using QwertyMod.Content.Items.Consumable.Tiles.Bars;
 using System;
 using Terraria;
 using Terraria.DataStructures;
@@ -71,7 +71,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RhuthiniumScepter
             player.itemLocation += new Vector2((float)Math.Cos(trueRotation + (float)Math.PI / 2), (float)Math.Sin(trueRotation + (float)Math.PI / 2)) * staveHoldOffset.X * player.direction;
         }
 
-        public override bool Shoot(Player player, ProjectileSource_Item_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             position = new Vector2(player.Center.X + (float)Main.rand.Next(-100, 101), player.Center.Y + (float)Main.rand.Next(-100, 101) - 600);
             velocity = QwertyMethods.PolarVector(Item.shootSpeed, (Main.MouseWorld - position).ToRotation() + (float)Math.PI / 16 - (float)Math.PI / 8 * Main.rand.NextFloat());

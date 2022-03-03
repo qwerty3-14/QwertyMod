@@ -48,55 +48,49 @@ namespace QwertyMod.Common
 			downedDinos = false;
 			//downedOtherBoss = false;
 		}
-
-		public override TagCompound SaveWorldData()
-		{
-			var downed = new List<string>();
+        public override void SaveWorldData(TagCompound tag)
+		{ 
 
 			if (downedBear)
 			{
-				downed.Add("downedBear");
+				tag["downedBear"] = true;
 			}
 			if(downedHydra)
             {
-				downed.Add("downedHydra");
+				tag["downedHydra"] = true;
             }
 			if(downedAncient)
             {
-				downed.Add("downedAncient");
+				tag["downedAncient"] = true;
             }
 			if(downedBlade)
-            {
-				downed.Add("downedBlade");
+            { 
+				tag["downedBlade"] = true;
             }
 			if(downedNoehtnap)
             {
-				downed.Add("downedNoehtnap");
+				tag["downedNoehtnap"] = true;
             }
 			if(downedRuneGhost)
             {
-				downed.Add("downedRuneGhost");
+				tag["downedRuneGhost"] = true;
             }
 			if(downedDivineLight)
             {
-				downed.Add("downedDivineLight");
+				tag["downedDivineLight"] = true;
             }
 			if(downedOLORD)
             {
-				downed.Add("downedOLORD");
+				tag["downedOLORD"] = true;
             }
 			if(downedDinos)
             {
-				downed.Add("downedDinos");
+				tag["downedDinos"] = true;
             }
 			//if (downedOtherBoss) {
 			//	downed.Add("downedOtherBoss");
 			//}
 
-			return new TagCompound
-			{
-				["downed"] = downed,
-			};
 		}
 
 		public override void LoadWorldData(TagCompound tag)

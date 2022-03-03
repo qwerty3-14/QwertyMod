@@ -1,4 +1,4 @@
-using QwertyMod.Content.Items.Consumable.Tile.Bars;
+using QwertyMod.Content.Items.Consumable.Tiles.Bars;
 using QwertyMod.Content.Items.Equipment.Accessories.Sword;
 using QwertyMod.Content.Items.Equipment.Vanity.BossMasks;
 using QwertyMod.Content.Items.MiscMaterials;
@@ -44,33 +44,33 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
 
         public override void OpenBossBag(Player player)
         {
-            player.QuickSpawnItem(ItemType<CaeliteBar>(), Main.rand.Next(18, 31));
-            player.QuickSpawnItem(ItemType<CaeliteCore>(), Main.rand.Next(9, 16));
-            player.QuickSpawnItem(ItemType<ExpertChalice>());
+            player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),ItemType<CaeliteBar>(), Main.rand.Next(18, 31));
+            player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),ItemType<CaeliteCore>(), Main.rand.Next(9, 16));
+            player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),ItemType<ExpertChalice>());
             if (Main.rand.Next(7) == 0)
-                player.QuickSpawnItem(ItemType<DivineLightMask>());
-            player.QuickSpawnItem(73, 10);
+                player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),ItemType<DivineLightMask>());
+            player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),73, 10);
             if (Main.rand.Next(5) == 0)
             {
-                player.QuickSpawnItem(ItemType<Lightling>());
+                player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),ItemType<Lightling>());
             }
             if (Main.rand.Next(5) == 0)
             {
-                player.QuickSpawnItem(ItemType<SkywardHilt>());
+                player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),ItemType<SkywardHilt>());
             }
             switch (Main.rand.Next(4))
             {
                 case 0:
-                    player.QuickSpawnItem(ItemType<CaeliteMagicWeapon>());
+                    player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),ItemType<CaeliteMagicWeapon>());
                     break;
                 case 1:
-                    player.QuickSpawnItem(ItemType<HolyExiler>());
+                    player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),ItemType<HolyExiler>());
                     break;
                 case 2:
-                    player.QuickSpawnItem(ItemType<CaeliteRainKnife>());
+                    player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),ItemType<CaeliteRainKnife>());
                     break;
                 case 3:
-                    player.QuickSpawnItem(ItemType<PriestStaff>());
+                    player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),ItemType<PriestStaff>());
                     break;
             }
         }

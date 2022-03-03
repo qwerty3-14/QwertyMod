@@ -1,10 +1,11 @@
 using QwertyMod.Common;
-using QwertyMod.Content.Items.Consumable.Tile.Bars;
+using QwertyMod.Content.Items.Consumable.Tiles.Bars;
 using QwertyMod.Content.Items.MiscMaterials;
 using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static Terraria.ID.ArmorIDs;
 using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content.Items.Equipment.Armor.Gale
@@ -17,6 +18,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Gale
             DisplayName.SetDefault("Gale Swift Helm");
             Tooltip.SetDefault("+6% chance to dodge an attack" + "\n+12% critical strike chance" + "\nGreatly increased damage after dodging");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+            Head.Sets.DrawHatHair[Item.headSlot] = true;
         }
 
         public override void SetDefaults()
@@ -29,10 +31,6 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Gale
             Item.height = 20;
         }
 
-        public override void DrawHair(ref bool drawHair, ref bool drawAltHair)
-        {
-            drawAltHair = true;
-        }
 
         public override void UpdateEquip(Player player)
         {

@@ -2,7 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Common;
 using QwertyMod.Content.Items.Consumable.BossBag;
-using QwertyMod.Content.Items.Consumable.Tile.Trophy.Polar;
+using QwertyMod.Content.Items.Consumable.Tiles.Trophy.Polar;
 using QwertyMod.Content.Items.Equipment.Vanity.BossMasks;
 using QwertyMod.Content.Items.Weapon.Magic.PenguinWhistle;
 using QwertyMod.Content.Items.Weapon.Melee.Sword;
@@ -42,9 +42,10 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
             NPC.damage = 40;
             NPC.boss = true;
             NPC.noGravity = false;
-            //music = mod.GetSoundSlot(SoundType.Music, "Sounds/Music/PolarOpposition");
-            Music = MusicID.Boss4;
-            BossBag = ItemType<TundraBossBag>();
+            if (!Main.dedServ)
+            {
+                Music = MusicLoader.GetMusicSlot(Mod, "Assets/Music/PolarOpposition");
+            }
         }
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
         {
@@ -64,7 +65,7 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
         public override void ScaleExpertStats(int numPlayers, float bossLifeScale)
         {
             NPC.damage = 30;
-            NPC.lifeMax = (int)(1000 * bossLifeScale);
+            NPC.lifeMax = (int)(NPC.lifeMax * 0.7 * bossLifeScale);
         }
 
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
@@ -74,7 +75,7 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
             //Add the treasure bag (automatically checks for expert mode)
-            npcLoot.Add(ItemDropRule.BossBag(BossBag)); //this requires you to set BossBag in SetDefaults accordingly
+            npcLoot.Add(ItemDropRule.BossBag(ItemType<TundraBossBag>())); //this requires you to set BossBag in SetDefaults accordingly
 
             //All our drops here are based on "not expert", meaning we use .OnSuccess() to add them into the rule, which then gets added
             LeadingConditionRule notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
@@ -184,7 +185,7 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
                             attackCounter++;
                             if (Main.netMode != 1)
                             {
-                                NPC.NewNPC((int)NPC.Center.X + 30 * NPC.direction, (int)NPC.Center.Y + 14, NPCType<SlidingPenguin>(), ai0: NPC.direction, ai1: (player.Bottom.Y < NPC.Center.Y + 14) ? 1 : 0);
+                                NPC.NewNPC(NPC.GetSpawnSourceForNPCFromNPCAI(), (int)NPC.Center.X + 30 * NPC.direction, (int)NPC.Center.Y + 14, NPCType<SlidingPenguin>(), ai0: NPC.direction, ai1: (player.Bottom.Y < NPC.Center.Y + 14) ? 1 : 0);
                             }
                             SoundEngine.PlaySound(SoundID.Item11, NPC.position);
                             for (int i = 0; i < 8; i++)
@@ -203,7 +204,7 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
                             {
                                 if (Main.netMode != 1)
                                 {
-                                    NPC.NewNPC((int)NPC.Center.X + 34 * NPC.direction, (int)NPC.Center.Y, NPCType<FlyingPenguin>(), 0, i);
+                                    NPC.NewNPC(NPC.GetSpawnSourceForNPCFromNPCAI(), (int)NPC.Center.X + 34 * NPC.direction, (int)NPC.Center.Y, NPCType<FlyingPenguin>(), 0, i);
                                 }
                                 SoundEngine.PlaySound(SoundID.Item11, NPC.position);
                             }
@@ -252,7 +253,7 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
                     for (int i = 0; i < (NPC.width / 16) + 1; i++)
                     {
                         Vector2 p = bottomLeft.ToVector2() + new Vector2(i, 0);
-                        if (Main.tileSolid[Main.tile[(int)p.X, (int)p.Y].type] && !Main.tileSolidTop[Main.tile[(int)p.X, (int)p.Y].type])
+                        if (Main.tileSolid[Main.tile[(int)p.X, (int)p.Y].TileType] && !Main.tileSolidTop[Main.tile[(int)p.X, (int)p.Y].TileType])
                         {
                             NPC.noTileCollide = false;
                         }
@@ -269,7 +270,7 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
                             int denUpperHeight = 40;
                             int ceilingHeight = (int)((float)Math.Sin(((float)(x + (denLength / 2)) / (float)denLength) * (float)Math.PI) * (float)denUpperHeight);
                             Vector2 spawnPos = FrozenDen.BearSpawn + new Vector2(x * 16, ceilingHeight * -16);
-                            NPC.NewNPC((int)spawnPos.X, (int)spawnPos.Y, NPCType<AgentPenguin>());
+                            NPC.NewNPC(NPC.GetSpawnSourceForNPCFromNPCAI(), (int)spawnPos.X, (int)spawnPos.Y, NPCType<AgentPenguin>());
                             
                         }
                         agentCooldown = 600;

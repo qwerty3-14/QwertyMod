@@ -32,7 +32,7 @@ namespace QwertyMod.Content.Items.Tool.Mining
                 {
                     if (item.GetGlobalItem<AoePick>().miningRadius > 0)
                     {
-                        if ((item.pick > 0 && !Main.tileAxe[(int)Main.tile[Player.tileTargetX, Player.tileTargetY].type] && !Main.tileHammer[(int)Main.tile[Player.tileTargetX, Player.tileTargetY].type]) || (item.axe > 0 && Main.tileAxe[(int)Main.tile[Player.tileTargetX, Player.tileTargetY].type]) || (item.hammer > 0 && Main.tileHammer[(int)Main.tile[Player.tileTargetX, Player.tileTargetY].type]))
+                        if ((item.pick > 0 && !Main.tileAxe[(int)Main.tile[Player.tileTargetX, Player.tileTargetY].TileType] && !Main.tileHammer[(int)Main.tile[Player.tileTargetX, Player.tileTargetY].TileType]) || (item.axe > 0 && Main.tileAxe[(int)Main.tile[Player.tileTargetX, Player.tileTargetY].TileType]) || (item.hammer > 0 && Main.tileHammer[(int)Main.tile[Player.tileTargetX, Player.tileTargetY].TileType]))
                         {
                         }
                         if (Player.toolTime == 0 && Player.itemAnimation > 0 && Player.controlUseItem)
@@ -45,7 +45,7 @@ namespace QwertyMod.Content.Items.Tool.Mining
                                 {
                                     for (int j = -item.GetGlobalItem<AoePick>().miningRadius; j <= item.GetGlobalItem<AoePick>().miningRadius; j++)
                                     {
-                                        if ((i != 0 || j != 0) && !Main.tileAxe[(int)Main.tile[Player.tileTargetX + i, Player.tileTargetY + j].type] && !Main.tileHammer[(int)Main.tile[Player.tileTargetX + i, Player.tileTargetY + j].type])
+                                        if ((i != 0 || j != 0) && !Main.tileAxe[(int)Main.tile[Player.tileTargetX + i, Player.tileTargetY + j].TileType] && !Main.tileHammer[(int)Main.tile[Player.tileTargetX + i, Player.tileTargetY + j].TileType])
                                         {
                                             Player.PickTile(Player.tileTargetX + i, Player.tileTargetY + j, item.pick);
                                         }
@@ -67,15 +67,15 @@ namespace QwertyMod.Content.Items.Tool.Mining
                         int num263 = Player.tileTargetX;
                         int num264 = Player.tileTargetY;
                         bool flag24 = true;
-                        if (Main.tile[num263, num264].wall > 0)
+                        if (Main.tile[num263, num264].WallType > 0)
                         {
-                            if (!Main.wallHouse[(int)Main.tile[num263, num264].wall])
+                            if (!Main.wallHouse[(int)Main.tile[num263, num264].WallType])
                             {
                                 for (int num265 = num263 - 1; num265 < num263 + 2; num265++)
                                 {
                                     for (int num266 = num264 - 1; num266 < num264 + 2; num266++)
                                     {
-                                        if (Main.tile[num265, num266].wall != Main.tile[num263, num264].wall)
+                                        if (Main.tile[num265, num266].WallType != Main.tile[num263, num264].WallType)
                                         {
                                             flag24 = false;
                                             break;
@@ -88,7 +88,7 @@ namespace QwertyMod.Content.Items.Tool.Mining
                                 flag24 = false;
                             }
                         }
-                        if (flag24 && !Main.tile[num263, num264].IsActive)
+                        if (flag24 && !Main.tile[num263, num264].HasTile)
                         {
                             int num267 = -1;
                             if ((double)(((float)Main.mouseX + Main.screenPosition.X) / 16f) < Math.Round((double)(((float)Main.mouseX + Main.screenPosition.X) / 16f)))
@@ -108,15 +108,15 @@ namespace QwertyMod.Content.Items.Tool.Mining
                                     {
                                         num263 = num269;
                                         num264 = num270;
-                                        if (Main.tile[num263, num264].wall > 0)
+                                        if (Main.tile[num263, num264].WallType > 0)
                                         {
-                                            if (!Main.wallHouse[(int)Main.tile[num263, num264].wall])
+                                            if (!Main.wallHouse[(int)Main.tile[num263, num264].WallType])
                                             {
                                                 for (int num271 = num263 - 1; num271 < num263 + 2; num271++)
                                                 {
                                                     for (int num272 = num264 - 1; num272 < num264 + 2; num272++)
                                                     {
-                                                        if (Main.tile[num271, num272].wall != Main.tile[num263, num264].wall)
+                                                        if (Main.tile[num271, num272].WallType != Main.tile[num263, num264].WallType)
                                                         {
                                                             flag24 = false;
                                                             break;

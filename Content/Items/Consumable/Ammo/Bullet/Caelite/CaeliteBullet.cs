@@ -1,4 +1,4 @@
-﻿using QwertyMod.Content.Items.Consumable.Tile.Bars;
+﻿using QwertyMod.Content.Items.Consumable.Tiles.Bars;
 using System;
 using System.Collections.Generic;
 using System.Linq;

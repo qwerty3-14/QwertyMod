@@ -41,6 +41,7 @@ namespace QwertyMod.Content.Items.Tool.Mining.Rune
             Item.height = 16;
             //Item.crit = 5;
             Item.autoReuse = true;
+            Item.useTurn = true;
             Item.pick = 200;
             Item.tileBoost = 4;
             Item.GetGlobalItem<AoePick>().miningRadius = 2;

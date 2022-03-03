@@ -19,6 +19,7 @@ using QwertyMod.Content.Items.Equipment.Vanity.BossMasks;
 using QwertyMod.Common;
 using QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls;
 using Terraria.GameContent.Bestiary;
+using QwertyMod.Content.Items.MiscMaterials;
 
 namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
 {
@@ -48,8 +49,10 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
             NPC.noTileCollide = true;
             NPC.alpha = 0;
             NPC.lifeMax = 60000;
-            //music = mod.GetSoundSlot(SoundType.Music, "Sounds/Music/TheConjurer");
-            BossBag = ItemType<RuneGhostBag>();
+            if (!Main.dedServ)
+            {
+                Music = MusicLoader.GetMusicSlot(Mod, "Assets/Music/TheConjurer");
+            }
         }
         public override bool CanHitPlayer(Player target, ref int cooldownSlot)
         {
@@ -184,7 +187,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
                         {
                             for (int i = 0; i < phase + 1; i++)
                             {
-                                Projectile rune = Main.projectile[Projectile.NewProjectile(NPC.GetProjectileSpawnSource(), NPC.Top + QwertyMethods.PolarVector(-120, (float)Math.PI * ((float)(i + 1) / (phase + 2))), Vector2.Zero, ProjectileType<BigRune>(), Main.expertMode ? 30 : 40, 0, Main.myPlayer)];
+                                Projectile rune = Main.projectile[Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), NPC.Top + QwertyMethods.PolarVector(-120, (float)Math.PI * ((float)(i + 1) / (phase + 2))), Vector2.Zero, ProjectileType<BigRune>(), Main.expertMode ? 30 : 40, 0, Main.myPlayer)];
                                 
                                 int newRune = lastRune == 5 ? Main.rand.Next(4) : Main.rand.Next(3);
                                 if(newRune >= lastRune)
@@ -257,12 +260,16 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
             //Add the treasure bag (automatically checks for expert mode)
-            npcLoot.Add(ItemDropRule.BossBag(BossBag)); //this requires you to set BossBag in SetDefaults accordingly
+            npcLoot.Add(ItemDropRule.BossBag(ItemType<RuneGhostBag>())); //this requires you to set BossBag in SetDefaults accordingly
 
             //All our drops here are based on "not expert", meaning we use .OnSuccess() to add them into the rule, which then gets added
             LeadingConditionRule notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
 
-            
+            // Notice we use notExpertRule.OnSuccess instead of npcLoot.Add so it only applies in normal mode
+            notExpertRule.OnSuccess(ItemDropRule.Common(ItemType<CraftingRune>(), 1, 25, 36));
+            //Finally add the leading rule
+            npcLoot.Add(notExpertRule);
+
             //Notice we use notExpertRule.OnSuccess instead of npcLoot.Add so it only applies in normal mode
             notExpertRule.OnSuccess(ItemDropRule.OneFromOptionsNotScalingWithLuck(1, ItemType<AggroScroll>(), ItemType<PursuitScroll>(), ItemType<IceScroll>(), ItemType<LeechScroll>()));
             //Finally add the leading rule

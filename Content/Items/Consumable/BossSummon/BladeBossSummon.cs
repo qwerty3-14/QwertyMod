@@ -1,5 +1,5 @@
 
-using QwertyMod.Content.Items.Consumable.Tile.Bars;
+using QwertyMod.Content.Items.Consumable.Tiles.Bars;
 using QwertyMod.Content.NPCs.Bosses.BladeBoss;
 using Terraria;
 using Terraria.Audio;

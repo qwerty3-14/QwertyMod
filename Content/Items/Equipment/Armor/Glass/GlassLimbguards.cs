@@ -3,6 +3,7 @@ using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static Terraria.ID.ArmorIDs;
 
 namespace QwertyMod.Content.Items.Equipment.Armor.Glass
 {
@@ -14,6 +15,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Glass
             DisplayName.SetDefault("Glass Limbguards");
             Tooltip.SetDefault("Walk right for 12% increased ranged damage\nWalk left for 12% increased magic damage");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+            Legs.Sets.HidesBottomSkin[Item.legSlot] = true;
         }
 
         public override void SetDefaults()
@@ -35,11 +37,6 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Glass
                 .AddIngredient(ItemID.TungstenBar, 6)
                 .AddTile(TileID.Anvils)
                 .Register();
-        }
-
-        public override bool DrawLegs()
-        {
-            return false;
         }
 
         public override void UpdateEquip(Player player)

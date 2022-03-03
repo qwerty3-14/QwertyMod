@@ -1,7 +1,7 @@
 using Microsoft.Xna.Framework;
 using QwertyMod.Content.Buffs;
 using QwertyMod.Content.Dusts;
-using QwertyMod.Content.Items.Consumable.Tile.Bars;
+using QwertyMod.Content.Items.Consumable.Tiles.Bars;
 using System;
 using Terraria;
 using Terraria.DataStructures;
@@ -47,7 +47,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Lune
                 .AddTile(TileID.Anvils)
                 .Register();
         }
-        public override bool Shoot(Player player, ProjectileSource_Item_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             for(int i =0; i <1000; i++)
             {

@@ -1,6 +1,6 @@
 using Microsoft.Xna.Framework;
 using QwertyMod.Content.Dusts;
-using QwertyMod.Content.Items.Consumable.Tile.Bars;
+using QwertyMod.Content.Items.Consumable.Tiles.Bars;
 using QwertyMod.Content.Items.MiscMaterials;
 using System;
 using Terraria;
@@ -32,7 +32,7 @@ namespace QwertyMod.Content.Items.Tool.Mining.Caelite
             Item.value = 25000;
             Item.rare = 3;
             Item.UseSound = SoundID.Item1;
-
+            Item.useTurn = true;
             Item.width = 32;
             Item.height = 32;
             //Item.crit = 5;

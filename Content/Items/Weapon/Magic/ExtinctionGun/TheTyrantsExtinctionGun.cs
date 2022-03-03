@@ -59,7 +59,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.ExtinctionGun
             return true;
         }
 
-        public override bool Shoot(Player player, ProjectileSource_Item_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             Vector2 muzzleOffset = Vector2.Normalize(velocity) * 28f;
             if (Collision.CanHit(position, 0, 0, position + muzzleOffset, 0, 0))

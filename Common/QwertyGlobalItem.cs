@@ -11,7 +11,14 @@ namespace QwertyMod.Common
 {
     public class QwertyGlobalItem : GlobalItem
     {
-        public override bool ConsumeAmmo(Item item, Player player)
+        public override void SetDefaults(Item item)
+        {
+            if(item.type == ItemID.BreakerBlade)
+            {
+                item.scale = 10;
+            }
+        }
+        public override bool CanConsumeAmmo(Item weapon, Player player)
         {
             return Main.rand.NextFloat() <= player.GetModPlayer<CommonStats>().ammoReduction;
         }

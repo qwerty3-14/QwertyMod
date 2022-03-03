@@ -97,7 +97,6 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
 
         public override void SetDefaults()
         {
-            Projectile.minion = true;
             Projectile.penetrate = -1;
             Projectile.alpha = 255;
             Projectile.width = Projectile.height = 14;
@@ -106,6 +105,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
             Projectile.timeLeft = 120;
             Projectile.extraUpdates = 3;
             Projectile.friendly = true;
+            Projectile.DamageType = DamageClass.Summon;
         }
 
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)

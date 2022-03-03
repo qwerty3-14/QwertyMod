@@ -1,5 +1,5 @@
 ﻿using QwertyMod.Content.NPCs.Bosses.TundraBoss;
-using QwertyMod.Content.Items.Consumable.Tile.Trophy;
+using QwertyMod.Content.Items.Consumable.Tiles.Trophy;
 using QwertyMod.Content.Items.Equipment.Vanity.BossMasks;
 using QwertyMod.Content.Items.Weapon.Magic.PenguinWhistle;
 using QwertyMod.Content.Items.Weapon.Melee.Sword;
@@ -48,25 +48,25 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
         {
             if (Main.rand.Next(7) == 0)
             {
-                player.QuickSpawnItem(ItemType<PolarMask>());
+                player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),ItemType<PolarMask>());
             }
             switch (Main.rand.Next(3))
             {
                 case 0:
-                    player.QuickSpawnItem(ItemType<PenguinClub>());
+                    player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),ItemType<PenguinClub>());
                     break;
 
                 case 1:
-                    player.QuickSpawnItem(ItemType<PenguinLauncher>());
+                    player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),ItemType<PenguinLauncher>());
                     break;
 
                 case 2:
-                    player.QuickSpawnItem(ItemType<PenguinWhistle>());
+                    player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),ItemType<PenguinWhistle>());
                     break;
             }
-            player.QuickSpawnItem(ItemType<PenguinGenerator>());
-            player.QuickSpawnItem(ItemID.Penguin, Main.rand.Next(40, 81));
-            player.QuickSpawnItem(73, 4);
+            player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),ItemType<PenguinGenerator>());
+            player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),ItemID.Penguin, Main.rand.Next(40, 81));
+            player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),73, 4);
         }
     }
 }

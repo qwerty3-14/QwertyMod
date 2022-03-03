@@ -1,9 +1,10 @@
-using QwertyMod.Content.Items.Consumable.Tile.Bars;
+using QwertyMod.Content.Items.Consumable.Tiles.Bars;
 using QwertyMod.Content.Items.MiscMaterials;
 using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static Terraria.ID.ArmorIDs;
 using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content.Items.Equipment.Armor.Caelite
@@ -17,6 +18,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Caelite
             DisplayName.SetDefault("Caelite Greaves");
             Tooltip.SetDefault("Melee and magic attacks hasten the cooldown for healing potions");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+            Legs.Sets.HidesBottomSkin[Item.legSlot] = true;
         }
 
         public override void SetDefaults()
@@ -47,10 +49,6 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Caelite
             if (!male) equipSlot = QwertyMod.CaeliteLegFemale;
         }
 
-        public override bool DrawLegs()
-        {
-            return false;
-        }
     }
 
     public class CaeliteGreavesEffect : ModPlayer

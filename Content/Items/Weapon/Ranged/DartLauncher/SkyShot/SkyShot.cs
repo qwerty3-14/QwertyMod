@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using QwertyMod.Content.Buffs;
 using QwertyMod.Content.Dusts;
-using QwertyMod.Content.Items.Consumable.Tile.Bars;
+using QwertyMod.Content.Items.Consumable.Tiles.Bars;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,7 +45,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.DartLauncher.SkyShot
             Item.UseSound = SoundID.Item63;
             Item.autoReuse = true;
         }
-        public override bool Shoot(Player player, ProjectileSource_Item_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             float r = (velocity).ToRotation() - (float)Math.PI/2f;
             Projectile.NewProjectile(source, position + QwertyMethods.PolarVector(4f * player.direction, r), velocity, type, damage, knockback, player.whoAmI);

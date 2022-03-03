@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "31G9mQHvr4CYeZPCoJqT8CQllgANFb8lkg5Ceer/h6zup3lNJ2QuAx/UtG48U4N8MOjtnheSiIR3lnQnOlxIZw==",
+  "dgSpecHash": "NGPU9garF2eHI99cq3Lf7OFvEutOSYsxkJWoomD4rjQ+OCU38GU4iNREn2GomtCzdESDUL9k0eaj+3bbXdH01Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\noahg\\Documents\\My Games\\Terraria\\ModLoader\\Beta\\Mod Sources\\QwertyMod\\QwertyMod.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\noahg\\.nuget\\packages\\tmodloader.codeassist\\0.1.2\\tmodloader.codeassist.0.1.2.nupkg.sha512"
+    "C:\\Users\\noahg\\.nuget\\packages\\tmodloader.codeassist\\0.1.3\\tmodloader.codeassist.0.1.3.nupkg.sha512"
   ],
   "logs": []
 }

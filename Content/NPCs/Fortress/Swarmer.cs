@@ -1,7 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Common.Fortress;
-using QwertyMod.Content.Items.Consumable.Tile.Banners;
+using QwertyMod.Content.Items.Consumable.Tiles.Banners;
 using System;
 using System.Collections.Generic;
 using Terraria;
@@ -240,7 +240,7 @@ namespace QwertyMod.Content.NPCs.Fortress
                 }
                 for (int s = 0; s < swarmSize; s++)
                 {
-                    NPC.NewNPC((int)NPC.Center.X, (int)NPC.Center.Y, NPCType<Swarmer>());
+                    NPC.NewNPC(NPC.GetSpawnSourceForNPCFromNPCAI(), (int)NPC.Center.X, (int)NPC.Center.Y, NPCType<Swarmer>());
                 }
             }
             NPC.active = false;

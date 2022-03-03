@@ -49,7 +49,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
         }
         public override void OnCraft(Recipe recipe)
         {
-            Main.LocalPlayer.QuickSpawnItem(ItemType<VitallumCoreUncharged>(), 1);
+            Main.LocalPlayer.QuickSpawnItem(Main.LocalPlayer.GetItemSource_OpenItem(Item.type), ItemType<VitallumCoreUncharged>(), 1);
         }
     }
     

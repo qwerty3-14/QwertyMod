@@ -39,7 +39,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.PenguinWhistle
             Item.noMelee = true;
             Item.noUseGraphic = true;
         }
-        public override bool Shoot(Player player, ProjectileSource_Item_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             int numberOfProjectiles = 5;
             for (int i = -2; i < numberOfProjectiles - 2; i++)

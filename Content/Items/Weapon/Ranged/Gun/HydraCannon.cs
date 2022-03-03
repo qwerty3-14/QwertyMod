@@ -54,7 +54,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun
             player.GetModPlayer<HydraCannonPlayer>().hydraCannon = true;
         }
 
-        public override bool ConsumeAmmo(Player player)
+        public override bool CanConsumeAmmo(Player player)
         {
             // We can get the Clockwork Assault Riffle Effect by not consuming ammo when itemAnimation is lower than the first shot.
             return !(player.itemAnimation < Item.useAnimation - 2);
@@ -122,7 +122,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun
             {
                 SoundEngine.PlaySound(SoundID.Roar, Player.position, 0);
 
-                Projectile.NewProjectile(new ProjectileSource_ProjectileParent(proj), Player.Center, (target.Center - Player.Center).SafeNormalize(Vector2.UnitY) * 24f, ProjectileType<DoomBreath>(), damage * 5, knockback * 3, Player.whoAmI);
+                Projectile.NewProjectile(Projectile.InheritSource(proj), Player.Center, (target.Center - Player.Center).SafeNormalize(Vector2.UnitY) * 24f, ProjectileType<DoomBreath>(), damage * 5, knockback * 3, Player.whoAmI);
 
                 Main.rand.NextFloat(Player.width);
             }

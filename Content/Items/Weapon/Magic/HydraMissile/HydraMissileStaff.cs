@@ -46,7 +46,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraMissile
             return new Vector2(-26, 0);
         }
 
-        public override bool Shoot(Player player, ProjectileSource_Item_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             Vector2 muzzleOffset = Vector2.Normalize(velocity) * 131f;
             if (Collision.CanHit(position, 0, 0, position + muzzleOffset, 0, 0))
@@ -94,21 +94,6 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraMissile
             Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<HydraBeamGlow>());
             Projectile.rotation = direction + ((float)Math.PI / 2);
         }
-
-        public override bool OnTileCollide(Vector2 velocityChange)
-        {
-            if (Projectile.velocity.X != velocityChange.X)
-            {
-                Projectile.velocity.X = -velocityChange.X;
-            }
-            if (Projectile.velocity.Y != velocityChange.Y)
-            {
-                Projectile.velocity.Y = -velocityChange.Y;
-            }
-            direction = Projectile.velocity.ToRotation();
-            return false;
-        }
-
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
         {
             //Projectile.localNPCImmunity[target.whoAmI] = -1;
@@ -130,7 +115,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraMissile
             for (int g = 0; g < 2; g++)
             {
                 float launchDirection = Main.rand.NextFloat() * (float)Math.PI * 2;
-                Projectile.NewProjectile(new ProjectileSource_ProjectileParent(Projectile), Projectile.Center, new Vector2((float)Math.Cos(launchDirection) * speed, (float)Math.Sin(launchDirection) * speed), ProjectileType<HydraMissileMedium>(), (int)(Projectile.damage * .6f), Projectile.knockBack * .6f, Projectile.owner);
+                Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, new Vector2((float)Math.Cos(launchDirection) * speed, (float)Math.Sin(launchDirection) * speed), ProjectileType<HydraMissileMedium>(), (int)(Projectile.damage * .6f), Projectile.knockBack * .6f, Projectile.owner);
             }
         }
     }
@@ -183,20 +168,6 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraMissile
             //target.immune[Projectile.owner] = 0;
         }
 
-        public override bool OnTileCollide(Vector2 velocityChange)
-        {
-            if (Projectile.velocity.X != velocityChange.X)
-            {
-                Projectile.velocity.X = -velocityChange.X;
-            }
-            if (Projectile.velocity.Y != velocityChange.Y)
-            {
-                Projectile.velocity.Y = -velocityChange.Y;
-            }
-            direction = Projectile.velocity.ToRotation();
-            return false;
-        }
-
         public override void Kill(int timeLeft)
         {
             Projectile.alpha = 255;
@@ -212,7 +183,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraMissile
             for (int g = 0; g < 2; g++)
             {
                 float launchDirection = Main.rand.NextFloat() * (float)Math.PI * 2;
-                Projectile.NewProjectile(new ProjectileSource_ProjectileParent(Projectile), Projectile.Center, new Vector2((float)Math.Cos(launchDirection) * speed, (float)Math.Sin(launchDirection) * speed), ProjectileType<HydraMissileSmall>(), (int)(Projectile.damage * .6f), Projectile.knockBack * .6f, Projectile.owner);
+                Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, new Vector2((float)Math.Cos(launchDirection) * speed, (float)Math.Sin(launchDirection) * speed), ProjectileType<HydraMissileSmall>(), (int)(Projectile.damage * .6f), Projectile.knockBack * .6f, Projectile.owner);
             }
         }
     }
@@ -261,20 +232,6 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraMissile
 
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
         {
-        }
-
-        public override bool OnTileCollide(Vector2 velocityChange)
-        {
-            if (Projectile.velocity.X != velocityChange.X)
-            {
-                Projectile.velocity.X = -velocityChange.X;
-            }
-            if (Projectile.velocity.Y != velocityChange.Y)
-            {
-                Projectile.velocity.Y = -velocityChange.Y;
-            }
-            direction = Projectile.velocity.ToRotation();
-            return false;
         }
 
         public override void Kill(int timeLeft)

@@ -40,6 +40,57 @@ using QwertyMod.Content.Items.Equipment.Armor.Gale;
 using QwertyMod.Content.Items.Equipment.Armor.Vitallum;
 using QwertyMod.Content;
 using QwertyMod.Content.Items.MiscMaterials;
+using System.Collections.Generic;
+using System;
+using QwertyMod.Content.NPCs.Bosses.AncientMachine;
+using QwertyMod.Content.Items.Consumable.Tiles.Trophy.Ancient;
+using QwertyMod.Content.Items.Consumable.BossBag;
+using QwertyMod.Content.Items.Consumable.BossSummon;
+using QwertyMod.Common;
+using QwertyMod.Content.Items.Consumable.Tiles.MusicBoxes;
+using QwertyMod.Content.Items.Tool.Mining.Ancient;
+using QwertyMod.Content.Items.Tool.FishingRod;
+using QwertyMod.Content.NPCs.Bosses.Hydra;
+using QwertyMod.Content.Items.Consumable.Tiles.Trophy.Hydra;
+using QwertyMod.Content.NPCs.Bosses.RuneGhost;
+using QwertyMod.Content.Items.Equipment.Vanity.BossMasks;
+using QwertyMod.Content.Items.Equipment.Accessories.Expert.HyperRunestone;
+using QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls;
+using QwertyMod.Content.Items.Weapon.Melee.Top.Cyclone;
+using QwertyMod.Content.Items.Weapon.Ranged.DartLauncher.Whirpool;
+using QwertyMod.Content.Items.Weapon.Sentry.BubbleBrewer;
+using QwertyMod.Content.Items.Weapon.Ranged.Bow.B4Bow;
+using QwertyMod.Content.NPCs.Bosses.OLORD;
+using QwertyMod.Content.Items.Weapon.Magic.BlackHole;
+using QwertyMod.Content.Items;
+using QwertyMod.Content.Items.Weapon.Magic.Plasma;
+using QwertyMod.Content.Items.Weapon.Minion.UrQuan;
+using QwertyMod.Content.Items.Tool.Mining.TheDevourer;
+using QwertyMod.Content.Items.Weapon.Melee.Misc;
+using QwertyMod.Content.Items.Consumable.Tiles.Trophy.FortressBoss;
+using QwertyMod.Content.Items.Weapon.Ranged.Bow.HolyExiler;
+using QwertyMod.Content.Items.Weapon.Magic.RestlessSun;
+using QwertyMod.Content.Items.Weapon.Minion.Priest;
+using QwertyMod.Content.NPCs.Bosses.TundraBoss;
+using QwertyMod.Content.Items.Consumable.Tiles.Trophy.Polar;
+using QwertyMod.Content.Items.Equipment.Accessories.Expert;
+using QwertyMod.Content.Items.Weapon.Melee.Sword;
+using QwertyMod.Content.Items.Pet;
+using QwertyMod.Content.Items.Equipment.Accessories.Sword;
+using QwertyMod.Content.Items.Consumable.Tiles.Bars;
+using QwertyMod.Content.Items.Weapon.Ranged.SpecialAmmo;
+using QwertyMod.Content.Items.Weapon.Magic.PenguinWhistle;
+using QwertyMod.Content.NPCs.Bosses.BladeBoss;
+using QwertyMod.Content.Items.Consumable.Tiles.Trophy.Blade;
+using QwertyMod.Content.Items.Equipment.Accessories.Expert.Sheath;
+using QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss;
+using QwertyMod.Content.Items.Equipment.Accessories.Expert.Doppleganger;
+using QwertyMod.Content.NPCs.DinoMilitia;
+using QwertyMod.Content.Items.Weapon.Melee.Flail.Ankylosaurus;
+using QwertyMod.Content.Items.Weapon.Magic.ExtinctionGun;
+using QwertyMod.Content.Items.Weapon.Ranged.Gun.DinoVulcan;
+using QwertyMod.Content.Items.Equipment.Accessories;
+using Terraria.DataStructures;
 
 namespace QwertyMod
 {
@@ -53,8 +104,8 @@ namespace QwertyMod
         public static Deck<int> HydraLoot;
 
         public const string HydraHead1 = "QwertyMod/Content/NPCs/Bosses/Hydra/MapHead1";
-        public const string HydraHead2 = "QwertyMod/Content/NPCs/Bosses/Hydra/MapHead1";
-        public const string HydraHead3 = "QwertyMod/Content/NPCs/Bosses/Hydra/MapHead1";
+        public const string HydraHead2 = "QwertyMod/Content/NPCs/Bosses/Hydra/MapHead2";
+        public const string HydraHead3 = "QwertyMod/Content/NPCs/Bosses/Hydra/MapHead3";
         public static ModKeybind YetAnotherSpecialAbility;
 
         public static int hydraLegMale = 0;
@@ -145,6 +196,62 @@ namespace QwertyMod
                     OnBodyDraw.ReigsterBodies();
                 });
             }
+            if (ModLoader.HasMod("BossChecklist"))
+            {
+                Mod bossChecklist = ModLoader.GetMod("BossChecklist");
+                if (bossChecklist != null)
+                {
+                    bossChecklist.Call("AddBoss", 5.5f, NPCType<AncientMachine>(), this, "Ancient Machine", (Func<bool>)(() => DownedBossSystem.downedAncient), ItemType<AncientEmblem>(),
+                        new List<int> { ItemType<AncientMachineTrophy>(), ItemType<MusicBoxBuiltToDestroy>() },
+                        new List<int> { ItemType<AncientMachineBag>(), ItemType<AncientBlade>(), ItemType<AncientThrow>(), ItemType<AncientLongbow>(), ItemType<AncientSniper>(), ItemType<AncientMissileStaff>(), ItemType<AncientWave>(), ItemType<AncientMinionStaff>(), ItemType<AncientNuke>(), ItemType<AncientMiner>(), ItemID.HealingPotion },
+                        "Look into the [i:" + ItemType<AncientEmblem>() + "]", null, "QwertyMod/Content/NPCs/Bosses/AncientMachine/AncientMachine_Checklist");
+
+                    bossChecklist.Call("AddBoss", 7.000001f, NPCType<Hydra>(), this, "The Hydra", (Func<bool>)(() => DownedBossSystem.downedHydra), ItemType<HydraSummon>(),
+                        new List<int> { ItemType<HydraTrophy>(), ItemType<MusicBoxBeastOfThreeHeads>() },
+                        new List<int> { ItemType<HydraBag>(), ItemType<Hydrent>(), ItemType<HydraJavelin>(), ItemType<HydraCannon>(), ItemType<HydraBeam>(), ItemType<HydraMissileStaff>(), ItemType<HydraHeadStaff>(), ItemType<HydraBarrage>(), ItemType<Hydrill>(), ItemType<Hydrator>(), ItemType<HydraScale>(), ItemID.GreaterHealingPotion },
+                        "Tempt with [i:" + ItemType<HydraSummon>() + "]", null, "QwertyMod/Content/NPCs/Bosses/Hydra/Hydra_Checklist", "QwertyMod/Content/NPCs/Bosses/Hydra/MapHead1");
+
+                    bossChecklist.Call("AddBoss", 14.2f, NPCType<RuneGhost>(), this, "Rune Ghost", (Func<bool>)(() => DownedBossSystem.downedRuneGhost), ItemType<SummoningRune>(),
+                        new List<int> { ItemType<RuneGhostMask>(), ItemType<MusicBoxTheConjurer>() },
+                        new List<int> { ItemType<RuneGhostBag>(), ItemType<HyperRunestone>(), ItemType<AggroScroll>(), ItemType<IceScroll>(), ItemType<LeechScroll>(), ItemType<PursuitScroll>(), ItemType<CraftingRune>(), ItemID.GreaterHealingPotion },
+                        "Use a [i:" + ItemType<SummoningRune>() + "] to challenge its power. [i:" + ItemType<SummoningRune>() + "] drops from the dungeon's spirits");
+
+                    bossChecklist.Call("AddBoss", 15.8f, NPCType<OLORDv2>(), this, "Oversized Laser-emitting Obliteration Radiation-emitting Destroyer", (Func<bool>)(() => DownedBossSystem.downedOLORD), ItemType<B4Summon>(),
+                        new List<int> { ItemType<MusicBoxEPIC>() },
+                        new List<int> { ItemType<B4Bag>(), ItemType<B4ExpertItem>(), ItemType<B4Bow>(), ItemType<BlackHoleStaff>(), ItemType<ExplosivePierce>(), ItemType<DreadnoughtStaff>(), ItemType<TheDevourer>(), ItemID.GreaterHealingPotion },
+                        "Use a [i:" + ItemType<B4Summon>() + "]", null, "QwertyMod/Content/NPCs/Bosses/OLORD/BackGround");
+
+                    bossChecklist.Call("AddBoss", 4.2f, NPCType<FortressBoss>(), this, "The Divine Light", (Func<bool>)(() => DownedBossSystem.downedDivineLight), ItemType<FortressBossSummon>(),
+                        new List<int> { ItemType<FortressBossTrophy>(), ItemType<DivineLightMask>(), ItemType<MusicBoxHigherBeing>() },
+                        new List<int> { ItemType<FortressBossBag>(), ItemType<CaeliteRainKnife>(), ItemType<HolyExiler>(), ItemType<CaeliteMagicWeapon>(), ItemType<PriestStaff>(), ItemType<Lightling>(), ItemType<SkywardHilt>(), ItemType<CaeliteBar>(), ItemType<CaeliteCore>(), ItemID.LesserManaPotion },
+                        "Use a [i:" + ItemType<FortressBossSummon>() + "]" + " at the altar in the sky fortress", null);
+
+                    bossChecklist.Call("AddBoss", .7f, NPCType<PolarBear>(), this, "Polar Exterminator", (Func<bool>)(() => DownedBossSystem.downedBear), null,
+                        new List<int> { ItemType<PolarTrophy>(), ItemType<PolarMask>() },
+                        new List<int> { ItemType<TundraBossBag>(), ItemType<PenguinGenerator>(), ItemType<PenguinClub>(), ItemType<PenguinLauncher>(), ItemType<PenguinWhistle>(), ItemID.Penguin, ItemID.LesserHealingPotion },
+                        "Hibernates in the underground tundra. After defeating it it will respawn the next day.", null);
+
+                    bossChecklist.Call("AddBoss", 11.4f, NPCType<Imperious>(), this, "Imperious", (Func<bool>)(() => DownedBossSystem.downedBlade), null,
+                        new List<int> { ItemType<BladeBossTrophy>(), ItemType<MusicBoxBladeOfAGod>() },
+                        new List<int> { ItemType<BladeBossBag>(), ItemType<ImperiousSheath>(), ItemType<ImperiousTheIV>(), ItemType<Discipline>(), ItemType<Arsenal>(), ItemType<BladedArrowShaft>(), ItemType<SwordStormStaff>(), ItemType<SwordMinionStaff>(), ItemType<Imperium>(), ItemType<Swordquake>(), ItemType<SwordsmanBadge>(), ItemID.GreaterHealingPotion },
+                        "Use the [i:" + ItemType<BladeBossSummon>() + "], and accept its challenge", null);
+
+                    bossChecklist.Call("AddBoss", 5.7f, NPCType<CloakedDarkBoss>(), this, "Noehtnap", (Func<bool>)(() => DownedBossSystem.downedNoehtnap), ItemType<RitualInterupter>(),
+                        new List<int> { ItemType<MusicBoxTheGodsBleed>() },
+                        new List<int> { ItemType<NoehtnapBag>(), ItemType<Doppleganger>(), ItemType<Etims>(), ItemID.HealingPotion },
+                        "Just use the [i:" + ItemType<RitualInterupter>() + "] mortal!", null, "QwertyMod/Content/NPCs/Bosses/CloakedDarkBoss/CloakedDarkBoss_Checklist");
+
+                    bossChecklist.Call("AddEvent", 11.001f,
+                        new List<int> { NPCType<Utah>(), NPCType<Triceratank>(), NPCType<AntiAir>(), NPCType<Velocichopper>(), NPCType<TheGreatTyrannosaurus>() },
+                        this, "Dino Militia", (Func<bool>)(() => DownedBossSystem.downedDinos), ItemType<DinoEgg>(),
+                        ItemType<MusicBoxOldDinosNewGuns>(),
+                        new List<int> { ItemType<DinoFlail>(), ItemType<DinoVulcan>(), ItemType<TheTyrantsExtinctionGun>(), ItemType<Tricerashield>(), ItemType<DinoTooth>() },
+                        "Use a [i:" + ItemType<DinoEgg>() + "] and they'll come to drive you extinct!", null, "QwertyMod/Content/NPCs/DinoMilitia/TheGreatTyrannosaurus_Bestiary", "QwertyMod/Content/Items/Consumable/BossSummons/DinoEgg");
+
+
+                    bossChecklist.Call("AddToBossLoot", "Terraria", "DukeFishron", new List<int> { ItemType<Cyclone>(), ItemType<Whirlpool>(), ItemType<BubbleBrewerBaton>() });
+                }
+            }
         }
         public static Vector2 GetLocalCursor(int id)
         {
@@ -181,7 +288,8 @@ namespace QwertyMod
                     break;
                 case ModMessageType.DivineCall:
                     Vector2 summonAt = reader.ReadVector2();
-                    int npcID = NPC.NewNPC((int)summonAt.X, (int)summonAt.Y, NPCType<FortressBoss>());
+                    int playerID = reader.ReadInt32();
+                    int npcID = NPC.NewNPC(NPC.GetBossSpawnSource(playerID),  (int)summonAt.X, (int)summonAt.Y, NPCType<FortressBoss>());
                     break;
                 case ModMessageType.StartDinoEvent:
                     DinoEvent.EventActive = true;

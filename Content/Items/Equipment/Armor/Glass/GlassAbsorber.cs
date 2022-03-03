@@ -43,10 +43,6 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Glass
                 .AddTile(TileID.Anvils)
                 .Register();
         }
-        public override void DrawHands(ref bool drawHands, ref bool drawArms)
-        {
-            drawHands = true;
-        }
     }
 
 }

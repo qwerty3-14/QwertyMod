@@ -129,7 +129,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.MiniTank
                     if (shootCounter >= 60)
                     {
                         shootCounter = 0;
-                        Projectile.NewProjectile(new ProjectileSource_ProjectileParent(Projectile), Projectile.Top + QwertyMethods.PolarVector(30, gunRotation), QwertyMethods.PolarVector(14, gunRotation), ProjectileType<MiniTankCannonBallFreindly>(), Projectile.damage, Projectile.knockBack, player.whoAmI);
+                        Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Top + QwertyMethods.PolarVector(30, gunRotation), QwertyMethods.PolarVector(14, gunRotation), ProjectileType<MiniTankCannonBallFreindly>(), Projectile.damage, Projectile.knockBack, player.whoAmI);
                     }
                 }
                 else
@@ -166,13 +166,11 @@ namespace QwertyMod.Content.Items.Weapon.Minion.MiniTank
             }
             return false;
         }
-
-        public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough)
+        public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
         {
             fallThrough = Main.player[Projectile.owner].Center.Y - Projectile.Center.Y > 64;
-            return base.TileCollideStyle(ref width, ref height, ref fallThrough);
+            return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
         }
-
         public override bool PreDraw(ref Color lightColor)
         {
             Texture2D texture = Request<Texture2D>("QwertyMod/Content/Items/Weapon/Minion/MiniTank/MiniTankGun").Value;

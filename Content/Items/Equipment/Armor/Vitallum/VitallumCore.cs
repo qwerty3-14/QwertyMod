@@ -46,7 +46,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
             if (charge > maxCharge)
             {
                 Item.TurnToAir();
-                player.QuickSpawnItem(ItemType<VitallumCoreCharged>(), 1);
+                player.QuickSpawnItem(player.GetItemSource_OpenItem(ItemID.PlanteraBossBag), ItemType<VitallumCoreCharged>(), 1);
             }
         }
 
@@ -133,7 +133,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
         {
             if (context == "bossBag" && arg == ItemID.PlanteraBossBag)
             {
-                player.QuickSpawnItem(ItemType<VitallumCoreUncharged>());
+                player.QuickSpawnItem(player.GetItemSource_OpenItem(ItemID.PlanteraBossBag),ItemType<VitallumCoreUncharged>());
             }
         }
     }

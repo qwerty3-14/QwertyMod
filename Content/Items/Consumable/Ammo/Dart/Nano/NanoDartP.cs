@@ -38,7 +38,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Dart.Nano
         {
             for (int r = 0; r < 5; r++)
             {
-                Projectile.NewProjectile(new ProjectileSource_ProjectileParent(Projectile), Projectile.Center, QwertyMethods.PolarVector(1f, (r / 5f) * (float)Math.PI * 2 + Projectile.velocity.ToRotation()), ProjectileType<Nanoprobe>(), (int)(.4f * Projectile.damage), 0, Projectile.owner);
+                Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, QwertyMethods.PolarVector(1f, (r / 5f) * (float)Math.PI * 2 + Projectile.velocity.ToRotation()), ProjectileType<Nanoprobe>(), (int)(.4f * Projectile.damage), 0, Projectile.owner);
             }
         }
     }

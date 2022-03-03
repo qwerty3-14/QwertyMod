@@ -45,7 +45,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.SoEF
             return new Vector2(-7, -1);
         }
 
-        public override bool Shoot(Player player, ProjectileSource_Item_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             int bulletCount = 3 + Main.rand.Next(2);
             float dir = velocity.ToRotation();

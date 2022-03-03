@@ -48,15 +48,15 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
 
             foreach (int item in loot)
             {
-                player.QuickSpawnItem(item);
+                player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),item);
             }
 
             if (Main.rand.Next(100) < 20)
             {
-                player.QuickSpawnItem(ItemType<AncientMiner>());
+                player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),ItemType<AncientMiner>());
             }
-            player.QuickSpawnItem(73, 8);
-            //player.QuickSpawnItem(mod.ItemType("AncientGemstone"));
+            player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),73, 8);
+            //player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),mod.ItemType("AncientGemstone"));
         }
     }
 }

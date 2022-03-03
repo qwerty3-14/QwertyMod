@@ -104,7 +104,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.Sheath
             {
                 if (effect && damageTally >= damageTallyMax)
                 {
-                        Projectile.NewProjectile(new ProjectileSource_BySourceId(1), Player.Center, Vector2.Zero, ProjectileType<ImperiousP>(), (int)(500f * Player.GetDamage(DamageClass.Summon).Multiplicative), 8f * Player.minionKB, Player.whoAmI); //summons Imperious to fight!
+                        Projectile.NewProjectile(Projectile.GetNoneSource(), Player.Center, Vector2.Zero, ProjectileType<ImperiousP>(), (int)(500f * Player.GetDamage(DamageClass.Summon).Multiplicative), 8f * Player.minionKB, Player.whoAmI); //summons Imperious to fight!
                         damageTally = 0; //resets the tally
                     
                 }

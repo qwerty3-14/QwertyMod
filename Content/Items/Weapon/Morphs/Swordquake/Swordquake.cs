@@ -118,7 +118,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.Swordquake
                             start += Vector2.UnitY;
                         }
                         start += Vector2.UnitY * 20;
-                        Projectile.NewProjectile(new ProjectileSource_ProjectileParent(Projectile), start, Vector2.Zero, ProjectileType<SwordlagmitePlayer>(), Projectile.damage, Projectile.knockBack, Projectile.owner, player.direction, 40);
+                        Projectile.NewProjectile(Projectile.InheritSource(Projectile), start, Vector2.Zero, ProjectileType<SwordlagmitePlayer>(), Projectile.damage, Projectile.knockBack, Projectile.owner, player.direction, 40);
                     }
                 }
             }
@@ -207,7 +207,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.Swordquake
                         start += Vector2.UnitY;
                     }
                     start += Vector2.UnitY * 20;
-                    next = Main.projectile[Projectile.NewProjectile(new ProjectileSource_ProjectileParent(Projectile), start, Vector2.Zero, ProjectileType<SwordlagmitePlayer>(), Projectile.damage, Projectile.knockBack, Projectile.owner, Projectile.ai[0], Projectile.ai[1] - 1)];
+                    next = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), start, Vector2.Zero, ProjectileType<SwordlagmitePlayer>(), Projectile.damage, Projectile.knockBack, Projectile.owner, Projectile.ai[0], Projectile.ai[1] - 1)];
                 }
             }
             if (Projectile.timeLeft == 1)

@@ -50,13 +50,13 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.Ancient
             }
         }
 
-        public override bool Shoot(Player player, ProjectileSource_Item_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             Projectile.NewProjectile(source, position, velocity, ProjectileType<AncientLongbowP>(), damage, knockback, player.whoAmI);
             return false;
         }
 
-        public override bool ConsumeAmmo(Player player)
+        public override bool CanConsumeAmmo(Player player)
         {
             return false;
         }
@@ -190,7 +190,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.Ancient
                     }
                     if (Main.netMode != 2)
                     {
-                        arrow = Main.projectile[Projectile.NewProjectile(new ProjectileSource_ProjectileParent(Projectile), Projectile.Center, Vector2.Zero, Ammo, weaponDamage, weaponKnockback, Projectile.owner)];
+                        arrow = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, Ammo, weaponDamage, weaponKnockback, Projectile.owner)];
                     }
                 }
                 arrow.velocity = QwertyMethods.PolarVector(speed, Projectile.rotation - (float)Math.PI / 2);
@@ -243,8 +243,8 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.Ancient
             }
             if (timer >= maxTime)
             {
-                Projectile.NewProjectile(new ProjectileSource_ProjectileParent(Projectile), arrow.Center, arrow.velocity * .9f, arrow.type, arrow.damage, arrow.knockBack, Projectile.owner);
-                Projectile.NewProjectile(new ProjectileSource_ProjectileParent(Projectile), arrow.Center, arrow.velocity * 1.1f, arrow.type, arrow.damage, arrow.knockBack, Projectile.owner);
+                Projectile.NewProjectile(Projectile.InheritSource(Projectile), arrow.Center, arrow.velocity * .9f, arrow.type, arrow.damage, arrow.knockBack, Projectile.owner);
+                Projectile.NewProjectile(Projectile.InheritSource(Projectile), arrow.Center, arrow.velocity * 1.1f, arrow.type, arrow.damage, arrow.knockBack, Projectile.owner);
             }
         }
 
@@ -292,14 +292,14 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.Ancient
             Main.EntitySpriteDraw(TextureAssets.Projectile[Projectile.type].Value, new Vector2(Projectile.Center.X - Main.screenPosition.X, Projectile.Center.Y - Main.screenPosition.Y),
                         new Rectangle(0, 0, 18, 36), drawColor, Projectile.rotation,
                         new Vector2(Projectile.width * 0.5f, Projectile.height * 0.5f), 1f, SpriteEffects.None, 0);
-            Main.EntitySpriteDraw(Request<Texture2D>("QwertyMod/Content/Items/Weapon/Ranged/Bow/AncientLongbow/AncientArrow_Glow").Value, new Vector2(Projectile.Center.X - Main.screenPosition.X, Projectile.Center.Y - Main.screenPosition.Y),
+            Main.EntitySpriteDraw(Request<Texture2D>("QwertyMod/Content/Items/Weapon/Ranged/Bow/Ancient/AncientArrow_Glow").Value, new Vector2(Projectile.Center.X - Main.screenPosition.X, Projectile.Center.Y - Main.screenPosition.Y),
                         new Rectangle(0, 0, 18, 36), Color.White, Projectile.rotation,
                         new Vector2(Projectile.width * 0.5f, Projectile.height * 0.5f), 1f, SpriteEffects.None, 0);
         }
 
         private void drawOrbital(Color drawColor, Vector2 Loc)
         {
-            Main.EntitySpriteDraw(Request<Texture2D>("QwertyMod/Content/Items/Weapon/Ranged/Bow/AncientLongbow/AncientArrow_Orbital").Value, Loc - Main.screenPosition,
+            Main.EntitySpriteDraw(Request<Texture2D>("QwertyMod/Content/Items/Weapon/Ranged/Bow/Ancient/AncientArrow_Orbital").Value, Loc - Main.screenPosition,
                         new Rectangle(0, 0, 6, 10), drawColor, Projectile.rotation,
                         new Vector2(3, 5), 1f, SpriteEffects.None, 0);
         }

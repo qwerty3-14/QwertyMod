@@ -1,7 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Content.Dusts;
-using QwertyMod.Content.Items.Consumable.Tile.Bars;
+using QwertyMod.Content.Items.Consumable.Tiles.Bars;
 using System;
 using Terraria;
 using Terraria.DataStructures;
@@ -49,7 +49,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.RhuthiniumGuardian
                 .Register();
         }
 
-        public override bool Shoot(Player player, ProjectileSource_Item_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             player.SpawnMinionOnCursor(source, player.whoAmI, type, Item.damage, knockback);
             return false;
@@ -212,7 +212,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.RhuthiniumGuardian
             Projectile.height = 14;
             Projectile.friendly = true;
             Projectile.penetrate = 1;
-            Projectile.minion = true;
+            Projectile.DamageType = DamageClass.Summon;
             Projectile.knockBack = 10f;
             Projectile.extraUpdates = 3;
         }

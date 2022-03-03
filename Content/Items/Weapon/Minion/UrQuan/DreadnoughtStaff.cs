@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
@@ -34,13 +35,13 @@ namespace QwertyMod.Content.Items.Weapon.Minion.UrQuan
             Item.knockBack = 1f;
             Item.value = 750000;
             Item.rare = ItemRarityID.Red;
-            Item.UseSound = SoundID.Item44;
+            //Item.UseSound = SoundID.Item44;
             Item.shoot = ProjectileType<Dreadnought>();
             Item.DamageType = DamageClass.Summon;
             Item.buffType = BuffType<UrQuanB>();
             Item.buffTime = 3600;
         }
-        public override bool Shoot(Player player, ProjectileSource_Item_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             player.SpawnMinionOnCursor(source, player.whoAmI, type, Item.damage, knockback);
             return false;
@@ -55,6 +56,10 @@ namespace QwertyMod.Content.Items.Weapon.Minion.UrQuan
             if (player.altFunctionUse == 2)
             {
                 player.MinionNPCTargetAim(false);
+            }
+            else
+            {
+                SoundEngine.PlaySound(SoundLoader.GetLegacySoundSlot(Mod, "Assets/Sounds/UrQuan-Ditty").WithVolume(.5f), player.Center);
             }
             return base.UseItem(player);
         }

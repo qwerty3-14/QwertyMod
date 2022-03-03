@@ -1,5 +1,5 @@
 using Microsoft.Xna.Framework;
-using QwertyMod.Content.Items.Consumable.Tile.Banners;
+using QwertyMod.Content.Items.Consumable.Tiles.Banners;
 using QwertyMod.Content.Items.Equipment.Accessories;
 using QwertyMod.Content.Items.Weapon.Sentry.AntiAir;
 using System;
@@ -40,7 +40,10 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
             AnimationType = -1;
             NPC.noGravity = false;
             NPC.noTileCollide = false;
-            //music = mod.GetSoundSlot(SoundType.Music, "Sounds/Music/OldDinosNewGuns");
+            if (!Main.dedServ)
+            {
+                Music = MusicLoader.GetMusicSlot(Mod, "Assets/Music/OldDinosNewGuns");
+            }
             NPC.lifeMax = 1800;
             Banner = NPC.type;
             BannerItem = ItemType<AntiAirBanner>();
@@ -121,7 +124,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
                     {
                         if (Main.netMode != 1)
                         {
-                            Projectile.NewProjectile(NPC.GetProjectileSpawnSource(), NPC.Center.X - (17f * NPC.direction), NPC.Center.Y - 40f, 0f, -10f, ProjectileType<AntiAirRocket>(), damage, 3f, Main.myPlayer);
+                            Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), NPC.Center.X - (17f * NPC.direction), NPC.Center.Y - 40f, 0f, -10f, ProjectileType<AntiAirRocket>(), damage, 3f, Main.myPlayer);
                         }
                         //Projectile.NewProjectile(NPC.Center.X-(17f*NPC.direction), NPC.Center.Y-40f, 0f, 0f, 102, damage, 3f, Main.myPlayer);
                         secondShot = false;
@@ -131,7 +134,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
                     {
                         if (Main.netMode != 1)
                         {
-                            Projectile.NewProjectile(NPC.GetProjectileSpawnSource(), NPC.Center.X + (23f * NPC.direction), NPC.Center.Y - 40f, 0f, -10f, ProjectileType<AntiAirRocket>(), damage, 3f, Main.myPlayer);
+                            Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), NPC.Center.X + (23f * NPC.direction), NPC.Center.Y - 40f, 0f, -10f, ProjectileType<AntiAirRocket>(), damage, 3f, Main.myPlayer);
                         }
                         //Projectile.NewProjectile(NPC.Center.X+(23f*NPC.direction), NPC.Center.Y-40f, 0f, 0f, 102, damage, 3f, Main.myPlayer);
                         secondShot = true;

@@ -1,5 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using QwertyMod.Content.Items.Consumable.Tile.Ores;
+using QwertyMod.Content.Items.Consumable.Tiles.Ores;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -26,13 +26,9 @@ namespace QwertyMod.Common
         {
             hasGeneratedRhuthinium = false;
         }
-
-        public override TagCompound SaveWorldData()
+        public override void SaveWorldData(TagCompound tag)
         {
-            return new TagCompound
-            {
-                {"genned", hasGeneratedRhuthinium},
-            };
+            tag["genned"] = hasGeneratedRhuthinium;
         }
 
         public override void LoadWorldData(TagCompound tag)
@@ -124,7 +120,7 @@ namespace QwertyMod.Common
             {
                 for(int j =0; j < size; j++)
                 {
-                    if(Main.tile[x+i, y+j].IsActive)
+                    if(Main.tile[x+i, y+j].HasTile)
                     {
                         return false;
                     }

@@ -32,8 +32,8 @@ namespace QwertyMod.Content.Items.Tool.Mining.BurstMiner
 
             Item.width = 30;
             Item.height = 30;
-            Item.noMelee = true;
             Item.autoReuse = true;
+            Item.useTurn = true;
             Item.pick = 95;
         }
 

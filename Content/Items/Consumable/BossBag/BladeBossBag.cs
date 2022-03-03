@@ -37,16 +37,16 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
         public override void OpenBossBag(Player player)
         {
             int[] spawnThese = QwertyMod.ImperiousLoot.Draw(3);
-            player.QuickSpawnItem((spawnThese[0]));
-            player.QuickSpawnItem((spawnThese[1]));
-            player.QuickSpawnItem((spawnThese[2]));
+            player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),(spawnThese[0]));
+            player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),(spawnThese[1]));
+            player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),(spawnThese[2]));
 
-            player.QuickSpawnItem(73, 15);
+            player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),73, 15);
             if(Main.rand.Next(4) == 0)
             {
-                player.QuickSpawnItem(ItemType<SwordsmanBadge>());
+                player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),ItemType<SwordsmanBadge>());
             }
-            player.QuickSpawnItem(ItemType<ImperiousSheath>());
+            player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),ItemType<ImperiousSheath>());
         }
     }
 }

@@ -128,7 +128,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.Priest
                             if (aimAt != null && !float.IsNaN(((float)aimAt)))
                             {
                                 
-                                Projectile.NewProjectile(new ProjectileSource_ProjectileParent(Projectile), shotPos, QwertyMethods.PolarVector(10f, (float)aimAt), ProjectileType<PriestPulse>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                                Projectile.NewProjectile(Projectile.InheritSource(Projectile), shotPos, QwertyMethods.PolarVector(10f, (float)aimAt), ProjectileType<PriestPulse>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
                             }
                         }
                     }

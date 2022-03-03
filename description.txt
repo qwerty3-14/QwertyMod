@@ -5,12 +5,15 @@ Currently the mod has:
 -Rhuthinium and Lune ore
 -some other items scattered throughout
 
+Discord: https://discord.gg/sdUz3yWKqF
+Source Code: https://github.com/qwerty3-14/QwertyMod
+
 I'm not that good of a spriter so here I'll give thanks to the spriters who helped!
 -Havoc
 -Liquidated Assets
 -SUS
 -Darkpuppey
--FazerGamer
+-CassyDaBean
 -GamingWithZack
 -ShockedHorizon5
 -FailureOfMankind
@@ -26,6 +29,61 @@ Extra thanks
 
 
 Changelog
+0.7.1
+-fixed mod crashing when boss checklist wasn't enabled
+
+0.7.0
+-now works on latest tmodloader version
+-boss checklist support
+-Fixed hydra expert scaling
+
+0.6.1
+-fixed bug with ancient longbow
+
+0.6.0
+-reintroduced music and sounds from the 1.3 version of the mod
+
+0.5.5
+-updated for tmodloader alpha 1.4.3!
+
+0.5.4
+-fixed crates, treasure bags, and lockboxes not working
+
+0.5.3
+-fixed hydra head minions crashing the game when the player dies
+-Imperios no longer lunges the player at lightspeed at the start of the fight
+-Fixed swordlagmite's warning lines no drawin when the player was too high
+-Fixed OLORD doing half its intended damage in expert mode
+
+0.5.2
+-actually fixed imperious's damage
+
+0.5.1
+-fixed Imperious's stats being to low
+
+0.5.0
+-reintroduced: cyclone, whirpool, and Bubble Brewer Baton
+-fixed Noehtnap's dash not working
+-fixed rhuthinium mask's set bonus not working
+
+
+0.4.6
+-now works with the most recent version of tmodloader
+-fixed hairs not drawing properly on modded head pieces
+
+
+0.4.4
+-fixed space fighter staff not having a recipe
+
+0.4.3
+-fixed Polar extreminator having less health than intended
+
+0.4.2
+-fixed bug where riptide sentry and ruthinium guardian couldn't deal damage
+
+0.4.1
+-Sword Enlarger is now sold by traveling merchant (I reintroduced it in 0.4.0 but forgot to make it obtainable)
+
 0.4.0
 -reintroduced dungeon items
 
@@ -87,9 +145,3 @@ Balance Changes:
 -lune curse critical damage 50%->20%
 -Imperial courage grants crit chance instead of attack speed (concerned about rounding with low use time wepons)
 
-
-Many of the features from Qwerty's bosses and items 1 still haven't been ported yet. Please be patient while I am working on them. Noteably:
--The Dino militia event
--Duke Fishron items
--Dungeon items
--Custom Music and Sounds (Tmodloader alpha doesn't support them yet)

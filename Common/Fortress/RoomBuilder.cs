@@ -57,18 +57,18 @@ namespace QwertyMod.Common.Fortress
                     //redo the tile placement for any tiles that failed to place the first time (like hanging tiles)
                     for (int k = 0; k < RoomTileTypes[0][type].Length; k++) //tiles
                     {
-                        if (Rooms[type, 0, y, x] == k && Rooms[type, 0, y, x] != 0 && !Main.tile[i + x, j + y].IsActive)
+                        if (Rooms[type, 0, y, x] == k && Rooms[type, 0, y, x] != 0 && !Main.tile[i + x, j + y].HasTile)
                         {
                             WorldGen.PlaceTile(i + x, j + y, RoomTileTypes[0][type][k], false, true);
                         }
                     }
-                    Main.tile[i + x, j + y].frameX = (short)Rooms[type, 5, y, x];
-                    Main.tile[i + x, j + y].frameY = (short)Rooms[type, 6, y, x];
+                    Main.tile[i + x, j + y].TileFrameX = (short)Rooms[type, 5, y, x];
+                    Main.tile[i + x, j + y].TileFrameY = (short)Rooms[type, 6, y, x];
                     WorldGen.SlopeTile(i + x, j + y, Rooms[type, 2, y, x] % 100);
                     if (Rooms[type, 2, y, x] >= 100)
                     {
-                        Main.tile[i + x, j + y].IsHalfBlock = true;
-                        //WorldGen.PoundTile(i + x, j + y);
+                        //Main.tile[i + x, j + y].HalfBrick = true;
+                        WorldGen.PoundTile(i + x, j + y);
                     }
 
                     if (Rooms[type, 3, y, x] % 10 == 1)

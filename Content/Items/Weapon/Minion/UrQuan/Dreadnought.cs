@@ -41,7 +41,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.UrQuan
         }
 
         private NPC target;
-        private const float maxSpeed = 6f;
+        private const float maxSpeed = 10f;
         private int shotCounter = 0;
         private int fighterCounter = 0;
         private List<Projectile> fighters = new List<Projectile>();
@@ -68,20 +68,20 @@ namespace QwertyMod.Content.Items.Weapon.Minion.UrQuan
             if (QwertyMethods.ClosestNPC(ref target, 1000, Projectile.Center, false, player.MinionAttackTargetNPC) && (player.Center - Projectile.Center).Length() < 1000)
             {
                 Projectile.rotation = QwertyMethods.SlowRotation(Projectile.rotation, (target.Center - Projectile.Center).ToRotation(), 4);
-                if (fighterCounter <= 0 && fighters.Count < 6)
+                if (fighterCounter <= 0 && fighters.Count < 10)
                 {
                     fighterCounter = 60;
-                    //SoundEngine.PlaySound(GetSoundSlot(Terraria.Audio.SoundType.Sound, "Sounds/SoundEffects/Ur-Quan/UrQuan-Launch").WithVolume(.4f));
-                    fighters.Add(Main.projectile[Projectile.NewProjectile(new ProjectileSource_ProjectileParent(Projectile), Projectile.Center + QwertyMethods.PolarVector(-40, Projectile.rotation) + QwertyMethods.PolarVector(10, Projectile.rotation + (float)Math.PI / 2), QwertyMethods.PolarVector(4, Projectile.rotation + 3 * (float)Math.PI / 4), ProjectileType<Fighter>(), (int)(Projectile.damage / 6f), 0, Projectile.owner, Projectile.whoAmI)]);
-                    fighters.Add(Main.projectile[Projectile.NewProjectile(new ProjectileSource_ProjectileParent(Projectile), Projectile.Center + QwertyMethods.PolarVector(-40, Projectile.rotation) + QwertyMethods.PolarVector(10, Projectile.rotation - (float)Math.PI / 2), QwertyMethods.PolarVector(4, Projectile.rotation - 3 * (float)Math.PI / 4), ProjectileType<Fighter>(), (int)(Projectile.damage / 6f), 0, Projectile.owner, Projectile.whoAmI)]);
+                    SoundEngine.PlaySound(SoundLoader.GetLegacySoundSlot(Mod, "Assets/Sounds/UrQuan-Launch").WithVolume(.4f), Projectile.Center);
+                    fighters.Add(Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center + QwertyMethods.PolarVector(-40, Projectile.rotation) + QwertyMethods.PolarVector(10, Projectile.rotation + (float)Math.PI / 2), QwertyMethods.PolarVector(4, Projectile.rotation + 3 * (float)Math.PI / 4), ProjectileType<Fighter>(), (int)(Projectile.damage / 6f), 0, Projectile.owner, Projectile.whoAmI)]);
+                    fighters.Add(Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center + QwertyMethods.PolarVector(-40, Projectile.rotation) + QwertyMethods.PolarVector(10, Projectile.rotation - (float)Math.PI / 2), QwertyMethods.PolarVector(4, Projectile.rotation - 3 * (float)Math.PI / 4), ProjectileType<Fighter>(), (int)(Projectile.damage / 6f), 0, Projectile.owner, Projectile.whoAmI)]);
                 }
                 if ((target.Center - Projectile.Center).Length() < 300)
                 {
                     if (shotCounter >= 20)
                     {
                         shotCounter = 0;
-                        //SoundEngine.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/SoundEffects/Ur-Quan/UrQuan-Fusion").WithVolume(.1f));
-                        Projectile l = Main.projectile[Projectile.NewProjectile(new ProjectileSource_ProjectileParent(Projectile), Projectile.Center + QwertyMethods.PolarVector(40f, Projectile.rotation), QwertyMethods.PolarVector(12f, Projectile.rotation), ProjectileType<Fusion>(), Projectile.damage, Projectile.knockBack, Projectile.owner)];
+                        SoundEngine.PlaySound(SoundLoader.GetLegacySoundSlot(Mod, "Assets/Sounds/UrQuan-Fusion").WithVolume(.1f), Projectile.Center);
+                        Projectile l = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center + QwertyMethods.PolarVector(40f, Projectile.rotation), QwertyMethods.PolarVector(12f, Projectile.rotation), ProjectileType<Fusion>(), Projectile.damage, Projectile.knockBack, Projectile.owner)];
                     }
                 }
                 else

@@ -49,14 +49,11 @@ namespace QwertyMod.Common
             };
 
         //public override TagCompound Save()
-        public override TagCompound SaveWorldData()
+        public override void SaveWorldData(TagCompound tag)
         {
-            return new TagCompound
-            {
-                {"BearSpawnX", BearSpawn.X},
-                {"BearSpawnY", BearSpawn.Y},
-                {"activeSleeper", activeSleeper }
-            };
+            tag["BearSpawnX"] = BearSpawn.X;
+            tag["BearSpawnY"] = BearSpawn.Y;
+            tag["activeSleeper"] = activeSleeper;
         }
 
         //public override void Load(TagCompound tag)
@@ -75,7 +72,7 @@ namespace QwertyMod.Common
             {
                 for (int h = 0; h < denUpperHeight; h++)
                 {
-                    if (!Main.tile[(x - ((denLength - 1) / 2)) + l, y - h].IsActive)
+                    if (!Main.tile[(x - ((denLength - 1) / 2)) + l, y - h].HasTile)
                     {
                         WorldGen.PlaceTile((x - ((denLength - 1) / 2)) + l, y - h, TileID.IceBlock);
                     }
@@ -194,7 +191,7 @@ namespace QwertyMod.Common
                     //kill some trees!
                     for (int j = 0; j < 20; j++)
                     {
-                        if (y - layer - j < Main.tile.GetLength(1) && Main.tile[x + i + xOffset, y - layer - j].IsActive && Main.tile[x + i + xOffset, y - layer - j].type == TileID.Trees)
+                        if (y - layer - j < Main.tile.Height && Main.tile[x + i + xOffset, y - layer - j].HasTile && Main.tile[x + i + xOffset, y - layer - j].TileType == TileID.Trees)
                         {
                             WorldGen.KillTile(x + i + xOffset, y - layer - j, false, false, true);
                         }
@@ -202,7 +199,7 @@ namespace QwertyMod.Common
 
                     for (int j = 0; j < 20; j++)
                     {
-                        if (y - layer - j < Main.tile.GetLength(1) && Main.tile[x + i + xOffset, y - layer - j].IsActive)
+                        if (y - layer - j < Main.tile.Height && Main.tile[x + i + xOffset, y - layer - j].HasTile)
                         {
                             doubleBreak = true;
                             break;
@@ -273,7 +270,7 @@ namespace QwertyMod.Common
             {
                 for (int y = 0; y < Main.worldSurface; y++)
                 {
-                    if (Main.tile[leftOfSnow, y].type == TileID.SnowBlock || Main.tile[leftOfSnow, y].type == TileID.IceBlock)
+                    if (Main.tile[leftOfSnow, y].TileType == TileID.SnowBlock || Main.tile[leftOfSnow, y].TileType == TileID.IceBlock)
                     {
                         doubleBreak = true;
                         break;
@@ -289,7 +286,7 @@ namespace QwertyMod.Common
             {
                 for (int y = 0; y < Main.worldSurface; y++)
                 {
-                    if (Main.tile[rightOfSnow, y].type == TileID.SnowBlock || Main.tile[rightOfSnow, y].type == TileID.IceBlock)
+                    if (Main.tile[rightOfSnow, y].TileType == TileID.SnowBlock || Main.tile[rightOfSnow, y].TileType == TileID.IceBlock)
                     {
                         doubleBreak = true;
                         break;
@@ -334,7 +331,7 @@ namespace QwertyMod.Common
             {
                 for(int j = (int)Main.worldSurface; j < y+10; j++)
                 {
-                    if(Main.tile[i,j].type == TileID.Containers || Main.tile[i, j].type == TileID.Containers2 || Main.tile[i, j].type == TileID.FakeContainers || Main.tile[i, j].type == TileID.FakeContainers2)
+                    if(Main.tile[i,j].TileType == TileID.Containers || Main.tile[i, j].TileType == TileID.Containers2 || Main.tile[i, j].TileType == TileID.FakeContainers || Main.tile[i, j].TileType == TileID.FakeContainers2)
                     {
                         return false;
                     }
@@ -356,14 +353,14 @@ namespace QwertyMod.Common
                 activeSleeper = true;
                 if (Main.netMode == NetmodeID.Server)
                     NetMessage.SendData(MessageID.WorldData); // Immediately inform clients of new world state.
-                NPC.NewNPC((int)BearSpawn.X, (int)BearSpawn.Y, NPCType<Sleeping>());
+                NPC.NewNPC(NPC.GetSpawnSourceForNaturalSpawn(), (int)BearSpawn.X, (int)BearSpawn.Y, NPCType<Sleeping>());
             }
             else if (activeSleeper && !NPC.AnyNPCs(NPCType<PolarBear>()) && !NPC.AnyNPCs(NPCType<Sleeping>()) && BearSpawn.X != -1 && BearSpawn.Y != -1)
             {
                 activeSleeper = true;
                 if (Main.netMode == NetmodeID.Server)
                     NetMessage.SendData(MessageID.WorldData); // Immediately inform clients of new world state.
-                NPC.NewNPC((int)BearSpawn.X, (int)BearSpawn.Y, NPCType<Sleeping>());
+                NPC.NewNPC(NPC.GetSpawnSourceForNaturalSpawn(), (int)BearSpawn.X, (int)BearSpawn.Y, NPCType<Sleeping>());
             }
         }
 

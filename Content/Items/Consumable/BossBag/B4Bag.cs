@@ -54,13 +54,13 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
                     mainLoot = ItemType<B4Bow>();
                     break;
             }
-            player.QuickSpawnItem(mainLoot);
+            player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),mainLoot);
 
             if(Main.rand.Next(5) == 0)
             {
-                player.QuickSpawnItem(ItemType<TheDevourer>());
+                player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),ItemType<TheDevourer>());
             }
-            player.QuickSpawnItem(ItemType<B4ExpertItem>());
+            player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),ItemType<B4ExpertItem>());
         }
     }
 }

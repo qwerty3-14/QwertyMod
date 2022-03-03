@@ -1,5 +1,5 @@
 using QwertyMod.Content.Dusts;
-using QwertyMod.Content.Items.Consumable.Tile.Banners;
+using QwertyMod.Content.Items.Consumable.Tiles.Banners;
 using QwertyMod.Content.Items.Equipment.Accessories;
 using System.Collections.Generic;
 using Terraria;
@@ -34,7 +34,10 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
             //aiType = 86;
             //animationType = 3;
             NPC.buffImmune[BuffID.Confused] = false;
-            //music = mod.GetSoundSlot(SoundType.Music, "Sounds/Music/OldDinosNewGuns");
+            if (!Main.dedServ)
+            {
+                Music = MusicLoader.GetMusicSlot(Mod, "Assets/Music/OldDinosNewGuns");
+            }
             Banner = NPC.type;
             BannerItem = ItemType<UtahBanner>();
         }

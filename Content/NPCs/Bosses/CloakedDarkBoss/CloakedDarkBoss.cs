@@ -37,11 +37,15 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
             NPC.DeathSound = SoundID.NPCDeath1;
             NPC.value = 60f;
             NPC.knockBackResist = 0f;
+            NPC.aiStyle = -1;
             NPC.noGravity = true;
             NPC.noTileCollide = true;
             //music = mod.GetSoundSlot(SoundType.Music, "Sounds/Music/TheGodsBleed");
             NPC.lifeMax = 6500;
-            BossBag = ItemType<NoehtnapBag>();
+            if (!Main.dedServ)
+            {
+                Music = MusicLoader.GetMusicSlot(Mod, "Assets/Music/TheGodsBleed");
+            }
         }
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
         {
@@ -177,7 +181,7 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
 
                 if ((cloak == null || cloak.type != ProjectileType<Cloak>() || !cloak.active) && Main.netMode != 1)
                 {
-                    cloak = Main.projectile[Projectile.NewProjectile(NPC.GetProjectileSpawnSource(), NPC.Center, Vector2.Zero, ProjectileType<Cloak>(), 0, 0, Main.myPlayer, NPC.whoAmI)];
+                    cloak = Main.projectile[Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), NPC.Center, Vector2.Zero, ProjectileType<Cloak>(), 0, 0, Main.myPlayer, NPC.whoAmI)];
                 }
 
                 if (playerviewRadius > 80)
@@ -236,7 +240,7 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
                                         break;
 
                                     case 1:
-                                        Projectile.NewProjectile(NPC.GetProjectileSpawnSource(), NPC.Center, Vector2.Zero, ProjectileType<Warning>(), 0, 0f, Main.myPlayer, 0, 0);
+                                        Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), NPC.Center, Vector2.Zero, ProjectileType<Warning>(), 0, 0f, Main.myPlayer, 0, 0);
                                         if (!Main.dedServ)
                                         {
                                             SoundEngine.PlaySound(25, NPC.Center, 0);
@@ -261,8 +265,8 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
                         }
                         else if (timer % 15 == 0 && Main.netMode != 1)
                         {
-                            Projectile.NewProjectile(NPC.GetProjectileSpawnSource(), NPC.Center, Vector2.Zero, ProjectileType<EtimsicCannon>(), Main.expertMode ? 18 : 24, 0f, Main.myPlayer, (player.Center - NPC.Center).ToRotation());
-                            Projectile.NewProjectile(NPC.GetProjectileSpawnSource(), NPC.Center, Vector2.Zero, ProjectileType<Warning>(), 0, 0f, Main.myPlayer, 1, (player.Center - NPC.Center).ToRotation());
+                            Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), NPC.Center, Vector2.Zero, ProjectileType<EtimsicCannon>(), Main.expertMode ? 18 : 24, 0f, Main.myPlayer, (player.Center - NPC.Center).ToRotation());
+                            Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), NPC.Center, Vector2.Zero, ProjectileType<Warning>(), 0, 0f, Main.myPlayer, 1, (player.Center - NPC.Center).ToRotation());
                             if (!Main.dedServ)
                             {
                                 SoundEngine.PlaySound(25, NPC.Center, 0);
@@ -276,8 +280,8 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
                         {
                             if (Main.netMode != 1)
                             {
-                                myWall = Main.projectile[Projectile.NewProjectile(NPC.GetProjectileSpawnSource(), NPC.Center, Vector2.Zero, ProjectileType<EtimsicWall>(), Main.expertMode ? 24 : 36, 0f, Main.myPlayer, (player.Center - NPC.Center).ToRotation() + (float)Math.PI / 2)];
-                                Projectile.NewProjectile(NPC.GetProjectileSpawnSource(), NPC.Center, Vector2.Zero, ProjectileType<Warning>(), 0, 0f, Main.myPlayer, 2, (player.Center - NPC.Center).ToRotation() + (float)Math.PI / 2);
+                                myWall = Main.projectile[Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), NPC.Center, Vector2.Zero, ProjectileType<EtimsicWall>(), Main.expertMode ? 24 : 36, 0f, Main.myPlayer, (player.Center - NPC.Center).ToRotation() + (float)Math.PI / 2)];
+                                Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), NPC.Center, Vector2.Zero, ProjectileType<Warning>(), 0, 0f, Main.myPlayer, 2, (player.Center - NPC.Center).ToRotation() + (float)Math.PI / 2);
                             }
 
                             if (!Main.dedServ)
@@ -311,7 +315,7 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
                                 NPC.velocity = Vector2.Zero;
                                 if (Main.netMode != 1)
                                 {
-                                    Projectile.NewProjectile(NPC.GetProjectileSpawnSource(), NPC.Center + new Vector2((float)Math.Cos(pupilDirection) * greaterPupilRadius * pupilStareOutAmount, (float)Math.Sin(pupilDirection) * lesserPupilRadius) * NPC.scale, QwertyMethods.PolarVector(10, pupilDirection), ProjectileType<EtimsicRay>(), Main.expertMode ? 18 : 24, 0f, Main.myPlayer);
+                                    Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), NPC.Center + new Vector2((float)Math.Cos(pupilDirection) * greaterPupilRadius * pupilStareOutAmount, (float)Math.Sin(pupilDirection) * lesserPupilRadius) * NPC.scale, QwertyMethods.PolarVector(10, pupilDirection), ProjectileType<EtimsicRay>(), Main.expertMode ? 18 : 24, 0f, Main.myPlayer);
                                 }
                                 if (!Main.dedServ)
                                 {
@@ -340,11 +344,11 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
                 }
 
                 //movement
-                if (attackType == 1 && ((Main.expertMode && (float)NPC.life / NPC.lifeMax > .5f) || timer >= 180 || timer < 60))
+                if (attackType == 1 && (((float)NPC.life / NPC.lifeMax > .5f) || timer >= 180 || timer < 60))
                 {
                 }
                 else
-                {
+                { 
                     NPC.velocity = QwertyMethods.PolarVector(orbitalVelocity, (player.Center - NPC.Center).ToRotation() + (float)Math.PI / 2);
 
                     if ((player.Center - NPC.Center).Length() < orbitDistance - 50)
@@ -405,7 +409,7 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
             //Add the treasure bag (automatically checks for expert mode)
-            npcLoot.Add(ItemDropRule.BossBag(BossBag)); //this requires you to set BossBag in SetDefaults accordingly
+            npcLoot.Add(ItemDropRule.BossBag(ItemType<NoehtnapBag>())); //this requires you to set BossBag in SetDefaults accordingly
 
             //All our drops here are based on "not expert", meaning we use .OnSuccess() to add them into the rule, which then gets added
             LeadingConditionRule notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
@@ -469,7 +473,7 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
         private int width = 0;
         private Color[] defaultdataColors = null;
         private Color trans = new Color(0, 0, 0, 0);
-        private float scale = 4;
+        private float scale = 8;
 
         private void lightsUpdate(Color color)
         {

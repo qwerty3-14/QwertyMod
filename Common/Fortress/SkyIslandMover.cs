@@ -93,7 +93,7 @@ namespace QwertyMod.Common.Fortress
 								int num821 = 0;
 								for (int num822 = 200; (double)num822 < Main.worldSurface; num822++)
 								{
-									if (Main.tile[num819, num822].IsActive)
+									if (Main.tile[num819, num822].HasTile)
 									{
 										num821 = num822;
 										flag54 = true;

@@ -1,4 +1,5 @@
 ﻿using QwertyMod.Content.Items.Equipment.Accessories;
+using QwertyMod.Content.Items.Equipment.Accessories.Sword;
 using QwertyMod.Content.Items.Weapon.Minion.MiniTank;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,14 @@ namespace QwertyMod.Common
                     shop.item[nextSlot].SetDefaults(ItemType<MiniTankStaff>());
                     nextSlot++;
                 }
+            }
+        }
+        public override void SetupTravelShop(int[] shop, ref int nextSlot)
+        {
+            if(Main.rand.Next(3)==0)
+            {
+                shop[nextSlot] = ItemType<SwordEnlarger>();
+                nextSlot++;
             }
         }
     }

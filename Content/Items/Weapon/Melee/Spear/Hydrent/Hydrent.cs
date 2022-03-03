@@ -119,7 +119,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Spear.Hydrent
                             streamCounter++;
                             if (streamCounter % 6 == 0)
                             {
-                                Projectile.NewProjectile(new ProjectileSource_ProjectileParent(Projectile), Projectile.Center + QwertyMethods.PolarVector((Projectile.velocity * movementFactor).Length(), Projectile.rotation - (3 * (float)Math.PI / 4)) + QwertyMethods.PolarVector(-7f + (7f * ((streamCounter /6) % 3)), Projectile.rotation - (1 * (float)Math.PI / 4)), QwertyMethods.PolarVector(16f, Projectile.rotation - (3 * (float)Math.PI / 4)), ProjectileType<HydrentBreath>(), (int)(Projectile.damage * .4f), Projectile.knockBack, Projectile.owner);
+                                Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center + QwertyMethods.PolarVector((Projectile.velocity * movementFactor).Length(), Projectile.rotation - (3 * (float)Math.PI / 4)) + QwertyMethods.PolarVector(-7f + (7f * ((streamCounter /6) % 3)), Projectile.rotation - (1 * (float)Math.PI / 4)), QwertyMethods.PolarVector(16f, Projectile.rotation - (3 * (float)Math.PI / 4)), ProjectileType<HydrentBreath>(), (int)(Projectile.damage * .4f), Projectile.knockBack, Projectile.owner);
                             }
                         }
                     }

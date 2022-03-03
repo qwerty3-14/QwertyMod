@@ -27,6 +27,7 @@ namespace QwertyMod.Content.Items.Tool.Mining.TheDevourer
             Item.height = 82;
             //Item.crit = 5;
             Item.autoReuse = true;
+            Item.useTurn = true;
             Item.pick = 250;
             Item.tileBoost = 6;
             Item.GetGlobalItem<AoePick>().miningRadius = 4;

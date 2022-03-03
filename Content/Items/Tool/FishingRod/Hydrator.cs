@@ -34,7 +34,7 @@ namespace QwertyMod.Content.Items.Tool.FishingRod
         }
 
         // The code below makes the pole shoot two additional bobbers
-        public override bool Shoot(Player player, ProjectileSource_Item_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             Projectile.NewProjectile(source, position, velocity * 1.2f, type, damage, knockback, player.whoAmI);
             Projectile.NewProjectile(source, position, velocity * 0.8f, type, damage, knockback, player.whoAmI);

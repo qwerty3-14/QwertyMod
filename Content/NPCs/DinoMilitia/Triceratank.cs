@@ -1,7 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Content.Dusts;
-using QwertyMod.Content.Items.Consumable.Tile.Banners;
+using QwertyMod.Content.Items.Consumable.Tiles.Banners;
 using QwertyMod.Content.Items.Equipment.Accessories;
 using System.Collections.Generic;
 using Terraria;
@@ -42,7 +42,10 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
             NPC.value = 6000f;
             NPC.knockBackResist = 0f;
             NPC.aiStyle = 3;
-            //music = mod.GetSoundSlot(SoundType.Music, "Sounds/Music/OldDinosNewGuns");
+            if (!Main.dedServ)
+            {
+                Music = MusicLoader.GetMusicSlot(Mod, "Assets/Music/OldDinosNewGuns");
+            }
             AIType = 28;
             Banner = NPC.type;
             BannerItem = ItemType<TriceratankBanner>();
@@ -109,7 +112,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
                 //Projectile.NewProjectile(NPC.Center.X+(78f*NPC.direction), NPC.Center.Y-34f, 1f*NPC.direction, 0, 102, damage, 3f, Main.myPlayer);
                 if (Main.netMode != 1)
                 {
-                    Projectile.NewProjectile(NPC.GetProjectileSpawnSource(), NPC.Center.X + (78f * NPC.direction), NPC.Center.Y - 34f, 10f * NPC.direction, 0, ProjectileType<TankCannonBall>(), damage, 3f, Main.myPlayer);
+                    Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), NPC.Center.X + (78f * NPC.direction), NPC.Center.Y - 34f, 10f * NPC.direction, 0, ProjectileType<TankCannonBall>(), damage, 3f, Main.myPlayer);
                 }
 
                 AI_Timer = 0;

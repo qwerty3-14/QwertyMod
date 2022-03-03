@@ -99,7 +99,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion
             if (Projectile.UseAmmo(AmmoID.Arrow, ref arrow, ref shootSpeed, ref weaponDamage, ref weaponKnockback, Main.rand.Next(2) == 0))
             {
                 ChangeArrow(ref arrow);
-                loadedArrow = Main.projectile[Projectile.NewProjectile(new ProjectileSource_ProjectileParent(Projectile), Projectile.Center, QwertyMethods.PolarVector(shootSpeed, Projectile.rotation), arrow, weaponDamage, weaponKnockback, Main.myPlayer)];
+                loadedArrow = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, QwertyMethods.PolarVector(shootSpeed, Projectile.rotation), arrow, weaponDamage, weaponKnockback, Main.myPlayer)];
                 arrowFired = false;
                 safetyIdCheck = loadedArrow.type;
             }

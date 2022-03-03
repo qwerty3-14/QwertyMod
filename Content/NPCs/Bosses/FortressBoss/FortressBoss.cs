@@ -5,8 +5,8 @@ using QwertyMod.Common.Fortress;
 using QwertyMod.Content.Buffs;
 using QwertyMod.Content.Dusts;
 using QwertyMod.Content.Items.Consumable.BossBag;
-using QwertyMod.Content.Items.Consumable.Tile.Bars;
-using QwertyMod.Content.Items.Consumable.Tile.Trophy.FortressBoss;
+using QwertyMod.Content.Items.Consumable.Tiles.Bars;
+using QwertyMod.Content.Items.Consumable.Tiles.Trophy.FortressBoss;
 using QwertyMod.Content.Items.Equipment.Accessories.Sword;
 using QwertyMod.Content.Items.Equipment.Vanity.BossMasks;
 using QwertyMod.Content.Items.MiscMaterials;
@@ -59,13 +59,15 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
             NPC.aiStyle = -1;
             NPC.noGravity = true;
             NPC.noTileCollide = true;
-            //music = mod.GetSoundSlot(SoundType.Music, "Sounds/Music/HigherBeing");
             NPC.lifeMax = 3200;
-            BossBag = ItemType<FortressBossBag>();
             NPC.buffImmune[20] = true;
             NPC.npcSlots = 200;
             NPC.GetGlobalNPC<FortressNPCGeneral>().fortressNPC = true;
             //NPC.alpha = 0;
+            if (!Main.dedServ)
+            {
+                Music = MusicLoader.GetMusicSlot(Mod, "Assets/Music/HigherBeing");
+            }
         }
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
         {
@@ -109,7 +111,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
             //Add the treasure bag (automatically checks for expert mode)
-            npcLoot.Add(ItemDropRule.BossBag(BossBag)); //this requires you to set BossBag in SetDefaults accordingly
+            npcLoot.Add(ItemDropRule.BossBag(ItemType<FortressBossBag>())); //this requires you to set BossBag in SetDefaults accordingly
 
             //All our drops here are based on "not expert", meaning we use .OnSuccess() to add them into the rule, which then gets added
             LeadingConditionRule notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
@@ -262,7 +264,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
                             player = Main.player[NPC.target];
                             if (Main.netMode != 1)
                             {
-                                Projectile.NewProjectile(NPC.GetProjectileSpawnSource(), NPC.Center, QwertyMethods.PolarVector(8f, (player.Center - NPC.Center).ToRotation()), ProjectileType<CaeliteSaw>(), damage, 0);
+                                Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), NPC.Center, QwertyMethods.PolarVector(8f, (player.Center - NPC.Center).ToRotation()), ProjectileType<CaeliteSaw>(), damage, 0);
                             }
                         }
                     }
@@ -317,7 +319,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
                 {
                     Vector2 endPos = NPC.Center + QwertyMethods.PolarVector(130, (player.Center - NPC.Center).ToRotation() + ((float)i / 11f) * (float)Math.PI - (float)Math.PI / 2f);
                     Vector2 startPos = NPC.position + spellPositions[i / 3];
-                    Projectile projectile = Main.projectile[Projectile.NewProjectile(NPC.GetProjectileSpawnSource(), startPos, Vector2.Zero, ProjectileType<Deflect>(), damage, 0, 255, endPos.X, endPos.Y)];
+                    Projectile projectile = Main.projectile[Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), startPos, Vector2.Zero, ProjectileType<Deflect>(), damage, 0, 255, endPos.X, endPos.Y)];
                     projectile.ai[0] = endPos.X;
                     projectile.ai[1] = endPos.Y;
                     projectile.timeLeft = (60 * 30) + (i % 3) * 30 + 60;
@@ -367,7 +369,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
                 SoundEngine.PlaySound(SoundID.Item43, position);
                 if (Main.netMode != 1)
                 {
-                    Projectile.NewProjectile(NPC.GetProjectileSpawnSource(), position, QwertyMethods.PolarVector(vel, angle), ProjectileType<DivineBolt>(), damage, 0);
+                    Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), position, QwertyMethods.PolarVector(vel, angle), ProjectileType<DivineBolt>(), damage, 0);
                 }
             }
         }
@@ -415,7 +417,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
             Player player = Main.player[NPC.target];
             if (Main.netMode != 1)
             {
-                QwertyMethods.ProjectileSpread(NPC.GetProjectileSpawnSource(), position, 3, 6f, ProjectileType<BarrierSpread>(), damage, 0, 255, NPC.whoAmI, rotation: (player.Center - position).ToRotation(), spread: (float)Math.PI / 6);
+                QwertyMethods.ProjectileSpread(NPC.GetSpawnSource_ForProjectile(), position, 3, 6f, ProjectileType<BarrierSpread>(), damage, 0, 255, NPC.whoAmI, rotation: (player.Center - position).ToRotation(), spread: (float)Math.PI / 6);
             }
         }
         void PlanAttackOrder()
@@ -573,7 +575,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
                         break;
                 }
                 Point coords = checkSpot.ToTileCoordinates();
-                if(Main.tile[coords.X, coords.Y].IsActive)
+                if(Main.tile[coords.X, coords.Y].HasTile)
                 {
                     return false;
                 }

@@ -73,7 +73,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.SpaceFighter
                     if (shotCounter >= 30)
                     {
                         shotCounter = 0;
-                        Projectile l = Main.projectile[Projectile.NewProjectile(new ProjectileSource_ProjectileParent(Projectile), Projectile.Center, QwertyMethods.PolarVector(12f, Projectile.rotation), ProjectileType<FighterLaser>(), Projectile.damage, Projectile.knockBack, Projectile.owner)];
+                        Projectile l = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, QwertyMethods.PolarVector(12f, Projectile.rotation), ProjectileType<FighterLaser>(), Projectile.damage, Projectile.knockBack, Projectile.owner)];
                         SoundEngine.PlaySound(SoundID.Item12, Projectile.position);
                     }
                 }

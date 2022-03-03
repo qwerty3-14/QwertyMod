@@ -10,6 +10,7 @@ using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using static Terraria.ID.ArmorIDs;
 using static Terraria.ModLoader.ModContent;
 
 
@@ -23,6 +24,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Glass
             DisplayName.SetDefault("Glass Helm");
             Tooltip.SetDefault("A glass prism orbits you zapping enemies");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+            Head.Sets.DrawHatHair[Item.headSlot] = true;
         }
 
         public override void SetDefaults()
@@ -38,12 +40,6 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Glass
         {
             player.GetModPlayer<HelmEffects>().helmEffect = true;
         }
-
-        public override void DrawHair(ref bool drawHair, ref bool drawAltHair)
-        {
-            drawAltHair = true;
-        }
-
         public override bool IsArmorSet(Item head, Item body, Item legs)
         {
             return body.type == ItemType<GlassAbsorber>() && legs.type == ItemType<GlassLimbguards>();

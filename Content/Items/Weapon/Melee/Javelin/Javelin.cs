@@ -20,7 +20,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin
         {
         }
 
-        public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough)
+        public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac)
         {
             // For going through platforms and such, javelins use a tad smaller size
             width = height = 10; // notice we set the width to the height, the height to 10. so both are 10
@@ -141,8 +141,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin
             {
                 // Change these multiplication factors to alter the javelin's movement change after reaching maxTicks
                 float velXmult = 0.98f; // x velocity factor, every AI update the x velocity will be 98% of the original speed
-                float
-                    velYmult = 0.35f; // y velocity factor, every AI update the y velocity will be be 0.35f bigger of the original speed, causing the javelin to drop to the ground
+                float velYmult = 0.35f; // y velocity factor, every AI update the y velocity will be be 0.35f bigger of the original speed, causing the javelin to drop to the ground
                 targetWhoAmI = maxTicks; // set ai1 to maxTicks continuously
                 Projectile.velocity.X = Projectile.velocity.X * velXmult;
                 Projectile.velocity.Y = Projectile.velocity.Y + velYmult;
@@ -178,8 +177,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin
             if (isStickingToTarget)
             {
                 // These 2 could probably be moved to the ModifyNPCHit hook, but in vanilla they are present in the AI
-                Projectile.ignoreWater = true; // Make sure the projectile ignores water
-                Projectile.tileCollide = false; // Make sure the projectile doesn't collide with tiles anymore
+                
                 int aiFactor = 15; // Change projectile factor to change the 'lifetime' of projectile sticking javelin
                 bool killProj = false; // if true, kill projectile at the end
                 bool hitEffect = false; // if true, perform a hit effect

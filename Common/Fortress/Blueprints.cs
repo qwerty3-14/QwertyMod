@@ -1,8 +1,8 @@
-﻿using QwertyMod.Content.Items.Consumable.Tile.Bars;
-using QwertyMod.Content.Items.Consumable.Tile.Fortress.BuildingBlocks;
-using QwertyMod.Content.Items.Consumable.Tile.Fortress.Carving;
-using QwertyMod.Content.Items.Consumable.Tile.Fortress.Furniture;
-using QwertyMod.Content.Items.Consumable.Tile.Fortress.Gadgets;
+﻿using QwertyMod.Content.Items.Consumable.Tiles.Bars;
+using QwertyMod.Content.Items.Consumable.Tiles.Fortress.BuildingBlocks;
+using QwertyMod.Content.Items.Consumable.Tiles.Fortress.Carving;
+using QwertyMod.Content.Items.Consumable.Tiles.Fortress.Furniture;
+using QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets;
 using System;
 using System.Collections.Generic;
 using System.Linq;

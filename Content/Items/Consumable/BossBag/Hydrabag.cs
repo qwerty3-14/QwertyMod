@@ -38,18 +38,18 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
             int getHook = Main.rand.Next(0, 100);
 
             int[] spawnThese = QwertyMod.HydraLoot.Draw(3);
-            player.QuickSpawnItem(spawnThese[0]);
-            player.QuickSpawnItem(spawnThese[1]);
-            player.QuickSpawnItem(spawnThese[2]);
+            player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),spawnThese[0]);
+            player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),spawnThese[1]);
+            player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),spawnThese[2]);
 
             if (Main.rand.Next(5) == 0)
             {
-                player.QuickSpawnItem(ItemType<Hydrator>());
+                player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),ItemType<Hydrator>());
             }
 
-            player.QuickSpawnItem(73, 12);
-            //player.QuickSpawnItem(mod.ItemType("HydraWings"));
-            player.QuickSpawnItem(ItemType<HydraScale>(), Main.rand.Next(30, 41));
+            player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),73, 12);
+            //player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),mod.ItemType("HydraWings"));
+            player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),ItemType<HydraScale>(), Main.rand.Next(30, 41));
         }
     }
 }

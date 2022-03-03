@@ -37,9 +37,5 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Shaman
             player.meleeSpeed += .14f;
         }
 
-        public override void DrawHands(ref bool drawHands, ref bool drawArms)
-        {
-            drawHands = true;
-        }
     }
 }

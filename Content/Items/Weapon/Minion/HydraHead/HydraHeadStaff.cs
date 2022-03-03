@@ -18,7 +18,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.HydraHead
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Hydra Head Staff");
-            Tooltip.SetDefault("Summons a hydra head to shoot towards your cursor" + "\nThe hydra head will automatically summon more heads if there are empty minion slots");
+            Tooltip.SetDefault("Summons a hydra head to shoot towards your cursor");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -43,7 +43,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.HydraHead
             Item.buffTime = 3600;
         }
 
-        public override bool Shoot(Player player, ProjectileSource_Item_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             player.SpawnMinionOnCursor(source, player.whoAmI, type, Item.damage, knockback);
             return false;
