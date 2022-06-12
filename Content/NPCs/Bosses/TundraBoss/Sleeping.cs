@@ -1,5 +1,6 @@
 using QwertyMod.Common;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameContent.Bestiary;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -48,7 +49,7 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
             FrozenDen.activeSleeper = false;
             if (Main.netMode == NetmodeID.Server)
                 NetMessage.SendData(MessageID.WorldData); // Immediately inform clients of new world state.
-            NPC.NewNPC(NPC.GetSpawnSourceForNPCFromNPCAI(), (int)NPC.Center.X, (int)NPC.Center.Y, NPCType<PolarBear>());
+            NPC.NewNPC(new EntitySource_Misc(""), (int)NPC.Center.X, (int)NPC.Center.Y, NPCType<PolarBear>());
         }
 
         private int frame;

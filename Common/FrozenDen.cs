@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameContent.Generation;
 using Terraria.ID;
 using Terraria.IO;
@@ -319,7 +320,7 @@ namespace QwertyMod.Common
             {
                 BearSpawn = new Vector2(denX * 16, (denY - 2) * 16);
                 activeSleeper = true;
-                if (Main.netMode == NetmodeID.Server)
+                if (Main.netMode == NetmodeID.Server && !WorldGen.gen)
                     NetMessage.SendData(MessageID.WorldData); // Immediately inform clients of new world state.
                 GenerateDen(denX, denY);
             }
@@ -353,14 +354,14 @@ namespace QwertyMod.Common
                 activeSleeper = true;
                 if (Main.netMode == NetmodeID.Server)
                     NetMessage.SendData(MessageID.WorldData); // Immediately inform clients of new world state.
-                NPC.NewNPC(NPC.GetSpawnSourceForNaturalSpawn(), (int)BearSpawn.X, (int)BearSpawn.Y, NPCType<Sleeping>());
+                NPC.NewNPC(new EntitySource_Misc(""), (int)BearSpawn.X, (int)BearSpawn.Y, NPCType<Sleeping>());
             }
             else if (activeSleeper && !NPC.AnyNPCs(NPCType<PolarBear>()) && !NPC.AnyNPCs(NPCType<Sleeping>()) && BearSpawn.X != -1 && BearSpawn.Y != -1)
             {
                 activeSleeper = true;
                 if (Main.netMode == NetmodeID.Server)
                     NetMessage.SendData(MessageID.WorldData); // Immediately inform clients of new world state.
-                NPC.NewNPC(NPC.GetSpawnSourceForNaturalSpawn(), (int)BearSpawn.X, (int)BearSpawn.Y, NPCType<Sleeping>());
+                NPC.NewNPC(new EntitySource_Misc(""), (int)BearSpawn.X, (int)BearSpawn.Y, NPCType<Sleeping>());
             }
         }
 

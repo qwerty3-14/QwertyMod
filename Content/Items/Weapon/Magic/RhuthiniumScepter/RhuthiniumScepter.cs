@@ -31,7 +31,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RhuthiniumScepter
             Item.useTurn = false;
             Item.noMelee = true; //can't hit as item since they have custom animation
             Item.useStyle = 20; //Vanilla doesn't use this for anything but it still starts the useAnimation timer, good for custom animations
-            Item.mana = 16;
+            Item.mana = ModLoader.HasMod("TRAEProject") ? 24 : 16;
             Item.autoReuse = true;
             Item.shootSpeed = 8f;
             Item.shoot = ProjectileType<RhuthiniumBolt>();

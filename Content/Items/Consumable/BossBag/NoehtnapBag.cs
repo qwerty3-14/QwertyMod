@@ -3,6 +3,7 @@ using QwertyMod.Content.Items.Equipment.Accessories.Expert.Doppleganger;
 using QwertyMod.Content.Items.MiscMaterials;
 using QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
@@ -39,16 +40,16 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
 
         public override void OpenBossBag(Player player)
         {
-            player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),73, 8);
-            //player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),mod.ItemType("Doppleganger"));
+            player.QuickSpawnItem(new EntitySource_Misc(""), 73, 8);
+            //player.QuickSpawnItem(new EntitySource_Misc(""), mod.ItemType("Doppleganger"));
 
-            int number = Item.NewItem(player.GetItemSource_OpenItem(Item.type), (int)player.position.X, (int)player.position.Y, player.width, player.height, ItemType<Doppleganger>(), 1, false, 0, false, false);
+            int number = Item.NewItem(new EntitySource_Misc(""),  (int)player.position.X, (int)player.position.Y, player.width, player.height, ItemType<Doppleganger>(), 1, false, 0, false, false);
             if (Main.netMode == 1)
             {
                 NetMessage.SendData(21, -1, -1, null, number, 1f, 0f, 0f, 0, 0, 0);
             }
 
-            player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),ItemType<Etims>(), 20 + Main.rand.Next(17));
+            player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<Etims>(), 20 + Main.rand.Next(17));
         }
     }
 }

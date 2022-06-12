@@ -4,6 +4,7 @@ using QwertyMod.Common.PlayerLayers;
 using System;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
@@ -34,7 +35,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Plasma
             Item.width = 92;
             Item.height = 30;
             Item.crit = 20;
-            Item.mana = 7;
+            Item.mana = ModLoader.HasMod("TRAEProject") ? 8 : 7;
             Item.shoot = ProjectileType<EPShot>();
             Item.shootSpeed = 27;
             Item.noMelee = true;
@@ -99,13 +100,13 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Plasma
         public override void Kill(int timeLeft)
         {
             Player player = Main.player[Projectile.owner];
-            Projectile.NewProjectile(Projectile.GetProjectileSource_FromThis(), Projectile.Center.X, Projectile.Center.Y, 0, 0, ProjectileType<EPexplosion>(), Projectile.damage, Projectile.knockBack, player.whoAmI);
+            Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center.X, Projectile.Center.Y, 0, 0, ProjectileType<EPexplosion>(), Projectile.damage, Projectile.knockBack, player.whoAmI);
         }
 
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
         {
             Player player = Main.player[Projectile.owner];
-            Projectile.NewProjectile(Projectile.GetProjectileSource_FromThis(), Projectile.Center.X, Projectile.Center.Y, 0, 0, ProjectileType<EPexplosion>(), Projectile.damage, Projectile.knockBack, player.whoAmI);
+            Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center.X, Projectile.Center.Y, 0, 0, ProjectileType<EPexplosion>(), Projectile.damage, Projectile.knockBack, player.whoAmI);
             Projectile.localNPCImmunity[target.whoAmI] = -1;
             target.immune[Projectile.owner] = 0;
         }

@@ -32,7 +32,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.ExtinctionGun
             Item.shootSpeed = 10f;
             Item.useTime = 10;
             Item.useAnimation = 10;
-            Item.mana = 5;
+            Item.mana = ModLoader.HasMod("TRAEProject") ? 6 : 5;
             Item.shoot = ProjectileType<SnowFlakeF>();
             Item.noUseGraphic = false;
             Item.noMelee = true;
@@ -55,7 +55,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.ExtinctionGun
             {
                 Item.shoot = ProjectileType<SnowFlakeF>();
             }
-            SoundEngine.PlaySound(16, player.Center, 0);
+            SoundEngine.PlaySound(SoundID.DoubleJump, player.Center);
             return true;
         }
 

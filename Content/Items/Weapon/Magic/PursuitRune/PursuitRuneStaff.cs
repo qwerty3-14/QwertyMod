@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -47,7 +48,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.PursuitRune
             {
                 Item.GetGlobalItem<ItemUseGlow>().glowTexture = Request<Texture2D>("QwertyMod/Content/Items/Weapon/Magic/PursuitRune/PursuitRuneStaff_Glow").Value;
             }
-            Item.mana = 7;
+            Item.mana = ModLoader.HasMod("TRAEProject") ? 14 : 7;
             Item.shoot = ProjectileType<PursuitRuneMissile>();
             Item.shootSpeed = 9;
             Item.noMelee = true;
@@ -58,7 +59,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.PursuitRune
         {
             if (player.statMana > Item.mana)
             {
-                SoundEngine.PlaySound(25, player.position, 0);
+                SoundEngine.PlaySound(SoundID.MaxMana, player.position);
             }
             return base.CanUseItem(player);
         }
@@ -133,13 +134,13 @@ namespace QwertyMod.Content.Items.Weapon.Magic.PursuitRune
         {
             Projectile.localNPCImmunity[target.whoAmI] = -1;
             target.immune[Projectile.owner] = 0;
-            Projectile e = Main.projectile[Projectile.NewProjectile(Projectile.GetProjectileSource_FromThis(), Projectile.Center.X, Projectile.Center.Y, 0, 0, ProjectileType<PursuitRuneBlast>(), Projectile.damage, Projectile.knockBack, Projectile.owner, 1f)];
+            Projectile e = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center.X, Projectile.Center.Y, 0, 0, ProjectileType<PursuitRuneBlast>(), Projectile.damage, Projectile.knockBack, Projectile.owner, 1f)];
             e.localNPCImmunity[target.whoAmI] = -1;
         }
 
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            Projectile.NewProjectile(Projectile.GetProjectileSource_FromThis(), Projectile.Center.X, Projectile.Center.Y, 0, 0, ProjectileType<PursuitRuneBlast>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+            Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center.X, Projectile.Center.Y, 0, 0, ProjectileType<PursuitRuneBlast>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
             return true;
         }
     }

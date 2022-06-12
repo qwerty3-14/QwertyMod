@@ -69,7 +69,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.UrQuan
                             counter = 30;
                             Projectile p = QwertyMethods.PokeNPCMinion(player, target, Projectile.InheritSource(Projectile), Projectile.damage, 0);
                             p.GetGlobalProjectile<QwertyGlobalProjectile>().ignoresArmor = true;
-                            SoundEngine.PlaySound(SoundLoader.GetLegacySoundSlot(Mod, "Assets/Sounds/UrQuan-Fighter").WithVolume(.15f), Projectile.Center);
+                            SoundEngine.PlaySound(new SoundStyle("QwertyMod/Assets/Sounds/UrQuan-Fighter"), Projectile.Center);
                         }
                     }
                 }
@@ -83,7 +83,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.UrQuan
                     }
                     if (Collision.CheckAABBvAABBCollision(Projectile.position, Projectile.Size, parent.position, parent.Size))
                     {
-                        SoundEngine.PlaySound(SoundLoader.GetLegacySoundSlot(Mod, "Assets/Sounds/UrQuan-Recover").WithVolume(.8f), Projectile.Center);
+                        SoundEngine.PlaySound(new SoundStyle("QwertyMod/Assets/Sounds/UrQuan-Recover"), Projectile.Center);
                         Projectile.ai[1] = 1;
                     }
                 }

@@ -40,7 +40,7 @@ namespace QwertyMod.Content.Items.Consumable.BossSummon
             if (!NPC.AnyNPCs(NPCType<CloakedDarkBoss>()))
             {
                 NPC.SpawnOnPlayer(player.whoAmI, NPCType<CloakedDarkBoss>());
-                SoundEngine.PlaySound(SoundID.Roar, player.position, 0);
+                SoundEngine.PlaySound(SoundID.Roar, player.position);
                 Item.stack--;
                 return true;
             }

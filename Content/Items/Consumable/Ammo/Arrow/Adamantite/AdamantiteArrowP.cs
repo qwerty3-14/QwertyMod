@@ -41,7 +41,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Adamantite
         }
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
         {
-            SoundEngine.PlaySound(SoundLoader.GetLegacySoundSlot(Mod, "Assets/Sounds/PUNCH").WithVolume(.5f), Projectile.Center);
+            SoundEngine.PlaySound(new SoundStyle("QwertyMod/Assets/Sounds/PUNCH"), Projectile.Center);
         }
     }
 }

@@ -3,6 +3,8 @@ using QwertyMod.Content.Dusts;
 using QwertyMod.Content.Items.Consumable.BossSummon;
 using QwertyMod.Content.NPCs.Bosses.FortressBoss;
 using Terraria;
+using Terraria.ID;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.Enums;
 using Terraria.ModLoader;
@@ -24,10 +26,8 @@ namespace QwertyMod.Common.Fortress
             TileObjectData.addTile(Type);
             Main.tileLighted[Type] = true;
             Main.tileFrameImportant[Type] = true;
-
             DustType = DustType<CaeliteDust>();
-            SoundType = 21;
-            SoundStyle = 2;
+            HitSound = QwertyMod.FortressBlocks;
             MinPick = 10000;
 
             ModTranslation name = CreateMapEntryName();

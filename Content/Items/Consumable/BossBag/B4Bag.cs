@@ -5,6 +5,7 @@ using QwertyMod.Content.Items.Weapon.Minion.UrQuan;
 using QwertyMod.Content.Items.Weapon.Ranged.Bow.B4Bow;
 using QwertyMod.Content.NPCs.Bosses.OLORD;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
 
@@ -54,13 +55,13 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
                     mainLoot = ItemType<B4Bow>();
                     break;
             }
-            player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),mainLoot);
+            player.QuickSpawnItem(new EntitySource_Misc(""), mainLoot);
 
             if(Main.rand.Next(5) == 0)
             {
-                player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),ItemType<TheDevourer>());
+                player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<TheDevourer>());
             }
-            player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),ItemType<B4ExpertItem>());
+            player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<B4ExpertItem>());
         }
     }
 }

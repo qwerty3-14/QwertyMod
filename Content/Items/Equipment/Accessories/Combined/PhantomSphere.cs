@@ -34,10 +34,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Combined
         {
             player.GetModPlayer<MagicPierePlayer>().pierceBoost += 2;
             player.GetDamage(DamageClass.Magic) -= .1f;
-            if (player.HeldItem.CountsAsClass(DamageClass.Magic))
-            {
-                player.armorPenetration += 10;
-            }
+            player.GetArmorPenetration(DamageClass.Magic);
         }
 
         public override void AddRecipes()

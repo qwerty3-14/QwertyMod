@@ -53,7 +53,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Flail
 			int num17 = throwTime + 5;
 
 			SetStats(ref throwTime, ref throwSpeed, ref recoverDistance, ref recoverDistance2, ref attackCooldown);
-			float meleeSpeed = player.meleeSpeed;
+			float meleeSpeed = player.GetAttackSpeed(DamageClass.Melee);
 			float num18 = 1f / meleeSpeed;
 			throwSpeed *= num18;
 			num11 *= num18;
@@ -336,7 +336,6 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Flail
 				{
 					Collision.HitTiles(Projectile.position, velocity, Projectile.width, Projectile.height);
 				}
-				SoundEngine.PlaySound(0, (int)Projectile.position.X, (int)Projectile.position.Y);
 			}
 			if (Projectile.ai[0] != 3f && Projectile.ai[0] != 0f && Projectile.ai[0] != 5f && Projectile.ai[0] != 6f && Projectile.localAI[0] >= 10f)
 			{

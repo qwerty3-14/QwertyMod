@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using QwertyMod.Content.Buffs;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
@@ -28,7 +29,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.PenguinWhistle
 
         public override void Kill(int timeLeft)
         {
-            NPC Penguin = Main.npc[NPC.NewNPC(Projectile.GetNoneSource(), (int)Projectile.Top.X, (int)Projectile.Top.Y, NPCID.Penguin)];
+            NPC Penguin = Main.npc[NPC.NewNPC(new EntitySource_Misc(""), (int)Projectile.Top.X, (int)Projectile.Top.Y, NPCID.Penguin)];
 
             Penguin.SpawnedFromStatue = true;
         }

@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -140,7 +141,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.RuneNuke
         {
             if (timeLeft == 0)
             {
-                Projectile e = Main.projectile[Projectile.NewProjectile(Projectile.GetProjectileSource_FromThis(), Projectile.Center.X, Projectile.Center.Y, 0, 0, ProjectileType<RuneFallout>(), Projectile.damage, Projectile.knockBack, Projectile.owner)];
+                Projectile e = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center.X, Projectile.Center.Y, 0, 0, ProjectileType<RuneFallout>(), Projectile.damage, Projectile.knockBack, Projectile.owner)];
             }
         }
 
@@ -148,13 +149,13 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.RuneNuke
         {
             Projectile.localNPCImmunity[target.whoAmI] = -1;
             target.immune[Projectile.owner] = 0;
-            Projectile e = Main.projectile[Projectile.NewProjectile(Projectile.GetProjectileSource_FromThis(), Projectile.Center.X, Projectile.Center.Y, 0, 0, ProjectileType<RuneFallout>(), Projectile.damage, Projectile.knockBack, Projectile.owner)];
+            Projectile e = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center.X, Projectile.Center.Y, 0, 0, ProjectileType<RuneFallout>(), Projectile.damage, Projectile.knockBack, Projectile.owner)];
             e.localNPCImmunity[target.whoAmI] = -1;
         }
 
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            Projectile e = Main.projectile[Projectile.NewProjectile(Projectile.GetProjectileSource_FromThis(), Projectile.Center.X, Projectile.Center.Y, 0, 0, ProjectileType<RuneFallout>(), Projectile.damage, Projectile.knockBack, Projectile.owner)];
+            Projectile e = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center.X, Projectile.Center.Y, 0, 0, ProjectileType<RuneFallout>(), Projectile.damage, Projectile.knockBack, Projectile.owner)];
             return true;
         }
 
@@ -221,7 +222,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.RuneNuke
             target.immune[Projectile.owner] = 0;
 
             float theta = MathHelper.ToRadians(Main.rand.Next(0, 360));
-            Projectile p = Main.projectile[Projectile.NewProjectile(Projectile.GetProjectileSource_FromThis(), target.Center + QwertyMethods.PolarVector(150, theta), QwertyMethods.PolarVector(-10, theta), ProjectileType<LeechRuneFreindly>(), (int)(50 * Main.player[Projectile.owner].GetDamage(DamageClass.Summon)), 3f, Main.myPlayer)];
+            Projectile p = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), target.Center + QwertyMethods.PolarVector(150, theta), QwertyMethods.PolarVector(-10, theta), ProjectileType<LeechRuneFreindly>(), (int)(50 * Main.player[Projectile.owner].GetDamage(DamageClass.Summon).Multiplicative), 3f, Main.myPlayer)];
             p.DamageType = DamageClass.Summon;
         }
 

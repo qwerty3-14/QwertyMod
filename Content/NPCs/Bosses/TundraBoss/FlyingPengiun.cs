@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameContent.Bestiary;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -126,7 +127,7 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
             }
             if(timer > 360)
             {
-                NPC Penguin = Main.npc[NPC.NewNPC(NPC.GetSpawnSourceForNPCFromNPCAI(), (int)NPC.Top.X, (int)NPC.Top.Y, NPCID.Penguin)];
+                NPC Penguin = Main.npc[NPC.NewNPC(new EntitySource_Misc(""), (int)NPC.Top.X, (int)NPC.Top.Y, NPCID.Penguin)];
                 NPC.active = false;
             }
         }
@@ -139,8 +140,8 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
         {
             if (NPC.life <= 0)
             {
-                Gore.NewGore(NPC.position, NPC.velocity, 160);
-                Gore.NewGore(new Vector2(NPC.position.X, NPC.position.Y), NPC.velocity, 161);
+                Gore.NewGore(new EntitySource_Misc(""), NPC.position, NPC.velocity, 160);
+                Gore.NewGore(new EntitySource_Misc(""), new Vector2(NPC.position.X, NPC.position.Y), NPC.velocity, 161);
             }
         }
     }

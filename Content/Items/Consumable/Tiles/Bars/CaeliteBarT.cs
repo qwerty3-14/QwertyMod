@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using QwertyMod.Content.Dusts;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 using static Terraria.ModLoader.ModContent;
@@ -19,11 +20,9 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Bars
             TileObjectData.newTile.StyleHorizontal = true;
             TileObjectData.newTile.LavaDeath = false;
             TileObjectData.addTile(Type);
-
+ 
             DustType = DustType<CaeliteDust>();
-
-            SoundType = 21;
-            SoundStyle = 2;
+            HitSound = SoundID.Tink;
             MinPick = 1;
             AddMapEntry(new Color(220, 192, 110));
             ItemDrop = ItemType<CaeliteBar>();

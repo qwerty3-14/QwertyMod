@@ -23,7 +23,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.BuildingBlocks
             TileObjectData.newTile.Height = 1;
             TileObjectData.addTile(Type);
             AddMapEntry(new Color(162, 184, 185));
-
+            HitSound = QwertyMod.FortressBlocks;
             DustType = DustType<FortressDust>();
             ItemDrop = ItemType<FortressPillar>();
         }

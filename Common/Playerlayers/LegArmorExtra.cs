@@ -30,11 +30,8 @@ namespace QwertyMod.Common.Playerlayers
         {
             Player drawPlayer = drawInfo.drawPlayer;
             Mod mod = ModLoader.GetMod("QwertyMod");
-            //Main.NewText("Jeans: " + mod.GetEquipSlot("VitallumJeans", EquipType.Legs));
-            //Main.NewText("Legs: " + drawPlayer.legs);
             if (OnLegDraw.LegDictionary.ContainsKey(drawPlayer.legs))
             {
-                //Main.NewText("Hey!");
                 Color color12 = drawInfo.colorArmorHead;
                 bool glowmask = OnLegDraw.LegDictionary[drawPlayer.legs].glowmask;
                 if (glowmask)
@@ -49,18 +46,6 @@ namespace QwertyMod.Common.Playerlayers
                     texture = OnLegDraw.LegDictionary[drawPlayer.legs].femaleTexture;
                 }
                 int horizontalFrame = 0;
-                /*
-                if (horizontalFrames > 1)
-                {
-                    int frameTimer = drawPlayer.GetModPlayer<QwertyPlayer>().ArmorFrameCounter % ((pulseFrames ? (2 * horizontalFrames - 2) : horizontalFrames) * 10);
-                    horizontalFrame = frameTimer / 10;
-
-                    if (horizontalFrame > horizontalFrames - 1)
-                    {
-                        horizontalFrame = (horizontalFrames - 1) - (horizontalFrame - (horizontalFrames - 1));
-                    }
-                }
-                */
                 Vector2 legsOffset = drawInfo.legsOffset;
                 DrawData item;
                 if (drawInfo.isSitting)
@@ -91,23 +76,6 @@ namespace QwertyMod.Common.Playerlayers
                     }
                     drawInfo.DrawDataCache.Add(item);
                 }
-                /*
-                int drawX = (int)(drawPlayer.position.X - Main.screenPosition.X);
-                int drawY = (int)(drawPlayer.position.Y - Main.screenPosition.Y);
-                Vector2 Position = drawInfo.Position;
-                Vector2 origin = new Vector2((float)drawPlayer.legFrame.Width * 0.5f, (float)drawPlayer.legFrame.Height * 0.5f);
-                Vector2 pos = new Vector2((float)((int)(Position.X - Main.screenPosition.X - (float)(drawPlayer.bodyFrame.Width / 2) + (float)(drawPlayer.width / 2))), (float)((int)(Position.Y - Main.screenPosition.Y + (float)drawPlayer.height - (float)drawPlayer.bodyFrame.Height + 4f))) + drawPlayer.bodyPosition + new Vector2((float)(drawPlayer.bodyFrame.Width / 2), (float)(drawPlayer.bodyFrame.Height / 2));
-                DrawData data = new DrawData(texture, pos, new Rectangle(drawPlayer.legFrame.X + drawPlayer.legFrame.Width * horizontalFrame, drawPlayer.legFrame.Y, drawPlayer.legFrame.Width, drawPlayer.legFrame.Height), color12, 0f, origin, 1f, drawInfo.playerEffect, 0);
-                if (useShader == -1)
-                {
-                    data.shader = drawInfo.cLegs;
-                }
-                else
-                {
-                    data.shader = drawPlayer.dye[useShader].dye;
-                }
-                drawInfo.DrawDataCache.Add(data);
-                */
 
             }
             
@@ -239,11 +207,10 @@ namespace QwertyMod.Common.Playerlayers
             var immediate = AssetRequestMode.ImmediateLoad;
             Mod mod = ModLoader.GetMod("QwertyMod");
             OnLegDraw leg = new OnLegDraw(Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Hydra/HydraLeggings_Legs_Glow", immediate).Value, Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Hydra/HydraLeggings_FemaleLegs_Glow", immediate).Value);
-            //LegDictionary.Add(mod.GetEquipSlot("HydraLeggings", EquipType.Legs), leg);
             LegDictionary.Add(QwertyMod.hydraLegMale, leg);
             LegDictionary.Add(QwertyMod.hydraLegFemale, leg);
             leg = new OnLegDraw(Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Glass/GlassLimbguards_Legs_Glass", immediate).Value, Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Glass/GlassLimbguards_Legs_Glass", immediate).Value, false, 3);
-            LegDictionary.Add(mod.GetEquipSlot("GlassLimbguards", EquipType.Legs), leg);
+            LegDictionary.Add(EquipLoader.GetEquipSlot(mod, "GlassLimbguards", EquipType.Legs), leg);
             leg = new OnLegDraw(Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Vitallum/VitallumJeans_Legs_Vein", immediate).Value, Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Vitallum/VitallumJeans_FemaleLegs_Vein", immediate).Value, false, 3);
             LegDictionary.Add(QwertyMod.VitLegMale, leg);
             LegDictionary.Add(QwertyMod.VitLegFemale, leg);

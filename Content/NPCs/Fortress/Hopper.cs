@@ -7,6 +7,7 @@ using QwertyMod.Content.Items.Consumable.Tiles.Fortress.BuildingBlocks;
 using System;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
@@ -106,7 +107,7 @@ namespace QwertyMod.Content.NPCs.Fortress
 
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
-            if (spawnInfo.player.InModBiome(GetInstance<FortressBiome>()))
+            if (spawnInfo.Player.InModBiome(GetInstance<FortressBiome>()))
             {
                 return 140f;
             }
@@ -192,7 +193,7 @@ namespace QwertyMod.Content.NPCs.Fortress
                     int children = Main.rand.Next(3);
                     for (int i = 0; i < children; i++)
                     {
-                        NPC.NewNPC(NPC.GetSpawnSourceForNPCFromNPCAI(), (int)NPC.Center.X + Main.rand.Next(-40, 41), (int)NPC.Center.Y, NPCType<YoungTile>());
+                        NPC.NewNPC(new EntitySource_Misc(""), (int)NPC.Center.X + Main.rand.Next(-40, 41), (int)NPC.Center.Y, NPCType<YoungTile>());
                     }
                 }
             }

@@ -89,11 +89,11 @@ namespace QwertyMod.Common.Playerlayers
             var immediate = AssetRequestMode.ImmediateLoad;
             Mod mod = ModLoader.GetMod("QwertyMod");
             OnHeadDraw head = new OnHeadDraw(Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Hydra/HydraHelmet_Glow", immediate).Value);
-            HeadDictionary.Add(mod.GetEquipSlot("HydraHelmet", EquipType.Head), head);
+            HeadDictionary.Add(EquipLoader.GetEquipSlot(mod, "HydraHelmet", EquipType.Head), head);
             head = new OnHeadDraw(Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Glass/GlassHelm_Head_Glass", immediate).Value, false, 3);
-            HeadDictionary.Add(mod.GetEquipSlot("GlassHelm", EquipType.Head), head);
+            HeadDictionary.Add(EquipLoader.GetEquipSlot(mod, "GlassHelm", EquipType.Head), head);
             head = new OnHeadDraw(Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Vitallum/VitallumHeadress_Head_Vein", immediate).Value, false, 3, 4);
-            HeadDictionary.Add(mod.GetEquipSlot("VitallumHeadress", EquipType.Head), head);
+            HeadDictionary.Add(EquipLoader.GetEquipSlot(mod, "VitallumHeadress", EquipType.Head), head);
 
         }
     }

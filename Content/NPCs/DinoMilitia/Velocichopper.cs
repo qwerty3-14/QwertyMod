@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
@@ -115,7 +116,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
                 }
                 if (bombTimer > bombReload && Main.netMode != 1)
                 {
-                    Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), NPC.Center.X, NPC.Center.Y, 0, 0, ProjectileType<DinoBomb>(), damage, 3f, Main.myPlayer);
+                    Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Center.X, NPC.Center.Y, 0, 0, ProjectileType<DinoBomb>(), damage, 3f, Main.myPlayer);
                     bombTimer = 0;
                 }
             }
@@ -146,7 +147,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
 
                     int Yvar = 50 - Xvar;
 
-                    Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), NPC.Center.X + (100f * NPC.direction), NPC.Center.Y, 5.00f * (1 + Xvar * .01f) * NPC.direction, 5.00f * (1 + Yvar * .01f), 110, damage, 3f, Main.myPlayer);
+                    Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Center.X + (100f * NPC.direction), NPC.Center.Y, 5.00f * (1 + Xvar * .01f) * NPC.direction, 5.00f * (1 + Yvar * .01f), 110, damage, 3f, Main.myPlayer);
 
                     Reload_Timer = 0;
                 }
@@ -252,7 +253,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
             Projectile.height = 150;
             Projectile.position.X = Projectile.position.X - (float)(Projectile.width / 2);
             Projectile.position.Y = Projectile.position.Y - (float)(Projectile.height / 2);
-            Projectile.NewProjectile(Projectile.GetProjectileSource_FromThis(), Projectile.Center, new Vector2(0, 0), ProjectileType<DinoBombExplosion>(), Projectile.damage, Projectile.knockBack, player.whoAmI);
+            Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center, new Vector2(0, 0), ProjectileType<DinoBombExplosion>(), Projectile.damage, Projectile.knockBack, player.whoAmI);
             SoundEngine.PlaySound(SoundID.Item62, Projectile.position);
             for (int i = 0; i < 100; i++)
             {

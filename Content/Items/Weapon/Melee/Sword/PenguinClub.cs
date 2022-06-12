@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -38,7 +39,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword
 
         public override void OnHitNPC(Player player, NPC target, int damage, float knockBack, bool crit)
         {
-            Projectile penguin = Main.projectile[Projectile.NewProjectile(player.GetProjectileSource_Item(Item), player.Center, (target.Center - player.Center).SafeNormalize(-Vector2.UnitY) * 6, ProjectileType<SlidingPenguinMelee>(), Item.damage, knockBack, player.whoAmI, ai1: 1)];
+            Projectile penguin = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), player.Center, (target.Center - player.Center).SafeNormalize(-Vector2.UnitY) * 6, ProjectileType<SlidingPenguinMelee>(), Item.damage, knockBack, player.whoAmI, ai1: 1)];
         }
     }
 }

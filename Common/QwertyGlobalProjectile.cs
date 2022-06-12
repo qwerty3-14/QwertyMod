@@ -17,7 +17,7 @@ namespace QwertyMod.Common
             if (ignoresArmor)
             {
                 Player player = Main.player[projectile.owner];
-                int finalDefense = target.defense - player.armorPenetration;
+                int finalDefense = target.defense - (int)player.GetArmorPenetration(DamageClass.Generic);
                 target.ichor = false;
                 target.betsysCurse = false;
                 if (finalDefense < 0)

@@ -26,6 +26,16 @@ namespace QwertyMod.Common
         public override void SetStaticDefaults()
         {
             IL.Terraria.Player.GetAdjustedItemScale += HookSize;
+            IL.Terraria.Player.ItemCheck_GetMeleeHitbox += HookHey;
+        }
+
+        private void HookHey(ILContext il)
+        {
+            var c = new ILCursor(il);
+            c.EmitDelegate(() =>
+            {
+
+            });
         }
         private void HookSize(ILContext il)
         {
@@ -113,27 +123,27 @@ namespace QwertyMod.Common
                         Main.dust[num].noGravity = true;
                     }
                 }
-                int num2 = Gore.NewGore(new Vector2(Player.position.X + (float)(Player.width / 2) - 24f, Player.position.Y + (float)(Player.height / 2) - 24f), default(Vector2), Main.rand.Next(61, 64), 1f);
+                int num2 = Gore.NewGore(new EntitySource_Misc(""), new Vector2(Player.position.X + (float)(Player.width / 2) - 24f, Player.position.Y + (float)(Player.height / 2) - 24f), default(Vector2), Main.rand.Next(61, 64), 1f);
                 Main.gore[num2].scale = 1.5f;
                 Main.gore[num2].velocity.X = (float)Main.rand.Next(-50, 51) * 0.01f;
                 Main.gore[num2].velocity.Y = (float)Main.rand.Next(-50, 51) * 0.01f;
                 Main.gore[num2].velocity *= 0.4f;
-                num2 = Gore.NewGore(new Vector2(Player.position.X + (float)(Player.width / 2) - 24f, Player.position.Y + (float)(Player.height / 2) - 24f), default(Vector2), Main.rand.Next(61, 64), 1f);
+                num2 = Gore.NewGore(new EntitySource_Misc(""), new Vector2(Player.position.X + (float)(Player.width / 2) - 24f, Player.position.Y + (float)(Player.height / 2) - 24f), default(Vector2), Main.rand.Next(61, 64), 1f);
                 Main.gore[num2].scale = 1.5f;
                 Main.gore[num2].velocity.X = 1.5f + (float)Main.rand.Next(-50, 51) * 0.01f;
                 Main.gore[num2].velocity.Y = 1.5f + (float)Main.rand.Next(-50, 51) * 0.01f;
                 Main.gore[num2].velocity *= 0.4f;
-                num2 = Gore.NewGore(new Vector2(Player.position.X + (float)(Player.width / 2) - 24f, Player.position.Y + (float)(Player.height / 2) - 24f), default(Vector2), Main.rand.Next(61, 64), 1f);
+                num2 = Gore.NewGore(new EntitySource_Misc(""), new Vector2(Player.position.X + (float)(Player.width / 2) - 24f, Player.position.Y + (float)(Player.height / 2) - 24f), default(Vector2), Main.rand.Next(61, 64), 1f);
                 Main.gore[num2].scale = 1.5f;
                 Main.gore[num2].velocity.X = -1.5f - (float)Main.rand.Next(-50, 51) * 0.01f;
                 Main.gore[num2].velocity.Y = 1.5f + (float)Main.rand.Next(-50, 51) * 0.01f;
                 Main.gore[num2].velocity *= 0.4f;
-                num2 = Gore.NewGore(new Vector2(Player.position.X + (float)(Player.width / 2) - 24f, Player.position.Y + (float)(Player.height / 2) - 24f), default(Vector2), Main.rand.Next(61, 64), 1f);
+                num2 = Gore.NewGore(new EntitySource_Misc(""), new Vector2(Player.position.X + (float)(Player.width / 2) - 24f, Player.position.Y + (float)(Player.height / 2) - 24f), default(Vector2), Main.rand.Next(61, 64), 1f);
                 Main.gore[num2].scale = 1.5f;
                 Main.gore[num2].velocity.X = 1.5f + (float)Main.rand.Next(-50, 51) * 0.01f;
                 Main.gore[num2].velocity.Y = -1.5f - (float)Main.rand.Next(-50, 51) * 0.01f;
                 Main.gore[num2].velocity *= 0.4f;
-                num2 = Gore.NewGore(new Vector2(Player.position.X + (float)(Player.width / 2) - 24f, Player.position.Y + (float)(Player.height / 2) - 24f), default(Vector2), Main.rand.Next(61, 64), 1f);
+                num2 = Gore.NewGore(new EntitySource_Misc(""), new Vector2(Player.position.X + (float)(Player.width / 2) - 24f, Player.position.Y + (float)(Player.height / 2) - 24f), default(Vector2), Main.rand.Next(61, 64), 1f);
                 Main.gore[num2].scale = 1.5f;
                 Main.gore[num2].velocity.X = -1.5f - (float)Main.rand.Next(-50, 51) * 0.01f;
                 Main.gore[num2].velocity.Y = -1.5f - (float)Main.rand.Next(-50, 51) * 0.01f;

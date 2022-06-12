@@ -71,7 +71,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.RuneLongbow
             return false;
         }
 
-        public override bool CanConsumeAmmo(Player player)
+        public override bool CanConsumeAmmo(Item ammo, Player player)
         {
             return false;
         }
@@ -127,7 +127,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.RuneLongbow
             }
             Projectile.timeLeft = 2;
 
-            bool firing = (player.channel || timer < 30) && player.HasAmmo(player.HeldItem, true) && !player.noItems && !player.CCed;
+            bool firing = (player.channel || timer < 30) && player.HasAmmo(player.HeldItem) && !player.noItems && !player.CCed;
 
             Ammo = AmmoID.Arrow;
 
@@ -202,7 +202,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.RuneLongbow
 
                 if (timer == 0)
                 {
-                    player.PickAmmo(player.HeldItem, ref Ammo, ref speed, ref firing, ref weaponDamage, ref weaponKnockback, out _);
+                    player.PickAmmo(player.HeldItem, out Ammo, out speed, out weaponDamage, out weaponKnockback, out _);
 
                     if (Ammo == ProjectileID.WoodenArrowFriendly)
                     {
@@ -210,7 +210,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.RuneLongbow
                     }
                     if (Main.netMode != 2)
                     {
-                        arrow = Main.projectile[Projectile.NewProjectile(Projectile.GetProjectileSource_FromThis(), Projectile.Center.X, Projectile.Center.Y, 0, 0, Ammo, weaponDamage, weaponKnockback, Projectile.owner)];
+                        arrow = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center.X, Projectile.Center.Y, 0, 0, Ammo, weaponDamage, weaponKnockback, Projectile.owner)];
                     }
                 }
                 arrow.velocity = QwertyMethods.PolarVector(speed, Projectile.rotation - (float)Math.PI / 2);
@@ -234,7 +234,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.RuneLongbow
                     
                     if (timer == maxTime)
                     {
-                        SoundEngine.PlaySound(25, player.position, 0);
+                        SoundEngine.PlaySound(SoundID.Item5, player.position);
                     }
                 }
             }
@@ -255,8 +255,8 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.RuneLongbow
             }
             if (timer >= maxTime)
             {
-                Projectile.NewProjectile(Projectile.GetProjectileSource_FromThis(), arrow.Center, QwertyMethods.PolarVector(arrow.velocity.Length(), arrow.velocity.ToRotation() + (float)Math.PI / 64f) , arrow.type, arrow.damage, arrow.knockBack, Projectile.owner);
-                Projectile.NewProjectile(Projectile.GetProjectileSource_FromThis(), arrow.Center, QwertyMethods.PolarVector(arrow.velocity.Length(), arrow.velocity.ToRotation() - (float)Math.PI / 64f), arrow.type, arrow.damage, arrow.knockBack, Projectile.owner);
+                Projectile.NewProjectile(new EntitySource_Misc(""), arrow.Center, QwertyMethods.PolarVector(arrow.velocity.Length(), arrow.velocity.ToRotation() + (float)Math.PI / 64f) , arrow.type, arrow.damage, arrow.knockBack, Projectile.owner);
+                Projectile.NewProjectile(new EntitySource_Misc(""), arrow.Center, QwertyMethods.PolarVector(arrow.velocity.Length(), arrow.velocity.ToRotation() - (float)Math.PI / 64f), arrow.type, arrow.damage, arrow.knockBack, Projectile.owner);
             }
         }
 

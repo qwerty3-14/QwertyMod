@@ -71,7 +71,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.UrQuan
                 if (fighterCounter <= 0 && fighters.Count < 10)
                 {
                     fighterCounter = 60;
-                    SoundEngine.PlaySound(SoundLoader.GetLegacySoundSlot(Mod, "Assets/Sounds/UrQuan-Launch").WithVolume(.4f), Projectile.Center);
+                    SoundEngine.PlaySound(new SoundStyle("QwertyMod/Assets/Sounds/UrQuan-Launch"), Projectile.Center);
                     fighters.Add(Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center + QwertyMethods.PolarVector(-40, Projectile.rotation) + QwertyMethods.PolarVector(10, Projectile.rotation + (float)Math.PI / 2), QwertyMethods.PolarVector(4, Projectile.rotation + 3 * (float)Math.PI / 4), ProjectileType<Fighter>(), (int)(Projectile.damage / 6f), 0, Projectile.owner, Projectile.whoAmI)]);
                     fighters.Add(Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center + QwertyMethods.PolarVector(-40, Projectile.rotation) + QwertyMethods.PolarVector(10, Projectile.rotation - (float)Math.PI / 2), QwertyMethods.PolarVector(4, Projectile.rotation - 3 * (float)Math.PI / 4), ProjectileType<Fighter>(), (int)(Projectile.damage / 6f), 0, Projectile.owner, Projectile.whoAmI)]);
                 }
@@ -80,7 +80,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.UrQuan
                     if (shotCounter >= 20)
                     {
                         shotCounter = 0;
-                        SoundEngine.PlaySound(SoundLoader.GetLegacySoundSlot(Mod, "Assets/Sounds/UrQuan-Fusion").WithVolume(.1f), Projectile.Center);
+                        SoundEngine.PlaySound(new SoundStyle("QwertyMod/Assets/Sounds/UrQuan-Fusion"), Projectile.Center);
                         Projectile l = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center + QwertyMethods.PolarVector(40f, Projectile.rotation), QwertyMethods.PolarVector(12f, Projectile.rotation), ProjectileType<Fusion>(), Projectile.damage, Projectile.knockBack, Projectile.owner)];
                     }
                 }

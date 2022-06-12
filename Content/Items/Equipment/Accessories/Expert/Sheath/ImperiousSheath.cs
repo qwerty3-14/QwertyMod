@@ -55,9 +55,9 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.Sheath
             }
             foreach (TooltipLine line in tooltips) //runs through all tooltip lines
             {
-                if (line.mod == "Terraria" && line.Name == "Tooltip0") //this checks if it's the line we're interested in
+                if (line.Mod == "Terraria" && line.Name == "Tooltip0") //this checks if it's the line we're interested in
                 {
-                    line.text = s;//change tooltip
+                    line.Text = s;//change tooltip
                 }
             }
         }
@@ -104,7 +104,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.Sheath
             {
                 if (effect && damageTally >= damageTallyMax)
                 {
-                        Projectile.NewProjectile(Projectile.GetNoneSource(), Player.Center, Vector2.Zero, ProjectileType<ImperiousP>(), (int)(500f * Player.GetDamage(DamageClass.Summon).Multiplicative), 8f * Player.minionKB, Player.whoAmI); //summons Imperious to fight!
+                        Projectile.NewProjectile(new EntitySource_Misc(""), Player.Center, Vector2.Zero, ProjectileType<ImperiousP>(), (int)(500f * Player.GetDamage(DamageClass.Summon).Multiplicative), 8f * Player.GetKnockback(DamageClass.Summon).Multiplicative, Player.whoAmI); //summons Imperious to fight!
                         damageTally = 0; //resets the tally
                     
                 }

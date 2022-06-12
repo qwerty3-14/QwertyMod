@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.Graphics.Shaders;
 using Terraria.ID;
@@ -151,7 +152,7 @@ namespace QwertyMod.Content.Items.Pet
             bool petProjectileNotSpawned = player.ownedProjectileCounts[ProjectileType<LightlingP>()] <= 0;
             if (petProjectileNotSpawned && player.whoAmI == Main.myPlayer)
             {
-                Projectile.NewProjectile(player.GetProjectileSource_Buff(buffIndex), player.Center.X, player.Center.Y, 0f, 0f, ProjectileType<LightlingP>(), 0, 0f, player.whoAmI, 0f, 0f);
+                Projectile.NewProjectile(new EntitySource_Misc(""), player.Center.X, player.Center.Y, 0f, 0f, ProjectileType<LightlingP>(), 0, 0f, player.whoAmI, 0f, 0f);
             }
         }
     }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -54,7 +55,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.SpecialAmmo
                     if (Math.Abs(Projectile.velocity.X) < 1f)
                     {
                         Projectile.friendly = false;
-                        NPC Penguin = Main.npc[NPC.NewNPC(Projectile.GetNoneSource(), (int)Projectile.Top.X, (int)Projectile.Top.Y, NPCID.Penguin)];
+                        NPC Penguin = Main.npc[NPC.NewNPC(new EntitySource_Misc(""), (int)Projectile.Top.X, (int)Projectile.Top.Y, NPCID.Penguin)];
                         if (Projectile.ai[1] == 1)
                         {
                             Penguin.SpawnedFromStatue = true;

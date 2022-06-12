@@ -19,6 +19,8 @@ namespace QwertyMod.Content.Items.Weapon.Minion.GlassSpike
             DisplayName.SetDefault("Glass Spike Staff");
             Tooltip.SetDefault("Summon spikes that rest on the ground, damaging enemies that step on them \nWill reposition if you walk away");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+            ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
+            ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
         }
 
 
@@ -49,19 +51,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.GlassSpike
             return false;
         }
 
-        public override bool AltFunctionUse(Player player)
-        {
-            return true;
-        }
-
-        public override bool? UseItem(Player player)
-        {
-            if (player.altFunctionUse == 2)
-            {
-                player.MinionNPCTargetAim(false);
-            }
-            return base.UseItem(player);
-        }
         public override void AddRecipes()
         {
             CreateRecipe().AddIngredient(ItemID.Glass, 20)

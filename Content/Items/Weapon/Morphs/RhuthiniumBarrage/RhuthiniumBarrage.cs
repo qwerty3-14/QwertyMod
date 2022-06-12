@@ -4,6 +4,7 @@ using QwertyMod.Content.Dusts;
 using QwertyMod.Content.Items.Consumable.Tiles.Bars;
 using System;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
@@ -104,7 +105,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.RhuthiniumBarrage
             {
                 for (int d = 0; d < 60; d++)
                 {
-                    Darts.Add(Main.projectile[Projectile.NewProjectile(Projectile.GetProjectileSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<RhuthiniumBarrageDart>(), Projectile.damage, Projectile.knockBack, Projectile.owner, Main.rand.Next(-14, 15), 0f)]);
+                    Darts.Add(Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center, Vector2.Zero, ProjectileType<RhuthiniumBarrageDart>(), Projectile.damage, Projectile.knockBack, Projectile.owner, Main.rand.Next(-14, 15), 0f)]);
                 }
                 runOnce = false;
             }

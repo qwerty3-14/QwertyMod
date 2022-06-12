@@ -20,6 +20,8 @@ namespace QwertyMod.Content.Items.Weapon.Minion.ChloroSniper
             DisplayName.SetDefault("Chlorophyte Sniper Staff");
             Tooltip.SetDefault("Summons a Chlorophyte Sniper to execute your foes! +\nBurst damage minion");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+            ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
+            ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
         }
 
         public override void SetDefaults()
@@ -46,20 +48,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.ChloroSniper
         {
             player.SpawnMinionOnCursor(source, player.whoAmI, type, Item.damage, knockback);
             return false;
-        }
-
-        public override bool AltFunctionUse(Player player)
-        {
-            return true;
-        }
-
-        public override bool? UseItem(Player player)
-        {
-            if (player.altFunctionUse == 2)
-            {
-                player.MinionNPCTargetAim(false);
-            }
-            return base.UseItem(player);
         }
         public override void AddRecipes()
         {

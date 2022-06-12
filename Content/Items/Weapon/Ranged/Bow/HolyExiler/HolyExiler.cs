@@ -100,7 +100,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.HolyExiler
                             Vector2 teleTo = new Vector2(target.Center.X + (float)Math.Cos(projectile.ai[0]) * teleportDistance, target.Center.Y + (float)Math.Sin(projectile.ai[0]) * teleportDistance);
                             if (Collision.CanHit(new Vector2(teleTo.X - projectile.width / 2, teleTo.Y - projectile.height / 2), projectile.width, projectile.height, target.position, target.width, target.height))// checks if there are no tiles between player and potential teleport spot
                             {
-                                portal1 = Main.projectile[Projectile.NewProjectile(projectile.GetProjectileSource_FromThis(), teleTo, Vector2.Zero, ProjectileType<ArrowPortal>(), projectile.damage, projectile.knockBack, projectile.owner, projectile.type, 12f)];
+                                portal1 = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), teleTo, Vector2.Zero, ProjectileType<ArrowPortal>(), projectile.damage, projectile.knockBack, projectile.owner, projectile.type, 12f)];
                                 portal1.rotation = (target.Center - teleTo).ToRotation();
                                 portal1.timeLeft = (i+1) * 15;
                                 break; //end for loop
@@ -164,7 +164,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.HolyExiler
                 }
                 if (Projectile.timeLeft == activeTime / 2)
                 {
-                    Projectile.NewProjectile(Projectile.GetProjectileSource_FromThis(), Projectile.Center, QwertyMethods.PolarVector(Projectile.ai[1], Projectile.rotation), (int)Projectile.ai[0], Projectile.damage, Projectile.knockBack, Projectile.owner);
+                    Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center, QwertyMethods.PolarVector(Projectile.ai[1], Projectile.rotation), (int)Projectile.ai[0], Projectile.damage, Projectile.knockBack, Projectile.owner);
                 }
                 Projectile.alpha = 0;
             }

@@ -56,7 +56,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.Ancient
             return false;
         }
 
-        public override bool CanConsumeAmmo(Player player)
+        public override bool CanConsumeAmmo(Item ammo, Player player)
         {
             return false;
         }
@@ -106,7 +106,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.Ancient
             Projectile.timeLeft = 2;
 
             //var modPlayer = player.GetModPlayer<QwertyPlayer>();
-            bool firing = (player.channel || timer < 30) && player.HasAmmo(player.HeldItem, true) && !player.noItems && !player.CCed;
+            bool firing = (player.channel || timer < 30) && player.HasAmmo(player.HeldItem) && !player.noItems && !player.CCed;
             Ammo = AmmoID.Arrow;
 
             weaponDamage = player.GetWeaponDamage(player.inventory[player.selectedItem]);
@@ -182,7 +182,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.Ancient
                 if (timer == 0)
                 {
                    
-                    player.PickAmmo(player.HeldItem, ref Ammo, ref speed, ref firing, ref weaponDamage, ref weaponKnockback, out _);
+                    player.PickAmmo(player.HeldItem, out Ammo, out speed, out weaponDamage, out weaponKnockback, out _);
 
                     if (Ammo == ProjectileID.WoodenArrowFriendly)
                     {
@@ -222,7 +222,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.Ancient
                     */
                     if (timer == maxTime)
                     {
-                        SoundEngine.PlaySound(25, player.position, 0);
+                        SoundEngine.PlaySound(SoundID.Item5, player.position);
                     }
                 }
             }

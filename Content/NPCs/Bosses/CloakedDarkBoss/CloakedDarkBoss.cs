@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
@@ -181,7 +182,7 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
 
                 if ((cloak == null || cloak.type != ProjectileType<Cloak>() || !cloak.active) && Main.netMode != 1)
                 {
-                    cloak = Main.projectile[Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), NPC.Center, Vector2.Zero, ProjectileType<Cloak>(), 0, 0, Main.myPlayer, NPC.whoAmI)];
+                    cloak = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Center, Vector2.Zero, ProjectileType<Cloak>(), 0, 0, Main.myPlayer, NPC.whoAmI)];
                 }
 
                 if (playerviewRadius > 80)
@@ -240,10 +241,10 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
                                         break;
 
                                     case 1:
-                                        Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), NPC.Center, Vector2.Zero, ProjectileType<Warning>(), 0, 0f, Main.myPlayer, 0, 0);
+                                        Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Center, Vector2.Zero, ProjectileType<Warning>(), 0, 0f, Main.myPlayer, 0, 0);
                                         if (!Main.dedServ)
                                         {
-                                            SoundEngine.PlaySound(25, NPC.Center, 0);
+                                            SoundEngine.PlaySound(SoundID.MaxMana, NPC.Center);
                                             //SoundEngine.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/SoundEffects/Notice").WithVolume(3f).WithPitchVariance(.5f), NPC.Center);
                                         }
                                         NPC.velocity = Vector2.Zero;
@@ -265,11 +266,11 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
                         }
                         else if (timer % 15 == 0 && Main.netMode != 1)
                         {
-                            Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), NPC.Center, Vector2.Zero, ProjectileType<EtimsicCannon>(), Main.expertMode ? 18 : 24, 0f, Main.myPlayer, (player.Center - NPC.Center).ToRotation());
-                            Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), NPC.Center, Vector2.Zero, ProjectileType<Warning>(), 0, 0f, Main.myPlayer, 1, (player.Center - NPC.Center).ToRotation());
+                            Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Center, Vector2.Zero, ProjectileType<EtimsicCannon>(), Main.expertMode ? 18 : 24, 0f, Main.myPlayer, (player.Center - NPC.Center).ToRotation());
+                            Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Center, Vector2.Zero, ProjectileType<Warning>(), 0, 0f, Main.myPlayer, 1, (player.Center - NPC.Center).ToRotation());
                             if (!Main.dedServ)
                             {
-                                SoundEngine.PlaySound(25, NPC.Center, 0);
+                                SoundEngine.PlaySound(SoundID.MaxMana, NPC.Center);
                                 // SoundEngine.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/SoundEffects/Notice").WithVolume(3f).WithPitchVariance(.5f), NPC.Center);
                             }
                         }
@@ -280,13 +281,13 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
                         {
                             if (Main.netMode != 1)
                             {
-                                myWall = Main.projectile[Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), NPC.Center, Vector2.Zero, ProjectileType<EtimsicWall>(), Main.expertMode ? 24 : 36, 0f, Main.myPlayer, (player.Center - NPC.Center).ToRotation() + (float)Math.PI / 2)];
-                                Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), NPC.Center, Vector2.Zero, ProjectileType<Warning>(), 0, 0f, Main.myPlayer, 2, (player.Center - NPC.Center).ToRotation() + (float)Math.PI / 2);
+                                myWall = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Center, Vector2.Zero, ProjectileType<EtimsicWall>(), Main.expertMode ? 24 : 36, 0f, Main.myPlayer, (player.Center - NPC.Center).ToRotation() + (float)Math.PI / 2)];
+                                Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Center, Vector2.Zero, ProjectileType<Warning>(), 0, 0f, Main.myPlayer, 2, (player.Center - NPC.Center).ToRotation() + (float)Math.PI / 2);
                             }
 
                             if (!Main.dedServ)
                             {
-                                SoundEngine.PlaySound(25, NPC.Center, 0);
+                                SoundEngine.PlaySound(SoundID.MaxMana, NPC.Center);
                                 //  SoundEngine.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/SoundEffects/Notice").WithVolume(3f).WithPitchVariance(.5f), NPC.Center);
                             }
 
@@ -315,7 +316,7 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
                                 NPC.velocity = Vector2.Zero;
                                 if (Main.netMode != 1)
                                 {
-                                    Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), NPC.Center + new Vector2((float)Math.Cos(pupilDirection) * greaterPupilRadius * pupilStareOutAmount, (float)Math.Sin(pupilDirection) * lesserPupilRadius) * NPC.scale, QwertyMethods.PolarVector(10, pupilDirection), ProjectileType<EtimsicRay>(), Main.expertMode ? 18 : 24, 0f, Main.myPlayer);
+                                    Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Center + new Vector2((float)Math.Cos(pupilDirection) * greaterPupilRadius * pupilStareOutAmount, (float)Math.Sin(pupilDirection) * lesserPupilRadius) * NPC.scale, QwertyMethods.PolarVector(10, pupilDirection), ProjectileType<EtimsicRay>(), Main.expertMode ? 18 : 24, 0f, Main.myPlayer);
                                 }
                                 if (!Main.dedServ)
                                 {

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
@@ -192,7 +193,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
                 }
                 if ((timer - walkTime) % attackreloadTimes[attack] == 0)
                 {
-                    SoundEngine.PlaySound(16, NPC.position + gunOffset, 0);
+                    SoundEngine.PlaySound(SoundID.DoubleJump, NPC.position + gunOffset);
                     if (Main.netMode != 1)
                     {
                         float spread = MathHelper.ToRadians(Main.rand.Next(-15, 15));
@@ -200,15 +201,15 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
                         switch (attack)
                         {
                             case 0:
-                                Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), NPC.position + gunOffset + QwertyMethods.PolarVector(56, gunRot), QwertyMethods.PolarVector(10f, gunRot + spread), ProjectileType<SnowFlake>(), damage, 3f, Main.myPlayer);
+                                Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.position + gunOffset + QwertyMethods.PolarVector(56, gunRot), QwertyMethods.PolarVector(10f, gunRot + spread), ProjectileType<SnowFlake>(), damage, 3f, Main.myPlayer);
                                 break;
 
                             case 1:
-                                NPC.NewNPC(NPC.GetSpawnSourceForNPCFromNPCAI(), (int)(NPC.position + gunOffset + QwertyMethods.PolarVector(56, gunRot)).X, (int)(NPC.position + gunOffset + QwertyMethods.PolarVector(56, gunRot)).Y, NPCType<Mosquitto>(), 0, spread, NPC.direction);
+                                NPC.NewNPC(new EntitySource_Misc(""), (int)(NPC.position + gunOffset + QwertyMethods.PolarVector(56, gunRot)).X, (int)(NPC.position + gunOffset + QwertyMethods.PolarVector(56, gunRot)).Y, NPCType<Mosquitto>(), 0, spread, NPC.direction);
                                 break;
 
                             case 2:
-                                Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), NPC.Center + new Vector2(-24 * NPC.direction, -74f), Vector2.UnitY * -40f, ProjectileType<MeteorLaunch>(), damage, 3f, Main.myPlayer);
+                                Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Center + new Vector2(-24 * NPC.direction, -74f), Vector2.UnitY * -40f, ProjectileType<MeteorLaunch>(), damage, 3f, Main.myPlayer);
 
                                 break;
                         }
@@ -236,7 +237,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
                         if (Main.netMode != 1)
                         {
                             int Xvar = Main.rand.Next(-750, 750);
-                            Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), player.Center.X + Xvar * 1.0f, player.Center.Y - 800f, 0f, 10f, ProjectileType<MeteorFall>(), damage, 3f, Main.myPlayer);
+                            Projectile.NewProjectile(new EntitySource_Misc(""),  player.Center.X + Xvar * 1.0f, player.Center.Y - 800f, 0f, 10f, ProjectileType<MeteorFall>(), damage, 3f, Main.myPlayer);
                         }
                         meteorTime = 0;
                     }

@@ -25,7 +25,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Lune
         public override void SetDefaults()
         {
             Item.damage = 11;
-            Item.mana = 9;
+            Item.mana = ModLoader.HasMod("TRAEProject") ? 100 : 16;
             Item.width = 42;
             Item.height = 40;
             Item.useTime = 30;
@@ -101,7 +101,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Lune
             {
                 if (QwertyMethods.ClosestNPC(ref target, 400, Projectile.Center, false, -1))
                 {
-                    QwertyMethods.PokeNPC(Main.player[Projectile.owner], target, Projectile.GetProjectileSource_FromThis(), Projectile.damage, DamageClass.Magic, Projectile.knockBack);
+                    QwertyMethods.PokeNPC(Main.player[Projectile.owner], target, new EntitySource_Misc(""), Projectile.damage, DamageClass.Magic, Projectile.knockBack);
                     for (int d = 0; d < (target.Center - Projectile.Center).Length(); d += 4)
                     {
                         Dust.NewDust(Projectile.Center + QwertyMethods.PolarVector(d, (target.Center - Projectile.Center).ToRotation()), 0, 0, DustType<LuneDust>());

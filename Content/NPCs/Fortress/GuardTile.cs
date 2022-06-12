@@ -91,7 +91,7 @@ namespace QwertyMod.Content.NPCs.Fortress
 
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
-            if (spawnInfo.player.InModBiome(GetInstance<FortressBiome>()) && Main.hardMode)
+            if (spawnInfo.Player.InModBiome(GetInstance<FortressBiome>()) && Main.hardMode)
             {
                 return 40f;
             }

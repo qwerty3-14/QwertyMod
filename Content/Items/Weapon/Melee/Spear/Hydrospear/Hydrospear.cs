@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -123,9 +124,9 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Spear.Hydrospear
                         {
                             noDust = true;
                             streamCounter++;
-                            if (streamCounter % (int)(16f * projOwner.meleeSpeed) == 0)
+                            if (streamCounter % (int)(16f * projOwner.GetAttackSpeed(DamageClass.Melee)) == 0)
                             {
-                                Projectile.NewProjectile(Projectile.GetProjectileSource_FromThis(), Projectile.Center + QwertyMethods.PolarVector(180, Projectile.rotation - (3 * (float)Math.PI / 4)) + QwertyMethods.PolarVector(5, Projectile.rotation - (1 * (float)Math.PI / 4)), QwertyMethods.PolarVector(1, Projectile.rotation - (3 * (float)Math.PI / 4)), ProjectileType<HydrospearStream>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                                Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center + QwertyMethods.PolarVector(180, Projectile.rotation - (3 * (float)Math.PI / 4)) + QwertyMethods.PolarVector(5, Projectile.rotation - (1 * (float)Math.PI / 4)), QwertyMethods.PolarVector(1, Projectile.rotation - (3 * (float)Math.PI / 4)), ProjectileType<HydrospearStream>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
                             }
                         }
                     }

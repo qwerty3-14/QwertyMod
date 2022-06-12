@@ -19,6 +19,8 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.Riptide
             DisplayName.SetDefault("Riptide Sentry Staff");
             Tooltip.SetDefault("");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+            ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
+            ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
         }
 
         public override void SetDefaults()
@@ -46,25 +48,13 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.Riptide
             return false;
         }
 
-        public override bool AltFunctionUse(Player player)
-        {
-            return true;
-        }
-        public override bool? UseItem(Player player)
-        {
-            if (player.altFunctionUse == 2)
-            {
-                player.MinionNPCTargetAim(false);
-            }
-            return base.UseItem(player);
-        }
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
             foreach (TooltipLine line in tooltips)
             {
-                if (line.mod == "Terraria" && line.Name == "Knockback") //this checks if it's the line we're interested in
+                if (line.Mod == "Terraria" && line.Name == "Knockback") //this checks if it's the line we're interested in
                 {
-                    line.text = "Absolutely no knockback";//change tooltip
+                    line.Text = "Absolutely no knockback";//change tooltip
                 }
             }
         }
@@ -128,7 +118,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.Riptide
                     Vector2 shootFrom = Projectile.Center + QwertyMethods.PolarVector(12, Projectile.rotation) + QwertyMethods.PolarVector(si * 4, Projectile.rotation + (float)Math.PI / 2);
                     //if (Main.netMode != 1)
                     {
-                        Projectile.NewProjectile(Projectile.GetProjectileSource_FromThis(), shootFrom, QwertyMethods.PolarVector(1, Projectile.rotation), ProjectileType<RiptideStream>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                        Projectile.NewProjectile(new EntitySource_Misc(""), shootFrom, QwertyMethods.PolarVector(1, Projectile.rotation), ProjectileType<RiptideStream>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
                     }
                 }
             }

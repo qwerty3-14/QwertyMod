@@ -40,7 +40,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.AncientWave
             {
                 Item.GetGlobalItem<ItemUseGlow>().glowTexture = Request<Texture2D>("QwertyMod/Content/Items/Weapon/Magic/AncientWave/AncientWave_Glow").Value;
             }
-            Item.mana = 12;
+            Item.mana = ModLoader.HasMod("TRAEProject") ? 32 : 12;
             Item.shoot = ProjectileType<AncientWaveP>();
             Item.shootSpeed = 9;
             Item.noMelee = true;

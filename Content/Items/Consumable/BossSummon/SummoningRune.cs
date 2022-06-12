@@ -37,7 +37,7 @@ namespace QwertyMod.Content.Items.Consumable.BossSummon
         public override bool CanUseItem(Player player)
         {
             NPC.SpawnOnPlayer(player.whoAmI, NPCType<RuneGhost>());
-            SoundEngine.PlaySound(SoundID.Roar, player.position, 0);
+            SoundEngine.PlaySound(SoundID.Roar, player.position);
             Item.stack--;
             return true;
         }

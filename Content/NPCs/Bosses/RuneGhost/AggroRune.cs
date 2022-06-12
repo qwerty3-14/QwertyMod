@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
 
@@ -48,7 +49,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
             }
             if(timer % 120 == 90 && Main.netMode != 1)
             {
-                Projectile.NewProjectile(Projectile.GetProjectileSource_FromThis(), middle, QwertyMethods.PolarVector(1, Projectile.rotation), ProjectileType<AggroStrike>(), Projectile.damage, 0);
+                Projectile.NewProjectile(new EntitySource_Misc(""), middle, QwertyMethods.PolarVector(1, Projectile.rotation), ProjectileType<AggroStrike>(), Projectile.damage, 0);
             }
             if(timer % 120 == 119)
             {

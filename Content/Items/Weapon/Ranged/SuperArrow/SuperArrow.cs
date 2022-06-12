@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
 
@@ -27,7 +28,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.SuperArrow
                     {
                         if (shootTime[i] == 0 && Player.itemTimeMax != 0 && Player.itemTime == Player.itemTimeMax)
                         {
-                            Projectile p = Main.projectile[Projectile.NewProjectile(Player.GetProjectileSource_Item(Player.inventory[i]),
+                            Projectile p = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""),
                                 Player.Center,
                                 Player.inventory[i].shootSpeed * (QwertyMod.GetLocalCursor(Player.whoAmI) - Player.Center).RotatedByRandom(Math.PI / 32),
                                 Player.inventory[i].shoot,

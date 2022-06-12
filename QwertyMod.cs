@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System.IO;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ModLoader;
 using Terraria.ID;
 using QwertyMod.Common.RuneBuilder;
@@ -122,6 +123,7 @@ namespace QwertyMod
         public static int GaleLegFemale = 0;
         public static int VitLegMale = 0;
         public static int VitLegFemale = 0;
+        public static SoundStyle FortressBlocks;
         public override void Load()
         {
             AMLoot = new Deck<int>();
@@ -160,23 +162,23 @@ namespace QwertyMod
             AddBossHeadTexture(HydraHead1);
             AddBossHeadTexture(HydraHead2);
             AddBossHeadTexture(HydraHead3);
-
+            FortressBlocks = SoundID.Tink;
             if (!Main.dedServ)
             {
-                hydraLegMale = AddEquipTexture(GetModItem(ItemType<HydraLeggings>()), EquipType.Legs, "QwertyMod/Content/Items/Equipment/Armor/Hydra/HydraLeggings_Legs");
-                hydraLegFemale = AddEquipTexture(GetModItem(ItemType<HydraLeggings>()), EquipType.Legs, "QwertyMod/Content/Items/Equipment/Armor/Hydra/HydraLeggings_FemaleLegs");
-                shamaLegMale = AddEquipTexture(GetModItem(ItemType<ShamanLegs>()), EquipType.Legs, "QwertyMod/Content/Items/Equipment/Armor/Shaman/ShamanLegs_Legs");
-                shamanLegFemale = AddEquipTexture(GetModItem(ItemType<ShamanLegs>()), EquipType.Legs, "QwertyMod/Content/Items/Equipment/Armor/Shaman/ShamanLegs_FemaleLegs");
-                LuneLegMale = AddEquipTexture(GetModItem(ItemType<LuneLeggings>()), EquipType.Legs, "QwertyMod/Content/Items/Equipment/Armor/Lune/LuneLeggings_Legs");
-                LuneLegFemale = AddEquipTexture(GetModItem(ItemType<LuneLeggings>()), EquipType.Legs, "QwertyMod/Content/Items/Equipment/Armor/Lune/LuneLeggings_FemaleLegs");
-                RhuthiniumLegMale = AddEquipTexture(GetModItem(ItemType<RhuthiniumGreaves>()), EquipType.Legs, "QwertyMod/Content/Items/Equipment/Armor/Rhuthinium/RhuthiniumGreaves_Legs");
-                RhuthiniumLegFemale = AddEquipTexture(GetModItem(ItemType<RhuthiniumGreaves>()), EquipType.Legs, "QwertyMod/Content/Items/Equipment/Armor/Rhuthinium/RhuthiniumGreaves_FemaleLegs");
-                CaeliteLegMale = AddEquipTexture(GetModItem(ItemType<CaeliteGreaves>()), EquipType.Legs, "QwertyMod/Content/Items/Equipment/Armor/Caelite/CaeliteGreaves_Legs");
-                CaeliteLegFemale = AddEquipTexture(GetModItem(ItemType<CaeliteGreaves>()), EquipType.Legs, "QwertyMod/Content/Items/Equipment/Armor/Caelite/CaeliteGreaves_FemaleLegs");
-                GaleLegMale = AddEquipTexture(GetModItem(ItemType<GaleSwiftRobes>()), EquipType.Legs, "QwertyMod/Content/Items/Equipment/Armor/Gale/GaleSwiftRobes_Legs");
-                GaleLegFemale = AddEquipTexture(GetModItem(ItemType<GaleSwiftRobes>()), EquipType.Legs, "QwertyMod/Content/Items/Equipment/Armor/Gale/GaleSwiftRobes_FemaleLegs");
-                VitLegMale = AddEquipTexture(GetModItem(ItemType<VitallumJeans>()), EquipType.Legs, "QwertyMod/Content/Items/Equipment/Armor/Vitallum/VitallumJeans_Legs");
-                VitLegFemale = AddEquipTexture(GetModItem(ItemType<VitallumJeans>()), EquipType.Legs, "QwertyMod/Content/Items/Equipment/Armor/Vitallum/VitallumJeans_FemaleLegs");
+                hydraLegMale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Hydra/HydraLeggings_Legs", EquipType.Legs, GetModItem(ItemType<HydraLeggings>()));
+                hydraLegFemale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Hydra/HydraLeggings_FemaleLegs", EquipType.Legs, GetModItem(ItemType<HydraLeggings>()) );
+                shamaLegMale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Shaman/ShamanLegs_Legs", EquipType.Legs, GetModItem(ItemType<ShamanLegs>()));
+                shamanLegFemale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Shaman/ShamanLegs_FemaleLegs", EquipType.Legs, GetModItem(ItemType<ShamanLegs>()));
+                LuneLegMale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Lune/LuneLeggings_Legs", EquipType.Legs, GetModItem(ItemType<LuneLeggings>()));
+                LuneLegFemale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Lune/LuneLeggings_FemaleLegs", EquipType.Legs, GetModItem(ItemType<LuneLeggings>()));
+                RhuthiniumLegMale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Rhuthinium/RhuthiniumGreaves_Legs", EquipType.Legs, GetModItem(ItemType<RhuthiniumGreaves>()));
+                RhuthiniumLegFemale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Rhuthinium/RhuthiniumGreaves_FemaleLegs", EquipType.Legs, GetModItem(ItemType<RhuthiniumGreaves>()));
+                CaeliteLegMale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Caelite/CaeliteGreaves_Legs", EquipType.Legs, GetModItem(ItemType<CaeliteGreaves>()));
+                CaeliteLegFemale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Caelite/CaeliteGreaves_FemaleLegs", EquipType.Legs, GetModItem(ItemType<CaeliteGreaves>()));
+                GaleLegMale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Gale/GaleSwiftRobes_Legs", EquipType.Legs, GetModItem(ItemType<GaleSwiftRobes>()));
+                GaleLegFemale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Gale/GaleSwiftRobes_FemaleLegs", EquipType.Legs, GetModItem(ItemType<GaleSwiftRobes>()));
+                VitLegMale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Vitallum/VitallumJeans_Legs", EquipType.Legs, GetModItem(ItemType<VitallumJeans>()));
+                VitLegFemale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Vitallum/VitallumJeans_FemaleLegs", EquipType.Legs, GetModItem(ItemType<VitallumJeans>()));
                 Main.QueueMainThreadAction(() =>
                 {
                     RuneSprites.BuildRunes();

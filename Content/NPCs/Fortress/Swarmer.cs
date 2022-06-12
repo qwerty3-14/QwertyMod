@@ -5,6 +5,7 @@ using QwertyMod.Content.Items.Consumable.Tiles.Banners;
 using System;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameContent.Bestiary;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -220,7 +221,7 @@ namespace QwertyMod.Content.NPCs.Fortress
         }
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
-            if (spawnInfo.player.InModBiome(GetInstance<FortressBiome>()) && spawnInfo.player.HeldItem.fishingPole <= 0)
+            if (spawnInfo.Player.InModBiome(GetInstance<FortressBiome>()) && spawnInfo.Player.HeldItem.fishingPole <= 0)
             {
                 return 5f;
             }
@@ -240,7 +241,7 @@ namespace QwertyMod.Content.NPCs.Fortress
                 }
                 for (int s = 0; s < swarmSize; s++)
                 {
-                    NPC.NewNPC(NPC.GetSpawnSourceForNPCFromNPCAI(), (int)NPC.Center.X, (int)NPC.Center.Y, NPCType<Swarmer>());
+                    NPC.NewNPC(new EntitySource_Misc(""), (int)NPC.Center.X, (int)NPC.Center.Y, NPCType<Swarmer>());
                 }
             }
             NPC.active = false;

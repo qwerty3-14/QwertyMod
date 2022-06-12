@@ -44,7 +44,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion
             bool foundIdentiy = false;
             for (int p = 0; p < 1000; p++)
             {
-                if (Main.projectile[p].active && Main.projectile[p].ModProjectile != null && Main.projectile[p].ModProjectile is BowMinionBase)
+                if (Main.projectile[p].owner == Projectile.owner && Main.projectile[p].active && Main.projectile[p].ModProjectile != null && Main.projectile[p].ModProjectile is BowMinionBase)
                 {
                     bowCount++;
                     if (!foundIdentiy)
@@ -96,7 +96,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion
         {
             int weaponDamage = Projectile.damage;
             float weaponKnockback = Projectile.knockBack;
-            if (Projectile.UseAmmo(AmmoID.Arrow, ref arrow, ref shootSpeed, ref weaponDamage, ref weaponKnockback, Main.rand.Next(2) == 0))
+            if (Projectile.owner == Main.myPlayer && Projectile.UseAmmo(AmmoID.Arrow, ref arrow, ref shootSpeed, ref weaponDamage, ref weaponKnockback, Main.rand.Next(2) == 0))
             {
                 ChangeArrow(ref arrow);
                 loadedArrow = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, QwertyMethods.PolarVector(shootSpeed, Projectile.rotation), arrow, weaponDamage, weaponKnockback, Main.myPlayer)];

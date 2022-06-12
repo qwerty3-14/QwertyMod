@@ -24,14 +24,12 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.AncientNuke
         }
 
         public const int dmg = 300;
-        public const int crt = 0;
         public const float kb = 9f;
         public const int def = -1;
 
         public override void SetDefaults()
         {
             Item.damage = dmg;
-            Item.crit = crt;
             Item.knockBack = kb;
             Item.DamageType = DamageClass.Summon;
             Item.GetGlobalItem<ShapeShifterItem>().morphCooldown = 27;

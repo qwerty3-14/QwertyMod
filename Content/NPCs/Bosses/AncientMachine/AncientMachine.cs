@@ -362,23 +362,23 @@ namespace QwertyMod.Content.NPCs.Bosses.AncientMachine
 
                     if (NPC.ai[1] == 0)
                     {
-                        SoundEngine.PlaySound(25, NPC.position, 0);
+                        SoundEngine.PlaySound(SoundID.MaxMana, NPC.Center);
                         for (int r = 0; r < 5; r++)
                         {
                             if (Main.netMode != 1)
                             {
-                                Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), NPC.Center.X, NPC.Center.Y, (float)Math.Cos((NPC.rotation + r * (float)Math.PI / 8) - (float)Math.PI / 4) * orbSpeed, (float)Math.Sin((NPC.rotation + r * (float)Math.PI / 8) - (float)Math.PI / 4) * orbSpeed, ProjectileType<AncientEnergy>(), damage, 3f, Main.myPlayer);
+                                Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Center.X, NPC.Center.Y, (float)Math.Cos((NPC.rotation + r * (float)Math.PI / 8) - (float)Math.PI / 4) * orbSpeed, (float)Math.Sin((NPC.rotation + r * (float)Math.PI / 8) - (float)Math.PI / 4) * orbSpeed, ProjectileType<AncientEnergy>(), damage, 3f, Main.myPlayer);
                             }
                         }
                     }
                     if (NPC.ai[1] == 1)
                     {
-                        SoundEngine.PlaySound(25, NPC.position, 0);
+                        SoundEngine.PlaySound(SoundID.MaxMana, NPC.Center);
                         missileReloadCounter = 60;
                         if (Main.netMode != 1)
                         {
-                            Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), NPC.Center + QwertyMethods.PolarVector(MissileOffset.X, NPC.rotation) + QwertyMethods.PolarVector(MissileOffset.Y, NPC.rotation + (float)Math.PI / 2), QwertyMethods.PolarVector(orbSpeed, NPC.rotation + angle), ProjectileType<AncientMissile>(), damage, 3f, Main.myPlayer);
-                            Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), NPC.Center + QwertyMethods.PolarVector(MissileOffset.X, NPC.rotation) + QwertyMethods.PolarVector(-MissileOffset.Y, NPC.rotation + (float)Math.PI / 2), QwertyMethods.PolarVector(orbSpeed, NPC.rotation - angle), ProjectileType<AncientMissile>(), damage, 3f, Main.myPlayer);
+                            Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Center + QwertyMethods.PolarVector(MissileOffset.X, NPC.rotation) + QwertyMethods.PolarVector(MissileOffset.Y, NPC.rotation + (float)Math.PI / 2), QwertyMethods.PolarVector(orbSpeed, NPC.rotation + angle), ProjectileType<AncientMissile>(), damage, 3f, Main.myPlayer);
+                            Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Center + QwertyMethods.PolarVector(MissileOffset.X, NPC.rotation) + QwertyMethods.PolarVector(-MissileOffset.Y, NPC.rotation + (float)Math.PI / 2), QwertyMethods.PolarVector(orbSpeed, NPC.rotation - angle), ProjectileType<AncientMissile>(), damage, 3f, Main.myPlayer);
                         }
                     }
                     if (NPC.ai[1] == 2)
@@ -387,15 +387,15 @@ namespace QwertyMod.Content.NPCs.Bosses.AncientMachine
                         {
                             float d = new Vector2(player.Center.X - NPC.Center.X, player.Center.Y - NPC.Center.Y).ToRotation();
                             Vector2 pos = NPC.Center + QwertyMethods.PolarVector(200, NPC.rotation) + QwertyMethods.PolarVector(100, NPC.rotation + (float)Math.PI / 2);
-                            NPC.NewNPC(NPC.GetSpawnSourceForNPCFromNPCAI(), (int)pos.X, (int)pos.Y, NPCType<AncientMinion>(), 0, NPC.whoAmI);
+                            NPC.NewNPC(new EntitySource_Misc(""), (int)pos.X, (int)pos.Y, NPCType<AncientMinion>(), 0, NPC.whoAmI);
                             pos = NPC.Center + QwertyMethods.PolarVector(200, NPC.rotation) + QwertyMethods.PolarVector(-100, NPC.rotation + (float)Math.PI / 2);
-                            NPC.NewNPC(NPC.GetSpawnSourceForNPCFromNPCAI(), (int)pos.X, (int)pos.Y, NPCType<AncientMinion>(), 0, NPC.whoAmI);
+                            NPC.NewNPC(new EntitySource_Misc(""), (int)pos.X, (int)pos.Y, NPCType<AncientMinion>(), 0, NPC.whoAmI);
                             if (angry)
                             {
                                 pos = NPC.Center + QwertyMethods.PolarVector(100, NPC.rotation) + QwertyMethods.PolarVector(-200, NPC.rotation + (float)Math.PI / 2);
-                                NPC.NewNPC(NPC.GetSpawnSourceForNPCFromNPCAI(), (int)pos.X, (int)pos.Y, NPCType<AncientMinion>(), 0, NPC.whoAmI);
+                                NPC.NewNPC(new EntitySource_Misc(""), (int)pos.X, (int)pos.Y, NPCType<AncientMinion>(), 0, NPC.whoAmI);
                                 pos = NPC.Center + QwertyMethods.PolarVector(100, NPC.rotation) + QwertyMethods.PolarVector(200, NPC.rotation + (float)Math.PI / 2);
-                                NPC.NewNPC(NPC.GetSpawnSourceForNPCFromNPCAI(), (int)pos.X, (int)pos.Y, NPCType<AncientMinion>(), 0, NPC.whoAmI);
+                                NPC.NewNPC(new EntitySource_Misc(""), (int)pos.X, (int)pos.Y, NPCType<AncientMinion>(), 0, NPC.whoAmI);
                             }
                         }
                     }
@@ -406,23 +406,23 @@ namespace QwertyMod.Content.NPCs.Bosses.AncientMachine
                     {
                         if (NPC.ai[1] == 0)
                         {
-                            SoundEngine.PlaySound(25, NPC.position, 0);
+                            SoundEngine.PlaySound(SoundID.MaxMana, NPC.Center);
                             for (int r = 0; r < 4; r++)
                             {
                                 if (Main.netMode != 1)
                                 {
-                                    Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), NPC.Center.X, NPC.Center.Y, (float)Math.Cos((NPC.rotation + r * (float)Math.PI / 6) - (float)Math.PI / 4) * orbSpeed, (float)Math.Sin((NPC.rotation + r * (float)Math.PI / 6) - (float)Math.PI / 4) * orbSpeed, ProjectileType<AncientEnergy>(), damage, 3f, Main.myPlayer);
+                                    Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Center.X, NPC.Center.Y, (float)Math.Cos((NPC.rotation + r * (float)Math.PI / 6) - (float)Math.PI / 4) * orbSpeed, (float)Math.Sin((NPC.rotation + r * (float)Math.PI / 6) - (float)Math.PI / 4) * orbSpeed, ProjectileType<AncientEnergy>(), damage, 3f, Main.myPlayer);
                                 }
                             }
                         }
                         if (NPC.ai[1] == 1)
                         {
-                            SoundEngine.PlaySound(25, NPC.position, 0);
+                            SoundEngine.PlaySound(SoundID.MaxMana, NPC.Center);
                             missileReloadCounter = 60;
                             if (Main.netMode != 1)
                             {
-                                Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), NPC.Center + QwertyMethods.PolarVector(MissileOffset.X, NPC.rotation) + QwertyMethods.PolarVector(MissileOffset.Y, NPC.rotation + (float)Math.PI / 2), QwertyMethods.PolarVector(orbSpeed, NPC.rotation + angle), ProjectileType<AncientMissile>(), damage, 3f, Main.myPlayer);
-                                Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), NPC.Center + QwertyMethods.PolarVector(MissileOffset.X, NPC.rotation) + QwertyMethods.PolarVector(-MissileOffset.Y, NPC.rotation + (float)Math.PI / 2), QwertyMethods.PolarVector(orbSpeed, NPC.rotation - angle), ProjectileType<AncientMissile>(), damage, 3f, Main.myPlayer);
+                                Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Center + QwertyMethods.PolarVector(MissileOffset.X, NPC.rotation) + QwertyMethods.PolarVector(MissileOffset.Y, NPC.rotation + (float)Math.PI / 2), QwertyMethods.PolarVector(orbSpeed, NPC.rotation + angle), ProjectileType<AncientMissile>(), damage, 3f, Main.myPlayer);
+                                Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Center + QwertyMethods.PolarVector(MissileOffset.X, NPC.rotation) + QwertyMethods.PolarVector(-MissileOffset.Y, NPC.rotation + (float)Math.PI / 2), QwertyMethods.PolarVector(orbSpeed, NPC.rotation - angle), ProjectileType<AncientMissile>(), damage, 3f, Main.myPlayer);
                             }
                         }
                     }
@@ -435,18 +435,18 @@ namespace QwertyMod.Content.NPCs.Bosses.AncientMachine
             {
                 if (AI_Timer == switchTime / 2)
                 {
-                    SoundEngine.PlaySound(25, NPC.position, 0);
+                    SoundEngine.PlaySound(SoundID.MaxMana, NPC.Center);
                     if (Main.netMode != 1)
                     {
-                        Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), NPC.Center, new Vector2((float)Math.Cos((NPC.rotation)), (float)Math.Sin(NPC.rotation)) * orbSpeed, ProjectileType<AncientEnergy>(), damage, 3f, Main.myPlayer);
+                        Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Center, new Vector2((float)Math.Cos((NPC.rotation)), (float)Math.Sin(NPC.rotation)) * orbSpeed, ProjectileType<AncientEnergy>(), damage, 3f, Main.myPlayer);
                     }
                 }
                 if (AI_Timer == 3 * switchTime / 4 && angry)
                 {
-                    SoundEngine.PlaySound(25, NPC.position, 0);
+                    SoundEngine.PlaySound(SoundID.MaxMana, NPC.Center);
                     if (Main.netMode != 1)
                     {
-                        Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), NPC.Center, new Vector2((float)Math.Cos((NPC.rotation)), (float)Math.Sin(NPC.rotation)) * orbSpeed, ProjectileType<AncientEnergy>(), damage, 3f, Main.myPlayer);
+                        Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Center, new Vector2((float)Math.Cos((NPC.rotation)), (float)Math.Sin(NPC.rotation)) * orbSpeed, ProjectileType<AncientEnergy>(), damage, 3f, Main.myPlayer);
                     }
                 }
             }
@@ -455,7 +455,7 @@ namespace QwertyMod.Content.NPCs.Bosses.AncientMachine
 
             if (justTeleported)
             {
-                SoundEngine.PlaySound(SoundID.Item8, NPC.position);
+                SoundEngine.PlaySound(SoundID.MaxMana, NPC.Center);
                 for (int i = 0; i < RingDustQty; i++)
                 {
                     float theta = Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI);

@@ -4,6 +4,7 @@ using QwertyMod.Content.Items.MiscMaterials;
 using QwertyMod.Content.Items.Weapon.Minion.Longsword;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.Localization;
@@ -108,7 +109,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Hydra
                             {
                                 for (float i = 0; i < spareSlots; i += projectile.minionSlots)
                                 {
-                                    Player.SpawnMinionOnCursor(projectile.GetProjectileSource_FromThis(), projectile.owner, projectile.type, projectile.originalDamage, projectile.knockBack);
+                                    Player.SpawnMinionOnCursor(new EntitySource_Misc(""), projectile.owner, projectile.type, projectile.originalDamage, projectile.knockBack);
                                 }
                                 break;
                             }

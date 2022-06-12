@@ -20,6 +20,7 @@ using QwertyMod.Common;
 using QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls;
 using Terraria.GameContent.Bestiary;
 using QwertyMod.Content.Items.MiscMaterials;
+using Terraria.DataStructures;
 
 namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
 {
@@ -187,7 +188,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
                         {
                             for (int i = 0; i < phase + 1; i++)
                             {
-                                Projectile rune = Main.projectile[Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), NPC.Top + QwertyMethods.PolarVector(-120, (float)Math.PI * ((float)(i + 1) / (phase + 2))), Vector2.Zero, ProjectileType<BigRune>(), Main.expertMode ? 30 : 40, 0, Main.myPlayer)];
+                                Projectile rune = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Top + QwertyMethods.PolarVector(-120, (float)Math.PI * ((float)(i + 1) / (phase + 2))), Vector2.Zero, ProjectileType<BigRune>(), Main.expertMode ? 30 : 40, 0, Main.myPlayer)];
                                 
                                 int newRune = lastRune == 5 ? Main.rand.Next(4) : Main.rand.Next(3);
                                 if(newRune >= lastRune)

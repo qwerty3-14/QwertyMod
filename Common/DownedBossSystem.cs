@@ -95,17 +95,15 @@ namespace QwertyMod.Common
 
 		public override void LoadWorldData(TagCompound tag)
 		{
-			var downed = tag.GetList<string>("downed");
-
-			downedBear = downed.Contains("downedBear");
-			downedHydra = downed.Contains("downedHydra");
-			downedAncient = downed.Contains("downedAncient");
-			downedBlade = downed.Contains("downedBlade");
-			downedNoehtnap = downed.Contains("downedNoehtnap");
-			downedRuneGhost = downed.Contains("downedRuneGhost");
-			downedDivineLight = downed.Contains("downedDivineLight");
-			downedOLORD = downed.Contains("downedOLORD");
-			downedDinos = downed.Contains("downedDinos");
+			downedBear = tag.ContainsKey("downedBear");
+			downedHydra = tag.ContainsKey("downedHydra");
+			downedAncient = tag.ContainsKey("downedAncient");
+			downedBlade = tag.ContainsKey("downedBlade");
+			downedNoehtnap = tag.ContainsKey("downedNoehtnap");
+			downedRuneGhost = tag.ContainsKey("downedRuneGhost");
+			downedDivineLight = tag.ContainsKey("downedDivineLight");
+			downedOLORD = tag.ContainsKey("downedOLORD");
+			downedDinos = tag.ContainsKey("downedDinos");
 			//downedOtherBoss = downed.Contains("downedOtherBoss");
 		}
 

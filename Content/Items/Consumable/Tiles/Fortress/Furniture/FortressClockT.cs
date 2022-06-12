@@ -31,6 +31,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Furniture
             // name.SetDefault("Example Clock"); // Automatic from .lang files
             AddMapEntry(new Color(162, 184, 185), name);
             DustType = DustType<FortressDust>();
+            HitSound = QwertyMod.FortressBlocks;
             AdjTiles = new int[] { TileID.GrandfatherClocks };
         }
 

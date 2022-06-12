@@ -2,6 +2,7 @@
 using QwertyMod.Content.Items.Weapon.Ranged.DartLauncher.Whirpool;
 using QwertyMod.Content.Items.Weapon.Sentry.BubbleBrewer;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -44,7 +45,7 @@ namespace QwertyMod.Common
                         itemID = ItemType<Whirlpool>();
                         break;
                 }
-                player.QuickSpawnItem(player.GetItemSource_OpenItem(ItemID.FishronBossBag),itemID);
+                player.QuickSpawnItem(new EntitySource_Misc(""), itemID);
             }
         }
     }

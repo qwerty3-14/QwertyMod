@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
@@ -124,7 +125,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
                     {
                         if (Main.netMode != 1)
                         {
-                            Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), NPC.Center.X - (17f * NPC.direction), NPC.Center.Y - 40f, 0f, -10f, ProjectileType<AntiAirRocket>(), damage, 3f, Main.myPlayer);
+                            Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Center.X - (17f * NPC.direction), NPC.Center.Y - 40f, 0f, -10f, ProjectileType<AntiAirRocket>(), damage, 3f, Main.myPlayer);
                         }
                         //Projectile.NewProjectile(NPC.Center.X-(17f*NPC.direction), NPC.Center.Y-40f, 0f, 0f, 102, damage, 3f, Main.myPlayer);
                         secondShot = false;
@@ -134,7 +135,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
                     {
                         if (Main.netMode != 1)
                         {
-                            Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), NPC.Center.X + (23f * NPC.direction), NPC.Center.Y - 40f, 0f, -10f, ProjectileType<AntiAirRocket>(), damage, 3f, Main.myPlayer);
+                            Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Center.X + (23f * NPC.direction), NPC.Center.Y - 40f, 0f, -10f, ProjectileType<AntiAirRocket>(), damage, 3f, Main.myPlayer);
                         }
                         //Projectile.NewProjectile(NPC.Center.X+(23f*NPC.direction), NPC.Center.Y-40f, 0f, 0f, 102, damage, 3f, Main.myPlayer);
                         secondShot = true;

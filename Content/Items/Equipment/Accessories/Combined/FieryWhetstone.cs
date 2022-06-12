@@ -82,7 +82,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Combined
         {
             if (effect != 0f &&  !target.buffImmune[BuffID.OnFire] && item.CountsAsClass(DamageClass.Melee))
             {
-                QwertyMethods.PokeNPC(Player, target, Player.GetProjectileSource_Item(item), damage * effect * Player.GetDamage(DamageClass.Magic).Multiplicative, DamageClass.Magic);
+                QwertyMethods.PokeNPC(Player, target, new EntitySource_Misc(""), damage * effect * Player.GetDamage(DamageClass.Magic).Multiplicative, DamageClass.Magic);
             }
         }
     }
@@ -97,7 +97,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Combined
                 int TLIndex = tooltips.FindIndex(TooltipLine => TooltipLine.Name.Equals("CritChance"));
                 TooltipLine line = new TooltipLine(Mod, "MagicBoost", (int)(item.damage * player.GetModPlayer<FieryWhetStoneEffect>().effect * player.GetDamage(DamageClass.Magic).Multiplicative) + " magic damage");
                 {
-                    line.overrideColor = Color.OrangeRed;
+                    line.OverrideColor = Color.OrangeRed;
                 }
                 if (TLIndex != -1)
                 {
@@ -106,7 +106,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Combined
 
                 line = new TooltipLine(Mod, "MagicBoostCrit", (player.GetCritChance(DamageClass.Magic) + 4) + "% critical strike chance");
                 {
-                    line.overrideColor = Color.OrangeRed;
+                    line.OverrideColor = Color.OrangeRed;
                 }
                 if (TLIndex != -1)
                 {

@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using QwertyMod.Content.Dusts;
 using System;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
 
@@ -95,8 +96,8 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
         {
             if (Main.netMode != 1 && timeLeft > 1)
             {
-                QwertyMethods.ProjectileSpread(Projectile.GetProjectileSource_FromThis(), Projectile.Center, 4, shotSpeed, ProjectileType<TurretShot>(), Projectile.damage, Projectile.knockBack, Main.myPlayer);
-                QwertyMethods.ProjectileSpread(Projectile.GetProjectileSource_FromThis(), Projectile.Center, 4, shotSpeed * 1.5f, ProjectileType<TurretShot>(), Projectile.damage, Projectile.knockBack, Main.myPlayer, rotation: (float)Math.PI / 4);
+                QwertyMethods.ProjectileSpread(new EntitySource_Misc(""), Projectile.Center, 4, shotSpeed, ProjectileType<TurretShot>(), Projectile.damage, Projectile.knockBack, Main.myPlayer);
+                QwertyMethods.ProjectileSpread(new EntitySource_Misc(""), Projectile.Center, 4, shotSpeed * 1.5f, ProjectileType<TurretShot>(), Projectile.damage, Projectile.knockBack, Main.myPlayer, rotation: (float)Math.PI / 4);
             }
         }
     }
@@ -204,7 +205,7 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
         {
             if (Main.netMode != 1)
             {
-                Projectile.NewProjectile(Projectile.GetProjectileSource_FromThis(),  Projectile.Center.X, Projectile.Center.Y, 0, 0, ProjectileType<MagicMine>(), Projectile.damage, 0, Main.myPlayer);
+                Projectile.NewProjectile(new EntitySource_Misc(""),  Projectile.Center.X, Projectile.Center.Y, 0, 0, ProjectileType<MagicMine>(), Projectile.damage, 0, Main.myPlayer);
             }
         }
     }

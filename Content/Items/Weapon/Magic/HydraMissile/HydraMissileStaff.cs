@@ -24,7 +24,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraMissile
         public override void SetDefaults()
         {
             Item.damage = 40;
-            Item.mana = 10;
+            Item.mana = ModLoader.HasMod("TRAEProject") ? 50 : 30;
             Item.width = 100;
             Item.height = 100;
             Item.useTime = 28;

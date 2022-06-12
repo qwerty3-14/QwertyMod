@@ -20,6 +20,7 @@ using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
 using Terraria.GameContent.Bestiary;
 using System.Collections.Generic;
+using Terraria.DataStructures;
 
 namespace QwertyMod.Content.NPCs.Bosses.Hydra
 {
@@ -155,7 +156,7 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
                 {
                     if (Main.netMode != 1)
                     {
-                        NPC.NewNPC(NPC.GetSpawnSourceForNPCFromNPCAI(), (int)NPC.Center.X + h, (int)NPC.Center.Y, NPCType<HydraHead>(), ai0: NPC.whoAmI, ai1: h);
+                        NPC.NewNPC(new EntitySource_Misc(""), (int)NPC.Center.X + h, (int)NPC.Center.Y, NPCType<HydraHead>(), ai0: NPC.whoAmI, ai1: h);
                     }
                 }
                 runOnce = false;

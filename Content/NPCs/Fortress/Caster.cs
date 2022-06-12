@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
@@ -62,7 +63,7 @@ namespace QwertyMod.Content.NPCs.Fortress
 
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
-            if (spawnInfo.player.InModBiome(GetInstance<FortressBiome>()) && !NPC.AnyNPCs(NPCType<Caster>()) && !NPC.AnyNPCs(NPCType<FortressBoss>()))
+            if (spawnInfo.Player.InModBiome(GetInstance<FortressBiome>()) && !NPC.AnyNPCs(NPCType<Caster>()) && !NPC.AnyNPCs(NPCType<FortressBoss>()))
             {
                 return 10f;
             }
@@ -91,7 +92,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             ringProjectileCount = 2 - (int)((float)NPC.life / (float)NPC.lifeMax * 2) + 4;
             if (timer == GenerateRingTime)
             {
-                ring = Main.projectile[Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), NPC.Center, Vector2.Zero, ProjectileType<RingCenter>(), 11, 0, player.whoAmI, ringProjectileCount, NPC.direction)];
+                ring = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Center, Vector2.Zero, ProjectileType<RingCenter>(), 11, 0, player.whoAmI, ringProjectileCount, NPC.direction)];
                 castingFrames = true;
             }
             if (timer > GenerateRingTime && timer < GenerateRingTime + throwRingTime)
@@ -261,11 +262,11 @@ namespace QwertyMod.Content.NPCs.Fortress
 
                     if (Projectile.ai[1] == 1)
                     {
-                        Projectile.NewProjectile(Projectile.GetProjectileSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<RingOuter>(), Projectile.damage, Projectile.knockBack, Projectile.owner, (float)i / (float)projectilesInRing * 2 * (float)Math.PI, Projectile.whoAmI);
+                        Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center, Vector2.Zero, ProjectileType<RingOuter>(), Projectile.damage, Projectile.knockBack, Projectile.owner, (float)i / (float)projectilesInRing * 2 * (float)Math.PI, Projectile.whoAmI);
                     }
                     else
                     {
-                        Projectile.NewProjectile(Projectile.GetProjectileSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<RingOuter>(), Projectile.damage, Projectile.knockBack, Projectile.owner, (float)i / (float)projectilesInRing * 2 * (float)Math.PI, -Projectile.whoAmI);
+                        Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center, Vector2.Zero, ProjectileType<RingOuter>(), Projectile.damage, Projectile.knockBack, Projectile.owner, (float)i / (float)projectilesInRing * 2 * (float)Math.PI, -Projectile.whoAmI);
                     }
                 }
                 runOnce = false;

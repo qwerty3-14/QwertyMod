@@ -79,7 +79,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Shaman
         {
             if (hasteTime > 0)
             {
-                Player.meleeSpeed += .4f;
+                Player.GetAttackSpeed(DamageClass.Melee) += .4f;
                 hasteTime--;
                 Player.GetModPlayer<MinionSpeedStats>().minionSpeed += 1f;
             }

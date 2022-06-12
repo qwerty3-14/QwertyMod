@@ -41,7 +41,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo
                 {
                     Projectile.localAI[0] += 1f;
                     float num = Projectile.localAI[0] / 60f;
-                    num /= (1f + Main.player[Projectile.owner].meleeSpeed) / 2f;
+                    num /= (1f + Main.player[Projectile.owner].GetAttackSpeed(DamageClass.Melee)) / 2f;
                     float num2 = time;
                     if (num2 != -1f && num > num2)
                     {
@@ -82,8 +82,8 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo
                 {
                     useRange = useRange * 1.25f + 30f;
                 }
-                useRange /= (1f + Main.player[Projectile.owner].meleeSpeed * 3f) / 4f;
-                useSpeed /= (1f + Main.player[Projectile.owner].meleeSpeed * 3f) / 4f;
+                useRange /= (1f + Main.player[Projectile.owner].GetAttackSpeed(DamageClass.Melee) * 3f) / 4f;
+                useSpeed /= (1f + Main.player[Projectile.owner].GetAttackSpeed(DamageClass.Melee) * 3f) / 4f;
                 float num11 = 14f - useSpeed / 2f;
                 float num12 = 5f + useSpeed / 2f;
                 if (Orbital)

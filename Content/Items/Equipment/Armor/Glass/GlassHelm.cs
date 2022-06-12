@@ -90,7 +90,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Glass
                 Vector2 prismCenter = Player.Center + new Vector2((float)Math.Sin(PrismTrigonometryCounterOfAwsomenessWowThisIsAVeryLongVariableName) * 40f, 0);
                 if (QwertyMethods.ClosestNPC(ref target, 4000, prismCenter) && prismDazzleCounter <= 0)
                 {
-                    Projectile.NewProjectile(Player.GetProjectileSource_SetBonus(1), prismCenter, QwertyMethods.PolarVector(1, (target.Center - prismCenter).ToRotation()), ProjectileType<PrismDazzle>(), (int)(10f * Player.GetDamage(DamageClass.Magic)), 0f, Player.whoAmI);
+                    Projectile.NewProjectile(new EntitySource_Misc(""), prismCenter, QwertyMethods.PolarVector(1, (target.Center - prismCenter).ToRotation()), ProjectileType<PrismDazzle>(), (int)(12f * Player.GetDamage(DamageClass.Magic).Multiplicative), 0f, Player.whoAmI);
                     prismDazzleCounter = 90;
                 }
             }

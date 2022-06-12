@@ -72,7 +72,7 @@ namespace QwertyMod.Common.Fortress
 
         public override void EditSpawnPool(IDictionary<int, float> pool, NPCSpawnInfo spawnInfo)
         {
-            if (spawnInfo.player.InModBiome(GetInstance<FortressBiome>()))
+            if (spawnInfo.Player.InModBiome(GetInstance<FortressBiome>()))
             {
                 pool[0] = 0f;
             }

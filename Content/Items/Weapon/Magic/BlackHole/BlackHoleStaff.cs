@@ -24,7 +24,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.BlackHole
         public override void SetDefaults()
         {
             Item.damage = 80;
-            Item.mana = 14;
+            Item.mana = ModLoader.HasMod("TRAEProject") ? 50 : 14;
             Item.width = 100;
             Item.height = 114;
             Item.useTime = 30;

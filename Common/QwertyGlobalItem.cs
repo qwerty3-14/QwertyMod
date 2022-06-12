@@ -18,7 +18,7 @@ namespace QwertyMod.Common
                 item.scale = 10;
             }
         }
-        public override bool CanConsumeAmmo(Item weapon, Player player)
+        public override bool CanConsumeAmmo(Item weapon, Item ammo, Player player)
         {
             return Main.rand.NextFloat() <= player.GetModPlayer<CommonStats>().ammoReduction;
         }
@@ -28,10 +28,10 @@ namespace QwertyMod.Common
             {
                 foreach (TooltipLine line in tooltips) //runs through all tooltip lines
                 {
-                    if (line.mod == "Terraria" && line.Name == "BuffTime") //this checks if it's the line we're interested in
+                    if (line.Mod == "Terraria" && line.Name == "BuffTime") //this checks if it's the line we're interested in
                     {
                         //tooltips.Remove(line);
-                        line.text = "";
+                        line.Text = "";
                     }
                 }
             }

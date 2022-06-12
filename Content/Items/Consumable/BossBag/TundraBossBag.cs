@@ -15,6 +15,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
 using QwertyMod.Content.Items.Equipment.Accessories.Expert;
+using Terraria.DataStructures;
 
 namespace QwertyMod.Content.Items.Consumable.BossBag
 {
@@ -48,25 +49,25 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
         {
             if (Main.rand.Next(7) == 0)
             {
-                player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),ItemType<PolarMask>());
+                player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<PolarMask>());
             }
             switch (Main.rand.Next(3))
             {
                 case 0:
-                    player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),ItemType<PenguinClub>());
+                    player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<PenguinClub>());
                     break;
 
                 case 1:
-                    player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),ItemType<PenguinLauncher>());
+                    player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<PenguinLauncher>());
                     break;
 
                 case 2:
-                    player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),ItemType<PenguinWhistle>());
+                    player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<PenguinWhistle>());
                     break;
             }
-            player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),ItemType<PenguinGenerator>());
-            player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),ItemID.Penguin, Main.rand.Next(40, 81));
-            player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),73, 4);
+            player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<PenguinGenerator>());
+            player.QuickSpawnItem(new EntitySource_Misc(""), ItemID.Penguin, Main.rand.Next(40, 81));
+            player.QuickSpawnItem(new EntitySource_Misc(""), 73, 4);
         }
     }
 }

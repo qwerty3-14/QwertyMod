@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
 using Terraria.ID;
@@ -143,7 +144,7 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
                     {
                         if (!beamAttack)
                         {
-                            Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), NPC.Center + QwertyMethods.PolarVector(50, NPC.rotation), QwertyMethods.PolarVector(5, NPC.rotation), ProjectileType<HydraBreath>(), projDamge, 0f, Main.myPlayer);
+                            Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Center + QwertyMethods.PolarVector(50, NPC.rotation), QwertyMethods.PolarVector(5, NPC.rotation), ProjectileType<HydraBreath>(), projDamge, 0f, Main.myPlayer);
                         }
                     }
                     attacking = false;
@@ -181,7 +182,7 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
                     }
                     else if (attackTimer == -beamTime / 2)
                     {
-                        laser = Main.projectile[Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), NPC.Center.X, NPC.Center.Y, 0f, 0f, ProjectileType<HydraBeamT>(), (int)(projDamge * 1.5f), 3f, Main.myPlayer, NPC.whoAmI, 420)];
+                        laser = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Center.X, NPC.Center.Y, 0f, 0f, ProjectileType<HydraBeamT>(), (int)(projDamge * 1.5f), 3f, Main.myPlayer, NPC.whoAmI, 420)];
                     }
                     else
                     {
@@ -246,7 +247,7 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
                 {
                     if (Main.netMode != 1 && Body.active && Body.type == NPCType<Hydra>())
                     {
-                        NPC.NewNPC(NPC.GetSpawnSourceForNPCFromNPCAI(), (int)NPC.Center.X, (int)NPC.Center.Y, NPCType<HydraHead>(), ai0: Body.whoAmI, ai1: NPC.ai[1]);
+                        NPC.NewNPC(new EntitySource_Misc(""), (int)NPC.Center.X, (int)NPC.Center.Y, NPCType<HydraHead>(), ai0: Body.whoAmI, ai1: NPC.ai[1]);
                     }
                 }
             }

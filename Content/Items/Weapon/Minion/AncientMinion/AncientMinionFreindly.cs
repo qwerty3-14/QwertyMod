@@ -151,7 +151,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.AncientMinion
                 noTargetTimer++;
                 if (noTargetTimer == 2)
                 {
-                    SoundEngine.PlaySound(SoundID.Item8);
+                    SoundEngine.PlaySound(SoundID.Item8, Projectile.Center);
                     for (int i = 0; i < minionRingDustQty; i++)
                     {
                         float theta = Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI);

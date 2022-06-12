@@ -20,6 +20,8 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.RhuthiniumGuardian
             DisplayName.SetDefault("Rhuthinium Guardian Staff");
             Tooltip.SetDefault("Summons an extremely slow guardian to shoot at your enemies");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+            ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
+            ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
         }
 
 
@@ -53,19 +55,6 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.RhuthiniumGuardian
         {
             player.SpawnMinionOnCursor(source, player.whoAmI, type, Item.damage, knockback);
             return false;
-        }
-
-        public override bool AltFunctionUse(Player player)
-        {
-            return true;
-        }
-        public override bool? UseItem(Player player)
-        {
-            if (player.altFunctionUse == 2)
-            {
-                player.MinionNPCTargetAim(false);
-            }
-            return base.UseItem(player);
         }
     }
 
@@ -125,7 +114,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.RhuthiniumGuardian
                 if (timer >= 600)
                 {
                     if (Main.netMode != 1)
-                        Projectile.NewProjectile(Projectile.GetProjectileSource_FromThis(), Projectile.Center, QwertyMethods.PolarVector(shardVelocity, Aim), ProjectileType<RhuthiniumShard>(), Projectile.damage, Projectile.knockBack, Main.myPlayer, 0f, 0f);
+                        Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center, QwertyMethods.PolarVector(shardVelocity, Aim), ProjectileType<RhuthiniumShard>(), Projectile.damage, Projectile.knockBack, Main.myPlayer, 0f, 0f);
                     timer = 0;
                 }
             }

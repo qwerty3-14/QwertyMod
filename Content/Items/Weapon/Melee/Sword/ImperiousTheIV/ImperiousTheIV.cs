@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -47,7 +48,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.ImperiousTheIV
         {
             if (player.whoAmI == Main.myPlayer && !target.immortal && player.ownedProjectileCounts[ProjectileType<ImperiousTheV>()] < 40)
             {
-                Projectile.NewProjectile(player.GetProjectileSource_Item(Item), target.Center, Vector2.Zero, ProjectileType<ImperiousTheV>(), damage, 0.1f, player.whoAmI, target.whoAmI);
+                Projectile.NewProjectile(new EntitySource_Misc(""), target.Center, Vector2.Zero, ProjectileType<ImperiousTheV>(), damage, 0.1f, player.whoAmI, target.whoAmI);
             }
         }
     }

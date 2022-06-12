@@ -34,7 +34,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RestlessSun
             Item.shootSpeed = 12f;
             Item.useTime = 34;
             Item.useAnimation = 34;
-            Item.mana = 11;
+            Item.mana = ModLoader.HasMod("TRAEProject") ? 36 : 11;
             Item.shoot = ProjectileType<CaeliteMagicProjectile>();
             Item.noUseGraphic = false;
             Item.noMelee = true;

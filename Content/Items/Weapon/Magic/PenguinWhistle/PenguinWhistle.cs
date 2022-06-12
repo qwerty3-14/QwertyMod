@@ -20,7 +20,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.PenguinWhistle
         public override void SetDefaults()
         {
             Item.damage = 20;
-            Item.mana = 10;
+            Item.mana = ModLoader.HasMod("TRAEProject") ? 20 : 10;
             Item.width = 100;
             Item.height = 100;
             Item.useTime = 39;

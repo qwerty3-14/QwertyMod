@@ -36,7 +36,7 @@ namespace QwertyMod.Content.Items.Consumable.BossSummon
             if (!NPC.AnyNPCs(NPCType<Hydra>()))
             {
                 NPC.SpawnOnPlayer(player.whoAmI, NPCType<Hydra>());
-                SoundEngine.PlaySound(SoundID.Roar, player.position, 0);
+                SoundEngine.PlaySound(SoundID.Roar, player.position);
                 Item.stack--;
                 return true;
             }

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
+using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
@@ -21,6 +22,9 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.BubbleBrewer
         {
             DisplayName.SetDefault("Bubble Brewer Baton");
             Tooltip.SetDefault("Summons a bubble brewer\nWorks well as a last line of defense");
+            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+            ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
+            ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
         }
         public override void SetDefaults()
         {
@@ -46,18 +50,6 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.BubbleBrewer
             
             player.SpawnMinionOnCursor(source, player.whoAmI, type, Item.damage, knockback);
             return false;
-        }
-        public override bool AltFunctionUse(Player player)
-        {
-            return true;
-        }
-        public override bool? UseItem(Player player)
-        {
-            if (player.altFunctionUse == 2)
-            {
-                player.MinionNPCTargetAim(false);
-            }
-            return base.UseItem(player);
         }
     }
     public class BubbleBrewer : ModProjectile
@@ -122,10 +114,10 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.BubbleBrewer
                 {
                     if(waterLevel > 10)
                     {
-                        SoundEngine.PlaySound(29, (int)Projectile.Center.X, (int)Projectile.Center.Y, 20);
+                        SoundEngine.PlaySound(SoundID.ForceRoarPitched, Projectile.Center);
                     }
                     Projectile.frameCounter = 30;
-                    Projectile.NewProjectile(Projectile.GetProjectileSource_FromThis(), Projectile.position + bubbleShooterLocation, (target.Center - (Projectile.position + bubbleShooterLocation)).SafeNormalize(Vector2.UnitY) * 12f, ProjectileType<BrewerBubble>(), Projectile.damage, Projectile.knockBack, Projectile.owner, -10f);
+                    Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.position + bubbleShooterLocation, (target.Center - (Projectile.position + bubbleShooterLocation)).SafeNormalize(Vector2.UnitY) * 12f, ProjectileType<BrewerBubble>(), Projectile.damage, Projectile.knockBack, Projectile.owner, -10f);
                     waterLevel--;
                 }
             }

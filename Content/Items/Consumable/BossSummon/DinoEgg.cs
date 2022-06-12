@@ -50,7 +50,7 @@ namespace QwertyMod.Content.Items.Consumable.BossSummon
 
             if (Main.netMode == 0)
             {
-                SoundEngine.PlaySound(SoundID.Roar, player.position, 0);
+                SoundEngine.PlaySound(SoundID.Roar, player.position);
                 DinoEvent.EventActive = true;
                 DinoEvent.DinoKillCount = 0;
             }

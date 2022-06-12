@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Common.RuneBuilder;
 using static Terraria.ModLoader.ModContent;
 using Terraria.GameContent.Creative;
+using Terraria.DataStructures;
 
 namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
 {
@@ -75,7 +76,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
             }
             if (timer % 120 == 90 && Main.netMode != 1)
             {
-                Projectile.NewProjectile(Projectile.GetProjectileSource_FromThis(), player.Center, QwertyMethods.PolarVector(1, Projectile.rotation), ProjectileType<AggroStrikeFriendly>(), Projectile.damage, 0, Projectile.owner);
+                Projectile.NewProjectile(new EntitySource_Misc(""), player.Center, QwertyMethods.PolarVector(1, Projectile.rotation), ProjectileType<AggroStrikeFriendly>(), Projectile.damage, 0, Projectile.owner);
             }
             if (timer % 120 == 119)
             {

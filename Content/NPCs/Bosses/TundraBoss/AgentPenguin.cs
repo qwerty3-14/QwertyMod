@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameContent.Bestiary;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -72,7 +73,7 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
                 {
                     NPC.TargetClosest(true);
                     Vector2 pos = NPC.Center + new Vector2(11 * NPC.spriteDirection * -1, 0);
-                    Projectile p = Main.projectile[Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), pos, QwertyMethods.PolarVector(11, (Main.player[NPC.target].Center - pos).ToRotation()), ProjectileID.SnowBallFriendly, 10, 0, 255)];
+                    Projectile p = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""),  pos, QwertyMethods.PolarVector(11, (Main.player[NPC.target].Center - pos).ToRotation()), ProjectileID.SnowBallFriendly, 10, 0, 255)];
                     p.hostile = true;
                     p.friendly = false;
                 }
@@ -115,8 +116,8 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
         {
             if (NPC.life <= 0)
             {
-                Gore.NewGore(NPC.position, NPC.velocity, 160);
-                Gore.NewGore(new Vector2(NPC.position.X, NPC.position.Y), NPC.velocity, 161);
+                Gore.NewGore(new EntitySource_Misc(""), NPC.position, NPC.velocity, 160);
+                Gore.NewGore(new EntitySource_Misc(""), new Vector2(NPC.position.X, NPC.position.Y), NPC.velocity, 161);
             }
         }
     }

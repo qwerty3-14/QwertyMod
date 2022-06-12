@@ -20,6 +20,8 @@ namespace QwertyMod.Content.Items.Weapon.Minion.UrQuan
             DisplayName.SetDefault("Rod of Command");
             Tooltip.SetDefault("Used by Ur-Quan lords to issue commands");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+            ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
+            ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
         }
 
         public override void SetDefaults()
@@ -45,23 +47,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.UrQuan
         {
             player.SpawnMinionOnCursor(source, player.whoAmI, type, Item.damage, knockback);
             return false;
-        }
-        public override bool AltFunctionUse(Player player)
-        {
-            return true;
-        }
-
-        public override bool? UseItem(Player player)
-        {
-            if (player.altFunctionUse == 2)
-            {
-                player.MinionNPCTargetAim(false);
-            }
-            else
-            {
-                SoundEngine.PlaySound(SoundLoader.GetLegacySoundSlot(Mod, "Assets/Sounds/UrQuan-Ditty").WithVolume(.5f), player.Center);
-            }
-            return base.UseItem(player);
         }
     }
 }

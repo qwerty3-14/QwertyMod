@@ -97,7 +97,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.ChloroSniper
                 if (QwertyMethods.ClosestNPC(ref target, 100000, Projectile.Center, false, player.MinionAttackTargetNPC) && timer > 240)
                 {
                     SoundEngine.PlaySound(SoundID.Item92, Projectile.Center);
-                    Projectile.NewProjectile(Projectile.GetProjectileSource_FromThis(), Projectile.Center + Vector2.UnitY * hoverOffset, QwertyMethods.PolarVector(10, (target.Center - Projectile.Center).ToRotation()), ProjectileType<ChlorophyteSnipe>(), Projectile.damage, Projectile.knockBack, player.whoAmI);
+                    Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center + Vector2.UnitY * hoverOffset, QwertyMethods.PolarVector(10, (target.Center - Projectile.Center).ToRotation()), ProjectileType<ChlorophyteSnipe>(), Projectile.damage, Projectile.knockBack, player.whoAmI);
                     Projectile.velocity += QwertyMethods.PolarVector(-6, (target.Center - Projectile.Center).ToRotation());
                     timer = 0;
                 }

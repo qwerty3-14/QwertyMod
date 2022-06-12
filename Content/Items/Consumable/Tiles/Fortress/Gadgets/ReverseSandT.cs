@@ -30,7 +30,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
             if (!Main.tile[i, j - 1].HasTile)
             {
                 WorldGen.KillTile(i, j, noItem: true);
-                Projectile.NewProjectile(Projectile.GetNoneSource(),  new Vector2(i, j) * 16 + new Vector2(8, 8), Vector2.Zero, ProjectileType<ReverseSandBall>(), 50, 0f, Main.myPlayer);
+                Projectile.NewProjectile(new EntitySource_Misc(""),  new Vector2(i, j) * 16 + new Vector2(8, 8), Vector2.Zero, ProjectileType<ReverseSandBall>(), 50, 0f, Main.myPlayer);
             }
         }
 
@@ -39,7 +39,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
             if (!Main.tile[i, j - 1].HasTile)
             {
                 WorldGen.KillTile(i, j, noItem: true);
-                Projectile.NewProjectile(Projectile.GetNoneSource(),  new Vector2(i, j) * 16 + new Vector2(8, 8), Vector2.Zero, ProjectileType<ReverseSandBall>(), 50, 0f, Main.myPlayer);
+                Projectile.NewProjectile(new EntitySource_Misc(""),  new Vector2(i, j) * 16 + new Vector2(8, 8), Vector2.Zero, ProjectileType<ReverseSandBall>(), 50, 0f, Main.myPlayer);
             }
         }
 
@@ -49,7 +49,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
             if (!Main.tile[i, j - 1].HasTile)
             {
                 WorldGen.KillTile(i, j, noItem: true);
-                Projectile.NewProjectile(Projectile.GetNoneSource(), entityCoord, Vector2.Zero, ProjectileType<ReverseSandBall>(), 50, 0f, Main.myPlayer);
+                Projectile.NewProjectile(new EntitySource_Misc(""), entityCoord, Vector2.Zero, ProjectileType<ReverseSandBall>(), 50, 0f, Main.myPlayer);
             }
 
             //if(Main.LocalPlayer.Top.Y- entityCoord.Y <16 && Main.LocalPlayer.Top.Y - entityCoord.Y >0 && Math.Abs(Main.LocalPlayer.Top.X-entityCoord.X)<16)

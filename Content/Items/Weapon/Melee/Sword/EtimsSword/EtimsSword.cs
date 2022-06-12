@@ -237,7 +237,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.EtimsSword
                             }
                             //////////////////////
 
-                            Projectile p = QwertyMethods.PokeNPC(Player, Main.npc[n], Player.GetProjectileSource_Item(item), damageBeforeVariance, DamageClass.Melee, item.knockBack);
+                            Projectile p = QwertyMethods.PokeNPC(Player, Main.npc[n], new EntitySource_Misc(""), damageBeforeVariance, DamageClass.Melee, item.knockBack);
                             if (item.type == ItemType<EtimsSword>())
                             {
                                 p.GetGlobalProjectile<EtimsProjectile>().effect = true;

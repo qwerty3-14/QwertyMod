@@ -57,7 +57,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
         {
             Player drawPlayer = drawInfo.drawPlayer;
             Mod mod = ModLoader.GetMod("QwertyMod");
-            if (drawPlayer.shield == mod.GetEquipSlot("Tricerashield", EquipType.Shield))
+            if (drawPlayer.shield == EquipLoader.GetEquipSlot(mod, "Tricerashield", EquipType.Shield))
             {
                 //Main.NewText("Hi");
                 Vector2 Position = drawInfo.Position;

@@ -235,11 +235,11 @@ namespace QwertyMod.Common.Playerlayers
             var immediate = AssetRequestMode.ImmediateLoad;
             Mod mod = ModLoader.GetMod("QwertyMod");
             OnBodyDraw body = new OnBodyDraw(Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Hydra/HydraScalemail_Body_Glow", immediate).Value);
-            BodyDictionary.Add(mod.GetEquipSlot("HydraScalemail", EquipType.Body), body);
+            BodyDictionary.Add(EquipLoader.GetEquipSlot(mod, "HydraScalemail", EquipType.Body), body);
             body = new OnBodyDraw(Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Glass/GlassAbsorber_Body_Glass", immediate).Value, false, 3);
-            BodyDictionary.Add(mod.GetEquipSlot("GlassAbsorber", EquipType.Body), body);
+            BodyDictionary.Add(EquipLoader.GetEquipSlot(mod, "GlassAbsorber", EquipType.Body), body);
             body = new OnBodyDraw(Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Vitallum/VitallumLifeguard_Body_Vein", immediate).Value, false, 3, 4);
-            BodyDictionary.Add(mod.GetEquipSlot("VitallumLifeguard", EquipType.Body), body);
+            BodyDictionary.Add(EquipLoader.GetEquipSlot(mod, "VitallumLifeguard", EquipType.Body), body);
 
         }
     }

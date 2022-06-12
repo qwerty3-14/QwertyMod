@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using QwertyMod.Content.Dusts;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 using static Terraria.ModLoader.ModContent;
@@ -21,8 +22,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Bars
             TileObjectData.addTile(Type);
 
             DustType = DustType<LuneDust>();
-            SoundType = 21;
-            SoundStyle = 2;
+            HitSound = SoundID.Tink; 
             MinPick = 1;
             AddMapEntry(new Color(102, 143, 204));
             ItemDrop = ItemType<LuneBar>();

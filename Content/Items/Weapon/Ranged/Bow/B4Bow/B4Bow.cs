@@ -42,7 +42,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.B4Bow
             return new Vector2(-6, 0);
         }
 
-        public override bool CanConsumeAmmo(Player player)
+        public override bool CanConsumeAmmo(Item ammo, Player player)
         {
             return !(player.itemAnimation < Item.useAnimation - 2);
         }

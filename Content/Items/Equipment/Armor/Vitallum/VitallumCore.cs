@@ -46,7 +46,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
             if (charge > maxCharge)
             {
                 Item.TurnToAir();
-                player.QuickSpawnItem(player.GetItemSource_OpenItem(ItemID.PlanteraBossBag), ItemType<VitallumCoreCharged>(), 1);
+                player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<VitallumCoreCharged>(), 1);
             }
         }
 
@@ -55,9 +55,9 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
             String s = charge + "/" + maxCharge + " enemies killed.";
             foreach (TooltipLine line in tooltips) //runs through all tooltip lines
             {
-                if (line.mod == "Terraria" && line.Name == "Tooltip2") //this checks if it's the line we're interested in
+                if (line.Mod == "Terraria" && line.Name == "Tooltip2") //this checks if it's the line we're interested in
                 {
-                    line.text = s;//change tooltip
+                    line.Text = s;//change tooltip
                 }
             }
         }
@@ -133,7 +133,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
         {
             if (context == "bossBag" && arg == ItemID.PlanteraBossBag)
             {
-                player.QuickSpawnItem(player.GetItemSource_OpenItem(ItemID.PlanteraBossBag),ItemType<VitallumCoreUncharged>());
+                player.QuickSpawnItem(new EntitySource_Misc(""),ItemType<VitallumCoreUncharged>());
             }
         }
     }

@@ -2,6 +2,7 @@
 using QwertyMod.Content.Buffs;
 using System;
 using Terraria;
+using Terraria.ID;
 using Terraria.Audio;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
@@ -40,7 +41,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin
 
         public override void Kill(int timeLeft)
         {
-            SoundEngine.PlaySound(0, (int)Projectile.position.X, (int)Projectile.position.Y); // Play a death sound
+            SoundEngine.PlaySound(SoundID.Tink, Projectile.position); // Play a death sound
             Vector2 usePos = Projectile.position; // Position to use for dusts
                                                   // Please note the usage of MathHelper, please use projectile! We subtract 90 degrees as radians to the rotation vector to offset the sprite as its default rotation in the sprite isn't aligned properly.
             Vector2 rotVector =

@@ -6,6 +6,7 @@ using QwertyMod.Content.Items.Equipment.Accessories;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
@@ -112,7 +113,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
                 //Projectile.NewProjectile(NPC.Center.X+(78f*NPC.direction), NPC.Center.Y-34f, 1f*NPC.direction, 0, 102, damage, 3f, Main.myPlayer);
                 if (Main.netMode != 1)
                 {
-                    Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), NPC.Center.X + (78f * NPC.direction), NPC.Center.Y - 34f, 10f * NPC.direction, 0, ProjectileType<TankCannonBall>(), damage, 3f, Main.myPlayer);
+                    Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Center.X + (78f * NPC.direction), NPC.Center.Y - 34f, 10f * NPC.direction, 0, ProjectileType<TankCannonBall>(), damage, 3f, Main.myPlayer);
                 }
 
                 AI_Timer = 0;
@@ -213,7 +214,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
             Projectile.height = 75;
             Projectile.position.X = Projectile.position.X - (float)(Projectile.width / 2);
             Projectile.position.Y = Projectile.position.Y - (float)(Projectile.height / 2);
-            Projectile.NewProjectile(Projectile.GetProjectileSource_FromThis(), Projectile.Center, new Vector2(0, 0), ProjectileType<TankCannonBallExplosion>(), Projectile.damage, Projectile.knockBack, player.whoAmI);
+            Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center, new Vector2(0, 0), ProjectileType<TankCannonBallExplosion>(), Projectile.damage, Projectile.knockBack, player.whoAmI);
             SoundEngine.PlaySound(SoundID.Item62, Projectile.position);
             for (int i = 0; i < 50; i++)
             {

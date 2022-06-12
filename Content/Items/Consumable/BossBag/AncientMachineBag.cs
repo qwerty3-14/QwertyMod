@@ -4,6 +4,7 @@ using QwertyMod.Common.PlayerLayers;
 using QwertyMod.Content.Items.Tool.Mining.Ancient;
 using QwertyMod.Content.NPCs.Bosses.AncientMachine;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
@@ -48,15 +49,15 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
 
             foreach (int item in loot)
             {
-                player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),item);
+                player.QuickSpawnItem(new EntitySource_Misc(""), item);
             }
 
             if (Main.rand.Next(100) < 20)
             {
-                player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),ItemType<AncientMiner>());
+                player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<AncientMiner>());
             }
-            player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),73, 8);
-            //player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),mod.ItemType("AncientGemstone"));
+            player.QuickSpawnItem(new EntitySource_Misc(""), 73, 8);
+            //player.QuickSpawnItem(new EntitySource_Misc(""), mod.ItemType("AncientGemstone"));
         }
     }
 }

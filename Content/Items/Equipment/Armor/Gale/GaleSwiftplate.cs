@@ -167,7 +167,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Gale
                                 Position.X += (float)Math.Sin(orb[b, Player.whoAmI].Y) * 50;
                                 Position.Y += (float)Math.Sin(orb[b, Player.whoAmI].Y) * 50 * (float)Math.Sin(counter);
                                 float speed = 10;
-                                Projectile.NewProjectile(Player.GetProjectileSource_SetBonus(1), Position, (Main.MouseWorld - Position).SafeNormalize(-Vector2.UnitY) * speed, ProjectileType<GaleKnife>(), (int)(75f * Player.GetDamage(DamageClass.Generic)), 3f, Player.whoAmI);
+                                Projectile.NewProjectile(new EntitySource_Misc(""), Position, (Main.MouseWorld - Position).SafeNormalize(-Vector2.UnitY) * speed, ProjectileType<GaleKnife>(), (int)(75f * Player.GetDamage(DamageClass.Generic).Multiplicative), 3f, Player.whoAmI);
                                 orb[b, Player.whoAmI].X = 0;
                             }
                         }

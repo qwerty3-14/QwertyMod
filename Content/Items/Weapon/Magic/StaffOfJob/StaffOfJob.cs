@@ -29,7 +29,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.StaffOfJob
             Item.width = Item.height = 48;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.damage = 10;
-            Item.mana = 4;
+            Item.mana = ModLoader.HasMod("TRAEProject") ? 40 : 10;
             Item.shootSpeed = 1f;
             Item.shoot = 1;
             Item.useTime = 30;
@@ -79,7 +79,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.StaffOfJob
                 miseryCounter++;
                 if(miseryCounter % 6 == 0)
                 {
-                        QwertyMethods.PokeNPC(Main.player[MiseryCauser], npc, Projectile.GetNoneSource(), MiseryIntensity, DamageClass.Magic);
+                        QwertyMethods.PokeNPC(Main.player[MiseryCauser], npc, new EntitySource_Misc(""), MiseryIntensity, DamageClass.Magic);
                 }
             }
             else

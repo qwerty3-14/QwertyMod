@@ -8,6 +8,7 @@ using QwertyMod.Content.Items.Consumable.Tiles.Banners;
 using System;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
@@ -94,7 +95,7 @@ namespace QwertyMod.Content.NPCs.Fortress
 
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
-            if (spawnInfo.player.InModBiome(GetInstance<FortressBiome>()))
+            if (spawnInfo.Player.InModBiome(GetInstance<FortressBiome>()))
             {
                 return 60f;
             }
@@ -213,7 +214,7 @@ namespace QwertyMod.Content.NPCs.Fortress
                     {
                         float shootSpeed = 24;
 
-                        Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), shootFrom.X, shootFrom.Y, (float)Math.Cos(aimDirection) * shootSpeed, (float)Math.Sin(aimDirection) * shootSpeed, ProjectileType<MollusketSnipe>(), 15, 0, player.whoAmI);
+                        Projectile.NewProjectile(new EntitySource_Misc(""),  shootFrom.X, shootFrom.Y, (float)Math.Cos(aimDirection) * shootSpeed, (float)Math.Sin(aimDirection) * shootSpeed, ProjectileType<MollusketSnipe>(), 15, 0, player.whoAmI);
                         timer = 0;
                     }
                     if (timer > 60)

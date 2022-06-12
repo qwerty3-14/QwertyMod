@@ -64,7 +64,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.DinoVulcan
             return false;
         }
 
-        public override bool CanConsumeAmmo(Player player)
+        public override bool CanConsumeAmmo(Item ammo, Player player)
         {
             return  Main.rand.Next(3)>0;
         }
@@ -112,7 +112,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.DinoVulcan
             Projectile.timeLeft = 10;
             timer++;
 
-            bool firing = player.channel && player.HasAmmo(player.HeldItem, true) && !player.noItems && !player.CCed;
+            bool firing = player.channel && player.HasAmmo(player.HeldItem) && !player.noItems && !player.CCed;
 
             int Ammo = 14;
             float speed = 14f;
@@ -201,11 +201,11 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.DinoVulcan
                     float SspeedA = .05f * Main.rand.Next(15, 41);
 
                     SoundEngine.PlaySound(SoundID.Item11, Projectile.Center);
-                    player.PickAmmo(player.HeldItem, ref Ammo, ref speed, ref firing, ref weaponDamage, ref weaponKnockback, out _);
+                    player.PickAmmo(player.HeldItem, out Ammo, out speed, out weaponDamage, out weaponKnockback, out _);
                     if (player.whoAmI == Main.myPlayer)
                     {
-                        Projectile.NewProjectile(Projectile.GetProjectileSource_FromThis(), Projectile.Center.X, Projectile.Center.Y, (float)Math.Cos(VarA) * speed, (float)Math.Sin(VarA) * speed, Ammo, weaponDamage, weaponKnockback, Main.myPlayer);
-                        Projectile.NewProjectile(Projectile.GetProjectileSource_FromThis(), Projectile.Center.X, Projectile.Center.Y, (float)Math.Cos(SVarA) * SspeedA * -player.direction, (float)Math.Sin(SVarA) * SspeedA, ProjectileType<Shell>(), 0, 0, Main.myPlayer);
+                        Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center.X, Projectile.Center.Y, (float)Math.Cos(VarA) * speed, (float)Math.Sin(VarA) * speed, Ammo, weaponDamage, weaponKnockback, Main.myPlayer);
+                        Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center.X, Projectile.Center.Y, (float)Math.Cos(SVarA) * SspeedA * -player.direction, (float)Math.Sin(SVarA) * SspeedA, ProjectileType<Shell>(), 0, 0, Main.myPlayer);
                         
                     }
 

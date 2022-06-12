@@ -5,6 +5,7 @@ using QwertyMod.Content.Dusts;
 using QwertyMod.Content.Items.MiscMaterials;
 using System;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -40,7 +41,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RuneWave
             {
                 Item.GetGlobalItem<ItemUseGlow>().glowTexture = Request<Texture2D>("QwertyMod/Content/Items/Weapon/Magic/RuneWave/RunicWave_Glow").Value;
             }
-            Item.mana = 12;
+            Item.mana = ModLoader.HasMod("TRAEProject") ? 32 : 12;
             Item.shoot = ProjectileType<RunicWaveP>();
             Item.shootSpeed = 9;
             Item.noMelee = true;
@@ -93,8 +94,8 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RuneWave
             {
                 float startDistance = 100;
 
-                ice1 = Main.projectile[Projectile.NewProjectile(Projectile.GetProjectileSource_FromThis(), Projectile.Center.X + (float)Math.Cos(0) * startDistance, Projectile.Center.Y + (float)Math.Sin(0) * startDistance, 0, 0, ProjectileType<IceRuneTome>(), Projectile.damage, 3f, Main.myPlayer)];
-                ice2 = Main.projectile[Projectile.NewProjectile(Projectile.GetProjectileSource_FromThis(), player.Center.X + (float)Math.Cos(Math.PI) * startDistance, player.Center.Y + (float)Math.Sin(Math.PI) * startDistance, 0, 0, ProjectileType<IceRuneTome>(), Projectile.damage, 3f, Main.myPlayer)];
+                ice1 = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center.X + (float)Math.Cos(0) * startDistance, Projectile.Center.Y + (float)Math.Sin(0) * startDistance, 0, 0, ProjectileType<IceRuneTome>(), Projectile.damage, 3f, Main.myPlayer)];
+                ice2 = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), player.Center.X + (float)Math.Cos(Math.PI) * startDistance, player.Center.Y + (float)Math.Sin(Math.PI) * startDistance, 0, 0, ProjectileType<IceRuneTome>(), Projectile.damage, 3f, Main.myPlayer)];
                 runOnce = false;
             }
             ice1.rotation += (float)((2 * Math.PI) / (Math.PI * 2 * 100 / iceRuneSpeed));

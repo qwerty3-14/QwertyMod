@@ -11,6 +11,7 @@ using static Terraria.ModLoader.ModContent;
 using QwertyMod.Content.NPCs.Bosses.Hydra;
 using Terraria.DataStructures;
 using Microsoft.Xna.Framework.Graphics;
+using Terraria.ID;
 
 namespace QwertyMod.Common
 {
@@ -75,7 +76,7 @@ namespace QwertyMod.Common
                             Rectangle rect = nPC.getRect();
                             if (rectangle.Intersects(rect) && (nPC.noTileCollide || Player.CanHit(nPC) && nPC.type != NPCType<Hydra>()))
                             {
-                                float num = customDashRam * Player.GetDamage(DamageClass.Melee);
+                                float num = customDashRam * Player.GetDamage(DamageClass.Melee).Multiplicative;
                                 float num2 = 9f;
                                 bool crit = false;
                                 if (Player.kbGlove)
@@ -249,7 +250,7 @@ namespace QwertyMod.Common
                             }
                             for (int num17 = 0; num17 < 20; num17++)
                             {
-                                int num18 = Dust.NewDust(new Vector2(Player.position.X, Player.position.Y), Player.width, Player.height, 31, 0f, 0f, 100, default(Color), 2f);
+                                int num18 = Dust.NewDust(new Vector2(Player.position.X, Player.position.Y), Player.width, Player.height, DustID.Smoke, 0f, 0f, 100, default(Color), 2f);
                                 Dust dust = Main.dust[num18];
                                 dust.position.X = dust.position.X + (float)Main.rand.Next(-5, 6);
                                 Dust dust2 = Main.dust[num18];
@@ -258,11 +259,11 @@ namespace QwertyMod.Common
                                 Main.dust[num18].scale *= 1f + (float)Main.rand.Next(20) * 0.01f;
                                 Main.dust[num18].shader = GameShaders.Armor.GetSecondaryShader(Player.cShoe, Player);
                             }
-                            int num19 = Gore.NewGore(new Vector2(Player.position.X + (float)(Player.width / 2) - 24f, Player.position.Y + (float)(Player.height / 2) - 34f), default(Vector2), Main.rand.Next(61, 64), 1f);
+                            int num19 = Gore.NewGore(new EntitySource_Misc(""), new Vector2(Player.position.X + (float)(Player.width / 2) - 24f, Player.position.Y + (float)(Player.height / 2) - 34f), default(Vector2), Main.rand.Next(61, 64), 1f);
                             Main.gore[num19].velocity.X = (float)Main.rand.Next(-50, 51) * 0.01f;
                             Main.gore[num19].velocity.Y = (float)Main.rand.Next(-50, 51) * 0.01f;
                             Main.gore[num19].velocity *= 0.4f;
-                            num19 = Gore.NewGore(new Vector2(Player.position.X + (float)(Player.width / 2) - 24f, Player.position.Y + (float)(Player.height / 2) - 14f), default(Vector2), Main.rand.Next(61, 64), 1f);
+                            num19 = Gore.NewGore(new EntitySource_Misc(""), new Vector2(Player.position.X + (float)(Player.width / 2) - 24f, Player.position.Y + (float)(Player.height / 2) - 14f), default(Vector2), Main.rand.Next(61, 64), 1f);
                             Main.gore[num19].velocity.X = (float)Main.rand.Next(-50, 51) * 0.01f;
                             Main.gore[num19].velocity.Y = (float)Main.rand.Next(-50, 51) * 0.01f;
                             Main.gore[num19].velocity *= 0.4f;

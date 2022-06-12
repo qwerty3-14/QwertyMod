@@ -45,6 +45,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Furniture
             name.SetDefault("Fortress Bookcase");
             AddMapEntry(new Color(162, 184, 185), name);
             DustType = DustType<FortressDust>();
+            HitSound = QwertyMod.FortressBlocks;
             //// disableSmartCursor = true;
             AdjTiles = new int[] { TileID.Bookcases };
         }

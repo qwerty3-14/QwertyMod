@@ -56,7 +56,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert
             {
                 for (int i = 0; i < 2; i++)
                 {
-                    Projectile penguin = Main.projectile[Projectile.NewProjectile(Player.GetProjectileSource_Item(item), Player.Center, new Vector2(6 - 12 * i, 0), ProjectileType<SlidingPenguinGeneric>(), damage, 0, Player.whoAmI)];
+                    Projectile penguin = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), Player.Center, new Vector2(6 - 12 * i, 0), ProjectileType<SlidingPenguinGeneric>(), damage, 0, Player.whoAmI)];
                     penguin.GetGlobalProjectile<PenguinLimit>().realeasedPenguin = true;
                 }
             }

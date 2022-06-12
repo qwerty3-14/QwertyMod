@@ -6,6 +6,7 @@ using QwertyMod.Content.Items.Consumable.Tiles.Bars;
 using System;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.GameInput;
 using Terraria.Graphics.Shaders;
@@ -149,7 +150,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Lune
                     }
                     else
                     {
-                        Projectile.NewProjectile(Player.GetProjectileSource_SetBonus(1), Main.MouseWorld, new Vector2(0, 0), ProjectileType<MoonTarget>(), 0, 0, Player.whoAmI, 0, 0);
+                        Projectile.NewProjectile(new EntitySource_Misc(""), Main.MouseWorld, new Vector2(0, 0), ProjectileType<MoonTarget>(), 0, 0, Player.whoAmI, 0, 0);
                         Player.AddBuff(BuffType<MoonCooldown>(), 3 * 60);
                         justSummonedMoon = true;
                     }

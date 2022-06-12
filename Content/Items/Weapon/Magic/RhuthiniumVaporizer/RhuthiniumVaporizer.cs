@@ -27,7 +27,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RhuthiniumVaporizer
             Item.damage = 35;
             Item.width = 54;
             Item.height = 22;
-            Item.mana = 8;
+            Item.mana = ModLoader.HasMod("TRAEProject") ? 10 : 8;
             Item.useTime = 10;
             Item.useAnimation = 10;
             Item.shootSpeed = 1f;

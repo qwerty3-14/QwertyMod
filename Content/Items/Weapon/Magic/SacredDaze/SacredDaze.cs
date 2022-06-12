@@ -36,7 +36,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.SacredDaze
             Item.shootSpeed = 10f;
             Item.useTime = 9;
             Item.useAnimation = 9;
-            Item.mana = 4;
+            Item.mana = ModLoader.HasMod("TRAEProject") ? 6 : 4;
             Item.shoot = ProjectileType<SacredDazeP>();
             Item.noUseGraphic = false;
             Item.noMelee = true;

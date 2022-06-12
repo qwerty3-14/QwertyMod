@@ -23,6 +23,8 @@ namespace QwertyMod.Content.Items.Weapon.Minion.AncientMinion
             DisplayName.SetDefault("Ancient Minion Staff");
             Tooltip.SetDefault("Summons an ancient minion to fight for you!");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+            ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
+            ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
         }
         
 
@@ -80,18 +82,5 @@ namespace QwertyMod.Content.Items.Weapon.Minion.AncientMinion
             return false;
         }
 
-        public override bool AltFunctionUse(Player player)
-        {
-            return true;
-        }
-
-        public override bool? UseItem(Player player)
-        {
-            if (player.altFunctionUse == 2)
-            {
-                player.MinionNPCTargetAim(false);
-            }
-            return base.UseItem(player);
-        }
     }
 }

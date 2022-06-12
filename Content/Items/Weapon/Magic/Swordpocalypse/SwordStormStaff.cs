@@ -23,7 +23,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Swordpocalypse
         public override void SetDefaults()
         {
             Item.damage = 30;
-            Item.mana = 10;
+            Item.mana = ModLoader.HasMod("TRAEProject") ? 54 : 10;
             Item.width = 46;
             Item.height = 46;
             Item.useTime = 4;

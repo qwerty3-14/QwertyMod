@@ -27,6 +27,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Furniture
             name.SetDefault("Fortress Candelabra");
             AddMapEntry(new Color(162, 184, 185), name);
             DustType = DustType<FortressDust>();
+            HitSound = QwertyMod.FortressBlocks;
             AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
             //// disableSmartCursor = true;
             AdjTiles = new int[] { TileID.Candelabras };

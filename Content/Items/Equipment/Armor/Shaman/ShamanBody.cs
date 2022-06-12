@@ -34,7 +34,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Shaman
         public override void UpdateEquip(Player player)
         {
             player.maxMinions++;
-            player.meleeSpeed += .14f;
+            player.GetAttackSpeed(DamageClass.Melee) += .14f;
         }
 
     }

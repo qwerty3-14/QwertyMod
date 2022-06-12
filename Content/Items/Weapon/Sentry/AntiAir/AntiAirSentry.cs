@@ -18,6 +18,8 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.AntiAir
             DisplayName.SetDefault("Anti Air Sentry Wrench");
             Tooltip.SetDefault("Summons a stationary anti air sentry");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+            ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
+            ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
         }
 
         public override void SetDefaults()
@@ -46,18 +48,6 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.AntiAir
             return false;
         }
 
-        public override bool AltFunctionUse(Player player)
-        {
-            return true;
-        }
-        public override bool? UseItem(Player player)
-        {
-            if (player.altFunctionUse == 2)
-            {
-                player.MinionNPCTargetAim(false);
-            }
-            return base.UseItem(player);
-        }
     }
 
     public class AntiAirSentry : ModProjectile
@@ -111,7 +101,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.AntiAir
             {
                 playAttackFrame = true;
                 if (Main.netMode != 1)
-                    Projectile.NewProjectile(Projectile.GetProjectileSource_FromThis(), Projectile.Center.X + (16 * secondShot), Projectile.Center.Y - 30, 0, -5f, ProjectileType<SentryAntiAir>(), Projectile.damage, Projectile.knockBack, Main.myPlayer, validTarget.Center.Y, rocketDirection);
+                    Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center.X + (16 * secondShot), Projectile.Center.Y - 30, 0, -5f, ProjectileType<SentryAntiAir>(), Projectile.damage, Projectile.knockBack, Main.myPlayer, validTarget.Center.Y, rocketDirection);
 
                 secondShot *= -1;
 

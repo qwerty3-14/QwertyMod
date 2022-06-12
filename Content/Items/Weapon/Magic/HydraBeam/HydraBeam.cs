@@ -38,7 +38,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraBeam
             Item.width = 28;
             Item.height = 30;
             Item.channel = true;
-            Item.mana = 10;
+            Item.mana = ModLoader.HasMod("TRAEProject") ? 60 : 10;
             Item.shoot = ProjectileType<BeamHead>();
             Item.shootSpeed = 9;
             Item.noMelee = true;

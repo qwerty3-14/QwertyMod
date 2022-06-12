@@ -4,6 +4,7 @@ using QwertyMod.Content.Items.MiscMaterials;
 using System;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
@@ -47,7 +48,7 @@ namespace QwertyMod.Content.NPCs.Fortress
         }
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
-            if (spawnInfo.player.InModBiome(GetInstance<FortressBiome>()) && Main.hardMode)
+            if (spawnInfo.Player.InModBiome(GetInstance<FortressBiome>()) && Main.hardMode)
             {
                 return 80f;
             }
@@ -107,7 +108,7 @@ namespace QwertyMod.Content.NPCs.Fortress
                         float shootDirection = (player.Center - NPC.Center).ToRotation(); // find the direction the player is in
                         for (int p = -1; p < 2; p++) //this will repeat 3 times for 3 projectiles
                         {
-                            Projectile.NewProjectile(NPC.GetSpawnSource_ForProjectile(), NPC.Center, QwertyMethods.PolarVector(6, shootDirection + ((float)Math.PI / 8 * p)), ProjectileType<FortressHarpyProjectile>(), damage, player.whoAmI); // shoots a projectile
+                            Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Center, QwertyMethods.PolarVector(6, shootDirection + ((float)Math.PI / 8 * p)), ProjectileType<FortressHarpyProjectile>(), damage, player.whoAmI); // shoots a projectile
                         }
                         attackTimer = 0; // resets attackTimer needer for the once per second effect
                     }

@@ -21,8 +21,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
             TileObjectData.newTile.AnchorBottom = new AnchorData(AnchorType.SolidTile, 0, 0);
             TileObjectData.addTile(Type);
             DustType = DustType<FortressDust>();
-            SoundType = 21;
-            SoundStyle = 2;
+            HitSound = QwertyMod.FortressBlocks;
             MinPick = 1;
 
             ModTranslation name = CreateMapEntryName();

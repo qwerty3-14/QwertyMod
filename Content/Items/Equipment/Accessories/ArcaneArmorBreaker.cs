@@ -28,10 +28,9 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            if(player.HeldItem.CountsAsClass(DamageClass.Magic))
-            {
-                player.armorPenetration += 10;
-            }
+
+            player.GetArmorPenetration(DamageClass.Magic) += 10;
+
         }
 
     }

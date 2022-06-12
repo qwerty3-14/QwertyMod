@@ -44,7 +44,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.AncientMissile
             {
                 Item.GetGlobalItem<ItemUseGlow>().glowTexture = Request<Texture2D>("QwertyMod/Content/Items/Weapon/Magic/AncientMissile/AncientMissileStaff_Glow").Value;
             }
-            Item.mana = 7;
+            Item.mana = ModLoader.HasMod("TRAEProject") ? 14 : 7;
             Item.shoot = ProjectileType<AncientMissileP>();
             Item.shootSpeed = 9;
             Item.noMelee = true;
@@ -55,7 +55,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.AncientMissile
         {
             if (player.statMana > Item.mana)
             {
-                SoundEngine.PlaySound(25, player.position, 0);
+                SoundEngine.PlaySound(SoundID.MaxMana, player.position);
             }
             return base.CanUseItem(player);
         }

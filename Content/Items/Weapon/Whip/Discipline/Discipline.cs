@@ -17,7 +17,7 @@ namespace QwertyMod.Content.Items.Weapon.Whip.Discipline
         {
             DisplayName.SetDefault("Discipline");
             Tooltip.SetDefault("Your minions will gain speed when attacking struck enemies");
-            ItemID.Sets.SummonerWeaponThatScalesWithAttackSpeed[Item.type] = true;
+            //ItemID.Sets.SummonerWeaponThatScalesWithAttackSpeed[Item.type] = true;
         }
         public override void SetDefaults()
         {

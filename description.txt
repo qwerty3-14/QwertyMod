@@ -29,6 +29,23 @@ Extra thanks
 
 
 Changelog
+0.7.5
+-Fixed ancient minion / leech rune minion causing global sounds
+-reduced drop rate on bloody medalion
+
+0.7.4
+-fixed archer minions in multiplayer
+-fixed summon staves not being able to priority target
+-Magic weapons get increased mana cost when TRAE is enabled
+
+0.7.3
+-Fixed sword enlarger not increasing melee hitboxes
+
+0.7.2
+-now works on most recent tmodloader version
+-Riptide sentry can no longer gain knockback from minion knockback buffs
+-hydra missile rod missles no longer bounce on tiles
+
 0.7.1
 -fixed mod crashing when boss checklist wasn't enabled
 

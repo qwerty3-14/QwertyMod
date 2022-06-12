@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.IO;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
@@ -185,7 +186,7 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
                             attackCounter++;
                             if (Main.netMode != 1)
                             {
-                                NPC.NewNPC(NPC.GetSpawnSourceForNPCFromNPCAI(), (int)NPC.Center.X + 30 * NPC.direction, (int)NPC.Center.Y + 14, NPCType<SlidingPenguin>(), ai0: NPC.direction, ai1: (player.Bottom.Y < NPC.Center.Y + 14) ? 1 : 0);
+                                NPC.NewNPC(new EntitySource_Misc(""), (int)NPC.Center.X + 30 * NPC.direction, (int)NPC.Center.Y + 14, NPCType<SlidingPenguin>(), ai0: NPC.direction, ai1: (player.Bottom.Y < NPC.Center.Y + 14) ? 1 : 0);
                             }
                             SoundEngine.PlaySound(SoundID.Item11, NPC.position);
                             for (int i = 0; i < 8; i++)
@@ -204,7 +205,7 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
                             {
                                 if (Main.netMode != 1)
                                 {
-                                    NPC.NewNPC(NPC.GetSpawnSourceForNPCFromNPCAI(), (int)NPC.Center.X + 34 * NPC.direction, (int)NPC.Center.Y, NPCType<FlyingPenguin>(), 0, i);
+                                    NPC.NewNPC(new EntitySource_Misc(""), (int)NPC.Center.X + 34 * NPC.direction, (int)NPC.Center.Y, NPCType<FlyingPenguin>(), 0, i);
                                 }
                                 SoundEngine.PlaySound(SoundID.Item11, NPC.position);
                             }
@@ -270,7 +271,7 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
                             int denUpperHeight = 40;
                             int ceilingHeight = (int)((float)Math.Sin(((float)(x + (denLength / 2)) / (float)denLength) * (float)Math.PI) * (float)denUpperHeight);
                             Vector2 spawnPos = FrozenDen.BearSpawn + new Vector2(x * 16, ceilingHeight * -16);
-                            NPC.NewNPC(NPC.GetSpawnSourceForNPCFromNPCAI(), (int)spawnPos.X, (int)spawnPos.Y, NPCType<AgentPenguin>());
+                            NPC.NewNPC(new EntitySource_Misc(""), (int)spawnPos.X, (int)spawnPos.Y, NPCType<AgentPenguin>());
                             
                         }
                         agentCooldown = 600;

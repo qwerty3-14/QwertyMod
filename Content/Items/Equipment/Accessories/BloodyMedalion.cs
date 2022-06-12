@@ -107,15 +107,15 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
             {
                 foreach (TooltipLine line in tooltips) //runs through all tooltip lines
                 {
-                    if (line.mod == "Terraria" && line.Name == "UseMana") //this checks if it's the line we're interested in
+                    if (line.Mod == "Terraria" && line.Name == "UseMana") //this checks if it's the line we're interested in
                     {
                         int lifeCost = (int)(item.mana * Main.LocalPlayer.manaCost);
                         if (lifeCost < 0)
                         {
                             lifeCost = 0;
                         }
-                        line.text = "Uses " + lifeCost + " life!";//change tooltip
-                        line.overrideColor = Color.Crimson;
+                        line.Text = "Uses " + lifeCost + " life!";//change tooltip
+                        line.OverrideColor = Color.Crimson;
                     }
                 }
             }
@@ -126,7 +126,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
         public override void ModifyGlobalLoot(GlobalLoot globalLoot)
         {
             LeadingConditionRule bloodMoon = new LeadingConditionRule(new Conditions.IsBloodMoonAndNotFromStatue());
-            bloodMoon.OnSuccess(ItemDropRule.Common(ItemType<BloodyMedalion>(), 50));
+            bloodMoon.OnSuccess(ItemDropRule.Common(ItemType<BloodyMedalion>(), 200));
             globalLoot.Add(bloodMoon);
         }
     }

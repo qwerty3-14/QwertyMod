@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -29,7 +30,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
             {
                 summonCounter = 0;
                 float rot = Main.rand.NextFloat() * 2f * (float)Math.PI;
-                Projectile.NewProjectile(Player.GetProjectileSource_SetBonus(1), position + QwertyMethods.PolarVector(240, rot), QwertyMethods.PolarVector(4f, rot + (float)Math.PI), ProjectileType<RhuthimisWraith>(), (int)(30 * Player.GetDamage(DamageClass.Summon)), (int)(5f + Player.minionKB), Player.whoAmI);
+                Projectile.NewProjectile(new EntitySource_Misc(""), position + QwertyMethods.PolarVector(240, rot), QwertyMethods.PolarVector(4f, rot + (float)Math.PI), ProjectileType<RhuthimisWraith>(), (int)(30 * Player.GetDamage(DamageClass.Summon).Multiplicative), (int)(5f + Player.GetKnockback(DamageClass.Summon).Multiplicative), Player.whoAmI);
             }
         }
 

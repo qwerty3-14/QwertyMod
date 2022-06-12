@@ -2,6 +2,7 @@ using QwertyMod.Content.Items.Equipment.Accessories.Expert.Sheath;
 using QwertyMod.Content.Items.Equipment.Accessories.Sword;
 using QwertyMod.Content.NPCs.Bosses.BladeBoss;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
 
@@ -37,16 +38,16 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
         public override void OpenBossBag(Player player)
         {
             int[] spawnThese = QwertyMod.ImperiousLoot.Draw(3);
-            player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),(spawnThese[0]));
-            player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),(spawnThese[1]));
-            player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),(spawnThese[2]));
+            player.QuickSpawnItem(new EntitySource_Misc(""), (spawnThese[0]));
+            player.QuickSpawnItem(new EntitySource_Misc(""), (spawnThese[1]));
+            player.QuickSpawnItem(new EntitySource_Misc(""), (spawnThese[2]));
 
-            player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),73, 15);
+            player.QuickSpawnItem(new EntitySource_Misc(""), 73, 15);
             if(Main.rand.Next(4) == 0)
             {
-                player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),ItemType<SwordsmanBadge>());
+                player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<SwordsmanBadge>());
             }
-            player.QuickSpawnItem(player.GetItemSource_OpenItem(Item.type),ItemType<ImperiousSheath>());
+            player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<ImperiousSheath>());
         }
     }
 }

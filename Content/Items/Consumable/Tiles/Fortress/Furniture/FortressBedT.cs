@@ -6,6 +6,7 @@ using Terraria.ModLoader;
 using Terraria.ObjectData; using static Terraria.ModLoader.ModContent;
 using QwertyMod.Content.Dusts;
 using Terraria.Localization;
+using Terraria.GameContent.ObjectInteractions;
 
 namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Furniture
 {
@@ -26,11 +27,11 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Furniture
             name.SetDefault("Fortress Bed");
             AddMapEntry(new Color(162, 184, 185), name);
             DustType = DustType<FortressDust>();
+            HitSound = QwertyMod.FortressBlocks;
             // disableSmartCursor = true;
             AdjTiles = new int[] { TileID.Beds };
         }
-
-        public override bool HasSmartInteract()
+        public override bool HasSmartInteract(int i, int j, SmartInteractScanSettings settings)
         {
             return true;
         }

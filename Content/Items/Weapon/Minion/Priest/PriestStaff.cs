@@ -18,6 +18,8 @@ namespace QwertyMod.Content.Items.Weapon.Minion.Priest
             DisplayName.SetDefault("Priest Staff");
             Tooltip.SetDefault("Do I even need to explain how higher beings are involved with this?");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+            ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
+            ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
         }
         public override void SetDefaults()
         {
@@ -42,19 +44,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.Priest
         {
             player.SpawnMinionOnCursor(source, player.whoAmI, type, Item.damage, knockback);
             return false;
-        }
-        public override bool AltFunctionUse(Player player)
-        {
-            return true;
-        }
-
-        public override bool? UseItem(Player player)
-        {
-            if (player.altFunctionUse == 2)
-            {
-                player.MinionNPCTargetAim(false);
-            }
-            return base.UseItem(player);
         }
     }
 }
