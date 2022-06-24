@@ -29,6 +29,8 @@ namespace QwertyMod.Common.Fortress
     {
         public override void EditSpawnRate(Player player, ref int spawnRate, ref int maxSpawns)
         {
+            int defaultSpawnRate = 600;
+            int defaultmaxSpawn = 5;
             if (player.InModBiome(GetInstance<FortressBiome>()))
             {
 
@@ -44,26 +46,26 @@ namespace QwertyMod.Common.Fortress
                     {
                         if (Main.dayTime)
                         {
-                            spawnRate = 30;
-                            maxSpawns = 12;
+                            spawnRate = (int)((spawnRate *  30f) / defaultSpawnRate);
+                            maxSpawns = (int)((maxSpawns *  12f) / defaultmaxSpawn);
                         }
                         else
                         {
-                            spawnRate = 34;
-                            maxSpawns = 10;
+                            spawnRate = (int)((spawnRate *  34f) / defaultSpawnRate);
+                            maxSpawns = (int)((maxSpawns *  10f) / defaultmaxSpawn);
                         }
                     }
                     else
                     {
                         if (Main.dayTime)
                         {
-                            spawnRate = 34;
-                            maxSpawns = 10;
+                            spawnRate = (int)((spawnRate *  34f) / defaultSpawnRate);
+                            maxSpawns = (int)((maxSpawns *  14f) / defaultmaxSpawn);
                         }
                         else
                         {
-                            spawnRate = 38;
-                            maxSpawns = 8;
+                            spawnRate = (int)((spawnRate *  38f) / defaultSpawnRate);
+                            maxSpawns = (int)((maxSpawns *  12f) / defaultmaxSpawn);
                         }
                     }
                 }

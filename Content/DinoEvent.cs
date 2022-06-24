@@ -87,7 +87,6 @@ namespace QwertyMod.Content
                 Texture2D progressBg = TextureAssets.ColorBar.Value;
                 Texture2D progressColor = TextureAssets.ColorBar.Value;
                 Texture2D orionIcon = Request<Texture2D>("QwertyMod/Content/Items/Consumable/BossSummon/DinoEgg").Value;
-                const string orionDescription = "Dino Militia";
                 Color descColor = new Color(39, 86, 134);
 
                 Color waveColor = new Color(255, 241, 51);
@@ -134,7 +133,7 @@ namespace QwertyMod.Content
 
                     Utils.DrawBorderString(spriteBatch, "Dino Militia", new Vector2(barrierBackground.X + barrierBackground.Width * 0.5f, barrierBackground.Y - internalOffset - descSize.Y * 0.5f), Color.White, 0.80f, 0.3f, 0.4f);
                 }
-                catch (Exception e)
+                catch 
                 {
                     //ErrorLogger.Log(e.ToString());
                 }
@@ -146,6 +145,8 @@ namespace QwertyMod.Content
     {
         public override void EditSpawnRate(Player player, ref int spawnRate, ref int maxSpawns)
         {
+            int defaultSpawnRate = 600;
+            int defaultmaxSpawn = 5;
             if (DinoEvent.EventActive)
             {
                 if (NPC.AnyNPCs(NPCType<TheGreatTyrannosaurus>()))
@@ -155,8 +156,8 @@ namespace QwertyMod.Content
                 }
                 else
                 {
-                    spawnRate = 10;
-                    maxSpawns = 10;
+                    spawnRate = (int)((spawnRate *  10f) / defaultSpawnRate);
+                    maxSpawns = (int)((maxSpawns *  10f) / defaultmaxSpawn);
                 }
             }
         }

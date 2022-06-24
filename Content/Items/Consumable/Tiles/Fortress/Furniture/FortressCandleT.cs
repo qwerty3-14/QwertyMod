@@ -89,7 +89,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Furniture
 
         public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
         {
-            ulong randSeed = Main.TileFrameSeed ^ (ulong)((long)j << 32 | (long)((ulong)i));
+            ulong randSeed = Main.TileFrameSeed ^ (ulong)((int)j << 32 | (long)((ulong)i));
             Color color = new Color(100, 100, 100, 0);
             int frameX = Main.tile[i, j].TileFrameX;
             int frameY = Main.tile[i, j].TileFrameY;

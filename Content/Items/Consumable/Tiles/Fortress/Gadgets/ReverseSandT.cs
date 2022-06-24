@@ -105,37 +105,12 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
             int i = (int)(Projectile.position.X + (float)(Projectile.width / 2)) / 16;
             int j = (int)(Projectile.position.Y + (float)(Projectile.height / 2)) / 16;
             int tileToPlace = 0;
-            int num835 = 2;
 
-            {
+            
                 tileToPlace = TileType<ReverseSandT>();
-                num835 = 0;
-            }
-            /*
-            if (Main.tile[i, j].halfBrick() && Projectile.velocity.Y > 0f && Math.Abs(Projectile.velocity.Y) > Math.Abs(Projectile.velocity.X))
-            {
-                j--;
-            }*/
             if (!Main.tile[i, j].HasTile && tileToPlace >= 0)
             {
                 WorldGen.PlaceTile(i, j, tileToPlace, false, true, -1, 0);
-
-                /*
-                if (!flag5 && Main.tile[i, j].active() && (int)Main.tile[i, j].type == tileToPlace)
-                {
-                    if (Main.tile[i, j + 1].halfBrick() || Main.tile[i, j + 1].slope() != 0)
-                    {
-                        WorldGen.SlopeTile(i, j + 1, 0);
-                        if (Main.netMode == 2)
-                        {
-                            NetMessage.SendData(17, -1, -1, null, 14, (float)i, (float)(j + 1), 0f, 0, 0, 0);
-                        }
-                    }
-                    if (Main.netMode != 0)
-                    {
-                        NetMessage.SendData(17, -1, -1, null, 1, (float)i, (float)j, (float)tileToPlace, 0, 0, 0);
-                    }
-                }*/
             }
         }
     }

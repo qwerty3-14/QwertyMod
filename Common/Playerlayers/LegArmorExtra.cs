@@ -45,7 +45,6 @@ namespace QwertyMod.Common.Playerlayers
                 {
                     texture = OnLegDraw.LegDictionary[drawPlayer.legs].femaleTexture;
                 }
-                int horizontalFrame = 0;
                 Vector2 legsOffset = drawInfo.legsOffset;
                 DrawData item;
                 if (drawInfo.isSitting)

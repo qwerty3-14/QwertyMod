@@ -40,7 +40,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
         public override void HitWire(int i, int j)
         {
             WorldGen.KillTile(i, j);
-            NetMessage.SendData(MessageID.TileChange, -1, -1, null, 0, (float)i, (float)j);
+            NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 0, (float)i, (float)j);
         }
 
         public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)

@@ -151,8 +151,6 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
             // It will look for collisions on the given line using AABB
             return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), new Vector2(shooter.Center.X, shooter.Center.Y),
                 new Vector2(shooter.Center.X, shooter.Center.Y) + unit * Distance, 22, ref point);
-
-            return false;
         }
 
         // Set custom immunity time on hitting an NPC

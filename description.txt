@@ -29,6 +29,10 @@ Extra thanks
 
 
 Changelog
+0.7.15
+-fixed the way spawn rates work in fortress and Dino Militia
+-tweaked OLORD's despawning slightly (might fix a certain bug)
+
 0.7.5
 -Fixed ancient minion / leech rune minion causing global sounds
 -reduced drop rate on bloody medalion

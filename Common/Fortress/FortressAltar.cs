@@ -16,7 +16,6 @@ namespace QwertyMod.Common.Fortress
 {
     public class FortressAltar : ModTile
     {
-
         public override void SetStaticDefaults()
         {
             TileObjectData.newTile.CopyFrom(TileObjectData.Style3x2);

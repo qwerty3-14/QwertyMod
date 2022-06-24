@@ -74,7 +74,7 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
         private Vector2[] turret = new Vector2[4] { new Vector2(0, 2), new Vector2(0, 2), new Vector2(0, 2), new Vector2(0, 2) }; //Y is the frame, X is the angle
         private Vector2[] turretPos = new Vector2[4] { new Vector2(-2 * (guideWidth / 3), turretVerticalShift), new Vector2(-1 * (guideWidth / 3), turretVerticalShift), new Vector2(1 * (guideWidth / 3), turretVerticalShift), new Vector2(2 * (guideWidth / 3), turretVerticalShift) };
         private int shotDamage = 35;
-        private int quitCount;
+        private int quitCount = 0;
         private bool playerDied = false;
         public Projectile[] wall = new Projectile[2];
         private bool activeWalls = false;
@@ -106,23 +106,6 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
                 if (NPC.life < (int)(NPC.lifeMax * .3f))
                 {
                     NPC.ai[3] = 1;
-                    /*
-                    if(!didHalfDeadSequence)
-                    {
-                        string key = "O.L.O.R.D. is frusturated (attack speed doubled!)";
-                        SoundEngine.PlaySound(SoundID.Roar, player.position, 0);
-                        Color messageColor = Color.Orange;
-                        if (Main.netMode == 2) // Server
-                        {
-                            NetMessage.BroadcastChatMessage(NetworkText.FromKey(key), messageColor);
-                        }
-                        else if (Main.netMode == 0) // Single Player
-                        {
-                            Main.NewText(Language.GetTextValue(key), messageColor);
-                        }
-                        didHalfDeadSequence = true;
-                    }
-                    */
                 }
                 else
                 {
@@ -237,7 +220,7 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
                     quitCount++;
                     if (quitCount >= 120)
                     {
-                        NPC.position.Y += 100000f;
+                        NPC.position.Y -= 4f;
                         playerDied = true;
                         NPC.active = false;
                     }
@@ -245,6 +228,7 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
                 else
                 {
                     quitCount = 0;
+                    playerDied = false;
                 }
 
                 //////////////////
@@ -984,8 +968,6 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
             // It will look for collisions on the given line using AABB
             return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), new Vector2(Projectile.ai[0], Projectile.ai[1]),
                 new Vector2(Projectile.ai[0], Projectile.ai[1]) + unit * Distance, 50, ref point);
-
-            return false;
         }
 
         // Set custom immunity time on hitting an NPC
@@ -1249,8 +1231,6 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
             // It will look for collisions on the given line using AABB
             return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), new Vector2(shooter.Center.X, shooter.Center.Y),
                 new Vector2(shooter.Center.X, shooter.Center.Y) + unit * Distance, 472, ref point);
-
-            return false;
         }
 
         // Set custom immunity time on hitting an NPC
@@ -1435,8 +1415,6 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
             // It will look for collisions on the given line using AABB
             return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), new Vector2(shooter.Center.X + Projectile.ai[1], shooter.Center.Y + downFromCenter),
                 new Vector2(shooter.Center.X + Projectile.ai[1], shooter.Center.Y + downFromCenter) + unit * Distance, 316, ref point);
-
-            return false;
         }
 
         public override bool ShouldUpdatePosition()

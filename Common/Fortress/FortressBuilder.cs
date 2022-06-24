@@ -32,8 +32,6 @@ namespace QwertyMod.Common.Fortress
             int CenterX;
             int maxDistanceFromCenter;
             int mediumRoomCount = Main.rand.Next(8, 11);
-            int smallRoomsPerMed = 2;
-            int tinyRoomsPerMed = 3;
 
             if (Main.dungeonX < Main.maxTilesX * .5f)
             {

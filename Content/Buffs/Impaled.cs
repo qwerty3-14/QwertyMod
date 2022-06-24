@@ -21,7 +21,6 @@ namespace QwertyMod.Content.Buffs
                 npc.lifeRegen = 0;
             }
             int JavelinCount = 0;
-            int num6 = 1;
             int impaleDamage = 0;
             for (int i = 0; i < 1000; i++)
             {

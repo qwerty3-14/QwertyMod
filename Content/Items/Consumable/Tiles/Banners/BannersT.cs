@@ -7,7 +7,6 @@ using Terraria.Enums;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 using static Terraria.ModLoader.ModContent;
-using Terraria.DataStructures;
 
 namespace QwertyMod.Content.Items.Consumable.Tiles.Banners
 {
