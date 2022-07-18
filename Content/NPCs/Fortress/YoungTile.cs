@@ -32,6 +32,12 @@ namespace QwertyMod.Content.NPCs.Fortress
             NPC.damage = 28;
             NPC.defense = 18;
             NPC.lifeMax = 30;
+            
+            if(NPC.downedGolemBoss)
+            {
+                NPC.lifeMax = 200;
+                NPC.damage = 80;
+            }
             NPC.value = 50;
             //NPC.alpha = 100;
             //NPC.behindTiles = true;
@@ -47,6 +53,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             //banner = NPC.type;
             //bannerItem = mod.ItemType("HopperBanner");
             NPC.buffImmune[BuffID.Confused] = false;
+            NPC.GetGlobalNPC<FortressNPCGeneral>().contactDamageToInvaders = true;
         }
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
         {
@@ -143,11 +150,9 @@ namespace QwertyMod.Content.NPCs.Fortress
             }
             gravity *= num2;
             jumpSpeedY = gravity * -35;
-            //Main.NewText("gravity: " +gravity);
-            //Main.NewText("jump: " +jumpSpeedY);
-            Player player = Main.player[NPC.target];
-
-            NPC.TargetClosest(true);
+            
+            Entity player = FortressNPCGeneral.FindTarget(NPC, true);
+            
             //Main.NewText(Math.Abs(player.Center.X - NPC.Center.X));
             if (Math.Abs(player.Center.X - NPC.Center.X) < aggroDistance && Math.Abs(player.Bottom.Y - NPC.Bottom.Y) < aggroDistanceY)
             {
@@ -187,6 +192,10 @@ namespace QwertyMod.Content.NPCs.Fortress
                 {
                     frame = 1;
                 }
+            }
+            else if(timer > 0)
+            {
+                timer++;
             }
             else if (!jump)
             {

@@ -8,6 +8,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using Terraria.GameContent.Creative;
 
 namespace QwertyMod.Content.Items.Weapon.Whip.Discipline
 {
@@ -17,23 +18,12 @@ namespace QwertyMod.Content.Items.Weapon.Whip.Discipline
         {
             DisplayName.SetDefault("Discipline");
             Tooltip.SetDefault("Your minions will gain speed when attacking struck enemies");
-            //ItemID.Sets.SummonerWeaponThatScalesWithAttackSpeed[Item.type] = true;
+			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
         public override void SetDefaults()
         {
-            Item.autoReuse = false;
-            Item.useStyle = 1;
-            Item.useTime = Item.useAnimation = 20;
-            Item.width = 18;
-            Item.height = 18;
-            Item.shoot = ProjectileType<DisciplineP>();
-            Item.UseSound = SoundID.Item152;
-            Item.noMelee = true;
-            Item.DamageType = DamageClass.Summon;
-            Item.noUseGraphic = true;
-            Item.damage = 67;
-            Item.knockBack = 3f;
-            Item.shootSpeed = 4f;
+
+			Item.DefaultToWhip(ModContent.ProjectileType<DisciplineP>(), 67, 3, 4, 20);
             Item.rare = 7;
             Item.value = Item.sellPrice(0, 10, 0, 0);
         }
@@ -43,12 +33,14 @@ namespace QwertyMod.Content.Items.Weapon.Whip.Discipline
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Discipline");
-            //ProjectileID.Sets.IsAWhip[Type] = true;
+            ProjectileID.Sets.IsAWhip[Type] = true;
         }
         public override void WhipDefaults()
         {
+            Projectile.WhipSettings.Segments = 20;
+			Projectile.WhipSettings.RangeMultiplier = 2f;
+
             originalColor = new Color(128, 39, 83);
-            whipRangeMultiplier = 2f;
             fallOff = 0.15f;
             tag = BuffType<DisciplineTag>();
         }

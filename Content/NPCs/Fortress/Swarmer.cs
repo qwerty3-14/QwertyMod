@@ -37,6 +37,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             NPC.npcSlots = 0.05f;
             NPC.noTileCollide = true;
             NPC.buffImmune[BuffID.Confused] = false;
+            NPC.GetGlobalNPC<FortressNPCGeneral>().contactDamageToInvaders = true;
         }
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
         {
@@ -87,8 +88,7 @@ namespace QwertyMod.Content.NPCs.Fortress
                     freindCount++;
                 }
             }
-            Player player = Main.player[NPC.target];
-            NPC.velocity = Vector2.Zero;
+            Entity player = FortressNPCGeneral.FindTarget(NPC, true);
             float towardsPlayer = (player.Center - NPC.Center).ToRotation();
             if (freindCount >= 4)
             {

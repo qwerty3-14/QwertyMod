@@ -42,6 +42,11 @@ namespace QwertyMod.Content.NPCs.Fortress
             NPC.damage = 20;
             NPC.defense = 18;
             NPC.lifeMax = 65;
+
+            if(NPC.downedGolemBoss)
+            {
+                NPC.lifeMax = 600;
+            }
             DrawOffsetY = -4;
             NPC.value = 100;
             //NPC.alpha = 100;
@@ -124,6 +129,7 @@ namespace QwertyMod.Content.NPCs.Fortress
 
         public override void AI()
         {
+            NPC.damage = 0;
             NPC.GetGlobalNPC<FortressNPCGeneral>().fortressNPC = true;
 
             NPC.dontTakeDamage = false;
@@ -203,18 +209,18 @@ namespace QwertyMod.Content.NPCs.Fortress
                     }
                 }
                 //NPC.TargetClosest(true);
-                Player player = Main.player[NPC.target];
-                if (Collision.CanHit(shootFrom, 0, 0, player.Center, 0, 0) && (player.Center - NPC.Center).Length() < 1000)
+                Entity player = FortressNPCGeneral.FindTarget(NPC, false);
+                if (Collision.CanHitLine(shootFrom, 0, 0, player.Center, 0, 0) && (player.Center - NPC.Center).Length() < 1000)
                 {
                     NPC.velocity.X = 0;
                     NPC.velocity.Y = 0;
-                    aimDirection = (player.Center - NPC.Center).ToRotation();
+                    aimDirection = (player.Center - shootFrom).ToRotation();
                     timer++;
                     if (timer > 180)
                     {
                         float shootSpeed = 24;
 
-                        Projectile.NewProjectile(new EntitySource_Misc(""),  shootFrom.X, shootFrom.Y, (float)Math.Cos(aimDirection) * shootSpeed, (float)Math.Sin(aimDirection) * shootSpeed, ProjectileType<MollusketSnipe>(), 15, 0, player.whoAmI);
+                        Projectile.NewProjectile(new EntitySource_Misc(""),  shootFrom.X, shootFrom.Y, (float)Math.Cos(aimDirection) * shootSpeed, (float)Math.Sin(aimDirection) * shootSpeed, ProjectileType<MollusketSnipe>(), NPC.downedGolemBoss ? 50 : 15, 0, 0);
                         timer = 0;
                     }
                     if (timer > 60)
@@ -302,7 +308,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             spriteBatch.Draw(texture, new Vector2(NPC.Center.X - screenPos.X, NPC.Center.Y - screenPos.Y),
                        NPC.frame, drawColor, NPC.rotation,
                        new Vector2(NPC.width * 0.5f, NPC.height * 0.5f), 1f, 0, 0f);
-            Player player = Main.player[NPC.target];
+            Entity player = FortressNPCGeneral.FindTarget(NPC, false);
 
             if (alternateColor)
             {
@@ -377,6 +383,8 @@ namespace QwertyMod.Content.NPCs.Fortress
             Projectile.timeLeft = 600;
             Projectile.DamageType = DamageClass.Ranged;
             Projectile.extraUpdates = 3;
+            Projectile.GetGlobalProjectile<FortressNPCProjectile>().isFromFortressNPC = true;
+            Projectile.friendly = true;
         }
 
         public override bool PreDraw(ref Color lightColor)

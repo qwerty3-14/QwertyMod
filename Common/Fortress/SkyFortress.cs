@@ -41,8 +41,20 @@ namespace QwertyMod.Common.Fortress
                 }
                 else
                 {
-
-                    if (Main.hardMode)
+                    if(NPC.downedGolemBoss)
+                    {
+                        if (Main.dayTime)
+                        {
+                            spawnRate = (int)((spawnRate *  15f) / defaultSpawnRate);
+                            maxSpawns = (int)((maxSpawns *  24f) / defaultmaxSpawn);
+                        }
+                        else
+                        {
+                            spawnRate = (int)((spawnRate *  17f) / defaultSpawnRate);
+                            maxSpawns = (int)((maxSpawns *  20f) / defaultmaxSpawn);
+                        }
+                    }
+                    else if (Main.hardMode)
                     {
                         if (Main.dayTime)
                         {

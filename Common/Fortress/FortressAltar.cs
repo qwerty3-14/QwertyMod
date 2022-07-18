@@ -46,7 +46,6 @@ namespace QwertyMod.Common.Fortress
                     {
                         if (Main.netMode == 0)
                         {
-                            //QwertyWorld.FortressBossQuotes();
                             int npcID = NPC.NewNPC(NPC.GetBossSpawnSource(player.whoAmI),  i * 16, j * 16 - 200, NPCType<FortressBoss>());
                         }
                         else

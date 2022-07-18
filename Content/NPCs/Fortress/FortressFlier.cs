@@ -10,6 +10,9 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Terraria.GameContent;
 
 namespace QwertyMod.Content.NPCs.Fortress
 {
@@ -23,12 +26,17 @@ namespace QwertyMod.Content.NPCs.Fortress
 
         public override void SetDefaults()
         {
-            NPC.width = 56; //should be the same as your npc's frame width
+            NPC.width = 16; //should be the same as your npc's frame width
             NPC.height = 48;//should be the same as your npc's frame height
             NPC.aiStyle = -1; // -1 is blank (we will write our own)
             NPC.damage = 50; // damage the enemy does on contact automaticly doubled in expert
             NPC.defense = 28; // defense of enemy
             NPC.lifeMax = 330; //maximum life doubled automaticly in expert
+            
+            if(NPC.downedGolemBoss)
+            {
+                NPC.lifeMax = 660;
+            }
             NPC.value = 100; // how much $$ it drops
             NPC.HitSound = SoundID.NPCHit1; //sfx when hit
             NPC.DeathSound = SoundID.NPCDeath1; // sfx when killed
@@ -85,8 +93,7 @@ namespace QwertyMod.Content.NPCs.Fortress
                 //I put stuff here I want to only run once
                 runOnce = false;
             }
-            Player player = Main.player[NPC.target]; // sets the variable player needed to locate the player
-            NPC.TargetClosest(true); // give the npc a target
+            Entity player = FortressNPCGeneral.FindTarget(NPC, true);
 
             playerDistance = (player.Center - NPC.Center).Length(); // finds the distance between this enemy and player
 
@@ -108,7 +115,7 @@ namespace QwertyMod.Content.NPCs.Fortress
                         float shootDirection = (player.Center - NPC.Center).ToRotation(); // find the direction the player is in
                         for (int p = -1; p < 2; p++) //this will repeat 3 times for 3 projectiles
                         {
-                            Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Center, QwertyMethods.PolarVector(6, shootDirection + ((float)Math.PI / 8 * p)), ProjectileType<FortressHarpyProjectile>(), damage, player.whoAmI); // shoots a projectile
+                            Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Center, QwertyMethods.PolarVector(6, shootDirection + ((float)Math.PI / 8 * p)), ProjectileType<FortressHarpyProjectile>(), damage, 0, 0); // shoots a projectile
                         }
                         attackTimer = 0; // resets attackTimer needer for the once per second effect
                     }
@@ -175,8 +182,15 @@ namespace QwertyMod.Content.NPCs.Fortress
 
         public override void FindFrame(int frameHeight) // this part takes care of animations
         {
-            NPC.spriteDirection = faceDirection;
+            NPC.spriteDirection = -faceDirection;
             NPC.frame.Y = frameHeight * frame;
+        }
+        public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+        {
+            spriteBatch.Draw(TextureAssets.Npc[NPC.type].Value, NPC.Center - screenPos,
+            NPC.frame, drawColor, NPC.rotation,
+            new Vector2(TextureAssets.Npc[NPC.type].Width() * 0.5f, NPC.height * 0.5f), 1f, NPC.spriteDirection != 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0f);
+            return false;
         }
     }
 
@@ -198,6 +212,8 @@ namespace QwertyMod.Content.NPCs.Fortress
             Projectile.penetrate = -1;
             Projectile.timeLeft = 120;
             Projectile.tileCollide = true;
+            Projectile.GetGlobalProjectile<FortressNPCProjectile>().isFromFortressNPC = true;
+            Projectile.friendly = true;
         }
 
         public int dustTimer;

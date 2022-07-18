@@ -50,7 +50,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.RhuthiniumBarrage
             Item.shoot = ProjectileType<RhuthiniumBarrageLauncher>();
             Item.shootSpeed = 0f;
             Item.channel = true;
-            Item.DamageType = DamageClass.Summon;
+            Item.DamageType = DamageClass.Generic;
         }
         public override void AddRecipes()
         {

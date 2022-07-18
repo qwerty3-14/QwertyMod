@@ -78,8 +78,25 @@ namespace QwertyMod.Common
         {
             tasks.Add( new PassLegacy("Placing ore in space!", delegate (GenerationProgress progress, GameConfiguration configuration)
             {
-                PlaceMoons();
+                PlaceOreInIslands();
             }));
+        }
+        public static void PlaceOreInIslands()
+        {
+            for(int i =0; i < Main.maxTilesX; i++)
+            {
+                for(int j =0; j < Main.maxTilesY / 4; j++) 
+                {
+                    if(Main.tile[i, j].HasTile && Main.tile[i, j].TileType == TileID.Dirt && Main.tile[i, j+1].TileType == TileID.Cloud)
+                    {
+                        int amt = WorldGen.genRand.Next(2, 5);
+                        for(int k =0; k < amt; k++)
+                        {
+                            WorldGen.PlaceTile(i, j + 1 + k, TileType<LuneOreT>(), true, true);
+                        }
+                    }
+                }
+            }
         }
         public static void PlaceMoons()
         {
@@ -165,6 +182,23 @@ namespace QwertyMod.Common
         public override void Action(CommandCaller caller, string input, string[] args)
         {
             OreGeneration.PlaceMoons();
+        }
+    }
+    internal class LuneOre : ModCommand
+    {
+        public override CommandType Type
+        {
+            get { return CommandType.Chat; }
+        }
+
+        public override string Command
+        {
+            get { return "luneOre"; }
+        }
+
+        public override void Action(CommandCaller caller, string input, string[] args)
+        {
+            OreGeneration.PlaceOreInIslands();
         }
     }
 }

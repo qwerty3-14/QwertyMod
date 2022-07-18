@@ -11,6 +11,7 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.UI;
+using QwertyMod.Content.Items.Weapon.Ranged.Gun.ChromeShotgun;
 
 namespace QwertyMod.Common.PlayerLayers
 {
@@ -45,7 +46,6 @@ namespace QwertyMod.Common.PlayerLayers
 			if (heldItem.TryGetGlobalItem<ItemUseGlow>(out result))
 			{
 				Texture2D glowTexture = result.glowTexture;
-
 				if (glowTexture != null)
 				{
 

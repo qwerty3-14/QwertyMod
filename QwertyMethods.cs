@@ -10,6 +10,7 @@ using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
 using Terraria.DataStructures;
 using Terraria.ID;
+using Terraria.Chat;
 
 namespace QwertyMod
 {
@@ -232,7 +233,41 @@ namespace QwertyMod
             float calculatedShootAngle = angleToTarget - (float)Math.Asin((targetSpeed * time * (float)Math.Sin(z)) / (shootSpeed * time));
             return calculatedShootAngle;
         }
+        /// <summary>
+        /// give an angle to shoot at to attempt to hit a moving target, returns NaN when this is impossible, includes a shoot Offest
+        /// </summary>
+        public static float PredictiveAimWithOffset(Vector2 shootFrom, float shootSpeed, Vector2 targetPos, Vector2 targetVelocity, float shootOffset)
+        {
+            float angleToTarget = (targetPos - shootFrom).ToRotation();
+            float targetTraj = targetVelocity.ToRotation();
+            float targetSpeed = targetVelocity.Length();
+            float dist = (targetPos - shootFrom).Length();
+            if (dist < shootOffset)
+            {
+                shootOffset = 0;
+            }
 
+            //imagine a tirangle between the shooter, its target and where it think the target will be in the future
+            // we need to find an angle in the triangle z this is the angle located at the target's corner
+            float z = (float)Math.PI + (targetTraj - angleToTarget);
+
+            //with this angle z we can now use the law of cosines to find time
+            //the side opposite of z is equal to shootSpeed * time
+            //the other sides are dist and targetSpeed * time
+            //putting these values into law of cosines gets (shootSpeed * time + shootOffset)^2 = (targetSpeed * time)^2 + dist^2 -2*targetSpeed*time*cos(z)
+            //we can rearange it to (shootSpeed^2 - targetSpeed^2)time^2 + (2*targetSpeed*dist*cos(z) + 2*shootOffest*shootSpeed)*time + shootOffset^2 - dist^2 = 0, this is a quadratic!
+
+            //here we use the quadratic formula to find time
+            float a = shootSpeed * shootSpeed - targetSpeed * targetSpeed;
+            float b = 2 * targetSpeed * dist * (float)Math.Cos(z) + 2 * shootOffset * shootSpeed;
+            float c = (shootOffset * shootOffset) - (dist * dist);
+            float time = (-b + (float)Math.Sqrt(b * b - 4 * a * c)) / (2 * a);
+
+            //we now know the time allowing use to find all sides of the tirangle, now we use law of Sines to calculate the angle to shoot at.
+            float calculatedShootAngle = angleToTarget - (float)Math.Asin((targetSpeed * time * (float)Math.Sin(z)) / (shootSpeed * time));
+            return calculatedShootAngle;
+        }
+        
         //used for projectiles using ammo, the vanilla PickAmmo had a bunch of clutter we don't need
         public static bool UseAmmo(this Projectile projectile, int ammoID, ref int shoot, ref float speed, ref int Damage, ref float KnockBack, bool dontConsume = false)
         {
@@ -417,6 +452,19 @@ namespace QwertyMod
                 }
             }
             return p;
+        }
+        
+        public static void ServerClientCheck(string q)
+        {
+            if (Main.netMode == 1)
+            {
+                Main.NewText("Client says  " + q, Color.Pink);
+            }
+
+            if (Main.netMode == 2) // Server
+            {
+                ChatHelper.BroadcastChatMessage(Terraria.Localization.NetworkText.FromLiteral("Server says " + q), Color.Green);
+            }
         }
     }
     public class Poke : ModProjectile

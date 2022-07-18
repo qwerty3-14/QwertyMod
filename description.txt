@@ -29,6 +29,34 @@ Extra thanks
 
 
 Changelog
+0.8.0
+Major additions
+-Added post golem fortress enemies, that drop new useful items
+
+Minor additions
+-reintroduced ash fell staff
+-reintroduced arachnoyo
+-reintroduced chrome shotgun
+
+Bug Fixes
+-Fixed Many bugs related to Discipline
+-fixed lune and rhuthinium Bracelets' equip textures not working
+-Fixed Sky fortress causing multiplayer crashing
+-fixed polar extreminator not spawning in multiplayer
+
+Tweaks
+-Lune ore now generates in sky islands instead of giant moons
+-Lune bar cost from 4->3 ore since less ore generates
+-Biomass no longer works on coins
+-Morphs now do generic damage
+-Enchanted whetstone and fiery whetstone tooltips tweaked
+-Swordpocalypse pierce reduced from infinite to 3
+
+
+
+
+
+
 0.7.15
 -fixed the way spawn rates work in fortress and Dino Militia
 -tweaked OLORD's despawning slightly (might fix a certain bug)

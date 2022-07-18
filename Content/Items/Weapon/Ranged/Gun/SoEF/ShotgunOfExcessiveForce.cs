@@ -73,12 +73,14 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.SoEF
     {
         public bool effect = false;
         public override bool InstancePerEntity => true;
-
         public override void AI(Projectile projectile)
         {
             if (effect)
             {
-                Dust.NewDustPerfect(projectile.Center, DustType<BloodforceDust>(), Vector2.Zero);
+                if(projectile.timeLeft > 10)
+                {
+                    Dust.NewDustPerfect(projectile.Center, DustType<BloodforceDust>(), Vector2.Zero);
+                }
             }
         }
 

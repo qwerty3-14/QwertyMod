@@ -20,34 +20,22 @@ namespace QwertyMod.Content.Items.Weapon.Whip
 
         public override void SetDefaults()
         {
-			Projectile.width = 18;
-			Projectile.height = 18;
-			//Projectile.aiStyle = 165;
-			Projectile.friendly = true;
-			Projectile.penetrate = -1;
-			Projectile.tileCollide = false;
-			Projectile.scale = 1f;
-			Projectile.ownerHitCheck = true;
-			Projectile.extraUpdates = 1;
-			Projectile.usesLocalNPCImmunity = true;
-			Projectile.localNPCHitCooldown = -1;
-			Projectile.DamageType = DamageClass.Summon;
+			// This method quickly sets the whip's properties.
+			Projectile.DefaultToWhip();
+
+			// use these to change from the vanilla defaults
+			Projectile.WhipSettings.Segments = 20;
+			Projectile.WhipSettings.RangeMultiplier = 1f;
 			WhipDefaults();
 		}
 		public virtual void WhipDefaults()
         {
 
         }
-        protected int whipSegments = 20;
-		protected float whipRangeMultiplier = 1f;
 		protected Color originalColor = Color.White;
 		protected int tag = -1;
 		protected float tipScale = 1f;
 		protected float fallOff = 0.3f;
-        public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
-        {
-			ProjectileID.Sets.IsAWhip[Type] = true;
-		}
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
         {
 			Projectile.damage = (int)(Projectile.damage * (1f - fallOff));
@@ -56,42 +44,14 @@ namespace QwertyMod.Content.Items.Weapon.Whip
 				target.AddBuff(tag, 240);
 			}
 			Main.player[Projectile.owner].MinionAttackTargetNPC = target.whoAmI;
-			ProjectileID.Sets.IsAWhip[Type] = false;
 
-		}
-		
-        public override void AI()
-        {
-
-			Player player = Main.player[Projectile.owner];
-			Projectile.rotation = Projectile.velocity.ToRotation() + (float)Math.PI / 2f;
-			Projectile.ai[0] += 1f;
-			GetWhipSettings(Projectile, out var timeToFlyOut, out var _, out var _);
-			Projectile.Center = Main.GetPlayerArmPosition(Projectile) + Projectile.velocity * (Projectile.ai[0] - 1f);
-			Projectile.spriteDirection = ((!(Vector2.Dot(Projectile.velocity, Vector2.UnitX) < 0f)) ? 1 : (-1));
-			if (Projectile.ai[0] >= timeToFlyOut || player.itemAnimation == 0)
-			{
-				Projectile.Kill();
-				return;
-			}
-			player.heldProj = Projectile.whoAmI;
-			player.itemAnimation = player.itemAnimationMax - (int)(Projectile.ai[0] / (float)Projectile.MaxUpdates);
-			player.itemTime = player.itemAnimation;
-			if (Projectile.ai[0] == (float)(int)(timeToFlyOut / 2f))
-			{
-				Projectile.WhipPointsForCollision.Clear();
-				FillWhipControlPoints(Projectile, Projectile.WhipPointsForCollision);
-				Vector2 position = Projectile.WhipPointsForCollision[Projectile.WhipPointsForCollision.Count - 1];
-				SoundEngine.PlaySound(SoundID.Item153, position);
-			}
-			
 		}
 		
 		public void GetWhipSettings(Projectile proj, out float timeToFlyOut, out int segments, out float rangeMultiplier)
 		{
 			timeToFlyOut = Main.player[proj.owner].itemAnimationMax * proj.MaxUpdates;
-			segments = whipSegments;
-			rangeMultiplier = whipRangeMultiplier;
+			segments = Projectile.WhipSettings.Segments;
+			rangeMultiplier = Projectile.WhipSettings.RangeMultiplier;
 		}
 		public void FillWhipControlPoints(Projectile proj, List<Vector2> controlPoints)
 		{
@@ -235,6 +195,7 @@ namespace QwertyMod.Content.Items.Weapon.Whip
 			DrawWhip(Projectile);
 			return false;
         }
+		/*
         public override void CutTiles()
         {
 			Projectile.WhipPointsForCollision.Clear();
@@ -261,5 +222,6 @@ namespace QwertyMod.Content.Items.Weapon.Whip
 			}
 			return false;
 		}
+		*/
     }
 }

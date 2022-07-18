@@ -32,7 +32,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Bars
         }
         public override void AddRecipes()
         {
-            CreateRecipe(1).AddIngredient(ItemType<LuneOre>(), 4)
+            CreateRecipe(1).AddIngredient(ItemType<LuneOre>(), 3)
                 .AddTile(TileID.Furnaces)
                 .Register();
         }

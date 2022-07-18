@@ -39,6 +39,7 @@ using QwertyMod.Content.Items.Equipment.Armor.Lune;
 using QwertyMod.Content.Items.Equipment.Armor.Caelite;
 using QwertyMod.Content.Items.Equipment.Armor.Gale;
 using QwertyMod.Content.Items.Equipment.Armor.Vitallum;
+using QwertyMod.Content.Items.Equipment.Armor.Bionic;
 using QwertyMod.Content;
 using QwertyMod.Content.Items.MiscMaterials;
 using System.Collections.Generic;
@@ -91,6 +92,7 @@ using QwertyMod.Content.Items.Weapon.Melee.Flail.Ankylosaurus;
 using QwertyMod.Content.Items.Weapon.Magic.ExtinctionGun;
 using QwertyMod.Content.Items.Weapon.Ranged.Gun.DinoVulcan;
 using QwertyMod.Content.Items.Equipment.Accessories;
+using QwertyMod.Content.Items.Equipment.Armor.Invader;
 using Terraria.DataStructures;
 
 namespace QwertyMod
@@ -123,6 +125,10 @@ namespace QwertyMod
         public static int GaleLegFemale = 0;
         public static int VitLegMale = 0;
         public static int VitLegFemale = 0;
+        public static int BionicLegMale = 0;
+        public static int BionicLegFemale = 0;
+        public static int invaderLanderMale = 0;
+        public static int invaderLanderFemale = 0;
         public static SoundStyle FortressBlocks;
         public override void Load()
         {
@@ -179,6 +185,10 @@ namespace QwertyMod
                 GaleLegFemale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Gale/GaleSwiftRobes_FemaleLegs", EquipType.Legs, GetModItem(ItemType<GaleSwiftRobes>()));
                 VitLegMale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Vitallum/VitallumJeans_Legs", EquipType.Legs, GetModItem(ItemType<VitallumJeans>()));
                 VitLegFemale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Vitallum/VitallumJeans_FemaleLegs", EquipType.Legs, GetModItem(ItemType<VitallumJeans>()));
+                BionicLegMale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Bionic/BionicLimbs_Legs", EquipType.Legs, GetModItem(ItemType<BionicLimbs>()));
+                BionicLegFemale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Bionic/BionicLimbs_FemaleLegs", EquipType.Legs, GetModItem(ItemType<BionicLimbs>()));
+                invaderLanderMale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Invader/InvaderLanders_Legs", EquipType.Legs, GetModItem(ItemType<InvaderLanders>()));
+                invaderLanderFemale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Invader/InvaderLanders_FemaleLegs", EquipType.Legs, GetModItem(ItemType<InvaderLanders>()));
                 Main.QueueMainThreadAction(() =>
                 {
                     RuneSprites.BuildRunes();
@@ -302,6 +312,11 @@ namespace QwertyMod
                     }
 
                     break;
+                case ModMessageType.SpawnBear:
+                    Vector2 summonAt2 = reader.ReadVector2();
+                    int playerID2 = reader.ReadInt32();
+                    int npcID2 = NPC.NewNPC(NPC.GetBossSpawnSource(playerID2),  (int)summonAt2.X, (int)summonAt2.Y, NPCType<Sleeping>());
+                    break;
             }
         }
     }
@@ -310,6 +325,7 @@ namespace QwertyMod
 
         DivineCall,
         UpdateLocalCursor,
-        StartDinoEvent
+        StartDinoEvent,
+        SpawnBear
     }
 }

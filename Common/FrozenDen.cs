@@ -349,19 +349,43 @@ namespace QwertyMod.Common
         }
         public override void PreUpdateWorld()
         {
-            if (!NPC.AnyNPCs(NPCType<PolarBear>()) && !NPC.AnyNPCs(NPCType<Sleeping>()) && Main.dayTime && Main.time == 1 && BearSpawn.X != -1 && BearSpawn.Y != -1)
+            //QwertyMethods.ServerClientCheck("Time: " + Main.time + ", SpawnAt: " + BearSpawn);
+            if (!NPC.AnyNPCs(NPCType<PolarBear>()) && !NPC.AnyNPCs(NPCType<Sleeping>()) && Main.time < 100 && BearSpawn.X != -1 && BearSpawn.Y != -1)
             {
                 activeSleeper = true;
                 if (Main.netMode == NetmodeID.Server)
                     NetMessage.SendData(MessageID.WorldData); // Immediately inform clients of new world state.
-                NPC.NewNPC(new EntitySource_Misc(""), (int)BearSpawn.X, (int)BearSpawn.Y, NPCType<Sleeping>());
+                if (Main.netMode == 0)
+                {
+                    int npcID = NPC.NewNPC(NPC.GetBossSpawnSource(Main.myPlayer), (int)BearSpawn.X, (int)BearSpawn.Y, NPCType<Sleeping>());
+                }
+                else
+                {
+                    ModPacket packet = Mod.GetPacket();
+                    packet.Write((byte)ModMessageType.SpawnBear);
+                    packet.WriteVector2(new Vector2((int)BearSpawn.X, (int)BearSpawn.Y));
+                    packet.Write(Main.myPlayer);
+                    packet.Send();
+                }
+                
             }
             else if (activeSleeper && !NPC.AnyNPCs(NPCType<PolarBear>()) && !NPC.AnyNPCs(NPCType<Sleeping>()) && BearSpawn.X != -1 && BearSpawn.Y != -1)
             {
                 activeSleeper = true;
                 if (Main.netMode == NetmodeID.Server)
                     NetMessage.SendData(MessageID.WorldData); // Immediately inform clients of new world state.
-                NPC.NewNPC(new EntitySource_Misc(""), (int)BearSpawn.X, (int)BearSpawn.Y, NPCType<Sleeping>());
+                if (Main.netMode == 0)
+                {
+                    int npcID = NPC.NewNPC(NPC.GetBossSpawnSource(Main.myPlayer), (int)BearSpawn.X, (int)BearSpawn.Y, NPCType<Sleeping>());
+                }
+                else
+                {
+                    ModPacket packet = Mod.GetPacket();
+                    packet.Write((byte)ModMessageType.SpawnBear);
+                    packet.WriteVector2(new Vector2((int)BearSpawn.X, (int)BearSpawn.Y));
+                    packet.Write(Main.myPlayer);
+                    packet.Send();
+                }
             }
         }
 
