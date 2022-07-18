@@ -31,6 +31,8 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
         {
             DisplayName.SetDefault("Oversized Laser-emitting Obliteration Radiation-emitting Destroyer");
             Main.npcFrameCount[NPC.type] = 2;
+
+            NPCID.Sets.MPAllowedEnemies[NPC.type] = true; //For allowing use of SpawnOnPlayer in multiplayer
         }
 
 
@@ -95,11 +97,14 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
 
         public override void AI()
         {
-            for (int i = 0; i < 255; i++)
+            for (int i = 0; i < Main.maxPlayers; i++)
             {
-                Main.player[i].AddBuff(BuffID.ChaosState, 2);
+                Player allPlayer = Main.player[i];
+                if (allPlayer.active && !allPlayer.dead)
+                {
+                    allPlayer.AddBuff(BuffID.ChaosState, 2);
+                }
             }
-            Player player = Main.player[NPC.target];
             if (Main.expertMode)
             {
                 shotDamage = (int)(NPC.damage / 4 * 1.6f);
@@ -118,7 +123,7 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
                 NPC.ai[3] = 1;
             }
 
-            #region
+            //Start
             //////////////////
             NPC.width = (int)(320 * NPC.scale);
             NPC.height = (int)(60 * NPC.scale);
@@ -213,8 +218,8 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
                 {
                     NPC.dontTakeDamage = false;
                 }
-                player = Main.player[NPC.target];
                 NPC.TargetClosest(true);
+                Player player = Main.player[NPC.target];
                 if (!player.active || player.dead)
                 {
                     quitCount++;
@@ -231,8 +236,8 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
                     playerDied = false;
                 }
 
+                //End
                 //////////////////
-                #endregion
 
                 timer++;
                 frame = 0;
@@ -1048,11 +1053,10 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
         public override void AI()
         {
             shooter = Main.npc[(int)Projectile.ai[0]];
-            Vector2 mousePos = Main.MouseWorld;
-            Player player = Main.player[Projectile.owner];
             if (!shooter.active)
             {
                 Projectile.Kill();
+                return;
             }
             #region Set projectile position
             /*
@@ -1323,12 +1327,11 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
         public override void AI()
         {
             shooter = Main.npc[(int)Projectile.ai[0]];
-            Vector2 mousePos = Main.MouseWorld;
-            Player player = Main.player[Projectile.owner];
 
             if (!shooter.active)
             {
                 Projectile.Kill();
+                return;
             }
             #region Set projectile position
 
