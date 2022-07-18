@@ -34,14 +34,19 @@ namespace QwertyMod.Content.Items.Consumable.BossSummon
 
         public override bool CanUseItem(Player player)
         {
-            if (!NPC.AnyNPCs(NPCType<OLORDv2>()))
+            return !NPC.AnyNPCs(NPCType<OLORDv2>());
+        }
+
+        public override bool? UseItem(Player player)
+        {
+            if (player.whoAmI == Main.myPlayer)
             {
-                NPC.SpawnOnPlayer(player.whoAmI, NPCType<OLORDv2>());
-                SoundEngine.PlaySound(SoundID.Roar, player.position);
-                Item.stack--;
+                SoundEngine.PlaySound(SoundID.Roar, player.Center);
+                QwertyMethods.NPCSpawnOnPlayer(player, NPCType<OLORDv2>());
                 return true;
             }
-            return false;
+
+            return base.UseItem(player);
         }
         public override void AddRecipes()
         {

@@ -462,6 +462,21 @@ namespace QwertyMod
                 ChatHelper.BroadcastChatMessage(Terraria.Localization.NetworkText.FromLiteral("Server says " + q), Color.Green);
             }
         }
+
+        /// <summary>
+        /// This should only be called on the local player. Spawns the given NPC in singleplayer, or sends to the server to spawn it there (if the NPC isn't already alive!)
+        /// </summary>
+        public static void NPCSpawnOnPlayer(Player player, int type)
+        {
+            if (Main.netMode != NetmodeID.MultiplayerClient)
+            {
+                NPC.SpawnOnPlayer(player.whoAmI, type);
+            }
+            else
+            {
+                NetMessage.SendData(MessageID.SpawnBoss, number: player.whoAmI, number2: type);
+            }
+        }
     }
     public class Poke : ModProjectile
     {
