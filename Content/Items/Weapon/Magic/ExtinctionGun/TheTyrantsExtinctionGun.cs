@@ -45,18 +45,21 @@ namespace QwertyMod.Content.Items.Weapon.Magic.ExtinctionGun
             return true;
         }
 
-        public override bool CanUseItem(Player player)
+        public override void UseAnimation(Player player)
+        {
+            SoundEngine.PlaySound(SoundID.DoubleJump, player.Center);
+        }
+
+        public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
         {
             if (player.altFunctionUse == 2)
             {
-                Item.shoot = ProjectileType<MosquittoF>();
+                type = ProjectileType<MosquittoF>();
             }
             else
             {
-                Item.shoot = ProjectileType<SnowFlakeF>();
+                type = ProjectileType<SnowFlakeF>();
             }
-            SoundEngine.PlaySound(SoundID.DoubleJump, player.Center);
-            return true;
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)

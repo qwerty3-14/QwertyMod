@@ -263,7 +263,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
                 //Player player = Main.player[Projectile.owner];
                 if (Main.netMode != 1)
                 {
-                    for (int i = 0; i < 255; i++)
+                    for (int i = 0; i < Main.maxPlayers; i++)
                     {
                         if (Main.player[i].active && (Projectile.Center - Main.player[i].Center).Length() < closest)
                         {

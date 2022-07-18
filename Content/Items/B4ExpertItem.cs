@@ -33,17 +33,22 @@ namespace QwertyMod.Content.Items
             Item.useTime = 2;
             Item.autoReuse = true;
         }
-        public override bool CanUseItem(Player player)
+
+        public override bool? UseItem(Player player)
         {
-            float direction = (Main.MouseWorld - player.Center).ToRotation();
-            float distance = (Main.MouseWorld - player.Center).Length();
-            player.armorEffectDrawShadow = true;
-            player.direction = Main.MouseWorld.X > player.Center.X ? 1 : -1;
+            if (Main.myPlayer == player.whoAmI)
+            {
+                float direction = (Main.MouseWorld - player.Center).ToRotation();
+                float distance = (Main.MouseWorld - player.Center).Length();
+                player.armorEffectDrawShadow = true;
+                player.direction = Main.MouseWorld.X > player.Center.X ? 1 : -1;
 
-            player.velocity = new Vector2((float)Math.Cos(direction), (float)Math.Sin(direction)) * distance / 10;
+                player.velocity = new Vector2((float)Math.Cos(direction), (float)Math.Sin(direction)) * distance / 10;
 
-            int dust = Dust.NewDust(player.position, player.width, player.height, DustType<B4PDust>(), 0, 0);
-            player.noFallDmg = true;
+                int dust = Dust.NewDust(player.position, player.width, player.height, DustType<B4PDust>(), 0, 0);
+                player.noFallDmg = true;
+            }
+
             return true;
         }
     }

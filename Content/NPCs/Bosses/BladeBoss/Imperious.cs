@@ -36,6 +36,9 @@ namespace QwertyMod.Content.NPCs.Bosses.BladeBoss
         {
             DisplayName.SetDefault("Imperious");
             Main.npcFrameCount[NPC.type] = 1;
+
+            NPCID.Sets.MPAllowedEnemies[NPC.type] = true; //For allowing use of SpawnOnPlayer in multiplayer
+
             NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers(0)
             {
                 CustomTexturePath = "QwertyMod/Content/NPCs/Bosses/BladeBoss/Imperious_Bestiary",
@@ -872,7 +875,7 @@ namespace QwertyMod.Content.NPCs.Bosses.BladeBoss
 
                 Player player = null;
                 float dist = -1f;
-                for (int i = 0; i < Main.player.Length; i++)
+                for (int i = 0; i < Main.maxPlayers; i++)
                 {
                     if (Main.player[i].active && (Math.Abs(Main.player[i].Center.X - Projectile.Center.X) < dist || dist == -1f))
                     {

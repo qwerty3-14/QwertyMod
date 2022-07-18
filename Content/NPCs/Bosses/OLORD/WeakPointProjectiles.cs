@@ -77,16 +77,20 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
             Projectile.timeLeft -= (int)Projectile.ai[0] - 1;
             //Player player = Main.player[Projectile.owner];
 
-            for (int p = 0; p < 255; p++)
+            for (int p = 0; p < Main.maxPlayers; p++)
             {
-                direction = (Projectile.Center - Main.player[p].Center).ToRotation();
-                horiSpeed = (float)Math.Cos(direction) * pullSpeed / 2;
-                vertSpeed = (float)Math.Sin(direction) * pullSpeed / 2;
-                Main.player[p].velocity += new Vector2(horiSpeed, vertSpeed);
-
-                for (int i = 0; i < 1; i++)
+                Player player = Main.player[p];
+                if (player.active && !player.dead)
                 {
-                    int dust = Dust.NewDust(Main.player[p].position, Main.player[p].width, Main.player[p].height, DustType<B4PDust>(), 0, 0);
+                    direction = (Projectile.Center - player.Center).ToRotation();
+                    horiSpeed = (float)Math.Cos(direction) * pullSpeed / 2;
+                    vertSpeed = (float)Math.Sin(direction) * pullSpeed / 2;
+                    player.velocity += new Vector2(horiSpeed, vertSpeed);
+
+                    for (int i = 0; i < 1; i++)
+                    {
+                        int dust = Dust.NewDust(player.position, player.width, player.height, DustType<B4PDust>(), 0, 0);
+                    }
                 }
             }
             /*

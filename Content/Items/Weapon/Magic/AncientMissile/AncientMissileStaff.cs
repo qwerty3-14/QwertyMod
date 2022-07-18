@@ -51,13 +51,12 @@ namespace QwertyMod.Content.Items.Weapon.Magic.AncientMissile
             //Item.GetGlobalItem<ItemUseGlow>().glowTexture = Request<Texture2D>("Items/AncientItems/AncientWave_Glow");
         }
 
-        public override bool CanUseItem(Player player)
+        public override void UseAnimation(Player player)
         {
             if (player.statMana > Item.mana)
             {
                 SoundEngine.PlaySound(SoundID.MaxMana, player.position);
             }
-            return base.CanUseItem(player);
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
