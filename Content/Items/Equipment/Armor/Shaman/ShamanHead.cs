@@ -1,12 +1,8 @@
-using Microsoft.Xna.Framework;
 using QwertyMod.Common;
-using System;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.GameInput;
 using Terraria.ID;
-using Terraria.Localization;
 using Terraria.ModLoader;
 using static Terraria.ID.ArmorIDs;
 using static Terraria.ModLoader.ModContent;
@@ -57,7 +53,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Shaman
             string s = "Please go to conrols and bind the 'Yet another special ability key'";
             foreach (string key in QwertyMod.YetAnotherSpecialAbility.GetAssignedKeys()) //get's the string of the hotkey's name
             {
-                s = "Press the "+ key + " key to to call war spirits which temporarily make minions attack much faster and you gain 40% melee speed! \n 60 second cooldown";
+                s = "Press the " + key + " key to to call war spirits which temporarily make minions attack much faster and you gain 40% melee speed! \n 60 second cooldown";
             }
             player.setBonus = s;
             player.GetModPlayer<ShamanHeadEffects>().setBonus = true;

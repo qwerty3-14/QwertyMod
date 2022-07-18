@@ -1,4 +1,3 @@
-using Microsoft.Xna.Framework;
 using QwertyMod.Content.Items.Consumable.Tiles.Bars;
 using Terraria;
 using Terraria.GameContent.Creative;

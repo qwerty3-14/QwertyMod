@@ -1,12 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using QwertyMod.Common;
 using QwertyMod.Common.PlayerLayers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
@@ -26,33 +20,33 @@ namespace QwertyMod.Content.Items.Weapon.Minion.AncientMinion
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
         }
-        
+
 
         public override void SetDefaults()
         {
-            Item.damage = 12;  
-            Item.mana = 20;      
-            Item.width = 72;   
-            Item.height = 72;     
-            Item.useTime = 25;   
-            Item.useAnimation = 25;    
-            Item.useStyle = ItemUseStyleID.Swing;  
+            Item.damage = 12;
+            Item.mana = 20;
+            Item.width = 72;
+            Item.height = 72;
+            Item.useTime = 25;
+            Item.useAnimation = 25;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.noMelee = true;
-            Item.knockBack = 1f;  
+            Item.knockBack = 1f;
             Item.value = 150000;
             Item.rare = ItemRarityID.Orange;
-            Item.UseSound = SoundID.Item8;  
-            Item.autoReuse = true;  
-            Item.shoot = ProjectileType<AncientMinionFreindly>();  
-            Item.DamageType = DamageClass.Summon;    
-            Item.buffType = BuffType<AncientMinionB>(); 
+            Item.UseSound = SoundID.Item8;
+            Item.autoReuse = true;
+            Item.shoot = ProjectileType<AncientMinionFreindly>();
+            Item.DamageType = DamageClass.Summon;
+            Item.buffType = BuffType<AncientMinionB>();
             Item.buffTime = 3600;
-            
+
             if (!Main.dedServ)
             {
                 Item.GetGlobalItem<ItemUseGlow>().glowTexture = Request<Texture2D>("QwertyMod/Content/Items/Weapon/Minion/AncientMinion/AncientMinionStaff_Glow").Value;
             }
-            
+
         }
         /*
         public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)

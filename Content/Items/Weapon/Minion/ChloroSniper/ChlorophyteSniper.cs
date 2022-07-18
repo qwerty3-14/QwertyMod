@@ -1,12 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Common;
-using QwertyMod.Content.Buffs;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -76,7 +71,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.ChloroSniper
             timer++;
             if (sniperCount != 0)
             {
-                hoverOffset = (float)Math.Sin(player.GetModPlayer<MinionManager>().mythrilPrismRotation * 4f  + (float)Math.PI* ((float)identity / sniperCount)) * 6;
+                hoverOffset = (float)Math.Sin(player.GetModPlayer<MinionManager>().mythrilPrismRotation * 4f + (float)Math.PI * ((float)identity / sniperCount)) * 6;
 
                 Projectile.ai[0] = 40f;
                 flyTo = player.Center + QwertyMethods.PolarVector(35f + 7f * sniperCount, -(float)Math.PI * ((float)(identity + 1) / (sniperCount + 1)));
@@ -104,7 +99,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.ChloroSniper
                 float rot = Projectile.velocity.X * (float)Math.PI / 30;
                 Projectile.rotation.SlowRotation(rot, (float)Math.PI / 30);
                 int dustAmt = Math.Min(timer / 60, 4);
-                for(int i =0; i < dustAmt; i++)
+                for (int i = 0; i < dustAmt; i++)
                 {
                     if (Main.rand.Next(2) == 0)
                     {

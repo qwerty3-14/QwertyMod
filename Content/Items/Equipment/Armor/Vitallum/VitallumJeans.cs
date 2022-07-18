@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -50,8 +49,8 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
         }
         public override void OnCraft(Recipe recipe)
         {
-            Main.LocalPlayer.QuickSpawnItem(new EntitySource_Misc(""),ItemType<VitallumCoreUncharged>(), 1);
+            Main.LocalPlayer.QuickSpawnItem(new EntitySource_Misc(""), ItemType<VitallumCoreUncharged>(), 1);
         }
     }
-    
+
 }

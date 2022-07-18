@@ -201,7 +201,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
                         switch (attack)
                         {
                             case 0:
-                                Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.position + gunOffset + QwertyMethods.PolarVector(56, gunRot), QwertyMethods.PolarVector(10f, gunRot + spread), ProjectileType<SnowFlake>(), damage, 3f, Main.myPlayer);
+                                Projectile.NewProjectile(new EntitySource_Misc(""), NPC.position + gunOffset + QwertyMethods.PolarVector(56, gunRot), QwertyMethods.PolarVector(10f, gunRot + spread), ProjectileType<SnowFlake>(), damage, 3f, Main.myPlayer);
                                 break;
 
                             case 1:
@@ -209,7 +209,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
                                 break;
 
                             case 2:
-                                Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Center + new Vector2(-24 * NPC.direction, -74f), Vector2.UnitY * -40f, ProjectileType<MeteorLaunch>(), damage, 3f, Main.myPlayer);
+                                Projectile.NewProjectile(new EntitySource_Misc(""), NPC.Center + new Vector2(-24 * NPC.direction, -74f), Vector2.UnitY * -40f, ProjectileType<MeteorLaunch>(), damage, 3f, Main.myPlayer);
 
                                 break;
                         }
@@ -237,7 +237,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
                         if (Main.netMode != 1)
                         {
                             int Xvar = Main.rand.Next(-750, 750);
-                            Projectile.NewProjectile(new EntitySource_Misc(""),  player.Center.X + Xvar * 1.0f, player.Center.Y - 800f, 0f, 10f, ProjectileType<MeteorFall>(), damage, 3f, Main.myPlayer);
+                            Projectile.NewProjectile(new EntitySource_Misc(""), player.Center.X + Xvar * 1.0f, player.Center.Y - 800f, 0f, 10f, ProjectileType<MeteorFall>(), damage, 3f, Main.myPlayer);
                         }
                         meteorTime = 0;
                     }

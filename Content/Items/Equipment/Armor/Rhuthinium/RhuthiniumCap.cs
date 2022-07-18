@@ -3,7 +3,6 @@ using QwertyMod.Content.Items.Consumable.Tiles.Bars;
 using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
-using Terraria.Localization;
 using Terraria.ModLoader;
 using static Terraria.ID.ArmorIDs;
 using static Terraria.ModLoader.ModContent;

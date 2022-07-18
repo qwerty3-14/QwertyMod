@@ -144,7 +144,7 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
                     {
                         if (!beamAttack)
                         {
-                            Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Center + QwertyMethods.PolarVector(50, NPC.rotation), QwertyMethods.PolarVector(5, NPC.rotation), ProjectileType<HydraBreath>(), projDamge, 0f, Main.myPlayer);
+                            Projectile.NewProjectile(new EntitySource_Misc(""), NPC.Center + QwertyMethods.PolarVector(50, NPC.rotation), QwertyMethods.PolarVector(5, NPC.rotation), ProjectileType<HydraBreath>(), projDamge, 0f, Main.myPlayer);
                         }
                     }
                     attacking = false;
@@ -182,7 +182,7 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
                     }
                     else if (attackTimer == -beamTime / 2)
                     {
-                        laser = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Center.X, NPC.Center.Y, 0f, 0f, ProjectileType<HydraBeamT>(), (int)(projDamge * 1.5f), 3f, Main.myPlayer, NPC.whoAmI, 420)];
+                        laser = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), NPC.Center.X, NPC.Center.Y, 0f, 0f, ProjectileType<HydraBeamT>(), (int)(projDamge * 1.5f), 3f, Main.myPlayer, NPC.whoAmI, 420)];
                     }
                     else
                     {
@@ -333,7 +333,7 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
 
         public override void OnKill()
         {
-            
+
         }
 
         public override void SendExtraAI(BinaryWriter writer)

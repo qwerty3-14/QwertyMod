@@ -1,26 +1,25 @@
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using QwertyMod.Content.Items.MiscMaterials;
 using QwertyMod.Common;
 using QwertyMod.Content.Items.Consumable.BossBag;
 using QwertyMod.Content.Items.Consumable.Tiles.Trophy.Hydra;
+using QwertyMod.Content.Items.MiscMaterials;
 using QwertyMod.Content.Items.Tool.FishingRod;
-using QwertyMod.Content.Items.Weapon.Morphs.HydraBarrage;
+using QwertyMod.Content.Items.Tool.Mining;
 using QwertyMod.Content.Items.Weapon.Magic.HydraBeam;
-using QwertyMod.Content.Items.Weapon.Ranged.Gun;
-using QwertyMod.Content.Items.Weapon.Minion.HydraHead;
+using QwertyMod.Content.Items.Weapon.Magic.HydraMissile;
 using QwertyMod.Content.Items.Weapon.Melee.Javelin.Hydra;
 using QwertyMod.Content.Items.Weapon.Melee.Spear.Hydrent;
-using QwertyMod.Content.Items.Tool.Mining;
-using QwertyMod.Content.Items.Weapon.Magic.HydraMissile;
+using QwertyMod.Content.Items.Weapon.Minion.HydraHead;
+using QwertyMod.Content.Items.Weapon.Morphs.HydraBarrage;
+using QwertyMod.Content.Items.Weapon.Ranged.Gun;
+using System.Collections.Generic;
 using Terraria;
+using Terraria.DataStructures;
+using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
-using Terraria.GameContent.Bestiary;
-using System.Collections.Generic;
-using Terraria.DataStructures;
 
 namespace QwertyMod.Content.NPCs.Bosses.Hydra
 {
@@ -145,7 +144,7 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
                             NPC.lifeMax += 4;
                         }
                     }
-                    if(Main.masterMode)
+                    if (Main.masterMode)
                     {
                         NPC.lifeMax += (int)(NPC.lifeMax * 0.5f);
                     }
@@ -256,6 +255,6 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
             //This sets downedMinionBoss to true, and if it was false before, it initiates a lantern night
             NPC.SetEventFlagCleared(ref DownedBossSystem.downedHydra, -1);
         }
-        
+
     }
 }

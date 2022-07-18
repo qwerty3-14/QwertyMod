@@ -105,10 +105,10 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
             }
             else
             {
-                
+
                 NPC.TargetClosest(true);
                 NPC.spriteDirection = NPC.direction;
-                if ( timer % 10 == 0)
+                if (timer % 10 == 0)
                 {
                     if (frame == 3)
                     {
@@ -125,7 +125,7 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
                     NPC.velocity = NPC.velocity.SafeNormalize(-Vector2.UnitY) * flySpeed;
                 }
             }
-            if(timer > 360)
+            if (timer > 360)
             {
                 NPC Penguin = Main.npc[NPC.NewNPC(new EntitySource_Misc(""), (int)NPC.Top.X, (int)NPC.Top.Y, NPCID.Penguin)];
                 NPC.active = false;

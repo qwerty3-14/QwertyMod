@@ -1,5 +1,4 @@
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Common;
 using QwertyMod.Content.Items.Consumable.BossBag;
 using QwertyMod.Content.Items.Consumable.Tiles.Trophy.Polar;
@@ -51,11 +50,11 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
         {
             // Sets the description of this NPC that is listed in the bestiary
-            bestiaryEntry.Info.AddRange(new List<IBestiaryInfoElement> 
+            bestiaryEntry.Info.AddRange(new List<IBestiaryInfoElement>
             {
                 BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.UndergroundSnow,
                 new FlavorTextBestiaryInfoElement("Wait? Polar bears and penguins interacting? That's not possible! Polar bears are from the south pole and penguins from the north! Immersion ruined!")
-            });;
+            }); ;
         }
         private const int IdleFrame = 4;
         private const int JumpFrame = 1;
@@ -140,15 +139,15 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
             }
             else
             {
-                if(Main.expertMode && landed)
+                if (Main.expertMode && landed)
                 {
-                    timer+= 1 + 2 * (1f - (float)NPC.life/NPC.lifeMax);
+                    timer += 1 + 2 * (1f - (float)NPC.life / NPC.lifeMax);
                 }
                 else
                 {
                     timer++;
                 }
-                
+
                 if (timer > resetAttacks)
                 {
                     NPC.velocity.X = 10 * NPC.direction;
@@ -162,7 +161,7 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
                     }
                     attackCounter = 0;
                     attackCycle++;
-                    if(attackCycle == 7)
+                    if (attackCycle == 7)
                     {
                         attackCycle = 0;
                     }
@@ -272,7 +271,7 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
                             int ceilingHeight = (int)((float)Math.Sin(((float)(x + (denLength / 2)) / (float)denLength) * (float)Math.PI) * (float)denUpperHeight);
                             Vector2 spawnPos = FrozenDen.BearSpawn + new Vector2(x * 16, ceilingHeight * -16);
                             NPC.NewNPC(new EntitySource_Misc(""), (int)spawnPos.X, (int)spawnPos.Y, NPCType<AgentPenguin>());
-                            
+
                         }
                         agentCooldown = 600;
                     }
@@ -281,7 +280,7 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
                         agentCooldown--;
                     }
                 }
-                
+
             }
         }
         public override void FindFrame(int frameHeight)

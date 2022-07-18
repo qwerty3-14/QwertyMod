@@ -2,7 +2,6 @@ using Microsoft.Xna.Framework;
 using QwertyMod.Content.Dusts;
 using QwertyMod.Content.Items.Consumable.Tiles.Bars;
 using QwertyMod.Content.Items.MiscMaterials;
-using System;
 using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;

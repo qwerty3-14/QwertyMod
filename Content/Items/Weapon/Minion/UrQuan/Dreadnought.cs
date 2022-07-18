@@ -1,11 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Common;
 using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
-using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
@@ -29,11 +27,11 @@ namespace QwertyMod.Content.Items.Weapon.Minion.UrQuan
         public override void SetDefaults()
         {
             Projectile.DamageType = DamageClass.Summon;
-            Projectile.width = 80; 
-            Projectile.height = 66;  
-            Projectile.friendly = true;  
+            Projectile.width = 80;
+            Projectile.height = 66;
+            Projectile.friendly = true;
             Projectile.ignoreWater = true;
-            Projectile.penetrate = -1; 
+            Projectile.penetrate = -1;
             Projectile.tileCollide = false;
             Projectile.minion = true;
             Projectile.minionSlots = 1;

@@ -214,7 +214,7 @@ namespace QwertyMod.Content.NPCs.Fortress
                     {
                         float shootSpeed = 24;
 
-                        Projectile.NewProjectile(new EntitySource_Misc(""),  shootFrom.X, shootFrom.Y, (float)Math.Cos(aimDirection) * shootSpeed, (float)Math.Sin(aimDirection) * shootSpeed, ProjectileType<MollusketSnipe>(), 15, 0, player.whoAmI);
+                        Projectile.NewProjectile(new EntitySource_Misc(""), shootFrom.X, shootFrom.Y, (float)Math.Cos(aimDirection) * shootSpeed, (float)Math.Sin(aimDirection) * shootSpeed, ProjectileType<MollusketSnipe>(), 15, 0, player.whoAmI);
                         timer = 0;
                     }
                     if (timer > 60)

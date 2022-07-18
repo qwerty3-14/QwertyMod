@@ -40,7 +40,7 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
         public override void OpenBossBag(Player player)
         {
             int mainLoot = 0;
-            switch(Main.rand.Next(5))
+            switch (Main.rand.Next(5))
             {
                 case 0:
                     mainLoot = ItemType<BlackHoleStaff>();
@@ -57,7 +57,7 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
             }
             player.QuickSpawnItem(new EntitySource_Misc(""), mainLoot);
 
-            if(Main.rand.Next(5) == 0)
+            if (Main.rand.Next(5) == 0)
             {
                 player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<TheDevourer>());
             }

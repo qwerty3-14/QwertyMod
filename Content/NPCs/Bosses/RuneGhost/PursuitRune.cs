@@ -1,16 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using QwertyMod.Content.Dusts;
 using QwertyMod.Common.RuneBuilder;
+using QwertyMod.Content.Dusts;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-
 using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
@@ -30,13 +24,13 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
 
         public override void AI()
         {
-            if(runOnce)
+            if (runOnce)
             {
                 runOnce = false;
                 Projectile.rotation = Projectile.velocity.ToRotation();
             }
             timer++;
-            if(timer > 119 && timer % 120 == 0)
+            if (timer > 119 && timer % 120 == 0)
             {
                 Projectile.extraUpdates++;
                 for (int d = 0; d <= 40; d++)

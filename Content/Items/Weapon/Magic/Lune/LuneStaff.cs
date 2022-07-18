@@ -10,7 +10,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
 
-namespace QwertyMod.Content.Items.Weapon.Magic.Lune      
+namespace QwertyMod.Content.Items.Weapon.Magic.Lune
 {
     public class LuneStaff : ModItem
     {
@@ -49,7 +49,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Lune
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            for(int i =0; i <1000; i++)
+            for (int i = 0; i < 1000; i++)
             {
                 if (Main.projectile[i].type == type && Main.projectile[i].owner == player.whoAmI && Main.projectile[i].active)
                 {

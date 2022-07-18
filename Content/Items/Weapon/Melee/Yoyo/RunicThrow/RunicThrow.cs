@@ -99,7 +99,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.RunicThrow
         // ai[0] being negative makes the yoyo move back towards the player
         // Any AI method can be used for dust, spawning projectiles, etc specific to your yoyo.
 
-        public override void PostDraw( Color lightColor)
+        public override void PostDraw(Color lightColor)
         {
             Main.EntitySpriteDraw(Request<Texture2D>("QwertyMod/Content/Items/Weapon/Melee/Yoyo/RunicThrow/RunicThrowP_Glow").Value, new Vector2(Projectile.Center.X - Main.screenPosition.X, Projectile.Center.Y - Main.screenPosition.Y),
                         new Rectangle(0, Projectile.frame * Projectile.height, Projectile.width, Projectile.height), Color.White, Projectile.rotation,

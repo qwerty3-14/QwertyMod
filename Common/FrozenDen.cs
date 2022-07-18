@@ -328,11 +328,11 @@ namespace QwertyMod.Common
         }
         static bool SafeDenLocation(int x, int y)
         {
-            for(int i = x -60; i < 60; i++)
+            for (int i = x - 60; i < 60; i++)
             {
-                for(int j = (int)Main.worldSurface; j < y+10; j++)
+                for (int j = (int)Main.worldSurface; j < y + 10; j++)
                 {
-                    if(Main.tile[i,j].TileType == TileID.Containers || Main.tile[i, j].TileType == TileID.Containers2 || Main.tile[i, j].TileType == TileID.FakeContainers || Main.tile[i, j].TileType == TileID.FakeContainers2)
+                    if (Main.tile[i, j].TileType == TileID.Containers || Main.tile[i, j].TileType == TileID.Containers2 || Main.tile[i, j].TileType == TileID.FakeContainers || Main.tile[i, j].TileType == TileID.FakeContainers2)
                     {
                         return false;
                     }

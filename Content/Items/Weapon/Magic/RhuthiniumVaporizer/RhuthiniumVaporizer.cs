@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Content.Dusts;
 using QwertyMod.Content.Items.Consumable.Tiles.Bars;
 using System;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent;
@@ -184,7 +183,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RhuthiniumVaporizer
             return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), Projectile.Center, Projectile.Center + QwertyMethods.PolarVector(beamLength, Projectile.rotation), 12, ref point);
         }
     }
-    
+
     public class DrawVaporizer : PlayerDrawLayer
     {
         public override void SetStaticDefaults()
@@ -225,7 +224,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RhuthiniumVaporizer
                     drawInfo.DrawDataCache.Add(d);
                 }
             }
-            
+
         }
     }
 }

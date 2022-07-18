@@ -1,14 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using QwertyMod.Content.Items.Consumable.Tiles.Ores;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.GameContent.Generation;
-using Terraria.ID;
 using Terraria.IO;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -76,10 +71,10 @@ namespace QwertyMod.Common
 
         public override void ModifyWorldGenTasks(List<GenPass> tasks, ref float totalWeight)
         {
-            tasks.Add( new PassLegacy("Placing ore in space!", delegate (GenerationProgress progress, GameConfiguration configuration)
-            {
-                PlaceMoons();
-            }));
+            tasks.Add(new PassLegacy("Placing ore in space!", delegate (GenerationProgress progress, GameConfiguration configuration)
+           {
+               PlaceMoons();
+           }));
         }
         public static void PlaceMoons()
         {
@@ -116,11 +111,11 @@ namespace QwertyMod.Common
         static bool PlaceMoon(int x, int y)
         {
             int size = WorldGen.genRand.Next(30, 51);
-            for(int i=0; i < size; i++)
+            for (int i = 0; i < size; i++)
             {
-                for(int j =0; j < size; j++)
+                for (int j = 0; j < size; j++)
                 {
-                    if(Main.tile[x+i, y+j].HasTile)
+                    if (Main.tile[x + i, y + j].HasTile)
                     {
                         return false;
                     }

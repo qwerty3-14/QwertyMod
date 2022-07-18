@@ -16,7 +16,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Ores
             Main.tileSpelunker[Type] = true;
 
             DustType = DustType<LuneDust>();
-            HitSound = SoundID.Tink; 
+            HitSound = SoundID.Tink;
 
             ModTranslation name = CreateMapEntryName();
             name.SetDefault("Lune Ore");

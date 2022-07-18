@@ -3,8 +3,6 @@ using QwertyMod.Content.Dusts;
 using QwertyMod.Content.Items.Consumable.BossSummon;
 using QwertyMod.Content.NPCs.Bosses.FortressBoss;
 using Terraria;
-using Terraria.ID;
-using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.Enums;
 using Terraria.ModLoader;
@@ -33,7 +31,7 @@ namespace QwertyMod.Common.Fortress
             name.SetDefault("Altar");
             AddMapEntry(new Color(162, 184, 185), name);
         }
-        
+
         public override bool RightClick(int i, int j)
         {
             Player player = Main.LocalPlayer;
@@ -47,7 +45,7 @@ namespace QwertyMod.Common.Fortress
                         if (Main.netMode == 0)
                         {
                             //QwertyWorld.FortressBossQuotes();
-                            int npcID = NPC.NewNPC(NPC.GetBossSpawnSource(player.whoAmI),  i * 16, j * 16 - 200, NPCType<FortressBoss>());
+                            int npcID = NPC.NewNPC(NPC.GetBossSpawnSource(player.whoAmI), i * 16, j * 16 - 200, NPCType<FortressBoss>());
                         }
                         else
                         {
@@ -73,7 +71,7 @@ namespace QwertyMod.Common.Fortress
             player.cursorItemIconEnabled = true;
             player.cursorItemIconID = ItemType<FortressBossSummon>();
         }
-        
+
         public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
         {
             r = 0.5f;

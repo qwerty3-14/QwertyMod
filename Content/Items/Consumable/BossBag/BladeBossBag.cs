@@ -43,7 +43,7 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
             player.QuickSpawnItem(new EntitySource_Misc(""), (spawnThese[2]));
 
             player.QuickSpawnItem(new EntitySource_Misc(""), 73, 15);
-            if(Main.rand.Next(4) == 0)
+            if (Main.rand.Next(4) == 0)
             {
                 player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<SwordsmanBadge>());
             }

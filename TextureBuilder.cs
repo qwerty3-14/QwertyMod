@@ -2,10 +2,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 
 namespace QwertyMod
@@ -23,14 +19,14 @@ namespace QwertyMod
             PixelPack transition = PixelPack.SetupTransition(startPack, endPack);
             output[0] = start;
             output[steps - 1] = end;
-            for(int i = 1; i < steps-1; i++)
+            for (int i = 1; i < steps - 1; i++)
             {
                 transition.movePixels(1f / (float)(steps - 1));
                 output[i] = transition.Print(width, height);
             }
             return output;
-            
-            
+
+
         }
         class PixelMover
         {
@@ -73,9 +69,9 @@ namespace QwertyMod
                 Color[] dataColors = new Color[texture.Width * texture.Height]; //Color array
                 texture.GetData(dataColors);
                 int width = texture.Width;
-                for(int c =0; c < dataColors.Length; c++)
+                for (int c = 0; c < dataColors.Length; c++)
                 {
-                    if(dataColors[c].A != 0)
+                    if (dataColors[c].A != 0)
                     {
                         pixels.Add(new PixelMover(new Vector2(c % width, c / width), dataColors[c]));
                     }
@@ -84,14 +80,14 @@ namespace QwertyMod
             public static PixelPack SetupTransition(PixelPack start, PixelPack end)
             {
                 PixelPack newPack = new PixelPack();
-                foreach(PixelMover startPixel in start.pixels)
+                foreach (PixelMover startPixel in start.pixels)
                 {
                     Vector2 closest = end.pixels[0].position;
                     Vector2 position = startPixel.position;
                     Color endColor = end.pixels[0].color;
                     foreach (PixelMover endPixel in end.pixels)
                     {
-                        if((endPixel.position - position).Length() < (closest - position).Length())
+                        if ((endPixel.position - position).Length() < (closest - position).Length())
                         {
                             closest = endPixel.position;
                             endColor = endPixel.color;
@@ -117,22 +113,22 @@ namespace QwertyMod
                     {
                         newPack.pixels.Add(newOne);
                     }
-                    
+
                 }
                 return newPack;
             }
             public void movePixels(float scale)
             {
-                for(int i = 0; i < pixels.Count; i++)
+                for (int i = 0; i < pixels.Count; i++)
                 {
                     pixels[i].move(scale);
                 }
             }
             public Texture2D Print(int width, int height)
             {
-                
+
                 Color[] dataColors = new Color[width * height];
-                foreach(PixelMover pixel in pixels)
+                foreach (PixelMover pixel in pixels)
                 {
                     int x = (int)Math.Round(pixel.position.X);
                     int y = (int)Math.Round(pixel.position.Y);

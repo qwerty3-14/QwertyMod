@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
@@ -35,7 +30,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
             {
                 Projectile.NewProjectile(new EntitySource_Misc(""), Player.Center, Vector2.Zero, ProjectileType<IceRuneFreindly>(), (int)(300f * Player.GetDamage(DamageClass.Melee).Multiplicative), 0, Player.whoAmI);
             }
-            if(leechCooldown > 0)
+            if (leechCooldown > 0)
             {
                 leechCooldown--;
             }

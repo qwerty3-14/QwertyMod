@@ -1,10 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using QwertyMod.Common;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
@@ -103,7 +99,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.MechCrossbow
         }
         protected override void ChangeArrow(ref int arrowType)
         {
-            if(arrowType == ProjectileID.WoodenArrowFriendly)
+            if (arrowType == ProjectileID.WoodenArrowFriendly)
             {
                 arrowType = ProjectileType<TaggingBolt>();
             }

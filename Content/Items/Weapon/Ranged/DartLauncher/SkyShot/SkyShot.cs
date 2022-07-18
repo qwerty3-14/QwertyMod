@@ -3,10 +3,6 @@ using QwertyMod.Content.Buffs;
 using QwertyMod.Content.Dusts;
 using QwertyMod.Content.Items.Consumable.Tiles.Bars;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
@@ -47,7 +43,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.DartLauncher.SkyShot
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            float r = (velocity).ToRotation() - (float)Math.PI/2f;
+            float r = (velocity).ToRotation() - (float)Math.PI / 2f;
             Projectile.NewProjectile(source, position + QwertyMethods.PolarVector(4f * player.direction, r), velocity, type, damage, knockback, player.whoAmI);
             Projectile.NewProjectile(source, position + QwertyMethods.PolarVector(12f * player.direction, r), velocity, ProjectileType<CaeliteDart>(), damage, knockback, player.whoAmI);
             return false;
@@ -81,9 +77,9 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.DartLauncher.SkyShot
         }
         public override void Kill(int timeLeft)
         {
-            for(int i=0; i<3; i++)
+            for (int i = 0; i < 3; i++)
             {
-                Dust.NewDustPerfect(Projectile.Center, DustType<CaeliteDust>(), QwertyMethods.PolarVector(Main.rand.NextFloat()*4f, Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI)));
+                Dust.NewDustPerfect(Projectile.Center, DustType<CaeliteDust>(), QwertyMethods.PolarVector(Main.rand.NextFloat() * 4f, Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI)));
             }
         }
         public override void AI()

@@ -1,9 +1,9 @@
 using Microsoft.Xna.Framework;
+using QwertyMod.Content.Dusts;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
-using Terraria.DataStructures;
-using QwertyMod.Content.Dusts;
 
 namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
 {
@@ -30,7 +30,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
             if (!Main.tile[i, j - 1].HasTile)
             {
                 WorldGen.KillTile(i, j, noItem: true);
-                Projectile.NewProjectile(new EntitySource_Misc(""),  new Vector2(i, j) * 16 + new Vector2(8, 8), Vector2.Zero, ProjectileType<ReverseSandBall>(), 50, 0f, Main.myPlayer);
+                Projectile.NewProjectile(new EntitySource_Misc(""), new Vector2(i, j) * 16 + new Vector2(8, 8), Vector2.Zero, ProjectileType<ReverseSandBall>(), 50, 0f, Main.myPlayer);
             }
         }
 
@@ -39,7 +39,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
             if (!Main.tile[i, j - 1].HasTile)
             {
                 WorldGen.KillTile(i, j, noItem: true);
-                Projectile.NewProjectile(new EntitySource_Misc(""),  new Vector2(i, j) * 16 + new Vector2(8, 8), Vector2.Zero, ProjectileType<ReverseSandBall>(), 50, 0f, Main.myPlayer);
+                Projectile.NewProjectile(new EntitySource_Misc(""), new Vector2(i, j) * 16 + new Vector2(8, 8), Vector2.Zero, ProjectileType<ReverseSandBall>(), 50, 0f, Main.myPlayer);
             }
         }
 
@@ -106,8 +106,8 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
             int j = (int)(Projectile.position.Y + (float)(Projectile.height / 2)) / 16;
             int tileToPlace = 0;
 
-            
-                tileToPlace = TileType<ReverseSandT>();
+
+            tileToPlace = TileType<ReverseSandT>();
             if (!Main.tile[i, j].HasTile && tileToPlace >= 0)
             {
                 WorldGen.PlaceTile(i, j, tileToPlace, false, true, -1, 0);

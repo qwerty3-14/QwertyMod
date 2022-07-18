@@ -1,5 +1,4 @@
 using QwertyMod.Content.Items.MiscMaterials;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
@@ -36,7 +35,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Hydra
 
         public override void SetMatch(bool male, ref int equipSlot, ref bool robes)
         {
-            if (male) equipSlot =  QwertyMod.hydraLegMale;
+            if (male) equipSlot = QwertyMod.hydraLegMale;
             if (!male) equipSlot = QwertyMod.hydraLegFemale;
         }
 

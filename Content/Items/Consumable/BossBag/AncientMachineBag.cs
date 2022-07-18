@@ -1,4 +1,3 @@
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Common.PlayerLayers;
 using QwertyMod.Content.Items.Tool.Mining.Ancient;

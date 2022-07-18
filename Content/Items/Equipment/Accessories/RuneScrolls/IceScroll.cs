@@ -1,14 +1,12 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using QwertyMod.Common.RuneBuilder;
+using QwertyMod.Content.Dusts;
+using System;
 using Terraria;
+using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
-using QwertyMod.Common.RuneBuilder;
-
 using static Terraria.ModLoader.ModContent;
-using QwertyMod.Content.Dusts;
-using Terraria.GameContent.Creative;
 
 namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
 {

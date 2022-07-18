@@ -1,4 +1,3 @@
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Common.PlayerLayers;
 using Terraria;
@@ -37,6 +36,6 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Trophy.Ancient
             }
         }
 
-        
+
     }
 }

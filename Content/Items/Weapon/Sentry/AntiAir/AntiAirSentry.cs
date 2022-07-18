@@ -24,22 +24,22 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.AntiAir
 
         public override void SetDefaults()
         {
-            Item.damage = 55; 
-            Item.mana = 20;     
-            Item.width = 56;   
-            Item.height = 56;    
-            Item.useTime = 25;  
-            Item.useAnimation = 25;    
+            Item.damage = 55;
+            Item.mana = 20;
+            Item.width = 56;
+            Item.height = 56;
+            Item.useTime = 25;
+            Item.useAnimation = 25;
             Item.useStyle = 1;
-            Item.noMelee = true; 
-            Item.knockBack = 10f;  
+            Item.noMelee = true;
+            Item.knockBack = 10f;
             Item.value = 25000;
             Item.rare = 3;
-            Item.UseSound = SoundID.Item44;   
-            Item.autoReuse = true;  
+            Item.UseSound = SoundID.Item44;
+            Item.autoReuse = true;
             Item.shoot = ProjectileType<AntiAirSentry>();
             Item.DamageType = DamageClass.Summon;
-            Item.sentry = true; 
+            Item.sentry = true;
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
@@ -55,15 +55,15 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.AntiAir
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Anti Air Sentry");
-            ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true; 
-            Main.projFrames[Projectile.type] = 3; 
+            ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
+            Main.projFrames[Projectile.type] = 3;
         }
 
         public override void SetDefaults()
         {
             Projectile.sentry = true;
             Projectile.width = 60;
-            Projectile.height = 94;   
+            Projectile.height = 94;
             Projectile.hostile = false;    //tells the game if is hostile or not.
             Projectile.friendly = false;   //Tells the game whether it is friendly to players/friendly npcs or not
             Projectile.ignoreWater = true;    //Tells the game whether or not projectile will be affected by water

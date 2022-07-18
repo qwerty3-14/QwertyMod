@@ -2,13 +2,11 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Content.Buffs;
 using System;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.Graphics.Shaders;
 using Terraria.ID;
-using Terraria.Localization;
 using Terraria.ModLoader;
 using static Terraria.ID.ArmorIDs;
 using static Terraria.ModLoader.ModContent;
@@ -114,7 +112,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Glass
         {
             return true;
         }
-        public override Position GetDefaultPosition() =>  new Multiple()
+        public override Position GetDefaultPosition() => new Multiple()
         {
             { new Between(PlayerDrawLayers.CaptureTheGem, PlayerDrawLayers.BeetleBuff), drawInfo => Math.Cos(drawInfo.drawPlayer.GetModPlayer<HelmEffects>().PrismTrigonometryCounterOfAwsomenessWowThisIsAVeryLongVariableName) <= 0 },
             { new Between(PlayerDrawLayers.JimsCloak, PlayerDrawLayers.MountBack), drawInfo => Math.Cos(drawInfo.drawPlayer.GetModPlayer<HelmEffects>().PrismTrigonometryCounterOfAwsomenessWowThisIsAVeryLongVariableName) > 0 }
@@ -129,7 +127,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Glass
             Mod mod = ModLoader.GetMod("QwertyMod");
             Texture2D texture = Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Glass/GlassPrism").Value;
             Color color12 = drawPlayer.GetImmuneAlphaPure(Lighting.GetColor((int)((double)drawInfo.Position.X + (double)drawPlayer.width * 0.5) / 16, (int)((double)drawInfo.Position.Y + (double)drawPlayer.height * 0.5) / 16, Microsoft.Xna.Framework.Color.White), 0f);
-            
+
             if (drawPlayer.GetModPlayer<HelmEffects>().helmEffect)
             {
                 Vector2 Center = drawInfo.Position + new Vector2(drawPlayer.width / 2, drawPlayer.height / 2) - Main.screenPosition;

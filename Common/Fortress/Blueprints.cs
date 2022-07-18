@@ -3,11 +3,7 @@ using QwertyMod.Content.Items.Consumable.Tiles.Fortress.BuildingBlocks;
 using QwertyMod.Content.Items.Consumable.Tiles.Fortress.Carving;
 using QwertyMod.Content.Items.Consumable.Tiles.Fortress.Furniture;
 using QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
 

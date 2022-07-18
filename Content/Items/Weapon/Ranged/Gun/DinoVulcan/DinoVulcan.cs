@@ -66,7 +66,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.DinoVulcan
 
         public override bool CanConsumeAmmo(Item ammo, Player player)
         {
-            return  Main.rand.Next(3)>0;
+            return Main.rand.Next(3) > 0;
         }
         public override Vector2? HoldoutOffset()
         {
@@ -206,7 +206,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.DinoVulcan
                     {
                         Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center.X, Projectile.Center.Y, (float)Math.Cos(VarA) * speed, (float)Math.Sin(VarA) * speed, Ammo, weaponDamage, weaponKnockback, Main.myPlayer);
                         Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center.X, Projectile.Center.Y, (float)Math.Cos(SVarA) * SspeedA * -player.direction, (float)Math.Sin(SVarA) * SspeedA, ProjectileType<Shell>(), 0, 0, Main.myPlayer);
-                        
+
                     }
 
                     if (reloadTime > 3)

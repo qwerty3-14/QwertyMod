@@ -1,5 +1,4 @@
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Common.Fortress;
 using QwertyMod.Content.Buffs;
 using QwertyMod.Content.Dusts;
@@ -92,7 +91,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             ringProjectileCount = 2 - (int)((float)NPC.life / (float)NPC.lifeMax * 2) + 4;
             if (timer == GenerateRingTime)
             {
-                ring = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Center, Vector2.Zero, ProjectileType<RingCenter>(), 11, 0, player.whoAmI, ringProjectileCount, NPC.direction)];
+                ring = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), NPC.Center, Vector2.Zero, ProjectileType<RingCenter>(), 11, 0, player.whoAmI, ringProjectileCount, NPC.direction)];
                 castingFrames = true;
             }
             if (timer > GenerateRingTime && timer < GenerateRingTime + throwRingTime)
@@ -162,7 +161,7 @@ namespace QwertyMod.Content.NPCs.Fortress
                     int nearPlayerY = Main.rand.Next(playerTilePositionY - playerTargetShift, playerTilePositionY + playerTargetShift);
                     for (int num93 = nearPlayerY; num93 < playerTilePositionY + playerTargetShift; num93++)
                     {
-                        if ((nearPlayerX < playerTilePositionX - 12 || nearPlayerX > playerTilePositionX + 12) && (num93 < npcTilePositionY - 1 || num93 > npcTilePositionY + 1 || nearPlayerX < npcTilePositionX - 1 || nearPlayerX > npcTilePositionX + 1) )
+                        if ((nearPlayerX < playerTilePositionX - 12 || nearPlayerX > playerTilePositionX + 12) && (num93 < npcTilePositionY - 1 || num93 > npcTilePositionY + 1 || nearPlayerX < npcTilePositionX - 1 || nearPlayerX > npcTilePositionX + 1))
                         {
                             bool flag5 = true;
                             if (Main.tile[nearPlayerX, num93 - 1].LiquidType == LiquidID.Lava)
@@ -320,7 +319,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             for (int p = 0; p < 1000; p++)
             {
                 clearCheck = Main.projectile[p];
-                if (clearCheck.friendly  && !clearCheck.sentry && clearCheck.minionSlots <= 0 && Collision.CheckAABBvAABBCollision(Projectile.position, Projectile.Size, clearCheck.position, clearCheck.Size))
+                if (clearCheck.friendly && !clearCheck.sentry && clearCheck.minionSlots <= 0 && Collision.CheckAABBvAABBCollision(Projectile.position, Projectile.Size, clearCheck.position, clearCheck.Size))
                 {
                     clearCheck.Kill();
                 }

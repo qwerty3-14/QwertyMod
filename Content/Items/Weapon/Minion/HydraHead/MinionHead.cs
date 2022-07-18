@@ -1,14 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Common;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
@@ -31,15 +25,15 @@ namespace QwertyMod.Content.Items.Weapon.Minion.HydraHead
 
         public override void SetDefaults()
         {
-            Projectile.width = 42; 
-            Projectile.height = 36;  
-            Projectile.hostile = false;    
-            Projectile.friendly = false;   
-            Projectile.ignoreWater = true;   
-            Main.projFrames[Projectile.type] = 1;  
+            Projectile.width = 42;
+            Projectile.height = 36;
+            Projectile.hostile = false;
+            Projectile.friendly = false;
+            Projectile.ignoreWater = true;
+            Main.projFrames[Projectile.type] = 1;
             Projectile.knockBack = 10f;
-            Projectile.penetrate = -1; 
-            Projectile.tileCollide = false; 
+            Projectile.penetrate = -1;
+            Projectile.tileCollide = false;
             Projectile.minion = true;
             Projectile.minionSlots = 1;
             Projectile.timeLeft = 2;

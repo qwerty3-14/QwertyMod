@@ -1,26 +1,22 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using QwertyMod.Common;
+using QwertyMod.Common.RuneBuilder;
+using QwertyMod.Content.Items.Consumable.BossBag;
+using QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls;
+using QwertyMod.Content.Items.Equipment.Vanity.BossMasks;
+using QwertyMod.Content.Items.MiscMaterials;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using Terraria;
+using Terraria.DataStructures;
+using Terraria.GameContent;
+using Terraria.GameContent.Bestiary;
+using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
-using QwertyMod.Common.RuneBuilder;
-using System.IO;
-using Terraria.Localization;
 using static Terraria.ModLoader.ModContent;
-using QwertyMod.Content.Items.Consumable.BossBag;
-using Terraria.GameContent;
-using Terraria.GameContent.ItemDropRules;
-using QwertyMod.Content.Items.Equipment.Vanity.BossMasks;
-using QwertyMod.Common;
-using QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls;
-using Terraria.GameContent.Bestiary;
-using QwertyMod.Content.Items.MiscMaterials;
-using Terraria.DataStructures;
 
 namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
 {
@@ -97,12 +93,12 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
         {
             NPC.TargetClosest(true);
             Player player = Main.player[NPC.target];
-            
+
             phase = 0;
             if (Main.expertMode)
             {
                 castingSpeed = 1f + 1f - ((float)NPC.life / (float)NPC.lifeMax);
-                if ( (((float)NPC.life / NPC.lifeMax) < .5f))
+                if ((((float)NPC.life / NPC.lifeMax) < .5f))
                 {
                     phase++;
                 }
@@ -113,10 +109,10 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
                 NPC.velocity = castingSpeed * ((goTo - NPC.Center) / flightTimeMax);
                 NPC.netUpdate = true;
             }
-            
+
             flightTime = flightTimeMax;
             goToYOffset *= -1;
-            
+
         }
         public override void AI()
         {
@@ -126,7 +122,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
             {
                 NPC.TargetClosest(false);
                 player = Main.player[NPC.target];
-                
+
                 if (!player.active || player.dead || despawn)
                 {
                     despawn = true;
@@ -188,10 +184,10 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
                         {
                             for (int i = 0; i < phase + 1; i++)
                             {
-                                Projectile rune = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Top + QwertyMethods.PolarVector(-120, (float)Math.PI * ((float)(i + 1) / (phase + 2))), Vector2.Zero, ProjectileType<BigRune>(), Main.expertMode ? 30 : 40, 0, Main.myPlayer)];
-                                
+                                Projectile rune = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), NPC.Top + QwertyMethods.PolarVector(-120, (float)Math.PI * ((float)(i + 1) / (phase + 2))), Vector2.Zero, ProjectileType<BigRune>(), Main.expertMode ? 30 : 40, 0, Main.myPlayer)];
+
                                 int newRune = lastRune == 5 ? Main.rand.Next(4) : Main.rand.Next(3);
-                                if(newRune >= lastRune)
+                                if (newRune >= lastRune)
                                 {
                                     newRune++;
                                 }
@@ -227,11 +223,11 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
                     }
                 }
             }
-            
+
         }
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
-            if(casting)
+            if (casting)
             {
                 Texture2D texture = TextureAssets.Npc[NPC.type].Value;
                 spriteBatch.Draw(texture, NPC.Center - screenPos, new Rectangle(0, 90 * frame, 82, 90), Color.White, NPC.rotation, new Vector2(41, 45), Vector2.One, 0, 0);
@@ -240,7 +236,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
             {
                 Texture2D texture = RuneSprites.runeGhostMoving;
                 int phaseTime = (int)(flightTimeMax / 3f);
-                int phaseFrame =  (int)((float)RuneSprites.runeGhostPhaseIn.Length * (float)((int)flightTime % phaseTime) / phaseTime);
+                int phaseFrame = (int)((float)RuneSprites.runeGhostPhaseIn.Length * (float)((int)flightTime % phaseTime) / phaseTime);
                 if (phaseFrame > RuneSprites.runeGhostPhaseIn.Length - 1)
                 {
                     phaseFrame = RuneSprites.runeGhostPhaseIn.Length - 1;
@@ -248,7 +244,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
                 if (flightTime < phaseTime)
                 {
                     float c = 1f - (flightTime / (float)phaseTime);
-                    spriteBatch.Draw(RuneSprites.runeGhostPhaseIn[19-phaseFrame], NPC.Center - screenPos, null, new Color(c, c, c, c), NPC.rotation, texture.Size() * .5f, Vector2.One * 2, NPC.velocity.X > 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
+                    spriteBatch.Draw(RuneSprites.runeGhostPhaseIn[19 - phaseFrame], NPC.Center - screenPos, null, new Color(c, c, c, c), NPC.rotation, texture.Size() * .5f, Vector2.One * 2, NPC.velocity.X > 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
                 }
                 if (flightTime > flightTimeMax - phaseTime)
                 {
@@ -275,7 +271,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
             notExpertRule.OnSuccess(ItemDropRule.OneFromOptionsNotScalingWithLuck(1, ItemType<AggroScroll>(), ItemType<PursuitScroll>(), ItemType<IceScroll>(), ItemType<LeechScroll>()));
             //Finally add the leading rule
             npcLoot.Add(notExpertRule);
-            
+
 
             //Boss masks are spawned with 1/7 chance
             notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
@@ -299,7 +295,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
         }
         public override void ReceiveExtraAI(BinaryReader reader)
         {
-            
+
             NPC.velocity = reader.ReadVector2();
             NPC.position = reader.ReadVector2();
             flightTime = reader.ReadSingle();

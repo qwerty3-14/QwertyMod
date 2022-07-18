@@ -1,14 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.DataStructures;
-using Terraria.GameContent;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
 
@@ -77,7 +72,7 @@ namespace QwertyMod.Common.Playerlayers
                 }
 
             }
-            
+
         }
         static void DrawSittingLegs(ref PlayerDrawSet drawInfo, Texture2D textureToDraw, Color matchingColor, int shaderIndex = -1, bool glowmask = false)
         {

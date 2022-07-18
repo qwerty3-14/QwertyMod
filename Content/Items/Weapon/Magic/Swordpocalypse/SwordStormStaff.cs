@@ -47,7 +47,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Swordpocalypse
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            for(int i = 0; i < 1; i++)
+            for (int i = 0; i < 1; i++)
             {
                 float trueSpeed = velocity.Length();
                 float rot = velocity.ToRotation();
@@ -55,10 +55,10 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Swordpocalypse
                 Vector2 goHere = Main.MouseWorld + QwertyMethods.PolarVector(Main.rand.NextFloat(-40, 40), rot + (float)Math.PI / 2);
                 Vector2 diff = goHere - Rposition;
                 float dist = diff.Length();
-               
+
                 Projectile.NewProjectile(source, Rposition, diff.SafeNormalize(-Vector2.UnitY) * trueSpeed, type, damage, knockback, player.whoAmI, dist);
             }
-            
+
             return false;
         }
     }

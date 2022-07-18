@@ -1,15 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria;
+﻿using Terraria;
 using Terraria.Audio;
-using Terraria.DataStructures;
-using Terraria.GameContent.Creative;
-using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Adamantite
 {
@@ -18,7 +9,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Adamantite
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Adamantite Arrow");
-            
+
         }
 
         public override void SetDefaults()
@@ -33,7 +24,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Adamantite
             Projectile.tileCollide = true;
         }
 
-        
+
 
         public override void Kill(int timeLeft)
         {

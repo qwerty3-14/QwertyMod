@@ -1,19 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using QwertyMod.Common;
-using QwertyMod.Content.Buffs;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.Audio;
-using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content.Items.Weapon.Minion
 {
@@ -34,8 +24,8 @@ namespace QwertyMod.Content.Items.Weapon.Minion
         float targetRotation = 0;
         bool arrowFired = true;
         int safetyIdCheck = -1;
-        
-       
+
+
         protected void BowAI()
         {
             Player player = Main.player[Projectile.owner];
@@ -61,7 +51,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion
                     }
                 }
             }
-            
+
             if (bowCount != 0)
             {
                 timer++;

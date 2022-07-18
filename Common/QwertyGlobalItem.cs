@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -13,7 +9,7 @@ namespace QwertyMod.Common
     {
         public override void SetDefaults(Item item)
         {
-            if(item.type == ItemID.BreakerBlade)
+            if (item.type == ItemID.BreakerBlade)
             {
                 item.scale = 10;
             }

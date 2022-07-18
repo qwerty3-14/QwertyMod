@@ -20,7 +20,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Bars
             TileObjectData.newTile.StyleHorizontal = true;
             TileObjectData.newTile.LavaDeath = false;
             TileObjectData.addTile(Type);
- 
+
             DustType = DustType<CaeliteDust>();
             HitSound = SoundID.Tink;
             MinPick = 1;

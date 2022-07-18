@@ -47,7 +47,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraBeam
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             for (int l = 0; l < Main.projectile.Length; l++)
-            {       
+            {
                 Projectile proj = Main.projectile[l];
                 if (proj.active && proj.type == Item.shoot && proj.owner == player.whoAmI)
                 {
@@ -96,7 +96,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraBeam
 
             if (Main.LocalPlayer == player)
             {
-                if(Math.Abs(Main.MouseWorld.X - Projectile.Center.X) < 6f)
+                if (Math.Abs(Main.MouseWorld.X - Projectile.Center.X) < 6f)
                 {
                     Projectile.velocity.X = Main.MouseWorld.X - Projectile.Center.X;
                 }
@@ -105,7 +105,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraBeam
                     Projectile.velocity.X = 6f * Math.Sign(Main.MouseWorld.X - Projectile.Center.X);
                 }
                 Projectile.position.Y = player.Center.Y - 900;
-                
+
             }
             Projectile.frameCounter++;
             if (player.channel && player.CheckMana((int)((float)player.inventory[player.selectedItem].mana), !player.GetModPlayer<BloodMedalionEffect>().effect && Projectile.frameCounter % 20 == 0))

@@ -2,9 +2,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Bestiary;
@@ -46,7 +43,7 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
             {
                 BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.UndergroundSnow,
                 new FlavorTextBestiaryInfoElement("No! Just No! Immersion Ruined!")
-            }); 
+            });
         }
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
@@ -55,13 +52,13 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
         int preJump = 180;
         float maxRopeLength = 300;
         Vector2 start = Vector2.Zero;
-        
+
         public override void AI()
         {
             preJump--;
             if (preJump > 0)
             {
-                
+
                 NPC.velocity = Vector2.Zero;
                 Dust.NewDust(NPC.BottomLeft + Vector2.UnitY * NPC.width, NPC.width, NPC.width, DustID.Ice);
                 start = NPC.Center;
@@ -69,19 +66,19 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
             else
             {
                 NPC.noGravity = false;
-                if(preJump == -120 || preJump == -180 && Main.netMode != 1)
+                if (preJump == -120 || preJump == -180 && Main.netMode != 1)
                 {
                     NPC.TargetClosest(true);
                     Vector2 pos = NPC.Center + new Vector2(11 * NPC.spriteDirection * -1, 0);
-                    Projectile p = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""),  pos, QwertyMethods.PolarVector(11, (Main.player[NPC.target].Center - pos).ToRotation()), ProjectileID.SnowBallFriendly, 10, 0, 255)];
+                    Projectile p = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), pos, QwertyMethods.PolarVector(11, (Main.player[NPC.target].Center - pos).ToRotation()), ProjectileID.SnowBallFriendly, 10, 0, 255)];
                     p.hostile = true;
                     p.friendly = false;
                 }
-                if(preJump < -240 && maxRopeLength > 0)
+                if (preJump < -240 && maxRopeLength > 0)
                 {
                     maxRopeLength -= 2;
                 }
-                if(maxRopeLength <= 0)
+                if (maxRopeLength <= 0)
                 {
                     NPC.active = false;
                 }
@@ -91,7 +88,7 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
                     NPC.position += (-1 * NPC.velocity) * (diff.Length() / maxRopeLength);
                 }
             }
-            
+
         }
         int frame = 0;
         public override void FindFrame(int frameHeight)
@@ -121,5 +118,5 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
             }
         }
     }
-    
+
 }

@@ -177,7 +177,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.AncientMissile
             Projectile.tileCollide = false;
             Projectile.timeLeft = 2;
             Projectile.usesLocalNPCImmunity = true;
-            
+
         }
 
         public override void AI()

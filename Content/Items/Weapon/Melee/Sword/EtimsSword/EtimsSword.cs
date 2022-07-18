@@ -1,18 +1,17 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using QwertyMod.Content.Items.Equipment.Accessories.Sword;
+using QwertyMod.Content.Items.MiscMaterials;
+using QwertyMod.Content.Items.Weapon.Ranged.Gun.SoEF;
 using System;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.GameContent;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
 using static Terraria.ModLoader.ModContent;
-using QwertyMod.Content.Items.MiscMaterials;
-using Terraria.GameContent;
-using QwertyMod.Content.Items.Equipment.Accessories.Sword;
-using QwertyMod.Content.Items.Weapon.Ranged.Gun.SoEF;
 
 namespace QwertyMod.Content.Items.Weapon.Melee.Sword.EtimsSword
 {
@@ -220,10 +219,10 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.EtimsSword
                             {
                                 damageBeforeVariance *= 2;
                             }
-                            if(slam)
+                            if (slam)
                             {
                                 Player.immune = true;
-                                if(Player.immuneTime < 60)
+                                if (Player.immuneTime < 60)
                                 {
                                     Player.immuneTime = 60;
                                 }
@@ -251,7 +250,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.EtimsSword
         }
         public override bool CanBeHitByProjectile(Projectile proj)
         {
-            if(Player.HasBuff(BuffType<AntiProjectile>()))
+            if (Player.HasBuff(BuffType<AntiProjectile>()))
             {
                 return false;
             }
@@ -264,7 +263,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.EtimsSword
         public override bool InstancePerEntity => true;
         public override void OnHitNPC(Projectile projectile, NPC target, int damage, float knockback, bool crit)
         {
-            if(damage > target.life && !target.SpawnedFromStatue && projectile.GetGlobalProjectile<GiveAntiProjectileOnKill>().yes)
+            if (damage > target.life && !target.SpawnedFromStatue && projectile.GetGlobalProjectile<GiveAntiProjectileOnKill>().yes)
             {
                 Main.player[projectile.owner].AddBuff(BuffType<AntiProjectile>(), 360);
             }

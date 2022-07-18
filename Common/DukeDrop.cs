@@ -14,7 +14,7 @@ namespace QwertyMod.Common
     {
         public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
         {
-            if(npc.type == NPCID.DukeFishron)
+            if (npc.type == NPCID.DukeFishron)
             {
                 //All our drops here are based on "not expert", meaning we use .OnSuccess() to add them into the rule, which then gets added
                 LeadingConditionRule notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
@@ -30,7 +30,7 @@ namespace QwertyMod.Common
     {
         public override void OpenVanillaBag(string context, Player player, int arg)
         {
-            if (context == "bossBag" && arg == ItemID.FishronBossBag )
+            if (context == "bossBag" && arg == ItemID.FishronBossBag)
             {
                 int itemID = 0;
                 switch (Main.rand.Next(3))

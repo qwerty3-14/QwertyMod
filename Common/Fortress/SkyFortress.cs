@@ -1,12 +1,9 @@
-using Microsoft.Xna.Framework;
 using QwertyMod.Content.Items.Consumable.Tiles.Fortress.BuildingBlocks;
 using QwertyMod.Content.NPCs.Bosses.FortressBoss;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using Terraria;
 using Terraria.GameContent.Generation;
-using Terraria.ID;
 using Terraria.IO;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
@@ -46,26 +43,26 @@ namespace QwertyMod.Common.Fortress
                     {
                         if (Main.dayTime)
                         {
-                            spawnRate = (int)((spawnRate *  30f) / defaultSpawnRate);
-                            maxSpawns = (int)((maxSpawns *  12f) / defaultmaxSpawn);
+                            spawnRate = (int)((spawnRate * 30f) / defaultSpawnRate);
+                            maxSpawns = (int)((maxSpawns * 12f) / defaultmaxSpawn);
                         }
                         else
                         {
-                            spawnRate = (int)((spawnRate *  34f) / defaultSpawnRate);
-                            maxSpawns = (int)((maxSpawns *  10f) / defaultmaxSpawn);
+                            spawnRate = (int)((spawnRate * 34f) / defaultSpawnRate);
+                            maxSpawns = (int)((maxSpawns * 10f) / defaultmaxSpawn);
                         }
                     }
                     else
                     {
                         if (Main.dayTime)
                         {
-                            spawnRate = (int)((spawnRate *  34f) / defaultSpawnRate);
-                            maxSpawns = (int)((maxSpawns *  14f) / defaultmaxSpawn);
+                            spawnRate = (int)((spawnRate * 34f) / defaultSpawnRate);
+                            maxSpawns = (int)((maxSpawns * 14f) / defaultmaxSpawn);
                         }
                         else
                         {
-                            spawnRate = (int)((spawnRate *  38f) / defaultSpawnRate);
-                            maxSpawns = (int)((maxSpawns *  12f) / defaultmaxSpawn);
+                            spawnRate = (int)((spawnRate * 38f) / defaultSpawnRate);
+                            maxSpawns = (int)((maxSpawns * 12f) / defaultmaxSpawn);
                         }
                     }
                 }

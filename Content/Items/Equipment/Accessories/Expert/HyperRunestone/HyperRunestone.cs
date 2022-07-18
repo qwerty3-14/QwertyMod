@@ -1,8 +1,6 @@
-using Microsoft.Xna.Framework;
 using QwertyMod.Common;
 using Terraria;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.HyperRunestone
 {
@@ -35,5 +33,5 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.HyperRunestone
         }
     }
 
-    
+
 }

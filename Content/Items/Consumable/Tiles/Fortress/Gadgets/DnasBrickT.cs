@@ -17,7 +17,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
             Main.tileBlendAll[Type] = true;
 
             DustType = DustType<FortressDust>();
-            HitSound = QwertyMod.FortressBlocks; 
+            HitSound = QwertyMod.FortressBlocks;
             MinPick = 50;
             AddMapEntry(new Color(162, 184, 185));
             MineResist = 1;

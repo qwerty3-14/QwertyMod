@@ -2,12 +2,8 @@
 using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Common;
 using QwertyMod.Content.NPCs.DinoMilitia;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent;
@@ -19,7 +15,7 @@ using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content
 {
-    
+
     class DinoEvent : ModSystem
     {
         public static bool EventActive = false;
@@ -31,14 +27,14 @@ namespace QwertyMod.Content
         }
 
         public override void NetSend(BinaryWriter writer)
-		{
-			writer.Write(DinoKillCount);
-		}
+        {
+            writer.Write(DinoKillCount);
+        }
 
-		public override void NetReceive(BinaryReader reader)
-		{
-			DinoKillCount = reader.ReadInt32();
-		}
+        public override void NetReceive(BinaryReader reader)
+        {
+            DinoKillCount = reader.ReadInt32();
+        }
 
         public override void PreUpdateWorld()
         {
@@ -133,13 +129,13 @@ namespace QwertyMod.Content
 
                     Utils.DrawBorderString(spriteBatch, "Dino Militia", new Vector2(barrierBackground.X + barrierBackground.Width * 0.5f, barrierBackground.Y - internalOffset - descSize.Y * 0.5f), Color.White, 0.80f, 0.3f, 0.4f);
                 }
-                catch 
+                catch
                 {
                     //ErrorLogger.Log(e.ToString());
                 }
             }
         }
-        
+
     }
     public class DinoSpawnRates : GlobalNPC
     {
@@ -156,8 +152,8 @@ namespace QwertyMod.Content
                 }
                 else
                 {
-                    spawnRate = (int)((spawnRate *  10f) / defaultSpawnRate);
-                    maxSpawns = (int)((maxSpawns *  10f) / defaultmaxSpawn);
+                    spawnRate = (int)((spawnRate * 10f) / defaultSpawnRate);
+                    maxSpawns = (int)((maxSpawns * 10f) / defaultmaxSpawn);
                 }
             }
         }

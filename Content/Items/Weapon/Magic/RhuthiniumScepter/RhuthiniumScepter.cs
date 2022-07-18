@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Content.Dusts;
 using QwertyMod.Content.Items.Consumable.Tiles.Bars;
 using System;
@@ -54,7 +53,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RhuthiniumScepter
         public override void UseStyle(Player player, Rectangle heldItemFrame)
         {
             player.bodyFrame.Y = player.bodyFrame.Height * 3; //force the player to a specific frame
-            player.itemRotation = -1 * staveHoldRotation * player.direction; 
+            player.itemRotation = -1 * staveHoldRotation * player.direction;
             Vector2 vector24 = Main.OffsetsPlayerOnhand[player.bodyFrame.Y / 56] * 2f;
             if (player.direction != 1)
             {

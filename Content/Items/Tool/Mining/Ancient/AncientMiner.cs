@@ -1,4 +1,3 @@
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Common.PlayerLayers;
 using Terraria;
@@ -42,10 +41,10 @@ namespace QwertyMod.Content.Items.Tool.Mining.Ancient
             Item.GetGlobalItem<AoePick>().miningRadius = 1;
             if (!Main.dedServ)
             {
-                Item.GetGlobalItem<ItemUseGlow>().glowTexture  = Request<Texture2D>("QwertyMod/Content/Items/Tool/Mining/Ancient/AncientMiner_Glow").Value;
+                Item.GetGlobalItem<ItemUseGlow>().glowTexture = Request<Texture2D>("QwertyMod/Content/Items/Tool/Mining/Ancient/AncientMiner_Glow").Value;
             }
         }
 
-       
+
     }
 }

@@ -102,7 +102,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.HolyExiler
                             {
                                 portal1 = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), teleTo, Vector2.Zero, ProjectileType<ArrowPortal>(), projectile.damage, projectile.knockBack, projectile.owner, projectile.type, 12f)];
                                 portal1.rotation = (target.Center - teleTo).ToRotation();
-                                portal1.timeLeft = (i+1) * 15;
+                                portal1.timeLeft = (i + 1) * 15;
                                 break; //end for loop
                             }
                         }

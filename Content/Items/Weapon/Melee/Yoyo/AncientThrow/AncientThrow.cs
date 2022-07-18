@@ -54,7 +54,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.AncientThrow
             player.scope = true;
         }
 
-       
+
     }
     public class AncientThrowP : ModProjectile
     {

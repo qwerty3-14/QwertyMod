@@ -3,10 +3,8 @@ using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Common;
 using QwertyMod.Content.Dusts;
 using System;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
-using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
@@ -127,7 +125,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.Priest
                             justAttacked = true;
                             if (aimAt != null && !float.IsNaN(((float)aimAt)))
                             {
-                                
+
                                 Projectile.NewProjectile(Projectile.InheritSource(Projectile), shotPos, QwertyMethods.PolarVector(10f, (float)aimAt), ProjectileType<PriestPulse>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
                             }
                         }
