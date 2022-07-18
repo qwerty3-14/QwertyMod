@@ -79,19 +79,22 @@ namespace QwertyMod.Content.NPCs.Fortress
 
         public override void AI()
         {
+            NPC.damage = 0;
             NPC.chaseable = NPC.life < NPC.lifeMax;
             NPC.GetGlobalNPC<FortressNPCGeneral>().fortressNPC = true;
             if (NPC.life < NPC.lifeMax)
             {
                 timer++;
             }
-            NPC.TargetClosest(true);
+
             NPC.spriteDirection = NPC.direction;
-            Player player = Main.player[NPC.target];
+            Entity player = FortressNPCGeneral.FindTarget(NPC, true);
             ringProjectileCount = 2 - (int)((float)NPC.life / (float)NPC.lifeMax * 2) + 4;
             if (timer == GenerateRingTime)
             {
-                ring = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), NPC.Center, Vector2.Zero, ProjectileType<RingCenter>(), 11, 0, player.whoAmI, ringProjectileCount, NPC.direction)];
+                ring = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), NPC.Center, Vector2.Zero, ProjectileType<RingCenter>(), 11, 0, 0, ringProjectileCount, NPC.direction)];
+                ring.ai[0] = ringProjectileCount;
+                ring.ai[1] = NPC.direction;
                 castingFrames = true;
             }
             if (timer > GenerateRingTime && timer < GenerateRingTime + throwRingTime)
@@ -252,7 +255,6 @@ namespace QwertyMod.Content.NPCs.Fortress
         public override void AI()
         {
             projectilesInRing = (int)Projectile.ai[0];
-
             if (runOnce)
             {
                 for (int i = 0; i < projectilesInRing; i++)
@@ -261,11 +263,15 @@ namespace QwertyMod.Content.NPCs.Fortress
 
                     if (Projectile.ai[1] == 1)
                     {
-                        Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center, Vector2.Zero, ProjectileType<RingOuter>(), Projectile.damage, Projectile.knockBack, Projectile.owner, (float)i / (float)projectilesInRing * 2 * (float)Math.PI, Projectile.whoAmI);
+                        Projectile p = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center, Vector2.Zero, ProjectileType<RingOuter>(), Projectile.damage, Projectile.knockBack, 0, (float)i / (float)projectilesInRing * 2 * (float)Math.PI, Projectile.whoAmI)];
+                        p.ai[0] = (float)i / (float)projectilesInRing * 2 * (float)Math.PI;
+                        p.ai[1] = Projectile.whoAmI;
                     }
                     else
                     {
-                        Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center, Vector2.Zero, ProjectileType<RingOuter>(), Projectile.damage, Projectile.knockBack, Projectile.owner, (float)i / (float)projectilesInRing * 2 * (float)Math.PI, -Projectile.whoAmI);
+                        Projectile p = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center, Vector2.Zero, ProjectileType<RingOuter>(), Projectile.damage, Projectile.knockBack, 0, (float)i / (float)projectilesInRing * 2 * (float)Math.PI, -Projectile.whoAmI)];
+                        p.ai[0] = (float)i / (float)projectilesInRing * 2 * (float)Math.PI;
+                        p.ai[1] = -Projectile.whoAmI;
                     }
                 }
                 runOnce = false;
@@ -288,6 +294,8 @@ namespace QwertyMod.Content.NPCs.Fortress
             Projectile.friendly = false;
             Projectile.hostile = true;
             Projectile.tileCollide = false;
+            Projectile.GetGlobalProjectile<FortressNPCProjectile>().isFromFortressNPC = true;
+            Projectile.friendly = true;
         }
 
         private bool runOnce = true;
@@ -319,7 +327,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             for (int p = 0; p < 1000; p++)
             {
                 clearCheck = Main.projectile[p];
-                if (clearCheck.friendly && !clearCheck.sentry && clearCheck.minionSlots <= 0 && Collision.CheckAABBvAABBCollision(Projectile.position, Projectile.Size, clearCheck.position, clearCheck.Size))
+                if (clearCheck.friendly && !clearCheck.GetGlobalProjectile<FortressNPCProjectile>().isFromFortressNPC && !clearCheck.sentry && clearCheck.minionSlots <= 0 && Collision.CheckAABBvAABBCollision(Projectile.position, Projectile.Size, clearCheck.position, clearCheck.Size))
                 {
                     clearCheck.Kill();
                 }

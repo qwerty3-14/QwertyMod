@@ -42,6 +42,11 @@ namespace QwertyMod.Content.NPCs.Fortress
             NPC.defense = 18;
             NPC.lifeMax = 160;
             NPC.value = 100;
+            if (NPC.downedGolemBoss)
+            {
+                NPC.lifeMax = 750;
+                NPC.damage = 80;
+            }
             //NPC.alpha = 100;
             //NPC.behindTiles = true;
             NPC.HitSound = SoundID.NPCHit7;
@@ -56,6 +61,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             BannerItem = ItemType<HopperBanner>();
 
             NPC.buffImmune[BuffID.Confused] = false;
+            NPC.GetGlobalNPC<FortressNPCGeneral>().contactDamageToInvaders = true;
         }
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
         {
@@ -132,50 +138,53 @@ namespace QwertyMod.Content.NPCs.Fortress
             NPC.GetGlobalNPC<FortressNPCGeneral>().fortressNPC = true;
             if (runOnce)
             {
-                switch (Main.rand.Next(3))
+                if (Main.netMode == NetmodeID.SinglePlayer)
                 {
-                    case 0:
-                        spawnChildren = true;
+                    switch (Main.rand.Next(3))
+                    {
+                        case 0:
+                            spawnChildren = true;
 
-                        break;
+                            break;
 
-                    case 1:
+                        case 1:
+                            Point origin = NPC.Center.ToTileCoordinates();
+                            Point point;
+                            for (int s = 0; s < 200; s++)
+                            {
+                                if (NPC.Top.ToTileCoordinates().Y - 20 < 0)
+                                {
+                                    break;
+                                }
+                                if (!WorldUtils.Find(origin, Searches.Chain(new Searches.Up(2), new GenCondition[]
+                                {
+                                                new Terraria.WorldBuilding.Conditions.IsSolid()
+                                }), out point))
+                                {
+                                    NPC.position.Y--;
+                                    origin = NPC.Center.ToTileCoordinates();
+                                }
+                                else
+                                {
+                                    flipped = true;
+                                    break;
+                                }
+                            }
+                            break;
+                    }
+                    if (!flipped)
+                    {
                         Point origin = NPC.Center.ToTileCoordinates();
                         Point point;
-                        for (int s = 0; s < 200; s++)
-                        {
-                            if (NPC.Top.ToTileCoordinates().X - 10 < 0)
-                            {
-                                break;
-                            }
-                            if (!WorldUtils.Find(origin, Searches.Chain(new Searches.Up(2), new GenCondition[]
-                            {
-                                            new Terraria.WorldBuilding.Conditions.IsSolid()
-                            }), out point))
-                            {
-                                NPC.position.Y--;
-                                origin = NPC.Center.ToTileCoordinates();
-                            }
-                            else
-                            {
-                                flipped = true;
-                                break;
-                            }
-                        }
-                        break;
-                }
-                if (!flipped)
-                {
-                    Point origin = NPC.Center.ToTileCoordinates();
-                    Point point;
 
-                    while (!WorldUtils.Find(origin, Searches.Chain(new Searches.Down(4), new GenCondition[]
-                    {
-                                            new Terraria.WorldBuilding.Conditions.IsSolid()
-                    }), out point))
-                    {
-                        NPC.position.Y++;
-                        origin = NPC.Center.ToTileCoordinates();
+                        while (!WorldUtils.Find(origin, Searches.Chain(new Searches.Down(3), new GenCondition[]
+                        {
+                                                    new Terraria.WorldBuilding.Conditions.IsSolid()
+                        }), out point))
+                        {
+                            NPC.position.Y++;
+                            origin = NPC.Center.ToTileCoordinates();
+                        }
                     }
                 }
                 runOnce = false;
@@ -211,8 +220,7 @@ namespace QwertyMod.Content.NPCs.Fortress
                 {
                     gravity = 0f;
                     NPC.rotation = (float)Math.PI;
-                    Player player = Main.player[NPC.target];
-                    NPC.TargetClosest(true);
+                    Entity player = FortressNPCGeneral.FindTarget(NPC, true);
                     if (Collision.CheckAABBvLineCollision(player.position, player.Size, NPC.Center, NPC.Center + new Vector2(0, 1000)) && Collision.CanHit(NPC.Center, 0, 0, player.Center, 0, 0))
                     {
                         flipped = false;
@@ -243,8 +251,7 @@ namespace QwertyMod.Content.NPCs.Fortress
                     jumpSpeedY = gravity * -35;
                     //Main.NewText("gravity: " +gravity);
                     //Main.NewText("jump: " +jumpSpeedY);
-                    Player player = Main.player[NPC.target];
-                    NPC.TargetClosest(true);
+                    Entity player = FortressNPCGeneral.FindTarget(NPC, true);
                     //Main.NewText(Math.Abs(player.Center.X - NPC.Center.X));
                     if (Math.Abs(player.Center.X - NPC.Center.X) < aggroDistance && Math.Abs(player.Bottom.Y - NPC.Bottom.Y) < aggroDistanceY)
                     {
@@ -280,6 +287,10 @@ namespace QwertyMod.Content.NPCs.Fortress
                         {
                             frame = 1;
                         }
+                    }
+                    else if (timer > 0)
+                    {
+                        timer++;
                     }
                     else if (!jump)
                     {

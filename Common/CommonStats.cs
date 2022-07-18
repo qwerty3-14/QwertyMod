@@ -167,5 +167,78 @@ namespace QwertyMod.Common
                 }
             }
         }
+        public int negativeCritChance = 0;
+        bool criticalFailure = false;
+        public override void ModifyHitNPC(Item item, NPC target, ref int damage, ref float knockback, ref bool crit)
+        {
+            if (Player.GetTotalCritChance(item.DamageType) < 0)
+            {
+                ProcessCritChanceNegatable((int)Player.GetTotalCritChance(item.DamageType), ref damage, ref knockback, ref crit);
+            }
+        }
+        public override void OnHitNPC(Item item, NPC target, int damage, float knockback, bool crit)
+        {
+            ProcessCriticalFailure();
+        }
+        public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        {
+            if (Player.GetTotalCritChance(proj.DamageType) < 0)
+            {
+                ProcessCritChanceNegatable((int)Player.GetTotalCritChance(proj.DamageType), ref damage, ref knockback, ref crit);
+            }
+        }
+        public override void OnHitNPCWithProj(Projectile proj, NPC target, int damage, float knockback, bool crit)
+        {
+            ProcessCriticalFailure();
+        }
+        void ProcessCritChanceNegatable(int critChance, ref int damage, ref float knockback, ref bool crit)
+        {
+            crit = false;
+            if (critChance < 0)
+            {
+                int chanceToDoHalf = critChance * -1;
+                if (Main.rand.Next(100) < chanceToDoHalf)
+                {
+                    damage = damage / 2;
+                    criticalFailure = true;
+                }
+            }
+        }
+        void ProcessCriticalFailure()
+        {
+            if (criticalFailure)
+            {
+                int recent = -1;
+                for (int i = 99; i >= 0; i--)
+                {
+                    CombatText ctToCheck = Main.combatText[i];
+                    if (ctToCheck.lifeTime == 60 || ctToCheck.lifeTime == 120 || (ctToCheck.dot && ctToCheck.lifeTime == 40))
+                    {
+                        if (ctToCheck.alpha == 1f)
+                        {
+                            if ((ctToCheck.color == CombatText.DamagedHostile || ctToCheck.color == CombatText.DamagedHostileCrit))
+                            {
+                                recent = i;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (recent == -1)
+                {
+                    criticalFailure = false;
+                    return;
+                }
+                else
+                {
+
+                    Main.combatText[recent].color = Color.Gray;
+                    Main.combatText[recent].dot = true;
+                    Main.combatText[recent].velocity.Y *= 0.6f;
+                    Main.combatText[recent].lifeTime = 30;
+                }
+                criticalFailure = false;
+            }
+        }
     }
 }

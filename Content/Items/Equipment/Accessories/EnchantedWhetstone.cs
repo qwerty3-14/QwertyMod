@@ -13,7 +13,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Enchanted Whetstone");
-            Tooltip.SetDefault("Melee attacks inflict a bit of extra magic damage");
+            Tooltip.SetDefault("Melee attacks deal an extra 20% damage as magic damage");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 

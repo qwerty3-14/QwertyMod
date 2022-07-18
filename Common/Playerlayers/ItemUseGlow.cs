@@ -41,7 +41,6 @@ namespace QwertyMod.Common.PlayerLayers
             if (heldItem.TryGetGlobalItem<ItemUseGlow>(out result))
             {
                 Texture2D glowTexture = result.glowTexture;
-
                 if (glowTexture != null)
                 {
 

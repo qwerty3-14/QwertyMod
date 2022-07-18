@@ -30,7 +30,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.AncientNuke
         {
             Item.damage = dmg;
             Item.knockBack = kb;
-            Item.DamageType = DamageClass.Summon;
+            Item.DamageType = DamageClass.Generic;
             Item.GetGlobalItem<ShapeShifterItem>().morphCooldown = 27;
             Item.noMelee = true;
 

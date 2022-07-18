@@ -31,6 +31,12 @@ namespace QwertyMod.Content.NPCs.Fortress
             NPC.defense = 30;
             NPC.lifeMax = 480;
             NPC.value = 100;
+
+            if (NPC.downedGolemBoss)
+            {
+                NPC.lifeMax = 960;
+                NPC.damage = 160;
+            }
             //NPC.alpha = 100;
             //NPC.behindTiles = true;
             NPC.HitSound = SoundID.NPCHit7;
@@ -110,8 +116,8 @@ namespace QwertyMod.Content.NPCs.Fortress
         public override void AI()
         {
             NPC.GetGlobalNPC<FortressNPCGeneral>().fortressNPC = true;
-            Player player = Main.player[NPC.target];
-            NPC.TargetClosest(true);
+            NPC.GetGlobalNPC<FortressNPCGeneral>().contactDamageToInvaders = true;
+            Entity player = FortressNPCGeneral.FindTarget(NPC, true);
             timer++;
             switch (direction)
             {

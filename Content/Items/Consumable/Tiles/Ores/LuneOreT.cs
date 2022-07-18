@@ -14,6 +14,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Ores
             Main.tileSolid[Type] = true;
             Main.tileMergeDirt[Type] = true;
             Main.tileSpelunker[Type] = true;
+            Main.tileBlockLight[Type] = true;
 
             DustType = DustType<LuneDust>();
             HitSound = SoundID.Tink;

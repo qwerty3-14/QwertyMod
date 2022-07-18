@@ -235,6 +235,10 @@ namespace QwertyMod.Common.Playerlayers
             BodyDictionary.Add(EquipLoader.GetEquipSlot(mod, "GlassAbsorber", EquipType.Body), body);
             body = new OnBodyDraw(Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Vitallum/VitallumLifeguard_Body_Vein", immediate).Value, false, 3, 4);
             BodyDictionary.Add(EquipLoader.GetEquipSlot(mod, "VitallumLifeguard", EquipType.Body), body);
+            body = new OnBodyDraw(Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Bionic/BionicImplants_Body_Glow", immediate).Value);
+            BodyDictionary.Add(EquipLoader.GetEquipSlot(mod, "BionicImplants", EquipType.Body), body);
+            body = new OnBodyDraw(Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Invader/InvaderProtector_Body_Glow", immediate).Value);
+            BodyDictionary.Add(EquipLoader.GetEquipSlot(mod, "InvaderProtector", EquipType.Body), body);
 
         }
     }

@@ -14,7 +14,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Combined
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Fiery Whetstone");
-            Tooltip.SetDefault("Melee attacks ingnite enemies\nMelee attacks do extra magic damage against enemies vulnerable to fire");
+            Tooltip.SetDefault("Melee attacks ingnite enemies\nMelee attacks do an extra 30% damage as magic damage\nEnemies immune to fire are immune to the extra damage.");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 

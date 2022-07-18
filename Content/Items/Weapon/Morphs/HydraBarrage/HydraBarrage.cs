@@ -25,7 +25,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.HydraBarrage
         {
             Item.damage = 142;
             Item.knockBack = 0;
-            Item.DamageType = DamageClass.Summon;
+            Item.DamageType = DamageClass.Generic;
             Item.GetGlobalItem<ShapeShifterItem>().morphCooldown = 24;
             Item.noMelee = true;
 

@@ -9,10 +9,6 @@ namespace QwertyMod.Common
     {
         public override void SetDefaults(Item item)
         {
-            if (item.type == ItemID.BreakerBlade)
-            {
-                item.scale = 10;
-            }
         }
         public override bool CanConsumeAmmo(Item weapon, Item ammo, Player player)
         {

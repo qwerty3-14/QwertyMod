@@ -51,7 +51,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
                 {
                     if (!Player.inventory[i].IsAir)
                     {
-                        if ((Player.inventory[i].ammo != AmmoID.None) && Player.inventory[i].stack < Player.inventory[i].maxStack)
+                        if ((Player.inventory[i].ammo != AmmoID.None && Player.inventory[i].ammo != AmmoID.Coin) && Player.inventory[i].stack < Player.inventory[i].maxStack)
                         {
                             possibleStacks.Add(i);
                             attemptGrowth = true;

@@ -75,7 +75,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Swordpocalypse
             Projectile.width = 22;
             Projectile.height = 22;
             Projectile.friendly = true;
-            Projectile.penetrate = -1;
+            Projectile.penetrate = 4;
             Projectile.DamageType = DamageClass.Magic;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 30;

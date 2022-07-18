@@ -208,6 +208,14 @@ namespace QwertyMod.Common.Playerlayers
             leg = new OnLegDraw(Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Vitallum/VitallumJeans_Legs_Vein", immediate).Value, Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Vitallum/VitallumJeans_FemaleLegs_Vein", immediate).Value, false, 3);
             LegDictionary.Add(QwertyMod.VitLegMale, leg);
             LegDictionary.Add(QwertyMod.VitLegFemale, leg);
+            leg = new OnLegDraw(Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Bionic/BionicLimbs_Legs_Glow", immediate).Value, Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Bionic/BionicLimbs_FemaleLegs_Glow", immediate).Value);
+            LegDictionary.Add(QwertyMod.BionicLegMale, leg);
+            LegDictionary.Add(QwertyMod.BionicLegFemale, leg);
+
+            leg = new OnLegDraw(Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Invader/InvaderLanders_Legs_Glow", immediate).Value,
+            Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Invader/InvaderLanders_FemaleLegs_Glow", immediate).Value);
+            LegDictionary.Add(QwertyMod.invaderLanderMale, leg);
+            LegDictionary.Add(QwertyMod.invaderLanderFemale, leg);
         }
     }
 }
