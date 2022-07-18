@@ -1,5 +1,4 @@
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using Terraria;
@@ -104,14 +103,14 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.Sheath
             {
                 if (effect && damageTally >= damageTallyMax)
                 {
-                        Projectile.NewProjectile(new EntitySource_Misc(""), Player.Center, Vector2.Zero, ProjectileType<ImperiousP>(), (int)(500f * Player.GetDamage(DamageClass.Summon).Multiplicative), 8f * Player.GetKnockback(DamageClass.Summon).Multiplicative, Player.whoAmI); //summons Imperious to fight!
-                        damageTally = 0; //resets the tally
-                    
+                    Projectile.NewProjectile(new EntitySource_Misc(""), Player.Center, Vector2.Zero, ProjectileType<ImperiousP>(), (int)(500f * Player.GetDamage(DamageClass.Summon).Multiplicative), 8f * Player.GetKnockback(DamageClass.Summon).Multiplicative, Player.whoAmI); //summons Imperious to fight!
+                    damageTally = 0; //resets the tally
+
                 }
             }
         }
 
-        
+
     }
 
     public class ImperiousP : ModProjectile

@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using QwertyMod.Content.Items.Weapon.Morphs;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ID.ArmorIDs;
-using QwertyMod.Content.Items.Weapon.Morphs;
 
 namespace QwertyMod.Content.Items.Equipment.Armor.Bionic
 {
@@ -32,9 +27,9 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Bionic
         {
             player.GetModPlayer<ShapeShifterPlayer>().coolDownDuration *= 0.7f;
             player.runAcceleration += 0.8f;
-            
+
         }
-        
+
         public override void SetMatch(bool male, ref int equipSlot, ref bool robes)
         {
             if (male) equipSlot = QwertyMod.BionicLegMale;

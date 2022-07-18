@@ -1,9 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
+using QwertyMod.Content.Dusts;
 using Terraria;
+using Terraria.GameContent.Creative;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
-using QwertyMod.Content.Dusts;
-using Terraria.GameContent.Creative;
 
 namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
 {
@@ -77,12 +77,12 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
             if (!target.immortal && !target.SpawnedFromStatue)
             {
                 Player player = Main.player[Projectile.owner];
-                if(Main.rand.Next(2) == 0)
+                if (Main.rand.Next(2) == 0)
                 {
                     player.statLife++;
                     player.HealEffect(1, true);
                 }
-                
+
             }
         }
     }

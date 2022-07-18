@@ -93,7 +93,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.SkySpiral
             {
                 if (QwertyMethods.NPCsInRange(ref targets, maxDistance, Projectile.Center))
                 {
-                    for(int n =0; n < targets.Count; n++)
+                    for (int n = 0; n < targets.Count; n++)
                     {
                         targets[n].StrikeNPC(Projectile.damage, Projectile.knockBack, 0, false, false);
                         float distance = (targets[n].Center - Projectile.Center).Length();

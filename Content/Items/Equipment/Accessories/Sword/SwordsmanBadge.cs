@@ -40,7 +40,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Sword
         }
         public override void OnHitNPC(Item item, NPC target, int damage, float knockback, bool crit)
         {
-            if(critOnHit)
+            if (critOnHit)
             {
                 Player.AddBuff(BuffType<ImperialCourage>(), 240);
             }

@@ -31,8 +31,8 @@ namespace QwertyMod.Content.NPCs.Fortress
             NPC.defense = 30;
             NPC.lifeMax = 480;
             NPC.value = 100;
-            
-            if(NPC.downedGolemBoss)
+
+            if (NPC.downedGolemBoss)
             {
                 NPC.lifeMax = 960;
                 NPC.damage = 160;

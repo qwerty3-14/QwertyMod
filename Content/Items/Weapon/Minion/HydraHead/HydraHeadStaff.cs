@@ -1,9 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
@@ -26,22 +21,22 @@ namespace QwertyMod.Content.Items.Weapon.Minion.HydraHead
 
         public override void SetDefaults()
         {
-            Item.damage = 22; 
-            Item.mana = 20;     
-            Item.width = 80;   
-            Item.height = 80;     
-            Item.useTime = 25;   
-            Item.useAnimation = 25;    
-            Item.useStyle = ItemUseStyleID.Swing;  
-            Item.noMelee = true; 
-            Item.knockBack = 1f;  
+            Item.damage = 22;
+            Item.mana = 20;
+            Item.width = 80;
+            Item.height = 80;
+            Item.useTime = 25;
+            Item.useAnimation = 25;
+            Item.useStyle = ItemUseStyleID.Swing;
+            Item.noMelee = true;
+            Item.knockBack = 1f;
             Item.value = 250000;
             Item.rare = ItemRarityID.Pink;
-            Item.UseSound = SoundID.Item44; 
-            Item.autoReuse = true;   
+            Item.UseSound = SoundID.Item44;
+            Item.autoReuse = true;
             Item.shoot = ProjectileType<MinionHead>();
             Item.DamageType = DamageClass.Summon;
-            Item.buffType = BuffType<HydraHeadB>();  
+            Item.buffType = BuffType<HydraHeadB>();
             Item.buffTime = 3600;
         }
 

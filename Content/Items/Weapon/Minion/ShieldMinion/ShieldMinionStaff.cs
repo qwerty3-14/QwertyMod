@@ -1,10 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using QwertyMod.Content.Items.MiscMaterials;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
@@ -43,7 +38,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.ShieldMinion
             Item.buffType = BuffType<ShieldMinionB>();
             Item.buffTime = 3600;
         }
-        
+
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             player.SpawnMinionOnCursor(source, player.whoAmI, type, Item.damage, knockback);

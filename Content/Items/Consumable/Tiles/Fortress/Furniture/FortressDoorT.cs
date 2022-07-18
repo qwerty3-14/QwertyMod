@@ -1,12 +1,13 @@
 using Microsoft.Xna.Framework;
+using QwertyMod.Content.Dusts;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.Enums;
+using Terraria.GameContent.ObjectInteractions;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.ObjectData; using static Terraria.ModLoader.ModContent;
-using QwertyMod.Content.Dusts;
-using Terraria.GameContent.ObjectInteractions;
+using Terraria.ObjectData;
+using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Furniture
 {

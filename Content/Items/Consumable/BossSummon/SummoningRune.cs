@@ -46,7 +46,7 @@ namespace QwertyMod.Content.Items.Consumable.BossSummon
     {
         public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
         {
-            if(npc.type == NPCID.DungeonSpirit)
+            if (npc.type == NPCID.DungeonSpirit)
             {
                 npcLoot.Add(ItemDropRule.Common(ItemType<SummoningRune>(), 4));
             }

@@ -1,10 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -47,7 +42,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.BubbleBrewer
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            
+
             player.SpawnMinionOnCursor(source, player.whoAmI, type, Item.damage, knockback);
             return false;
         }
@@ -84,7 +79,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.BubbleBrewer
         public override void AI()
         {
             Player player = Main.player[Projectile.owner];
-            if(runOnce)
+            if (runOnce)
             {
                 Point point;
                 while (!WorldUtils.Find(Projectile.Center.ToTileCoordinates(), Searches.Chain(new Searches.Down(1), new GenCondition[]
@@ -99,20 +94,20 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.BubbleBrewer
             }
             player.UpdateMaxTurrets();
             timer++;
-            if(timer == 1)
+            if (timer == 1)
             {
                 SoundEngine.PlaySound(SoundID.Item46, Projectile.Center);
             }
-            if(timer % 60 == 0 && waterLevel < 26)
+            if (timer % 60 == 0 && waterLevel < 26)
             {
                 waterLevel++;
                 SoundEngine.PlaySound(SoundID.Item85, Projectile.Center);
             }
-            if(waterLevel > 0 && timer % 3 == 0)
+            if (waterLevel > 0 && timer % 3 == 0)
             {
-                if(QwertyMethods.ClosestNPC(ref target, 500, Projectile.Center, false, player.MinionAttackTargetNPC))
+                if (QwertyMethods.ClosestNPC(ref target, 500, Projectile.Center, false, player.MinionAttackTargetNPC))
                 {
-                    if(waterLevel > 10)
+                    if (waterLevel > 10)
                     {
                         SoundEngine.PlaySound(SoundID.ForceRoarPitched, Projectile.Center);
                     }
@@ -121,7 +116,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.BubbleBrewer
                     waterLevel--;
                 }
             }
-            if(Projectile.frameCounter > 0)
+            if (Projectile.frameCounter > 0)
             {
                 Projectile.frameCounter--;
                 Projectile.frame = 1;
@@ -138,7 +133,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.BubbleBrewer
             {
                 Main.EntitySpriteDraw(texture, Projectile.position + new Vector2(24, 36) - Vector2.UnitY * i - Main.screenPosition, null, lightColor, 0, new Vector2(0, 1), 1, 0, 0);
             }
-                
+
         }
     }
     public class BrewerBubble : ModProjectile

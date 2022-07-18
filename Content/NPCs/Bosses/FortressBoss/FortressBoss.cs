@@ -2,7 +2,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Common;
 using QwertyMod.Common.Fortress;
-using QwertyMod.Content.Buffs;
 using QwertyMod.Content.Dusts;
 using QwertyMod.Content.Items.Consumable.BossBag;
 using QwertyMod.Content.Items.Consumable.Tiles.Bars;
@@ -17,7 +16,6 @@ using QwertyMod.Content.Items.Weapon.Ranged.Bow.HolyExiler;
 using QwertyMod.Content.NPCs.Fortress;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -25,7 +23,6 @@ using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
-using Terraria.Localization;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
 
@@ -176,7 +173,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
                 maxDistanceFromCenter = 320 * 16;
             }
         }
-        int[] armFrames = new int[] { 4, 4, 0, 0};
+        int[] armFrames = new int[] { 4, 4, 0, 0 };
         //Vector2[] spellPositions = new Vector2[] { new Vector2(20, 48), new Vector2(135, 48), new Vector2(18, 76), new Vector2(137, 76) };
         Vector2[] spellPositions = new Vector2[] { new Vector2(23, 36), new Vector2(132, 36), new Vector2(23, 68), new Vector2(132, 68) };
         bool[] drawSpell = new bool[] { false, false, false, false };
@@ -214,17 +211,17 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
                     NPC.timeLeft = 10;
                 }
                 ArmsVibing();
-                
+
                 return;
             }
-            if(spawnInTime >0)
+            if (spawnInTime > 0)
             {
                 SpawnInAnimation();
             }
             else
             {
                 NPC.alpha = 255;
-                if(attackCounter ==0)
+                if (attackCounter == 0)
                 {
                     FlyToNewCampSpot();
                 }
@@ -232,7 +229,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
                 {
                     if (useBarrier)
                     {
-                        if(attackCounter == 1)
+                        if (attackCounter == 1)
                         {
                             SetupBarrier();
                         }
@@ -265,7 +262,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
                             player = Main.player[NPC.target];
                             if (Main.netMode != 1)
                             {
-                                Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Center, QwertyMethods.PolarVector(8f, (player.Center - NPC.Center).ToRotation()), ProjectileType<CaeliteSaw>(), damage, 0);
+                                Projectile.NewProjectile(new EntitySource_Misc(""), NPC.Center, QwertyMethods.PolarVector(8f, (player.Center - NPC.Center).ToRotation()), ProjectileType<CaeliteSaw>(), damage, 0);
                             }
                         }
                     }
@@ -275,7 +272,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
             Lighting.AddLight(NPC.Center, new Vector3(1.2f, 1.2f, 1.2f));
             NPC.dontTakeDamage = NPC.alpha != 255;
             DrawDust();
-            
+
         }
         void SetupBarrier()
         {
@@ -284,11 +281,11 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
                 SpawnBarrier();
                 attackStarter = false;
             }
-            if(timer > 300)
+            if (timer > 300)
             {
                 ResetTimer();
             }
-            else if(timer > 180)
+            else if (timer > 180)
             {
                 for (int i = 0; i < 4; i++)
                 {
@@ -297,7 +294,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
             }
             else
             {
-                for(int i =0; i < 4; i++)
+                for (int i = 0; i < 4; i++)
                 {
                     SetArmToAttackPosition(i);
                 }
@@ -305,9 +302,9 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
         }
         void SpawnBarrier()
         {
-            for(int i =0; i < 200; i++)
+            for (int i = 0; i < 200; i++)
             {
-                if(Main.projectile[i].type == ProjectileType<Deflect>())
+                if (Main.projectile[i].type == ProjectileType<Deflect>())
                 {
                     Main.projectile[i].Kill();
                 }
@@ -320,7 +317,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
                 {
                     Vector2 endPos = NPC.Center + QwertyMethods.PolarVector(130, (player.Center - NPC.Center).ToRotation() + ((float)i / 11f) * (float)Math.PI - (float)Math.PI / 2f);
                     Vector2 startPos = NPC.position + spellPositions[i / 3];
-                    Projectile projectile = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""),  startPos, Vector2.Zero, ProjectileType<Deflect>(), damage, 0, 255, endPos.X, endPos.Y)];
+                    Projectile projectile = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), startPos, Vector2.Zero, ProjectileType<Deflect>(), damage, 0, 255, endPos.X, endPos.Y)];
                     projectile.ai[0] = endPos.X;
                     projectile.ai[1] = endPos.Y;
                     projectile.timeLeft = (60 * 30) + (i % 3) * 30 + 60;
@@ -370,13 +367,13 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
                 SoundEngine.PlaySound(SoundID.Item43, position);
                 if (Main.netMode != 1)
                 {
-                    Projectile.NewProjectile(new EntitySource_Misc(""),  position, QwertyMethods.PolarVector(vel, angle), ProjectileType<DivineBolt>(), damage, 0);
+                    Projectile.NewProjectile(new EntitySource_Misc(""), position, QwertyMethods.PolarVector(vel, angle), ProjectileType<DivineBolt>(), damage, 0);
                 }
             }
         }
         void BarrierSpreadAttack()
         {
-            if(attackStarter)
+            if (attackStarter)
             {
                 PlanAttackOrder();
                 attackStarter = false;
@@ -389,16 +386,16 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
                 for (int i = 0; i < 4; i++)
                 {
                     int arm = attackOrder[i];
-                    if(!armAttacked[arm] && timer >= holdTime + attackSpeed * i)
+                    if (!armAttacked[arm] && timer >= holdTime + attackSpeed * i)
                     {
                         armAttacked[arm] = true;
                         ShootSpread(NPC.position + spellPositions[arm]);
                     }
                 }
             }
-            for(int i =0; i < 4; i++)
+            for (int i = 0; i < 4; i++)
             {
-                if(armAttacked[i])
+                if (armAttacked[i])
                 {
                     SetArmToHoldPosition(i);
                 }
@@ -407,7 +404,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
                     HoldingSpell(i);
                 }
             }
-            if(timer > holdTime + attackSpeed * 3 + afterTime)
+            if (timer > holdTime + attackSpeed * 3 + afterTime)
             {
                 ResetTimer();
             }
@@ -418,7 +415,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
             Player player = Main.player[NPC.target];
             if (Main.netMode != 1)
             {
-                QwertyMethods.ProjectileSpread(new EntitySource_Misc(""),  position, 3, 6f, ProjectileType<BarrierSpread>(), damage, 0, 255, NPC.whoAmI, rotation: (player.Center - position).ToRotation(), spread: (float)Math.PI / 6);
+                QwertyMethods.ProjectileSpread(new EntitySource_Misc(""), position, 3, 6f, ProjectileType<BarrierSpread>(), damage, 0, 255, NPC.whoAmI, rotation: (player.Center - position).ToRotation(), spread: (float)Math.PI / 6);
             }
         }
         void PlanAttackOrder()
@@ -429,31 +426,31 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
             attackOrder = new int[] { -1, -1, -1, -1 };
             float max = 0;
             float min = 100000;
-            for(int i =0; i < 4; i++)
+            for (int i = 0; i < 4; i++)
             {
                 armDistances[i] = (player.Center - (NPC.position + spellPositions[i])).Length();
-                if(armDistances[i] > max)
+                if (armDistances[i] > max)
                 {
                     max = armDistances[i];
                     attackOrder[3] = i;
                 }
-                if(armDistances[i] < min)
+                if (armDistances[i] < min)
                 {
                     min = armDistances[i];
                     attackOrder[0] = i;
                 }
             }
-            for(int i =0; i < 4; i++)
+            for (int i = 0; i < 4; i++)
             {
-                if(armDistances[i] != max && armDistances[i] != min)
+                if (armDistances[i] != max && armDistances[i] != min)
                 {
-                    if(attackOrder[2] == -1)
+                    if (attackOrder[2] == -1)
                     {
                         attackOrder[2] = i;
                     }
                     else
                     {
-                        if(armDistances[i] > attackOrder[2])
+                        if (armDistances[i] > attackOrder[2])
                         {
                             attackOrder[1] = attackOrder[2];
                             attackOrder[2] = i;
@@ -475,11 +472,11 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
             if (attackCounter > 6 + (useBarrier ? 1 : 0))
             {
                 attackCounter = 0;
-                if(Main.expertMode && (float)NPC.life / NPC.lifeMax < 0.6f )
+                if (Main.expertMode && (float)NPC.life / NPC.lifeMax < 0.6f)
                 {
                     useBarrier = true;
                 }
-                if(Main.expertMode && (float)NPC.life / NPC.lifeMax < 0.3f)
+                if (Main.expertMode && (float)NPC.life / NPC.lifeMax < 0.3f)
                 {
                     addSaw = true;
                 }
@@ -487,14 +484,14 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
         }
         void FlyToNewCampSpot()
         {
-            if(attackStarter)
+            if (attackStarter)
             {
                 FindCampSpot();
                 attackStarter = false;
             }
-            
+
             NPC.alpha = 150;
-            for(int i =0; i < 4; i++)
+            for (int i = 0; i < 4; i++)
             {
                 SetArmToHoldPosition(i);
             }
@@ -507,7 +504,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
             if (Math.Abs(NPC.velocity.Y) < .01f)
             {
                 NPC.velocity.X = flySpeed * campDirection;
-                if (Math.Sign(campSpot.X -NPC.Center.X) == campDirection * -1 && CampSpotOpen())
+                if (Math.Sign(campSpot.X - NPC.Center.X) == campDirection * -1 && CampSpotOpen())
                 {
                     ResetTimer();
                     NPC.velocity = Vector2.Zero;
@@ -525,16 +522,16 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
             {
                 campDirection = -1;
             }
-            if(player.Center.X + campDirection * campDistance < fortressCenter - maxDistanceFromCenter)
+            if (player.Center.X + campDirection * campDistance < fortressCenter - maxDistanceFromCenter)
             {
                 campDirection = 1;
             }
             campSpot = player.Center + (Vector2.UnitX * campDirection * campDistance);
-            if(campSpot.Y < upperLimit)
+            if (campSpot.Y < upperLimit)
             {
                 campSpot.Y = upperLimit + 20 * 16;
             }
-            if(campSpot.Y > lowerLimit)
+            if (campSpot.Y > lowerLimit)
             {
                 campSpot.Y = lowerLimit - 20 * 16;
             }
@@ -542,10 +539,10 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
         }
         bool CampSpotOpen()
         {
-            for(int i =0; i < 9; i++)
+            for (int i = 0; i < 9; i++)
             {
                 Vector2 checkSpot = NPC.position;
-                switch(i)
+                switch (i)
                 {
                     case 0:
                         checkSpot = NPC.TopLeft;
@@ -576,7 +573,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
                         break;
                 }
                 Point coords = checkSpot.ToTileCoordinates();
-                if(Main.tile[coords.X, coords.Y].HasTile)
+                if (Main.tile[coords.X, coords.Y].HasTile)
                 {
                     return false;
                 }
@@ -585,9 +582,9 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
         }
         void DrawDust()
         {
-            for(int i =0; i < 4; i++)
+            for (int i = 0; i < 4; i++)
             {
-                if(drawSpell[i])
+                if (drawSpell[i])
                 {
                     Dust dust = Main.dust[Dust.NewDust(NPC.position + spellPositions[i] - Vector2.One * 16, 32, 32, DustType<CaeliteDust>())];
                     dust.frame.Y = 0;
@@ -597,11 +594,11 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
         }
         void SpawnInAnimation()
         {
-            if(spawnInTime == 300)
+            if (spawnInTime == 300)
             {
                 SetupBoundries();
             }
-            if(stretchTime > 300 - spawnInTime)
+            if (stretchTime > 300 - spawnInTime)
             {
                 scale.X = 0.5f + 0.5f * ((300f - (float)spawnInTime) / stretchTime);
                 scale.Y = 2f - 1f * ((300f - (float)spawnInTime) / stretchTime);
@@ -632,10 +629,10 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
         //Classic animation
         void ArmsVibing()
         {
-            for(int i =0; i <4; i++)
+            for (int i = 0; i < 4; i++)
             {
-                armFrames[i] = (int)(NPC.frameCounter) / 5 + (i >=2 ? 4 : 0);
-                if(armFrames[i] >= 8)
+                armFrames[i] = (int)(NPC.frameCounter) / 5 + (i >= 2 ? 4 : 0);
+                if (armFrames[i] >= 8)
                 {
                     armFrames[i] -= 8;
                 }
@@ -692,7 +689,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
                 }
                 texture = Request<Texture2D>(path).Value;
                 spriteBatch.Draw(texture, NPC.Center - screenPos, new Rectangle(0, armFrames[i] * 128, 156, 128), drawColor, NPC.rotation, new Vector2(156 * 0.5f, 128 * 0.5f), scale, 0, 0);
-                if(drawSpell[i])
+                if (drawSpell[i])
                 {
                     texture = Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/FortressBoss/SpellOrb").Value;
                     spriteBatch.Draw(texture, NPC.position + spellPositions[i] - screenPos, null, drawColor, orbRotatior, texture.Size() * .5f, scale, 0, 0);
@@ -702,5 +699,5 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
         }
     }
 
-    
+
 }

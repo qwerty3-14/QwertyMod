@@ -1,5 +1,4 @@
-﻿using QwertyMod.Common;
-using Terraria;
+﻿using Terraria;
 using Terraria.ModLoader;
 
 namespace QwertyMod.Content.Buffs

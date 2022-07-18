@@ -1,10 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
@@ -75,9 +71,9 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Top.Cyclone
         float trigCounter = 0;
         public override void ExtraTopNonesense()
         {
-            if(hitGround && Projectile.friendly)
+            if (hitGround && Projectile.friendly)
             {
-                if(Projectile.frameCounter % 2 == 0 && segments < maxSegments)
+                if (Projectile.frameCounter % 2 == 0 && segments < maxSegments)
                 {
                     segments++;
                 }
@@ -97,8 +93,8 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Top.Cyclone
                 float spoutRadius = 10f;
                 for (int i = 0; i < segments; i++)
                 {
-                    int frame = ((Projectile.frameCounter/5) + i) % 6;
-                    Vector2 pos = Projectile.Center - Vector2.UnitY * i * height - Vector2.UnitY + Vector2.UnitX * (spoutRadius * (float)Math.Sin(trigCounter + ((float)Math.PI/3f * i)));
+                    int frame = ((Projectile.frameCounter / 5) + i) % 6;
+                    Vector2 pos = Projectile.Center - Vector2.UnitY * i * height - Vector2.UnitY + Vector2.UnitX * (spoutRadius * (float)Math.Sin(trigCounter + ((float)Math.PI / 3f * i)));
                     Main.EntitySpriteDraw(texture, pos - Main.screenPosition, new Rectangle(0, height * frame, texture.Width, height), lightColor, 0, new Vector2(texture.Width, height) * .5f, 1, 0, 0);
                 }
             }

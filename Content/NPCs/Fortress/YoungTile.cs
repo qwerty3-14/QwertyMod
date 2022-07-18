@@ -1,17 +1,16 @@
 using Microsoft.Xna.Framework;
+using QwertyMod.Content.Dusts;
+using QwertyMod.Content.Items.Consumable.Tiles.Fortress.BuildingBlocks;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using Terraria;
+using Terraria.GameContent.Bestiary;
+using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.DataStructures;
-using static Terraria.ModLoader.ModContent;
-using Terraria.GameContent.ItemDropRules;
-using QwertyMod.Content.Items.Consumable.Tiles.Fortress.BuildingBlocks;
-using QwertyMod.Content.Dusts;
 using Terraria.WorldBuilding;
-using Terraria.GameContent.Bestiary;
-using System.Collections.Generic;
+using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content.NPCs.Fortress
 {
@@ -32,8 +31,8 @@ namespace QwertyMod.Content.NPCs.Fortress
             NPC.damage = 28;
             NPC.defense = 18;
             NPC.lifeMax = 30;
-            
-            if(NPC.downedGolemBoss)
+
+            if (NPC.downedGolemBoss)
             {
                 NPC.lifeMax = 200;
                 NPC.damage = 80;
@@ -70,7 +69,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             {
                 for (int i = 0; i < 10; i++)
                 {
-                    int dustType = DustType<FortressDust>(); 
+                    int dustType = DustType<FortressDust>();
                     int dustIndex = Dust.NewDust(NPC.position, NPC.width, NPC.height, dustType);
                     Dust dust = Main.dust[dustIndex];
                     dust.velocity.X = dust.velocity.X + Main.rand.Next(-50, 51) * 0.01f;
@@ -80,7 +79,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             }
             for (int i = 0; i < 1; i++)
             {
-                int dustType = DustType<FortressDust>(); 
+                int dustType = DustType<FortressDust>();
                 int dustIndex = Dust.NewDust(NPC.position, NPC.width, NPC.height, dustType);
                 Dust dust = Main.dust[dustIndex];
                 dust.velocity.X = dust.velocity.X + Main.rand.Next(-50, 51) * 0.01f;
@@ -150,9 +149,9 @@ namespace QwertyMod.Content.NPCs.Fortress
             }
             gravity *= num2;
             jumpSpeedY = gravity * -35;
-            
+
             Entity player = FortressNPCGeneral.FindTarget(NPC, true);
-            
+
             //Main.NewText(Math.Abs(player.Center.X - NPC.Center.X));
             if (Math.Abs(player.Center.X - NPC.Center.X) < aggroDistance && Math.Abs(player.Bottom.Y - NPC.Bottom.Y) < aggroDistanceY)
             {
@@ -193,7 +192,7 @@ namespace QwertyMod.Content.NPCs.Fortress
                     frame = 1;
                 }
             }
-            else if(timer > 0)
+            else if (timer > 0)
             {
                 timer++;
             }

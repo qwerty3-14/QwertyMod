@@ -3,13 +3,8 @@ using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Common;
 using QwertyMod.Content.Dusts;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.Audio;
-using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -22,7 +17,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.AncientMinion
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Ancient Minion");
-            ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true; 
+            ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             Main.projFrames[Projectile.type] = 1;
             ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
             Main.projPet[Projectile.type] = true;
@@ -32,13 +27,13 @@ namespace QwertyMod.Content.Items.Weapon.Minion.AncientMinion
 
         public override void SetDefaults()
         {
-            Projectile.width = 42; 
-            Projectile.height = 56;   
+            Projectile.width = 42;
+            Projectile.height = 56;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Summon;
-            Projectile.ignoreWater = true;   
-            Projectile.penetrate = -1; 
-            Projectile.tileCollide = false; 
+            Projectile.ignoreWater = true;
+            Projectile.penetrate = -1;
+            Projectile.tileCollide = false;
             Projectile.minion = true;
             Projectile.minionSlots = 1;
             Projectile.timeLeft = 2;
@@ -187,7 +182,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.AncientMinion
             {
                 justTeleported = false;
             }
-            
+
             Projectile.frameCounter++;
         }
 

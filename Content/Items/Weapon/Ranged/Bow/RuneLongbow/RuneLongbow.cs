@@ -5,10 +5,6 @@ using QwertyMod.Common.RuneBuilder;
 using QwertyMod.Content.Items.MiscMaterials;
 using QwertyMod.Content.Items.Weapon.Ranged.Bow.Ancient;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -231,7 +227,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.RuneLongbow
                 if (timer < maxTime)
                 {
                     timer++;
-                    
+
                     if (timer == maxTime)
                     {
                         SoundEngine.PlaySound(SoundID.Item5, player.position);
@@ -255,7 +251,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.RuneLongbow
             }
             if (timer >= maxTime)
             {
-                Projectile.NewProjectile(new EntitySource_Misc(""), arrow.Center, QwertyMethods.PolarVector(arrow.velocity.Length(), arrow.velocity.ToRotation() + (float)Math.PI / 64f) , arrow.type, arrow.damage, arrow.knockBack, Projectile.owner);
+                Projectile.NewProjectile(new EntitySource_Misc(""), arrow.Center, QwertyMethods.PolarVector(arrow.velocity.Length(), arrow.velocity.ToRotation() + (float)Math.PI / 64f), arrow.type, arrow.damage, arrow.knockBack, Projectile.owner);
                 Projectile.NewProjectile(new EntitySource_Misc(""), arrow.Center, QwertyMethods.PolarVector(arrow.velocity.Length(), arrow.velocity.ToRotation() - (float)Math.PI / 64f), arrow.type, arrow.damage, arrow.knockBack, Projectile.owner);
             }
         }
@@ -332,10 +328,10 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.RuneLongbow
             else
             {
                 Texture2D texture = TextureAssets.Projectile[Projectile.type].Value;
-                Main.EntitySpriteDraw(texture, Projectile.Center + QwertyMethods.PolarVector( 8, Projectile.rotation - (float)Math.PI/2f) - Main.screenPosition, null, Color.White, Projectile.rotation, Projectile.Size * .5f, 1f, 0, 0);
+                Main.EntitySpriteDraw(texture, Projectile.Center + QwertyMethods.PolarVector(8, Projectile.rotation - (float)Math.PI / 2f) - Main.screenPosition, null, Color.White, Projectile.rotation, Projectile.Size * .5f, 1f, 0, 0);
             }
             return false;
         }
     }
-    
+
 }

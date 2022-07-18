@@ -1,13 +1,12 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using QwertyMod.Common.PlayerLayers;
 using System;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
-using QwertyMod.Common.PlayerLayers;
-using Terraria.GameContent;
 
 namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.ChromeShotgun
 {
@@ -149,21 +148,21 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.ChromeShotgun
                     case 0:
                         for (int p = 0; p < 3; p++)
                         {
-                            Projectile.NewProjectile(source, position, velocity.RotatedBy((((float)(p+1) / 4f) * (float)Math.PI / 16f) - (float)Math.PI / 32f), type, damage, knockback, player.whoAmI);
+                            Projectile.NewProjectile(source, position, velocity.RotatedBy((((float)(p + 1) / 4f) * (float)Math.PI / 16f) - (float)Math.PI / 32f), type, damage, knockback, player.whoAmI);
                         }
                         break;
 
                     case 1:
                         for (int p = 0; p < 4; p++)
                         {
-                            Projectile.NewProjectile(source, position, velocity.RotatedBy(Math.PI).RotatedBy((((float)(p+1) / 5f) * (float)Math.PI / 8f) - (float)Math.PI / 16f), type, damage, knockback, player.whoAmI);
+                            Projectile.NewProjectile(source, position, velocity.RotatedBy(Math.PI).RotatedBy((((float)(p + 1) / 5f) * (float)Math.PI / 8f) - (float)Math.PI / 16f), type, damage, knockback, player.whoAmI);
                         }
                         break;
 
                     case 2:
                         for (int p = 0; p < 2; p++)
                         {
-                            Projectile.NewProjectile(source, position + QwertyMethods.PolarVector(p * 2, velocity.ToRotation() + (float)Math.PI/2), velocity, type, damage, knockback, player.whoAmI);
+                            Projectile.NewProjectile(source, position + QwertyMethods.PolarVector(p * 2, velocity.ToRotation() + (float)Math.PI / 2), velocity, type, damage, knockback, player.whoAmI);
                         }
                         break;
 
@@ -207,7 +206,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.ChromeShotgun
             {
                 Projectile.timeLeft = 300;
             }
-            else if (player.HeldItem.type != ModContent.ItemType<ChromeShotgunDefault>()) 
+            else if (player.HeldItem.type != ModContent.ItemType<ChromeShotgunDefault>())
             {
                 Projectile.Kill();
             }
@@ -298,14 +297,14 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.ChromeShotgun
                         }
                     }
                 }
-                if (Player.HeldItem.type ==  ModContent.ItemType<ChromeShotgunDefault>() && Player.HeldItem.GetGlobalItem<ChromeGunToggle>().mode == 3 && Player.ownedProjectileCounts[ModContent.ProjectileType<ShotgunMinion>()] < 1)
+                if (Player.HeldItem.type == ModContent.ItemType<ChromeShotgunDefault>() && Player.HeldItem.GetGlobalItem<ChromeGunToggle>().mode == 3 && Player.ownedProjectileCounts[ModContent.ProjectileType<ShotgunMinion>()] < 1)
                 {
                     Projectile.NewProjectile(new EntitySource_Misc(""), Player.Center, Vector2.Zero, ModContent.ProjectileType<ShotgunMinion>(), Player.HeldItem.damage, Player.HeldItem.knockBack, Player.whoAmI);
                 }
             }
         }
     }
-    
+
     class ChromeGunLayer : PlayerDrawLayer
     {
         public override void SetStaticDefaults()
@@ -316,7 +315,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.ChromeShotgun
         {
             return true;
         }
-		public override Position GetDefaultPosition() => new AfterParent(PlayerDrawLayers.HeldItem);
+        public override Position GetDefaultPosition() => new AfterParent(PlayerDrawLayers.HeldItem);
 
         protected override void Draw(ref PlayerDrawSet drawInfo)
         {
@@ -324,9 +323,9 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.ChromeShotgun
             {
                 return;
             }
-            
+
             Player drawPlayer = drawInfo.drawPlayer;
-			if (!drawPlayer.HeldItem.IsAir)
+            if (!drawPlayer.HeldItem.IsAir)
             {
                 if (!drawPlayer.HeldItem.IsAir && drawPlayer.HeldItem.type == ModContent.ItemType<ChromeShotgunDefault>())
                 {
@@ -387,5 +386,5 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.ChromeShotgun
             }
         }
     }
-    
+
 }

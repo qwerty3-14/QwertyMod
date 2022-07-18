@@ -2,7 +2,6 @@
 using System;
 using System.IO;
 using Terraria;
-using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Cobalt

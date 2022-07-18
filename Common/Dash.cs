@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria;
-using Terraria.ModLoader;
-using Microsoft.Xna.Framework;
-using Terraria.Graphics.Shaders;
-using static Terraria.ModLoader.ModContent;
-using QwertyMod.Content.NPCs.Bosses.Hydra;
-using Terraria.DataStructures;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using QwertyMod.Content.NPCs.Bosses.Hydra;
+using System;
+using Terraria;
+using Terraria.DataStructures;
+using Terraria.Graphics.Shaders;
 using Terraria.ID;
+using Terraria.ModLoader;
+using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Common
 {
@@ -33,7 +29,7 @@ namespace QwertyMod.Common
         }
         public void SetDash(float speed)
         {
-            if(speed > Base)
+            if (speed > Base)
             {
                 Base = speed;
             }
@@ -233,7 +229,7 @@ namespace QwertyMod.Common
                         }
                         if (flag)
                         {
-                            
+
                             Player.velocity.X = (Base + 10f + Bonus) * (float)num16;
 
                             Point point = (Player.Center + new Vector2((float)(num16 * Player.width / 2 + 2), Player.gravDir * -(float)Player.height / 2f + Player.gravDir * 2f)).ToTileCoordinates();
@@ -293,12 +289,12 @@ namespace QwertyMod.Common
             if (drawPlayer.GetModPlayer<Dash>().hyperRune && drawPlayer.GetModPlayer<Dash>().hyperRuneTimer >= 180)
             {
                 float c = (float)(drawPlayer.GetModPlayer<Dash>().hyperRuneTimer - 180) / 60f;
-                if(c > 1f)
+                if (c > 1f)
                 {
                     c = 1f;
                 }
                 Color drawColor = new Color(c, c, c, c);
-                float rotation = drawPlayer.GetModPlayer<CommonStats>().genericCounter * (float)Math.PI /60f;
+                float rotation = drawPlayer.GetModPlayer<CommonStats>().genericCounter * (float)Math.PI / 60f;
                 Texture2D texture = Request<Texture2D>("QwertyMod/Common/SignalRune").Value;
                 DrawData d = new DrawData(texture, drawInfo.Position + drawPlayer.Size * 0.5f - Main.screenPosition, null, drawColor, rotation, texture.Size() * 0.5f, 1f, drawInfo.playerEffect, 0);
                 drawInfo.DrawDataCache.Add(d);

@@ -1,10 +1,6 @@
-using QwertyMod.Content.Items.MiscMaterials;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.GameContent.Creative;
-using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
 
 
 namespace QwertyMod.Content.Items.Equipment.Armor.Invader

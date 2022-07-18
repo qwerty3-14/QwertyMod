@@ -2,7 +2,6 @@
 using QwertyMod.Content.Dusts;
 using System;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -119,7 +118,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Spear.Hydrent
                             streamCounter++;
                             if (streamCounter % 6 == 0)
                             {
-                                Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center + QwertyMethods.PolarVector((Projectile.velocity * movementFactor).Length(), Projectile.rotation - (3 * (float)Math.PI / 4)) + QwertyMethods.PolarVector(-7f + (7f * ((streamCounter /6) % 3)), Projectile.rotation - (1 * (float)Math.PI / 4)), QwertyMethods.PolarVector(16f, Projectile.rotation - (3 * (float)Math.PI / 4)), ProjectileType<HydrentBreath>(), (int)(Projectile.damage * .4f), Projectile.knockBack, Projectile.owner);
+                                Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center + QwertyMethods.PolarVector((Projectile.velocity * movementFactor).Length(), Projectile.rotation - (3 * (float)Math.PI / 4)) + QwertyMethods.PolarVector(-7f + (7f * ((streamCounter / 6) % 3)), Projectile.rotation - (1 * (float)Math.PI / 4)), QwertyMethods.PolarVector(16f, Projectile.rotation - (3 * (float)Math.PI / 4)), ProjectileType<HydrentBreath>(), (int)(Projectile.damage * .4f), Projectile.knockBack, Projectile.owner);
                             }
                         }
                     }
@@ -165,7 +164,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Spear.Hydrent
             Projectile.localNPCImmunity[target.whoAmI] = 10;
             target.immune[Projectile.owner] = 0;
         }
-    
+
     }
 
     public class HydrentBreath : ModProjectile

@@ -1,4 +1,3 @@
-using QwertyMod.Common;
 using Terraria;
 using Terraria.ModLoader;
 

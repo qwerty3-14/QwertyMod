@@ -2,10 +2,6 @@
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.Graphics.Shaders;
@@ -175,7 +171,7 @@ namespace QwertyMod.Common
         bool criticalFailure = false;
         public override void ModifyHitNPC(Item item, NPC target, ref int damage, ref float knockback, ref bool crit)
         {
-            if(Player.GetTotalCritChance(item.DamageType) < 0)
+            if (Player.GetTotalCritChance(item.DamageType) < 0)
             {
                 ProcessCritChanceNegatable((int)Player.GetTotalCritChance(item.DamageType), ref damage, ref knockback, ref crit);
             }
@@ -186,7 +182,7 @@ namespace QwertyMod.Common
         }
         public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
         {
-            if(Player.GetTotalCritChance(proj.DamageType) < 0)
+            if (Player.GetTotalCritChance(proj.DamageType) < 0)
             {
                 ProcessCritChanceNegatable((int)Player.GetTotalCritChance(proj.DamageType), ref damage, ref knockback, ref crit);
             }
@@ -198,10 +194,10 @@ namespace QwertyMod.Common
         void ProcessCritChanceNegatable(int critChance, ref int damage, ref float knockback, ref bool crit)
         {
             crit = false;
-            if(critChance < 0)
+            if (critChance < 0)
             {
                 int chanceToDoHalf = critChance * -1;
-                if(Main.rand.Next(100) < chanceToDoHalf)
+                if (Main.rand.Next(100) < chanceToDoHalf)
                 {
                     damage = damage / 2;
                     criticalFailure = true;
@@ -210,30 +206,30 @@ namespace QwertyMod.Common
         }
         void ProcessCriticalFailure()
         {
-            if(criticalFailure)
+            if (criticalFailure)
             {
                 int recent = -1;
-			    for (int i = 99; i >= 0; i--) 
+                for (int i = 99; i >= 0; i--)
                 {
-				    CombatText ctToCheck = Main.combatText[i];
-				    if (ctToCheck.lifeTime == 60 || ctToCheck.lifeTime == 120 || (ctToCheck.dot && ctToCheck.lifeTime == 40)) 
+                    CombatText ctToCheck = Main.combatText[i];
+                    if (ctToCheck.lifeTime == 60 || ctToCheck.lifeTime == 120 || (ctToCheck.dot && ctToCheck.lifeTime == 40))
                     {
-					    if(ctToCheck.alpha == 1f) 
+                        if (ctToCheck.alpha == 1f)
                         {
-                            if ( (ctToCheck.color == CombatText.DamagedHostile || ctToCheck.color == CombatText.DamagedHostileCrit) ) 
+                            if ((ctToCheck.color == CombatText.DamagedHostile || ctToCheck.color == CombatText.DamagedHostileCrit))
                             {
                                 recent = i;
                                 break;
                             }
-					    }
-				    }
+                        }
+                    }
                 }
-                if (recent == -1) 
+                if (recent == -1)
                 {
                     criticalFailure = false;
                     return;
                 }
-                else 
+                else
                 {
 
                     Main.combatText[recent].color = Color.Gray;

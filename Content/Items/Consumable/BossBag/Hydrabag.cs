@@ -1,10 +1,10 @@
+using QwertyMod.Content.Items.MiscMaterials;
+using QwertyMod.Content.Items.Tool.FishingRod;
+using QwertyMod.Content.NPCs.Bosses.Hydra;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
-using QwertyMod.Content.Items.Tool.FishingRod;
-using QwertyMod.Content.Items.MiscMaterials;
-using QwertyMod.Content.NPCs.Bosses.Hydra;
-using Terraria.DataStructures;
 
 namespace QwertyMod.Content.Items.Consumable.BossBag
 {

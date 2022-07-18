@@ -1,10 +1,9 @@
+using QwertyMod.Common;
+using QwertyMod.Content.Items.Consumable.Tiles.Bars;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
-using Terraria.GameContent.Creative;
-using QwertyMod.Common;
-using QwertyMod.Content.Items.Consumable.Tiles.Bars;
 
 namespace QwertyMod.Content.Items.Equipment.Accessories
 {

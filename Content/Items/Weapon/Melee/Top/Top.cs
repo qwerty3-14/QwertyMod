@@ -23,7 +23,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Top
                 runOnce = false;
             }
             Projectile.frameCounter++;
-            if(Projectile.frameCounter % (frameDelay *(initVel < 2 ? 2 : 1)) == 0)
+            if (Projectile.frameCounter % (frameDelay * (initVel < 2 ? 2 : 1)) == 0)
             {
                 Projectile.frame++;
                 if (Projectile.frame >= Main.projFrames[Projectile.type])

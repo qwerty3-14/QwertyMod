@@ -27,21 +27,21 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.RhuthiniumGuardian
 
         public override void SetDefaults()
         {
-            Item.damage = 200; 
-            Item.mana = 20;     
-            Item.width = 38;   
-            Item.height = 38;    
-            Item.useTime = 25; 
-            Item.useAnimation = 25;   
-            Item.useStyle = 1; 
+            Item.damage = 200;
+            Item.mana = 20;
+            Item.width = 38;
+            Item.height = 38;
+            Item.useTime = 25;
+            Item.useAnimation = 25;
+            Item.useStyle = 1;
             Item.noMelee = true;
-            Item.knockBack = 10f; 
+            Item.knockBack = 10f;
             Item.value = 25000;
             Item.rare = 3;
-            Item.UseSound = SoundID.Item44;   
-            Item.shoot = ProjectileType<RhuthiniumGuardian>();   
+            Item.UseSound = SoundID.Item44;
+            Item.shoot = ProjectileType<RhuthiniumGuardian>();
             Item.DamageType = DamageClass.Summon;
-            Item.sentry = true; 
+            Item.sentry = true;
         }
 
         public override void AddRecipes()

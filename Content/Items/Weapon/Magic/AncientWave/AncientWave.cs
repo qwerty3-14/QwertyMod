@@ -46,7 +46,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.AncientWave
             Item.noMelee = true;
         }
 
-       
+
     }
 
     public class AncientWaveP : ModProjectile

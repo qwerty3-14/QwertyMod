@@ -1,5 +1,4 @@
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Common.Fortress;
 using QwertyMod.Content.Buffs;
 using QwertyMod.Content.Dusts;
@@ -87,13 +86,13 @@ namespace QwertyMod.Content.NPCs.Fortress
             {
                 timer++;
             }
-            
+
             NPC.spriteDirection = NPC.direction;
             Entity player = FortressNPCGeneral.FindTarget(NPC, true);
             ringProjectileCount = 2 - (int)((float)NPC.life / (float)NPC.lifeMax * 2) + 4;
             if (timer == GenerateRingTime)
             {
-                ring = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Center, Vector2.Zero, ProjectileType<RingCenter>(), 11, 0, 0, ringProjectileCount, NPC.direction)];
+                ring = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), NPC.Center, Vector2.Zero, ProjectileType<RingCenter>(), 11, 0, 0, ringProjectileCount, NPC.direction)];
                 ring.ai[0] = ringProjectileCount;
                 ring.ai[1] = NPC.direction;
                 castingFrames = true;
@@ -165,7 +164,7 @@ namespace QwertyMod.Content.NPCs.Fortress
                     int nearPlayerY = Main.rand.Next(playerTilePositionY - playerTargetShift, playerTilePositionY + playerTargetShift);
                     for (int num93 = nearPlayerY; num93 < playerTilePositionY + playerTargetShift; num93++)
                     {
-                        if ((nearPlayerX < playerTilePositionX - 12 || nearPlayerX > playerTilePositionX + 12) && (num93 < npcTilePositionY - 1 || num93 > npcTilePositionY + 1 || nearPlayerX < npcTilePositionX - 1 || nearPlayerX > npcTilePositionX + 1) )
+                        if ((nearPlayerX < playerTilePositionX - 12 || nearPlayerX > playerTilePositionX + 12) && (num93 < npcTilePositionY - 1 || num93 > npcTilePositionY + 1 || nearPlayerX < npcTilePositionX - 1 || nearPlayerX > npcTilePositionX + 1))
                         {
                             bool flag5 = true;
                             if (Main.tile[nearPlayerX, num93 - 1].LiquidType == LiquidID.Lava)

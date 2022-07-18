@@ -133,7 +133,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
         {
             if (context == "bossBag" && arg == ItemID.PlanteraBossBag)
             {
-                player.QuickSpawnItem(new EntitySource_Misc(""),ItemType<VitallumCoreUncharged>());
+                player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<VitallumCoreUncharged>());
             }
         }
     }

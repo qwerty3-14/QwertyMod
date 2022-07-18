@@ -1,12 +1,12 @@
-﻿using Terraria;
-using Terraria.ModLoader;
-using Microsoft.Xna.Framework;
-using System;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Common.RuneBuilder;
-using static Terraria.ModLoader.ModContent;
-using Terraria.GameContent.Creative;
+using System;
+using Terraria;
 using Terraria.DataStructures;
+using Terraria.GameContent.Creative;
+using Terraria.ModLoader;
+using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
 {
@@ -60,7 +60,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
         {
             Projectile.velocity = Vector2.Zero;
             Player player = Main.player[Projectile.owner];
-            if(player.GetModPlayer<ScrollEffects>().aggro)
+            if (player.GetModPlayer<ScrollEffects>().aggro)
             {
                 Projectile.timeLeft = 2;
             }
@@ -86,7 +86,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
             relativePosition += relativeVelocity;
             Projectile.Center = player.Center + relativePosition;
             Projectile.rotation = (Projectile.Center - player.Center).ToRotation();
-            
+
         }
         public override bool PreDraw(ref Color lightColor)
         {
@@ -103,7 +103,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
             Main.EntitySpriteDraw(RuneSprites.runeTransition[(int)Runes.Aggro][frame], Projectile.Center - Main.screenPosition, null, new Color(c, c, c, c), Projectile.rotation, new Vector2(15.5f, 15.5f), Vector2.One * 2, 0, 0);
             return false;
         }
-        public override void PostDraw( Color lightColor)
+        public override void PostDraw(Color lightColor)
         {
             if (timer % 120 > 30 && timer % 120 < 90)
             {

@@ -68,7 +68,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.ExtinctionGun
             }
             velocity = velocity.RotatedByRandom(MathHelper.ToRadians(15));
             Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
-            return false ;
+            return false;
         }
 
         public override Vector2? HoldoutOffset()

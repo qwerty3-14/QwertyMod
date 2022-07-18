@@ -43,7 +43,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             NPC.defense = 18;
             NPC.lifeMax = 65;
 
-            if(NPC.downedGolemBoss)
+            if (NPC.downedGolemBoss)
             {
                 NPC.lifeMax = 600;
             }
@@ -220,7 +220,7 @@ namespace QwertyMod.Content.NPCs.Fortress
                     {
                         float shootSpeed = 24;
 
-                        Projectile.NewProjectile(new EntitySource_Misc(""),  shootFrom.X, shootFrom.Y, (float)Math.Cos(aimDirection) * shootSpeed, (float)Math.Sin(aimDirection) * shootSpeed, ProjectileType<MollusketSnipe>(), NPC.downedGolemBoss ? 50 : 15, 0, 0);
+                        Projectile.NewProjectile(new EntitySource_Misc(""), shootFrom.X, shootFrom.Y, (float)Math.Cos(aimDirection) * shootSpeed, (float)Math.Sin(aimDirection) * shootSpeed, ProjectileType<MollusketSnipe>(), NPC.downedGolemBoss ? 50 : 15, 0, 0);
                         timer = 0;
                     }
                     if (timer > 60)

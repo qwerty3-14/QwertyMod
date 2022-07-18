@@ -1,11 +1,11 @@
 using Microsoft.Xna.Framework;
-using static Terraria.ModLoader.ModContent;
+using QwertyMod.Content.Dusts;
+using QwertyMod.Content.NPCs.Fortress;
 using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using QwertyMod.Content.Dusts;
-using QwertyMod.Content.NPCs.Fortress;
+using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
 {
@@ -27,7 +27,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
             MineResist = 1;
             //drop = mod.ItemType("FortressBrick");
         }
-        
+
         public override void KillTile(int i, int j, ref bool fail, ref bool effectOnly, ref bool noItem)
         {
             if (Main.netMode != 1 && !fail)
@@ -36,7 +36,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
                 youngTile.velocity = QwertyMethods.PolarVector(2, (float)Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI));
             }
         }
-        
+
         public override void HitWire(int i, int j)
         {
             WorldGen.KillTile(i, j);

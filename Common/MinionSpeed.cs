@@ -1,11 +1,6 @@
 ﻿using QwertyMod.Content.Items.Weapon.Whip.Discipline;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
@@ -15,22 +10,22 @@ namespace QwertyMod.Common
     public class MinionSpeedStats : ModPlayer
     {
         public float minionSpeed = 1f;
-        
+
         public override void ResetEffects()
         {
             minionSpeed = 1f;
         }
         public override void PreUpdate()
         {
-            for(int p = 0; p < 200; p++)
+            for (int p = 0; p < 200; p++)
             {
                 Projectile projectile = Main.projectile[p];
-                if(projectile.active && projectile.owner == Player.whoAmI && projectile.minion)
+                if (projectile.active && projectile.owner == Player.whoAmI && projectile.minion)
                 {
-                    
+
                     projectile.extraUpdates -= projectile.GetGlobalProjectile<MinionSpeedBoost>().bonustUpdates;
                     projectile.GetGlobalProjectile<MinionSpeedBoost>().minionSpeedAccumulator += (minionSpeed - 1f);
-                    if(projectile.GetGlobalProjectile<MinionSpeedBoost>().discipline > 0)
+                    if (projectile.GetGlobalProjectile<MinionSpeedBoost>().discipline > 0)
                     {
                         projectile.GetGlobalProjectile<MinionSpeedBoost>().minionSpeedAccumulator += 0.25f;
                         projectile.GetGlobalProjectile<MinionSpeedBoost>().discipline--;
@@ -55,14 +50,14 @@ namespace QwertyMod.Common
         public int discipline = 0;
         public override void OnHitNPC(Projectile projectile, NPC target, int damage, float knockback, bool crit)
         {
-            if(target.HasBuff(BuffType<DisciplineTag>()))
+            if (target.HasBuff(BuffType<DisciplineTag>()))
             {
 
-                if(projectile.minion || ProjectileID.Sets.MinionShot[projectile.type])
+                if (projectile.minion || ProjectileID.Sets.MinionShot[projectile.type])
                 {
-                    for(int p =0; p <200; p++)
+                    for (int p = 0; p < 200; p++)
                     {
-                        if(Main.projectile[p].active && Main.projectile[p].minion && projectile.owner == Main.projectile[p].owner)
+                        if (Main.projectile[p].active && Main.projectile[p].minion && projectile.owner == Main.projectile[p].owner)
                         {
                             SpeedBuff(Main.projectile[p]);
                             target.RequestBuffRemoval(BuffType<DisciplineTag>());

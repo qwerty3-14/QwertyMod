@@ -1,19 +1,6 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using QwertyMod.Common;
-using QwertyMod.Content.Buffs;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using QwertyMod.Common;
 using Terraria;
-using Terraria.Audio;
-using Terraria.DataStructures;
 using Terraria.ID;
-using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content.Items.Weapon.Minion.LuneArcherMinion
 {
@@ -33,13 +20,13 @@ namespace QwertyMod.Content.Items.Weapon.Minion.LuneArcherMinion
         }
         public override void SetDefaults()
         {
-            Projectile.width = 40; 
-            Projectile.height = 40;   
+            Projectile.width = 40;
+            Projectile.height = 40;
             Projectile.friendly = true;
-            Projectile.ignoreWater = true;    
+            Projectile.ignoreWater = true;
             Projectile.knockBack = 10f;
-            Projectile.penetrate = -1; 
-            Projectile.tileCollide = false; 
+            Projectile.penetrate = -1;
+            Projectile.tileCollide = false;
             Projectile.minion = true;
             Projectile.minionSlots = 1;
             Projectile.timeLeft = 2;

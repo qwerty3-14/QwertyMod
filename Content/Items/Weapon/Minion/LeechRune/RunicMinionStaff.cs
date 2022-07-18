@@ -1,11 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using QwertyMod.Content.Items.MiscMaterials;
-using QwertyMod.Content.Items.Weapon.Minion.AncientMinion;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
@@ -28,19 +22,19 @@ namespace QwertyMod.Content.Items.Weapon.Minion.LeechRune
 
         public override void SetDefaults()
         {
-            Item.damage = 76; 
-            Item.mana = 20;     
-            Item.width = 72;    
-            Item.height = 72;     
+            Item.damage = 76;
+            Item.mana = 20;
+            Item.width = 72;
+            Item.height = 72;
             Item.useTime = 25;
             Item.useAnimation = 25;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.noMelee = true;
-            Item.knockBack = 1f;  
+            Item.knockBack = 1f;
             Item.value = 500000;
             Item.rare = ItemRarityID.Cyan;
             Item.UseSound = SoundID.Item8;
-            Item.shoot = ProjectileType<RunicMinionFreindly>();   
+            Item.shoot = ProjectileType<RunicMinionFreindly>();
             Item.DamageType = DamageClass.Summon;
             Item.buffType = BuffType<RunicMinionB>();
             Item.buffTime = 3600;

@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Content.Items.MiscMaterials;
 using System;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
@@ -75,11 +74,11 @@ namespace QwertyMod.Content.Items.Weapon.Magic.StaffOfJob
             if (MiseryTime > 0)
             {
                 MiseryTime--;
-                trigCounter += 250 *  (float)Math.PI / (60f * 240f);
+                trigCounter += 250 * (float)Math.PI / (60f * 240f);
                 miseryCounter++;
-                if(miseryCounter % 6 == 0)
+                if (miseryCounter % 6 == 0)
                 {
-                        QwertyMethods.PokeNPC(Main.player[MiseryCauser], npc, new EntitySource_Misc(""), MiseryIntensity, DamageClass.Magic);
+                    QwertyMethods.PokeNPC(Main.player[MiseryCauser], npc, new EntitySource_Misc(""), MiseryIntensity, DamageClass.Magic);
                 }
             }
             else

@@ -1,5 +1,4 @@
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Content.Items.Consumable.Tiles.Banners;
 using QwertyMod.Content.Items.Equipment.Accessories;
 using QwertyMod.Content.Items.Weapon.Ranged.Gun.DinoVulcan;
@@ -116,7 +115,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
                 }
                 if (bombTimer > bombReload && Main.netMode != 1)
                 {
-                    Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Center.X, NPC.Center.Y, 0, 0, ProjectileType<DinoBomb>(), damage, 3f, Main.myPlayer);
+                    Projectile.NewProjectile(new EntitySource_Misc(""), NPC.Center.X, NPC.Center.Y, 0, 0, ProjectileType<DinoBomb>(), damage, 3f, Main.myPlayer);
                     bombTimer = 0;
                 }
             }
@@ -147,7 +146,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
 
                     int Yvar = 50 - Xvar;
 
-                    Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Center.X + (100f * NPC.direction), NPC.Center.Y, 5.00f * (1 + Xvar * .01f) * NPC.direction, 5.00f * (1 + Yvar * .01f), 110, damage, 3f, Main.myPlayer);
+                    Projectile.NewProjectile(new EntitySource_Misc(""), NPC.Center.X + (100f * NPC.direction), NPC.Center.Y, 5.00f * (1 + Xvar * .01f) * NPC.direction, 5.00f * (1 + Yvar * .01f), 110, damage, 3f, Main.myPlayer);
 
                     Reload_Timer = 0;
                 }
@@ -216,7 +215,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
             npcLoot.Add(ItemDropRule.Common(ItemType<DinoTooth>(), 100, 1, 1));
             npcLoot.Add(ItemDropRule.Common(ItemType<DinoVulcan>(), 6, 1, 1));
         }
-        
+
     }
 
     public class DinoBomb : ModProjectile

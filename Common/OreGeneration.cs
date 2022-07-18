@@ -1,11 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using QwertyMod.Content.Items.Consumable.Tiles.Ores;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.GameContent.Generation;
 using Terraria.ID;
@@ -76,21 +72,21 @@ namespace QwertyMod.Common
 
         public override void ModifyWorldGenTasks(List<GenPass> tasks, ref float totalWeight)
         {
-            tasks.Add( new PassLegacy("Placing ore in space!", delegate (GenerationProgress progress, GameConfiguration configuration)
-            {
-                PlaceOreInIslands();
-            }));
+            tasks.Add(new PassLegacy("Placing ore in space!", delegate (GenerationProgress progress, GameConfiguration configuration)
+           {
+               PlaceOreInIslands();
+           }));
         }
         public static void PlaceOreInIslands()
         {
-            for(int i =0; i < Main.maxTilesX; i++)
+            for (int i = 0; i < Main.maxTilesX; i++)
             {
-                for(int j =0; j < Main.maxTilesY / 4; j++) 
+                for (int j = 0; j < Main.maxTilesY / 4; j++)
                 {
-                    if(Main.tile[i, j].HasTile && Main.tile[i, j].TileType == TileID.Dirt && Main.tile[i, j+1].TileType == TileID.Cloud)
+                    if (Main.tile[i, j].HasTile && Main.tile[i, j].TileType == TileID.Dirt && Main.tile[i, j + 1].TileType == TileID.Cloud)
                     {
                         int amt = WorldGen.genRand.Next(2, 5);
-                        for(int k =0; k < amt; k++)
+                        for (int k = 0; k < amt; k++)
                         {
                             WorldGen.PlaceTile(i, j + 1 + k, TileType<LuneOreT>(), true, true);
                         }
@@ -133,11 +129,11 @@ namespace QwertyMod.Common
         static bool PlaceMoon(int x, int y)
         {
             int size = WorldGen.genRand.Next(30, 51);
-            for(int i=0; i < size; i++)
+            for (int i = 0; i < size; i++)
             {
-                for(int j =0; j < size; j++)
+                for (int j = 0; j < size; j++)
                 {
-                    if(Main.tile[x+i, y+j].HasTile)
+                    if (Main.tile[x + i, y + j].HasTile)
                     {
                         return false;
                     }

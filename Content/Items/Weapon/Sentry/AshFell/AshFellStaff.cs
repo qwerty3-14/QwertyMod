@@ -1,13 +1,12 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.GameContent;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.GameContent;
 using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content.Items.Weapon.Sentry.AshFell
@@ -101,7 +100,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.AshFell
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            Texture2D missile = Request<Texture2D>("QwertyMod/Content/Items/Weapon/Sentry/AshFell/AshMissile").Value; 
+            Texture2D missile = Request<Texture2D>("QwertyMod/Content/Items/Weapon/Sentry/AshFell/AshMissile").Value;
             for (int i = 0; i < missileCounters.Length; i++)
             {
                 Main.EntitySpriteDraw(missile,
@@ -215,7 +214,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.AshFell
                 {
                     if (Main.chest[c].item[0].type == ItemID.DarkLance || Main.chest[c].item[0].type == ItemID.Flamelash || Main.chest[c].item[0].type == ItemID.FlowerofFire || Main.chest[c].item[0].type == ItemID.Sunfury || Main.chest[c].item[0].type == ItemID.HellwingBow)
                     {
-                        if(Main.rand.Next(4) == 0)
+                        if (Main.rand.Next(4) == 0)
                         {
                             for (int i = 0; i < Main.chest[c].item.Length; i++)
                             {

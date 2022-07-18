@@ -1,12 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Common.RuneBuilder;
 using QwertyMod.Content.Dusts;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
@@ -31,11 +26,11 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
             Projectile.netUpdate = true;
             timer += Projectile.ai[1];
             frame = (int)(20f * (timer / 240f));
-            if(frame > 19)
+            if (frame > 19)
             {
                 frame = 19;
             }
-            if(timer > 240f)
+            if (timer > 240f)
             {
                 atackTimer++;
                 switch ((int)Projectile.ai[0])
@@ -46,16 +41,16 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
                             madeRunes = true;
                             if (Main.netMode != 1)
                             {
-                                for(int i = 0; i < 8; i++)
+                                for (int i = 0; i < 8; i++)
                                 {
-                                    Projectile p = Main.projectile[ Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center, Vector2.Zero, ProjectileType<AggroRune>(), (int)(Projectile.damage * 1.3f), 0, Main.myPlayer)];
+                                    Projectile p = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center, Vector2.Zero, ProjectileType<AggroRune>(), (int)(Projectile.damage * 1.3f), 0, Main.myPlayer)];
                                     p.rotation = (i / 8f) * (float)Math.PI * 2;
                                 }
                             }
                         }
                         break;
                     case (int)Runes.Leech:
-                        if(atackTimer % 120 == 1)
+                        if (atackTimer % 120 == 1)
                         {
                             if (Main.netMode != 1)
                             {
@@ -78,10 +73,10 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
                         }
                         break;
                     case (int)Runes.IceRune:
-                        if(!madeRunes)
+                        if (!madeRunes)
                         {
                             madeRunes = true;
-                            if(Main.netMode != 2)
+                            if (Main.netMode != 2)
                             {
                                 Projectile p = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), Main.LocalPlayer.Center, Vector2.Zero, ProjectileType<IceRune>(), (int)(Projectile.damage * 1.6f), 0, Main.myPlayer)];
                                 p.rotation = Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI);
@@ -95,16 +90,16 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
                             madeRunes = true;
                             if (Main.netMode != 1)
                             {
-                                for(int i =0; i < 4; i++)
+                                for (int i = 0; i < 4; i++)
                                 {
-                                    Projectile.NewProjectile(new EntitySource_Misc(""),  Projectile.Center, QwertyMethods.PolarVector(20f, (i /4f) * (float)Math.PI * 2f), ProjectileType<PursuitRune>(), (int)(Projectile.damage * 1f), 0, Main.myPlayer);
+                                    Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center, QwertyMethods.PolarVector(20f, (i / 4f) * (float)Math.PI * 2f), ProjectileType<PursuitRune>(), (int)(Projectile.damage * 1f), 0, Main.myPlayer);
                                 }
                             }
                             Projectile.Kill();
                         }
                         break;
                 }
-                if(atackTimer >=720)
+                if (atackTimer >= 720)
                 {
                     Projectile.Kill();
                 }
@@ -113,7 +108,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
         public override bool PreDraw(ref Color lightColor)
         {
             float c = (timer / 240f);
-            if(c > 1f)
+            if (c > 1f)
             {
                 c = 1f;
             }
@@ -139,10 +134,10 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
                     dustType = DustType<PursuitRuneDeath>();
                     break;
             }
-            for(int d = 0; d < 300; d++)
+            for (int d = 0; d < 300; d++)
             {
                 //Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, mod.DustType(dustName));
-                Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(Main.rand.Next(100), Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI)),dustType);
+                Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(Main.rand.Next(100), Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI)), dustType);
             }
         }
     }

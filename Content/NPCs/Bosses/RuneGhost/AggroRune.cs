@@ -2,11 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Common.RuneBuilder;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
@@ -42,18 +38,18 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
             if (timer % 120 == 29)
             {
                 Projectile.velocity = Vector2.Zero;
-                if(Main.netMode != 1)
+                if (Main.netMode != 1)
                 {
                     Projectile.netUpdate = true;
                 }
             }
-            if(timer % 120 == 90 && Main.netMode != 1)
+            if (timer % 120 == 90 && Main.netMode != 1)
             {
                 Projectile.NewProjectile(new EntitySource_Misc(""), middle, QwertyMethods.PolarVector(1, Projectile.rotation), ProjectileType<AggroStrike>(), Projectile.damage, 0);
             }
-            if(timer % 120 == 119)
+            if (timer % 120 == 119)
             {
-                if(Main.netMode != 1)
+                if (Main.netMode != 1)
                 {
                     Vector2 goTo = middle + QwertyMethods.PolarVector(200, Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI));
                     Projectile.velocity = (goTo - Projectile.Center) / 30f;
@@ -79,13 +75,13 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
         }
         public override void PostDraw(Color lightColor)
         {
-            if(timer % 120 > 30 && timer % 120 < 90 && middle != null)
+            if (timer % 120 > 30 && timer % 120 < 90 && middle != null)
             {
                 Texture2D texture = Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/RuneGhost/AggroLaser").Value;
                 Main.EntitySpriteDraw(texture, middle - Main.screenPosition, null, Color.White, Projectile.rotation, Vector2.UnitY, new Vector2(1500, 1), 0, 0);
             }
         }
-        
+
         public override void SendExtraAI(BinaryWriter writer)
         {
             writer.WriteVector2(Projectile.velocity);
@@ -112,7 +108,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
         public override void AI()
         {
             timer++;
-            if(runOnce)
+            if (runOnce)
             {
                 runOnce = false;
                 Projectile.rotation = Projectile.velocity.ToRotation();
@@ -122,7 +118,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
         }
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
-            if(timer < 5)
+            if (timer < 5)
             {
                 return false;
             }
@@ -131,7 +127,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
         public override bool PreDraw(ref Color lightColor)
         {
             int frame = timer / 2;
-            if(timer > 22)
+            if (timer > 22)
             {
                 frame = (30 - timer) / 2;
             }
@@ -140,11 +136,11 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
                 frame = 3;
             }
             float c = (float)frame / 3f;
-            for(int i = 0; i < 3000; i+=8)
+            for (int i = 0; i < 3000; i += 8)
             {
                 Main.EntitySpriteDraw(RuneSprites.aggroStrike[frame], Projectile.Center + QwertyMethods.PolarVector(i, Projectile.rotation) - Main.screenPosition, null, new Color(c, c, c, c), Projectile.rotation, new Vector2(0, 3), Vector2.One * 2, 0, 0);
             }
-            
+
             return false;
         }
     }

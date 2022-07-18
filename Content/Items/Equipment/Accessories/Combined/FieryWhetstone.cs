@@ -1,9 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
@@ -72,7 +68,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Combined
 
         public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
         {
-            if (effect != 0f && !target.buffImmune[BuffID.OnFire]  && proj.CountsAsClass(DamageClass.Melee))
+            if (effect != 0f && !target.buffImmune[BuffID.OnFire] && proj.CountsAsClass(DamageClass.Melee))
             {
                 QwertyMethods.PokeNPC(Player, target, Projectile.InheritSource(proj), proj.GetGlobalProjectile<MagicBonusOnProj>().magicBoost * Player.GetDamage(DamageClass.Magic).Multiplicative, DamageClass.Magic);
             }
@@ -80,7 +76,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Combined
 
         public override void ModifyHitNPC(Terraria.Item item, NPC target, ref int damage, ref float knockback, ref bool crit)
         {
-            if (effect != 0f &&  !target.buffImmune[BuffID.OnFire] && item.CountsAsClass(DamageClass.Melee))
+            if (effect != 0f && !target.buffImmune[BuffID.OnFire] && item.CountsAsClass(DamageClass.Melee))
             {
                 QwertyMethods.PokeNPC(Player, target, new EntitySource_Misc(""), damage * effect * Player.GetDamage(DamageClass.Magic).Multiplicative, DamageClass.Magic);
             }

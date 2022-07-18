@@ -1,9 +1,9 @@
-using static Terraria.ModLoader.ModContent;
+using QwertyMod.Content.Items.Consumable.Tiles.Fortress.BuildingBlocks;
+using QwertyMod.Content.Items.MiscMaterials;
+using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using QwertyMod.Content.Items.MiscMaterials;
-using QwertyMod.Content.Items.Consumable.Tiles.Fortress.BuildingBlocks;
-using Terraria.GameContent.Creative;
+using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
 {

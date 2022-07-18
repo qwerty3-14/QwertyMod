@@ -2,8 +2,8 @@
 using QwertyMod.Content.Buffs;
 using System;
 using Terraria;
-using Terraria.ID;
 using Terraria.Audio;
+using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
 
@@ -178,7 +178,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin
             if (isStickingToTarget)
             {
                 // These 2 could probably be moved to the ModifyNPCHit hook, but in vanilla they are present in the AI
-                
+
                 int aiFactor = 15; // Change projectile factor to change the 'lifetime' of projectile sticking javelin
                 bool killProj = false; // if true, kill projectile at the end
                 bool hitEffect = false; // if true, perform a hit effect

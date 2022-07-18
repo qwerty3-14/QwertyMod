@@ -1,6 +1,5 @@
 
 using Terraria.GameContent.Creative;
-using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace QwertyMod.Content.Items.MiscMaterials
@@ -11,7 +10,7 @@ namespace QwertyMod.Content.Items.MiscMaterials
         {
             DisplayName.SetDefault("Invader Plating");
             Tooltip.SetDefault("Leftover invader parts");
-            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] =25;
+            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 25;
         }
 
 

@@ -1,15 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using QwertyMod.Content.Dusts;
 using QwertyMod.Common.RuneBuilder;
+using QwertyMod.Content.Dusts;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ModLoader;
-
 using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
@@ -25,7 +19,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
         }
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
-            if(timer < 60)
+            if (timer < 60)
             {
                 return false;
             }
@@ -35,7 +29,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
         public override void AI()
         {
             timer++;
-            if(timer == 60)
+            if (timer == 60)
             {
                 if (Main.netMode != 1)
                 {
@@ -51,7 +45,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
                     }
                 }
             }
-            if(timer > 60)
+            if (timer > 60)
             {
                 Projectile.velocity = QwertyMethods.PolarVector(10, Projectile.ai[0]);
             }
@@ -91,7 +85,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
                 c = 1f;
             }
             int frame = timer / 3;
-            if(frame >19)
+            if (frame > 19)
             {
                 frame = 19;
             }

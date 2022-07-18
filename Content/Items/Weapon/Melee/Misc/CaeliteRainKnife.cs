@@ -5,7 +5,6 @@ using System;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
-using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
 
@@ -43,7 +42,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Misc
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            position = new Vector2((Main.MouseWorld.X + player.Center.X)/2f + Main.rand.Next(-100, 100), position.Y - 600);
+            position = new Vector2((Main.MouseWorld.X + player.Center.X) / 2f + Main.rand.Next(-100, 100), position.Y - 600);
             float trueSpeed = velocity.Length();
             int shift = Main.rand.Next(-50, 50);
             velocity.X = (float)Math.Cos((new Vector2(Main.MouseWorld.X + shift, Main.MouseWorld.Y) - position).ToRotation()) * trueSpeed;

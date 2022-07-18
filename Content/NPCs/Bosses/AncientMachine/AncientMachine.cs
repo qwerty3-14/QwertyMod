@@ -1,29 +1,28 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using QwertyMod.Common;
 using QwertyMod.Content.Dusts;
 using QwertyMod.Content.Items.Consumable.BossBag;
+using QwertyMod.Content.Items.Consumable.Tiles.Trophy.Ancient;
+using QwertyMod.Content.Items.Tool.Mining.Ancient;
+using QwertyMod.Content.Items.Weapon.Magic.AncientMissile;
+using QwertyMod.Content.Items.Weapon.Magic.AncientWave;
+using QwertyMod.Content.Items.Weapon.Melee.Sword.AncientBlade;
+using QwertyMod.Content.Items.Weapon.Melee.Yoyo.AncientThrow;
+using QwertyMod.Content.Items.Weapon.Minion.AncientMinion;
+using QwertyMod.Content.Items.Weapon.Morphs.AncientNuke;
+using QwertyMod.Content.Items.Weapon.Ranged.Bow.Ancient;
+using QwertyMod.Content.Items.Weapon.Ranged.Gun.Ancient;
 using System;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
-using Terraria.ID;
-using Terraria.Localization;
-using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
-using QwertyMod.Content.Items.Weapon.Melee.Sword.AncientBlade;
-using QwertyMod.Content.Items.Weapon.Minion.AncientMinion;
-using QwertyMod.Content.Items.Weapon.Ranged.Bow.Ancient;
-using QwertyMod.Content.Items.Weapon.Melee.Yoyo.AncientThrow;
-using QwertyMod.Content.Items.Weapon.Magic.AncientMissile;
-using QwertyMod.Content.Items.Weapon.Morphs.AncientNuke;
-using QwertyMod.Content.Items.Weapon.Magic.AncientWave;
-using QwertyMod.Content.Items.Weapon.Ranged.Gun.Ancient;
-using Terraria.GameContent.ItemDropRules;
-using QwertyMod.Content.Items.Tool.Mining.Ancient;
-using QwertyMod.Content.Items.Consumable.Tiles.Trophy.Ancient;
-using QwertyMod.Common;
 using Terraria.DataStructures;
 using Terraria.GameContent.Bestiary;
-using System.Collections.Generic;
+using Terraria.GameContent.ItemDropRules;
+using Terraria.ID;
+using Terraria.ModLoader;
+using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content.NPCs.Bosses.AncientMachine
 {
@@ -367,7 +366,7 @@ namespace QwertyMod.Content.NPCs.Bosses.AncientMachine
                         {
                             if (Main.netMode != 1)
                             {
-                                Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Center.X, NPC.Center.Y, (float)Math.Cos((NPC.rotation + r * (float)Math.PI / 8) - (float)Math.PI / 4) * orbSpeed, (float)Math.Sin((NPC.rotation + r * (float)Math.PI / 8) - (float)Math.PI / 4) * orbSpeed, ProjectileType<AncientEnergy>(), damage, 3f, Main.myPlayer);
+                                Projectile.NewProjectile(new EntitySource_Misc(""), NPC.Center.X, NPC.Center.Y, (float)Math.Cos((NPC.rotation + r * (float)Math.PI / 8) - (float)Math.PI / 4) * orbSpeed, (float)Math.Sin((NPC.rotation + r * (float)Math.PI / 8) - (float)Math.PI / 4) * orbSpeed, ProjectileType<AncientEnergy>(), damage, 3f, Main.myPlayer);
                             }
                         }
                     }
@@ -377,8 +376,8 @@ namespace QwertyMod.Content.NPCs.Bosses.AncientMachine
                         missileReloadCounter = 60;
                         if (Main.netMode != 1)
                         {
-                            Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Center + QwertyMethods.PolarVector(MissileOffset.X, NPC.rotation) + QwertyMethods.PolarVector(MissileOffset.Y, NPC.rotation + (float)Math.PI / 2), QwertyMethods.PolarVector(orbSpeed, NPC.rotation + angle), ProjectileType<AncientMissile>(), damage, 3f, Main.myPlayer);
-                            Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Center + QwertyMethods.PolarVector(MissileOffset.X, NPC.rotation) + QwertyMethods.PolarVector(-MissileOffset.Y, NPC.rotation + (float)Math.PI / 2), QwertyMethods.PolarVector(orbSpeed, NPC.rotation - angle), ProjectileType<AncientMissile>(), damage, 3f, Main.myPlayer);
+                            Projectile.NewProjectile(new EntitySource_Misc(""), NPC.Center + QwertyMethods.PolarVector(MissileOffset.X, NPC.rotation) + QwertyMethods.PolarVector(MissileOffset.Y, NPC.rotation + (float)Math.PI / 2), QwertyMethods.PolarVector(orbSpeed, NPC.rotation + angle), ProjectileType<AncientMissile>(), damage, 3f, Main.myPlayer);
+                            Projectile.NewProjectile(new EntitySource_Misc(""), NPC.Center + QwertyMethods.PolarVector(MissileOffset.X, NPC.rotation) + QwertyMethods.PolarVector(-MissileOffset.Y, NPC.rotation + (float)Math.PI / 2), QwertyMethods.PolarVector(orbSpeed, NPC.rotation - angle), ProjectileType<AncientMissile>(), damage, 3f, Main.myPlayer);
                         }
                     }
                     if (NPC.ai[1] == 2)
@@ -411,7 +410,7 @@ namespace QwertyMod.Content.NPCs.Bosses.AncientMachine
                             {
                                 if (Main.netMode != 1)
                                 {
-                                    Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Center.X, NPC.Center.Y, (float)Math.Cos((NPC.rotation + r * (float)Math.PI / 6) - (float)Math.PI / 4) * orbSpeed, (float)Math.Sin((NPC.rotation + r * (float)Math.PI / 6) - (float)Math.PI / 4) * orbSpeed, ProjectileType<AncientEnergy>(), damage, 3f, Main.myPlayer);
+                                    Projectile.NewProjectile(new EntitySource_Misc(""), NPC.Center.X, NPC.Center.Y, (float)Math.Cos((NPC.rotation + r * (float)Math.PI / 6) - (float)Math.PI / 4) * orbSpeed, (float)Math.Sin((NPC.rotation + r * (float)Math.PI / 6) - (float)Math.PI / 4) * orbSpeed, ProjectileType<AncientEnergy>(), damage, 3f, Main.myPlayer);
                                 }
                             }
                         }
@@ -421,8 +420,8 @@ namespace QwertyMod.Content.NPCs.Bosses.AncientMachine
                             missileReloadCounter = 60;
                             if (Main.netMode != 1)
                             {
-                                Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Center + QwertyMethods.PolarVector(MissileOffset.X, NPC.rotation) + QwertyMethods.PolarVector(MissileOffset.Y, NPC.rotation + (float)Math.PI / 2), QwertyMethods.PolarVector(orbSpeed, NPC.rotation + angle), ProjectileType<AncientMissile>(), damage, 3f, Main.myPlayer);
-                                Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Center + QwertyMethods.PolarVector(MissileOffset.X, NPC.rotation) + QwertyMethods.PolarVector(-MissileOffset.Y, NPC.rotation + (float)Math.PI / 2), QwertyMethods.PolarVector(orbSpeed, NPC.rotation - angle), ProjectileType<AncientMissile>(), damage, 3f, Main.myPlayer);
+                                Projectile.NewProjectile(new EntitySource_Misc(""), NPC.Center + QwertyMethods.PolarVector(MissileOffset.X, NPC.rotation) + QwertyMethods.PolarVector(MissileOffset.Y, NPC.rotation + (float)Math.PI / 2), QwertyMethods.PolarVector(orbSpeed, NPC.rotation + angle), ProjectileType<AncientMissile>(), damage, 3f, Main.myPlayer);
+                                Projectile.NewProjectile(new EntitySource_Misc(""), NPC.Center + QwertyMethods.PolarVector(MissileOffset.X, NPC.rotation) + QwertyMethods.PolarVector(-MissileOffset.Y, NPC.rotation + (float)Math.PI / 2), QwertyMethods.PolarVector(orbSpeed, NPC.rotation - angle), ProjectileType<AncientMissile>(), damage, 3f, Main.myPlayer);
                             }
                         }
                     }
@@ -438,7 +437,7 @@ namespace QwertyMod.Content.NPCs.Bosses.AncientMachine
                     SoundEngine.PlaySound(SoundID.MaxMana, NPC.Center);
                     if (Main.netMode != 1)
                     {
-                        Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Center, new Vector2((float)Math.Cos((NPC.rotation)), (float)Math.Sin(NPC.rotation)) * orbSpeed, ProjectileType<AncientEnergy>(), damage, 3f, Main.myPlayer);
+                        Projectile.NewProjectile(new EntitySource_Misc(""), NPC.Center, new Vector2((float)Math.Cos((NPC.rotation)), (float)Math.Sin(NPC.rotation)) * orbSpeed, ProjectileType<AncientEnergy>(), damage, 3f, Main.myPlayer);
                     }
                 }
                 if (AI_Timer == 3 * switchTime / 4 && angry)
@@ -446,7 +445,7 @@ namespace QwertyMod.Content.NPCs.Bosses.AncientMachine
                     SoundEngine.PlaySound(SoundID.MaxMana, NPC.Center);
                     if (Main.netMode != 1)
                     {
-                        Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Center, new Vector2((float)Math.Cos((NPC.rotation)), (float)Math.Sin(NPC.rotation)) * orbSpeed, ProjectileType<AncientEnergy>(), damage, 3f, Main.myPlayer);
+                        Projectile.NewProjectile(new EntitySource_Misc(""), NPC.Center, new Vector2((float)Math.Cos((NPC.rotation)), (float)Math.Sin(NPC.rotation)) * orbSpeed, ProjectileType<AncientEnergy>(), damage, 3f, Main.myPlayer);
                     }
                 }
             }

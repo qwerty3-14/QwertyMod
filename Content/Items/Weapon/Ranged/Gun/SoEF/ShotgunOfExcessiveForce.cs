@@ -77,7 +77,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.SoEF
         {
             if (effect)
             {
-                if(projectile.timeLeft > 10)
+                if (projectile.timeLeft > 10)
                 {
                     Dust.NewDustPerfect(projectile.Center, DustType<BloodforceDust>(), Vector2.Zero);
                 }

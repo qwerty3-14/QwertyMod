@@ -1,5 +1,4 @@
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Content.Dusts;
 using QwertyMod.Content.Items.Consumable.Tiles.Banners;
 using QwertyMod.Content.Items.Equipment.Accessories;
@@ -113,7 +112,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
                 //Projectile.NewProjectile(NPC.Center.X+(78f*NPC.direction), NPC.Center.Y-34f, 1f*NPC.direction, 0, 102, damage, 3f, Main.myPlayer);
                 if (Main.netMode != 1)
                 {
-                    Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Center.X + (78f * NPC.direction), NPC.Center.Y - 34f, 10f * NPC.direction, 0, ProjectileType<TankCannonBall>(), damage, 3f, Main.myPlayer);
+                    Projectile.NewProjectile(new EntitySource_Misc(""), NPC.Center.X + (78f * NPC.direction), NPC.Center.Y - 34f, 10f * NPC.direction, 0, ProjectileType<TankCannonBall>(), damage, 3f, Main.myPlayer);
                 }
 
                 AI_Timer = 0;
@@ -159,7 +158,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
             npcLoot.Add(ItemDropRule.Common(ItemType<DinoTooth>(), 100, 1, 1));
             npcLoot.Add(ItemDropRule.Common(ItemType<Tricerashield>(), 6, 1, 1));
         }
-       
+
     }
 
     public class TankCannonBall : ModProjectile

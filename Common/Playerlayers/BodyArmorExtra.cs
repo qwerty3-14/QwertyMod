@@ -1,14 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.DataStructures;
-using Terraria.GameContent;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
 
@@ -55,10 +50,10 @@ namespace QwertyMod.Common.Playerlayers
                 {
                     Rectangle useFrame = drawInfo.compTorsoFrame;
                     int frameCount = OnBodyDraw.BodyDictionary[drawPlayer.body].cycleFrameCount;
-                    if(frameCount > 1)
+                    if (frameCount > 1)
                     {
-                        int f = (drawPlayer.GetModPlayer<CommonStats>().genericCounter / 10) % (frameCount + (frameCount-2));
-                        if(f >= frameCount)
+                        int f = (drawPlayer.GetModPlayer<CommonStats>().genericCounter / 10) % (frameCount + (frameCount - 2));
+                        if (f >= frameCount)
                         {
                             f = (frameCount - 1) - (f - frameCount);
                         }

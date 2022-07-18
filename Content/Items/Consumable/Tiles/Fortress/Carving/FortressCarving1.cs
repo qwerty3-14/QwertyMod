@@ -1,8 +1,8 @@
-using static Terraria.ModLoader.ModContent;
-using Terraria.ID;
-using Terraria.ModLoader;
 using QwertyMod.Content.Items.Consumable.Tiles.Fortress.BuildingBlocks;
 using Terraria.GameContent.Creative;
+using Terraria.ID;
+using Terraria.ModLoader;
+using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Carving
 {

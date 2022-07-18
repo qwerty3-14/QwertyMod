@@ -50,20 +50,20 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
             {
                 BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.UndergroundSnow,
                 new FlavorTextBestiaryInfoElement("This penguin slides a little too well... Immersion Ruined!")
-            }); 
+            });
         }
 
         private int timer;
         float speed = 5;
         public override void AI()
         {
-            if(NPC.ai[1] == 1)
+            if (NPC.ai[1] == 1)
             {
                 NPC.TargetClosest(false);
                 Player player = Main.player[NPC.target];
                 NPC.rotation = (player.Center - NPC.Center).ToRotation() + (float)Math.PI;
                 NPC.velocity = QwertyMethods.PolarVector(5, NPC.rotation - (float)Math.PI);
-                if(NPC.velocity.X > 0)
+                if (NPC.velocity.X > 0)
                 {
                     NPC.rotation += (float)Math.PI;
                 }
@@ -115,7 +115,7 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
         }
         public override void HitEffect(int hitDirection, double damage)
         {
-            if(NPC.life <=0)
+            if (NPC.life <= 0)
             {
                 Gore.NewGore(new EntitySource_Misc(""), NPC.position, NPC.velocity, 160);
                 Gore.NewGore(new EntitySource_Misc(""), new Vector2(NPC.position.X, NPC.position.Y), NPC.velocity, 161);

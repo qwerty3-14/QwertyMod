@@ -1,3 +1,5 @@
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Common.Fortress;
 using QwertyMod.Content.Items.Consumable.Tiles.Banners;
 using QwertyMod.Content.Items.MiscMaterials;
@@ -5,14 +7,12 @@ using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Terraria.GameContent;
 
 namespace QwertyMod.Content.NPCs.Fortress
 {
@@ -32,8 +32,8 @@ namespace QwertyMod.Content.NPCs.Fortress
             NPC.damage = 50; // damage the enemy does on contact automaticly doubled in expert
             NPC.defense = 28; // defense of enemy
             NPC.lifeMax = 330; //maximum life doubled automaticly in expert
-            
-            if(NPC.downedGolemBoss)
+
+            if (NPC.downedGolemBoss)
             {
                 NPC.lifeMax = 660;
             }
@@ -115,7 +115,7 @@ namespace QwertyMod.Content.NPCs.Fortress
                         float shootDirection = (player.Center - NPC.Center).ToRotation(); // find the direction the player is in
                         for (int p = -1; p < 2; p++) //this will repeat 3 times for 3 projectiles
                         {
-                            Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Center, QwertyMethods.PolarVector(6, shootDirection + ((float)Math.PI / 8 * p)), ProjectileType<FortressHarpyProjectile>(), damage, 0, 0); // shoots a projectile
+                            Projectile.NewProjectile(new EntitySource_Misc(""), NPC.Center, QwertyMethods.PolarVector(6, shootDirection + ((float)Math.PI / 8 * p)), ProjectileType<FortressHarpyProjectile>(), damage, 0, 0); // shoots a projectile
                         }
                         attackTimer = 0; // resets attackTimer needer for the once per second effect
                     }

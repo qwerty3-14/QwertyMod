@@ -22,7 +22,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Bars
             TileObjectData.addTile(Type);
 
             DustType = DustType<LuneDust>();
-            HitSound = SoundID.Tink; 
+            HitSound = SoundID.Tink;
             MinPick = 1;
             AddMapEntry(new Color(102, 143, 204));
             ItemDrop = ItemType<LuneBar>();

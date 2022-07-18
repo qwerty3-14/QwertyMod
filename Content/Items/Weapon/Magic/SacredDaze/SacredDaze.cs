@@ -1,11 +1,6 @@
 ﻿using QwertyMod.Content.Buffs;
 using QwertyMod.Content.Dusts;
 using QwertyMod.Content.Items.Consumable.Tiles.Bars;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
@@ -84,7 +79,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.SacredDaze
         }
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
         {
-            if(!target.boss)
+            if (!target.boss)
             {
                 target.AddBuff(BuffType<Stunned>(), 12);
             }

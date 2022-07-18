@@ -115,27 +115,27 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Banners
                     case 4:
                         type = NPCType<Caster>();
                         break;
-                        /*
-                    case 5:
-                        type = NPCType<Spector>();
-                        break;
+                    /*
+                case 5:
+                    type = NPCType<Spector>();
+                    break;
 
-                    case 6:
-                        type = NPCType<Triceratank>();
-                        break;
+                case 6:
+                    type = NPCType<Triceratank>();
+                    break;
 
-                    case 7:
-                        type = NPCType<Utah>();
-                        break;
+                case 7:
+                    type = NPCType<Utah>();
+                    break;
 
-                    case 8:
-                        type = NPCType<Velocichopper>();
-                        break;
+                case 8:
+                    type = NPCType<Velocichopper>();
+                    break;
 
-                    case 9:
-                        type = NPCType<AntiAir>();
-                        break;
-                        */
+                case 9:
+                    type = NPCType<AntiAir>();
+                    break;
+                    */
                     case 10:
                         type = NPCType<Swarmer>();
                         break;

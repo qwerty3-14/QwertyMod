@@ -42,7 +42,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             NPC.defense = 18;
             NPC.lifeMax = 160;
             NPC.value = 100;
-            if(NPC.downedGolemBoss)
+            if (NPC.downedGolemBoss)
             {
                 NPC.lifeMax = 750;
                 NPC.damage = 80;
@@ -78,7 +78,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             {
                 for (int i = 0; i < 40; i++)
                 {
-                    int dustType = DustType<FortressDust>(); 
+                    int dustType = DustType<FortressDust>();
                     int dustIndex = Dust.NewDust(NPC.position, NPC.width, NPC.height, dustType);
                     Dust dust = Main.dust[dustIndex];
                     dust.velocity.X = dust.velocity.X + Main.rand.Next(-50, 51) * 0.01f;
@@ -88,7 +88,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             }
             for (int i = 0; i < 4; i++)
             {
-                int dustType = DustType<FortressDust>(); 
+                int dustType = DustType<FortressDust>();
                 int dustIndex = Dust.NewDust(NPC.position, NPC.width, NPC.height, dustType);
                 Dust dust = Main.dust[dustIndex];
                 dust.velocity.X = dust.velocity.X + Main.rand.Next(-50, 51) * 0.01f;
@@ -138,7 +138,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             NPC.GetGlobalNPC<FortressNPCGeneral>().fortressNPC = true;
             if (runOnce)
             {
-                if(Main.netMode == NetmodeID.SinglePlayer)
+                if (Main.netMode == NetmodeID.SinglePlayer)
                 {
                     switch (Main.rand.Next(3))
                     {
@@ -288,7 +288,7 @@ namespace QwertyMod.Content.NPCs.Fortress
                             frame = 1;
                         }
                     }
-                    else if(timer > 0)
+                    else if (timer > 0)
                     {
                         timer++;
                     }

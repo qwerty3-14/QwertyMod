@@ -1,12 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using QwertyMod.Content.Dusts;
 using QwertyMod.Common.RuneBuilder;
+using QwertyMod.Content.Dusts;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -27,7 +22,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
         {
             for (int i = 0; i < 4; i++)
             {
-                if(Collision.CheckAABBvAABBCollision(targetHitbox.TopLeft(), targetHitbox.Size(), Projectile.Center + QwertyMethods.PolarVector(dist, Projectile.rotation + i * (float)Math.PI/2f) + new Vector2(-18, -18), new Vector2(36, 36)))
+                if (Collision.CheckAABBvAABBCollision(targetHitbox.TopLeft(), targetHitbox.Size(), Projectile.Center + QwertyMethods.PolarVector(dist, Projectile.rotation + i * (float)Math.PI / 2f) + new Vector2(-18, -18), new Vector2(36, 36)))
                 {
                     return true;
                 }
@@ -39,19 +34,19 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
         public override void AI()
         {
             timer++;
-            if(Projectile.timeLeft > 150)
+            if (Projectile.timeLeft > 150)
             {
                 Projectile.rotation += (float)Math.PI / 60f;
             }
-            if(Projectile.timeLeft > 120)
+            if (Projectile.timeLeft > 120)
             {
                 Projectile.Center = Main.LocalPlayer.Center;
             }
-            else if(Projectile.timeLeft < 60)
+            else if (Projectile.timeLeft < 60)
             {
                 dist -= 8;
             }
-            
+
         }
         public override void Kill(int timeLeft)
         {
@@ -63,7 +58,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
                     Dust.NewDust(pos, 36, 36, DustType<IceRuneDeath>());
                 }
             }
-            
+
         }
         public override bool PreDraw(ref Color lightColor)
         {
@@ -81,7 +76,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
                 }
                 Main.EntitySpriteDraw(RuneSprites.runeTransition[(int)Runes.IceRune][frame], Projectile.Center + QwertyMethods.PolarVector(dist, Projectile.rotation + i * (float)Math.PI / 2f) - Main.screenPosition, null, new Color(c, c, c, c), Projectile.rotation, new Vector2(9, 9), Vector2.One * 2, 0, 0);
             }
-            
+
             return false;
         }
         public override void OnHitPlayer(Player target, int damage, bool crit)

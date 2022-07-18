@@ -2,13 +2,8 @@
 using QwertyMod.Content.Buffs;
 using QwertyMod.Content.Dusts;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using Terraria;
-using Terraria.GameContent.Bestiary;
-using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
-using Terraria.Localization;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
 
@@ -116,7 +111,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
                     clearCheck.Kill();
                 }
             }
-            
+
         }
     }
 
@@ -199,10 +194,10 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
         public override void AI()
         {
             Projectile.frameCounter++;
-            if(Projectile.frameCounter % 6 ==0)
+            if (Projectile.frameCounter % 6 == 0)
             {
                 Projectile.frame++;
-                if(Projectile.frame >= 4)
+                if (Projectile.frame >= 4)
                 {
                     Projectile.frame = 0;
                 }

@@ -1,10 +1,10 @@
 using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.ModLoader;
-using Terraria.ObjectData; 
-using static Terraria.ModLoader.ModContent;
 using QwertyMod.Content.Dusts;
+using Terraria;
 using Terraria.DataStructures;
+using Terraria.ModLoader;
+using Terraria.ObjectData;
+using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Furniture
 {
@@ -22,8 +22,8 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Furniture
             name.SetDefault("Fortress Bathtub");
             AddMapEntry(new Color(162, 184, 185), name);
             DustType = DustType<FortressDust>();
-            HitSound = QwertyMod.FortressBlocks; 
-           
+            HitSound = QwertyMod.FortressBlocks;
+
         }
 
         public override void NumDust(int i, int j, bool fail, ref int num)

@@ -2,7 +2,6 @@ using QwertyMod.Content.Items.Consumable.Tiles.Fortress.BuildingBlocks;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.DataStructures;
 
 using static Terraria.ModLoader.ModContent;
 namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Furniture
@@ -29,7 +28,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Furniture
             Item.createTile = TileType<FortressTableT>();
         }
 
-         public override void AddRecipes()
+        public override void AddRecipes()
         {
             CreateRecipe().AddIngredient(ItemType<FortressBrick>(), 8)
                 .AddTile(TileID.WorkBenches)

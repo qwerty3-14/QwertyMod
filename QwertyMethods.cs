@@ -1,16 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
-using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+using Terraria.Chat;
 using Terraria.DataStructures;
 using Terraria.ID;
-using Terraria.Chat;
+using Terraria.ModLoader;
+using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod
 {
@@ -267,7 +263,7 @@ namespace QwertyMod
             float calculatedShootAngle = angleToTarget - (float)Math.Asin((targetSpeed * time * (float)Math.Sin(z)) / (shootSpeed * time));
             return calculatedShootAngle;
         }
-        
+
         //used for projectiles using ammo, the vanilla PickAmmo had a bunch of clutter we don't need
         public static bool UseAmmo(this Projectile projectile, int ammoID, ref int shoot, ref float speed, ref int Damage, ref float KnockBack, bool dontConsume = false)
         {
@@ -453,7 +449,7 @@ namespace QwertyMod
             }
             return p;
         }
-        
+
         public static void ServerClientCheck(string q)
         {
             if (Main.netMode == 1)

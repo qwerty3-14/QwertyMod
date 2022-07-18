@@ -12,7 +12,7 @@ namespace QwertyMod.Content.Items.MiscMaterials
             DisplayName.SetDefault("Etims");
             Tooltip.SetDefault("Forged from the blood of those slain by gods!");
             ItemID.Sets.ItemNoGravity[Item.type] = true;
-            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] =25;
+            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 25;
         }
 
 

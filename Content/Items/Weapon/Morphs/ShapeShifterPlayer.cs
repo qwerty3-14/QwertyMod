@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria.ModLoader;
+﻿using Terraria.ModLoader;
 
 namespace QwertyMod.Content.Items.Weapon.Morphs
 {
@@ -28,7 +23,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs
         }
         public override void PreUpdate()
         {
-            if(noDraw)
+            if (noDraw)
             {
                 Player.immuneAlpha = 255;
             }

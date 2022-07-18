@@ -1,10 +1,8 @@
-﻿using Terraria.ModLoader;
-using Terraria;
-using QwertyMod.Content.NPCs.Invader;
-using System.Collections.Generic;
+﻿using QwertyMod.Content.NPCs.Invader;
 using System;
-using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.DataStructures;
+using Terraria.ModLoader;
 
 namespace QwertyMod.Content.NPCs.Fortress
 {
@@ -18,15 +16,15 @@ namespace QwertyMod.Content.NPCs.Fortress
             npc.TargetClosest(false);
             float maxDist = (Main.player[npc.target].Center - npc.Center).Length() - Main.player[npc.target].aggro;
             NPC npcTarget = null;
-            if(QwertyMethods.ClosestNPC(ref npcTarget, maxDist, npc.Center, false, -1, delegate (NPC possibleTarget) { return possibleTarget.GetGlobalNPC<InvaderNPCGeneral>().invaderNPC; }))
+            if (QwertyMethods.ClosestNPC(ref npcTarget, maxDist, npc.Center, false, -1, delegate (NPC possibleTarget) { return possibleTarget.GetGlobalNPC<InvaderNPCGeneral>().invaderNPC; }))
             {
-                if(allowFlip)
+                if (allowFlip)
                 {
                     npc.direction = Math.Sign(npcTarget.Center.X - npc.Center.X);
                 }
                 return npcTarget;
             }
-            if(allowFlip && Collision.CanHitLine(npc.Center, 0, 0, Main.player[npc.target].Center, 0, 0) )
+            if (allowFlip && Collision.CanHitLine(npc.Center, 0, 0, Main.player[npc.target].Center, 0, 0))
             {
                 npc.TargetClosest(true);
             }
@@ -35,15 +33,15 @@ namespace QwertyMod.Content.NPCs.Fortress
         int contactDamageCooldown = 0;
         public override void PostAI(NPC npc)
         {
-            if(contactDamageToInvaders)
+            if (contactDamageToInvaders)
             {
-                if(contactDamageCooldown <=0)
+                if (contactDamageCooldown <= 0)
                 {
-                    for(int i =0; i < 200; i++)
+                    for (int i = 0; i < 200; i++)
                     {
-                        if( Main.npc[i].TryGetGlobalNPC<InvaderNPCGeneral>(out InvaderNPCGeneral gNPC))
+                        if (Main.npc[i].TryGetGlobalNPC<InvaderNPCGeneral>(out InvaderNPCGeneral gNPC))
                         {
-                            if(gNPC.invaderNPC && Collision.CheckAABBvAABBCollision(npc.position, npc.Size, Main.npc[i].position, Main.npc[i].Size))
+                            if (gNPC.invaderNPC && Collision.CheckAABBvAABBCollision(npc.position, npc.Size, Main.npc[i].position, Main.npc[i].Size))
                             {
                                 QwertyMethods.PokeNPC(Main.LocalPlayer, Main.npc[i], new EntitySource_Misc(""), npc.damage, DamageClass.Default, 0);
                                 contactDamageCooldown = 10;
@@ -62,14 +60,14 @@ namespace QwertyMod.Content.NPCs.Fortress
         public override bool InstancePerEntity => true;
         public override void SetDefaults(Projectile projectile)
         {
-            if(isFromFortressNPC)
+            if (isFromFortressNPC)
             {
                 projectile.friendly = true;
             }
         }
         public override bool? CanHitNPC(Projectile projectile, NPC target)
         {
-            if(isFromFortressNPC)
+            if (isFromFortressNPC)
             {
                 return target.GetGlobalNPC<InvaderNPCGeneral>().invaderNPC ? null : false;
             }
@@ -78,11 +76,11 @@ namespace QwertyMod.Content.NPCs.Fortress
 
         public override void ModifyHitNPC(Projectile projectile, NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
         {
-            if(isFromFortressNPC)
+            if (isFromFortressNPC)
             {
                 damage *= 4;
             }
         }
     }
-    
+
 }

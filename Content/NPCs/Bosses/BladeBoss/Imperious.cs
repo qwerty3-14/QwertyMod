@@ -1,30 +1,30 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using QwertyMod.Common;
 using QwertyMod.Content.Items.Consumable.BossBag;
+using QwertyMod.Content.Items.Consumable.Tiles.Trophy.Blade;
+using QwertyMod.Content.Items.Equipment.Accessories.Sword;
+using QwertyMod.Content.Items.MiscMaterials;
+using QwertyMod.Content.Items.Weapon.Magic.Swordpocalypse;
+using QwertyMod.Content.Items.Weapon.Melee.Javelin.Imperium;
+using QwertyMod.Content.Items.Weapon.Melee.Sword.ImperiousTheIV;
+using QwertyMod.Content.Items.Weapon.Melee.Yoyo.Arsenal;
+using QwertyMod.Content.Items.Weapon.Minion.Longsword;
+using QwertyMod.Content.Items.Weapon.Morphs.Swordquake;
+using QwertyMod.Content.Items.Weapon.Whip.Discipline;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using Terraria;
+using Terraria.Audio;
+using Terraria.DataStructures;
+using Terraria.GameContent;
+using Terraria.GameContent.Bestiary;
+using Terraria.GameContent.ItemDropRules;
 using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
-using QwertyMod.Content.Items.Weapon.Magic.Swordpocalypse;
-using QwertyMod.Content.Items.Weapon.Melee.Sword.ImperiousTheIV;
-using QwertyMod.Content.Items.Weapon.Whip.Discipline;
-using QwertyMod.Content.Items.Weapon.Minion.Longsword;
-using QwertyMod.Content.Items.Weapon.Melee.Yoyo.Arsenal;
-using QwertyMod.Content.Items.Equipment.Accessories.Sword;
-using QwertyMod.Content.Items.Weapon.Melee.Javelin.Imperium;
-using QwertyMod.Content.Items.Weapon.Morphs.Swordquake;
-using Terraria.GameContent.ItemDropRules;
-using QwertyMod.Content.Items.Consumable.Tiles.Trophy.Blade;
-using Terraria.GameContent.Bestiary;
-using QwertyMod.Common;
-using Terraria.Audio;
-using Terraria.GameContent;
-using Terraria.DataStructures;
-using QwertyMod.Content.Items.MiscMaterials;
 
 namespace QwertyMod.Content.NPCs.Bosses.BladeBoss
 {
@@ -220,7 +220,7 @@ namespace QwertyMod.Content.NPCs.Bosses.BladeBoss
                 SoundEngine.PlaySound(SoundID.Item8, NPC.Center);
                 if (Main.netMode != 1)
                 {
-                    PhantomBladeIds.Add(Projectile.NewProjectile(new EntitySource_Misc(""),  NPC.Center, Vector2.Zero, ProjectileType<PhantomBlade>(), (int)(NPC.damage * (Main.expertMode ? .25f : .5f)), 0, ai0: NPC.rotation));
+                    PhantomBladeIds.Add(Projectile.NewProjectile(new EntitySource_Misc(""), NPC.Center, Vector2.Zero, ProjectileType<PhantomBlade>(), (int)(NPC.damage * (Main.expertMode ? .25f : .5f)), 0, ai0: NPC.rotation));
                     Main.projectile[PhantomBladeIds[PhantomBladeIds.Count - 1]].rotation = Main.projectile[PhantomBladeIds[PhantomBladeIds.Count - 1]].ai[0] = NPC.rotation;
                     Main.projectile[PhantomBladeIds[PhantomBladeIds.Count - 1]].netUpdate = true;
                     NPC.netUpdate = true;
@@ -353,7 +353,7 @@ namespace QwertyMod.Content.NPCs.Bosses.BladeBoss
                                 NPC.netUpdate = true;
                             }
                         }
-                        if(nextPositions.Count == 1 && (int)SpecialAttack == phantomCircle)
+                        if (nextPositions.Count == 1 && (int)SpecialAttack == phantomCircle)
                         {
                             ClearPhantoms();
                         }
@@ -413,7 +413,7 @@ namespace QwertyMod.Content.NPCs.Bosses.BladeBoss
                                 break;
 
                             case swordquake:
-                                if (Collision.CanHit(NPC.Center, 0, 0, NPC.Center + Vector2.UnitY * bladeLength, 0, 0) && NPC.Center.Y - player.Center.Y < 3000 && SpecialAttackTimer ==0)
+                                if (Collision.CanHit(NPC.Center, 0, 0, NPC.Center + Vector2.UnitY * bladeLength, 0, 0) && NPC.Center.Y - player.Center.Y < 3000 && SpecialAttackTimer == 0)
                                 {
                                     NPC.velocity = Vector2.UnitY * 24f;
                                 }
@@ -493,7 +493,7 @@ namespace QwertyMod.Content.NPCs.Bosses.BladeBoss
                                                 Vector2 fallToHere = new Vector2((player.Center.X + (player.velocity.X * startAwayAmount / shootSpeed)) - impactZoneWidth / 2 + Main.rand.Next(impactZoneWidth), player.Bottom.Y);
                                                 Vector2 positionOffset = QwertyMethods.PolarVector(startAwayAmount, (float)Math.PI + (float)Math.PI / 2 - (float)Math.PI / 4 + Main.rand.NextFloat() * (float)Math.PI / 8);
                                                 positionOffset.X *= starDirection;
-                                                Projectile.NewProjectile(new EntitySource_Misc(""),  fallToHere + positionOffset, QwertyMethods.PolarVector(shootSpeed, (positionOffset).ToRotation() + (float)Math.PI), ProjectileType<Swordpocalypse>(), (int)(NPC.damage * (Main.expertMode ? .2f : .4f)), 0);
+                                                Projectile.NewProjectile(new EntitySource_Misc(""), fallToHere + positionOffset, QwertyMethods.PolarVector(shootSpeed, (positionOffset).ToRotation() + (float)Math.PI), ProjectileType<Swordpocalypse>(), (int)(NPC.damage * (Main.expertMode ? .2f : .4f)), 0);
                                             }
                                         }
                                     }
@@ -528,7 +528,7 @@ namespace QwertyMod.Content.NPCs.Bosses.BladeBoss
                                             }
                                             for (int i = (SpecialAttackTimer == circleDelay * waveCount ? 1 : 0); i < swordCount; i++)
                                             {
-                                                Projectile p = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""),  player.Center + QwertyMethods.PolarVector(cicrleRange, (i / swordCount) * 2 * (float)Math.PI + offset), QwertyMethods.PolarVector(-circleSpeed, (i / swordCount) * 2 * (float)Math.PI + offset), ProjectileType<PhantomBlade>(), (int)(NPC.damage * (Main.expertMode ? .25f : .5f)), 0, ai0: NPC.rotation)];
+                                                Projectile p = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), player.Center + QwertyMethods.PolarVector(cicrleRange, (i / swordCount) * 2 * (float)Math.PI + offset), QwertyMethods.PolarVector(-circleSpeed, (i / swordCount) * 2 * (float)Math.PI + offset), ProjectileType<PhantomBlade>(), (int)(NPC.damage * (Main.expertMode ? .25f : .5f)), 0, ai0: NPC.rotation)];
                                                 p.timeLeft = (cicrleRange - bladeLength + 18) / circleSpeed;
                                                 p.rotation = p.ai[0] = (i / swordCount) * 2 * (float)Math.PI + offset + (float)Math.PI;
                                                 p.netUpdate = true;
@@ -592,7 +592,7 @@ namespace QwertyMod.Content.NPCs.Bosses.BladeBoss
                 pos.Y++;
             }
             pos.Y += bladeLength;
-            Projectile.NewProjectile(new EntitySource_Misc(""),  pos, Vector2.Zero, ProjectileType<Swordlacmite>(), (int)(NPC.damage * (Main.expertMode ? .25f : .5f)), 0f);
+            Projectile.NewProjectile(new EntitySource_Misc(""), pos, Vector2.Zero, ProjectileType<Swordlacmite>(), (int)(NPC.damage * (Main.expertMode ? .25f : .5f)), 0f);
         }
 
         public override void DrawEffects(ref Color drawColor)
@@ -781,7 +781,7 @@ namespace QwertyMod.Content.NPCs.Bosses.BladeBoss
                     Main.npc[who].immune[projectile.owner] = NPC.immune[projectile.owner];
                 }
             }
-            else if(projectile.usesIDStaticNPCImmunity)
+            else if (projectile.usesIDStaticNPCImmunity)
             {
                 foreach (int who in hitboxIds)
                 {
@@ -835,7 +835,7 @@ namespace QwertyMod.Content.NPCs.Bosses.BladeBoss
         }
     }
 
-    
+
     public class Swordlacmite : ModProjectile
     {
         public override void SetStaticDefaults()
@@ -940,9 +940,9 @@ namespace QwertyMod.Content.NPCs.Bosses.BladeBoss
         {
 
             Texture2D line = Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/BladeBoss/WarningLaser").Value;
-            for (int p = 0; p <1000; p++)
+            for (int p = 0; p < 1000; p++)
             {
-                if(Main.projectile[p].active && Main.projectile[p].type == ProjectileType<Swordlacmite>() && Main.projectile[p].timeLeft > 130)
+                if (Main.projectile[p].active && Main.projectile[p].type == ProjectileType<Swordlacmite>() && Main.projectile[p].timeLeft > 130)
                 {
                     Projectile Projectile = Main.projectile[p];
                     Main.EntitySpriteDraw(line, new Vector2(Projectile.Center.X - Main.screenPosition.X, Main.screenHeight), null, ((Projectile.timeLeft % 10 == 0) ? Color.White : Color.Red), 0f, new Vector2(1, 6), new Vector2(1f, Main.screenHeight / 6), 0, 0);

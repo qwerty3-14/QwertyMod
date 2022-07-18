@@ -1,11 +1,6 @@
 ﻿using QwertyMod.Content.Items.Equipment.Accessories;
 using QwertyMod.Content.Items.Equipment.Accessories.Sword;
 using QwertyMod.Content.Items.Weapon.Minion.MiniTank;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -33,7 +28,7 @@ namespace QwertyMod.Common
         }
         public override void SetupTravelShop(int[] shop, ref int nextSlot)
         {
-            if(Main.rand.Next(3)==0)
+            if (Main.rand.Next(3) == 0)
             {
                 shop[nextSlot] = ItemType<SwordEnlarger>();
                 nextSlot++;

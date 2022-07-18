@@ -73,7 +73,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RestlessSun
             return false;
         }
 
-        
+
 
         public class CaeliteMagicProjectile : ModProjectile
         {
@@ -97,7 +97,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RestlessSun
                 Projectile.tileCollide = true;
                 Projectile.light = 1f;
             }
-            
+
 
             public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
             {

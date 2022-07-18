@@ -42,7 +42,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.SuperArrow.BladedArrow
         }
     }
 
-   
+
     public class BladedArrowP : ModProjectile
     {
         public override void SetDefaults()

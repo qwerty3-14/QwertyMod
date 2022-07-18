@@ -51,7 +51,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Flail.Ankylosaurus
                     int dmg = int.Parse(strings[0]);
                     dmg *= 2;
                     line.Text = dmg + "";//change tooltip
-                    for(int i = 1; i < strings.Length; i++)
+                    for (int i = 1; i < strings.Length; i++)
                     {
                         line.Text += " " + strings[i];
                     }
@@ -103,7 +103,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Flail.Ankylosaurus
             }
         }
 
-        
+
 
         public override bool PreDraw(ref Color lightColor)
         {

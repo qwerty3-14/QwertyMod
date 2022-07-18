@@ -25,7 +25,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Banners
             Item.consumable = true;
             Item.rare = 1;
             Item.value = Item.buyPrice(0, 0, 10, 0);
-            Item.createTile =TileType<BannersT>();
+            Item.createTile = TileType<BannersT>();
             Item.placeStyle = 4;
         }
     }

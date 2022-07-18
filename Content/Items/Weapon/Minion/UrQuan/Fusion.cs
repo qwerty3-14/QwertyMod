@@ -1,14 +1,7 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using QwertyMod.Common;
-using System;
-using System.Collections.Generic;
+﻿using QwertyMod.Common;
 using Terraria;
-using Terraria.Audio;
-using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content.Items.Weapon.Minion.UrQuan
 {
@@ -35,6 +28,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.UrQuan
             Projectile.tileCollide = false;
             Projectile.GetGlobalProjectile<QwertyGlobalProjectile>().ignoresArmor = true;
         }
-        
+
     }
 }

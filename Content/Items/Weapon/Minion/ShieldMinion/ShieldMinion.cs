@@ -5,12 +5,7 @@ using QwertyMod.Content.Buffs;
 using QwertyMod.Content.Dusts;
 using QwertyMod.Content.NPCs.Fortress;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
@@ -164,7 +159,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.ShieldMinion
                 target.AddBuff(BuffType<Stunned>(), 120);
             }
         }
-        
+
         public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
         {
             if (target.GetGlobalNPC<FortressNPCGeneral>().fortressNPC)
@@ -177,7 +172,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.ShieldMinion
                 damage *= 2;
             }
         }
-        
+
         public override void PostDraw(Color lightColor)
         {
             if (Projectile.frame == 0)

@@ -1,13 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
-using Mono.Cecil.Cil;
-using MonoMod.Cil;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
@@ -28,7 +22,7 @@ namespace QwertyMod.Common.Playerlayers
             Player drawPlayer = drawInfo.drawPlayer;
             if (OnHeadDraw.HeadDictionary.ContainsKey(drawPlayer.head))
             {
-                if(!OnHeadDraw.HeadDictionary[drawPlayer.head].lowered)
+                if (!OnHeadDraw.HeadDictionary[drawPlayer.head].lowered)
                 {
                     DrawHead(drawPlayer, ref drawInfo);
                 }
@@ -92,7 +86,7 @@ namespace QwertyMod.Common.Playerlayers
             Player drawPlayer = drawInfo.drawPlayer;
             if (OnHeadDraw.HeadDictionary.ContainsKey(drawPlayer.head))
             {
-                if(OnHeadDraw.HeadDictionary[drawPlayer.head].lowered)
+                if (OnHeadDraw.HeadDictionary[drawPlayer.head].lowered)
                 {
                     HeadArmorExtra.DrawHead(drawPlayer, ref drawInfo);
                 }
@@ -125,7 +119,7 @@ namespace QwertyMod.Common.Playerlayers
             HeadDictionary.Add(EquipLoader.GetEquipSlot(mod, "GlassHelm", EquipType.Head), head);
             head = new OnHeadDraw(Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Vitallum/VitallumHeadress_Head_Vein", immediate).Value, false, 3, 4);
             HeadDictionary.Add(EquipLoader.GetEquipSlot(mod, "VitallumHeadress", EquipType.Head), head);
-            
+
             //head = new OnHeadDraw(Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Bionic/BionicEye_Head_Lower", immediate).Value, lowered: true);
             //HeadDictionary.Add(EquipLoader.GetEquipSlot(mod, "BionicEye", EquipType.Head), head);
             head = new OnHeadDraw(Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Bionic/BionicEye_Head_Glow", immediate).Value, lowered: true);
@@ -133,7 +127,7 @@ namespace QwertyMod.Common.Playerlayers
 
             head = new OnHeadDraw(Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Invader/InvaderPercepticals_Head_Glow", immediate).Value, lowered: true);
             HeadDictionary.Add(EquipLoader.GetEquipSlot(mod, "InvaderPercepticals", EquipType.Head), head);
-            
+
 
         }
     }

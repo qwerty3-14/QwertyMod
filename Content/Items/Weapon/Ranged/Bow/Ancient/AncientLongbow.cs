@@ -1,7 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Common.PlayerLayers;
-using QwertyMod.Content.Dusts;
 using System;
 using Terraria;
 using Terraria.Audio;
@@ -115,7 +114,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.Ancient
 
             if (firing)
             {
-                
+
                 #region drill ai
 
                 ///////////////////////////////////// copied from vanilla drill/chainsaw AI
@@ -181,7 +180,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.Ancient
 
                 if (timer == 0)
                 {
-                   
+
                     player.PickAmmo(player.HeldItem, out Ammo, out speed, out weaponDamage, out weaponKnockback, out _);
 
                     if (Ammo == ProjectileID.WoodenArrowFriendly)

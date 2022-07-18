@@ -1,6 +1,3 @@
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
 using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ModLoader;
@@ -64,7 +61,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.SuperArrow.Aqueous
             Projectile.tileCollide = true;
         }
 
-        
+
         public override void AI()
         {
             if (Main.rand.Next(6) == 0)

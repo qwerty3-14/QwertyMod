@@ -205,7 +205,7 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
         {
             if (Main.netMode != 1)
             {
-                Projectile.NewProjectile(new EntitySource_Misc(""),  Projectile.Center.X, Projectile.Center.Y, 0, 0, ProjectileType<MagicMine>(), Projectile.damage, 0, Main.myPlayer);
+                Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center.X, Projectile.Center.Y, 0, 0, ProjectileType<MagicMine>(), Projectile.damage, 0, Main.myPlayer);
             }
         }
     }

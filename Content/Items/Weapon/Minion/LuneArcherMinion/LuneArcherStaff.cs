@@ -1,10 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using QwertyMod.Content.Items.Consumable.Tiles.Bars;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
@@ -27,21 +22,21 @@ namespace QwertyMod.Content.Items.Weapon.Minion.LuneArcherMinion
 
         public override void SetDefaults()
         {
-            Item.damage = 7;  
-            Item.mana = 20;     
-            Item.width = 32;   
-            Item.height = 32;    
-            Item.useTime = 25;  
-            Item.useAnimation = 25;   
-            Item.useStyle = 1;  
-            Item.noMelee = true; 
-            Item.knockBack = 1f;  
+            Item.damage = 7;
+            Item.mana = 20;
+            Item.width = 32;
+            Item.height = 32;
+            Item.useTime = 25;
+            Item.useAnimation = 25;
+            Item.useStyle = 1;
+            Item.noMelee = true;
+            Item.knockBack = 1f;
             Item.value = 20000;
             Item.rare = ItemRarityID.Blue;
-            Item.UseSound = SoundID.Item44;   
-            Item.shoot = ProjectileType<LuneArcher>();   
+            Item.UseSound = SoundID.Item44;
+            Item.shoot = ProjectileType<LuneArcher>();
             Item.DamageType = DamageClass.Summon;
-            Item.buffType = BuffType<LuneArcherB>(); 
+            Item.buffType = BuffType<LuneArcherB>();
             Item.buffTime = 3600;
         }
 

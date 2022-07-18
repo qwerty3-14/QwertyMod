@@ -1,14 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
+using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
-using Terraria.GameContent.Creative;
 
 namespace QwertyMod.Content.Items.Weapon.Whip.Discipline
 {
@@ -18,12 +13,12 @@ namespace QwertyMod.Content.Items.Weapon.Whip.Discipline
         {
             DisplayName.SetDefault("Discipline");
             Tooltip.SetDefault("Your minions will gain speed when attacking struck enemies");
-			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
         public override void SetDefaults()
         {
 
-			Item.DefaultToWhip(ModContent.ProjectileType<DisciplineP>(), 67, 3, 4, 20);
+            Item.DefaultToWhip(ModContent.ProjectileType<DisciplineP>(), 67, 3, 4, 20);
             Item.rare = 7;
             Item.value = Item.sellPrice(0, 10, 0, 0);
         }
@@ -38,7 +33,7 @@ namespace QwertyMod.Content.Items.Weapon.Whip.Discipline
         public override void WhipDefaults()
         {
             Projectile.WhipSettings.Segments = 20;
-			Projectile.WhipSettings.RangeMultiplier = 2f;
+            Projectile.WhipSettings.RangeMultiplier = 2f;
 
             originalColor = new Color(128, 39, 83);
             fallOff = 0.15f;

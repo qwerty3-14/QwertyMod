@@ -1,21 +1,15 @@
-﻿using QwertyMod.Content.NPCs.Bosses.TundraBoss;
-using QwertyMod.Content.Items.Consumable.Tiles.Trophy;
+﻿using QwertyMod.Content.Items.Equipment.Accessories.Expert;
 using QwertyMod.Content.Items.Equipment.Vanity.BossMasks;
 using QwertyMod.Content.Items.Weapon.Magic.PenguinWhistle;
 using QwertyMod.Content.Items.Weapon.Melee.Sword;
 using QwertyMod.Content.Items.Weapon.Ranged.SpecialAmmo;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using QwertyMod.Content.NPCs.Bosses.TundraBoss;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
-using QwertyMod.Content.Items.Equipment.Accessories.Expert;
-using Terraria.DataStructures;
 
 namespace QwertyMod.Content.Items.Consumable.BossBag
 {

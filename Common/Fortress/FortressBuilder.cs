@@ -23,7 +23,7 @@ namespace QwertyMod.Common.Fortress
         }
     }
 
-    internal class FortressBuilder 
+    internal class FortressBuilder
     {
         public static void BuildFortress()
         {

@@ -1,16 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Common;
 using QwertyMod.Common.RuneBuilder;
 using QwertyMod.Content.Dusts;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Terraria;
 using Terraria.Audio;
-using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
@@ -34,12 +28,12 @@ namespace QwertyMod.Content.Items.Weapon.Minion.LeechRune
         public override void SetDefaults()
         {
             Projectile.DamageType = DamageClass.Summon;
-            Projectile.width = 40; 
-            Projectile.height = 40;  
-            Projectile.friendly = true;  
-            Projectile.ignoreWater = true;    
-            Projectile.penetrate = -1; 
-            Projectile.tileCollide = false; 
+            Projectile.width = 40;
+            Projectile.height = 40;
+            Projectile.friendly = true;
+            Projectile.ignoreWater = true;
+            Projectile.penetrate = -1;
+            Projectile.tileCollide = false;
             Projectile.minion = true;
             Projectile.minionSlots = 1;
             Projectile.timeLeft = 2;

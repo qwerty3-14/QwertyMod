@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
-using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
@@ -221,7 +220,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.Swordquake
             }
         }
 
-        
+
 
         public override bool PreDraw(ref Color lightColor)
         {

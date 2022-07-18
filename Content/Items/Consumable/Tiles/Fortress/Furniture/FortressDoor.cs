@@ -28,7 +28,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Furniture
             Item.createTile = TileType<FortressDoorClosed>();
         }
 
-         public override void AddRecipes()
+        public override void AddRecipes()
         {
             CreateRecipe().AddIngredient(ItemType<FortressBrick>(), 6)
                 .AddTile(TileID.WorkBenches)

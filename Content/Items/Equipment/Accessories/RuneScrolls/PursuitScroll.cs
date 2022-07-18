@@ -1,11 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
+using QwertyMod.Content.Dusts;
 using System;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
-using QwertyMod.Content.Dusts;
-using Terraria.DataStructures;
 
 namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
 {
@@ -15,7 +15,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
         {
             DisplayName.SetDefault("Pursuit Scroll");
             Tooltip.SetDefault("Minions ocasionaly shoot pursuit runes");
-            
+
         }
 
         public override void SetDefaults()
@@ -115,12 +115,12 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
                 runeCounter++;
                 if (runeCounter >= 120 / projectile.minionSlots || (runeCounter >= 120 && projectile.sentry))
                 {
-                    if(QwertyMethods.ClosestNPC(ref target, 1000, projectile.Center, false, player.MinionAttackTargetNPC ))
+                    if (QwertyMethods.ClosestNPC(ref target, 1000, projectile.Center, false, player.MinionAttackTargetNPC))
                     {
                         Projectile.NewProjectile(new EntitySource_Misc(""), projectile.Center, (target.Center - projectile.Center).SafeNormalize(Vector2.UnitY) * runeSpeed, ProjectileType<PursuitRuneFreindly>(), (int)(40f * player.GetDamage(DamageClass.Summon).Multiplicative), projectile.knockBack, projectile.owner);
                         runeCounter = 0;
                     }
-                    
+
                 }
             }
         }

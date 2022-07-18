@@ -1,4 +1,3 @@
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Common.PlayerLayers;
 using QwertyMod.Content.Items.Consumable.Tiles.Bars;
@@ -40,7 +39,7 @@ namespace QwertyMod.Content.Items.Consumable.BossSummon
             }
         }
 
-        
+
         public override bool CanUseItem(Player player)
         {
             if (!NPC.AnyNPCs(NPCType<AncientMachine>()))
@@ -52,7 +51,7 @@ namespace QwertyMod.Content.Items.Consumable.BossSummon
             }
             return false;
         }
-        
+
         public override void AddRecipes()
         {
             CreateRecipe().AddIngredient(ItemType<RhuthiniumBar>(), 10)

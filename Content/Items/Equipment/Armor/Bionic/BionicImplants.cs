@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using QwertyMod.Content.Buffs;
+using QwertyMod.Content.Items.Weapon.Morphs;
+using System;
 using Terraria;
+using Terraria.Audio;
+using Terraria.DataStructures;
+using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.GameContent;
-using Terraria.DataStructures;
-using QwertyMod.Content.Items.Weapon.Morphs;
-using Terraria.Audio;
-using Terraria.GameInput;
-using QwertyMod.Content.Buffs;
 
 namespace QwertyMod.Content.Items.Equipment.Armor.Bionic
 {
@@ -35,7 +30,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Bionic
             player.GetModPlayer<ShapeShifterPlayer>().coolDownDuration *= 0.7f;
             player.GetModPlayer<BionicEffects>().ArmCannon = true;
         }
-        
+
         public override bool IsArmorSet(Item head, Item body, Item legs)
         {
             return head.type == ModContent.ItemType<BionicEye>() && legs.type == ModContent.ItemType<BionicLimbs>();
@@ -46,7 +41,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Bionic
             String s = "Please go to conrols and bind the 'Yet another special ability key'";
             foreach (string key in QwertyMod.YetAnotherSpecialAbility.GetAssignedKeys()) //get's the string of the hotkey's name
             {
-                s = "Press the "+ key + " key to activate 'overdrive' significantly increaasing your arm cannons fire rate and movement speed.";
+                s = "Press the " + key + " key to activate 'overdrive' significantly increaasing your arm cannons fire rate and movement speed.";
             }
             player.setBonus = s;
             player.GetModPlayer<BionicEffects>().setBonus = true;
@@ -59,7 +54,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Bionic
                 .Register();
         }
     }
-    
+
     public class BionicEffects : ModPlayer
     {
         public bool ArmCannon = false;
@@ -75,78 +70,78 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Bionic
         }
         public override void PostUpdate()
         {
-            if(armCannonCountdown <=0 && ArmCannon)
+            if (armCannonCountdown <= 0 && ArmCannon)
             {
                 bool allowFlip = true;
                 NPC target = null;
-                if(Player.itemAnimation > 0)
+                if (Player.itemAnimation > 0)
                 {
                     allowFlip = false;
                 }
-                if(QwertyMethods.ClosestNPC(ref target, 1000, Player.MountedCenter, false, -1, delegate(NPC possibleTarget) 
-                {
-                    return allowFlip || Math.Sign(possibleTarget.Center.X - Player.Center.X) == Player.direction;
-                }))
+                if (QwertyMethods.ClosestNPC(ref target, 1000, Player.MountedCenter, false, -1, delegate (NPC possibleTarget)
+                 {
+                     return allowFlip || Math.Sign(possibleTarget.Center.X - Player.Center.X) == Player.direction;
+                 }))
                 {
                     Player.direction = Math.Sign(target.Center.X - Player.Center.X);
                     float shotSpeed = 12;
                     float offest = Player.GetBackHandPosition(Player.CompositeArmStretchAmount.Full, 0).Length();
-                    aimDirection = QwertyMethods.PredictiveAim(Player.MountedCenter, shotSpeed * 2, target.Center, target.velocity); 
-                    
-                    if(!float.IsNaN((float)aimDirection))
+                    aimDirection = QwertyMethods.PredictiveAim(Player.MountedCenter, shotSpeed * 2, target.Center, target.velocity);
+
+                    if (!float.IsNaN((float)aimDirection))
                     {
                         armCannonCountdown = 30;
-                        if(overdriveTime > 60*50)
+                        if (overdriveTime > 60 * 50)
                         {
                             armCannonCountdown = 5;
                         }
                         setDirection = Player.direction;
-                        Player.SetCompositeArmBack(enabled: true, Player.CompositeArmStretchAmount.Full, (float)aimDirection - (float)Math.PI/2);
-                        Projectile.NewProjectile(new EntitySource_Misc(""), Player.MountedCenter, QwertyMethods.PolarVector(shotSpeed, (float)aimDirection), ModContent.ProjectileType<ArmCannonLaser>(), (int)(30f*Player.GetDamage(DamageClass.Generic).Multiplicative), 0, Player.whoAmI);
+                        Player.SetCompositeArmBack(enabled: true, Player.CompositeArmStretchAmount.Full, (float)aimDirection - (float)Math.PI / 2);
+                        Projectile.NewProjectile(new EntitySource_Misc(""), Player.MountedCenter, QwertyMethods.PolarVector(shotSpeed, (float)aimDirection), ModContent.ProjectileType<ArmCannonLaser>(), (int)(30f * Player.GetDamage(DamageClass.Generic).Multiplicative), 0, Player.whoAmI);
                         SoundEngine.PlaySound(SoundID.Item157, Player.MountedCenter);
                     }
-                    
+
                 }
             }
-            else if(ArmCannon)
+            else if (ArmCannon)
             {
                 armCannonCountdown--;
-                if(setDirection != 0)
+                if (setDirection != 0)
                 {
-                    if(Player.itemAnimation == 0)
+                    if (Player.itemAnimation == 0)
                     {
                         Player.direction = setDirection;
                     }
-                    else if(Player.direction != setDirection)
+                    else if (Player.direction != setDirection)
                     {
                         aimDirection = null;
                     }
                 }
-                if(aimDirection != null)
+                if (aimDirection != null)
                 {
-                    Player.SetCompositeArmBack(enabled: true, Player.CompositeArmStretchAmount.Full, (float)aimDirection - (float)Math.PI/2);
+                    Player.SetCompositeArmBack(enabled: true, Player.CompositeArmStretchAmount.Full, (float)aimDirection - (float)Math.PI / 2);
                 }
             }
-            overdriveTime--; 
-            if(overdriveTime > 60*50)
+            overdriveTime--;
+            if (overdriveTime > 60 * 50)
             {
-                Player.AddBuff(ModContent.BuffType<Overrdrive>(), overdriveTime -  60*50);
+                Player.AddBuff(ModContent.BuffType<Overrdrive>(), overdriveTime - 60 * 50);
             }
-            else if(overdriveTime > 0)
+            else if (overdriveTime > 0)
             {
                 Player.AddBuff(ModContent.BuffType<OverrdriveCooldown>(), overdriveTime);
             }
         }
         public override void PostUpdateEquips()
         {
-            if(overdriveTime > 60*50)
+            if (overdriveTime > 60 * 50)
             {
                 Player.moveSpeed *= 1.5f;
                 Player.accRunSpeed *= 1.5f;
                 Player.runAcceleration += 1.5f;
             }
         }
-        
+
 
         public override void ProcessTriggers(TriggersSet triggersSet) //runs hotkey effects
         {

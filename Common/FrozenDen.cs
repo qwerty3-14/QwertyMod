@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.GameContent.Generation;
 using Terraria.ID;
 using Terraria.IO;
@@ -328,11 +327,11 @@ namespace QwertyMod.Common
         }
         static bool SafeDenLocation(int x, int y)
         {
-            for(int i = x -60; i < 60; i++)
+            for (int i = x - 60; i < 60; i++)
             {
-                for(int j = (int)Main.worldSurface; j < y+10; j++)
+                for (int j = (int)Main.worldSurface; j < y + 10; j++)
                 {
-                    if(Main.tile[i,j].TileType == TileID.Containers || Main.tile[i, j].TileType == TileID.Containers2 || Main.tile[i, j].TileType == TileID.FakeContainers || Main.tile[i, j].TileType == TileID.FakeContainers2)
+                    if (Main.tile[i, j].TileType == TileID.Containers || Main.tile[i, j].TileType == TileID.Containers2 || Main.tile[i, j].TileType == TileID.FakeContainers || Main.tile[i, j].TileType == TileID.FakeContainers2)
                     {
                         return false;
                     }
@@ -367,7 +366,7 @@ namespace QwertyMod.Common
                     packet.Write(Main.myPlayer);
                     packet.Send();
                 }
-                
+
             }
             else if (activeSleeper && !NPC.AnyNPCs(NPCType<PolarBear>()) && !NPC.AnyNPCs(NPCType<Sleeping>()) && BearSpawn.X != -1 && BearSpawn.Y != -1)
             {

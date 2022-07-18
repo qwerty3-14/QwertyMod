@@ -38,12 +38,12 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.AncientBlade
 
             Item.width = 70;
             Item.height = 70;
-            
+
             if (!Main.dedServ)
             {
-                Item.GetGlobalItem<ItemUseGlow>().glowTexture =  Request<Texture2D>("QwertyMod/Content/Items/Weapon/Melee/Sword/AncientBlade/AncientBlade_Glow").Value;
+                Item.GetGlobalItem<ItemUseGlow>().glowTexture = Request<Texture2D>("QwertyMod/Content/Items/Weapon/Melee/Sword/AncientBlade/AncientBlade_Glow").Value;
             }
-            
+
             Item.autoReuse = true;
             Item.shoot = ProjectileType<AncientOrb>();
             Item.shootSpeed = 9;
@@ -54,7 +54,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.AncientBlade
             for (int i = 0; i < numberProjectiles; i++)
             {
                 Vector2 perturbedSpeed = velocity.RotatedByRandom(MathHelper.ToRadians(15)); // 30 degree spread.
-                                                                                                                // If you want to randomize the speed to stagger the projectiles
+                                                                                             // If you want to randomize the speed to stagger the projectiles
                 float scale = 1f - (Main.rand.NextFloat() * .3f);
                 perturbedSpeed = perturbedSpeed * scale;
                 Projectile.NewProjectile(source, position, perturbedSpeed, type, damage, knockback, player.whoAmI, 35 + Main.rand.Next(10));

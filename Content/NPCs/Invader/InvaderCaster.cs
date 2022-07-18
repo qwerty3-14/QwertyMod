@@ -2,22 +2,16 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Common.Fortress;
 using QwertyMod.Content.Buffs;
-using QwertyMod.Content.Dusts;
-using QwertyMod.Content.Items.Consumable.BossSummon;
-using QwertyMod.Content.Items.Consumable.Tiles.Banners;
-using QwertyMod.Content.NPCs.Bosses.FortressBoss;
 using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
+using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
-using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
-using Terraria.GameContent;
-using QwertyMod.Content.NPCs.Fortress;
 
 namespace QwertyMod.Content.NPCs.Invader
 {
@@ -50,14 +44,14 @@ namespace QwertyMod.Content.NPCs.Invader
         public override void AI()
         {
             NPC.damage = 0;
-            if(preTimer > 0)
+            if (preTimer > 0)
             {
-                if(preTimer == 120)
+                if (preTimer == 120)
                 {
                     InvaderNPCGeneral.SpawnIn(NPC);
                     NPC.dontTakeDamage = true;
                 }
-                if(preTimer % 20 == 0)
+                if (preTimer % 20 == 0)
                 {
                     InvaderNPCGeneral.SpawnAnimation(NPC);
                 }
@@ -72,10 +66,10 @@ namespace QwertyMod.Content.NPCs.Invader
                 if (target != null && Collision.CanHitLine(shootFrom, 0, 0, target.Center, 0, 0) && (target.Center - NPC.Center).Length() < 600)
                 {
                     float dist = Math.Abs(target.Center.X - NPC.Center.X);
-                    if(dist < 100)
+                    if (dist < 100)
                     {
                         NPC.velocity.X = 0;
-                        if(dist < 60)
+                        if (dist < 60)
                         {
                             NPC.direction *= -1;
                             InvaderNPCGeneral.WalkerWalk(NPC, 3);
@@ -85,18 +79,18 @@ namespace QwertyMod.Content.NPCs.Invader
                     {
                         InvaderNPCGeneral.WalkerWalk(NPC, 3);
                     }
-                    if((target.Center - shootFrom).Length() < 150 && shotCounter <= 0)
+                    if ((target.Center - shootFrom).Length() < 150 && shotCounter <= 0)
                     {
                         shotCounter = 20;
-                        if(Main.netMode != NetmodeID.MultiplayerClient)
+                        if (Main.netMode != NetmodeID.MultiplayerClient)
                         {
                             SoundEngine.PlaySound(SoundID.Item157, shootFrom);
                             Projectile.NewProjectile(new EntitySource_Misc(""), shootFrom, QwertyMethods.PolarVector(3, (target.Center - shootFrom).ToRotation()), ModContent.ProjectileType<InvaderZap>(), 20, 0, 0);
                         }
                     }
-                    else if(shotCounter <= 0 && NPC.velocity.X == 0)
+                    else if (shotCounter <= 0 && NPC.velocity.X == 0)
                     {
-                        if(Main.netMode != NetmodeID.MultiplayerClient)
+                        if (Main.netMode != NetmodeID.MultiplayerClient)
                         {
                             SoundEngine.PlaySound(SoundID.Item157, shootFrom);
                             Projectile.NewProjectile(new EntitySource_Misc(""), shootFrom, QwertyMethods.PolarVector(5, (target.Center - shootFrom).ToRotation()), ModContent.ProjectileType<InvaderSphere>(), 20, 0, 0);
@@ -109,28 +103,28 @@ namespace QwertyMod.Content.NPCs.Invader
                     NPC.velocity.X = 0;
                     InvaderNPCGeneral.WalkerIdle(NPC, 2);
                 }
-                
+
             }
             NPC.spriteDirection = NPC.direction;
         }
-        
+
         public override bool CanHitPlayer(Player target, ref int cooldownSlot)
         {
             return preTimer <= 0;
         }
         public override void FindFrame(int frameHeight)
         {
-            if(NPC.velocity.X != 0)
+            if (NPC.velocity.X != 0)
             {
                 NPC.frameCounter++;
-                if(NPC.frame.Y < frameHeight)
+                if (NPC.frame.Y < frameHeight)
                 {
                     NPC.frame.Y = frameHeight;
                 }
-                if(NPC.frameCounter % 6 ==0)
+                if (NPC.frameCounter % 6 == 0)
                 {
                     NPC.frame.Y += frameHeight;
-                    if(NPC.frame.Y >= frameHeight * 4)
+                    if (NPC.frame.Y >= frameHeight * 4)
                     {
                         NPC.frame.Y = 0;
                     }
@@ -143,11 +137,11 @@ namespace QwertyMod.Content.NPCs.Invader
         }
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
-            if(preTimer > 0)
+            if (preTimer > 0)
             {
                 return false;
             }
-            
+
             spriteBatch.Draw(TextureAssets.Npc[NPC.type].Value, NPC.Center - screenPos,
             NPC.frame, drawColor, NPC.rotation,
             new Vector2(NPC.width * 0.5f, NPC.height * 0.5f), 1f, NPC.spriteDirection != 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0f);
@@ -268,7 +262,7 @@ namespace QwertyMod.Content.NPCs.Invader
     }
     public class InvaderSphere : ModProjectile
     {
-        
+
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Sphere");
@@ -284,19 +278,19 @@ namespace QwertyMod.Content.NPCs.Invader
         public override void AI()
         {
             counter++;
-            if(counter % 20 == 0)
+            if (counter % 20 == 0)
             {
                 Entity target = InvaderProjectile.FindTarget(Projectile, 150);
-                if(target != null)
+                if (target != null)
                 {
                     Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center, QwertyMethods.PolarVector(3, (target.Center - Projectile.Center).ToRotation()), ModContent.ProjectileType<InvaderZap>(), 20, 0, 0);
                 }
             }
             Projectile.frameCounter++;
-            if(Projectile.frameCounter % 4 ==0)
+            if (Projectile.frameCounter % 4 == 0)
             {
                 Projectile.frame++;
-                if(Projectile.frame >= 5)
+                if (Projectile.frame >= 5)
                 {
                     Projectile.frame = 0;
                 }

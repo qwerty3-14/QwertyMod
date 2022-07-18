@@ -3,21 +3,16 @@ using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Common.Fortress;
 using QwertyMod.Content.Buffs;
 using QwertyMod.Content.Dusts;
-using QwertyMod.Content.Items.Consumable.BossSummon;
-using QwertyMod.Content.Items.Consumable.Tiles.Banners;
-using QwertyMod.Content.NPCs.Bosses.FortressBoss;
 using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
+using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
-using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
-using Terraria.GameContent;
-using QwertyMod.Content.NPCs.Fortress;
 
 namespace QwertyMod.Content.NPCs.Invader
 {
@@ -50,25 +45,25 @@ namespace QwertyMod.Content.NPCs.Invader
         {
             NPC.damage = 0;
             Entity target = InvaderNPCGeneral.FindTarget(NPC, false);
-            if(combatTimer < 0)
+            if (combatTimer < 0)
             {
                 combatTimer++;
-                Dust.NewDustPerfect(NPC.Center + QwertyMethods.PolarVector(-21, NPC.rotation ), ModContent.DustType<InvaderGlow>(), Vector2.Zero);
+                Dust.NewDustPerfect(NPC.Center + QwertyMethods.PolarVector(-21, NPC.rotation), ModContent.DustType<InvaderGlow>(), Vector2.Zero);
             }
-            else if(combatTimer <= 240)
+            else if (combatTimer <= 240)
             {
                 NPC.velocity = Vector2.Zero;
                 combatTimer++;
-                if(combatTimer % 60 == 30)
+                if (combatTimer % 60 == 30)
                 {
-                    if(Main.netMode != NetmodeID.MultiplayerClient)
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         SoundEngine.PlaySound(SoundID.Item95, NPC.Center);
                         Vector2 shootFrom = NPC.Center + QwertyMethods.PolarVector(9, NPC.rotation) + QwertyMethods.PolarVector(9 * (combatTimer % 120 == 30 ? -1 : 1), NPC.rotation + (float)Math.PI / 2f);
                         Projectile.NewProjectile(new EntitySource_Misc(""), shootFrom, (shootFrom - NPC.Center).SafeNormalize(-Vector2.UnitY) * 8, ModContent.ProjectileType<InvaderMicroMissile>(), 30, 0, 0);
                     }
                 }
-                if(target != null)
+                if (target != null)
                 {
                     NPC.rotation.SlowRotation((target.Center - NPC.Center).ToRotation(), (float)Math.PI / 30f);
                 }
@@ -76,28 +71,28 @@ namespace QwertyMod.Content.NPCs.Invader
             else
             {
                 NPC.velocity = Vector2.Zero;
-                if(firedPlasma)
+                if (firedPlasma)
                 {
                     combatTimer++;
-                    if(combatTimer > 360 && target != null)
+                    if (combatTimer > 360 && target != null)
                     {
                         combatTimer = -60;
                         firedPlasma = false;
                         NPC.velocity = QwertyMethods.PolarVector(20, NPC.rotation);
                     }
                 }
-                else if(target != null)
+                else if (target != null)
                 {
                     float shotOffset = 28;
                     float shotSpeed = 8;
                     float aimAt = QwertyMethods.PredictiveAimWithOffset(NPC.Center, shotSpeed * 3, target.Center, target.velocity, shotOffset);
-                    if(!float.IsNaN(aimAt))
+                    if (!float.IsNaN(aimAt))
                     {
                         float rotOld = NPC.rotation;
                         NPC.rotation.SlowRotation(aimAt, (float)Math.PI / 30f);
-                        if(QwertyMethods.AngularDifference(rotOld, NPC.rotation) <  (float)Math.PI / 30f)
+                        if (QwertyMethods.AngularDifference(rotOld, NPC.rotation) < (float)Math.PI / 30f)
                         {
-                            if(Main.netMode != NetmodeID.MultiplayerClient)
+                            if (Main.netMode != NetmodeID.MultiplayerClient)
                             {
                                 SoundEngine.PlaySound(SoundID.Item5, NPC.Center);
                                 Vector2 shootFrom = NPC.Center + QwertyMethods.PolarVector(8, NPC.rotation) + QwertyMethods.PolarVector(8 * (combatTimer % 120 == 30 ? -1 : 1), NPC.rotation + (float)Math.PI / 2f);
@@ -111,7 +106,7 @@ namespace QwertyMod.Content.NPCs.Invader
         }
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
-            
+
             spriteBatch.Draw(TextureAssets.Npc[NPC.type].Value, NPC.Center - screenPos,
             NPC.frame, drawColor, NPC.rotation,
             new Vector2(TextureAssets.Npc[NPC.type].Value.Width * 0.5f, TextureAssets.Npc[NPC.type].Value.Height * 0.5f), 1f, SpriteEffects.None, 0f);
@@ -163,7 +158,7 @@ namespace QwertyMod.Content.NPCs.Invader
         bool exploded = false;
         void explode()
         {
-            if(!exploded)
+            if (!exploded)
             {
                 exploded = true;
                 Projectile.timeLeft = 5;
@@ -172,9 +167,9 @@ namespace QwertyMod.Content.NPCs.Invader
                 Projectile.position -= Vector2.One * 12;
                 Projectile.tileCollide = false;
                 Projectile.velocity = Vector2.Zero;
-                for(int i =0; i < 30; i++)
+                for (int i = 0; i < 30; i++)
                 {
-                    float rot = (float)Math.PI * 2f * ((float)i / 30f); 
+                    float rot = (float)Math.PI * 2f * ((float)i / 30f);
                     Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<InvaderGlow>(), QwertyMethods.PolarVector(3f, rot));
                 }
             }
@@ -196,21 +191,21 @@ namespace QwertyMod.Content.NPCs.Invader
         bool runOnce = true;
         public override void AI()
         {
-            if(!exploded)
+            if (!exploded)
             {
-                if(runOnce)
+                if (runOnce)
                 {
                     Projectile.rotation = Projectile.velocity.ToRotation();
                     runOnce = false;
                 }
                 Entity target = InvaderProjectile.FindTarget(Projectile, 600);
-                if(target != null)
+                if (target != null)
                 {
                     Projectile.rotation.SlowRotation((target.Center - Projectile.Center).ToRotation(), (float)Math.PI / 120f);
                 }
                 Projectile.velocity = QwertyMethods.PolarVector(6, Projectile.rotation);
                 Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(-4, Projectile.rotation), ModContent.DustType<InvaderGlow>(), Vector2.Zero, Scale: 0.2f);
-                if(Projectile.timeLeft < 5)
+                if (Projectile.timeLeft < 5)
                 {
                     explode();
                 }
@@ -218,7 +213,7 @@ namespace QwertyMod.Content.NPCs.Invader
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            if(exploded)
+            if (exploded)
             {
                 return false;
             }

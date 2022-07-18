@@ -1,13 +1,9 @@
-using Microsoft.Xna.Framework.Graphics;
-using QwertyMod.Common.Playerlayers;
 using QwertyMod.Content.Items.MiscMaterials;
 using QwertyMod.Content.Items.Weapon.Minion.Longsword;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
-using Terraria.Localization;
 using Terraria.ModLoader;
 using static Terraria.ID.ArmorIDs;
 using static Terraria.ModLoader.ModContent;
@@ -34,7 +30,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Hydra
             Item.width = 28;
             Item.height = 22;
             Item.defense = 13;
-            
+
         }
 
         public override void UpdateEquip(Player player)
@@ -43,12 +39,12 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Hydra
             player.GetDamage(DamageClass.Summon) += 0.1f;
         }
 
-        
+
         public override bool IsArmorSet(Item head, Item body, Item legs)
         {
             return body.type == ItemType<HydraScalemail>() && legs.type == ItemType<HydraLeggings>();
         }
-        
+
         public override void UpdateArmorSet(Player player)
         {
             player.GetModPlayer<MinionDuper>().DupeMinions = true;
