@@ -39,17 +39,21 @@ namespace QwertyMod.Content.Items.Consumable.BossSummon
             }
         }
 
-
         public override bool CanUseItem(Player player)
         {
-            if (!NPC.AnyNPCs(NPCType<AncientMachine>()))
+            return !NPC.AnyNPCs(NPCType<AncientMachine>());
+        }
+
+        public override bool? UseItem(Player player)
+        {
+            if (player.whoAmI == Main.myPlayer)
             {
-                NPC.SpawnOnPlayer(player.whoAmI, NPCType<AncientMachine>());
-                SoundEngine.PlaySound(SoundID.Roar, player.position);
-                Item.stack--;
+                SoundEngine.PlaySound(SoundID.Roar, player.Center);
+                QwertyMethods.NPCSpawnOnPlayer(player, NPCType<AncientMachine>());
                 return true;
             }
-            return false;
+
+            return base.UseItem(player);
         }
 
         public override void AddRecipes()

@@ -77,7 +77,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.ChromeShotgun
             return true;
         }
 
-        public override bool CanUseItem(Player player)
+        public override void UseAnimation(Player player)
         {
             switch (Item.GetGlobalItem<ChromeGunToggle>().mode)
             {
@@ -110,7 +110,6 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.ChromeShotgun
                 Item.UseSound = SoundID.Item11;
                 Item.useStyle = 5;
             }
-            return base.CanUseItem(player);
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)

@@ -51,13 +51,12 @@ namespace QwertyMod.Content.Items.Weapon.Magic.PursuitRune
             //Item.GetGlobalItem<ItemUseGlow>().glowTexture = mod.GetTexture("Items/AncientItems/AncientWave_Glow");
         }
 
-        public override bool CanUseItem(Player player)
+        public override void UseAnimation(Player player)
         {
             if (player.statMana > Item.mana)
             {
                 SoundEngine.PlaySound(SoundID.MaxMana, player.position);
             }
-            return base.CanUseItem(player);
         }
 
         public override void AddRecipes()

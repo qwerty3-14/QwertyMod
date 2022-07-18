@@ -56,7 +56,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
                             {
                                 float closest = 100000;
                                 Player closestPlayer = null;
-                                for (int i = 0; i < 255; i++)
+                                for (int i = 0; i < Main.maxPlayers; i++)
                                 {
                                     if (Main.player[i].active && (Projectile.Center - Main.player[i].Center).Length() < closest)
                                     {

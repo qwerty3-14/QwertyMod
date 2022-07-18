@@ -23,10 +23,18 @@ namespace QwertyMod.Content.Items.Weapon.Morphs
                 {
                     return false;
                 }
-                player.AddBuff(BuffType<MorphCooldown>(), (int)((morphCooldown * PrefixorphCooldownModifier * player.GetModPlayer<ShapeShifterPlayer>().coolDownDuration) * 60f));
             }
             return base.CanUseItem(item, player);
         }
+
+        public override void UseAnimation(Item item, Player player)
+        {
+            if (morphCooldown != -1 && !item.IsAir)
+            {
+                player.AddBuff(BuffType<MorphCooldown>(), (int)((morphCooldown * PrefixorphCooldownModifier * player.GetModPlayer<ShapeShifterPlayer>().coolDownDuration) * 60f));
+            }
+        }
+
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
             if (morphCooldown != -1)
@@ -35,7 +43,8 @@ namespace QwertyMod.Content.Items.Weapon.Morphs
                 TooltipLine line = new TooltipLine(Mod, "MorphCool", (morphCooldown * PrefixorphCooldownModifier * Main.LocalPlayer.GetModPlayer<ShapeShifterPlayer>().coolDownDuration) + " second cooldown");
                 {
                     line.OverrideColor = Color.Orange;
-                    tooltips.Insert(KBIndex + 3, line);
+                    int insertIndex = (int)MathHelper.Min(tooltips.Count, KBIndex + 3);
+                    tooltips.Insert(insertIndex, line);
                 }
                 //line.Text = (item.GetGlobalItem<ShapeShifterItem>().morphCooldown * PrefixorphCooldownModifier * Main.LocalPlayer.GetModPlayer<ShapeShifterPlayer>().coolDownDuration) + Language.GetTextValue("Mods.QwertysRandomContent.Morphcooldown");
             }

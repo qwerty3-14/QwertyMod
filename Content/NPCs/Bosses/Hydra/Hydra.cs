@@ -29,6 +29,8 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
         {
             DisplayName.SetDefault("Hydra");
             Main.npcFrameCount[NPC.type] = 5;
+
+            NPCID.Sets.MPAllowedEnemies[NPC.type] = true; //For allowing use of SpawnOnPlayer in multiplayer
         }
 
         public override void SetDefaults()
@@ -137,7 +139,7 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
             {
                 if (Main.expertMode)
                 {
-                    for (int p = 0; p < Main.player.Length; p++)
+                    for (int p = 0; p < Main.maxPlayers; p++)
                     {
                         if (Main.player[p].active)
                         {

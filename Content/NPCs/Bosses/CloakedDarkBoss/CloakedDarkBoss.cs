@@ -24,6 +24,8 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
         {
             DisplayName.SetDefault("Noehtnap");
             Main.npcFrameCount[NPC.type] = 5;
+
+            NPCID.Sets.MPAllowedEnemies[NPC.type] = true; //For allowing use of SpawnOnPlayer in multiplayer
         }
 
 
@@ -124,7 +126,7 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
             }
             else
             {
-                for (int i = 0; i < Main.player.Length; i++)
+                for (int i = 0; i < Main.maxPlayers; i++)
                 {
                     if ((Main.player[i].active && (QwertyMod.GetLocalCursor(i) - NPC.Center).Length() < 180) || (Main.player[i].Center - NPC.Center).Length() < orbitDistance)
                     {

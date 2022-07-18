@@ -33,6 +33,8 @@ namespace QwertyMod.Content.NPCs.Bosses.AncientMachine
             DisplayName.SetDefault("Ancient Machine");
             Main.npcFrameCount[NPC.type] = 4;
 
+            NPCID.Sets.MPAllowedEnemies[NPC.type] = true; //For allowing use of SpawnOnPlayer in multiplayer
+
             NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers(0)
             {
                 PortraitScale = 0.1f,
@@ -634,7 +636,7 @@ namespace QwertyMod.Content.NPCs.Bosses.AncientMachine
                 //Player player = Main.player[Projectile.owner];
                 if (Main.netMode != 1)
                 {
-                    for (int i = 0; i < 255; i++)
+                    for (int i = 0; i < Main.maxPlayers; i++)
                     {
                         if (Main.player[i].active && (Projectile.Center - Main.player[i].Center).Length() < closest)
                         {

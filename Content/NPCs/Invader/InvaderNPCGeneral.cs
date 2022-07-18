@@ -157,7 +157,7 @@ namespace QwertyMod.Content.NPCs.Invader
         public static Entity FindTarget(Projectile projectile, float maxRange)
         {
             Entity target = null;
-            for (int i = 0; i < 255; i++)
+            for (int i = 0; i < Main.maxPlayers; i++)
             {
                 if (Main.player[i].active && (Main.player[i].Center - projectile.Center).Length() - Main.player[i].aggro < maxRange)
                 {

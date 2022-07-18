@@ -75,7 +75,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
         }
         private int k;
 
-        public override bool CanUseItem(Item item, Player player)
+        public override void UseAnimation(Item item, Player player)
         {
             if (player.GetModPlayer<BloodMedalionEffect>().effect && item.mana > 0)
             {
@@ -90,10 +90,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
                     player.KillMe(PlayerDeathReason.ByCustomReason(player.name + " madly drained " + (player.Male ? "his" : "her") + " lifeforce!"), (int)(item.mana * player.manaCost), 0);
                 }
                 player.manaCost = 0f;
-                return true;
             }
-
-            return base.CanUseItem(item, player);
         }
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)

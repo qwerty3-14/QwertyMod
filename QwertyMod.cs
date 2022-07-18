@@ -99,7 +99,7 @@ namespace QwertyMod
     public class QwertyMod : Mod
     {
         public static QwertyMod Instance;
-        private static Vector2[] LocalCursor = new Vector2[Main.player.Length];
+        private static Vector2[] LocalCursor = new Vector2[Main.maxPlayers];
 
         public static Deck<int> AMLoot;
         public static Deck<int> ImperiousLoot;

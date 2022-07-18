@@ -34,11 +34,19 @@ namespace QwertyMod.Content.Items.Consumable.BossSummon
             Item.noUseGraphic = true;
         }
 
-        public override bool CanUseItem(Player player)
+        public override bool? UseItem(Player player)
         {
-            NPC.SpawnOnPlayer(player.whoAmI, NPCType<RuneGhost>());
-            SoundEngine.PlaySound(SoundID.Roar, player.position);
-            Item.stack--;
+            //This is different behavior compared to most boss summons: it can always be summoned regardless of AnyNPCs
+            if (Main.netMode != NetmodeID.MultiplayerClient)
+            {
+                NPC.SpawnOnPlayer(player.whoAmI, NPCType<RuneGhost>());
+            }
+
+            if (Main.netMode != NetmodeID.Server)
+            {
+                SoundEngine.PlaySound(SoundID.Roar, player.Center);
+            }
+
             return true;
         }
     }
