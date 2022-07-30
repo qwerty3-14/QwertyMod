@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using Terraria.DataStructures;
 
 namespace QwertyMod.Content.Items.Weapon.Morphs
 {
@@ -21,6 +22,17 @@ namespace QwertyMod.Content.Items.Weapon.Morphs
             {
                 if (player.HasBuff(BuffType<MorphCooldown>()))
                 {
+                    if(player.GetModPlayer<ShapeShifterPlayer>().ruthlessMorhphing > 0)
+                    {
+                        int ouchAmt = (int)(3f * player.GetModPlayer<ShapeShifterPlayer>().morphCooldownTime / 60f);
+                        CombatText.NewText(player.getRect(), CombatText.DamagedFriendly, ouchAmt, false);
+                        player.statLife -= ouchAmt;
+                        if(player.statLife < 0)
+                        {
+                            player.KillMe(PlayerDeathReason.ByCustomReason(player.name + " morphed into nothing!"), ouchAmt, 0);
+                        }
+                        return true;
+                    }
                     return false;
                 }
             }

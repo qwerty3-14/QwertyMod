@@ -7,6 +7,7 @@ using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using QwertyMod.Content.Items.Equipment.Accessories.Expert.AncientGemstone;
 
 namespace QwertyMod.Content.Items.Consumable.BossBag
 {
@@ -56,7 +57,7 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
                 player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<AncientMiner>());
             }
             player.QuickSpawnItem(new EntitySource_Misc(""), 73, 8);
-            //player.QuickSpawnItem(new EntitySource_Misc(""), mod.ItemType("AncientGemstone"));
+            player.QuickSpawnItem(new EntitySource_Misc(""), ModContent.ItemType<AncientGemstone>());
         }
     }
 }

@@ -7,6 +7,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs
         public int morphCooldownTime = 0;
         public float coolDownDuration = 1f;
         public bool noDraw = false;
+        public int ruthlessMorhphing = 0;
         public override void ResetEffects()
         {
             ResetVariables();
@@ -20,6 +21,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs
         {
             coolDownDuration = 1f;
             noDraw = false;
+            ruthlessMorhphing--;
         }
         public override void PreUpdate()
         {

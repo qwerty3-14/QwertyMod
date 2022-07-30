@@ -12,6 +12,9 @@ using Terraria.GameContent.Bestiary;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using Terraria.GameContent.ItemDropRules;
+using QwertyMod.Content.Items.MiscMaterials;
+using QwertyMod.Content.Items.Weapon.Minion.InvaderCaster;
 
 namespace QwertyMod.Content.NPCs.Invader
 {
@@ -162,7 +165,8 @@ namespace QwertyMod.Content.NPCs.Invader
         }
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
-
+            npcLoot.Add(ItemDropRule.Common(ItemType<InvaderPlating>(), 1, 2, 4));
+            npcLoot.Add(ItemDropRule.Common(ItemType<InvaderCasterStaff>(), 20, 1, 1));
         }
 
         public override float SpawnChance(NPCSpawnInfo spawnInfo)

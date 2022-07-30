@@ -210,11 +210,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.EtimsSword
                         if (Main.npc[n].active && !Main.npc[n].dontTakeDamage && (!Main.npc[n].friendly || (Main.npc[n].type == 22 && Player.killGuide) || (Main.npc[n].type == 54 && Player.killClothier)) && Player.itemAnimation > 0 && localNPCImmunity[n] <= 0 && Collision.CheckAABBvLineCollision(Main.npc[n].position, Main.npc[n].Size, Player.itemLocation, Player.itemLocation + QwertyMethods.PolarVector(swordLength, Player.itemRotation - (float)Math.PI / 4)))
                         {
                             localNPCImmunity[n] = item.useAnimation / 3;
-                            int damageBeforeVariance = item.damage;
-                            if (item.CountsAsClass(DamageClass.Melee))
-                            {
-                                damageBeforeVariance = (int)((float)item.damage * Player.GetDamage(DamageClass.Melee).Multiplicative);
-                            }
+                            int damageBeforeVariance = Player.GetWeaponDamage(item);
                             if (slam || uppercut)
                             {
                                 damageBeforeVariance *= 2;

@@ -167,6 +167,10 @@ namespace QwertyMod.Content.Items.Weapon.Whip
                     float rotation = vector4.ToRotation() - (float)Math.PI / 2f;
                     Microsoft.Xna.Framework.Color color = Lighting.GetColor(vector3.ToTileCoordinates());
                     Main.EntitySpriteDraw(value, vector2 - Main.screenPosition, rectangle, color, rotation, origin, scale, spriteEffects, 0);
+                    if(proj.type == ModContent.ProjectileType<Fork.InvaderForkP>())
+                    {
+                        Main.EntitySpriteDraw(ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Whip/Fork/InvaderForkP_Glow").Value, vector2 - Main.screenPosition, rectangle, Color.White, rotation, origin, scale, spriteEffects, 0);
+                    }
                 }
                 vector2 += vector4;
             }

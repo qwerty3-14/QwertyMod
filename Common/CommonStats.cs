@@ -6,6 +6,8 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.Graphics.Shaders;
 using Terraria.ModLoader;
+using QwertyMod.Content.Items.Weapon.Whip.Fork;
+using Terraria.ID;
 
 namespace QwertyMod.Common
 {
@@ -190,6 +192,10 @@ namespace QwertyMod.Common
         public override void OnHitNPCWithProj(Projectile proj, NPC target, int damage, float knockback, bool crit)
         {
             ProcessCriticalFailure();
+            if(target.HasBuff<ForkTag>() && proj.owner == Player.whoAmI && (proj.minion || ProjectileID.Sets.MinionShot[proj.type]))
+            {
+                Projectile.NewProjectile(new EntitySource_Misc(""), target.Center, (target.Center - Player.Center).SafeNormalize(-Vector2.UnitY) * 8, ModContent.ProjectileType<TagMissile>(), (int)(damage * 0.5f), 0, Player.whoAmI);
+            }
         }
         void ProcessCritChanceNegatable(int critChance, ref int damage, ref float knockback, ref bool crit)
         {

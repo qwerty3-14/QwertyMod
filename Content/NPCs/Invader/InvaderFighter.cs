@@ -13,6 +13,9 @@ using Terraria.GameContent.Bestiary;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using QwertyMod.Content.Items.MiscMaterials;
+using QwertyMod.Content.Items.Equipment.Accessories;
+using Terraria.GameContent.ItemDropRules;
 
 namespace QwertyMod.Content.NPCs.Invader
 {
@@ -84,8 +87,8 @@ namespace QwertyMod.Content.NPCs.Invader
                 else if (target != null)
                 {
                     float shotOffset = 28;
-                    float shotSpeed = 8;
-                    float aimAt = QwertyMethods.PredictiveAimWithOffset(NPC.Center, shotSpeed * 3, target.Center, target.velocity, shotOffset);
+                    float shotSpeed = 6;
+                    float aimAt = QwertyMethods.PredictiveAimWithOffset(NPC.Center, shotSpeed * 2, target.Center, target.velocity, shotOffset);
                     if (!float.IsNaN(aimAt))
                     {
                         float rotOld = NPC.rotation;
@@ -121,13 +124,15 @@ namespace QwertyMod.Content.NPCs.Invader
             bestiaryEntry.Info.AddRange(new List<IBestiaryInfoElement>
             {
                 BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Sky,
-                new FlavorTextBestiaryInfoElement("The invaders use orbs to casts spells, they attach them to some feet to move them around.")
+                new FlavorTextBestiaryInfoElement("The invaders use fighters to hunt down higher biengs.")
             });
         }
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
-
+            npcLoot.Add(ItemDropRule.Common(ItemType<InvaderPlating>(), 1, 3, 5));
+            npcLoot.Add(ItemDropRule.Common(ItemType<GravityBeGone>(), 20, 1, 1));
         }
+
 
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
@@ -235,21 +240,23 @@ namespace QwertyMod.Content.NPCs.Invader
         }
         public override void SetDefaults()
         {
-            Projectile.width = Projectile.height = 8;
+            Projectile.width = Projectile.height = 20;
             Projectile.penetrate = -1;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = -1;
-            Projectile.timeLeft = 75;
+            Projectile.timeLeft = 300;
             Projectile.extraUpdates = 74;
             Projectile.friendly = true;
             Projectile.hostile = true;
             Projectile.GetGlobalProjectile<InvaderProjectile>().isInvaderProjectile = true;
-            Projectile.extraUpdates = 2;
+            Projectile.extraUpdates = 1;
+            Projectile.tileCollide = false;
         }
         bool runOnce = true;
         public override void AI()
         {
             Projectile.rotation = Projectile.velocity.ToRotation();
+            Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(-4, Projectile.rotation), ModContent.DustType<InvaderGlow>(), Vector2.Zero);
         }
         public override bool PreDraw(ref Color lightColor)
         {

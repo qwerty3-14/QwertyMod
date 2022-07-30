@@ -24,6 +24,7 @@ namespace QwertyMod.Common
         public bool PriestMinion = false;
         public bool RuneMinion = false;
         public bool MechCrossbow = false;
+        public bool CasterMinion = false;
         public int PriestSynchroniser = 0;
         public float PriestAngle = 0f;
 
@@ -49,6 +50,7 @@ namespace QwertyMod.Common
             PriestMinion = false;
             RuneMinion = false;
             MechCrossbow = false;
+            CasterMinion = false;
         }
 
         public override void PreUpdate()

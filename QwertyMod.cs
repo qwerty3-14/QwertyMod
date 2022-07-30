@@ -93,13 +93,14 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using QwertyMod.Content.Items.Equipment.Vanity.RunicRobe;
 
 namespace QwertyMod
 {
     public class QwertyMod : Mod
     {
         public static QwertyMod Instance;
-        private static Vector2[] LocalCursor = new Vector2[Main.maxPlayers];
+        private static Vector2[] LocalCursor = new Vector2[Main.player.Length];
 
         public static Deck<int> AMLoot;
         public static Deck<int> ImperiousLoot;
@@ -128,7 +129,10 @@ namespace QwertyMod
         public static int BionicLegFemale = 0;
         public static int invaderLanderMale = 0;
         public static int invaderLanderFemale = 0;
+        public static int RuneLegMale = 0;
+        public static int RuneLegFemale = 0;
         public static SoundStyle FortressBlocks;
+        public const int InvaderGearValue = 50000000;
         public override void Load()
         {
             AMLoot = new Deck<int>();
@@ -188,6 +192,8 @@ namespace QwertyMod
                 BionicLegFemale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Bionic/BionicLimbs_FemaleLegs", EquipType.Legs, GetModItem(ItemType<BionicLimbs>()));
                 invaderLanderMale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Invader/InvaderLanders_Legs", EquipType.Legs, GetModItem(ItemType<InvaderLanders>()));
                 invaderLanderFemale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Invader/InvaderLanders_FemaleLegs", EquipType.Legs, GetModItem(ItemType<InvaderLanders>()));
+                RuneLegMale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Vanity/RunicRobe/RunicRobe_Legs", EquipType.Legs, GetModItem(ItemType<RunicRobe>()));
+                RuneLegFemale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Vanity/RunicRobe/RunicRobe_FemaleLegs", EquipType.Legs, GetModItem(ItemType<RunicRobe>()));
                 Main.QueueMainThreadAction(() =>
                 {
                     RuneSprites.BuildRunes();

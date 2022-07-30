@@ -98,7 +98,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Gale
     public class GaleSetBonus : ModPlayer
     {
         public bool setBonus = false;
-        public Vector3[,] orb = new Vector3[10, Main.maxPlayers];
+        public Vector3[,] orb = new Vector3[10, Main.player.Length];
         private bool runOnce = true;
 
         public override void Initialize()

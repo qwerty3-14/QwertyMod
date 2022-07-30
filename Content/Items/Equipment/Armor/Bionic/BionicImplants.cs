@@ -79,9 +79,9 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Bionic
                     allowFlip = false;
                 }
                 if (QwertyMethods.ClosestNPC(ref target, 1000, Player.MountedCenter, false, -1, delegate (NPC possibleTarget)
-                 {
-                     return allowFlip || Math.Sign(possibleTarget.Center.X - Player.Center.X) == Player.direction;
-                 }))
+                {
+                    return allowFlip || Math.Sign(possibleTarget.Center.X - Player.Center.X) == Player.direction;
+                }))
                 {
                     Player.direction = Math.Sign(target.Center.X - Player.Center.X);
                     float shotSpeed = 12;

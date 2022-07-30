@@ -1,6 +1,7 @@
 using QwertyMod.Content.Items.Equipment.Accessories.Expert.HyperRunestone;
 using QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls;
 using QwertyMod.Content.Items.Equipment.Vanity.BossMasks;
+using QwertyMod.Content.Items.Equipment.Vanity.RunicRobe;
 using QwertyMod.Content.Items.MiscMaterials;
 using QwertyMod.Content.NPCs.Bosses.RuneGhost;
 using Terraria;
@@ -47,7 +48,11 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
             {
                 player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<RuneGhostMask>());
             }
-
+            
+            if (Main.rand.Next(7) == 0)
+            {
+                player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<RunicRobe>());
+            }
 
 
             if (selectScroll == 1)

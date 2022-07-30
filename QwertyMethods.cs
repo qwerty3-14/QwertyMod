@@ -426,7 +426,24 @@ namespace QwertyMod
 
         public static Projectile PokeNPC(Player player, NPC npc, IEntitySource source, float damage, DamageClass damageClass, float knockback = 0f)
         {
-            Projectile p = Main.projectile[Projectile.NewProjectile(source, npc.Center, Vector2.Zero, ProjectileType<Poke>(), (int)damage, knockback, player.whoAmI)];
+            int id = ProjectileType<Poke>();
+            if(damageClass == DamageClass.Melee)
+            {
+                id = ProjectileType<PokeMelee>();
+            }
+            if(damageClass == DamageClass.Ranged)
+            {
+                id = ProjectileType<PokeRanged>();
+            }
+            if(damageClass == DamageClass.Melee)
+            {
+                id = ProjectileType<PokeMagic>();
+            }
+            if(damageClass == DamageClass.Summon)
+            {
+                id = ProjectileType<PokeSummon>();
+            }
+            Projectile p = Main.projectile[Projectile.NewProjectile(source, npc.Center, Vector2.Zero, id, (int)damage, knockback, player.whoAmI)];
             for (int n = 0; n < 200; n++)
             {
                 if (Main.npc[n] != npc)
@@ -485,6 +502,90 @@ namespace QwertyMod
             Projectile.width = 2;
             Projectile.height = 2;
 
+            Projectile.friendly = true;
+            Projectile.timeLeft = 2;
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.tileCollide = false;
+        }
+        public override bool PreDraw(ref Color lightColor)
+        {
+            return false;
+        }
+        public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        {
+            hitDirection = Math.Sign(target.Center.X - Main.player[Projectile.owner].Center.X);
+        }
+    }
+    public class PokeMelee : ModProjectile
+    {
+        public override void SetDefaults()
+        {
+            Projectile.width = 2;
+            Projectile.height = 2;
+            Projectile.DamageType = DamageClass.Melee;
+            Projectile.friendly = true;
+            Projectile.timeLeft = 2;
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.tileCollide = false;
+        }
+        public override bool PreDraw(ref Color lightColor)
+        {
+            return false;
+        }
+        public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        {
+            hitDirection = Math.Sign(target.Center.X - Main.player[Projectile.owner].Center.X);
+        }
+    }
+    public class PokeRanged : ModProjectile
+    {
+        public override void SetDefaults()
+        {
+            Projectile.width = 2;
+            Projectile.height = 2;
+            Projectile.DamageType = DamageClass.Ranged;
+            Projectile.friendly = true;
+            Projectile.timeLeft = 2;
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.tileCollide = false;
+        }
+        public override bool PreDraw(ref Color lightColor)
+        {
+            return false;
+        }
+        public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        {
+            hitDirection = Math.Sign(target.Center.X - Main.player[Projectile.owner].Center.X);
+        }
+    }
+    public class PokeMagic : ModProjectile
+    {
+        public override void SetDefaults()
+        {
+            Projectile.width = 2;
+            Projectile.height = 2;
+            Projectile.DamageType = DamageClass.Magic;
+            Projectile.friendly = true;
+            Projectile.timeLeft = 2;
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.tileCollide = false;
+        }
+        public override bool PreDraw(ref Color lightColor)
+        {
+            return false;
+        }
+        public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        {
+            hitDirection = Math.Sign(target.Center.X - Main.player[Projectile.owner].Center.X);
+        }
+    }
+    public class PokeSummon : ModProjectile
+    {
+        public override void SetDefaults()
+        {
+            Projectile.width = 2;
+            Projectile.height = 2;
+            Projectile.DamageType = DamageClass.Summon;
             Projectile.friendly = true;
             Projectile.timeLeft = 2;
             Projectile.usesLocalNPCImmunity = true;

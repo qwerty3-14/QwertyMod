@@ -5,6 +5,7 @@ using QwertyMod.Common.RuneBuilder;
 using QwertyMod.Content.Items.Consumable.BossBag;
 using QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls;
 using QwertyMod.Content.Items.Equipment.Vanity.BossMasks;
+using QwertyMod.Content.Items.Equipment.Vanity.RunicRobe;
 using QwertyMod.Content.Items.MiscMaterials;
 using System;
 using System.Collections.Generic;
@@ -276,6 +277,10 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
             //Boss masks are spawned with 1/7 chance
             notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
             notExpertRule.OnSuccess(ItemDropRule.Common(ItemType<RuneGhostMask>(), 7));
+            npcLoot.Add(notExpertRule);
+
+            notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
+            notExpertRule.OnSuccess(ItemDropRule.Common(ItemType<RunicRobe>(), 7));
             npcLoot.Add(notExpertRule);
 
             base.ModifyNPCLoot(npcLoot);

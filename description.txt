@@ -8,7 +8,7 @@ Currently the mod has:
 Discord: https://discord.gg/sdUz3yWKqF
 Source Code: https://github.com/qwerty3-14/QwertyMod
 
-I'm not that good of a spriter so here I'll give thanks to the spriters who helped!
+Several spriters have helped in making this mod!
 -Havoc
 -Liquidated Assets
 -SUS
@@ -26,23 +26,36 @@ I'm not that good of a spriter so here I'll give thanks to the spriters who help
 Extra thanks
 -Turquiose (for writing custom themes)
 -musicman (polar exterminator theme)
+-direwolf420 (for some bug fixes and git management tips)
 
 
 Changelog
-0.8.0
+0.8.0:  The invasion of the fortress part 1
 Major additions
--Added post golem fortress enemies, that drop new useful items
+-Added post golem fortress enemies, they will attack the other fortress enemies
+-Pre golem fortress enemies get stat buffs after golem to deal with the new invaders
+-Added invader scrap and items it can craft: Invader armor, Invader fork, Invader dart, Invader shooter.
+-Added some other invader drops: Gravity be gone, Overkill, and Invader Caster staff
+-souls of hieght and some items they craft have been added, however they are unobtainable without cheats (wait for part II of the update)
 
 Minor additions
 -reintroduced ash fell staff
 -reintroduced arachnoyo
 -reintroduced chrome shotgun
+-reintroduced and reworked bionic armor
+-reintroduced shroomite turret staff
+-reintroduced charging shotgun
+-reintroduced runic robe
+-reintroduced and reworked ancient gemstone
 
 Bug Fixes
 -Fixed Many bugs related to Discipline
 -fixed lune and rhuthinium Bracelets' equip textures not working
 -Fixed Sky fortress causing multiplayer crashing
 -fixed polar extreminator not spawning in multiplayer
+-fixed OLORD instantly despawning with some mods that mess with player buffs (thanks direwolf420)
+-fixed tooltips on shapeshifts (thanks direwolf420)
+-fixed the massacre not scaling off damage bonuses
 
 Tweaks
 -Lune ore now generates in sky islands instead of giant moons

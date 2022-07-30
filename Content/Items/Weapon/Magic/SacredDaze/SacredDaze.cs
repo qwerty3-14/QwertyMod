@@ -64,8 +64,6 @@ namespace QwertyMod.Content.Items.Weapon.Magic.SacredDaze
             Projectile.DamageType = DamageClass.Magic;
             Projectile.timeLeft = 180;
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 30;
-            Projectile.tileCollide = true;
             Projectile.light = 1f;
             Projectile.extraUpdates = 2;
         }

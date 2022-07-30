@@ -72,87 +72,84 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RestlessSun
             }
             return false;
         }
-
-
-
-        public class CaeliteMagicProjectile : ModProjectile
+    }
+    public class CaeliteMagicProjectile : ModProjectile
+    {
+        public override void SetStaticDefaults()
         {
-            public override void SetStaticDefaults()
+            DisplayName.SetDefault("Restless Sun");
+        }
+
+        public override void SetDefaults()
+        {
+            Projectile.aiStyle = 0;
+            //aiType = ProjectileID.Bullet;
+            Projectile.width = 44;
+            Projectile.height = 44;
+            Projectile.friendly = true;
+            Projectile.penetrate = 3;
+            Projectile.DamageType = DamageClass.Magic;
+            Projectile.timeLeft = 180;
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = 30;
+            Projectile.tileCollide = true;
+            Projectile.light = 1f;
+        }
+
+
+        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        {
+            if (Main.rand.Next(10) == 0)
             {
-                DisplayName.SetDefault("Restless Sun");
+                target.AddBuff(BuffType<PowerDown>(), 120);
             }
+            Projectile.localNPCImmunity[target.whoAmI] = -1;
+            //target.immune[Projectile.owner] = 0;
+        }
 
-            public override void SetDefaults()
+        private NPC target;
+        private NPC possibleTarget;
+        private bool foundTarget;
+        private float maxDistance = 10000f;
+        private float distance;
+        private int timer;
+        private float speed = 24;
+        private bool runOnce = true;
+        private float direction;
+
+        public override void AI()
+        {
+            if (runOnce)
             {
-                Projectile.aiStyle = 0;
-                //aiType = ProjectileID.Bullet;
-                Projectile.width = 44;
-                Projectile.height = 44;
-                Projectile.friendly = true;
-                Projectile.penetrate = 3;
-                Projectile.DamageType = DamageClass.Magic;
-                Projectile.timeLeft = 180;
-                Projectile.usesLocalNPCImmunity = true;
-                Projectile.localNPCHitCooldown = 30;
-                Projectile.tileCollide = true;
-                Projectile.light = 1f;
+                direction = Projectile.velocity.ToRotation();
+
+                runOnce = false;
             }
-
-
-            public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+            Player player = Main.player[Projectile.owner];
+            for (int k = 0; k < 200; k++)
             {
-                if (Main.rand.Next(10) == 0)
+                possibleTarget = Main.npc[k];
+                if (!Collision.CheckAABBvAABBCollision(Projectile.position, Projectile.Size, possibleTarget.position, possibleTarget.Size))
                 {
-                    target.AddBuff(BuffType<PowerDown>(), 120);
+                    Projectile.localNPCImmunity[k] = 0;
                 }
-                Projectile.localNPCImmunity[target.whoAmI] = -1;
-                //target.immune[Projectile.owner] = 0;
             }
-
-            private NPC target;
-            private NPC possibleTarget;
-            private bool foundTarget;
-            private float maxDistance = 10000f;
-            private float distance;
-            private int timer;
-            private float speed = 24;
-            private bool runOnce = true;
-            private float direction;
-
-            public override void AI()
+            if (QwertyMethods.ClosestNPC(ref target, maxDistance, Projectile.Center))
             {
-                if (runOnce)
-                {
-                    direction = Projectile.velocity.ToRotation();
-
-                    runOnce = false;
-                }
-                Player player = Main.player[Projectile.owner];
-                for (int k = 0; k < 200; k++)
-                {
-                    possibleTarget = Main.npc[k];
-                    if (!Collision.CheckAABBvAABBCollision(Projectile.position, Projectile.Size, possibleTarget.position, possibleTarget.Size))
-                    {
-                        Projectile.localNPCImmunity[k] = 0;
-                    }
-                }
-                if (QwertyMethods.ClosestNPC(ref target, maxDistance, Projectile.Center))
-                {
-                    direction = QwertyMethods.SlowRotation(direction, (target.Center - Projectile.Center).ToRotation(), 10f);
-                }
-                Projectile.velocity = new Vector2((float)Math.Cos(direction) * speed, (float)Math.Sin(direction) * speed);
-                foundTarget = false;
-                maxDistance = 10000f;
-                Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<CaeliteDust>());
-                Projectile.rotation += (float)Math.PI / 7.5f;
+                direction = QwertyMethods.SlowRotation(direction, (target.Center - Projectile.Center).ToRotation(), 10f);
             }
+            Projectile.velocity = new Vector2((float)Math.Cos(direction) * speed, (float)Math.Sin(direction) * speed);
+            foundTarget = false;
+            maxDistance = 10000f;
+            Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<CaeliteDust>());
+            Projectile.rotation += (float)Math.PI / 7.5f;
+        }
 
-            public override void Kill(int timeLeft)
+        public override void Kill(int timeLeft)
+        {
+            for (int i = 0; i < 6; i++)
             {
-                for (int i = 0; i < 6; i++)
-                {
-                    Dust dust = Main.dust[Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<CaeliteDust>())];
-                }
+                Dust dust = Main.dust[Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<CaeliteDust>())];
             }
         }
     }
