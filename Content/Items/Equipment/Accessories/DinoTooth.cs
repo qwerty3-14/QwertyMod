@@ -25,7 +25,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.GetArmorPenetration(DamageClass.Generic);
+            player.GetArmorPenetration(DamageClass.Generic) += 18;
         }
     }
 }

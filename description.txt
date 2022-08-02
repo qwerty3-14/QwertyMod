@@ -22,6 +22,7 @@ Several spriters have helped in making this mod!
 -Phobostar
 -Donmor
 -Olive
+-Kweequ
 
 Extra thanks
 -Turquiose (for writing custom themes)
@@ -30,6 +31,11 @@ Extra thanks
 
 
 Changelog
+0.8.1
+-fixed dino tooth not actually providing armor penetration
+-Actually fixed polar exterminator spawning in multiplayer (the previous 'fix' would sometimes spawn tons of polar exterminators lagging out multiplayer clients)
+-OLORD now drops 1 platinum instead of 1 copper
+
 0.8.0:  The invasion of the fortress part 1
 Major additions
 -Added post golem fortress enemies, they will attack the other fortress enemies
@@ -64,146 +70,8 @@ Tweaks
 -Morphs now do generic damage
 -Enchanted whetstone and fiery whetstone tooltips tweaked
 -Swordpocalypse pierce reduced from infinite to 3
+-new sprire for Skyward hilt and sword enlarger (thanks Kweequ)
 
 
 
-
-
-
-0.7.15
--fixed the way spawn rates work in fortress and Dino Militia
--tweaked OLORD's despawning slightly (might fix a certain bug)
-
-0.7.5
--Fixed ancient minion / leech rune minion causing global sounds
--reduced drop rate on bloody medalion
-
-0.7.4
--fixed archer minions in multiplayer
--fixed summon staves not being able to priority target
--Magic weapons get increased mana cost when TRAE is enabled
-
-0.7.3
--Fixed sword enlarger not increasing melee hitboxes
-
-0.7.2
--now works on most recent tmodloader version
--Riptide sentry can no longer gain knockback from minion knockback buffs
--hydra missile rod missles no longer bounce on tiles
-
-0.7.1
--fixed mod crashing when boss checklist wasn't enabled
-
-0.7.0
--now works on latest tmodloader version
--boss checklist support
--Fixed hydra expert scaling
-
-0.6.1
--fixed bug with ancient longbow
-
-0.6.0
--reintroduced music and sounds from the 1.3 version of the mod
-
-0.5.5
--updated for tmodloader alpha 1.4.3!
-
-0.5.4
--fixed crates, treasure bags, and lockboxes not working
-
-0.5.3
--fixed hydra head minions crashing the game when the player dies
--Imperios no longer lunges the player at lightspeed at the start of the fight
--Fixed swordlagmite's warning lines no drawin when the player was too high
--Fixed OLORD doing half its intended damage in expert mode
-
-0.5.2
--actually fixed imperious's damage
-
-0.5.1
--fixed Imperious's stats being to low
-
-0.5.0
--reintroduced: cyclone, whirpool, and Bubble Brewer Baton
--fixed Noehtnap's dash not working
--fixed rhuthinium mask's set bonus not working
-
-
-0.4.6
--now works with the most recent version of tmodloader
--fixed hairs not drawing properly on modded head pieces
-
-
-0.4.4
--fixed space fighter staff not having a recipe
-
-0.4.3
--fixed Polar extreminator having less health than intended
-
-0.4.2
--fixed bug where riptide sentry and ruthinium guardian couldn't deal damage
-
-0.4.1
--Sword Enlarger is now sold by traveling merchant (I reintroduced it in 0.4.0 but forgot to make it obtainable)
-
-0.4.0
--reintroduced dungeon items
-
-
-0.3.0
--The Dino Militia is back!
-
--Crimson rod's clouds can now be destroyed by divine light's projectiles
--Fixed bug where ammo wouldn't be consumed...
-
-
-0.2.0
--reintroduced Caelite Armor [No longer grants recovery since the stat has been removed, defense increased to compensate]
--reintroduced Gale Armor [Robes no longer grant a dash, conflicted too much with crystal assassin's niche]
--reintroduced Glass Armor
--reintroduced Hydra Armor [Setbonus now additionally grants the autosummon effect previous granted by the hydra charm, hydra charm removed]
--reintroduced Lune Armor [Jacket removed, hat now grants crit instead of ranged velocity]
--reintroduced Rhuthinium Armor [attack speed bonuses changed to crit chance (was worried about rounding with low use time weapons)]
--reintroduced Shaman Armor [skull no longer increases flask duration, pants no longer grant decay effect]
--reintroduced Vitallum Armor
--reintroduced Hyper Runestone [cooldown increased from 2sec -> 4sec, a bit less powerful when stack with another dash item]
--reintroduced Lune Bracelet [now just as effective during the day as night]
--reintroduced Rhuthinium Bracelet [effect changed to douple grabling hook pull speed (works with doppleganger)]
-
--fixed rhuthinium darts, rhuthinium arrows, and hydra arrows being crafted from dirt
-
-
-0.1.2
--fixed polar exterminator having twice the intended health and damage in expert mode
-
-0.1.1
--fixed bug where are projectiles could give you the 'anti projectile' buff
-
-0.1.0
--Initial release
-
-Changes from Qwerty's Bosses and Items 1
--It's for Tmodloader 1.4!!
--Divine Light's fight got a complete overhaul
--2 new items: Mech Crossbow Staff and Discipline
--Lune archer minions have new AI
--Chloro sniper minions have a new AI
--Lune staff has been reworked
--Lune Boomerang has been reworked
--Staff of Job has been reworked
--Lune ore now generates in cresent moon shapedd structures high in the sky, requires nightmare pick or better to mine (experimental)
--Quick morphs now do summon damage (experimental)
-
-Balance Changes:
--Arcane armor breaker now only give 10 armor penetration and is more expensive
--Rhtuhinium scepter use time 5->6 damage 14->15 (overall nerf)
--The Massacre now grants immunity to hostile projectiles when killing enemies
--Black hole staff 40->80 damage, attacks faster
--Plasma cannon use time 25->12, mana cost 11->7
--Possesing bow shoots much faster
--Imperious The IV does more damage and is larger, but swings a bit slower
--Leech rune staff damage increased
--hydra head staff damage decreased
--lune curse critical damage 50%->20%
--Imperial courage grants crit chance instead of attack speed (concerned about rounding with low use time wepons)
 

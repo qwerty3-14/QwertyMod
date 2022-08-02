@@ -1,6 +1,6 @@
 displayName = Qwerty's Bosses and Items 2
 author = qwerty3.14
-version = 0.8.0
+version = 0.8.1
 includeSource = true
 hideCode = false
 homepage = https://forums.terraria.org/index.php?threads/qwertys-bosses-and-items.84040/

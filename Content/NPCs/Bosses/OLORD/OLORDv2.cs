@@ -45,7 +45,7 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
             NPC.boss = true;
             NPC.HitSound = SoundID.NPCHit1;
             NPC.DeathSound = SoundID.NPCDeath1;
-            NPC.value = 1;
+            NPC.value = 1000000;
             NPC.knockBackResist = 0f;
             NPC.aiStyle = -1;
 
