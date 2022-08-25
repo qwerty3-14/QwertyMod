@@ -4,6 +4,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using Terraria.GameContent.Creative;
 
 namespace QwertyMod.Content.Items.Equipment.Accessories
 {
@@ -14,6 +15,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
         {
             DisplayName.SetDefault("Rhuthinium Bracelet");
             Tooltip.SetDefault("Increases grappling hook pull speed");
+            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()

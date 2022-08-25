@@ -114,9 +114,10 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.RuneNuke
             player.statDefense = 0;
             player.itemAnimation = 2;
             player.itemTime = 2;
+            player.fallStart = (int)player.Bottom.Y;
             player.GetModPlayer<ShapeShifterPlayer>().noDraw = true;
             player.AddBuff(BuffType<HealingHalt>(), 10);
-            player.AddBuff(BuffType<HealingHalt>(), (int)((27 * player.GetModPlayer<ShapeShifterPlayer>().coolDownDuration) * 60f));
+            player.AddBuff(BuffType<MorphCooldown>(), (int)((27 * player.GetModPlayer<ShapeShifterPlayer>().coolDownDuration) * 60f));
             if (player.controlLeft)
             {
                 Projectile.rotation -= (float)Math.PI / 60;

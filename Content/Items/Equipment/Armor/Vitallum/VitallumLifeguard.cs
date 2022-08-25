@@ -3,6 +3,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using Terraria.GameContent.Creative;
 
 namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
 {
@@ -13,6 +14,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
         {
             DisplayName.SetDefault("Vitallum Lifeguard");
             Tooltip.SetDefault("Increases max life by 120 \nEvery 10 missing health increases damage by 1%");
+			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()

@@ -7,6 +7,7 @@ using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.GameContent.Creative;
 
 namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.ChromeShotgun
 {
@@ -16,6 +17,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.ChromeShotgun
         {
             DisplayName.SetDefault("Chrome Shotgun");
             Tooltip.SetDefault("Right click to switch between 4 modes");
+			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         private Vector2 DefaultHoldOffset = new Vector2(-8, 0);

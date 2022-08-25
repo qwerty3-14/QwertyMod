@@ -31,6 +31,13 @@ Extra thanks
 
 
 Changelog
+0.8.2
+-fixed flails damaging every enemy on throw
+-fixed shape shifts not being able to get modifers
+-fixed rune nuke's cooldown depleting while being used
+-Ancient and Rune nuke will no longer build up fall damage while used
+-Added master mode relics to Polar Exterminator and Divine Light (thanks Kweequ)
+
 0.8.1
 -fixed dino tooth not actually providing armor penetration
 -Actually fixed polar exterminator spawning in multiplayer (the previous 'fix' would sometimes spawn tons of polar exterminators lagging out multiplayer clients)

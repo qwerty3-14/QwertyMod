@@ -36,14 +36,12 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
             //bossBagNPC = mod.NPCType("FortressBoss");
         }
 
-        public override int BossBagNPC => NPCType<FortressBoss>();
-
         public override bool CanRightClick()
         {
             return true;
         }
 
-        public override void OpenBossBag(Player player)
+        public override void RightClick(Player player)
         {
             player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<CaeliteBar>(), Main.rand.Next(18, 31));
             player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<CaeliteCore>(), Main.rand.Next(9, 16));

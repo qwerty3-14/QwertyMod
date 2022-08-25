@@ -3,6 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ID.ArmorIDs;
+using Terraria.GameContent.Creative;
 
 namespace QwertyMod.Content.Items.Equipment.Armor.Bionic
 {
@@ -14,6 +15,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Bionic
             DisplayName.SetDefault("Bionic Eye");
             Tooltip.SetDefault("30% reduced cooldown on morphs\n10% increased critical strike chance\nGrants enhanced vision");
             Head.Sets.DrawFullHair[Item.headSlot] = true;
+            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()

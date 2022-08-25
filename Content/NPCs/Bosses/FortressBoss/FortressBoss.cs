@@ -140,6 +140,9 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
             npcLoot.Add(ItemDropRule.Common(ItemType<FortressBossTrophy>(), 10));
 
 
+			// ItemDropRule.MasterModeCommonDrop for the relic
+			npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<Items.Consumable.Tiles.Relics.DivineLightRelic>()));
+
             base.ModifyNPCLoot(npcLoot);
         }
 

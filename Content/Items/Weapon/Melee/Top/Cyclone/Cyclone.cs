@@ -4,6 +4,7 @@ using System;
 using Terraria;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using Terraria.GameContent.Creative;
 
 namespace QwertyMod.Content.Items.Weapon.Melee.Top.Cyclone
 {
@@ -13,11 +14,12 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Top.Cyclone
         {
             DisplayName.SetDefault("Cyclone");
             Tooltip.SetDefault("<3");
+			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
         public override void SetDefaults()
         {
             Item.damage = 240;
-            Item.DamageType = DamageClass.Melee;
+            Item.DamageType = DamageClass.MeleeNoSpeed;
             Item.knockBack = 5;
             Item.value = Item.sellPrice(gold: 5);
             Item.rare = 8;

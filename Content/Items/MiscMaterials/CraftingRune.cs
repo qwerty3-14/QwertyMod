@@ -4,6 +4,7 @@ using QwertyMod.Common.RuneBuilder;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.GameContent.Creative;
 
 namespace QwertyMod.Content.Items.MiscMaterials
 {
@@ -14,6 +15,7 @@ namespace QwertyMod.Content.Items.MiscMaterials
             DisplayName.SetDefault("Rune");
             Tooltip.SetDefault("");
             ItemID.Sets.ItemNoGravity[Item.type] = true;
+			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 25;
         }
         public override bool PreDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
         {

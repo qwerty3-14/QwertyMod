@@ -16,6 +16,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Spear.Hydrospear
             DisplayName.SetDefault("Hydrospear");
             Tooltip.SetDefault("");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+            ItemID.Sets.Spears[Item.type] = true;
         }
 
         public override void SetDefaults()

@@ -7,6 +7,7 @@ using Terraria.DataStructures;
 using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.GameContent.Creative;
 
 namespace QwertyMod.Content.Items.Equipment.Armor.Bionic
 {
@@ -17,6 +18,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Bionic
         {
             DisplayName.SetDefault("Bionic Implants");
             Tooltip.SetDefault("30% reduced cooldown on morphs\nYour offhand is replaced with a laser cannon!");
+            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()

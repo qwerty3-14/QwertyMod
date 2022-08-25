@@ -1,5 +1,6 @@
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.GameContent.Creative;
 
 namespace QwertyMod.Content.Items.Tool.Mining.TheDevourer
 {
@@ -9,6 +10,7 @@ namespace QwertyMod.Content.Items.Tool.Mining.TheDevourer
         {
             DisplayName.SetDefault("The Devourer");
             Tooltip.SetDefault("Mines a 9x9 area!");
+			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
         public override void SetDefaults()
         {

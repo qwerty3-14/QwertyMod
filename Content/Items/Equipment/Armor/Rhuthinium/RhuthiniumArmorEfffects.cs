@@ -63,7 +63,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
             }
             RhuthimisWraith(target.Center);
         }
-
+        [Obsolete]
         public override void Hurt(bool pvp, bool quiet, double damage, int hitDirection, bool crit)
         {
             rangedCounter = 0;

@@ -4,6 +4,7 @@ using QwertyMod.Common;
 using QwertyMod.Content.NPCs.DinoMilitia;
 using System.Collections.Generic;
 using System.IO;
+using System;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent;
@@ -160,7 +161,7 @@ namespace QwertyMod.Content
     }
     public class FunnyDinoDeathQuotes : ModPlayer
     {
-        public override bool PreHurt(bool pvp, bool quiet, ref int damage, ref int hitDirection, ref bool crit, ref bool customDamage, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
+        public override bool PreHurt(bool pvp, bool quiet, ref int damage, ref int hitDirection, ref bool crit, ref bool customDamage, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource, ref int cooldownCounter)
         {
 
             if (damageSource.SourceProjectileType == ProjectileType<SnowFlake>())

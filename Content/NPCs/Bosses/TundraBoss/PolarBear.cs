@@ -97,6 +97,8 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
             //Trophies are spawned with 1/10 chance
             npcLoot.Add(ItemDropRule.Common(ItemType<PolarTrophy>(), 10));
 
+			// ItemDropRule.MasterModeCommonDrop for the relic
+			npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<Items.Consumable.Tiles.Relics.PolarBearRelic>()));
 
             base.ModifyNPCLoot(npcLoot);
         }

@@ -16,7 +16,7 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
         {
             DisplayName.SetDefault("Treasure Bag");
             Tooltip.SetDefault("{$CommonItemTooltip.RightClickToOpen}");
-            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 3;
         }
 
 
@@ -31,14 +31,13 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
             //bossBagNPC = mod.NPCType("CloakedDarkBoss");
         }
 
-        public override int BossBagNPC => NPCType<CloakedDarkBoss>();
 
         public override bool CanRightClick()
         {
             return true;
         }
 
-        public override void OpenBossBag(Player player)
+        public override void RightClick(Player player)
         {
             player.QuickSpawnItem(new EntitySource_Misc(""), 73, 8);
             //player.QuickSpawnItem(new EntitySource_Misc(""), mod.ItemType("Doppleganger"));

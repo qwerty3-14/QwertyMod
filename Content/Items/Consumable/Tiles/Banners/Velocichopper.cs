@@ -1,6 +1,7 @@
 using Terraria;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using Terraria.GameContent.Creative;
 namespace QwertyMod.Content.Items.Consumable.Tiles.Banners
 {
     public class VelocichopperBanner : ModItem
@@ -8,6 +9,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Banners
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Velocichopper Banner");
+            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()

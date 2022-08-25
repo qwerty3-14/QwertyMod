@@ -5,6 +5,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using Terraria.GameContent.Creative;
 
 
 namespace QwertyMod.Content.Items.Tool.Mining.Rune
@@ -15,6 +16,7 @@ namespace QwertyMod.Content.Items.Tool.Mining.Rune
         {
             DisplayName.SetDefault("Rune Miner");
             Tooltip.SetDefault("Mines a 5x5 area");
+			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
 

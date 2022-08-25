@@ -1,4 +1,5 @@
 using Terraria.ModLoader;
+using Terraria.GameContent.Creative;
 
 namespace QwertyMod.Content.Items.MiscMaterials
 {
@@ -8,6 +9,7 @@ namespace QwertyMod.Content.Items.MiscMaterials
         {
             DisplayName.SetDefault("Hydra Scale");
             Tooltip.SetDefault("");
+			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 25;
         }
 
         public override void SetDefaults()

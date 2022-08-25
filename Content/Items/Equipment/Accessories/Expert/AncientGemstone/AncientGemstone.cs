@@ -4,6 +4,7 @@ using System;
 using Terraria;
 using Terraria.ModLoader;
 using QwertyMod.Content.Items.Weapon.Morphs;
+using Terraria.GameContent.Creative;
 
 namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.AncientGemstone
 {
@@ -13,6 +14,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.AncientGemstone
         {
             DisplayName.SetDefault("Ancient Gemstone");
             Tooltip.SetDefault("Allows you use quick morphs while still on cooldown... at the cost of your life!");
+			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
 

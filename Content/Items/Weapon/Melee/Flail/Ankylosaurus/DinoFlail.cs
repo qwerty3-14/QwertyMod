@@ -23,7 +23,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Flail.Ankylosaurus
         public override void SetDefaults()
         {
             Item.damage = 60;
-            Item.DamageType = DamageClass.Melee;
+            Item.DamageType = DamageClass.MeleeNoSpeed;
             Item.noMelee = true;
             Item.scale = 1f;
             Item.noUseGraphic = true;

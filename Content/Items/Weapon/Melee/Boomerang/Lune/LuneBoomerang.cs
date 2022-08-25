@@ -22,7 +22,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Boomerang.Lune
         public override void SetDefaults()
         {
             Item.damage = 19;
-            Item.DamageType = DamageClass.Melee;
+            Item.DamageType = DamageClass.MeleeNoSpeed;
             Item.noMelee = true;
 
             Item.useTime = 20;

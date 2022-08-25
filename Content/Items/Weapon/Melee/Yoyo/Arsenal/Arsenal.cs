@@ -33,7 +33,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.Arsenal
             Item.damage = 18;
             Item.value = Item.sellPrice(gold: 10);
             Item.rare = 7;
-            Item.DamageType = DamageClass.Melee;
+            Item.DamageType = DamageClass.MeleeNoSpeed;
             Item.channel = true;
             Item.noMelee = true;
             Item.noUseGraphic = true;

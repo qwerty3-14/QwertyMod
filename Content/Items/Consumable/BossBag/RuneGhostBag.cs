@@ -33,14 +33,13 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
             //bossBagNPC = mod.NPCType("RuneSpector");
         }
 
-        public override int BossBagNPC => NPCType<RuneGhost>();
 
         public override bool CanRightClick()
         {
             return true;
         }
 
-        public override void OpenBossBag(Player player)
+        public override void RightClick(Player player)
         {
             int runeCount = Main.rand.Next(30, 41);
             int selectScroll = Main.rand.Next(1, 5);

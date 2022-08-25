@@ -8,6 +8,7 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using Terraria.GameContent.Creative;
 
 namespace QwertyMod.Content.Items.Consumable.BossBag
 {
@@ -17,6 +18,7 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
         {
             DisplayName.SetDefault("Treasure Bag");
             Tooltip.SetDefault("{$CommonItemTooltip.RightClickToOpen}");
+            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 3;
         }
 
         public override void SetDefaults()
@@ -30,14 +32,12 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
             //bossBagNPC = mod.NPCType("WeakPoint");
         }
 
-        public override int BossBagNPC => NPCType<OLORDv2>();
-
         public override bool CanRightClick()
         {
             return true;
         }
 
-        public override void OpenBossBag(Player player)
+        public override void RightClick(Player player)
         {
             int mainLoot = 0;
             switch (Main.rand.Next(5))

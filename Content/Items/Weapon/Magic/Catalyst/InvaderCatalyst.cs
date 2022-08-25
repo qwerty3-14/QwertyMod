@@ -9,6 +9,8 @@ using Terraria.Audio;
 using QwertyMod.Common.PlayerLayers;
 using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Content.Items.MiscMaterials;
+using Terraria.GameContent.Creative;
+
 namespace QwertyMod.Content.Items.Weapon.Magic.Catalyst
 {
     public class InvaderCatalyst : ModItem
@@ -17,6 +19,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Catalyst
         {
             DisplayName.SetDefault("Invader Catalyst");
             Tooltip.SetDefault("Melee attacks will cause magic explosions for a short time");
+			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
         public override void SetDefaults()
         {

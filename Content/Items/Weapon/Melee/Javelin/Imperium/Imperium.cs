@@ -33,7 +33,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin.Imperium
             Item.consumable = false;
             Item.noUseGraphic = true;
             Item.noMelee = true;
-            Item.DamageType = DamageClass.Melee;
+            Item.DamageType = DamageClass.MeleeNoSpeed;
 
             Item.autoReuse = true;
             Item.UseSound = SoundID.Item1;

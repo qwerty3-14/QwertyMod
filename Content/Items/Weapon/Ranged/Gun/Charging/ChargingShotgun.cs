@@ -5,6 +5,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Audio;
 using Terraria.DataStructures;
+using Terraria.GameContent.Creative;
 
 namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.Charging
 {
@@ -14,6 +15,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.Charging
         {
             DisplayName.SetDefault("Charging Shotgun");
             Tooltip.SetDefault("Right click to add an extra bullet to your next fire");
+			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
 

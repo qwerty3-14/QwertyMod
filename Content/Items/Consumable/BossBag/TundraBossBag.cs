@@ -32,14 +32,13 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
             Item.expert = true;
         }
 
-        public override int BossBagNPC => NPCType<PolarBear>();
 
         public override bool CanRightClick()
         {
             return true;
         }
 
-        public override void OpenBossBag(Player player)
+        public override void RightClick(Player player)
         {
             if (Main.rand.Next(7) == 0)
             {

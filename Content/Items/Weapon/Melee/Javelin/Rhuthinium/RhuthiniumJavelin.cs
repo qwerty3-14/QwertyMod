@@ -42,7 +42,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin.Rhuthinium
             Item.noUseGraphic = true;
             Item.noMelee = true;
             Item.autoReuse = true;
-            Item.DamageType = DamageClass.Melee;
+            Item.DamageType = DamageClass.MeleeNoSpeed;
 
             Item.UseSound = SoundID.Item1;
 

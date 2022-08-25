@@ -36,7 +36,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.RunicThrow
             Item.damage = 130;
             Item.value = 500000;
             Item.rare = 9;
-            Item.DamageType = DamageClass.Melee;
+            Item.DamageType = DamageClass.MeleeNoSpeed;
             Item.channel = true;
             Item.noMelee = true;
             Item.noUseGraphic = true;

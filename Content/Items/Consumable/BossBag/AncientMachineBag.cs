@@ -36,14 +36,12 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
             }
         }
 
-        public override int BossBagNPC => NPCType<AncientMachine>();
-
         public override bool CanRightClick()
         {
             return true;
         }
 
-        public override void OpenBossBag(Player player)
+        public override void RightClick(Player player)
         {
             int[] loot = QwertyMod.AMLoot.Draw(3);
 

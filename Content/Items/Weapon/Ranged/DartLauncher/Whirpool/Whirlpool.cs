@@ -4,6 +4,7 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.GameContent.Creative;
 
 namespace QwertyMod.Content.Items.Weapon.Ranged.DartLauncher.Whirpool
 {
@@ -13,6 +14,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.DartLauncher.Whirpool
         {
             DisplayName.SetDefault("Whirlpool");
             Tooltip.SetDefault("Uses darts as ammo");
+			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()

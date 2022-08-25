@@ -4,6 +4,12 @@ using Terraria;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
 using Terraria.DataStructures;
+using System;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Terraria.ID;
+using Terraria.Utilities;
 
 namespace QwertyMod.Content.Items.Weapon.Morphs
 {
@@ -60,6 +66,73 @@ namespace QwertyMod.Content.Items.Weapon.Morphs
                 }
                 //line.Text = (item.GetGlobalItem<ShapeShifterItem>().morphCooldown * PrefixorphCooldownModifier * Main.LocalPlayer.GetModPlayer<ShapeShifterPlayer>().coolDownDuration) + Language.GetTextValue("Mods.QwertysRandomContent.Morphcooldown");
             }
+        }
+        
+        public override int ChoosePrefix(Item item, UnifiedRandom rand)
+        {
+            if(morphCooldown != -1)
+            {
+                int num = 0;
+                int num10 = rand.Next(14);
+                if (num10 == 0)
+                {
+                    num = 36;
+                }
+                if (num10 == 1)
+                {
+                    num = 37;
+                }
+                if (num10 == 2)
+                {
+                    num = 38;
+                }
+                if (num10 == 3)
+                {
+                    num = 53;
+                }
+                if (num10 == 4)
+                {
+                    num = 54;
+                }
+                if (num10 == 5)
+                {
+                    num = 55;
+                }
+                if (num10 == 6)
+                {
+                    num = 39;
+                }
+                if (num10 == 7)
+                {
+                    num = 40;
+                }
+                if (num10 == 8)
+                {
+                    num = 56;
+                }
+                if (num10 == 9)
+                {
+                    num = 41;
+                }
+                if (num10 == 10)
+                {
+                    num = 57;
+                }
+                if (num10 == 11)
+                {
+                    num = 59;
+                }
+                if (num10 == 12)
+                {
+                    num = 60;
+                }
+                if (num10 == 13)
+                {
+                    num = 61;
+                }
+                return num;
+            }
+            return base.ChoosePrefix(item, rand);
         }
     }
 }

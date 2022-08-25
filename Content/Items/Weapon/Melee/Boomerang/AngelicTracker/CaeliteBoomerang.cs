@@ -21,7 +21,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Boomerang.AngelicTracker
         public override void SetDefaults()
         {
             Item.damage = 38;
-            Item.DamageType = DamageClass.Melee;
+            Item.DamageType = DamageClass.MeleeNoSpeed;
             Item.noMelee = true;
 
             Item.useTime = 34;

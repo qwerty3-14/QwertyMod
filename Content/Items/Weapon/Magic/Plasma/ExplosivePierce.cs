@@ -8,6 +8,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using Terraria.GameContent.Creative;
 
 namespace QwertyMod.Content.Items.Weapon.Magic.Plasma
 {
@@ -17,6 +18,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Plasma
         {
             DisplayName.SetDefault("Plasma Cannon");
             Tooltip.SetDefault("Fires projectiles that pierce through enemies exploding every time they hit something!");
+			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()

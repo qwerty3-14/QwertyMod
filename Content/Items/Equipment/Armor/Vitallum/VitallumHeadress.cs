@@ -10,6 +10,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ID.ArmorIDs;
 using static Terraria.ModLoader.ModContent;
+using Terraria.GameContent.Creative;
 
 namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
 {
@@ -21,6 +22,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
             DisplayName.SetDefault("Vitallum Headress");
             Tooltip.SetDefault("Increases max life by 80 \n7% increased damage \n Drain life from nearby enemies");
             Head.Sets.DrawHatHair[Item.headSlot] = true;
+			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()

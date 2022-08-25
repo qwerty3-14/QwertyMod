@@ -23,7 +23,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Boomerang.Rhuthinium
         public override void SetDefaults()
         {
             Item.damage = 26;
-            Item.DamageType = DamageClass.Melee;
+            Item.DamageType = DamageClass.MeleeNoSpeed;
             Item.noMelee = true;
 
             Item.useTime = 14;

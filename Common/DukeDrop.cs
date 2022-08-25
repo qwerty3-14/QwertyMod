@@ -7,6 +7,7 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using System;
 
 namespace QwertyMod.Common
 {
@@ -28,6 +29,7 @@ namespace QwertyMod.Common
     }
     public class DukeBag : GlobalItem
     {
+        [Obsolete]
         public override void OpenVanillaBag(string context, Player player, int arg)
         {
             if (context == "bossBag" && arg == ItemID.FishronBossBag)

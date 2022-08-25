@@ -1,5 +1,6 @@
 using Terraria;
 using Terraria.ModLoader;
+using Terraria.GameContent.Creative;
 using static Terraria.ModLoader.ModContent;
 namespace QwertyMod.Content.Items.Consumable.Tiles.Banners
 {
@@ -8,6 +9,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Banners
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Anti Air Banner");
+            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()

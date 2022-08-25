@@ -6,6 +6,7 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.GameContent.Creative;
 
 using static Terraria.ModLoader.ModContent;
 
@@ -17,7 +18,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.BlackHole
         {
             DisplayName.SetDefault("Black Hole Staff");
             Tooltip.SetDefault("Summons a black hole to suck up your enemies!" + "\nThe higher the black hole's damage the stronger the pull strength");
-
+			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             Item.staff[Item.type] = true;
             //Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(30, 29));
         }

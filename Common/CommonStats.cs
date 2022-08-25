@@ -83,9 +83,8 @@ namespace QwertyMod.Common
         public override void PreUpdate()
         {
             genericCounter++;
-        }
-
-        public override bool PreHurt(bool pvp, bool quiet, ref int damage, ref int hitDirection, ref bool crit, ref bool customDamage, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
+        }                                
+        public override bool PreHurt(bool pvp, bool quiet, ref int damage, ref int hitDirection, ref bool crit, ref bool customDamage, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource, ref int cooldownCounter)
         {
             int dodgeRng = Main.rand.Next(100);
             if (dodgeRng < dodgeChance && dodgeRng < 80)
@@ -153,7 +152,7 @@ namespace QwertyMod.Common
                 }
                 return false;
             }
-            return base.PreHurt(pvp, quiet, ref damage, ref hitDirection, ref crit, ref customDamage, ref playSound, ref genGore, ref damageSource);
+            return true;
         }
         public override void PostUpdateEquips()
         {

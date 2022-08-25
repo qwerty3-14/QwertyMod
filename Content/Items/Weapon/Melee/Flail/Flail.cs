@@ -337,12 +337,6 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Flail
                 Projectile.ai[0] = 4f;
                 Projectile.netUpdate = true;
             }
-            /*
-			if (Projectile.wet)
-			{
-				wetVelocity = Projectile.velocity;
-			}
-			*/
             return false;
         }
         private void CreateImpactExplosion(int dustAmountMultiplier, Vector2 explosionOrigin, ref Point scanAreaStart, ref Point scanAreaEnd, int explosionRange, out bool causedShockwaves)

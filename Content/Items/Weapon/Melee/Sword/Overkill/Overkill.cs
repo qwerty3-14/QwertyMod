@@ -89,23 +89,26 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.Overkill
             if (!Player.inventory[Player.selectedItem].IsAir && (float)Player.itemAnimation / Player.itemAnimationMax < 0.5f)
             {
                 Item item = Player.inventory[Player.selectedItem];
-                float swordLength = TextureAssets.Item[item.type].Value.Height;
-                swordLength *= item.scale;
-                for (int n = 0; n < Main.npc.Length; n++)
+                if(item.type == ModContent.ItemType<Overkill>())
                 {
-                    localNPCImmunity[n]--;
-                    if (Main.npc[n].active && !Main.npc[n].dontTakeDamage && (!Main.npc[n].friendly || (Main.npc[n].type == 22 && Player.killGuide) || (Main.npc[n].type == 54 && Player.killClothier)) && Player.itemAnimation > 0 && localNPCImmunity[n] <= 0 && Collision.CheckAABBvLineCollision(Main.npc[n].position, Main.npc[n].Size, Player.itemLocation, Player.itemLocation + QwertyMethods.PolarVector(swordLength, Player.itemRotation + (float)Math.PI / 2 * -Player.direction)))
+                    float swordLength = TextureAssets.Item[item.type].Value.Height;
+                    swordLength *= item.scale;
+                    for (int n = 0; n < Main.npc.Length; n++)
                     {
-                        localNPCImmunity[n] = item.useAnimation / 2;
-                        Projectile p = QwertyMethods.PokeNPC(Player, Main.npc[n], new EntitySource_Misc(""), 
-                        Player.GetWeaponDamage(item), DamageClass.Melee, item.knockBack);
-                        p.GetGlobalProjectile<EtimsProjectile>().effect = true;
-                        
+                        localNPCImmunity[n]--;
+                        if (Main.npc[n].active && !Main.npc[n].dontTakeDamage && (!Main.npc[n].friendly || (Main.npc[n].type == 22 && Player.killGuide) || (Main.npc[n].type == 54 && Player.killClothier)) && Player.itemAnimation > 0 && localNPCImmunity[n] <= 0 && Collision.CheckAABBvLineCollision(Main.npc[n].position, Main.npc[n].Size, Player.itemLocation, Player.itemLocation + QwertyMethods.PolarVector(swordLength, Player.itemRotation + (float)Math.PI / 2 * -Player.direction)))
+                        {
+                            localNPCImmunity[n] = item.useAnimation / 2;
+                            Projectile p = QwertyMethods.PokeNPC(Player, Main.npc[n], new EntitySource_Misc(""), 
+                            Player.GetWeaponDamage(item), DamageClass.Melee, item.knockBack);
+                            p.GetGlobalProjectile<EtimsProjectile>().effect = true;
+                            
+                        }
                     }
-                }
                 }
             }
         }
+    }
     public class WeirdSwordBig : PlayerDrawLayer
     {
         public override void SetStaticDefaults()

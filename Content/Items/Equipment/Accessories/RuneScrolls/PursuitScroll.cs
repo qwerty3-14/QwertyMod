@@ -6,6 +6,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using Terraria.GameContent.Creative;
 
 namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
 {
@@ -15,6 +16,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
         {
             DisplayName.SetDefault("Pursuit Scroll");
             Tooltip.SetDefault("Minions ocasionaly shoot pursuit runes");
+            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
 
         }
 

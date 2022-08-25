@@ -23,7 +23,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Misc
         public override void SetDefaults()
         {
             Item.damage = 13;
-            Item.DamageType = DamageClass.Melee;
+            Item.DamageType = DamageClass.MeleeNoSpeed;
             Item.knockBack = 1;
             Item.value = 50000;
             Item.rare = 3;

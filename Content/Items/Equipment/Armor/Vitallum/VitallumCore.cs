@@ -129,6 +129,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
 
     public class CoreBagDrop : GlobalItem
     {
+        [Obsolete]
         public override void OpenVanillaBag(string context, Player player, int arg)
         {
             if (context == "bossBag" && arg == ItemID.PlanteraBossBag)

@@ -16,6 +16,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Spear.Hydrent
             DisplayName.SetDefault("Fire Hydrent");
             Tooltip.SetDefault("Shoots hydra breath");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+            ItemID.Sets.Spears[Item.type] = true;
         }
 
         public override void SetDefaults()

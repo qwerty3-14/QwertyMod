@@ -36,7 +36,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.AncientThrow
             Item.damage = 23;
             Item.value = 150000;
             Item.rare = 3;
-            Item.DamageType = DamageClass.Melee;
+            Item.DamageType = DamageClass.MeleeNoSpeed;
             Item.channel = true;
             Item.noMelee = true;
             Item.noUseGraphic = true;
