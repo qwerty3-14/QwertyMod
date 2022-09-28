@@ -58,6 +58,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.Longsword
                     if (player.maxMinions - minionCount >= 1)
                     {
                         projectile.minionSlots++;
+                        projectile.netUpdate = true;
                     }
                     return false;
                 }

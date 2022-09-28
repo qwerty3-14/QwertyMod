@@ -55,7 +55,13 @@ namespace QwertyMod.Content.Items.Weapon.Minion.HydraHead
             {
                 Projectile.timeLeft = 2;
             }
-            Projectile.rotation = (QwertyMod.GetLocalCursor(Projectile.owner) - Projectile.Center).ToRotation();
+            
+            if(Main.myPlayer == Projectile.owner)
+            {
+                Projectile.ai[0] = (Main.MouseWorld - Projectile.Center).ToRotation();
+                Projectile.netUpdate = true;
+            }
+            Projectile.rotation = Projectile.ai[0];
 
             if (cooldown > 0)
             {

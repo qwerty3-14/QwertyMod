@@ -48,7 +48,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Sword
                                             new Conditions.IsSolid()
                                         }), out point) && Player.grappling[0] == -1)
             {
-                damage *= 2;
+                damage += (int)(damage * 0.3f);
             }
         }
     }

@@ -12,7 +12,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Lune
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Lune Leggings");
+            DisplayName.SetDefault("Lune Runners");
             Tooltip.SetDefault("10% increased movement speed" + "\n8% increased ranged crit");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }

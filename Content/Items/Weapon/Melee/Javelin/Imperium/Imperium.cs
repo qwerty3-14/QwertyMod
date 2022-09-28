@@ -16,15 +16,16 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin.Imperium
         public override void SetStaticDefaults()
         {
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+            Tooltip.SetDefault("Enemies will take 35% more damage from swords while this is stuck in them");
         }
         public override void SetDefaults()
         {
             Item.shootSpeed = 17f;
-            Item.damage = 160;
+            Item.damage = 150;
             Item.knockBack = 5f;
             Item.useStyle = 1;
-            Item.useAnimation = 30;
-            Item.useTime = 30;
+            Item.useAnimation = 40;
+            Item.useTime = 40;
             Item.width = 68;
             Item.height = 68;
             Item.maxStack = 1;
@@ -57,12 +58,11 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin.Imperium
             Projectile.DamageType = DamageClass.Melee;
             Projectile.penetrate = 1;
             Projectile.GetGlobalProjectile<ImplaingProjectile>().CanImpale = true;
-            Projectile.GetGlobalProjectile<ImplaingProjectile>().damagePerImpaler = 32;
-            maxStickingJavelins = 12;
+            Projectile.GetGlobalProjectile<ImplaingProjectile>().damagePerImpaler = 400;
+            maxStickingJavelins = 1;
             dropItem = ItemType<Imperium>();
             rotationOffset = (float)Math.PI / 4;
             maxTicks = 60f;
-            maxStickingJavelins = 10;
         }
 
         public override bool PreDraw(ref Color lightColor)
@@ -72,6 +72,10 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin.Imperium
                         new Rectangle(0, 0, texture.Width, texture.Height), lightColor, Projectile.rotation,
                         new Vector2(Projectile.width * 0.5f, Projectile.height * 0.5f), 1f, SpriteEffects.None, 0);
             return false;
+        }
+        public override void StuckEffects(NPC victim)
+        {
+            victim.GetGlobalNPC<JavelinAilments>().imperiumJavs++;
         }
     }
 }

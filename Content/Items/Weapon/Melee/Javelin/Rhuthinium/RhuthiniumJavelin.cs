@@ -20,7 +20,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin.Rhuthinium
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Rhuthinium Javelin");
-            Tooltip.SetDefault("Throws two at once!");
+            Tooltip.SetDefault("Each javelin stuck in the enemy causes them to take 1 extra damage\nMax: 10");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -29,11 +29,11 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin.Rhuthinium
         {
             // Alter any of these values as you see fit, but you should probably keep useStyle on 1, as well as the noUseGraphic and noMelee bools
             Item.shootSpeed = 10f;
-            Item.damage = 25;
+            Item.damage = 20;
             Item.knockBack = 5f;
             Item.useStyle = 1;
-            Item.useAnimation = 23;
-            Item.useTime = 23;
+            Item.useAnimation = 18;
+            Item.useTime = 18;
             Item.width = 68;
             Item.height = 68;
             Item.rare = 5;
@@ -55,7 +55,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin.Rhuthinium
                 .AddTile(TileID.Anvils)
                 .Register();
         }
-
+        /*
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             float angle = (velocity).ToRotation();
@@ -64,6 +64,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin.Rhuthinium
             Projectile.NewProjectile(source, player.MountedCenter.X, player.MountedCenter.Y, (float)Math.Cos(angle + MathHelper.ToRadians(Main.rand.Next(-5, 6))) * trueSpeed, (float)Math.Sin(angle + MathHelper.ToRadians(Main.rand.Next(-5, 6))) * trueSpeed, type, damage, knockback, Main.myPlayer, 0f, 0f);
             return false;
         }
+        */
     }
 
     public class RhuthiniumJavelinP : Javelin
@@ -83,8 +84,8 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin.Rhuthinium
             Projectile.DamageType = DamageClass.Melee;
             Projectile.penetrate = 1;
             Projectile.GetGlobalProjectile<ImplaingProjectile>().CanImpale = true;
-            Projectile.GetGlobalProjectile<ImplaingProjectile>().damagePerImpaler = 2;
-            maxStickingJavelins = 12;
+            Projectile.GetGlobalProjectile<ImplaingProjectile>().damagePerImpaler = 18;
+            maxStickingJavelins = 10;
             dropItem = ItemType<RhuthiniumJavelin>();
             rotationOffset = (float)Math.PI / 4;
         }
@@ -106,6 +107,10 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin.Rhuthinium
                 Dust d = Main.dust[Dust.NewDust(dustPos, Projectile.width, Projectile.height, DustType<RhuthiniumDust>())];
                 d.noGravity = true;
             }
+        }
+        public override void StuckEffects(NPC victim)
+        {
+            victim.GetGlobalNPC<JavelinAilments>().ruthJavs++;
         }
     }
 }

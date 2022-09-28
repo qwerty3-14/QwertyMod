@@ -74,12 +74,15 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
             return base.Clone(item, itemClone);
         }
         private int k;
-
+        int GetLifeCost(int manaCost)
+        {
+            return (int)MathHelper.Max(manaCost / (ModLoader.HasMod("TRAEProject") ? 6 : 3), 1);
+        }
         public override void UseAnimation(Item item, Player player)
         {
             if (player.GetModPlayer<BloodMedalionEffect>().effect && item.mana > 0)
             {
-                int lifeCost = (int)(item.mana * player.manaCost);
+                int lifeCost = GetLifeCost((int)(item.mana * player.manaCost));
                 if (lifeCost < 0)
                 {
                     lifeCost = 0;
@@ -101,7 +104,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
                 {
                     if (line.Mod == "Terraria" && line.Name == "UseMana") //this checks if it's the line we're interested in
                     {
-                        int lifeCost = (int)(item.mana * Main.LocalPlayer.manaCost);
+                        int lifeCost = GetLifeCost((int)(item.mana * Main.LocalPlayer.manaCost));
                         if (lifeCost < 0)
                         {
                             lifeCost = 0;

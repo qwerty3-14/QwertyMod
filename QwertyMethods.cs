@@ -263,6 +263,17 @@ namespace QwertyMod
             float calculatedShootAngle = angleToTarget - (float)Math.Asin((targetSpeed * time * (float)Math.Sin(z)) / (shootSpeed * time));
             return calculatedShootAngle;
         }
+        public static float PredictiveVerticalAim(float myX, float shootSpeed, Vector2 targetPos, Vector2 targetVelocity)
+        {
+            // targetPos.X + targetVelocity.X * time = myX + shootSpeed * time
+            shootSpeed *= Math.Sign(targetPos.X - myX);
+            float time = (myX - targetPos.X) / (targetVelocity.X - shootSpeed);
+            if(time < 0)
+            {
+                return float.NaN;
+            }
+            return (targetPos + targetVelocity * time).Y;
+        }
 
         //used for projectiles using ammo, the vanilla PickAmmo had a bunch of clutter we don't need
         public static bool UseAmmo(this Projectile projectile, int ammoID, ref int shoot, ref float speed, ref int Damage, ref float KnockBack, bool dontConsume = false)
@@ -444,26 +455,14 @@ namespace QwertyMod
                 id = ProjectileType<PokeSummon>();
             }
             Projectile p = Main.projectile[Projectile.NewProjectile(source, npc.Center, Vector2.Zero, id, (int)damage, knockback, player.whoAmI)];
-            for (int n = 0; n < 200; n++)
-            {
-                if (Main.npc[n] != npc)
-                {
-                    p.localNPCImmunity[n] = -1;
-                }
-            }
-            p.DamageType = damageClass;
+            p.ai[0] = npc.whoAmI;
+            //p.DamageType = damageClass;
             return p;
         }
         public static Projectile PokeNPCMinion(Player player, NPC npc, IEntitySource source, float damage, float knockback = 0f)
         {
             Projectile p = Main.projectile[Projectile.NewProjectile(source, npc.Center, Vector2.Zero, ProjectileType<MinionPoke>(), (int)damage, knockback, player.whoAmI)];
-            for (int n = 0; n < 200; n++)
-            {
-                if (Main.npc[n] != npc)
-                {
-                    p.localNPCImmunity[n] = -1;
-                }
-            }
+            p.ai[0] = npc.whoAmI;
             return p;
         }
 
@@ -501,10 +500,9 @@ namespace QwertyMod
         {
             Projectile.width = 2;
             Projectile.height = 2;
-
+            Projectile.penetrate = 1;
             Projectile.friendly = true;
             Projectile.timeLeft = 2;
-            Projectile.usesLocalNPCImmunity = true;
             Projectile.tileCollide = false;
         }
         public override bool PreDraw(ref Color lightColor)
@@ -514,6 +512,14 @@ namespace QwertyMod
         public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
         {
             hitDirection = Math.Sign(target.Center.X - Main.player[Projectile.owner].Center.X);
+        }
+        public override bool? CanHitNPC(NPC target)
+        {
+            if(Projectile.ai[0] != target.whoAmI)
+            {
+                return false;
+            }
+            return null;
         }
     }
     public class PokeMelee : ModProjectile
@@ -525,7 +531,7 @@ namespace QwertyMod
             Projectile.DamageType = DamageClass.Melee;
             Projectile.friendly = true;
             Projectile.timeLeft = 2;
-            Projectile.usesLocalNPCImmunity = true;
+            Projectile.penetrate = 1;
             Projectile.tileCollide = false;
         }
         public override bool PreDraw(ref Color lightColor)
@@ -535,6 +541,14 @@ namespace QwertyMod
         public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
         {
             hitDirection = Math.Sign(target.Center.X - Main.player[Projectile.owner].Center.X);
+        }
+        public override bool? CanHitNPC(NPC target)
+        {
+            if(Projectile.ai[0] != target.whoAmI)
+            {
+                return false;
+            }
+            return null;
         }
     }
     public class PokeRanged : ModProjectile
@@ -544,9 +558,9 @@ namespace QwertyMod
             Projectile.width = 2;
             Projectile.height = 2;
             Projectile.DamageType = DamageClass.Ranged;
+            Projectile.penetrate = 1;
             Projectile.friendly = true;
             Projectile.timeLeft = 2;
-            Projectile.usesLocalNPCImmunity = true;
             Projectile.tileCollide = false;
         }
         public override bool PreDraw(ref Color lightColor)
@@ -556,6 +570,14 @@ namespace QwertyMod
         public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
         {
             hitDirection = Math.Sign(target.Center.X - Main.player[Projectile.owner].Center.X);
+        }
+        public override bool? CanHitNPC(NPC target)
+        {
+            if(Projectile.ai[0] != target.whoAmI)
+            {
+                return false;
+            }
+            return null;
         }
     }
     public class PokeMagic : ModProjectile
@@ -565,9 +587,9 @@ namespace QwertyMod
             Projectile.width = 2;
             Projectile.height = 2;
             Projectile.DamageType = DamageClass.Magic;
+            Projectile.penetrate = 1;
             Projectile.friendly = true;
             Projectile.timeLeft = 2;
-            Projectile.usesLocalNPCImmunity = true;
             Projectile.tileCollide = false;
         }
         public override bool PreDraw(ref Color lightColor)
@@ -577,6 +599,14 @@ namespace QwertyMod
         public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
         {
             hitDirection = Math.Sign(target.Center.X - Main.player[Projectile.owner].Center.X);
+        }
+        public override bool? CanHitNPC(NPC target)
+        {
+            if(Projectile.ai[0] != target.whoAmI)
+            {
+                return false;
+            }
+            return null;
         }
     }
     public class PokeSummon : ModProjectile
@@ -588,7 +618,7 @@ namespace QwertyMod
             Projectile.DamageType = DamageClass.Summon;
             Projectile.friendly = true;
             Projectile.timeLeft = 2;
-            Projectile.usesLocalNPCImmunity = true;
+            Projectile.penetrate = 1;
             Projectile.tileCollide = false;
         }
         public override bool PreDraw(ref Color lightColor)
@@ -598,6 +628,14 @@ namespace QwertyMod
         public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
         {
             hitDirection = Math.Sign(target.Center.X - Main.player[Projectile.owner].Center.X);
+        }
+        public override bool? CanHitNPC(NPC target)
+        {
+            if(Projectile.ai[0] != target.whoAmI)
+            {
+                return false;
+            }
+            return null;
         }
     }
     public class MinionPoke : ModProjectile
@@ -616,12 +654,20 @@ namespace QwertyMod
             Projectile.DamageType = DamageClass.Summon;
             Projectile.friendly = true;
             Projectile.timeLeft = 2;
-            Projectile.usesLocalNPCImmunity = true;
+            Projectile.penetrate = 1;
             Projectile.tileCollide = false;
         }
         public override bool PreDraw(ref Color lightColor)
         {
             return false;
+        }
+        public override bool? CanHitNPC(NPC target)
+        {
+            if(Projectile.ai[0] != target.whoAmI)
+            {
+                return false;
+            }
+            return null;
         }
     }
 }

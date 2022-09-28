@@ -37,7 +37,6 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.ImperiousTheIV
             Item.height = 40;
             Item.crit = 20;
             Item.autoReuse = true;
-            //Item.scale = 5;
         }
 
         public override void MeleeEffects(Player player, Rectangle hitbox)
@@ -48,7 +47,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.ImperiousTheIV
         {
             if (player.whoAmI == Main.myPlayer && !target.immortal && player.ownedProjectileCounts[ProjectileType<ImperiousTheV>()] < 40)
             {
-                Projectile.NewProjectile(new EntitySource_Misc(""), target.Center, Vector2.Zero, ProjectileType<ImperiousTheV>(), damage, 0.1f, player.whoAmI, target.whoAmI);
+                Projectile.NewProjectile(player.GetSource_ItemUse(Item), target.Center, Vector2.Zero, ProjectileType<ImperiousTheV>(), player.GetWeaponDamage(Item), 0.1f, player.whoAmI, target.whoAmI);
             }
         }
     }
@@ -69,15 +68,13 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.ImperiousTheIV
             Projectile.hostile = false;
             Projectile.friendly = true;
             Projectile.ignoreWater = true;
-            Main.projFrames[Projectile.type] = 1;
-            Projectile.knockBack = 10f;
             Projectile.penetrate = -1;
             Projectile.tileCollide = false;
             Projectile.DamageType = DamageClass.Melee;
-            //Projectile.minionSlots = 1;
             Projectile.timeLeft = 120;
             Projectile.aiStyle = -1;
             Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = -1;
             Projectile.extraUpdates = 1;
         }
 
@@ -100,12 +97,6 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.ImperiousTheIV
             {
                 Projectile.Kill();
             }
-        }
-
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
-        {
-            Projectile.localNPCImmunity[target.whoAmI] = -1;
-            target.immune[Projectile.owner] = 0;
         }
     }
 }

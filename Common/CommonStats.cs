@@ -21,6 +21,7 @@ namespace QwertyMod.Common
         public float hookRange = 1f;
         public float hookSpeed = 1f;
         public float weaponSize = 1f;
+        public int normalGravity = 0;
         public override void SetStaticDefaults()
         {
             IL.Terraria.Player.GetAdjustedItemScale += HookSize;
@@ -79,10 +80,21 @@ namespace QwertyMod.Common
             hookRange = 1f;
             hookSpeed = 1f;
             weaponSize = 1f;
+            normalGravity--;
         }
         public override void PreUpdate()
         {
             genericCounter++;
+        }
+        public override void PreUpdateBuffs()
+        {
+            if(normalGravity > 0)
+            {
+                Player.gravity = Player.defaultGravity;
+            }
+        }
+        public override void PostUpdate()
+        {
         }                                
         public override bool PreHurt(bool pvp, bool quiet, ref int damage, ref int hitDirection, ref bool crit, ref bool customDamage, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource, ref int cooldownCounter)
         {

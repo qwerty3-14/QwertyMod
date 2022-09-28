@@ -13,7 +13,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Rhuthinium Hat");
+            DisplayName.SetDefault("Rhuthinium Scalp");
             Tooltip.SetDefault("10% increased magic critical chance \n10% reduced mana useage");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             Head.Sets.DrawHatHair[Item.headSlot] = true;

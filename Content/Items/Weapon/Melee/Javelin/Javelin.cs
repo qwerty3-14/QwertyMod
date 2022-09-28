@@ -215,4 +215,33 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin
             ExtraAI();
         }
     }
+    public class JavelinAilments : GlobalNPC
+    {
+        public override bool InstancePerEntity => true;
+        public int ruthJavs = 0;
+        public int hydraJavs = 0;
+        public int imperiumJavs = 0;
+        public override bool PreAI(NPC npc)
+        {
+            ruthJavs = 0;
+            hydraJavs = 0;
+            imperiumJavs = 0;
+            return true;
+        }
+        public override void ModifyHitByProjectile(NPC npc, Projectile projectile, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        {
+            damage += ruthJavs;
+            knockback += hydraJavs * 1.2f;
+        }
+
+        public override void ModifyHitByItem(NPC npc, Player player, Item item, ref int damage, ref float knockback, ref bool crit)
+        {
+            damage += ruthJavs;
+            damage = damage + (int)(damage * 0.35f * imperiumJavs);
+        }
+        public override void ModifyHitNPC(NPC npc, NPC target, ref int damage, ref float knockback, ref bool crit)
+        {
+            damage = damage * (int)(1f / (1 + hydraJavs * 0.02));
+        }
+    }
 }

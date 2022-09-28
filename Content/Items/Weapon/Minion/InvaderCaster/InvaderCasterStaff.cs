@@ -248,7 +248,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.InvaderCaster
 				if (projectile.owner == Main.myPlayer && projectile.ai[1] <=0)
 				{
 					Vector2 shootFrom = projectile.Top + Vector2.UnitY * 8;
-                    if ((target.Center - shootFrom).Length() < 150)
+                    if ((target.Center - shootFrom).Length() < 240)
                     {
                         if (Main.netMode != NetmodeID.MultiplayerClient)
                         {
@@ -258,19 +258,19 @@ namespace QwertyMod.Content.Items.Weapon.Minion.InvaderCaster
                         projectile.localAI[0] = attackRecencyCooldown;
 						projectile.ai[1] = attackCooldown;
                     }
-                    else if(Math.Abs(target.Center.X - projectile.Center.X) < distRequired + 10)
+                    else //if(Math.Abs(target.Center.X - projectile.Center.X) < distRequired + 10)
                     {
                         if (Main.netMode != NetmodeID.MultiplayerClient)
                         {
                             SoundEngine.PlaySound(SoundID.Item157, shootFrom);
-							float aimAt = QwertyMethods.PredictiveAim(shootFrom, 5, target.Center, target.velocity);
+							float aimAt = QwertyMethods.PredictiveAim(shootFrom, 8, target.Center, target.velocity);
 							if(!float.IsNaN(aimAt))
 							{
-								Projectile.NewProjectile(new EntitySource_Misc(""), shootFrom, QwertyMethods.PolarVector(5, aimAt), ModContent.ProjectileType<MinionSphere>(), projectile.damage, projectile.knockBack, projectile.owner);
+								Projectile.NewProjectile(new EntitySource_Misc(""), shootFrom, QwertyMethods.PolarVector(8, aimAt), ModContent.ProjectileType<MinionSphere>(), projectile.damage, projectile.knockBack, projectile.owner);
 							}
                         }
-                        projectile.localAI[0] = attackRecencyCooldown + 160;
-						projectile.ai[1] = attackCooldown + 160;
+                        projectile.localAI[0] = attackRecencyCooldown + 60;
+						projectile.ai[1] = attackCooldown + 60;
                     }
 				}
 			}
@@ -503,7 +503,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.InvaderCaster
         {
             Projectile.CloneDefaults(ProjectileID.MagnetSphereBall);
             Projectile.aiStyle = -1;
-            Projectile.timeLeft = 50;
+            Projectile.timeLeft = 600;
         }
         int counter;
         public override void AI()

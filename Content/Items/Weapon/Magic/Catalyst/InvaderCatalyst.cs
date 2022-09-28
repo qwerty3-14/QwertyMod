@@ -23,6 +23,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Catalyst
         }
         public override void SetDefaults()
         {
+            Item.value = QwertyMod.InvaderGearValue;
             Item.useStyle = ItemUseStyleID.HoldUp;
             Item.DamageType = DamageClass.Magic;
             Item.noMelee = true;
@@ -30,8 +31,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Catalyst
             Item.mana = 100;
             Item.UseSound = SoundID.Item29;
             Item.useTime = Item.useAnimation = 30;
-            Item.buffTime = 4 * 60;
-            Item.buffType = ModContent.BuffType<CatalystBuff>();
+            Item.rare = 8;
 
 
             if (!Main.dedServ)
@@ -42,6 +42,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Catalyst
         }
         public override bool? UseItem(Player player)
         {
+            player.AddBuff(ModContent.BuffType<CatalystBuff>(), 4 * 60);
             player.GetModPlayer<CatalystEffect>().CatalystDamage = player.GetWeaponDamage(Item);
             return base.UseItem(player);
         }
@@ -56,25 +57,33 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Catalyst
     public class CatalystEffect : ModPlayer
     {
         public int CatalystDamage = 0;
-        void ProcessCatalystEffect(NPC target)
+        void ProcessCatalystEffect(NPC target, IEntitySource source)
         {
             if(Player.HasBuff(ModContent.BuffType<CatalystBuff>()))
             {
-                Projectile.NewProjectile(new EntitySource_Misc(""), target.Center, Vector2.Zero, ModContent.ProjectileType<CatalystExplosion>(), Player.GetModPlayer<CatalystEffect>().CatalystDamage, 0, Player.whoAmI);
+
+                SoundEngine.PlaySound(SoundID.Item91, target.Center);
+                for (int i = 0; i < 100; i++)
+                {
+                    float rot = (float)Math.PI * 2f * ((float)i / 30f);
+                    Dust.NewDustPerfect(target.Center, ModContent.DustType<InvaderGlow>(), QwertyMethods.PolarVector(5f, rot));
+                }
+                QwertyMethods.PokeNPC(Player, target, source, Player.GetModPlayer<CatalystEffect>().CatalystDamage, DamageClass.Magic, 0);
+                //Projectile.NewProjectile(new EntitySource_Misc(""), target.Center, Vector2.Zero, ModContent.ProjectileType<CatalystExplosion>(), Player.GetModPlayer<CatalystEffect>().CatalystDamage, 0, Player.whoAmI);
             }
         }
         public override void OnHitNPC(Item item, NPC target, int damage, float knockback, bool crit)
         {
             if(item.CountsAsClass(DamageClass.Melee))
             {
-                ProcessCatalystEffect(target);
+                ProcessCatalystEffect(target, Player.GetSource_ItemUse(item));
             }
         }
         public override void OnHitNPCWithProj(Projectile proj, NPC target, int damage, float knockback, bool crit)
         {
             if(proj.CountsAsClass(DamageClass.Melee))
             {
-                ProcessCatalystEffect(target);
+                ProcessCatalystEffect(target, Projectile.InheritSource(proj));
             }
         }
     }

@@ -19,7 +19,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Glass
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Glass Helm");
+            DisplayName.SetDefault("Glass Headset");
             Tooltip.SetDefault("A glass prism orbits you zapping enemies");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             Head.Sets.DrawHatHair[Item.headSlot] = true;
@@ -45,18 +45,30 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Glass
 
         public override void UpdateArmorSet(Player player)
         {
-            player.setBonus = "Ranged attacks Inflict 'Arcanely tuned' \nMagic attacks chase enemies inflicted with 'Arcanely tuned'";
+            player.setBonus = "While moving right ranged attacks will inflict 'Arcanely tuned' \nWhile moving left magic attacks will chase enemies inflicted with 'Arcanely tuned'";
             player.GetModPlayer<HelmEffects>().setBonus = true;
         }
         public override void AddRecipes()
         {
             CreateRecipe(1).AddIngredient(ItemID.Glass, 15)
                 .AddIngredient(ItemID.SilverBar, 4)
-                .AddTile(TileID.Anvils)
+                .AddIngredient(ItemID.ShadowScale, 2)
+                .AddTile(TileID.GlassKiln)
                 .Register();
             CreateRecipe(1).AddIngredient(ItemID.Glass, 15)
                 .AddIngredient(ItemID.TungstenBar, 4)
-                .AddTile(TileID.Anvils)
+                .AddIngredient(ItemID.ShadowScale, 2)
+                .AddTile(TileID.GlassKiln)
+                .Register();
+            CreateRecipe(1).AddIngredient(ItemID.Glass, 15)
+                .AddIngredient(ItemID.SilverBar, 4)
+                .AddIngredient(ItemID.TissueSample, 2)
+                .AddTile(TileID.GlassKiln)
+                .Register();
+            CreateRecipe(1).AddIngredient(ItemID.Glass, 15)
+                .AddIngredient(ItemID.TungstenBar, 4)
+                .AddIngredient(ItemID.TissueSample, 2)
+                .AddTile(TileID.GlassKiln)
                 .Register();
         }
     }
@@ -96,7 +108,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Glass
 
         public override void OnHitNPCWithProj(Projectile proj, NPC target, int damage, float knockback, bool crit)
         {
-            if (proj.CountsAsClass(DamageClass.Ranged) && setBonus)
+            if (proj.CountsAsClass(DamageClass.Ranged) && setBonus && Player.velocity.X > 0)
             {
                 target.AddBuff(BuffType<ArcanelyTuned>(), 360);
             }
@@ -198,7 +210,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Glass
         {
             float maxDistance = 10000;
             foundTarget = false;
-            if (projectile.CountsAsClass(DamageClass.Magic) && projectile.friendly)
+            if (projectile.CountsAsClass(DamageClass.Magic) && projectile.friendly && Main.player[projectile.owner].velocity.X < 0 && Main.player[projectile.owner].GetModPlayer<HelmEffects>().setBonus)
             {
                 for (int k = 0; k < 200; k++)
                 {

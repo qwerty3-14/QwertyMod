@@ -35,11 +35,23 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Glass
         {
             CreateRecipe(1).AddIngredient(ItemID.Glass, 45)
                 .AddIngredient(ItemID.SilverBar, 8)
-                .AddTile(TileID.Anvils)
+                .AddIngredient(ItemID.ShadowScale, 4)
+                .AddTile(TileID.GlassKiln)
                 .Register();
             CreateRecipe(1).AddIngredient(ItemID.Glass, 45)
                 .AddIngredient(ItemID.TungstenBar, 8)
-                .AddTile(TileID.Anvils)
+                .AddIngredient(ItemID.ShadowScale, 4)
+                .AddTile(TileID.GlassKiln)
+                .Register();
+            CreateRecipe(1).AddIngredient(ItemID.Glass, 45)
+                .AddIngredient(ItemID.SilverBar, 8)
+                .AddIngredient(ItemID.TissueSample, 4)
+                .AddTile(TileID.GlassKiln)
+                .Register();
+            CreateRecipe(1).AddIngredient(ItemID.Glass, 45)
+                .AddIngredient(ItemID.TungstenBar, 8)
+                .AddIngredient(ItemID.TissueSample, 4)
+                .AddTile(TileID.GlassKiln)
                 .Register();
         }
     }

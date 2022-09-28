@@ -30,7 +30,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.Arsenal
             Item.useTime = 25;
             Item.shootSpeed = 16f;
             Item.knockBack = 2.5f;
-            Item.damage = 18;
+            Item.damage = 27;
             Item.value = Item.sellPrice(gold: 10);
             Item.rare = 7;
             Item.DamageType = DamageClass.MeleeNoSpeed;
@@ -47,7 +47,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.Arsenal
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            for (int n = 0; n < 6; n++)
+            for (int n = 0; n < 4; n++)
             {
                 yoyo = Main.projectile[Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI)];
                 yoyo.localAI[1] = n;
@@ -72,12 +72,13 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.Arsenal
             Projectile.penetrate = -1;
             Projectile.DamageType = DamageClass.Melee;
             Projectile.scale = 1f;
-            Projectile.localNPCHitCooldown = 20;
+            Projectile.localNPCHitCooldown = 30;
             Projectile.usesLocalNPCImmunity = true;
-            yoyoCount = 6;
+            yoyoCount = 4;
             time = 2f;
             range = 160;
             speed = 11f;
+            spread = (float)Math.PI / 4;
             //counterWeightId = mod.ProjectileType("SpiderCounterweight");
         }
 
@@ -90,7 +91,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.Arsenal
         public override void PostYoyoAI()
         {
             Projectile.frameCounter++;
-            if (Projectile.frameCounter % 20 == 0)
+            if (Projectile.frameCounter % 30 == 0)
             {
                 Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, QwertyMethods.PolarVector(4f + Main.rand.NextFloat(2f), (float)Math.PI * 2f * Main.rand.NextFloat()), ProjectileType<ArsenalSword>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
             }

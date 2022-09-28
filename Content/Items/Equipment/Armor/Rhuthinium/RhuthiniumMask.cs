@@ -13,7 +13,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Rhuthinium Mask");
+            DisplayName.SetDefault("Rhuthinium Guise");
             Tooltip.SetDefault("+1 max minions \n5% increased critical strike chance");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             Head.Sets.DrawFullHair[Item.headSlot] = true;

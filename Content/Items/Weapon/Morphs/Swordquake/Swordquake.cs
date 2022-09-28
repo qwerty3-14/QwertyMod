@@ -24,7 +24,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.Swordquake
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
-        public const int dmg = 900;
+        public const int dmg = 2700;
         public const int crt = 0;
         public const float kb = 9f;
         public const int def = -1;

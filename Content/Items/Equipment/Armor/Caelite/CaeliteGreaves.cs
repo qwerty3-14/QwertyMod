@@ -15,7 +15,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Caelite
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Caelite Greaves");
+            DisplayName.SetDefault("Caelite Reinforcmentss");
             Tooltip.SetDefault("Melee and magic attacks hasten the cooldown for healing potions");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             Legs.Sets.HidesBottomSkin[Item.legSlot] = true;

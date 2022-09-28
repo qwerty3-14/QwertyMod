@@ -248,6 +248,11 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
         {
             npcLoot.Add(ItemDropRule.Common(ItemType<DinoFlail>(), 4, 1, 1));
             npcLoot.Add(ItemDropRule.Common(ItemType<TheTyrantsExtinctionGun>(), 4, 1, 1));
+
+            
+
+			// ItemDropRule.MasterModeCommonDrop for the relic
+			npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<Items.Consumable.Tiles.Relics.TyrantRelic>()));
         }
         public int moveFrame = 0;
         public int moveFrame2 = 1;

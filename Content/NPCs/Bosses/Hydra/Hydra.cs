@@ -157,7 +157,7 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
                 {
                     if (Main.netMode != 1)
                     {
-                        NPC.NewNPC(new EntitySource_Misc(""), (int)NPC.Center.X + h, (int)NPC.Center.Y, NPCType<HydraHead>(), ai0: NPC.whoAmI, ai1: h);
+                        NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Center.X + h, (int)NPC.Center.Y, NPCType<HydraHead>(), ai0: NPC.whoAmI, ai1: h);
                     }
                 }
                 runOnce = false;
@@ -249,6 +249,10 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
             //Trophies are spawned with 1/10 chance
             npcLoot.Add(ItemDropRule.Common(ItemType<HydraTrophy>(), 10));
 
+            
+
+			// ItemDropRule.MasterModeCommonDrop for the relic
+			npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<Items.Consumable.Tiles.Relics.HydraRelic>()));
 
             base.ModifyNPCLoot(npcLoot);
         }

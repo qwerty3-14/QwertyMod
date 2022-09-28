@@ -16,7 +16,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin.Hydra
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Hydra Javelin");
-            Tooltip.SetDefault("Throws three at once!");
+            Tooltip.SetDefault("Throws three javelins at once\nEach javelin reduces the contact damage enemies deal\nMax: 15");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -26,8 +26,8 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin.Hydra
             Item.damage = 35;
             Item.knockBack = 5f;
             Item.useStyle = 1;
-            Item.useAnimation = 24;
-            Item.useTime = 24;
+            Item.useAnimation = 35;
+            Item.useTime = 35;
             Item.width = 58;
             Item.height = 58;
             Item.value = 250000;
@@ -70,14 +70,18 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin.Hydra
             Projectile.DamageType = DamageClass.Melee;
             Projectile.penetrate = 1;
             Projectile.GetGlobalProjectile<ImplaingProjectile>().CanImpale = true;
-            Projectile.GetGlobalProjectile<ImplaingProjectile>().damagePerImpaler = 1;
-            maxStickingJavelins = 100;
+            Projectile.GetGlobalProjectile<ImplaingProjectile>().damagePerImpaler = 20;
+            maxStickingJavelins = 15;
             dropItem = ItemType<HydraJavelin>();
         }
 
         public override void ExtraAI()
         {
             Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<HydraBeamGlow>());
+        }
+        public override void StuckEffects(NPC victim)
+        {
+            victim.GetGlobalNPC<JavelinAilments>().hydraJavs++;
         }
     }
 }

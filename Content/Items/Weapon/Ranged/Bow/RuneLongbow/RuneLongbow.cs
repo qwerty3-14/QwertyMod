@@ -69,7 +69,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.RuneLongbow
 
         public override bool CanConsumeAmmo(Item ammo, Player player)
         {
-            return false;
+            return true;
         }
 
         public override void AddRecipes()

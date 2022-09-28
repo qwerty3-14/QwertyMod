@@ -21,6 +21,7 @@ using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
 {
+    [AutoloadBossHead]
     public class RuneGhost : ModNPC
     {
         public override void SetStaticDefaults()
@@ -282,6 +283,11 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
             notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
             notExpertRule.OnSuccess(ItemDropRule.Common(ItemType<RunicRobe>(), 7));
             npcLoot.Add(notExpertRule);
+
+            
+
+			// ItemDropRule.MasterModeCommonDrop for the relic
+			npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<Items.Consumable.Tiles.Relics.RuneGhostRelic>()));
 
             base.ModifyNPCLoot(npcLoot);
         }

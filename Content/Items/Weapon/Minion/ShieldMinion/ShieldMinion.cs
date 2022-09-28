@@ -94,7 +94,12 @@ namespace QwertyMod.Content.Items.Weapon.Minion.ShieldMinion
                 }
 
                 float myOffset = (((float)Math.PI / 2) * (float)(identity + 1)) / (ShieldCount + 1) - (float)Math.PI / 4;
-                flyTo = player.Center + QwertyMethods.PolarVector(Projectile.ai[1] == guarding ? 120 : -50, (QwertyMod.GetLocalCursor(Projectile.owner) - player.Center).ToRotation() + myOffset);
+                if(Main.myPlayer == Projectile.owner)
+                {
+                    Projectile.ai[0] = (Main.MouseWorld - player.Center).ToRotation() + myOffset;
+                    Projectile.netUpdate = true;
+                }
+                flyTo = player.Center + QwertyMethods.PolarVector(Projectile.ai[1] == guarding ? 120 : -50, Projectile.ai[0]);
 
                 if (flyTo != null && flyTo != Vector2.Zero)
                 {

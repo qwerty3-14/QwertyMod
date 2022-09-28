@@ -27,7 +27,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Sword
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.GetModPlayer<CommonStats>().weaponSize += 1f;
+            player.GetModPlayer<CommonStats>().weaponSize += 0.7f;
         }
     }
 }

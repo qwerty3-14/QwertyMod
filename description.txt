@@ -31,12 +31,40 @@ Extra thanks
 
 
 Changelog
+0.8.3
+Additions
+-New relices for the rest of the bosses in the mod (thanks Kweequ)
+
+Bug Fixes
+-fixed invader items selling for way too much
+-fixed ancient longbow not conusming ammo
+-fixed shield minion multiplayer desync
+-fixed rune ghost not having a map icon
+-fixed enchanted whetstone getting blocked by global iframes (a lot of melee weapons inflict global iframes)
+-fixed shield minion and hydra head minion multiplayer desync
+-fixed Imperious the IV projectiles and invader catalyst not being able to crit.
+-fixed lightling being effected by dyes in the pet slot
+
+Tweaks
+-Skyward hilt damage bonus 100%->30%
+-Sword Enlarger size bonus 100%->70%
+-Glass armor's set bonus requires moving right/left to activate its effects, now requires shadow scale/tissue samples
+-Arsenal now fires 4 yoyos in a 45* spread instead of 6 in a 360* spread
+-Arsenal attack rate reduced by a third but damage increased by 50% (same base dps but with fewer higher damaging hits)
+-Imperious the IV projectile damage is based on the sword's damage instead of the damage of the hit
+-swordquake damage 900->2700
+-buffed hydrill mining speed
+-reduced the hp cost of using bloody medalion significantly
+-invader caster minions should be much more reliable now
+-javelins now do less direct dps, but have strong DoTs, they also now have 'stuck in' effects
+
 0.8.2
 -fixed flails damaging every enemy on throw
 -fixed shape shifts not being able to get modifers
 -fixed rune nuke's cooldown depleting while being used
 -Ancient and Rune nuke will no longer build up fall damage while used
 -Added master mode relics to Polar Exterminator and Divine Light (thanks Kweequ)
+-Fixed some items not being researchable in journey mode
 
 0.8.1
 -fixed dino tooth not actually providing armor penetration

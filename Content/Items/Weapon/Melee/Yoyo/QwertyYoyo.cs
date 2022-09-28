@@ -16,6 +16,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo
         protected float time = -1f;
         public int yoyoCount = 1;
         public int counterWeightId = -1;
+        public float spread = (float)Math.PI * 2;
 
         public override void AI()
         {
@@ -117,8 +118,13 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo
                         else
                         {
                             Vector2 vector4 = Main.ReverseGravitySupport(Main.MouseScreen, 0f) + Main.screenPosition;
-
-                            float rotationDirection = (vector4 - Main.player[Projectile.owner].Center).ToRotation() + (2 * (float)Math.PI / yoyoCount * Projectile.localAI[1]);
+                            int index = (int)Projectile.localAI[1] % yoyoCount;
+                            float rotationDirection = (vector4 - Main.player[Projectile.owner].Center).ToRotation() + (spread / yoyoCount * index);
+                            if(spread < (float)Math.PI * 2)
+                            {
+                                rotationDirection -= spread / 2;
+                                rotationDirection += spread / (2 * (yoyoCount + 1));
+                            }
                             float distance = (vector4 - Main.player[Projectile.owner].Center).Length();
                             vector4 = new Vector2(Main.player[Projectile.owner].Center.X + (float)Math.Cos(rotationDirection) * distance, Main.player[Projectile.owner].Center.Y + (float)Math.Sin(rotationDirection) * distance);
                             //Dust.NewDust(vector4, 0, 0, 1);

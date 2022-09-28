@@ -15,7 +15,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Hydra
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Hydra Helmet");
+            DisplayName.SetDefault("Hydra Maw");
             Tooltip.SetDefault("+0.5 life/sec regen rate" + "\n+10% summon damage");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             Head.Sets.DrawHatHair[Item.headSlot] = true;

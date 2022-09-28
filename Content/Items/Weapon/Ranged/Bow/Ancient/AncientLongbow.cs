@@ -57,7 +57,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.Ancient
 
         public override bool CanConsumeAmmo(Item ammo, Player player)
         {
-            return false;
+            return true;
         }
     }
 

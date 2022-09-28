@@ -23,7 +23,7 @@ namespace QwertyMod.Content.Items.Tool.Mining
             Item.DamageType = DamageClass.Melee;
             Item.width = 20;
             Item.height = 12;
-            Item.useTime = 6;
+            Item.useTime = 3;
             Item.useAnimation = 25;
             Item.channel = true;
             Item.noUseGraphic = true;

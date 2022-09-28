@@ -160,6 +160,10 @@ namespace QwertyMod.Content.NPCs.Bosses.BladeBoss
             //Trophies are spawned with 1/10 chance
             npcLoot.Add(ItemDropRule.Common(ItemType<BladeBossTrophy>(), 10));
 
+            
+
+			// ItemDropRule.MasterModeCommonDrop for the relic
+			npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<Items.Consumable.Tiles.Relics.ImperiousRelic>()));
 
             base.ModifyNPCLoot(npcLoot);
         }
@@ -223,7 +227,7 @@ namespace QwertyMod.Content.NPCs.Bosses.BladeBoss
                 SoundEngine.PlaySound(SoundID.Item8, NPC.Center);
                 if (Main.netMode != 1)
                 {
-                    PhantomBladeIds.Add(Projectile.NewProjectile(new EntitySource_Misc(""), NPC.Center, Vector2.Zero, ProjectileType<PhantomBlade>(), (int)(NPC.damage * (Main.expertMode ? .25f : .5f)), 0, ai0: NPC.rotation));
+                    PhantomBladeIds.Add(Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero, ProjectileType<PhantomBlade>(), (int)(NPC.damage * (Main.expertMode ? .25f : .5f)), 0, ai0: NPC.rotation));
                     Main.projectile[PhantomBladeIds[PhantomBladeIds.Count - 1]].rotation = Main.projectile[PhantomBladeIds[PhantomBladeIds.Count - 1]].ai[0] = NPC.rotation;
                     Main.projectile[PhantomBladeIds[PhantomBladeIds.Count - 1]].netUpdate = true;
                     NPC.netUpdate = true;
@@ -496,7 +500,7 @@ namespace QwertyMod.Content.NPCs.Bosses.BladeBoss
                                                 Vector2 fallToHere = new Vector2((player.Center.X + (player.velocity.X * startAwayAmount / shootSpeed)) - impactZoneWidth / 2 + Main.rand.Next(impactZoneWidth), player.Bottom.Y);
                                                 Vector2 positionOffset = QwertyMethods.PolarVector(startAwayAmount, (float)Math.PI + (float)Math.PI / 2 - (float)Math.PI / 4 + Main.rand.NextFloat() * (float)Math.PI / 8);
                                                 positionOffset.X *= starDirection;
-                                                Projectile.NewProjectile(new EntitySource_Misc(""), fallToHere + positionOffset, QwertyMethods.PolarVector(shootSpeed, (positionOffset).ToRotation() + (float)Math.PI), ProjectileType<Swordpocalypse>(), (int)(NPC.damage * (Main.expertMode ? .2f : .4f)), 0);
+                                                Projectile.NewProjectile(NPC.GetSource_FromAI(), fallToHere + positionOffset, QwertyMethods.PolarVector(shootSpeed, (positionOffset).ToRotation() + (float)Math.PI), ProjectileType<Swordpocalypse>(), (int)(NPC.damage * (Main.expertMode ? .2f : .4f)), 0);
                                             }
                                         }
                                     }
@@ -531,7 +535,7 @@ namespace QwertyMod.Content.NPCs.Bosses.BladeBoss
                                             }
                                             for (int i = (SpecialAttackTimer == circleDelay * waveCount ? 1 : 0); i < swordCount; i++)
                                             {
-                                                Projectile p = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), player.Center + QwertyMethods.PolarVector(cicrleRange, (i / swordCount) * 2 * (float)Math.PI + offset), QwertyMethods.PolarVector(-circleSpeed, (i / swordCount) * 2 * (float)Math.PI + offset), ProjectileType<PhantomBlade>(), (int)(NPC.damage * (Main.expertMode ? .25f : .5f)), 0, ai0: NPC.rotation)];
+                                                Projectile p = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromAI(), player.Center + QwertyMethods.PolarVector(cicrleRange, (i / swordCount) * 2 * (float)Math.PI + offset), QwertyMethods.PolarVector(-circleSpeed, (i / swordCount) * 2 * (float)Math.PI + offset), ProjectileType<PhantomBlade>(), (int)(NPC.damage * (Main.expertMode ? .25f : .5f)), 0, ai0: NPC.rotation)];
                                                 p.timeLeft = (cicrleRange - bladeLength + 18) / circleSpeed;
                                                 p.rotation = p.ai[0] = (i / swordCount) * 2 * (float)Math.PI + offset + (float)Math.PI;
                                                 p.netUpdate = true;
@@ -571,7 +575,7 @@ namespace QwertyMod.Content.NPCs.Bosses.BladeBoss
                 {
                     if (Main.netMode != 1)
                     {
-                        hitBoxSegmentIds[h] = NPC.NewNPC(new EntitySource_Misc(""), (int)spot.X, (int)spot.Y, NPCType<BladeHitbox>());
+                        hitBoxSegmentIds[h] = NPC.NewNPC(NPC.GetSource_FromAI(), (int)spot.X, (int)spot.Y, NPCType<BladeHitbox>());
                         Main.npc[hitBoxSegmentIds[h]].realLife = NPC.realLife;
                         NPC.netUpdate = true;
                     }
@@ -595,7 +599,7 @@ namespace QwertyMod.Content.NPCs.Bosses.BladeBoss
                 pos.Y++;
             }
             pos.Y += bladeLength;
-            Projectile.NewProjectile(new EntitySource_Misc(""), pos, Vector2.Zero, ProjectileType<Swordlacmite>(), (int)(NPC.damage * (Main.expertMode ? .25f : .5f)), 0f);
+            Projectile.NewProjectile(NPC.GetSource_FromAI(), pos, Vector2.Zero, ProjectileType<Swordlacmite>(), (int)(NPC.damage * (Main.expertMode ? .25f : .5f)), 0f);
         }
 
         public override void DrawEffects(ref Color drawColor)

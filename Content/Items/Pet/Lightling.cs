@@ -49,7 +49,8 @@ namespace QwertyMod.Content.Items.Pet
         {
             DisplayName.SetDefault("Lightling");
             Main.projFrames[Projectile.type] = 2;
-            Main.projPet[Projectile.type] = true;
+            //Main.projPet[Projectile.type] = true;
+            ProjectileID.Sets.LightPet[Projectile.type] = true;;
         }
 
         public override void SetDefaults()
@@ -107,31 +108,6 @@ namespace QwertyMod.Content.Items.Pet
             {
                 Projectile.frame = 0;
             }
-        }
-
-        public override void PostDraw(Color drawColor)
-        {
-            // As mentioned above, be sure not to forget this step.
-            Player player = Main.player[Projectile.owner];
-            if (shader != 0)
-            {
-                Main.spriteBatch.End();
-                Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.Transform);
-            }
-        }
-
-        public override bool PreDraw(ref Color lightColor)
-        {
-            Player player = Main.player[Projectile.owner];
-
-            if (shader != 0)
-            {
-                Main.spriteBatch.End();
-                Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.Default, RasterizerState.CullNone, null, Main.GameViewMatrix.ZoomMatrix);
-
-                GameShaders.Armor.GetSecondaryShader(shader, player).Apply(null);
-            }
-            return true;
         }
     }
 

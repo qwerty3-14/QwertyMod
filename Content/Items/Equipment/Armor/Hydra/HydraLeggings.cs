@@ -12,7 +12,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Hydra
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Hydra Leggings");
+            DisplayName.SetDefault("Hydra Extensions");
             Tooltip.SetDefault("+0.5 life/sec regen rate" + "\n+10% summon damage and movement speed");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }

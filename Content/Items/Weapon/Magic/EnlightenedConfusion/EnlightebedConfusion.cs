@@ -114,6 +114,10 @@ namespace QwertyMod.Content.Items.Weapon.Magic.EnlightenedConfusion
             {
                 target.AddBuff(BuffType<PowerDown>(), 120);
             }
+            if (Main.rand.Next(2) == 0)
+            {
+                target.AddBuff(BuffID.CursedInferno, 240);
+            }
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {

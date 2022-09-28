@@ -132,7 +132,7 @@ namespace QwertyMod
         public static int RuneLegMale = 0;
         public static int RuneLegFemale = 0;
         public static SoundStyle FortressBlocks;
-        public const int InvaderGearValue = 50000000;
+        public const int InvaderGearValue = 500000;
         public override void Load()
         {
             AMLoot = new Deck<int>();

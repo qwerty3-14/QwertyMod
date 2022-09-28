@@ -265,7 +265,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
                             player = Main.player[NPC.target];
                             if (Main.netMode != 1)
                             {
-                                Projectile.NewProjectile(new EntitySource_Misc(""), NPC.Center, QwertyMethods.PolarVector(8f, (player.Center - NPC.Center).ToRotation()), ProjectileType<CaeliteSaw>(), damage, 0);
+                                Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, QwertyMethods.PolarVector(8f, (player.Center - NPC.Center).ToRotation()), ProjectileType<CaeliteSaw>(), damage, 0);
                             }
                         }
                     }
@@ -320,7 +320,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
                 {
                     Vector2 endPos = NPC.Center + QwertyMethods.PolarVector(130, (player.Center - NPC.Center).ToRotation() + ((float)i / 11f) * (float)Math.PI - (float)Math.PI / 2f);
                     Vector2 startPos = NPC.position + spellPositions[i / 3];
-                    Projectile projectile = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), startPos, Vector2.Zero, ProjectileType<Deflect>(), damage, 0, 255, endPos.X, endPos.Y)];
+                    Projectile projectile = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromAI(), startPos, Vector2.Zero, ProjectileType<Deflect>(), damage, 0, 255, endPos.X, endPos.Y)];
                     projectile.ai[0] = endPos.X;
                     projectile.ai[1] = endPos.Y;
                     projectile.timeLeft = (60 * 30) + (i % 3) * 30 + 60;
@@ -370,7 +370,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
                 SoundEngine.PlaySound(SoundID.Item43, position);
                 if (Main.netMode != 1)
                 {
-                    Projectile.NewProjectile(new EntitySource_Misc(""), position, QwertyMethods.PolarVector(vel, angle), ProjectileType<DivineBolt>(), damage, 0);
+                    Projectile.NewProjectile(NPC.GetSource_FromAI(), position, QwertyMethods.PolarVector(vel, angle), ProjectileType<DivineBolt>(), damage, 0);
                 }
             }
         }
@@ -418,7 +418,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
             Player player = Main.player[NPC.target];
             if (Main.netMode != 1)
             {
-                QwertyMethods.ProjectileSpread(new EntitySource_Misc(""), position, 3, 6f, ProjectileType<BarrierSpread>(), damage, 0, 255, NPC.whoAmI, rotation: (player.Center - position).ToRotation(), spread: (float)Math.PI / 6);
+                QwertyMethods.ProjectileSpread(NPC.GetSource_FromAI(), position, 3, 6f, ProjectileType<BarrierSpread>(), damage, 0, 255, NPC.whoAmI, rotation: (player.Center - position).ToRotation(), spread: (float)Math.PI / 6);
             }
         }
         void PlanAttackOrder()
