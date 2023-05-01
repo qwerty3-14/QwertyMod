@@ -12,30 +12,17 @@ namespace QwertyMod.Content.Items.Consumable.Potion.CaeliteFlask
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Weapon Imbue: Caelite Wrath");
-            Description.SetDefault("Melee Attacks reduce the damage enemies deal");
             Main.debuff[Type] = false;
             Main.pvpBuff[Type] = false;
             Main.buffNoSave[Type] = false;
-            //longerExpertDebuff = false;
             Main.meleeBuff[Type] = true;
             Main.persistentBuff[Type] = true;
-        }
-
-        public override void Update(Player player, ref int buffIndex)
-        {
-            /*
-            if(player.meleeEnchant >0)
-            {
-                player.buffTime[player.FindBuffIndex(mod.BuffType("CaeliteImbune"))] = 0;
-            }
-            */
         }
     }
 
     public class InflictCaelite : GlobalNPC
     {
-        public override void OnHitByItem(NPC npc, Player player, Item item, int damage, float knockback, bool crit)
+        public override void OnHitByItem(NPC npc, Player player, Item item, NPC.HitInfo hit, int damageDone)
         {
             if (player.HasBuff(BuffType<CaeliteImbune>()))
             {
@@ -43,7 +30,7 @@ namespace QwertyMod.Content.Items.Consumable.Potion.CaeliteFlask
             }
         }
 
-        public override void OnHitByProjectile(NPC npc, Projectile projectile, int damage, float knockback, bool crit)
+        public override void OnHitByProjectile(NPC npc, Projectile projectile, NPC.HitInfo hit, int damageDone)
         {
             if (Main.player[projectile.owner].HasBuff(BuffType<CaeliteImbune>()) && (projectile.CountsAsClass(DamageClass.Melee) || ProjectileID.Sets.IsAWhip[projectile.type]))
             {

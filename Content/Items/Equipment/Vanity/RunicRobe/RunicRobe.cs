@@ -1,6 +1,7 @@
 ﻿using Terraria;
 using Terraria.ModLoader;
 using Terraria.GameContent.Creative;
+using Terraria.ID;
 
 namespace QwertyMod.Content.Items.Equipment.Vanity.RunicRobe
 {
@@ -10,8 +11,8 @@ namespace QwertyMod.Content.Items.Equipment.Vanity.RunicRobe
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Ancient Runic Robe");
-            Tooltip.SetDefault("remeber this?");
+            //DisplayName,SetDefault("Ancient Runic Robe");
+            //Tooltip.SetDefault("remeber this?");
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -19,7 +20,7 @@ namespace QwertyMod.Content.Items.Equipment.Vanity.RunicRobe
         {
             Item.width = 34;
             Item.height = 30;
-            Item.rare = 1;
+            Item.rare = ItemRarityID.Blue;
             Item.vanity = true;
         }
 

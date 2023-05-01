@@ -8,11 +8,6 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Dart.Rhuthinium
 {
     public class DartBeam : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault("Rhuthinium Dart");
-        }
-
         public override void SetDefaults()
         {
             Projectile.DamageType = DamageClass.Ranged;
@@ -38,7 +33,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Dart.Rhuthinium
             }
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.localNPCImmunity[target.whoAmI] = -1;
             target.immune[Projectile.owner] = 0;

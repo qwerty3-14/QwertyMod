@@ -17,7 +17,7 @@ namespace QwertyMod.Content.NPCs.Bosses.AncientMachine
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Ancient Minion");
+            //DisplayName,SetDefault("Ancient Minion");
             Main.npcFrameCount[NPC.type] = 1;
         }
 
@@ -56,20 +56,20 @@ namespace QwertyMod.Content.NPCs.Bosses.AncientMachine
             return 0f;
         }
         /*
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
         {
             if (NPC.life <= 0)
             {
-                Vector2 pos = NPC.Center + QwertyMethods.PolarVector(-16, NPC.rotation + (float)Math.PI / 2);
+                Vector2 pos = NPC.Center + QwertyMethods.PolarVector(-16, NPC.rotation + MathF.PI / 2);
                 Gore gore = Main.gore[Gore.NewGore(pos, NPC.velocity, mod.GetGoreSlot("Gores/MiniDebris_1" + (ModContent.GetInstance<SpriteSettings>().ClassicAncient ? "_Old" : "")), 1f)];
                 gore.rotation = NPC.rotation;
 
-                pos = NPC.Center + QwertyMethods.PolarVector(14, NPC.rotation + (float)Math.PI / 2);
+                pos = NPC.Center + QwertyMethods.PolarVector(14, NPC.rotation + MathF.PI / 2);
                 gore = Main.gore[Gore.NewGore(pos, NPC.velocity, mod.GetGoreSlot("Gores/MiniDebris_2" + (ModContent.GetInstance<SpriteSettings>().ClassicAncient ? "_Old" : "")), 1f)];
                 gore.rotation = NPC.rotation;
                 for (int i = 0; i < 180; i++)
                 {
-                    float theta = Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI);
+                    float theta = Main.rand.NextFloat(-MathF.PI, MathF.PI);
                     Dust dust = Dust.NewDustPerfect(NPC.Center, mod.DustType("AncientGlow"), QwertyMethods.PolarVector(Main.rand.Next(1, 9), theta));
                     dust.noGravity = true;
                 }
@@ -113,7 +113,7 @@ namespace QwertyMod.Content.NPCs.Bosses.AncientMachine
             }
             if (runOnce)
             {
-                if (Main.netMode != 1)
+                if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     NPC.ai[2] = NPC.Center.X;
                     NPC.ai[3] = NPC.Center.Y;
@@ -142,18 +142,18 @@ namespace QwertyMod.Content.NPCs.Bosses.AncientMachine
             {
                 for (int i = 0; i < minionRingDustQty; i++)
                 {
-                    float theta = Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI);
+                    float theta = Main.rand.NextFloat(-MathF.PI, MathF.PI);
 
                     Dust dust = Dust.NewDustPerfect(NPC.Center + QwertyMethods.PolarVector(minionRingRadius, theta), DustType<AncientGlow>(), QwertyMethods.PolarVector(-minionRingRadius / 10, theta));
                     dust.noGravity = true;
                 }
-                if (Main.netMode != 1)
+                if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
-                    NPC.ai[1] = Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI);
+                    NPC.ai[1] = Main.rand.NextFloat(-MathF.PI, MathF.PI);
                     NPC.netUpdate = true;
                 }
-                moveTo = new Vector2(player.Center.X + (float)Math.Cos(NPC.ai[1]) * 600, player.Center.Y + (float)Math.Sin(NPC.ai[1]) * 350);
-                if (Main.netMode != 1)
+                moveTo = new Vector2(player.Center.X + MathF.Cos(NPC.ai[1]) * 600, player.Center.Y + MathF.Sin(NPC.ai[1]) * 350);
+                if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     NPC.ai[2] = moveTo.X;
                     NPC.ai[3] = moveTo.Y;
@@ -173,7 +173,7 @@ namespace QwertyMod.Content.NPCs.Bosses.AncientMachine
                     SoundEngine.PlaySound(SoundID.Item8, NPC.position);
                     for (int i = 0; i < minionRingDustQty; i++)
                     {
-                        float theta = Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI);
+                        float theta = Main.rand.NextFloat(-MathF.PI, MathF.PI);
                         Dust dust = Dust.NewDustPerfect(NPC.Center, DustType<AncientGlow>(), QwertyMethods.PolarVector(minionRingRadius / 10, theta));
                         dust.noGravity = true;
                     }
@@ -182,7 +182,7 @@ namespace QwertyMod.Content.NPCs.Bosses.AncientMachine
             }
             if (charging)
             {
-                NPC.velocity = new Vector2((float)Math.Cos(NPC.rotation) * chargeSpeed, (float)Math.Sin(NPC.rotation) * chargeSpeed);
+                NPC.velocity = new Vector2(MathF.Cos(NPC.rotation) * chargeSpeed, MathF.Sin(NPC.rotation) * chargeSpeed);
             }
             else
             {

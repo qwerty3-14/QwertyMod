@@ -12,15 +12,13 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Hydra
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Hydra Extensions");
-            Tooltip.SetDefault("+0.5 life/sec regen rate" + "\n+10% summon damage and movement speed");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()
         {
             Item.value = 50000;
-            Item.rare = 5;
+            Item.rare = ItemRarityID.Pink;
             Item.width = 22;
             Item.height = 18;
             Item.defense = 14;

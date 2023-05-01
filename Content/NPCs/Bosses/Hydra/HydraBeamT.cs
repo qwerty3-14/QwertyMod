@@ -22,7 +22,7 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Hydra Beam");
+            //DisplayName,SetDefault("Hydra Beam");
         }
 
         public override void SetDefaults()
@@ -53,7 +53,7 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
 
             #region Set projectile position
 
-            Vector2 diff = new Vector2((float)Math.Cos(shooter.rotation + rOffset) * 14f, (float)Math.Sin(shooter.rotation + rOffset) * 14f);
+            Vector2 diff = new Vector2(MathF.Cos(shooter.rotation + rOffset) * 14f, MathF.Sin(shooter.rotation + rOffset) * 14f);
             diff.Normalize();
             Projectile.velocity = diff;
             Projectile.direction = Projectile.Center.X > shooter.Center.X ? 1 : -1;
@@ -67,7 +67,7 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
             player.heldProj = Projectile.whoAmI;
             player.itemTime = 2;
             player.itemAnimation = 2;
-            player.itemRotation = (float)Math.Atan2(Projectile.velocity.Y * dir, Projectile.velocity.X * dir);
+            player.itemRotation = MathF.Atan2(Projectile.velocity.Y * dir, Projectile.velocity.X * dir);
             */
 
             #endregion Set projectile position
@@ -153,7 +153,7 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
         }
 
         // Set custom immunity time on hitting an NPC
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.immune[Projectile.owner] = 5;
         }

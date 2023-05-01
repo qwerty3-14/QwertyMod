@@ -10,8 +10,8 @@ namespace QwertyMod.Content.Items.Weapon.Minion.GlassSpike
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Glass Spike");
-            Description.SetDefault("Way worse than stepping on legos!");
+            //DisplayName,SetDefault("Glass Spike");
+            //Description.SetDefault("Way worse than stepping on legos!");
             Main.buffNoSave[Type] = true;
             Main.buffNoTimeDisplay[Type] = true;
         }

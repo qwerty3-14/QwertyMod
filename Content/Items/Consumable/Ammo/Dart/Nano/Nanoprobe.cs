@@ -43,14 +43,14 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Dart.Nano
             {
                 if (QwertyMethods.ClosestNPC(ref target, 1000, Projectile.Center))
                 {
-                    dir.SlowRotation((target.Center - Projectile.Center).ToRotation(), (float)Math.PI / 60f);
+                    dir.SlowRotation((target.Center - Projectile.Center).ToRotation(), MathF.PI / 60f);
                 }
             }
             Dust d = Dust.NewDustPerfect(Projectile.Center, 135, Vector2.Zero, 100);
             d.noGravity = true;
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(BuffID.Confused, 60 * 10);
         }

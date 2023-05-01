@@ -9,8 +9,8 @@ namespace QwertyMod.Content.Buffs
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Periodic Confusion");
-            Description.SetDefault("Controls reverse sometimes...");
+            ////DisplayName,SetDefault("Periodic Confusion");
+            ////Description.SetDefault("Controls reverse sometimes...");
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = true;
             Main.buffNoSave[Type] = true;

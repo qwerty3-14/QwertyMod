@@ -12,8 +12,8 @@ namespace QwertyMod.Content.Items.Tool.Mining.Ancient
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Ancient Miner");
-            Tooltip.SetDefault("Mines a 3x3 area");
+            //DisplayName,SetDefault("Ancient Miner");
+            //Tooltip.SetDefault("Mines a 3x3 area");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -25,10 +25,10 @@ namespace QwertyMod.Content.Items.Tool.Mining.Ancient
 
             Item.useTime = 22;
             Item.useAnimation = 30;
-            Item.useStyle = 1;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.knockBack = 3;
             Item.value = 25000;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
             Item.UseSound = SoundID.Item1;
             //Item.prefix = 0;
             Item.width = 16;

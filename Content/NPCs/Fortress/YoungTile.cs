@@ -18,7 +18,7 @@ namespace QwertyMod.Content.NPCs.Fortress
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Young Tile");
+            //DisplayName,SetDefault("Young Tile");
             Main.npcFrameCount[NPC.type] = 4;
         }
 
@@ -63,7 +63,7 @@ namespace QwertyMod.Content.NPCs.Fortress
                 new FlavorTextBestiaryInfoElement("Even at a young age, the tile's insticts to defend to fortress are strong.")
             });
         }
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
         {
             if (NPC.life <= 0)
             {
@@ -155,7 +155,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             //Main.NewText(Math.Abs(player.Center.X - NPC.Center.X));
             if (Math.Abs(player.Center.X - NPC.Center.X) < aggroDistance && Math.Abs(player.Bottom.Y - NPC.Bottom.Y) < aggroDistanceY)
             {
-                if (Main.netMode != 1)
+                if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     jumpSpeedX = Math.Abs((player.Center.X + Main.rand.Next(-100, 100)) - NPC.Center.X) / 70 * (NPC.confused ? -1 : 1);
                     NPC.netUpdate = true;

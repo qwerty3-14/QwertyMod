@@ -22,56 +22,7 @@ namespace QwertyMod.Common
         public float hookSpeed = 1f;
         public float weaponSize = 1f;
         public int normalGravity = 0;
-        public override void SetStaticDefaults()
-        {
-            IL.Terraria.Player.GetAdjustedItemScale += HookSize;
-            IL.Terraria.Player.ItemCheck_GetMeleeHitbox += HookHey;
-        }
-
-        private void HookHey(ILContext il)
-        {
-            var c = new ILCursor(il);
-            c.EmitDelegate(() =>
-            {
-
-            });
-        }
-        private void HookSize(ILContext il)
-        {
-            var c = new ILCursor(il);
-
-            for (int i = 0; i < 2; i++)
-            {
-                if (!c.TryGotoNext(i => i.MatchLdloc(0)))
-                {
-                    return; // Patch unable to be applied
-                }
-            }
-
-            //EDIT: Pop the old value so we don't have stack issues
-            c.Index++;
-            c.Emit(OpCodes.Pop);
-
-            //push the item onto the stack
-            c.Emit(OpCodes.Ldarg_1);
-            //push the player onto the stack
-            c.Emit(OpCodes.Ldarg_0);
-            //push the local variable onto the stack
-            c.Emit(OpCodes.Ldloc_0);
-
-            c.EmitDelegate<Func<Item, Player, float, float>>((item, player, scale) =>
-            {
-                if (item.CountsAsClass(DamageClass.Melee))
-                {
-                    scale *= player.GetModPlayer<CommonStats>().weaponSize;
-                }
-                return scale;
-            });
-            //pop the variable at the top of the stack onto the local variable
-            c.Emit(OpCodes.Stloc_0);
-            //push the local variable onto the stack
-            c.Emit(OpCodes.Ldloc_0);
-        }
+        
         public override void ResetEffects()
         {
             ammoReduction = 1f;
@@ -95,76 +46,15 @@ namespace QwertyMod.Common
         }
         public override void PostUpdate()
         {
-        }                                
-        public override bool PreHurt(bool pvp, bool quiet, ref int damage, ref int hitDirection, ref bool crit, ref bool customDamage, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource, ref int cooldownCounter)
+        }
+        public override void ModifyHurt(ref Player.HurtModifiers modifiers)
         {
             int dodgeRng = Main.rand.Next(100);
             if (dodgeRng < dodgeChance && dodgeRng < 80)
             {
-                Player.immune = true;
-                Player.immuneTime = 40;
-                if (Player.longInvince)
-                {
-                    Player.immuneTime += 80;
-                }
-                if (dodgeDamageBoost)
-                {
-                    damageBoostFromDodge = true;
-                }
-                for (int i = 0; i < Player.hurtCooldowns.Length; i++)
-                {
-                    Player.hurtCooldowns[i] = Player.immuneTime;
-                }
-                #region dust and gore
-                for (int j = 0; j < 100; j++)
-                {
-                    int num = Dust.NewDust(new Vector2(Player.position.X, Player.position.Y), Player.width, Player.height, 31, 0f, 0f, 100, default(Color), 2f);
-                    Dust expr_A4_cp_0 = Main.dust[num];
-                    expr_A4_cp_0.position.X = expr_A4_cp_0.position.X + (float)Main.rand.Next(-20, 21);
-                    Dust expr_CB_cp_0 = Main.dust[num];
-                    expr_CB_cp_0.position.Y = expr_CB_cp_0.position.Y + (float)Main.rand.Next(-20, 21);
-                    Main.dust[num].velocity *= 0.4f;
-                    Main.dust[num].scale *= 1f + (float)Main.rand.Next(40) * 0.01f;
-                    Main.dust[num].shader = GameShaders.Armor.GetSecondaryShader(Player.cWaist, Player);
-                    if (Main.rand.Next(2) == 0)
-                    {
-                        Main.dust[num].scale *= 1f + (float)Main.rand.Next(40) * 0.01f;
-                        Main.dust[num].noGravity = true;
-                    }
-                }
-                int num2 = Gore.NewGore(new EntitySource_Misc(""), new Vector2(Player.position.X + (float)(Player.width / 2) - 24f, Player.position.Y + (float)(Player.height / 2) - 24f), default(Vector2), Main.rand.Next(61, 64), 1f);
-                Main.gore[num2].scale = 1.5f;
-                Main.gore[num2].velocity.X = (float)Main.rand.Next(-50, 51) * 0.01f;
-                Main.gore[num2].velocity.Y = (float)Main.rand.Next(-50, 51) * 0.01f;
-                Main.gore[num2].velocity *= 0.4f;
-                num2 = Gore.NewGore(new EntitySource_Misc(""), new Vector2(Player.position.X + (float)(Player.width / 2) - 24f, Player.position.Y + (float)(Player.height / 2) - 24f), default(Vector2), Main.rand.Next(61, 64), 1f);
-                Main.gore[num2].scale = 1.5f;
-                Main.gore[num2].velocity.X = 1.5f + (float)Main.rand.Next(-50, 51) * 0.01f;
-                Main.gore[num2].velocity.Y = 1.5f + (float)Main.rand.Next(-50, 51) * 0.01f;
-                Main.gore[num2].velocity *= 0.4f;
-                num2 = Gore.NewGore(new EntitySource_Misc(""), new Vector2(Player.position.X + (float)(Player.width / 2) - 24f, Player.position.Y + (float)(Player.height / 2) - 24f), default(Vector2), Main.rand.Next(61, 64), 1f);
-                Main.gore[num2].scale = 1.5f;
-                Main.gore[num2].velocity.X = -1.5f - (float)Main.rand.Next(-50, 51) * 0.01f;
-                Main.gore[num2].velocity.Y = 1.5f + (float)Main.rand.Next(-50, 51) * 0.01f;
-                Main.gore[num2].velocity *= 0.4f;
-                num2 = Gore.NewGore(new EntitySource_Misc(""), new Vector2(Player.position.X + (float)(Player.width / 2) - 24f, Player.position.Y + (float)(Player.height / 2) - 24f), default(Vector2), Main.rand.Next(61, 64), 1f);
-                Main.gore[num2].scale = 1.5f;
-                Main.gore[num2].velocity.X = 1.5f + (float)Main.rand.Next(-50, 51) * 0.01f;
-                Main.gore[num2].velocity.Y = -1.5f - (float)Main.rand.Next(-50, 51) * 0.01f;
-                Main.gore[num2].velocity *= 0.4f;
-                num2 = Gore.NewGore(new EntitySource_Misc(""), new Vector2(Player.position.X + (float)(Player.width / 2) - 24f, Player.position.Y + (float)(Player.height / 2) - 24f), default(Vector2), Main.rand.Next(61, 64), 1f);
-                Main.gore[num2].scale = 1.5f;
-                Main.gore[num2].velocity.X = -1.5f - (float)Main.rand.Next(-50, 51) * 0.01f;
-                Main.gore[num2].velocity.Y = -1.5f - (float)Main.rand.Next(-50, 51) * 0.01f;
-                Main.gore[num2].velocity *= 0.4f;
-                #endregion
-                if (Player.whoAmI == Main.myPlayer)
-                {
-                    NetMessage.SendData(62, -1, -1, null, Player.whoAmI, 1f, 0f, 0f, 0, 0, 0);
-                }
-                return false;
+                Player.NinjaDodge();
+                modifiers.FinalDamage *= 0;
             }
-            return true;
         }
         public override void PostUpdateEquips()
         {
@@ -182,43 +72,38 @@ namespace QwertyMod.Common
         }
         public int negativeCritChance = 0;
         bool criticalFailure = false;
-        public override void ModifyHitNPC(Item item, NPC target, ref int damage, ref float knockback, ref bool crit)
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            if (Player.GetTotalCritChance(item.DamageType) < 0)
-            {
-                ProcessCritChanceNegatable((int)Player.GetTotalCritChance(item.DamageType), ref damage, ref knockback, ref crit);
-            }
+            ProcessCritChanceNegatable(ref modifiers);
         }
-        public override void OnHitNPC(Item item, NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             ProcessCriticalFailure();
         }
-        public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
         {
-            if (Player.GetTotalCritChance(proj.DamageType) < 0)
-            {
-                ProcessCritChanceNegatable((int)Player.GetTotalCritChance(proj.DamageType), ref damage, ref knockback, ref crit);
-            }
+                ProcessCritChanceNegatable(ref modifiers);
         }
-        public override void OnHitNPCWithProj(Projectile proj, NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
             ProcessCriticalFailure();
             if(target.HasBuff<ForkTag>() && proj.owner == Player.whoAmI && (proj.minion || ProjectileID.Sets.MinionShot[proj.type]))
             {
-                Projectile.NewProjectile(new EntitySource_Misc(""), target.Center, (target.Center - Player.Center).SafeNormalize(-Vector2.UnitY) * 8, ModContent.ProjectileType<TagMissile>(), (int)(damage * 0.5f), 0, Player.whoAmI);
+                Projectile.NewProjectile(proj.GetSource_FromThis(), target.Center, (target.Center - Player.Center).SafeNormalize(-Vector2.UnitY) * 8, ModContent.ProjectileType<TagMissile>(), (int)(damageDone * 0.5f), 0, Player.whoAmI);
             }
         }
-        void ProcessCritChanceNegatable(int critChance, ref int damage, ref float knockback, ref bool crit)
+        void ProcessCritChanceNegatable(ref NPC.HitModifiers modifiers)
         {
-            crit = false;
-            if (critChance < 0)
+            if (modifiers.DamageType != DamageClass.Summon && Player.GetTotalCritChance(modifiers.DamageType) < 0)
             {
-                int chanceToDoHalf = critChance * -1;
+                float chanceToDoHalf = Player.GetTotalCritChance(modifiers.DamageType) * -1;
+                //Main.NewText(Player.GetTotalCritChance(modifiers.DamageType));
                 if (Main.rand.Next(100) < chanceToDoHalf)
                 {
-                    damage = damage / 2;
+                    modifiers.FinalDamage = modifiers.FinalDamage / 2;
                     criticalFailure = true;
                 }
+                modifiers.DisableCrit();
             }
         }
         void ProcessCriticalFailure()

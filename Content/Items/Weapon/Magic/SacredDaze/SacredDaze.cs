@@ -13,8 +13,8 @@ namespace QwertyMod.Content.Items.Weapon.Magic.SacredDaze
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Sacred Daze");
-            Tooltip.SetDefault("Stuns those who are not worthy!");
+            //DisplayName,SetDefault("Sacred Daze");
+            //Tooltip.SetDefault("Stuns those who are not worthy!");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
         public override void SetDefaults()
@@ -24,10 +24,10 @@ namespace QwertyMod.Content.Items.Weapon.Magic.SacredDaze
             Item.DamageType = DamageClass.Magic;
             Item.knockBack = 1;
             Item.value = 50000;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
             Item.width = 26;
             Item.height = 18;
-            Item.useStyle = 5;
+            Item.useStyle = ItemUseStyleID.Shoot;
             Item.shootSpeed = 10f;
             Item.useTime = 9;
             Item.useAnimation = 9;
@@ -50,7 +50,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.SacredDaze
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Sacred Daze");
+            //DisplayName,SetDefault("Sacred Daze");
         }
 
         public override void SetDefaults()
@@ -75,13 +75,13 @@ namespace QwertyMod.Content.Items.Weapon.Magic.SacredDaze
                 dust.velocity *= 3f;
             }
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (!target.boss)
             {
                 target.AddBuff(BuffType<Stunned>(), 12);
             }
-            if (Main.rand.Next(10) == 0)
+            if (Main.rand.NextBool(10))
             {
                 target.AddBuff(BuffType<PowerDown>(), 120);
             }

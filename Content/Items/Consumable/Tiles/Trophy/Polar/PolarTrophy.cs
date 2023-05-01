@@ -1,6 +1,7 @@
 ﻿using Terraria.GameContent.Creative;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using Terraria.ID;
 
 namespace QwertyMod.Content.Items.Consumable.Tiles.Trophy.Polar
 {
@@ -15,7 +16,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Trophy.Polar
             Item.autoReuse = true;
             Item.useAnimation = 15;
             Item.useTime = 10;
-            Item.useStyle = 1;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.consumable = true;
             Item.value = 50000;
             Item.createTile = TileType<PolarTrophyT>();
@@ -24,8 +25,8 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Trophy.Polar
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Polar Exterminator Trophy");
-            Tooltip.SetDefault("");
+            //DisplayName,SetDefault("Polar Exterminator Trophy");
+            //Tooltip.SetDefault("");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
     }

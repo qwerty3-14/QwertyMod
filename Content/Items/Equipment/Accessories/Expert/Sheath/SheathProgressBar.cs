@@ -22,43 +22,40 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.Sheath
         {
             try
             {
-                if (drawInfo.drawPlayer.GetModPlayer<ImperiousEffect>().effect)
+                
+                Player drawPlayer = drawInfo.drawPlayer;
+                if(!drawPlayer.TryGetModPlayer<ImperiousEffect>(out ImperiousEffect modPlayer)){ return; }
+                if(!modPlayer.effect){ return; }
+
+                Texture2D texture = Request<Texture2D>("QwertyMod/Content/Items/Equipment/Accessories/Expert/Sheath/SheathProgress").Value;
+
+                int drawX = (int)(drawPlayer.position.X - Main.screenPosition.X);
+                int drawY = (int)(drawPlayer.position.Y - Main.screenPosition.Y);
+                Vector2 Position = drawInfo.Position;
+                Vector2 origin = texture.Size() / 2;
+                Vector2 pos = new Vector2((float)((int)(Position.X - Main.screenPosition.X - (float)(drawPlayer.bodyFrame.Width / 2) + (float)(drawPlayer.width / 2))), (float)((int)(Position.Y - Main.screenPosition.Y + (float)drawPlayer.height - (float)drawPlayer.bodyFrame.Height + 4f))) + drawPlayer.bodyPosition + new Vector2((float)(drawPlayer.bodyFrame.Width / 2), (float)(drawPlayer.bodyFrame.Height / 2));
+                pos.Y += 50;
+
+                DrawData data = new DrawData(texture, pos, new Rectangle(0, 0, texture.Width, texture.Height), Color.White, 0f, origin, 1f, SpriteEffects.None, 0);
+                drawInfo.DrawDataCache.Add(data);
+
+
+                texture = Request<Texture2D>("QwertyMod/Content/Items/Equipment/Accessories/Expert/Sheath/SheathBlip").Value;
+
+                Position = drawInfo.Position;
+                origin = new Vector2((texture.Width - 2) / 2, texture.Height / 4);
+                pos = new Vector2((float)((int)(Position.X - Main.screenPosition.X - (float)(drawPlayer.bodyFrame.Width / 2) + (float)(drawPlayer.width / 2))), (float)((int)(Position.Y - Main.screenPosition.Y + (float)drawPlayer.height - (float)drawPlayer.bodyFrame.Height + 4f))) + drawPlayer.bodyPosition + new Vector2((float)(drawPlayer.bodyFrame.Width / 2), (float)(drawPlayer.bodyFrame.Height / 2));
+                pos.Y += 50f;
+
+                float amountComplete = (float)(modPlayer.damageTally) / (float)(modPlayer.damageTallyMax);
+                int frame = 0;
+                if (amountComplete >= 1f)
                 {
-                    Player drawPlayer = drawInfo.drawPlayer;
-
-                    if (drawPlayer.GetModPlayer<ImperiousEffect>().effect)
-                    {
-                        Texture2D texture = Request<Texture2D>("QwertyMod/Content/Items/Equipment/Accessories/Expert/Sheath/SheathProgress").Value;
-
-                        int drawX = (int)(drawPlayer.position.X - Main.screenPosition.X);
-                        int drawY = (int)(drawPlayer.position.Y - Main.screenPosition.Y);
-                        Vector2 Position = drawInfo.Position;
-                        Vector2 origin = texture.Size() / 2;
-                        Vector2 pos = new Vector2((float)((int)(Position.X - Main.screenPosition.X - (float)(drawPlayer.bodyFrame.Width / 2) + (float)(drawPlayer.width / 2))), (float)((int)(Position.Y - Main.screenPosition.Y + (float)drawPlayer.height - (float)drawPlayer.bodyFrame.Height + 4f))) + drawPlayer.bodyPosition + new Vector2((float)(drawPlayer.bodyFrame.Width / 2), (float)(drawPlayer.bodyFrame.Height / 2));
-                        pos.Y += 50;
-
-                        DrawData data = new DrawData(texture, pos, new Rectangle(0, 0, texture.Width, texture.Height), Color.White, 0f, origin, 1f, SpriteEffects.None, 0);
-                        drawInfo.DrawDataCache.Add(data);
-
-
-                        texture = Request<Texture2D>("QwertyMod/Content/Items/Equipment/Accessories/Expert/Sheath/SheathBlip").Value;
-
-                        Position = drawInfo.Position;
-                        origin = new Vector2((texture.Width - 2) / 2, texture.Height / 4);
-                        pos = new Vector2((float)((int)(Position.X - Main.screenPosition.X - (float)(drawPlayer.bodyFrame.Width / 2) + (float)(drawPlayer.width / 2))), (float)((int)(Position.Y - Main.screenPosition.Y + (float)drawPlayer.height - (float)drawPlayer.bodyFrame.Height + 4f))) + drawPlayer.bodyPosition + new Vector2((float)(drawPlayer.bodyFrame.Width / 2), (float)(drawPlayer.bodyFrame.Height / 2));
-                        pos.Y += 50f;
-
-                        float amountComplete = (float)(drawPlayer.GetModPlayer<ImperiousEffect>().damageTally) / (float)(drawPlayer.GetModPlayer<ImperiousEffect>().damageTallyMax);
-                        int frame = 0;
-                        if (amountComplete >= 1f)
-                        {
-                            frame = 10;
-                        }
-
-                        data = new DrawData(texture, pos, new Rectangle(0, frame, (int)((texture.Width - 2) * amountComplete), texture.Height / 2), Color.White, 0f, origin, 1f, SpriteEffects.None, 0);
-                        drawInfo.DrawDataCache.Add(data);
-                    }
+                    frame = 10;
                 }
+
+                data = new DrawData(texture, pos, new Rectangle(0, frame, (int)((texture.Width - 2) * amountComplete), texture.Height / 2), Color.White, 0f, origin, 1f, SpriteEffects.None, 0);
+                drawInfo.DrawDataCache.Add(data);
             }
             catch
             {

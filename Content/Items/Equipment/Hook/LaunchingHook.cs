@@ -14,7 +14,6 @@ namespace QwertyMod.Content.Items.Equipment.Hook
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Launching Hook");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -24,7 +23,7 @@ namespace QwertyMod.Content.Items.Equipment.Hook
             Item.shootSpeed = 18f; // how quickly the hook is shot.
             Item.shoot = ProjectileType<LaunchingHookP>();
             Item.value = 50000;
-            Item.rare = 5;
+            Item.rare = ItemRarityID.Pink;
         }
     }
 
@@ -33,7 +32,7 @@ namespace QwertyMod.Content.Items.Equipment.Hook
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("${ProjectileName.GemHookAmethyst}");
+            //DisplayName,SetDefault("${ProjectileName.GemHookAmethyst}");
         }
 
         public override void SetDefaults()
@@ -101,7 +100,7 @@ namespace QwertyMod.Content.Items.Equipment.Hook
             for (int d = 0; d < distanceToHook; d += texture.Height)
             {
                 Main.EntitySpriteDraw(texture, player.Center + QwertyMethods.PolarVector(d, directionToHook) - Main.screenPosition,
-                       new Rectangle(0, 0, texture.Width, texture.Height), lightColor, directionToHook + (float)Math.PI / 2,
+                       new Rectangle(0, 0, texture.Width, texture.Height), lightColor, directionToHook + MathF.PI / 2,
                        new Vector2(texture.Width * 0.5f, texture.Height * 0.5f), 1f, SpriteEffects.None, 0);
             }
 

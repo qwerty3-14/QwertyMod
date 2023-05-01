@@ -13,7 +13,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion
         protected float shootSpeed = 12;
         protected int cycleTIme = 80;
         protected float holdOffset = 20;
-        protected float rotSpeed = (float)Math.PI / 30f;
+        protected float rotSpeed = MathF.PI / 30f;
 
         private NPC target;
         private int timer;
@@ -56,7 +56,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion
             {
                 timer++;
                 Projectile.velocity = Vector2.Zero;
-                Vector2 RestSpot = player.Center + QwertyMethods.PolarVector(50f + 8f * bowCount, -(float)Math.PI * ((float)(identity + 1) / (bowCount + 1))) + Vector2.UnitY * 10;
+                Vector2 RestSpot = player.Center + QwertyMethods.PolarVector(50f + 8f * bowCount, -MathF.PI * ((float)(identity + 1) / (bowCount + 1))) + Vector2.UnitY * 10;
                 if (timer >= cycleTIme)
                 {
                     Projectile.Center = RestSpot;
@@ -86,7 +86,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion
         {
             int weaponDamage = Projectile.damage;
             float weaponKnockback = Projectile.knockBack;
-            if (Projectile.owner == Main.myPlayer && Projectile.UseAmmo(AmmoID.Arrow, ref arrow, ref shootSpeed, ref weaponDamage, ref weaponKnockback, Main.rand.Next(2) == 0))
+            if (Projectile.owner == Main.myPlayer && Projectile.UseAmmo(AmmoID.Arrow, ref arrow, ref shootSpeed, ref weaponDamage, ref weaponKnockback, Main.rand.NextBool(2)))
             {
                 ChangeArrow(ref arrow);
                 loadedArrow = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, QwertyMethods.PolarVector(shootSpeed, Projectile.rotation), arrow, weaponDamage, weaponKnockback, Main.myPlayer)];
@@ -100,8 +100,8 @@ namespace QwertyMod.Content.Items.Weapon.Minion
         }
         void HoldArrow()
         {
-            loadedArrow.velocity = QwertyMethods.PolarVector(0.01f, Projectile.rotation - (float)Math.PI / 2);
-            loadedArrow.Center = Projectile.Center + QwertyMethods.PolarVector(holdOffset - loadedArrow.velocity.Length() * (loadedArrow.extraUpdates + 1), Projectile.rotation - (float)Math.PI / 2);
+            loadedArrow.velocity = QwertyMethods.PolarVector(0.01f, Projectile.rotation - MathF.PI / 2);
+            loadedArrow.Center = Projectile.Center + QwertyMethods.PolarVector(holdOffset - loadedArrow.velocity.Length() * (loadedArrow.extraUpdates + 1), Projectile.rotation - MathF.PI / 2);
             loadedArrow.friendly = false;
             loadedArrow.rotation = Projectile.rotation;
             loadedArrow.timeLeft += loadedArrow.extraUpdates + 1;
@@ -122,7 +122,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion
                     giveTileCollision = false;
                 }
                 SoundEngine.PlaySound(SoundID.Item5, Projectile.Center);
-                loadedArrow.velocity = QwertyMethods.PolarVector(shootSpeed, Projectile.rotation - (float)Math.PI / 2);
+                loadedArrow.velocity = QwertyMethods.PolarVector(shootSpeed, Projectile.rotation - MathF.PI / 2);
                 loadedArrow.friendly = true;
             }
             arrowFired = true;
@@ -149,7 +149,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion
                     }
                     aimRotation.SlowRotation(targetRotation, rotSpeed);
 
-                    Projectile.rotation = aimRotation + (float)Math.PI / 2;
+                    Projectile.rotation = aimRotation + MathF.PI / 2;
                     if (aimRotation == targetRotation)
                     {
                         Fire();
@@ -167,10 +167,10 @@ namespace QwertyMod.Content.Items.Weapon.Minion
             targetRotation = (Projectile.Center - player.Center).ToRotation();
             if (timer - (cycleTIme / 2) < 0)
             {
-                targetRotation += (float)Math.PI;
+                targetRotation += MathF.PI;
             }
             aimRotation.SlowRotation(targetRotation, rotSpeed);
-            Projectile.rotation = aimRotation + (float)Math.PI / 2;
+            Projectile.rotation = aimRotation + MathF.PI / 2;
         }
         void FloatArrow()
         {

@@ -9,8 +9,8 @@ namespace QwertyMod.Content.Items
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Chalice of the Light");
-            Tooltip.SetDefault("Reusable" + "\nGives you 2 seconds of invinsibility after drinking");
+            //DisplayName,SetDefault("Chalice of the Light");
+            //Tooltip.SetDefault("Reusable" + "\nGives you 2 seconds of invinsibility after drinking");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -18,7 +18,7 @@ namespace QwertyMod.Content.Items
         {
             Item.UseSound = SoundID.Item3;
             Item.healLife = 100;
-            Item.useStyle = 2;
+            Item.useStyle = ItemUseStyleID.DrinkLiquid; 
             Item.useTurn = true;
             Item.useAnimation = 17;
             Item.useTime = 17;
@@ -26,7 +26,7 @@ namespace QwertyMod.Content.Items
             Item.consumable = false;
             Item.width = 14;
             Item.height = 24;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
             Item.potion = true;
             Item.value = 50000;
             Item.expert = true;

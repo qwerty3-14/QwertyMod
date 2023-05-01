@@ -19,15 +19,13 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Vitallum Headress");
-            Tooltip.SetDefault("Increases max life by 80 \n7% increased damage \n Drain life from nearby enemies");
             Head.Sets.DrawHatHair[Item.headSlot] = true;
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()
         {
-            Item.rare = 8;
+            Item.rare = ItemRarityID.Yellow;
             Item.value = Item.sellPrice(gold: 6);
         }
 
@@ -61,17 +59,16 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
             player.setBonus = s;
             player.GetModPlayer<HeadressEffects>().setBonus = true;
         }
-
+        [Obsolete]
         public override void OnCraft(Recipe recipe)
         {
-            Main.LocalPlayer.QuickSpawnItem(new EntitySource_Misc(""), ItemType<VitallumCoreUncharged>(), 1);
+            Main.LocalPlayer.QuickSpawnItem(new EntitySource_Misc("Recipe"), ItemType<VitallumCoreUncharged>(), 1);
         }
     }
 
     public class HeadressEffects : ModPlayer
     {
         public bool poisonHeal = false;
-        private int counter = 0;
         private List<Dust> leechDusts = new List<Dust>();
         public bool setBonus = false;
         public int heartCount = 0;
@@ -102,7 +99,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
         {
             if (setBonus)
             {
-                trigCounter += (float)Math.PI / 60;
+                trigCounter += MathF.PI / 60;
                 heartCounter++;
                 if (heartCounter < 0)
                 {
@@ -149,13 +146,13 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
                     {
                         Main.npc[i].AddBuff(151, 30);
                         Player.soulDrain++;
-                        if (Main.rand.Next(3) != 0)
+                        if (Main.rand.Next(3) > 0)
                         {
                             Vector2 center = Main.npc[i].Center;
                             center.X += (float)Main.rand.Next(-100, 100) * 0.05f;
                             center.Y += (float)Main.rand.Next(-100, 100) * 0.05f;
                             center += Main.npc[i].velocity;
-                            int num = Dust.NewDust(center, 1, 1, 235);
+                            int num = Dust.NewDust(center, 1, 1, DustID.LifeDrain);
                             Main.dust[num].velocity *= 0f;
                             Main.dust[num].scale = (float)Main.rand.Next(70, 85) * 0.01f;
                             Main.dust[num].fadeIn = Player.whoAmI + 1;
@@ -184,7 +181,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
                 return;
             }
             Player drawPlayer = drawInfo.drawPlayer;
-            HeadressEffects modPlayer = drawPlayer.GetModPlayer<HeadressEffects>();
+            if(!drawPlayer.TryGetModPlayer<HeadressEffects>(out HeadressEffects modPlayer)){ return; }
             Mod mod = ModLoader.GetMod("QwertyMod");
             int horizontalFrame = 0;
             int horizontalFrames = 4;
@@ -200,7 +197,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
             }
             for (int e = 0; e < modPlayer.heartCount; e++)
             {
-                Vector2 heartPos = drawPlayer.Center + QwertyMethods.PolarVector(modPlayer.heartRadius, modPlayer.trigCounter + ((float)Math.PI * 2 * e) / (float)modPlayer.heartCount) - Main.screenPosition;
+                Vector2 heartPos = drawPlayer.Center + QwertyMethods.PolarVector(modPlayer.heartRadius, modPlayer.trigCounter + (MathF.PI * 2 * e) / (float)modPlayer.heartCount) - Main.screenPosition;
                 Texture2D heartTexture = Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Vitallum/VitallumCoreUncharged").Value;
                 DrawData data = new DrawData(heartTexture, heartPos, null, Color.White, 0, heartTexture.Size() * .5f, 1f, 0, 0);
                 data.shader = drawInfo.cBody;

@@ -1,5 +1,6 @@
 using QwertyMod.Content.Items.Consumable.Tiles.Fortress.BuildingBlocks;
 using QwertyMod.Content.NPCs.Bosses.FortressBoss;
+using QwertyMod.Content.NPCs.Bosses.InvaderBattleship;
 using System;
 using System.Collections.Generic;
 using Terraria;
@@ -31,7 +32,7 @@ namespace QwertyMod.Common.Fortress
             if (player.InModBiome(GetInstance<FortressBiome>()))
             {
 
-                if (NPC.AnyNPCs(NPCType<FortressBoss>()))
+                if (NPC.AnyNPCs(NPCType<FortressBoss>()) || NPC.AnyNPCs(NPCType<InvaderBattleship>()))
                 {
                     spawnRate = 0;
                     maxSpawns = 0;
@@ -103,7 +104,7 @@ namespace QwertyMod.Common.Fortress
         {
             fortressBrick = tileCounts[TileType<FortressBrickT>()];
         }
-        public override void ModifyWorldGenTasks(List<GenPass> tasks, ref float totalWeight)
+        public override void ModifyWorldGenTasks(List<GenPass> tasks, ref double totalWeight)
         {
             tasks.Add(new PassLegacy("Fortifying the sky!", delegate (GenerationProgress progress, GameConfiguration configuration)
             {

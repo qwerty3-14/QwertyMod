@@ -9,11 +9,6 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Rhuthinium
 {
     public class RhuthiniumArrowP : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault("Rhuthinium Arrow");
-        }
-
 
         public override void SetDefaults()
         {
@@ -34,7 +29,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Rhuthinium
             if (Projectile.timeLeft < 3598)
             {
                 Dust d = Dust.NewDustPerfect(Projectile.Center, DustType<RhuthiniumDust>(), Vector2.Zero);
-                d.frame.Y = Main.rand.Next(2) == 0 ? 0 : 10;
+                d.frame.Y = Main.rand.NextBool(2) ? 0 : 10;
                 d.noGravity = true;
             }
         }
@@ -49,7 +44,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Rhuthinium
             }
         }
 
-        public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
             Player player = Main.player[Projectile.owner];
             float distance = (player.Center - target.Center).Length();
@@ -57,7 +52,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Rhuthinium
             {
                 distance = 1500;
             }
-            damage = damage + (int)(((float)damage * distance / 1500f) / 2f);
+            modifiers.FinalDamage *= 1 + (distance / 1500f);
         }
     }
 }

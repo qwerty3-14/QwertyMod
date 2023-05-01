@@ -9,8 +9,8 @@ namespace QwertyMod.Content.Items.Weapon.Minion.TileMinion
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Tile Minion");
-            Description.SetDefault("Up up down down left right left right...");
+            //DisplayName,SetDefault("Tile Minion");
+            //Description.SetDefault("Up up down down left right left right...");
             Main.buffNoSave[Type] = true;
             Main.buffNoTimeDisplay[Type] = true;
         }

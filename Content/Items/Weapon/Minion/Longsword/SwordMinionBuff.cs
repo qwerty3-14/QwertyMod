@@ -9,8 +9,8 @@ namespace QwertyMod.Content.Items.Weapon.Minion.Longsword
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Sword Minion");
-            Description.SetDefault("The embodiment of force multiplication");
+            //DisplayName,SetDefault("Sword Minion");
+            //Description.SetDefault("The embodiment of force multiplication");
             Main.buffNoSave[Type] = true;
             Main.buffNoTimeDisplay[Type] = true;
         }

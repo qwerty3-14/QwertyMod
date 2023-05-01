@@ -13,8 +13,8 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Hydra Cannon");
-            Tooltip.SetDefault("Killing enemies releases a powerful wave of destruction");
+            //DisplayName,SetDefault("Hydra Cannon");
+            //Tooltip.SetDefault("Killing enemies releases a powerful wave of destruction");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -27,17 +27,17 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun
             Item.useTime = 6;
             Item.reuseDelay = 14;
 
-            Item.useStyle = 5;
+            Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 5;
             Item.value = 250000;
-            Item.rare = 5;
+            Item.rare = ItemRarityID.Pink;
             Item.UseSound = SoundID.Item11;
 
             Item.width = 54;
             Item.height = 64;
 
-            Item.shoot = 97;
-            Item.useAmmo = 97;
+            Item.shoot = ProjectileID.Bullet;
+            Item.useAmmo = AmmoID.Bullet;
             Item.shootSpeed = 36;
             Item.noMelee = true;
             Item.autoReuse = true;
@@ -64,7 +64,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Doom Breath");
+            //DisplayName,SetDefault("Doom Breath");
             Main.projFrames[Projectile.type] = 2;
         }
 
@@ -115,13 +115,13 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun
         {
             hydraCannon = false;
         }
-        public override void OnHitNPCWithProj(Projectile proj, NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (hydraCannon && !target.immortal && target.life <= 0 && proj.CountsAsClass(DamageClass.Ranged) && proj.type != ProjectileType<DoomBreath>() && !target.SpawnedFromStatue)
             {
                 SoundEngine.PlaySound(SoundID.Roar, Player.position);
 
-                Projectile.NewProjectile(Projectile.InheritSource(proj), Player.Center, (target.Center - Player.Center).SafeNormalize(Vector2.UnitY) * 24f, ProjectileType<DoomBreath>(), damage * 5, knockback * 3, Player.whoAmI);
+                Projectile.NewProjectile(Projectile.InheritSource(proj), Player.Center, (target.Center - Player.Center).SafeNormalize(Vector2.UnitY) * 24f, ProjectileType<DoomBreath>(), damageDone* 5, hit.Knockback * 3, Player.whoAmI);
 
                 Main.rand.NextFloat(Player.width);
             }

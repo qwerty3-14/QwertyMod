@@ -13,8 +13,8 @@ namespace QwertyMod.Content.Items.Weapon.Minion.UrQuan
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Rod of Command");
-            Tooltip.SetDefault("Used by Ur-Quan lords to issue commands");
+            //DisplayName,SetDefault("Rod of Command");
+            //Tooltip.SetDefault("Used by Ur-Quan lords to issue commands");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
@@ -28,11 +28,11 @@ namespace QwertyMod.Content.Items.Weapon.Minion.UrQuan
             Item.height = 54;
             Item.useTime = 25;
             Item.useAnimation = 25;
-            Item.useStyle = 1;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.noMelee = true;
             Item.knockBack = 1f;
             Item.value = 750000;
-            Item.rare = ItemRarityID.Red;
+            Item.rare = ItemRarityID.LightRed;
             //Item.UseSound = SoundID.Item44;
             Item.shoot = ProjectileType<Dreadnought>();
             Item.DamageType = DamageClass.Summon;

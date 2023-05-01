@@ -36,16 +36,12 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Furniture
             };
             TileObjectData.newTile.CoordinateWidth = 16;
             TileObjectData.newTile.CoordinatePadding = 2;
-            //TileObjectData.addBaseTile(out TileObjectData.Style1xX);
             TileObjectData.newTile.CopyFrom(TileObjectData.Style1xX);
             TileObjectData.newTile.WaterDeath = true;
             TileObjectData.newTile.WaterPlacement = LiquidPlacement.NotAllowed;
             TileObjectData.newTile.LavaPlacement = LiquidPlacement.NotAllowed;
             TileObjectData.addTile(Type);
-            //AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTable);
-            ModTranslation name = CreateMapEntryName();
-            name.SetDefault("Fortress Lamp");
-            AddMapEntry(new Color(162, 184, 185), name);
+            AddMapEntry(new Color(162, 184, 185));
             DustType = DustType<FortressDust>();
             HitSound = QwertyMod.FortressBlocks;
             //// disableSmartCursor = true;

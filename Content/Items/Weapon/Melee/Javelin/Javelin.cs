@@ -71,9 +71,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin
             get { return Projectile.ai[1]; }
             set { Projectile.ai[1] = value; }
         }
-
-        public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit,
-            ref int hitDirection)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.timeLeft = 30 * 60;
             // If you'd use the example above, you'd do: isStickingToTarget = 1f;
@@ -129,6 +127,10 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin
                 Main.projectile[stickingJavelins[oldJavelinIndex].X].Kill();
             }
         }
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            
+        }
 
         public virtual void StuckEffects(NPC victim)
         {
@@ -172,7 +174,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin
 
                 // Make sure to set the rotation accordingly to the velocity, and add some to work around the sprite's rotation
                 Projectile.rotation =
-                    Projectile.velocity.ToRotation() + (float)Math.PI / 2 + rotationOffset;
+                    Projectile.velocity.ToRotation() + MathF.PI / 2 + rotationOffset;
             }
             // projectile code is ran when the javelin is sticking to a target
             if (isStickingToTarget)
@@ -228,20 +230,19 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin
             imperiumJavs = 0;
             return true;
         }
-        public override void ModifyHitByProjectile(NPC npc, Projectile projectile, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitByProjectile(NPC npc, Projectile projectile, ref NPC.HitModifiers modifiers)
         {
-            damage += ruthJavs;
-            knockback += hydraJavs * 1.2f;
+            modifiers.FlatBonusDamage += ruthJavs;
         }
 
-        public override void ModifyHitByItem(NPC npc, Player player, Item item, ref int damage, ref float knockback, ref bool crit)
+        public override void ModifyHitByItem(NPC npc, Player player, Item item, ref NPC.HitModifiers modifiers)
         {
-            damage += ruthJavs;
-            damage = damage + (int)(damage * 0.35f * imperiumJavs);
+            modifiers.FinalDamage += ruthJavs;
+            modifiers.FinalDamage *= 1 + 0.35f * imperiumJavs;
         }
-        public override void ModifyHitNPC(NPC npc, NPC target, ref int damage, ref float knockback, ref bool crit)
+        public override void ModifyHitPlayer(NPC npc, Player target, ref Player.HurtModifiers modifiers)
         {
-            damage = damage * (int)(1f / (1 + hydraJavs * 0.02));
+            modifiers.FinalDamage *=  (1f / (1 + hydraJavs * 0.02f));
         }
     }
 }

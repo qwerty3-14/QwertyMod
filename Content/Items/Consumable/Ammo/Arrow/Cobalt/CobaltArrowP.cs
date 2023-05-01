@@ -8,10 +8,6 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Cobalt
 {
     public class CobaltArrowP : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault("Cobalt Arrow");
-        }
 
         public override void SetDefaults()
         {
@@ -47,8 +43,8 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Cobalt
                     Projectile.netUpdate = true;
                 }
 
-                Projectile.velocity.X = (float)Math.Cos(targetRotation + MathHelper.ToRadians(-90)) * 10f;
-                Projectile.velocity.Y = (float)Math.Sin(targetRotation + MathHelper.ToRadians(-90)) * 10f;
+                Projectile.velocity.X = MathF.Cos(targetRotation + MathHelper.ToRadians(-90)) * 10f;
+                Projectile.velocity.Y = MathF.Sin(targetRotation + MathHelper.ToRadians(-90)) * 10f;
             }
             else
             {
@@ -60,11 +56,11 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Cobalt
                     Projectile.ai[0] = (Main.MouseWorld - Projectile.Center).ToRotation();
                     if (Projectile.ai[1] == 1)
                     {
-                        Projectile.ai[0] += (float)Math.PI;
+                        Projectile.ai[0] += MathF.PI;
                     }
                     Projectile.netUpdate = true;
                 }
-                targetRotation = Projectile.ai[0] + (float)Math.PI / 2;
+                targetRotation = Projectile.ai[0] + MathF.PI / 2;
                 Projectile.rotation = targetRotation;
             }
         }

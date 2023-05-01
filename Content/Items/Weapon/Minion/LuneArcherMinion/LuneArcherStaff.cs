@@ -13,8 +13,8 @@ namespace QwertyMod.Content.Items.Weapon.Minion.LuneArcherMinion
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Lune Archer Staff");
-            Tooltip.SetDefault("Summons a lune archer to shoot arrows from your inventory at enemies");
+            //DisplayName,SetDefault("Lune Archer Staff");
+            //Tooltip.SetDefault("Summons a lune archer to shoot arrows from your inventory at enemies");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
@@ -28,7 +28,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.LuneArcherMinion
             Item.height = 32;
             Item.useTime = 25;
             Item.useAnimation = 25;
-            Item.useStyle = 1;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.noMelee = true;
             Item.knockBack = 1f;
             Item.value = 20000;

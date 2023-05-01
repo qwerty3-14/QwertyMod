@@ -14,8 +14,8 @@ namespace QwertyMod.Content.Items.Tool.Mining.Rune
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Rune Miner");
-            Tooltip.SetDefault("Mines a 5x5 area");
+            //DisplayName,SetDefault("Rune Miner");
+            //Tooltip.SetDefault("Mines a 5x5 area");
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -27,10 +27,10 @@ namespace QwertyMod.Content.Items.Tool.Mining.Rune
 
             Item.useTime = 12;
             Item.useAnimation = 30;
-            Item.useStyle = 1;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.knockBack = 3;
             Item.value = 500000;
-            Item.rare = 9;
+            Item.rare = ItemRarityID.Cyan;
             Item.UseSound = SoundID.Item1;
             //Item.prefix = 0;
             Item.width = 16;

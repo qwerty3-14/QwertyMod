@@ -7,8 +7,8 @@ namespace QwertyMod.Content.Buffs
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Stunned");
-            Description.SetDefault("If you can read this you're hacking!");
+            ////DisplayName,SetDefault("Stunned");
+            ////Description.SetDefault("If you can read this you're hacking!");
             Main.buffNoSave[Type] = true;
             Main.buffNoTimeDisplay[Type] = true;
         }

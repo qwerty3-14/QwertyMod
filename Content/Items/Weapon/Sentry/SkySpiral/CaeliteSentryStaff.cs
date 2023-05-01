@@ -15,8 +15,8 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.SkySpiral
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Sky Spiral Staff");
-            Tooltip.SetDefault("Higher beings will punish all enemies near this sentry!");
+            //DisplayName,SetDefault("Sky Spiral Staff");
+            //Tooltip.SetDefault("Higher beings will punish all enemies near this sentry!");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
@@ -30,11 +30,11 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.SkySpiral
             Item.height = 32;
             Item.useTime = 25;
             Item.useAnimation = 25;
-            Item.useStyle = 1;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.noMelee = true;
             Item.knockBack = 0f;
             Item.value = 25000;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
             Item.UseSound = SoundID.Item44;
             Item.shoot = ProjectileType<CaeliteSentry>();
             Item.DamageType = DamageClass.Summon;
@@ -59,7 +59,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.SkySpiral
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Sky bound spiral");
+            //DisplayName,SetDefault("Sky bound spiral");
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             Main.projFrames[Projectile.type] = 4;
         }
@@ -95,7 +95,10 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.SkySpiral
                 {
                     for (int n = 0; n < targets.Count; n++)
                     {
-                        targets[n].StrikeNPC(Projectile.damage, Projectile.knockBack, 0, false, false);
+                        NPC.HitInfo hit = new NPC.HitInfo();
+                        hit.Damage = Projectile.damage;
+                        hit.DamageType = DamageClass.Summon;
+                        targets[n].StrikeNPC(hit);
                         float distance = (targets[n].Center - Projectile.Center).Length();
                         for (int d = 0; d < distance; d += 4)
                         {

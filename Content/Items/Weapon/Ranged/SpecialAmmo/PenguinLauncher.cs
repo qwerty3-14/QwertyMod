@@ -11,8 +11,8 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.SpecialAmmo
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Penguin Launcher");
-            Tooltip.SetDefault("Uses penguins as ammo");
+            //DisplayName,SetDefault("Penguin Launcher");
+            //Tooltip.SetDefault("Uses penguins as ammo");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -23,10 +23,10 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.SpecialAmmo
 
             Item.useTime = 30;
             Item.useAnimation = 30;
-            Item.useStyle = 5;
+            Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 5;
             Item.value = 100000;
-            Item.rare = 1;
+            Item.rare = ItemRarityID.Blue;
             Item.UseSound = SoundID.Item11;
 
             Item.width = 82;

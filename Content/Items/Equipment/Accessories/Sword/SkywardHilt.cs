@@ -3,6 +3,7 @@ using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
+using Terraria.ID;
 
 namespace QwertyMod.Content.Items.Equipment.Accessories.Sword
 {
@@ -10,15 +11,15 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Sword
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Skyward Hilt");
-            Tooltip.SetDefault("Swords deal more damage while airborne");
+            //DisplayName,SetDefault("Skyward Hilt");
+            //Tooltip.SetDefault("Swords deal more damage while airborne");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()
         {
             Item.value = 25000;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
 
             Item.width = Item.height = 20;
 
@@ -39,7 +40,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Sword
             effect = false;
         }
 
-        public override void ModifyHitNPC(Item item, NPC target, ref int damage, ref float knockback, ref bool crit)
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
             Point origin = Player.Bottom.ToTileCoordinates();
             Point point;
@@ -48,7 +49,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Sword
                                             new Conditions.IsSolid()
                                         }), out point) && Player.grappling[0] == -1)
             {
-                damage += (int)(damage * 0.3f);
+                modifiers.FinalDamage *= 1.25f;
             }
         }
     }

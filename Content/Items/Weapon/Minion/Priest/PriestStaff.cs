@@ -12,8 +12,8 @@ namespace QwertyMod.Content.Items.Weapon.Minion.Priest
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Priest Staff");
-            Tooltip.SetDefault("Do I even need to explain how higher beings are involved with this?");
+            //DisplayName,SetDefault("Priest Staff");
+            //Tooltip.SetDefault("Do I even need to explain how higher beings are involved with this?");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
@@ -26,11 +26,11 @@ namespace QwertyMod.Content.Items.Weapon.Minion.Priest
             Item.height = 32;
             Item.useTime = 25;
             Item.useAnimation = 25;
-            Item.useStyle = 1;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.noMelee = true;
             Item.knockBack = 2f;
             Item.value = 25000;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
             Item.UseSound = SoundID.Item44;
             Item.shoot = ProjectileType<PriestMinion>();
             Item.DamageType = DamageClass.Summon;

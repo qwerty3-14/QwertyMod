@@ -17,7 +17,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RhuthiniumVaporizer
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Rhuthinium Vaporizer");
+            //DisplayName,SetDefault("Rhuthinium Vaporizer");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -35,8 +35,8 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RhuthiniumVaporizer
             Item.channel = true;
             Item.autoReuse = true;
             Item.value = 25000;
-            Item.rare = 3;
-            Item.useStyle = 5;
+            Item.rare = ItemRarityID.Orange;
+            Item.useStyle = ItemUseStyleID.Shoot;
             Item.noMelee = true;
             Item.noUseGraphic = true;
             Item.crit = 5;
@@ -81,7 +81,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RhuthiniumVaporizer
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Rhuthinium Vaporizer");
+            //DisplayName,SetDefault("Rhuthinium Vaporizer");
         }
 
         public override void SetDefaults()
@@ -96,7 +96,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RhuthiniumVaporizer
             Projectile.hide = false;
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.localNPCImmunity[target.whoAmI] = 5;
             target.immune[Projectile.owner] = 0;
@@ -139,8 +139,8 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RhuthiniumVaporizer
                 vector24.Y = player.bodyFrame.Height - vector24.Y;
             }
             vector24 -= new Vector2(player.bodyFrame.Width - player.width, player.bodyFrame.Height - 42) / 2f;
-            Projectile.rotation = player.itemRotation + (player.direction == 1 ? 0 : (float)Math.PI);
-            Projectile.Center = player.position + vector24 + QwertyMethods.PolarVector(22, Projectile.rotation) + QwertyMethods.PolarVector(-10 * (player.direction == 1 ? 1 : -1), Projectile.rotation + (float)Math.PI / 2);
+            Projectile.rotation = player.itemRotation + (player.direction == 1 ? 0 : MathF.PI);
+            Projectile.Center = player.position + vector24 + QwertyMethods.PolarVector(22, Projectile.rotation) + QwertyMethods.PolarVector(-10 * (player.direction == 1 ? 1 : -1), Projectile.rotation + MathF.PI / 2);
 
             if (player.channel && player.itemAnimation > 0)
             {
@@ -166,9 +166,9 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RhuthiniumVaporizer
             }
         }
 
-        public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            damage = (int)(damage * (chargeUp / 30f));
+            modifiers.FinalDamage *= (chargeUp / 30f);
         }
 
         public override bool PreDraw(ref Color lightColor)
@@ -217,7 +217,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RhuthiniumVaporizer
                 if (Projectile != null)
                 {
                     Texture2D gun = TextureAssets.Item[ItemType<RhuthiniumVaporizer>()].Value;
-                    DrawData d = new DrawData(gun, Projectile.Center - Main.screenPosition + (Main.player[Projectile.owner].direction == 1 ? Vector2.Zero : QwertyMethods.PolarVector(-10, Projectile.rotation + (float)Math.PI / 2)), null, lightColor, Projectile.rotation, new Vector2(54, 6), Vector2.One, (Main.player[Projectile.owner].direction == 1 ? SpriteEffects.None : SpriteEffects.FlipVertically), 0);
+                    DrawData d = new DrawData(gun, Projectile.Center - Main.screenPosition + (Main.player[Projectile.owner].direction == 1 ? Vector2.Zero : QwertyMethods.PolarVector(-10, Projectile.rotation + MathF.PI / 2)), null, lightColor, Projectile.rotation, new Vector2(54, 6), Vector2.One, (Main.player[Projectile.owner].direction == 1 ? SpriteEffects.None : SpriteEffects.FlipVertically), 0);
                     drawInfo.DrawDataCache.Add(d);
                     Texture2D texture = TextureAssets.Projectile[Projectile.type].Value;
                     d = new DrawData(texture, Projectile.Center - Main.screenPosition, new Rectangle(0, 0, (int)Projectile.ai[1], 12), new Color((int)((Projectile.ai[0] / 30f) * 100), (int)((Projectile.ai[0] / 30f) * 100), (int)((Projectile.ai[0] / 30f) * 100), (int)((Projectile.ai[0] / 30f) * 100)), Projectile.rotation, new Vector2(0, 6), new Vector2(1f, Projectile.ai[0] / 30f), SpriteEffects.None, 0);

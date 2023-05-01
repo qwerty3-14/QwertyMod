@@ -14,7 +14,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.UrQuan
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Fighter");
+            //DisplayName,SetDefault("Fighter");
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             Main.projFrames[Projectile.type] = 1;
             ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
@@ -53,7 +53,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.UrQuan
             {
                 if (QwertyMethods.ClosestNPC(ref target, 2000, Projectile.Center, false, player.MinionAttackTargetNPC))
                 {
-                    Projectile.rotation = (target.Center - Projectile.Center).ToRotation() + (float)Math.PI / 2;
+                    Projectile.rotation = (target.Center - Projectile.Center).ToRotation() + MathF.PI / 2;
                     Vector2 offSpot = target.Center + QwertyMethods.PolarVector(-40, (target.Center - Projectile.Center).ToRotation());
                     Projectile.velocity = (offSpot - Projectile.Center);
                     if (Projectile.velocity.Length() > speed)
@@ -73,7 +73,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.UrQuan
                 }
                 else
                 {
-                    Projectile.rotation = (parent.Center - Projectile.Center).ToRotation() + (float)Math.PI / 2;
+                    Projectile.rotation = (parent.Center - Projectile.Center).ToRotation() + MathF.PI / 2;
                     Projectile.velocity = (parent.Center - Projectile.Center);
                     if (Projectile.velocity.Length() > speed)
                     {
@@ -88,7 +88,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.UrQuan
             }
             else
             {
-                Projectile.rotation = Projectile.velocity.ToRotation() + (float)Math.PI / 2;
+                Projectile.rotation = Projectile.velocity.ToRotation() + MathF.PI / 2;
                 startTime++;
             }
             for (int k = 0; k < 1000; k++)
@@ -97,7 +97,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.UrQuan
                 {
                     if ((Projectile.Center - Main.projectile[k].Center).Length() < 10)
                     {
-                        Projectile.velocity += new Vector2((float)Math.Cos((Projectile.Center - Main.projectile[k].Center).ToRotation()) * .1f, (float)Math.Sin((Projectile.Center - Main.projectile[k].Center).ToRotation()) * .1f);
+                        Projectile.velocity += new Vector2(MathF.Cos((Projectile.Center - Main.projectile[k].Center).ToRotation()) * .1f, MathF.Sin((Projectile.Center - Main.projectile[k].Center).ToRotation()) * .1f);
                     }
                 }
             }

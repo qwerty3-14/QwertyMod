@@ -11,8 +11,8 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.B4Bow
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Possesing Bow");
-            Tooltip.SetDefault("Arrows fired from this will chase your enemies!");
+            //DisplayName,SetDefault("Possesing Bow");
+            //Tooltip.SetDefault("Arrows fired from this will chase your enemies!");
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
         public override void SetDefaults()
@@ -23,17 +23,17 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.B4Bow
             Item.useTime = 4;
             Item.useAnimation = 12;
             Item.reuseDelay = 20;
-            Item.useStyle = 5;
+            Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 2f;
             Item.value = 750000;
-            Item.rare = 10;
+            Item.rare = ItemRarityID.Red;
             Item.UseSound = SoundID.Item5;
 
             Item.width = 32;
             Item.height = 62;
 
-            Item.shoot = 40;
-            Item.useAmmo = 40;
+            Item.shoot = ProjectileID.WoodenArrowFriendly;
+            Item.useAmmo = AmmoID.Arrow;
             Item.shootSpeed = 12f;
             Item.noMelee = true;
             Item.autoReuse = true;

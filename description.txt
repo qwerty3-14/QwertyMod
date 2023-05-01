@@ -31,6 +31,19 @@ Extra thanks
 
 
 Changelog
+0.8.4
+-New Boss: Invader Battleship
+
+-Titanium bullets visuals have been polished up
+-Titanium bullets' knockback is directed toward the bullet but, damage dropoff has been increased 25%->40% 
+-Palladium bullet reworked
+-Caelite bullet new visuals
+-Caelite wrath now works on projectiles enemies spawn
+-Adamantite arrow now ignores knockback resistance
+-Gun Arrow now loses velocity in flight, can't hit enemies itself, and fires up to 4 bullets, but they now deal 40%.
+-Rebalanced sword accesories
+
+
 0.8.3
 Additions
 -New relices for the rest of the bosses in the mod (thanks Kweequ)

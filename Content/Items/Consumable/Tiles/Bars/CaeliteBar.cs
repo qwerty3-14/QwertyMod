@@ -1,14 +1,15 @@
 using Terraria.GameContent.Creative;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using Terraria.ID;
 namespace QwertyMod.Content.Items.Consumable.Tiles.Bars
 {
     public class CaeliteBar : ModItem
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Caelite Bar");
-            Tooltip.SetDefault("");
+            //DisplayName,SetDefault("Caelite Bar");
+            //Tooltip.SetDefault("");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 24;
         }
 
@@ -16,15 +17,15 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Bars
         {
             Item.width = 30;
             Item.height = 24;
-            Item.maxStack = 999;
+            Item.maxStack = 9999;
             Item.value = 20000;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
             Item.createTile = TileType<CaeliteBarT>();
             Item.useTurn = true;
             Item.autoReuse = true;
             Item.useAnimation = 15;
             Item.useTime = 10;
-            Item.useStyle = 1;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.consumable = true;
         }
     }

@@ -9,10 +9,12 @@ using QwertyMod.Content.Items.Weapon.Minion.Priest;
 using QwertyMod.Content.Items.Weapon.Ranged.Bow.HolyExiler;
 using QwertyMod.Content.NPCs.Bosses.FortressBoss;
 using Terraria;
+using Terraria.ID;
 using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using Terraria.GameContent.ItemDropRules;
 
 namespace QwertyMod.Content.Items.Consumable.BossBag
 {
@@ -20,18 +22,16 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Treasure Bag");
-            Tooltip.SetDefault("{$CommonItemTooltip.RightClickToOpen}");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 3;
         }
 
         public override void SetDefaults()
         {
-            Item.maxStack = 999;
+            Item.maxStack = 9999;
             Item.consumable = true;
             Item.width = 60;
             Item.height = 34;
-            Item.rare = 9;
+            Item.rare = ItemRarityID.Cyan;
             Item.expert = true;
             //bossBagNPC = mod.NPCType("FortressBoss");
         }
@@ -40,38 +40,18 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
         {
             return true;
         }
-
-        public override void RightClick(Player player)
+        public override void ModifyItemLoot(ItemLoot itemLoot)
         {
-            player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<CaeliteBar>(), Main.rand.Next(18, 31));
-            player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<CaeliteCore>(), Main.rand.Next(9, 16));
-            player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<ExpertChalice>());
-            if (Main.rand.Next(7) == 0)
-                player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<DivineLightMask>());
-            player.QuickSpawnItem(new EntitySource_Misc(""), 73, 10);
-            if (Main.rand.Next(5) == 0)
-            {
-                player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<Lightling>());
-            }
-            if (Main.rand.Next(5) == 0)
-            {
-                player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<SkywardHilt>());
-            }
-            switch (Main.rand.Next(4))
-            {
-                case 0:
-                    player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<CaeliteMagicWeapon>());
-                    break;
-                case 1:
-                    player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<HolyExiler>());
-                    break;
-                case 2:
-                    player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<CaeliteRainKnife>());
-                    break;
-                case 3:
-                    player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<PriestStaff>());
-                    break;
-            }
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<CaeliteBar>(), 1, 18, 30));            
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<CaeliteCore>(), 1, 9, 15));      
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<ExpertChalice>(), 1, 1, 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<DivineLightMask>(), 7, 1, 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<Lightling>(), 5, 1, 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<SkywardHilt>(), 5, 1, 1));
+            
+            itemLoot.Add(ItemDropRule.OneFromOptionsNotScalingWithLuck(1, new int[] { ModContent.ItemType<CaeliteMagicWeapon>(), ModContent.ItemType<HolyExiler>(), ModContent.ItemType<CaeliteRainKnife>(), ModContent.ItemType<PriestStaff>()}));
         }
+
+        
     }
 }

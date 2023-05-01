@@ -15,8 +15,8 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.Riptide
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Riptide Sentry Staff");
-            Tooltip.SetDefault("");
+            //DisplayName,SetDefault("Riptide Sentry Staff");
+            //Tooltip.SetDefault("");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
@@ -30,11 +30,11 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.Riptide
             Item.height = 32;
             Item.useTime = 25;
             Item.useAnimation = 25;
-            Item.useStyle = 1;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.noMelee = true;
             Item.knockBack = 0f;
             Item.value = Item.sellPrice(silver: 54);
-            Item.rare = 2;
+            Item.rare = ItemRarityID.Green;
             Item.UseSound = SoundID.Item44;
             Item.shoot = ProjectileType<RiptideP>();
             Item.DamageType = DamageClass.Summon;
@@ -64,7 +64,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.Riptide
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Riptide");
+            //DisplayName,SetDefault("Riptide");
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             Main.projFrames[Projectile.type] = 3;
         }
@@ -85,9 +85,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.Riptide
         }
 
         private NPC target;
-
         private float maxDistance = 1000f;
-        private float distance;
         private int timer;
         private int reloadTime = 6;
         private int si = 1;
@@ -114,10 +112,10 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.Riptide
                         si = -1;
                     }
 
-                    Vector2 shootFrom = Projectile.Center + QwertyMethods.PolarVector(12, Projectile.rotation) + QwertyMethods.PolarVector(si * 4, Projectile.rotation + (float)Math.PI / 2);
-                    //if (Main.netMode != 1)
+                    Vector2 shootFrom = Projectile.Center + QwertyMethods.PolarVector(12, Projectile.rotation) + QwertyMethods.PolarVector(si * 4, Projectile.rotation + MathF.PI / 2);
+                    //if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
-                        Projectile.NewProjectile(new EntitySource_Misc(""), shootFrom, QwertyMethods.PolarVector(1, Projectile.rotation), ProjectileType<RiptideStream>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), shootFrom, QwertyMethods.PolarVector(1, Projectile.rotation), ProjectileType<RiptideStream>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
                     }
                 }
             }
@@ -148,17 +146,17 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.Riptide
 
         public override void AI()
         {
-            if (Main.rand.Next(8) == 0)
+            if (Main.rand.NextBool(8))
             {
-                Dust d = Main.dust[Dust.NewDust(Projectile.Center, 0, 0, 172)];
+                Dust d = Main.dust[Dust.NewDust(Projectile.Center, 0, 0, DustID.DungeonWater)];
                 d.velocity *= .1f;
                 d.noGravity = true;
                 d.position = Projectile.Center;
             }
         }
-        public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            knockback = 0;
+            modifiers.Knockback.Flat = 0;
         }
     }
 }

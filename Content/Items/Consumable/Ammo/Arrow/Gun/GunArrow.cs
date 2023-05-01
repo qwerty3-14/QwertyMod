@@ -10,8 +10,6 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Gun
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Gun Arrow");
-            Tooltip.SetDefault("Shoots 2 bullets from your inventory!");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 99;
         }
 
@@ -21,16 +19,16 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Gun
             Item.DamageType = DamageClass.Ranged;
             Item.knockBack = 2;
             Item.value = 5;
-            Item.rare = 4;
+            Item.rare = ItemRarityID.LightRed;
             Item.width = 14;
             Item.height = 32;
 
             Item.shootSpeed = 6;
-            Item.useAmmo = 97;
+            Item.useAmmo = AmmoID.Bullet;
             Item.consumable = true;
             Item.shoot = ProjectileType<GunArrowP>();
             Item.ammo = 40;
-            Item.maxStack = 999;
+            Item.maxStack = 9999;
         }
 
         public override void AddRecipes()

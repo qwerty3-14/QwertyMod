@@ -12,7 +12,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.ShieldMinion
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Slams intruders that get too close to you! +\nBurst damage minion");
+            //Tooltip.SetDefault("Slams intruders that get too close to you! +\nBurst damage minion");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
@@ -27,7 +27,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.ShieldMinion
             Item.height = 34;
             Item.useTime = 25;
             Item.useAnimation = 25;
-            Item.useStyle = 1;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.noMelee = true;
             Item.knockBack = 6f;
             Item.rare = ItemRarityID.Orange;

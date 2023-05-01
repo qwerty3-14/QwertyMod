@@ -12,8 +12,8 @@ namespace QwertyMod.Content.Items.Weapon.Minion.SpaceFighter
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Space Fighter Staff");
-            Tooltip.SetDefault("");
+            //DisplayName,SetDefault("Space Fighter Staff");
+            //Tooltip.SetDefault("");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
@@ -27,11 +27,11 @@ namespace QwertyMod.Content.Items.Weapon.Minion.SpaceFighter
             Item.height = 44;
             Item.useTime = 25;
             Item.useAnimation = 25;
-            Item.useStyle = 1;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.noMelee = true;
             Item.knockBack = 5f;
             Item.value = Item.sellPrice(silver: 40);
-            Item.rare = 1;
+            Item.rare = ItemRarityID.Blue;
             Item.UseSound = SoundID.Item44;
             Item.shoot = ProjectileType<SpaceFighter>();
             Item.DamageType = DamageClass.Summon;

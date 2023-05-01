@@ -22,7 +22,7 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Noehtnap");
+            //DisplayName,SetDefault("Noehtnap");
             Main.npcFrameCount[NPC.type] = 5;
 
             NPCID.Sets.MPAllowedEnemies[NPC.type] = true; //For allowing use of SpawnOnPlayer in multiplayer
@@ -76,15 +76,15 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
             return NPC.chaseable;
         }
 
-        public override void ScaleExpertStats(int numPlayers, float bossLifeScale)
+        public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
         {
-            NPC.lifeMax = (int)(NPC.lifeMax * 0.75f * bossLifeScale);
+            NPC.lifeMax = (int)(NPC.lifeMax * 0.75f * bossAdjustment);
             NPC.damage = 60;
         }
 
         private static float randomRotation()
         {
-            return Main.rand.NextFloat(-1, 1) * (float)Math.PI;
+            return Main.rand.NextFloat(-1, 1) * MathF.PI;
         }
 
         public Projectile cloak;
@@ -109,7 +109,7 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
             if (orbitalVelocity == 0)
             {
                 NPC.netUpdate = true;
-                return 7f * (Main.rand.Next(2) == 0 ? 1f : -1f);
+                return 7f * (Main.rand.NextBool(2) ? 1f : -1f);
             }
             return 7f * (orbitalVelocity > 0 ? 1f : -1f);
         }
@@ -182,7 +182,7 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
             {
                 canDespawn = false;
 
-                if ((cloak == null || cloak.type != ProjectileType<Cloak>() || !cloak.active) && Main.netMode != 1)
+                if ((cloak == null || cloak.type != ProjectileType<Cloak>() || !cloak.active) && Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     cloak = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero, ProjectileType<Cloak>(), 0, 0, Main.myPlayer, NPC.whoAmI)];
                 }
@@ -191,7 +191,7 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
                 {
                     playerviewRadius -= 10;
                 }
-                if (Main.netMode != 1)
+                if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     cloak.ai[1] = playerviewRadius;
                     cloak.timeLeft = 30;
@@ -225,14 +225,14 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
 
                         if (timer > 120 * (Main.expertMode ? .2f + .8f * ((float)NPC.life / NPC.lifeMax) : 1f) && (player.Center - NPC.Center).Length() < 1000f)
                         {
-                            if (Main.netMode != 1)
+                            if (Main.netMode != NetmodeID.MultiplayerClient)
                             {
                                 attackType = Main.rand.Next(7);
                                 switch (attackType)
                                 {
                                     default:
                                         orbitalVelocity = 14f;
-                                        if (Main.rand.Next(2) == 0)
+                                        if (Main.rand.NextBool(2))
                                         {
                                             orbitalVelocity *= -1;
                                         }
@@ -266,7 +266,7 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
                             timer = 0;
                             attackType = -1;
                         }
-                        else if (timer % 15 == 0 && Main.netMode != 1)
+                        else if (timer % 15 == 0 && Main.netMode != NetmodeID.MultiplayerClient)
                         {
                             Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero, ProjectileType<EtimsicCannon>(), Main.expertMode ? 18 : 24, 0f, Main.myPlayer, (player.Center - NPC.Center).ToRotation());
                             Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero, ProjectileType<Warning>(), 0, 0f, Main.myPlayer, 1, (player.Center - NPC.Center).ToRotation());
@@ -279,12 +279,12 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
                         break;
 
                     case 0:
-                        if (timer == 0 && QwertyMethods.AngularDifference(lastMoved.ToRotation(), (NPC.Center - player.Center).ToRotation()) < (float)Math.PI / 30)
+                        if (timer == 0 && QwertyMethods.AngularDifference(lastMoved.ToRotation(), (NPC.Center - player.Center).ToRotation()) < MathF.PI / 30)
                         {
-                            if (Main.netMode != 1)
+                            if (Main.netMode != NetmodeID.MultiplayerClient)
                             {
-                                myWall = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero, ProjectileType<EtimsicWall>(), Main.expertMode ? 24 : 36, 0f, Main.myPlayer, (player.Center - NPC.Center).ToRotation() + (float)Math.PI / 2)];
-                                Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero, ProjectileType<Warning>(), 0, 0f, Main.myPlayer, 2, (player.Center - NPC.Center).ToRotation() + (float)Math.PI / 2);
+                                myWall = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero, ProjectileType<EtimsicWall>(), Main.expertMode ? 24 : 36, 0f, Main.myPlayer, (player.Center - NPC.Center).ToRotation() + MathF.PI / 2)];
+                                Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero, ProjectileType<Warning>(), 0, 0f, Main.myPlayer, 2, (player.Center - NPC.Center).ToRotation() + MathF.PI / 2);
                             }
 
                             if (!Main.dedServ)
@@ -316,9 +316,9 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
                             if (timer < 180 && timer % 15 == 0)
                             {
                                 NPC.velocity = Vector2.Zero;
-                                if (Main.netMode != 1)
+                                if (Main.netMode != NetmodeID.MultiplayerClient)
                                 {
-                                    Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center + new Vector2((float)Math.Cos(pupilDirection) * greaterPupilRadius * pupilStareOutAmount, (float)Math.Sin(pupilDirection) * lesserPupilRadius) * NPC.scale, QwertyMethods.PolarVector(10, pupilDirection), ProjectileType<EtimsicRay>(), Main.expertMode ? 18 : 24, 0f, Main.myPlayer);
+                                    Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center + new Vector2(MathF.Cos(pupilDirection) * greaterPupilRadius * pupilStareOutAmount, MathF.Sin(pupilDirection) * lesserPupilRadius) * NPC.scale, QwertyMethods.PolarVector(10, pupilDirection), ProjectileType<EtimsicRay>(), Main.expertMode ? 18 : 24, 0f, Main.myPlayer);
                                 }
                                 if (!Main.dedServ)
                                 {
@@ -326,7 +326,7 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
                                     //SoundEngine.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/SoundEffects/PewPew").WithVolume(3f).WithPitchVariance(.5f), NPC.Center);
                                 }
                             }
-                            if (timer == 179 && Main.netMode != 1)
+                            if (timer == 179 && Main.netMode != NetmodeID.MultiplayerClient)
                             {
                                 NPC.netUpdate = true;
                             }
@@ -352,7 +352,7 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
                 }
                 else
                 {
-                    NPC.velocity = QwertyMethods.PolarVector(orbitalVelocity, (player.Center - NPC.Center).ToRotation() + (float)Math.PI / 2);
+                    NPC.velocity = QwertyMethods.PolarVector(orbitalVelocity, (player.Center - NPC.Center).ToRotation() + MathF.PI / 2);
 
                     if ((player.Center - NPC.Center).Length() < orbitDistance - 50)
                     {
@@ -382,8 +382,8 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
 
         public override void FindFrame(int frameHeight)
         {
-            pulseCounter += (float)Math.PI / 30;
-            NPC.scale = 1f + .05f * (float)Math.Sin(pulseCounter);
+            pulseCounter += MathF.PI / 30;
+            NPC.scale = 1f + .05f * MathF.Sin(pulseCounter);
             if (frame > 4)
             {
                 NPC.frame.Y = (8 - frame) * frameHeight;
@@ -400,7 +400,7 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
                        NPC.frame, drawColor, NPC.rotation,
                        new Vector2(NPC.width * 0.5f, NPC.height * 0.5f), NPC.scale, SpriteEffects.None, 0f);
             Texture2D Pupil = Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/CloakedDarkBoss/Pupil").Value;
-            spriteBatch.Draw(Pupil, NPC.Center - screenPos + new Vector2((float)Math.Cos(pupilDirection) * greaterPupilRadius * pupilStareOutAmount, (float)Math.Sin(pupilDirection) * lesserPupilRadius) * NPC.scale,
+            spriteBatch.Draw(Pupil, NPC.Center - screenPos + new Vector2(MathF.Cos(pupilDirection) * greaterPupilRadius * pupilStareOutAmount, MathF.Sin(pupilDirection) * lesserPupilRadius) * NPC.scale,
                        Pupil.Frame(), drawColor, NPC.rotation,
                        Pupil.Size() * .5f, NPC.scale, SpriteEffects.None, 0f);
             Texture2D Eyelid = Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/CloakedDarkBoss/Eyelid").Value;
@@ -467,7 +467,7 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
             }
             Projectile.Center = Main.npc[(int)Projectile.ai[0]].Center;
             // QwertyMethods.ServerClientCheck((int)Projectile.ai[1]);
-            if (Main.netMode != 1)
+            if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 Projectile.netUpdate = true;
             }

@@ -2,6 +2,7 @@ using QwertyMod.Content.Dusts;
 using Terraria;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using Terraria.DataStructures;
 
 namespace QwertyMod.Content.Buffs
 {
@@ -9,8 +10,8 @@ namespace QwertyMod.Content.Buffs
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Caelite Wrath");
-            Description.SetDefault("You deal 20% less damage!");
+            ////DisplayName,SetDefault("Caelite Wrath");
+            ////Description.SetDefault("You deal 20% less damage!");
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = true;
             Main.buffNoSave[Type] = true;
@@ -50,27 +51,38 @@ namespace QwertyMod.Content.Buffs
 
     public class PowerDownNPC : GlobalNPC
     {
-        public override void ModifyHitByProjectile(NPC npc, Projectile projectile, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitByProjectile(NPC npc, Projectile projectile, ref NPC.HitModifiers modifiers)
         {
             if (Main.player[projectile.owner].HasBuff(BuffType<PowerDown>()))
             {
-                damage = (int)(damage * .8f);
+                modifiers.FinalDamage *= 0.8f;
             }
         }
 
-        public override void ModifyHitByItem(NPC npc, Player player, Terraria.Item item, ref int damage, ref float knockback, ref bool crit)
+        public override void ModifyHitByItem(NPC npc, Player player, Item item, ref NPC.HitModifiers modifiers)
         {
             if (player.HasBuff(BuffType<PowerDown>()))
             {
-                damage = (int)(damage * .8f);
+                modifiers.FinalDamage *= 0.8f;
             }
         }
 
-        public override void ModifyHitPlayer(NPC npc, Player target, ref int damage, ref bool crit)
+        public override void ModifyHitPlayer(NPC npc, Player target, ref Player.HurtModifiers modifiers)
         {
             if (npc.HasBuff(BuffType<PowerDown>()))
             {
-                damage = (int)(damage * .8f);
+                modifiers.FinalDamage *= 0.8f;
+            }
+        }
+    }
+    public class PowerDownProjectile : GlobalProjectile
+    {
+        public override void OnSpawn(Projectile projectile, IEntitySource source)
+        {
+            if(source is EntitySource_Parent parent && parent.Entity is NPC npc && npc.HasBuff(ModContent.BuffType<PowerDown>()))
+            {
+                projectile.damage = (int)(projectile.damage * 0.8f);
+                projectile.originalDamage = (int)(projectile.originalDamage * 0.8f);
             }
         }
     }

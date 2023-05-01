@@ -12,7 +12,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.MusicBoxes
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Music Box (Built to Destroy)");
+            //DisplayName,SetDefault("Music Box (Built to Destroy)");
 
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
 
@@ -47,9 +47,9 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.MusicBoxes
             TileObjectData.newTile.DrawYOffset = 2;
             TileObjectData.addTile(Type);
 
-            ModTranslation name = CreateMapEntryName();
-            name.SetDefault("Music Box");
-            AddMapEntry(new Color(200, 200, 200), name);
+            //ModTranslation name = CreateMapEntryName();
+            //name.SetDefault("Music Box");
+            //AddMapEntry(new Color(200, 200, 200), name);
         }
 
         public override void KillMultiTile(int i, int j, int frameX, int frameY)

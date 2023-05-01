@@ -8,8 +8,8 @@ namespace QwertyMod.Content.Items.Weapon.Minion.ChloroSniper
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Chlorophyte Sniper");
-            Description.SetDefault("The Chlorophyte Sniper will fight for you!");
+            //DisplayName,SetDefault("Chlorophyte Sniper");
+            //Description.SetDefault("The Chlorophyte Sniper will fight for you!");
             Main.buffNoSave[Type] = true;
             Main.buffNoTimeDisplay[Type] = true;
         }

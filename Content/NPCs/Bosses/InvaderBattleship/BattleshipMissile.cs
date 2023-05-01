@@ -23,7 +23,7 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Invader Battleship");
+            //DisplayName,SetDefault("Invader Battleship");
         }
         public override void SetDefaults()
         {
@@ -47,12 +47,12 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
                 Projectile.velocity = Vector2.Zero;
                 for (int i = 0; i < 100; i++)
                 {
-                    float rot = (float)Math.PI * 2f * ((float)i / 30f);
+                    float rot = MathF.PI * 2f * ((float)i / 30f);
                     Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<InvaderGlow>(), QwertyMethods.PolarVector(6f, rot));
                 }
             }
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             explode();
         }
@@ -61,13 +61,13 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
             explode();
             return false;
         }
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             target.AddBuff(ModContent.BuffType<CriticalFailure>(), 10 * 60);
             explode();
         }
         bool runOnce = true;
-        float rotSpeed = (float)Math.PI / 90f;
+        float rotSpeed = MathF.PI / 90f;
         public override void AI()
         {
             if (!exploded)
@@ -90,8 +90,8 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
                 {
                     if(ScanForTiles(0, out _))
                     {
-                        ScanForTiles((float)Math.PI / 6, out int leftSearch);
-                        ScanForTiles(-(float)Math.PI / 6, out int rightSearch);
+                        ScanForTiles(MathF.PI / 6, out int leftSearch);
+                        ScanForTiles(-MathF.PI / 6, out int rightSearch);
                         if(leftSearch > rightSearch)
                         {
                             Projectile.rotation += rotSpeed; 
@@ -110,7 +110,10 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
                 {
                     Projectile.rotation.SlowRotation((target.Center - Projectile.Center).ToRotation(), rotSpeed);
                 }
-                Projectile.velocity = QwertyMethods.PolarVector(4, Projectile.rotation);
+                float angDiffRatio = QwertyMethods.AngularDifference(Projectile.rotation, Projectile.velocity.ToRotation()) / MathF.PI;
+                float acc = 4f / 30f;
+                Projectile.velocity += QwertyMethods.PolarVector(angDiffRatio * 3f * acc, (-Projectile.velocity).ToRotation());
+                Projectile.velocity += QwertyMethods.PolarVector((1f - angDiffRatio) * acc, Projectile.rotation);
                 Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(-35, Projectile.rotation), ModContent.DustType<InvaderGlow>(), Vector2.Zero, Scale: 0.2f);
                 if (Projectile.timeLeft < 5)
                 {

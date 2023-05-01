@@ -14,8 +14,8 @@ namespace QwertyMod.Content.Items.Weapon.Magic.ExtinctionGun
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("The Tyrant's Extinction Gun");
-            Tooltip.SetDefault("Left click shoots climate change!" + "\nRight click shoots disease!");
+            //DisplayName,SetDefault("The Tyrant's Extinction Gun");
+            //Tooltip.SetDefault("Left click shoots climate change!" + "\nRight click shoots disease!");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -24,11 +24,11 @@ namespace QwertyMod.Content.Items.Weapon.Magic.ExtinctionGun
             Item.damage = 48;
             Item.DamageType = DamageClass.Magic;
             Item.knockBack = 1;
-            Item.rare = 6;
+            Item.rare = ItemRarityID.LightPurple;
             Item.value = Item.sellPrice(0, 10, 0, 0);
             Item.width = 66;
             Item.height = 24;
-            Item.useStyle = 5;
+            Item.useStyle = ItemUseStyleID.Shoot;
             Item.shootSpeed = 10f;
             Item.useTime = 10;
             Item.useAnimation = 10;
@@ -84,7 +84,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.ExtinctionGun
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Mosquitto");
+            //DisplayName,SetDefault("Mosquitto");
             Main.projFrames[Projectile.type] = 4;
         }
 
@@ -103,7 +103,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.ExtinctionGun
             //animationType = ProjectileID.Bee;
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(BuffType<DinoPox>(), 480);
         }
@@ -113,7 +113,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.ExtinctionGun
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Snow Flake");
+            //DisplayName,SetDefault("Snow Flake");
         }
 
         public override void SetDefaults()
@@ -153,7 +153,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.ExtinctionGun
             return false;
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.localNPCImmunity[target.whoAmI] = -1;
             target.immune[Projectile.owner] = 0;

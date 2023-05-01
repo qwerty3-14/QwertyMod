@@ -21,15 +21,13 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Lune
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Lune Crestplate");
-            Tooltip.SetDefault("Ranged attacks pierce an extra enemy.\n Projectiles that normally don't pierce will use local immunity");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()
         {
             Item.value = 30000;
-            Item.rare = 1;
+            Item.rare = ItemRarityID.Blue;
             Item.width = 22;
             Item.height = 12;
             Item.defense = 5;
@@ -69,7 +67,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Lune
             if (!Main.dayTime)
             {
                 float radius = Main.rand.NextFloat(200);
-                float theta = Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI);
+                float theta = Main.rand.NextFloat(-MathF.PI, MathF.PI);
                 Dust dust = Dust.NewDustPerfect(player.Center + QwertyMethods.PolarVector(radius, theta), DustType<LuneDust>());
                 dust.shader = GameShaders.Armor.GetSecondaryShader(player.ArmorSetDye(), player);
             }
@@ -115,7 +113,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Lune
             }
         }
 
-        public override void OnHitNPC(Projectile projectile, NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (projectile.localNPCHitCooldown == -10)
             {
@@ -148,7 +146,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Lune
                     }
                     else
                     {
-                        Projectile.NewProjectile(new EntitySource_Misc(""), Main.MouseWorld, new Vector2(0, 0), ProjectileType<MoonTarget>(), 0, 0, Player.whoAmI, 0, 0);
+                        Projectile.NewProjectile(new EntitySource_Misc("SetBouns_Lune"), Main.MouseWorld, new Vector2(0, 0), ProjectileType<MoonTarget>(), 0, 0, Player.whoAmI, 0, 0);
                         Player.AddBuff(BuffType<MoonCooldown>(), 3 * 60);
                         justSummonedMoon = true;
                     }
@@ -189,7 +187,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Lune
                 runOnce = false;
             }
             //Main.NewText(Projectile.timeLeft + ", " + player.ArmorSetDye());
-            //Projectile.rotation += (float)Math.PI / 30;
+            //Projectile.rotation += MathF.PI / 30;
             timer++;
             if ((timer > 10 && player.GetModPlayer<crestSet>().justSummonedMoon) || !player.GetModPlayer<crestSet>().setBonus)
             {
@@ -256,7 +254,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Lune
             }
         }
 
-        public override void OnHitNPC(Projectile projectile, NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (boosted)
             {

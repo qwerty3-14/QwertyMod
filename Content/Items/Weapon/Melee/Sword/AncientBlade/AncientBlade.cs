@@ -17,8 +17,8 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.AncientBlade
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Ancient Blade");
-            Tooltip.SetDefault("Launches a spread of orbs");
+            //DisplayName,SetDefault("Ancient Blade");
+            //Tooltip.SetDefault("Launches a spread of orbs");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -30,10 +30,10 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.AncientBlade
 
             Item.useTime = 35;
             Item.useAnimation = 35;
-            Item.useStyle = 1;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.knockBack = 5;
             Item.value = 150000;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
             Item.UseSound = SoundID.Item1;
 
             Item.width = 70;
@@ -68,7 +68,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.AncientBlade
         public override void SetStaticDefaults()
         {
             Main.projFrames[Projectile.type] = 2;
-            DisplayName.SetDefault("Ancient Orb");
+            //DisplayName,SetDefault("Ancient Orb");
         }
 
 
@@ -105,7 +105,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.AncientBlade
             Projectile.scale = .5f + (.5f * 1 - (Projectile.alpha / 255f));
             for (int d = 0; d < Projectile.alpha / 30; d++)
             {
-                float theta = Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI);
+                float theta = Main.rand.NextFloat(-MathF.PI, MathF.PI);
                 Dust dust = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(25, theta), DustType<AncientGlow>(), QwertyMethods.PolarVector(-6, theta) + Projectile.velocity);
                 dust.scale = .5f;
                 dust.alpha = 255;

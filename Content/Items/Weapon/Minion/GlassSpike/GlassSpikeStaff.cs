@@ -11,8 +11,8 @@ namespace QwertyMod.Content.Items.Weapon.Minion.GlassSpike
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Glass Spike Staff");
-            Tooltip.SetDefault("Summon spikes that rest on the ground, damaging enemies that step on them \nWill reposition if you walk away");
+            //DisplayName,SetDefault("Glass Spike Staff");
+            //Tooltip.SetDefault("Summon spikes that rest on the ground, damaging enemies that step on them \nWill reposition if you walk away");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;

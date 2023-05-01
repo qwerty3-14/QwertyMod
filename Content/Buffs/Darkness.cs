@@ -21,8 +21,8 @@ namespace QwertyMod.Content.Buffs
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Darkness");
-            Description.SetDefault("You knew this was coming...");
+            ////DisplayName,SetDefault("Darkness");
+            ////Description.SetDefault("You knew this was coming...");
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = true;
             Main.buffNoSave[Type] = true;

@@ -16,20 +16,20 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin.Imperium
         public override void SetStaticDefaults()
         {
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
-            Tooltip.SetDefault("Enemies will take 35% more damage from swords while this is stuck in them");
+            //Tooltip.SetDefault("Enemies will take 35% more damage from swords while this is stuck in them");
         }
         public override void SetDefaults()
         {
             Item.shootSpeed = 17f;
             Item.damage = 150;
             Item.knockBack = 5f;
-            Item.useStyle = 1;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.useAnimation = 40;
             Item.useTime = 40;
             Item.width = 68;
             Item.height = 68;
             Item.maxStack = 1;
-            Item.rare = 7;
+            Item.rare = ItemRarityID.Lime;
             Item.value = Item.sellPrice(0, 10, 0, 0);
             Item.consumable = false;
             Item.noUseGraphic = true;
@@ -46,7 +46,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin.Imperium
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Imperium");
+            //DisplayName,SetDefault("Imperium");
         }
 
         public override void SetDefaults()
@@ -61,7 +61,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin.Imperium
             Projectile.GetGlobalProjectile<ImplaingProjectile>().damagePerImpaler = 400;
             maxStickingJavelins = 1;
             dropItem = ItemType<Imperium>();
-            rotationOffset = (float)Math.PI / 4;
+            rotationOffset = MathF.PI / 4;
             maxTicks = 60f;
         }
 

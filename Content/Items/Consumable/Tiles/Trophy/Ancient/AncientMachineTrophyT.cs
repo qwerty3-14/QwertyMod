@@ -21,7 +21,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Trophy.Ancient
             TileObjectData.newTile.StyleWrapLimit = 36;
             TileObjectData.addTile(Type);
             DustType = 7;
-            AddMapEntry(new Color(120, 85, 60));
+            //AddMapEntry(new Color(120, 85, 60));
         }
 
         public override void KillMultiTile(int i, int j, int frameX, int frameY)

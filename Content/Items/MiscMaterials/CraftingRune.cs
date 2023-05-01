@@ -12,8 +12,6 @@ namespace QwertyMod.Content.Items.MiscMaterials
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Rune");
-            Tooltip.SetDefault("");
             ItemID.Sets.ItemNoGravity[Item.type] = true;
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 25;
         }
@@ -56,11 +54,11 @@ namespace QwertyMod.Content.Items.MiscMaterials
         {
             Item.width = 54;
             Item.height = 54;
-            Item.maxStack = 999;
+            Item.maxStack = 9999;
             Item.value = 100;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
             Item.value = 500;
-            Item.rare = 9;
+            Item.rare = ItemRarityID.Cyan;
         }
     }
     public class ItemFrameCounter : ModPlayer

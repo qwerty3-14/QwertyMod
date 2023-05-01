@@ -11,11 +11,6 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Dart.Rhuthinium
 {
     public class RhuthiniumDartP : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault("Rhuthinium Dart");
-        }
-
         public override void SetDefaults()
         {
             Projectile.DamageType = DamageClass.Ranged;
@@ -32,7 +27,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Dart.Rhuthinium
         private void SetFlyOffset()
         {
             Player player = Main.player[Projectile.owner];
-            flyOffset = QwertyMethods.PolarVector(100, (player.Center - Projectile.Center).ToRotation() + Main.rand.NextFloat(-(float)Math.PI / 2, (float)Math.PI / 2));
+            flyOffset = QwertyMethods.PolarVector(100, (player.Center - Projectile.Center).ToRotation() + Main.rand.NextFloat(-MathF.PI / 2, MathF.PI / 2));
         }
 
         public override void AI()
@@ -40,7 +35,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Dart.Rhuthinium
             Player player = Main.player[Projectile.owner];
             if (start)
             {
-                Projectile.rotation = Projectile.velocity.ToRotation() + (float)Math.PI / 2;
+                Projectile.rotation = Projectile.velocity.ToRotation() + MathF.PI / 2;
                 Projectile.velocity *= .8f;
                 if (Projectile.velocity.Length() < .1f)
                 {
@@ -52,7 +47,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Dart.Rhuthinium
             {
                 if (Main.LocalPlayer == player)
                 {
-                    Projectile.rotation.SlowRotation((Main.MouseWorld - Projectile.Center).ToRotation() + (float)Math.PI / 2, (float)Math.PI / 30);
+                    Projectile.rotation.SlowRotation((Main.MouseWorld - Projectile.Center).ToRotation() + MathF.PI / 2, MathF.PI / 30);
                 }
                 Projectile.velocity -= Projectile.velocity.SafeNormalize(Vector2.UnitY) * acceleration / 2;
                 Projectile.velocity += (player.Center + flyOffset - Projectile.Center).SafeNormalize(Vector2.UnitY) * acceleration;
@@ -66,7 +61,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Dart.Rhuthinium
                     SoundEngine.PlaySound(SoundID.Item12, Projectile.Center);
                     Projectile.Center = player.Center + flyOffset;
                     Projectile.velocity = Vector2.Zero;
-                    Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center + QwertyMethods.PolarVector(10, Projectile.rotation - (float)Math.PI / 2), QwertyMethods.PolarVector(4, Projectile.rotation - (float)Math.PI / 2), ProjectileType<DartBeam>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                    Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center + QwertyMethods.PolarVector(10, Projectile.rotation - MathF.PI / 2), QwertyMethods.PolarVector(4, Projectile.rotation - MathF.PI / 2), ProjectileType<DartBeam>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
                     SetFlyOffset();
                     Projectile.penetrate--;
                 }

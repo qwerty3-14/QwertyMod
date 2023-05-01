@@ -19,7 +19,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
             DustType = DustType<FortressDust>();
             HitSound = QwertyMod.FortressBlocks;
             MinPick = 50;
-            AddMapEntry(new Color(162, 184, 185));
+            //AddMapEntry(new Color(162, 184, 185));
             MineResist = 1;
             ItemDrop = ItemType<DnasBrick>();
         }

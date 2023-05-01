@@ -14,7 +14,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.GlassSpike
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Glass Spike");
+            //DisplayName,SetDefault("Glass Spike");
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
             Main.projPet[Projectile.type] = true;
@@ -50,7 +50,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.GlassSpike
         {
             if (spin)
             {
-                Projectile.rotation += Projectile.velocity.Length() * (float)Math.PI / 60 * (Projectile.velocity.X > 0 ? 1 : -1);
+                Projectile.rotation += Projectile.velocity.Length() * MathF.PI / 60 * (Projectile.velocity.X > 0 ? 1 : -1);
             }
             spin = true;
             Player player = Main.player[Projectile.owner];
@@ -106,7 +106,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.GlassSpike
             return false;
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.perIDStaticNPCImmunity[Projectile.type][target.whoAmI] = (uint)(Main.GameUpdateCount + 10);
         }

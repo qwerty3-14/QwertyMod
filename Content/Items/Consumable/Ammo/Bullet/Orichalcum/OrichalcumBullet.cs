@@ -10,8 +10,6 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Bullet.Orichalcum
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Orichalcum Bullet");
-            Tooltip.SetDefault("Upon hitting an enemy flies toward another enemy");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 99;
         }
 
@@ -21,16 +19,16 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Bullet.Orichalcum
             Item.DamageType = DamageClass.Ranged;
             Item.knockBack = 2;
             Item.value = 1;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
             Item.width = 12;
             Item.height = 18;
 
-            Item.shootSpeed = 14;
+            Item.shootSpeed = 2;
 
             Item.consumable = true;
             Item.shoot = ProjectileType<OrichalcumBulletP>();
             Item.ammo = 97;
-            Item.maxStack = 999;
+            Item.maxStack = 9999;
         }
 
         public override void AddRecipes()

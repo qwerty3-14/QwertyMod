@@ -25,6 +25,7 @@ namespace QwertyMod.Common.Playerlayers
         {
             Player drawPlayer = drawInfo.drawPlayer;
             Mod mod = ModLoader.GetMod("QwertyMod");
+            //drawInfo.compTorsoFrame = new Rectangle(drawInfo.compTorsoFrame.X, drawInfo.compTorsoFrame.Y, drawInfo.compTorsoFrame.Width, 20);
             if (OnBodyDraw.BodyDictionary.ContainsKey(drawPlayer.body))
             {
                 Color color12 = drawInfo.colorArmorBody;

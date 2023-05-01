@@ -25,13 +25,9 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Furniture
             TileObjectData.newSubTile.LavaDeath = false;
             TileObjectData.newSubTile.LavaPlacement = LiquidPlacement.Allowed;
             TileObjectData.addTile(Type);
-            //AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTable);
-            ModTranslation name = CreateMapEntryName();
-            name.SetDefault("Fortress Latern");
-            AddMapEntry(new Color(162, 184, 185), name);
+            AddMapEntry(new Color(162, 184, 185));
             DustType = DustType<FortressDust>();
             HitSound = QwertyMod.FortressBlocks;
-            //// disableSmartCursor = true;
             AdjTiles = new int[] { TileID.HangingLanterns };
             AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
         }

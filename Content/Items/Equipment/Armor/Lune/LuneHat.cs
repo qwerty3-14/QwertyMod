@@ -13,8 +13,6 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Lune
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Lune Hat");
-            Tooltip.SetDefault("+8% ranged crit" + "\nImproves vision");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             Head.Sets.DrawHatHair[Item.headSlot] = true;
         }
@@ -22,7 +20,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Lune
         public override void SetDefaults()
         {
             Item.value = 20000;
-            Item.rare = 1;
+            Item.rare = ItemRarityID.Blue;
 
             Item.width = 26;
             Item.height = 16;

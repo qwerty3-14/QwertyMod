@@ -7,8 +7,8 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Sword
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Imperial Courage");
-            Description.SetDefault("25% increased critical chance");
+            //DisplayName,SetDefault("Imperial Courage");
+            //Description.SetDefault("25% increased critical chance");
             Main.debuff[Type] = false;
             Main.pvpBuff[Type] = false;
             Main.buffNoSave[Type] = true;

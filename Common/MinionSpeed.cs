@@ -48,7 +48,7 @@ namespace QwertyMod.Common
         public int bonustUpdates = 0;
         public float minionSpeedAccumulator = 0f;
         public int discipline = 0;
-        public override void OnHitNPC(Projectile projectile, NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (target.HasBuff(BuffType<DisciplineTag>()))
             {
@@ -64,24 +64,6 @@ namespace QwertyMod.Common
                         }
                     }
                 }
-                //projectile sources are useless RIP
-                /*
-                if(projectile.minion)
-                {
-                    SpeedBuff(projectile);
-                }
-                else if(ProjectileID.Sets.MinionShot[projectile.type])
-                {
-                    Main.NewText("Item With Ammo: " + (projectile.GetProjectileSource_FromThis() is EntitySource_ItemUse_WithAmmo));
-                    Main.NewText("Item: " + (projectile.GetProjectileSource_FromThis() is ProjectileSource_Item));
-                    Main.NewText("Projectile: " + (projectile.GetProjectileSource_FromThis() is ProjectileSource_ProjectileParent));
-
-                    if (projectile.GetProjectileSource_FromThis() is ProjectileSource_ProjectileParent source)
-                    {
-                        Main.NewText("Projectile: " + projectile.whoAmI + " Parent: " + source.ParentProjectile.whoAmI);
-                    }
-                }
-                */
             }
         }
         void SpeedBuff(Projectile projectile)
@@ -90,7 +72,7 @@ namespace QwertyMod.Common
             {
                 for (int d = 0; d < 20; d++)
                 {
-                    Dust dust = Dust.NewDustPerfect(projectile.Center, 15, QwertyMethods.PolarVector(10, ((float)d / 20f) * (float)Math.PI * 2f));
+                    Dust dust = Dust.NewDustPerfect(projectile.Center, 15, QwertyMethods.PolarVector(10, ((float)d / 20f) * MathF.PI * 2f));
                     dust.noGravity = true;
                 }
             }

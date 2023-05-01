@@ -15,8 +15,8 @@ namespace QwertyMod
         public static float SlowRotation(float currentRotation, float targetAngle, float speed)
         {
             int f = 1; //this is used to switch rotation direction
-            float actDirection = new Vector2((float)Math.Cos(currentRotation), (float)Math.Sin(currentRotation)).ToRotation();
-            targetAngle = new Vector2((float)Math.Cos(targetAngle), (float)Math.Sin(targetAngle)).ToRotation();
+            float actDirection = new Vector2(MathF.Cos(currentRotation), MathF.Sin(currentRotation)).ToRotation();
+            targetAngle = new Vector2(MathF.Cos(targetAngle), MathF.Sin(targetAngle)).ToRotation();
 
             //this makes f 1 or -1 to rotate the shorter distance
             if (Math.Abs(actDirection - targetAngle) > Math.PI)
@@ -40,13 +40,13 @@ namespace QwertyMod
             {
                 actDirection -= MathHelper.ToRadians(speed) * f;
             }
-            actDirection = new Vector2((float)Math.Cos(actDirection), (float)Math.Sin(actDirection)).ToRotation();
+            actDirection = new Vector2(MathF.Cos(actDirection), MathF.Sin(actDirection)).ToRotation();
 
             return actDirection;
         }
         public static Vector2 PolarVector(float radius, float theta)
         {
-            return new Vector2((float)Math.Cos(theta), (float)Math.Sin(theta)) * radius;
+            return new Vector2(MathF.Cos(theta), MathF.Sin(theta)) * radius;
         }
 
         public delegate bool SpecialCondition(NPC possibleTarget);
@@ -111,8 +111,8 @@ namespace QwertyMod
         public static void SlowRotation(this ref float currentRotation, float targetAngle, float speed)
         {
             int f = 1; //this is used to switch rotation direction
-            float actDirection = new Vector2((float)Math.Cos(currentRotation), (float)Math.Sin(currentRotation)).ToRotation();
-            targetAngle = new Vector2((float)Math.Cos(targetAngle), (float)Math.Sin(targetAngle)).ToRotation();
+            float actDirection = new Vector2(MathF.Cos(currentRotation), MathF.Sin(currentRotation)).ToRotation();
+            targetAngle = new Vector2(MathF.Cos(targetAngle), MathF.Sin(targetAngle)).ToRotation();
 
             //this makes f 1 or -1 to rotate the shorter distance
             if (Math.Abs(actDirection - targetAngle) > Math.PI)
@@ -136,38 +136,38 @@ namespace QwertyMod
             {
                 actDirection -= speed * f;
             }
-            actDirection = new Vector2((float)Math.Cos(actDirection), (float)Math.Sin(actDirection)).ToRotation();
+            actDirection = new Vector2(MathF.Cos(actDirection), MathF.Sin(actDirection)).ToRotation();
             currentRotation = actDirection;
         }
         public static void SlowRotWhileAvoid(this ref float currentRotation, float targetAngle, float speed, float avoid)
         {
-            float actDirection = new Vector2((float)Math.Cos(currentRotation), (float)Math.Sin(currentRotation)).ToRotation();
-            targetAngle = new Vector2((float)Math.Cos(targetAngle), (float)Math.Sin(targetAngle)).ToRotation();
-            avoid = new Vector2((float)Math.Cos(avoid), (float)Math.Sin(avoid)).ToRotation();
+            float actDirection = new Vector2(MathF.Cos(currentRotation), MathF.Sin(currentRotation)).ToRotation();
+            targetAngle = new Vector2(MathF.Cos(targetAngle), MathF.Sin(targetAngle)).ToRotation();
+            avoid = new Vector2(MathF.Cos(avoid), MathF.Sin(avoid)).ToRotation();
 
 
             if (actDirection < 0)
             {
-                actDirection += (float)Math.PI * 2;
+                actDirection += MathF.PI * 2;
             }
             if (targetAngle < 0)
             {
-                targetAngle += (float)Math.PI * 2;
+                targetAngle += MathF.PI * 2;
             }
 
             actDirection -= avoid;
             targetAngle -= avoid;
 
-            actDirection = new Vector2((float)Math.Cos(actDirection), (float)Math.Sin(actDirection)).ToRotation();
-            targetAngle = new Vector2((float)Math.Cos(targetAngle), (float)Math.Sin(targetAngle)).ToRotation();
+            actDirection = new Vector2(MathF.Cos(actDirection), MathF.Sin(actDirection)).ToRotation();
+            targetAngle = new Vector2(MathF.Cos(targetAngle), MathF.Sin(targetAngle)).ToRotation();
 
             if (actDirection < 0)
             {
-                actDirection += (float)Math.PI * 2;
+                actDirection += MathF.PI * 2;
             }
             if (targetAngle < 0)
             {
-                targetAngle += (float)Math.PI * 2;
+                targetAngle += MathF.PI * 2;
             }
 
             if (actDirection <= targetAngle + speed * 2 && actDirection >= targetAngle - speed * 2)
@@ -185,7 +185,7 @@ namespace QwertyMod
 
             actDirection += avoid;
 
-            actDirection = new Vector2((float)Math.Cos(actDirection), (float)Math.Sin(actDirection)).ToRotation();
+            actDirection = new Vector2(MathF.Cos(actDirection), MathF.Sin(actDirection)).ToRotation();
             currentRotation = actDirection;
 
         }
@@ -204,30 +204,7 @@ namespace QwertyMod
         //give an angle to shoot at to attempt to hit a moving target, returns NaN when this is impossible
         public static float PredictiveAim(Vector2 shootFrom, float shootSpeed, Vector2 targetPos, Vector2 targetVelocity)
         {
-            float angleToTarget = (targetPos - shootFrom).ToRotation();
-            float targetTraj = targetVelocity.ToRotation();
-            float targetSpeed = targetVelocity.Length();
-            float dist = (targetPos - shootFrom).Length();
-
-            //imagine a tirangle between the shooter, its target and where it think the target will be in the future
-            // we need to find an angle in the triangle z this is the angle located at the target's corner
-            float z = (float)Math.PI + (targetTraj - angleToTarget);
-
-            //with this angle z we can now use the law of cosines to find time
-            //the side opposite of z is equal to shootSpeed * time
-            //the other sides are dist and targetSpeed * time
-            // putting these values into law of cosines gets (shootSpeed * time)^2 = (targetSpeed * time)^2 + dist^2 -2*targetSpeed*time*cos(z)
-            //we can rearange it to (shootSpeed^2 - targetSpeed^2)time^2 + 2*targetSpeed*dist*cos(z)*time - dist^2 = 0, this is a quadratic!
-
-            //here we use the quadratic formula to find time
-            float a = shootSpeed * shootSpeed - targetSpeed * targetSpeed;
-            float b = 2 * targetSpeed * dist * (float)Math.Cos(z);
-            float c = -(dist * dist);
-            float time = (-b + (float)Math.Sqrt(b * b - 4 * a * c)) / (2 * a);
-
-            //we now know the time allowing use to find all sides of the tirangle, now we use law of Sines to calculate the angle to shoot at.
-            float calculatedShootAngle = angleToTarget - (float)Math.Asin((targetSpeed * time * (float)Math.Sin(z)) / (shootSpeed * time));
-            return calculatedShootAngle;
+            return PredictiveAimWithOffset(shootFrom, shootSpeed, targetPos, targetVelocity, 0);
         }
         /// <summary>
         /// give an angle to shoot at to attempt to hit a moving target, returns NaN when this is impossible, includes a shoot Offest
@@ -245,7 +222,7 @@ namespace QwertyMod
 
             //imagine a tirangle between the shooter, its target and where it think the target will be in the future
             // we need to find an angle in the triangle z this is the angle located at the target's corner
-            float z = (float)Math.PI + (targetTraj - angleToTarget);
+            float z = MathF.PI + (targetTraj - angleToTarget);
 
             //with this angle z we can now use the law of cosines to find time
             //the side opposite of z is equal to shootSpeed * time
@@ -255,12 +232,12 @@ namespace QwertyMod
 
             //here we use the quadratic formula to find time
             float a = shootSpeed * shootSpeed - targetSpeed * targetSpeed;
-            float b = 2 * targetSpeed * dist * (float)Math.Cos(z) + 2 * shootOffset * shootSpeed;
+            float b = 2 * targetSpeed * dist * MathF.Cos(z) + 2 * shootOffset * shootSpeed;
             float c = (shootOffset * shootOffset) - (dist * dist);
-            float time = (-b + (float)Math.Sqrt(b * b - 4 * a * c)) / (2 * a);
+            float time = (-b + MathF.Sqrt(b * b - 4 * a * c)) / (2 * a);
 
             //we now know the time allowing use to find all sides of the tirangle, now we use law of Sines to calculate the angle to shoot at.
-            float calculatedShootAngle = angleToTarget - (float)Math.Asin((targetSpeed * time * (float)Math.Sin(z)) / (shootSpeed * time));
+            float calculatedShootAngle = angleToTarget - MathF.Asin((targetSpeed * time * MathF.Sin(z)) / (shootSpeed * time + shootOffset));
             return calculatedShootAngle;
         }
         public static float PredictiveVerticalAim(float myX, float shootSpeed, Vector2 targetPos, Vector2 targetVelocity)
@@ -338,24 +315,24 @@ namespace QwertyMod
                 KnockBack += item.knockBack;
                 bool flag2 = dontConsume;
 
-                if (player.magicQuiver && ammoID == AmmoID.Arrow && Main.rand.Next(5) == 0)
+                if (player.magicQuiver && ammoID == AmmoID.Arrow && Main.rand.NextBool(5))
                 {
                     flag2 = true;
                 }
-                if (player.ammoBox && Main.rand.Next(5) == 0)
+                if (player.ammoBox && Main.rand.NextBool(5))
                 {
                     flag2 = true;
                 }
-                if (player.ammoPotion && Main.rand.Next(5) == 0)
+                if (player.ammoPotion && Main.rand.NextBool(5))
                 {
                     flag2 = true;
                 }
 
-                if (player.ammoCost80 && Main.rand.Next(5) == 0)
+                if (player.ammoCost80 && Main.rand.NextBool(5))
                 {
                     flag2 = true;
                 }
-                if (player.ammoCost75 && Main.rand.Next(4) == 0)
+                if (player.ammoCost75 && Main.rand.NextBool(4))
                 {
                     flag2 = true;
                 }
@@ -394,7 +371,7 @@ namespace QwertyMod
                     }
                     int num4 = Main.DamageVar((float)Projectile.damage);
                     Projectile.StatusPlayer(myPlayer);
-                    Main.player[myPlayer].Hurt(PlayerDeathReason.ByProjectile(Projectile.owner, Projectile.whoAmI), num4, Projectile.direction, true, false, false, -1);
+                    Main.player[myPlayer].Hurt(PlayerDeathReason.ByProjectile(Projectile.owner, Projectile.whoAmI), num4, Projectile.direction, true, false);
                 }
             }
         }
@@ -404,7 +381,7 @@ namespace QwertyMod
             angle2 = PolarVector(1f, angle2).ToRotation();
             if (Math.Abs(angle1 - angle2) > Math.PI)
             {
-                return (float)Math.PI * 2 - Math.Abs(angle1 - angle2);
+                return MathF.PI * 2 - Math.Abs(angle1 - angle2);
             }
             return Math.Abs(angle1 - angle2);
         }
@@ -424,7 +401,7 @@ namespace QwertyMod
                 }
             }
         }
-        public static List<Projectile> ProjectileSpread(IEntitySource source, Vector2 position, int count, float speed, int type, int damage, float kb, int owner = 255, float ai0 = 0, float ai1 = 0, float rotation = 0f, float spread = (float)Math.PI * 2)
+        public static List<Projectile> ProjectileSpread(IEntitySource source, Vector2 position, int count, float speed, int type, int damage, float kb, int owner = 255, float ai0 = 0, float ai1 = 0, float rotation = 0f, float spread = MathF.PI * 2)
         {
             List<Projectile> me = new List<Projectile>();
             for (int r = 0; r < count; r++)
@@ -468,12 +445,12 @@ namespace QwertyMod
 
         public static void ServerClientCheck(string q)
         {
-            if (Main.netMode == 1)
+            if (Main.netMode == NetmodeID.MultiplayerClient)
             {
                 Main.NewText("Client says  " + q, Color.Pink);
             }
 
-            if (Main.netMode == 2) // Server
+            if (Main.netMode == NetmodeID.Server) // Server
             {
                 ChatHelper.BroadcastChatMessage(Terraria.Localization.NetworkText.FromLiteral("Server says " + q), Color.Green);
             }
@@ -490,7 +467,7 @@ namespace QwertyMod
             }
             else
             {
-                NetMessage.SendData(MessageID.SpawnBoss, number: player.whoAmI, number2: type);
+                NetMessage.SendData(MessageID.SpawnBossUseLicenseStartEvent, number: player.whoAmI, number2: type);
             }
         }
     }
@@ -509,9 +486,9 @@ namespace QwertyMod
         {
             return false;
         }
-        public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            hitDirection = Math.Sign(target.Center.X - Main.player[Projectile.owner].Center.X);
+            modifiers.HitDirectionOverride = Math.Sign(target.Center.X - Main.player[Projectile.owner].Center.X);
         }
         public override bool? CanHitNPC(NPC target)
         {
@@ -538,9 +515,9 @@ namespace QwertyMod
         {
             return false;
         }
-        public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            hitDirection = Math.Sign(target.Center.X - Main.player[Projectile.owner].Center.X);
+            modifiers.HitDirectionOverride = Math.Sign(target.Center.X - Main.player[Projectile.owner].Center.X);
         }
         public override bool? CanHitNPC(NPC target)
         {
@@ -567,9 +544,9 @@ namespace QwertyMod
         {
             return false;
         }
-        public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            hitDirection = Math.Sign(target.Center.X - Main.player[Projectile.owner].Center.X);
+            modifiers.HitDirectionOverride = Math.Sign(target.Center.X - Main.player[Projectile.owner].Center.X);
         }
         public override bool? CanHitNPC(NPC target)
         {
@@ -596,9 +573,9 @@ namespace QwertyMod
         {
             return false;
         }
-        public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            hitDirection = Math.Sign(target.Center.X - Main.player[Projectile.owner].Center.X);
+            modifiers.HitDirectionOverride = Math.Sign(target.Center.X - Main.player[Projectile.owner].Center.X);
         }
         public override bool? CanHitNPC(NPC target)
         {
@@ -625,9 +602,9 @@ namespace QwertyMod
         {
             return false;
         }
-        public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            hitDirection = Math.Sign(target.Center.X - Main.player[Projectile.owner].Center.X);
+            modifiers.HitDirectionOverride = Math.Sign(target.Center.X - Main.player[Projectile.owner].Center.X);
         }
         public override bool? CanHitNPC(NPC target)
         {
@@ -642,7 +619,6 @@ namespace QwertyMod
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Zap");
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             Main.projFrames[Projectile.type] = 1;
             ProjectileID.Sets.MinionShot[Projectile.type] = true;

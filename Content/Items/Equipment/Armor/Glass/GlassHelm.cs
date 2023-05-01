@@ -19,8 +19,6 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Glass
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Glass Headset");
-            Tooltip.SetDefault("A glass prism orbits you zapping enemies");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             Head.Sets.DrawHatHair[Item.headSlot] = true;
         }
@@ -28,7 +26,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Glass
         public override void SetDefaults()
         {
             Item.value = 10000;
-            Item.rare = 1;
+            Item.rare = ItemRarityID.Blue;
             Item.width = 22;
             Item.height = 14;
             Item.defense = 3;
@@ -97,16 +95,16 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Glass
                 PrismTrigonometryCounterOfAwsomenessWowThisIsAVeryLongVariableName += (float)MathHelper.Pi / 30;
                 prismDazzleCounter--;
                 NPC target = new NPC();
-                Vector2 prismCenter = Player.Center + new Vector2((float)Math.Sin(PrismTrigonometryCounterOfAwsomenessWowThisIsAVeryLongVariableName) * 40f, 0);
+                Vector2 prismCenter = Player.Center + new Vector2(MathF.Sin(PrismTrigonometryCounterOfAwsomenessWowThisIsAVeryLongVariableName) * 40f, 0);
                 if (QwertyMethods.ClosestNPC(ref target, 4000, prismCenter) && prismDazzleCounter <= 0)
                 {
-                    Projectile.NewProjectile(new EntitySource_Misc(""), prismCenter, QwertyMethods.PolarVector(1, (target.Center - prismCenter).ToRotation()), ProjectileType<PrismDazzle>(), (int)(12f * Player.GetDamage(DamageClass.Magic).Multiplicative), 0f, Player.whoAmI);
+                    Projectile.NewProjectile(new EntitySource_Misc("SetBonus_Prism"), prismCenter, QwertyMethods.PolarVector(1, (target.Center - prismCenter).ToRotation()), ProjectileType<PrismDazzle>(), (int)(12f * Player.GetDamage(DamageClass.Magic).Multiplicative), 0f, Player.whoAmI);
                     prismDazzleCounter = 90;
                 }
             }
         }
 
-        public override void OnHitNPCWithProj(Projectile proj, NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (proj.CountsAsClass(DamageClass.Ranged) && setBonus && Player.velocity.X > 0)
             {
@@ -126,8 +124,8 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Glass
         }
         public override Position GetDefaultPosition() => new Multiple()
         {
-            { new Between(PlayerDrawLayers.CaptureTheGem, PlayerDrawLayers.BeetleBuff), drawInfo => Math.Cos(drawInfo.drawPlayer.GetModPlayer<HelmEffects>().PrismTrigonometryCounterOfAwsomenessWowThisIsAVeryLongVariableName) <= 0 },
-            { new Between(PlayerDrawLayers.JimsCloak, PlayerDrawLayers.MountBack), drawInfo => Math.Cos(drawInfo.drawPlayer.GetModPlayer<HelmEffects>().PrismTrigonometryCounterOfAwsomenessWowThisIsAVeryLongVariableName) > 0 }
+            { new Between(PlayerDrawLayers.CaptureTheGem, PlayerDrawLayers.BeetleBuff), drawInfo => drawInfo.drawPlayer.TryGetModPlayer<HelmEffects>(out _) && Math.Cos(drawInfo.drawPlayer.GetModPlayer<HelmEffects>().PrismTrigonometryCounterOfAwsomenessWowThisIsAVeryLongVariableName) <= 0 },
+            { new Between(PlayerDrawLayers.JimsCloak, PlayerDrawLayers.MountBack), drawInfo => drawInfo.drawPlayer.TryGetModPlayer<HelmEffects>(out _) && Math.Cos(drawInfo.drawPlayer.GetModPlayer<HelmEffects>().PrismTrigonometryCounterOfAwsomenessWowThisIsAVeryLongVariableName) > 0 }
         };
         protected override void Draw(ref PlayerDrawSet drawInfo)
         {
@@ -140,10 +138,10 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Glass
             Texture2D texture = Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Glass/GlassPrism").Value;
             Color color12 = drawPlayer.GetImmuneAlphaPure(Lighting.GetColor((int)((double)drawInfo.Position.X + (double)drawPlayer.width * 0.5) / 16, (int)((double)drawInfo.Position.Y + (double)drawPlayer.height * 0.5) / 16, Microsoft.Xna.Framework.Color.White), 0f);
 
-            if (drawPlayer.GetModPlayer<HelmEffects>().helmEffect)
+            if (drawPlayer.TryGetModPlayer<HelmEffects>(out HelmEffects helm) &&  helm.helmEffect)
             {
                 Vector2 Center = drawInfo.Position + new Vector2(drawPlayer.width / 2, drawPlayer.height / 2) - Main.screenPosition;
-                Center.X += (float)Math.Sin(drawPlayer.GetModPlayer<HelmEffects>().PrismTrigonometryCounterOfAwsomenessWowThisIsAVeryLongVariableName) * 40;
+                Center.X += MathF.Sin(helm.PrismTrigonometryCounterOfAwsomenessWowThisIsAVeryLongVariableName) * 40;
                 DrawData data = new DrawData(texture, Center, texture.Frame(), color12, 0f, texture.Size() * .5f, 1f, drawInfo.playerEffect, 0);
                 data.shader = (int)drawPlayer.dye[3].dye;
                 drawInfo.DrawDataCache.Add(data);
@@ -172,7 +170,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Glass
 
         public override void AI()
         {
-            if (Main.rand.Next(8) == 0)
+            if (Main.rand.NextBool(8))
             {
                 Dust d = Main.dust[Dust.NewDust(Projectile.Center, 0, 0, DustType<GlassSmoke>())];
                 d.velocity *= .1f;
@@ -189,9 +187,9 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Glass
             }
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (!target.boss && Main.rand.Next(20) == 0)
+            if (!target.boss && Main.rand.NextBool(20))
             {
                 target.AddBuff(BuffType<Stunned>(), 120);
             }

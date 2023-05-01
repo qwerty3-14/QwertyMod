@@ -9,8 +9,8 @@ namespace QwertyMod.Content.Items.Weapon.Minion.MechCrossbow
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Mech Crossbow");
-            Description.SetDefault("Will shoot your enemies in the knee!");
+            //DisplayName,SetDefault("Mech Crossbow");
+            //Description.SetDefault("Will shoot your enemies in the knee!");
             Main.buffNoSave[Type] = true;
             Main.buffNoTimeDisplay[Type] = true;
         }

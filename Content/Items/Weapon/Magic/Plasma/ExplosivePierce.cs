@@ -16,8 +16,8 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Plasma
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Plasma Cannon");
-            Tooltip.SetDefault("Fires projectiles that pierce through enemies exploding every time they hit something!");
+            //DisplayName,SetDefault("Plasma Cannon");
+            //Tooltip.SetDefault("Fires projectiles that pierce through enemies exploding every time they hit something!");
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -28,10 +28,10 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Plasma
 
             Item.useTime = 12;
             Item.useAnimation = 12;
-            Item.useStyle = 5;
+            Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 1;
             Item.value = 750000;
-            Item.rare = 10;
+            Item.rare = ItemRarityID.Red;
             Item.UseSound = SoundID.Item91;
             Item.autoReuse = true;
             Item.width = 92;
@@ -60,7 +60,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Plasma
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("EPShot");
+            //DisplayName,SetDefault("EPShot");
             Main.projFrames[Projectile.type] = 18;
         }
 
@@ -102,13 +102,13 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Plasma
         public override void Kill(int timeLeft)
         {
             Player player = Main.player[Projectile.owner];
-            Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center.X, Projectile.Center.Y, 0, 0, ProjectileType<EPexplosion>(), Projectile.damage, Projectile.knockBack, player.whoAmI);
+            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center.X, Projectile.Center.Y, 0, 0, ProjectileType<EPexplosion>(), Projectile.damage, Projectile.knockBack, player.whoAmI);
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Player player = Main.player[Projectile.owner];
-            Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center.X, Projectile.Center.Y, 0, 0, ProjectileType<EPexplosion>(), Projectile.damage, Projectile.knockBack, player.whoAmI);
+            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center.X, Projectile.Center.Y, 0, 0, ProjectileType<EPexplosion>(), Projectile.damage, Projectile.knockBack, player.whoAmI);
             Projectile.localNPCImmunity[target.whoAmI] = -1;
             target.immune[Projectile.owner] = 0;
         }
@@ -118,7 +118,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Plasma
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("EP explosion");
+            //DisplayName,SetDefault("EP explosion");
         }
 
         public override void SetDefaults()
@@ -150,13 +150,13 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Plasma
                 dust.noGravity = true;
                 dust.velocity *= 5f;
                 float distFromCenter = Main.rand.NextFloat(0, 1f);
-                float theta = Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI);
+                float theta = Main.rand.NextFloat(-MathF.PI, MathF.PI);
 
-                dust.position = Projectile.Center + new Vector2((float)Math.Cos(theta) * distFromCenter * Projectile.width / 2, (float)Math.Sin(theta) * distFromCenter * Projectile.height / 2);
+                dust.position = Projectile.Center + new Vector2(MathF.Cos(theta) * distFromCenter * Projectile.width / 2, MathF.Sin(theta) * distFromCenter * Projectile.height / 2);
             }
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.localNPCImmunity[target.whoAmI] = -1;
             target.immune[Projectile.owner] = 0;

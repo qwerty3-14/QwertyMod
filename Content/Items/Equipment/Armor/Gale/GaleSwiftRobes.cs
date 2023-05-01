@@ -15,8 +15,8 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Gale
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Gale Swift Robes");
-            Tooltip.SetDefault("+9% chance to dodge an attack" + "\n+8% critical strike chance");
+            //DisplayName,SetDefault("Gale Swift Robes");
+            //Tooltip.SetDefault("+9% chance to dodge an attack" + "\n+8% critical strike chance");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -29,7 +29,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Gale
         public override void SetDefaults()
         {
             Item.value = Item.sellPrice(0, 0, 75, 0);
-            Item.rare = 4;
+            Item.rare = ItemRarityID.LightRed;
             Item.defense = 1;
             //Item.vanity = true;
             Item.width = 20;

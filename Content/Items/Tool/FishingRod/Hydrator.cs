@@ -16,8 +16,8 @@ namespace QwertyMod.Content.Items.Tool.FishingRod
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("The Hydrator");
-            Tooltip.SetDefault("Three bobbers are better than one!");
+            //DisplayName,SetDefault("The Hydrator");
+            //Tooltip.SetDefault("Three bobbers are better than one!");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -28,7 +28,7 @@ namespace QwertyMod.Content.Items.Tool.FishingRod
             Item.fishingPole = 10; //this defines the fishing pole fishing power
 
             Item.value = 25000;
-            Item.rare = 3;    //The color the title of your item when hovering over it ingame .
+            Item.rare = ItemRarityID.Orange;    //The color the title of your item when hovering over it ingame .
             Item.shoot = ProjectileType<HydraBobber>();  //This defines what type of projectile this item will shot
             Item.shootSpeed = 9f; //this defines the the projectile speed when shot. for fishing pole also increases the fishing line length/range
         }
@@ -46,7 +46,7 @@ namespace QwertyMod.Content.Items.Tool.FishingRod
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Hydra Bobber");
+            //DisplayName,SetDefault("Hydra Bobber");
         }
 
         public override void SetDefaults()
@@ -83,7 +83,7 @@ namespace QwertyMod.Content.Items.Tool.FishingRod
                 float projPosX = Projectile.position.X + (float)Projectile.width * 0.5f - value.X;
                 float projPosY = Projectile.position.Y + (float)Projectile.height * 0.5f - value.Y;
                 Math.Sqrt((double)(projPosX * projPosX + projPosY * projPosY));
-                float rotation2 = (float)Math.Atan2((double)projPosY, (double)projPosX) - 1.57f;
+                float rotation2 = MathF.Atan2(projPosY, projPosX) - 1.57f;
                 bool flag2 = true;
                 if (projPosX == 0f && projPosY == 0f)
                 {
@@ -91,7 +91,7 @@ namespace QwertyMod.Content.Items.Tool.FishingRod
                 }
                 else
                 {
-                    float projPosXY = (float)Math.Sqrt((double)(projPosX * projPosX + projPosY * projPosY));
+                    float projPosXY = MathF.Sqrt((projPosX * projPosX + projPosY * projPosY));
                     projPosXY = 12f / projPosXY;
                     projPosX *= projPosXY;
                     projPosY *= projPosXY;
@@ -103,7 +103,7 @@ namespace QwertyMod.Content.Items.Tool.FishingRod
                 while (flag2)
                 {
                     float num = 12f;
-                    float num2 = (float)Math.Sqrt((double)(projPosX * projPosX + projPosY * projPosY));
+                    float num2 = MathF.Sqrt((projPosX * projPosX + projPosY * projPosY));
                     float num3 = num2;
                     if (float.IsNaN(num2) || float.IsNaN(num3))
                     {
@@ -167,7 +167,7 @@ namespace QwertyMod.Content.Items.Tool.FishingRod
                                 projPosX *= 1f - num4;
                             }
                         }
-                        rotation2 = (float)Math.Atan2((double)projPosY, (double)projPosX) - 1.57f;
+                        rotation2 = MathF.Atan2(projPosY, projPosX) - 1.57f;
                         Microsoft.Xna.Framework.Color color2 = Lighting.GetColor((int)value.X / 16, (int)(value.Y / 16f), new Microsoft.Xna.Framework.Color(228, 29, 249));    //this is the fishing line color in RGB, 200 is red, 12 is green, 50 blue
 
                         Main.spriteBatch.Draw(TextureAssets.FishingLine.Value, new Vector2(value.X - Main.screenPosition.X + (float)TextureAssets.FishingLine.Value.Width * 0.5f, value.Y - Main.screenPosition.Y + (float)TextureAssets.FishingLine.Value.Height * 0.5f), new Microsoft.Xna.Framework.Rectangle?(new Microsoft.Xna.Framework.Rectangle(0, 0, TextureAssets.FishingLine.Value.Width, (int)num)), color2, rotation2, new Vector2((float)TextureAssets.FishingLine.Value.Width * 0.5f, 0f), 1f, SpriteEffects.None, 0f);

@@ -14,8 +14,6 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Caelite
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Caelite Helm");
-            Tooltip.SetDefault("Enemies killed by melee or magic attacks drop more money!");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             Head.Sets.DrawHead[Item.headSlot] = false;
         }
@@ -23,7 +21,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Caelite
         public override void SetDefaults()
         {
             Item.value = 30000;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
 
             Item.width = 22;
 
@@ -53,9 +51,9 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Caelite
             hasEffect = false;
         }
 
-        public override void OnHitNPCWithProj(Projectile proj, NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Player.GetModPlayer<CaeliteHelmEffect>().hasEffect && damage > target.life && (proj.CountsAsClass(DamageClass.Magic) || proj.CountsAsClass(DamageClass.Melee)))
+            if (Player.GetModPlayer<CaeliteHelmEffect>().hasEffect && damageDone > target.life && (proj.CountsAsClass(DamageClass.Magic) || proj.CountsAsClass(DamageClass.Melee)))
             {
                 target.value = (int)(target.value * 2f);
             }

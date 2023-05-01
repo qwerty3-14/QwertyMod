@@ -10,8 +10,8 @@ namespace QwertyMod.Content.Items.Weapon.Minion.LeechRune
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Leech Rune");
-            Description.SetDefault("The Leech rune will fight for you!");
+            //DisplayName,SetDefault("Leech Rune");
+            //Description.SetDefault("The Leech rune will fight for you!");
             Main.buffNoSave[Type] = true;
             Main.buffNoTimeDisplay[Type] = true;
         }

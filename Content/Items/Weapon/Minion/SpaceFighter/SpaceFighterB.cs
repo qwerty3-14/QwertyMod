@@ -8,8 +8,8 @@ namespace QwertyMod.Content.Items.Weapon.Minion.SpaceFighter
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Space fighter");
-            Description.SetDefault("Breaking news! You're in SPACE!");
+            //DisplayName,SetDefault("Space fighter");
+            //Description.SetDefault("Breaking news! You're in SPACE!");
             Main.buffNoSave[Type] = true;
             Main.buffNoTimeDisplay[Type] = true;
         }

@@ -24,7 +24,7 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Polar Exterminator");
+            //DisplayName,SetDefault("Polar Exterminator");
             Main.npcFrameCount[NPC.type] = 5;
             NPCID.Sets.BossBestiaryPriority.Add(Type);
         }
@@ -62,10 +62,10 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
         private const int ShootSliderFrame = 3;
         private const int ShootFlierFrame = 2;
 
-        public override void ScaleExpertStats(int numPlayers, float bossLifeScale)
+        public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
         {
             NPC.damage = 30;
-            NPC.lifeMax = (int)(NPC.lifeMax * 0.7 * bossLifeScale);
+            NPC.lifeMax = (int)(NPC.lifeMax * 0.7 * bossAdjustment);
         }
 
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
@@ -156,7 +156,7 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
                     NPC.velocity.Y = -10;
                     landed = false;
                     frame = JumpFrame;
-                    if (Main.netMode != 1)
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         timer = 0;
                         NPC.netUpdate = true;
@@ -167,7 +167,7 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
                     {
                         attackCycle = 0;
                     }
-                    if (Main.netMode != 1)
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         NPC.ai[0] = (attackCycle == 0 || attackCycle == 1 || attackCycle == 3 || attackCycle == 4) ? 0 : 1;
                         NPC.netUpdate = true;
@@ -185,9 +185,9 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
                         if (timer > (attackCounter + 1) * 90 + attackDelay && attackCounter < 2)
                         {
                             attackCounter++;
-                            if (Main.netMode != 1)
+                            if (Main.netMode != NetmodeID.MultiplayerClient)
                             {
-                                NPC.NewNPC(new EntitySource_Misc(""), (int)NPC.Center.X + 30 * NPC.direction, (int)NPC.Center.Y + 14, NPCType<SlidingPenguin>(), ai0: NPC.direction, ai1: (player.Bottom.Y < NPC.Center.Y + 14) ? 1 : 0);
+                                NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Center.X + 30 * NPC.direction, (int)NPC.Center.Y + 14, NPCType<SlidingPenguin>(), ai0: NPC.direction, ai1: (player.Bottom.Y < NPC.Center.Y + 14) ? 1 : 0);
                             }
                             SoundEngine.PlaySound(SoundID.Item11, NPC.position);
                             for (int i = 0; i < 8; i++)
@@ -204,9 +204,9 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
                             attackCounter++;
                             for (int i = -2; i < 3; i++)
                             {
-                                if (Main.netMode != 1)
+                                if (Main.netMode != NetmodeID.MultiplayerClient)
                                 {
-                                    NPC.NewNPC(new EntitySource_Misc(""), (int)NPC.Center.X + 34 * NPC.direction, (int)NPC.Center.Y, NPCType<FlyingPenguin>(), 0, i);
+                                    NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Center.X + 34 * NPC.direction, (int)NPC.Center.Y, NPCType<FlyingPenguin>(), 0, i);
                                 }
                                 SoundEngine.PlaySound(SoundID.Item11, NPC.position);
                             }
@@ -231,12 +231,12 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
                     NPC.velocity.X = 0;
                 }
                 /*
-                if (Main.netMode == 1)
+                if (Main.netMode == NetmodeID.MultiplayerClient)
                 {
                     Main.NewText("client: " + timer);
                 }
 
-                if (Main.netMode == 2) // Server
+                if (Main.netMode == NetmodeID.Server) // Server
                 {
                     NetMessage.BroadcastChatMessage(Terraria.Localization.NetworkText.FromLiteral("Server: " + timer), Color.Black);
                 }
@@ -261,7 +261,7 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
                         }
                     }
                 }
-                if (Main.netMode != 1)
+                if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     if (Main.expertMode && (float)NPC.life / (float)NPC.lifeMax < .5f && agentCooldown <= 0)
                     {
@@ -270,9 +270,9 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
                             float x = Main.rand.NextFloat(7, 24) * (i == 0 ? 1 : -1);
                             int denLength = 101;
                             int denUpperHeight = 40;
-                            int ceilingHeight = (int)((float)Math.Sin(((float)(x + (denLength / 2)) / (float)denLength) * (float)Math.PI) * (float)denUpperHeight);
+                            int ceilingHeight = (int)(MathF.Sin(((float)(x + (denLength / 2)) / (float)denLength) * MathF.PI) * (float)denUpperHeight);
                             Vector2 spawnPos = FrozenDen.BearSpawn + new Vector2(x * 16, ceilingHeight * -16);
-                            NPC.NewNPC(new EntitySource_Misc(""), (int)spawnPos.X, (int)spawnPos.Y, NPCType<AgentPenguin>());
+                            NPC.NewNPC(NPC.GetSource_FromAI(), (int)spawnPos.X, (int)spawnPos.Y, NPCType<AgentPenguin>());
 
                         }
                         agentCooldown = 600;

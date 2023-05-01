@@ -13,8 +13,8 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Spear.Hydrospear
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Hydrospear");
-            Tooltip.SetDefault("");
+            //DisplayName,SetDefault("Hydrospear");
+            //Tooltip.SetDefault("");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.Spears[Item.type] = true;
         }
@@ -22,7 +22,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Spear.Hydrospear
         public override void SetDefaults()
         {
             Item.damage = 30;
-            Item.useStyle = 5;
+            Item.useStyle = ItemUseStyleID.Shoot;
             Item.useAnimation = 40;
             Item.useTime = 40;
             Item.shootSpeed = 37f;
@@ -31,7 +31,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Spear.Hydrospear
             Item.height = 70;
             Item.scale = 1f;
             Item.value = Item.sellPrice(silver: 54);
-            Item.rare = 2;
+            Item.rare = ItemRarityID.Green;
 
             Item.DamageType = DamageClass.Melee;
             Item.noMelee = true; // Important because the spear is actually a projectile instead of an Item. This prevents the melee hitbox of this Item.
@@ -54,7 +54,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Spear.Hydrospear
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Hydrospear");
+            //DisplayName,SetDefault("Hydrospear");
         }
 
         public override void SetDefaults()
@@ -99,7 +99,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Spear.Hydrospear
             // Here we set some of the projectile's owner properties, such as held item and itemtime, along with projectile direction and position based on the player
             Vector2 ownerMountedCenter = projOwner.RotatedRelativePoint(projOwner.MountedCenter, true);
             vel = maxDistance / projOwner.itemAnimationMax / 2;
-            Projectile.velocity = new Vector2((float)Math.Cos(Projectile.velocity.ToRotation()) * vel, (float)Math.Sin(Projectile.velocity.ToRotation()) * vel);
+            Projectile.velocity = new Vector2(MathF.Cos(Projectile.velocity.ToRotation()) * vel, MathF.Sin(Projectile.velocity.ToRotation()) * vel);
             Projectile.direction = projOwner.direction;
             projOwner.heldProj = Projectile.whoAmI;
             projOwner.itemTime = projOwner.itemAnimation;
@@ -126,7 +126,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Spear.Hydrospear
                             streamCounter++;
                             if (streamCounter % (int)(16f * projOwner.GetAttackSpeed(DamageClass.Melee)) == 0)
                             {
-                                Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center + QwertyMethods.PolarVector(180, Projectile.rotation - (3 * (float)Math.PI / 4)) + QwertyMethods.PolarVector(5, Projectile.rotation - (1 * (float)Math.PI / 4)), QwertyMethods.PolarVector(1, Projectile.rotation - (3 * (float)Math.PI / 4)), ProjectileType<HydrospearStream>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center + QwertyMethods.PolarVector(180, Projectile.rotation - (3 * MathF.PI / 4)) + QwertyMethods.PolarVector(5, Projectile.rotation - (1 * MathF.PI / 4)), QwertyMethods.PolarVector(1, Projectile.rotation - (3 * MathF.PI / 4)), ProjectileType<HydrospearStream>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
                             }
                         }
                     }
@@ -161,12 +161,12 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Spear.Hydrospear
             }
             if (!noDust)
             {
-                Dust k = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(-4, Projectile.rotation - (3 * (float)Math.PI / 4)) + QwertyMethods.PolarVector(4, Projectile.rotation - (1 * (float)Math.PI / 4)), 172);
+                Dust k = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(-4, Projectile.rotation - (3 * MathF.PI / 4)) + QwertyMethods.PolarVector(4, Projectile.rotation - (1 * MathF.PI / 4)), DustID.DungeonWater);
                 k.velocity = Vector2.Zero;
             }
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.localNPCImmunity[target.whoAmI] = 10;
             target.immune[Projectile.owner] = 0;
@@ -187,7 +187,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Spear.Hydrospear
             Projectile.DamageType = DamageClass.Melee;
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.localNPCImmunity[target.whoAmI] = -1;
             target.immune[Projectile.owner] = 0;
@@ -200,9 +200,9 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Spear.Hydrospear
 
         public override void AI()
         {
-            if (Main.rand.Next(8) == 0)
+            if (Main.rand.NextBool(8))
             {
-                Dust d = Main.dust[Dust.NewDust(Projectile.Center, 0, 0, 172)];
+                Dust d = Main.dust[Dust.NewDust(Projectile.Center, 0, 0, DustID.DungeonWater)];
                 d.velocity *= .1f;
                 d.noGravity = true;
                 d.position = Projectile.Center;

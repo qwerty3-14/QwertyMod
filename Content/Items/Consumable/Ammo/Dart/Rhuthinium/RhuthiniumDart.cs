@@ -11,8 +11,6 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Dart.Rhuthinium
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Rhuthinium Dart");
-            Tooltip.SetDefault("Flies around you and fires 3 beams before breaking");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 99;
         }
 
@@ -26,9 +24,9 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Dart.Rhuthinium
             Item.shoot = ProjectileType<RhuthiniumDartP>();
             Item.shootSpeed = 3;
             Item.knockBack = 0;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
             Item.consumable = true;
-            Item.maxStack = 999;
+            Item.maxStack = 9999;
         }
 
         public override void AddRecipes()

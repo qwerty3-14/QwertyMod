@@ -13,15 +13,15 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Rhuthinium Greaves");
-            Tooltip.SetDefault("Lets you dash");
+            //DisplayName,SetDefault("Rhuthinium Greaves");
+            //Tooltip.SetDefault("Lets you dash");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()
         {
             Item.value = 50000;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
 
             Item.width = 22;
             Item.height = 18;

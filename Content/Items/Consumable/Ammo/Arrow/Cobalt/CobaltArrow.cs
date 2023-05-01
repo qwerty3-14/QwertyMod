@@ -10,8 +10,6 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Cobalt
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Cobalt Arrow");
-            Tooltip.SetDefault("Remains stationarry until you right click, which sends it flying at your cursor");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 99;
         }
 
@@ -21,7 +19,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Cobalt
             Item.DamageType = DamageClass.Ranged;
             Item.knockBack = 2;
             Item.value = 5;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
             Item.width = 14;
             Item.height = 32;
 
@@ -30,7 +28,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Cobalt
             Item.consumable = true;
             Item.shoot = ProjectileType<CobaltArrowP>();
             Item.ammo = 40;
-            Item.maxStack = 999;
+            Item.maxStack = 9999;
         }
 
         public override void AddRecipes()

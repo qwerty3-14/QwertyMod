@@ -2,13 +2,14 @@ using Terraria;
 using Terraria.ModLoader;
 using Terraria.GameContent.Creative;
 using static Terraria.ModLoader.ModContent;
+using Terraria.ID;
 namespace QwertyMod.Content.Items.Consumable.Tiles.Banners
 {
     public class SpectorBanner : ModItem
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Sneaking Ghost Banner");
+            //DisplayName,SetDefault("Sneaking Ghost Banner");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -21,9 +22,9 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Banners
             Item.autoReuse = true;
             Item.useAnimation = 15;
             Item.useTime = 10;
-            Item.useStyle = 1;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.consumable = true;
-            Item.rare = 1;
+            Item.rare = ItemRarityID.Blue;
             Item.value = Item.buyPrice(0, 0, 10, 0);
             Item.createTile = TileType<BannersT>();
             Item.placeStyle = 5;

@@ -10,8 +10,8 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Dnas Painted Fortress Brick");
-            Tooltip.SetDefault("The underside of the brick is painted with Dnas you know what will happen if you bonk your head on it...");
+            //DisplayName,SetDefault("Dnas Painted Fortress Brick");
+            //Tooltip.SetDefault("The underside of the brick is painted with Dnas you know what will happen if you bonk your head on it...");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 100;
         }
 
@@ -20,15 +20,15 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
         {
             Item.width = 16;
             Item.height = 16;
-            Item.maxStack = 999;
+            Item.maxStack = 9999;
             Item.value = 0;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
             Item.createTile = TileType<DnasBrickT>();
             Item.useTurn = true;
             Item.autoReuse = true;
             Item.useAnimation = 15;
             Item.useTime = 10;
-            Item.useStyle = 1;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.consumable = true;
         }
 

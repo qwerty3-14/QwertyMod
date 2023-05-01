@@ -6,10 +6,6 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Bullet.Orichalcum
 {
     public class OrichalcumBulletP : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault("Orichalcum Bullet");
-        }
 
         public override void SetDefaults()
         {
@@ -40,7 +36,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Bullet.Orichalcum
 
         private NPC ConfirmedTarget;
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.localNPCImmunity[target.whoAmI] = -1;
             target.immune[Projectile.owner] = 0;

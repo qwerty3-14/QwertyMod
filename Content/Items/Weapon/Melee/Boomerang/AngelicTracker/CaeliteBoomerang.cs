@@ -13,8 +13,8 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Boomerang.AngelicTracker
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Angelic Tracker");
-            Tooltip.SetDefault("Higher beings will guide your boomerang!");
+            //DisplayName,SetDefault("Angelic Tracker");
+            //Tooltip.SetDefault("Higher beings will guide your boomerang!");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -26,10 +26,10 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Boomerang.AngelicTracker
 
             Item.useTime = 34;
             Item.useAnimation = 34;
-            Item.useStyle = 5;
+            Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 0;
             Item.value = 50000;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
             Item.UseSound = SoundID.Item1;
             Item.noUseGraphic = true;
             Item.width = 18;
@@ -76,7 +76,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Boomerang.AngelicTracker
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Caelite Boomerang");
+            //DisplayName,SetDefault("Caelite Boomerang");
         }
 
         private float speed;
@@ -136,9 +136,9 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Boomerang.AngelicTracker
             //Main.NewText("speed: " + speed);
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Main.rand.Next(10) == 0)
+            if (Main.rand.NextBool(10))
             {
                 target.AddBuff(BuffType<PowerDown>(), 120);
             }

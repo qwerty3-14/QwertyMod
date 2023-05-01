@@ -15,8 +15,8 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Caelite
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Caelite Reinforcmentss");
-            Tooltip.SetDefault("Melee and magic attacks hasten the cooldown for healing potions");
+            //DisplayName,SetDefault("Caelite Reinforcmentss");
+            //Tooltip.SetDefault("Melee and magic attacks hasten the cooldown for healing potions");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             Legs.Sets.HidesBottomSkin[Item.legSlot] = true;
         }
@@ -24,7 +24,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Caelite
         public override void SetDefaults()
         {
             Item.value = 30000;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
 
             Item.width = 22;
             Item.height = 18;
@@ -64,11 +64,11 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Caelite
             }
         }
 
-        public override void OnHitNPCWithProj(Projectile proj, NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (hasEffect && (proj.CountsAsClass(DamageClass.Melee) || proj.CountsAsClass(DamageClass.Magic)) && Player.HasBuff(BuffID.PotionSickness))
             {
-                int healAmount = damage / 2;
+                int healAmount = damageDone / 2;
                 if (healAmount > healLimiter)
                 {
                     healAmount = healLimiter;
@@ -86,11 +86,11 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Caelite
             }
         }
 
-        public override void OnHitNPC(Item item, NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (hasEffect && (item.CountsAsClass(DamageClass.Melee)) && Player.HasBuff(BuffID.PotionSickness))
+            if (hasEffect && (hit.DamageType == DamageClass.Melee && Player.HasBuff(BuffID.PotionSickness)))
             {
-                int healAmount = damage / 2;
+                int healAmount = damageDone / 2;
                 if (healAmount > healLimiter)
                 {
                     healAmount = healLimiter;

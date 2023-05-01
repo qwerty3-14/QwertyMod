@@ -14,7 +14,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.Longsword
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Longsword");
+            //DisplayName,SetDefault("Longsword");
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             Main.projFrames[Projectile.type] = 1;
             ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
@@ -44,7 +44,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.Longsword
         private float yetAnotherTrigCounter;
         private NPC target;
         private bool returningToPlayer = false;
-        private float turnOffset = 3 * (float)Math.PI / 4;
+        private float turnOffset = 3 * MathF.PI / 4;
         private int counter = 0;
         private float bladeLength = 10;
         float? toward = null;
@@ -57,7 +57,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.Longsword
             {
                 turnOffset *= -1;
             }
-            yetAnotherTrigCounter += (float)Math.PI / 120;
+            yetAnotherTrigCounter += MathF.PI / 120;
             Player player = Main.player[Projectile.owner];
             if (player.GetModPlayer<MinionManager>().SwordMinion)
             {
@@ -71,8 +71,8 @@ namespace QwertyMod.Content.Items.Weapon.Minion.Longsword
             {
                 returningToPlayer = false;
             }
-            Vector2 flyTo = player.Center + new Vector2(-50 * player.direction, -50 - 14 * Projectile.minionSlots) + Vector2.UnitY * (float)Math.Sin(yetAnotherTrigCounter) * 20;
-            float turnTo = (float)Math.PI / 2;
+            Vector2 flyTo = player.Center + new Vector2(-50 * player.direction, -50 - 14 * Projectile.minionSlots) + Vector2.UnitY * MathF.Sin(yetAnotherTrigCounter) * 20;
+            float turnTo = MathF.PI / 2;
             float speed = 12f;
             if (returningToPlayer)
             {
@@ -107,17 +107,17 @@ namespace QwertyMod.Content.Items.Weapon.Minion.Longsword
 
             if (spinAttack)
             {
-                Projectile.rotation += ((float)Math.PI * 2) / Projectile.localNPCHitCooldown;
+                Projectile.rotation += (MathF.PI * 2) / Projectile.localNPCHitCooldown;
             }
             else
             {
                 if (toward == null)
                 {
-                    Projectile.rotation.SlowRotation(turnTo, ((float)Math.PI * 2) / Projectile.localNPCHitCooldown);
+                    Projectile.rotation.SlowRotation(turnTo, (MathF.PI * 2) / Projectile.localNPCHitCooldown);
                 }
                 else
                 {
-                    Projectile.rotation.SlowRotWhileAvoid(turnTo, ((float)Math.PI * 2) / Projectile.localNPCHitCooldown, (float)toward + (float)Math.PI);
+                    Projectile.rotation.SlowRotWhileAvoid(turnTo, (MathF.PI * 2) / Projectile.localNPCHitCooldown, (float)toward + MathF.PI);
                 }
             }
             Vector2 difference = flyTo - Projectile.Center;
@@ -138,7 +138,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.Longsword
             return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), Projectile.Center, Projectile.Center + QwertyMethods.PolarVector(bladeLength, Projectile.rotation), 14f, ref point) || Collision.CheckAABBvAABBCollision(targetHitbox.TopLeft(), targetHitbox.Size(), projHitbox.TopLeft(), projHitbox.Size());
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.localNPCImmunity[target.whoAmI] = Projectile.localNPCHitCooldown;
             target.immune[Projectile.owner] = 0;
@@ -162,9 +162,9 @@ namespace QwertyMod.Content.Items.Weapon.Minion.Longsword
             return false;
         }
 
-        public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            damage = (int)Projectile.minionSlots * damage;
+            modifiers.SourceDamage.Base *= Projectile.minionSlots;
         }
         public override void Kill(int timeLeft)
         {

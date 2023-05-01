@@ -73,13 +73,13 @@ namespace QwertyMod.Common.PlayerLayers
                         //_ = (1f + num4 * 10f) / 11f;
                         drawInfo.itemColor = drawInfo.itemColor.MultiplyRGBA(new Color(Vector4.Lerp(Vector4.One, new Vector4(0f, 0.12f, 0.16f, 0f), 1f - num4)));
                     }
-                    bool flag = drawInfo.drawPlayer.itemAnimation > 0 && heldItem.useStyle != 0;
+                    bool flag = drawInfo.drawPlayer.itemAnimation > 0 && heldItem.useStyle != ItemUseStyleID.None;
                     bool flag2 = heldItem.holdStyle != 0 && !drawInfo.drawPlayer.pulley;
                     if (!drawInfo.drawPlayer.CanVisuallyHoldItem(heldItem))
                     {
                         flag2 = false;
                     }
-                    if (drawInfo.shadow != 0f || drawInfo.drawPlayer.frozen || !(flag || flag2) || itemID <= 0 || drawInfo.drawPlayer.dead || heldItem.noUseGraphic || (drawInfo.drawPlayer.wet && heldItem.noWet) || (drawInfo.drawPlayer.happyFunTorchTime && drawInfo.drawPlayer.inventory[drawInfo.drawPlayer.selectedItem].createTile == 4 && drawInfo.drawPlayer.itemAnimation == 0))
+                    if (drawInfo.shadow != 0f || drawInfo.drawPlayer.frozen || !(flag || flag2) || itemID <= 0 || drawInfo.drawPlayer.dead || heldItem.noUseGraphic || (drawInfo.drawPlayer.wet && heldItem.noWet) || (drawInfo.drawPlayer.happyFunTorchTime && drawInfo.drawPlayer.inventory[drawInfo.drawPlayer.selectedItem].createTile == TileID.Torches && drawInfo.drawPlayer.itemAnimation == 0))
                     {
                         return;
                     }
@@ -88,7 +88,7 @@ namespace QwertyMod.Common.PlayerLayers
                     //Vector2 vector = Vector2.Zero;
 
                     Vector2 origin = new Vector2((float)sourceRect.Value.Width * 0.5f - (float)sourceRect.Value.Width * 0.5f * (float)drawInfo.drawPlayer.direction, sourceRect.Value.Height);
-                    if (heldItem.useStyle == 9 && drawInfo.drawPlayer.itemAnimation > 0)
+                    if (heldItem.useStyle == ItemUseStyleID.DrinkLiquid && drawInfo.drawPlayer.itemAnimation > 0)
                     {
                         Vector2 value2 = new Vector2(0.5f, 0.4f);
                         origin = sourceRect.Value.Size() * value2;
@@ -99,20 +99,20 @@ namespace QwertyMod.Common.PlayerLayers
                     }
                     //origin += vector;
                     float itemRotation = drawInfo.drawPlayer.itemRotation;
-                    if (heldItem.useStyle == 8)
+                    if (heldItem.useStyle == ItemUseStyleID.GolfPlay)
                     {
                         ref float x = ref position.X;
                         float num6 = x;
                         //_ = drawInfo.drawPlayer.direction;
                         x = num6 - 0f;
-                        itemRotation -= (float)Math.PI / 2f * (float)drawInfo.drawPlayer.direction;
+                        itemRotation -= MathF.PI / 2f * (float)drawInfo.drawPlayer.direction;
                         origin.Y = 2f;
                         origin.X += 2 * drawInfo.drawPlayer.direction;
                     }
                     ItemSlot.GetItemLight(ref drawInfo.itemColor, heldItem);
                     DrawData drawData;
 
-                    if (heldItem.useStyle == 5)
+                    if (heldItem.useStyle == ItemUseStyleID.Shoot)
                     {
                         if (Item.staff[itemID])
                         {
@@ -127,7 +127,7 @@ namespace QwertyMod.Common.PlayerLayers
                             }
                             if (itemID == 3870)
                             {
-                                Vector2 vector2 = (drawInfo.drawPlayer.itemRotation + (float)Math.PI / 4f * (float)drawInfo.drawPlayer.direction).ToRotationVector2() * new Vector2((float)(-drawInfo.drawPlayer.direction) * 1.5f, drawInfo.drawPlayer.gravDir) * 3f;
+                                Vector2 vector2 = (drawInfo.drawPlayer.itemRotation + MathF.PI / 4f * (float)drawInfo.drawPlayer.direction).ToRotationVector2() * new Vector2((float)(-drawInfo.drawPlayer.direction) * 1.5f, drawInfo.drawPlayer.gravDir) * 3f;
                                 num10 = (int)vector2.X;
                                 num11 = (int)vector2.Y;
                             }
@@ -217,7 +217,7 @@ namespace QwertyMod.Common.PlayerLayers
                     new Vector2
                     (
                         item.position.X - Main.screenPosition.X + item.width * 0.5f,
-                        item.position.Y - Main.screenPosition.Y + item.height - texture.Height * 0.5f + 2f
+                        item.position.Y - Main.screenPosition.Y + item.height - texture.Height * 0.5f
                     ),
                     new Rectangle(0, 0, texture.Width, texture.Height),
                     Color.White,

@@ -12,15 +12,15 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Bionic
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Bionic Eye");
-            Tooltip.SetDefault("30% reduced cooldown on morphs\n10% increased critical strike chance\nGrants enhanced vision");
+            //DisplayName,SetDefault("Bionic Eye");
+            //Tooltip.SetDefault("30% reduced cooldown on morphs\n10% increased critical strike chance\nGrants enhanced vision");
             Head.Sets.DrawFullHair[Item.headSlot] = true;
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()
         {
-            Item.rare = 5;
+            Item.rare = ItemRarityID.Pink;
             Item.value = Item.sellPrice(gold: 5);
             Item.defense = 7;
         }

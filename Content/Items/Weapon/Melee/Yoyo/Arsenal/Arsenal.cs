@@ -13,8 +13,8 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.Arsenal
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Arsenal");
-            Tooltip.SetDefault("Creates lingering blades!");
+            //DisplayName,SetDefault("Arsenal");
+            //Tooltip.SetDefault("Creates lingering blades!");
             ItemID.Sets.Yoyo[Item.type] = true;
             ItemID.Sets.GamepadExtraRange[Item.type] = 15;
             ItemID.Sets.GamepadSmartQuickReach[Item.type] = true;
@@ -23,7 +23,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.Arsenal
 
         public override void SetDefaults()
         {
-            Item.useStyle = 5;
+            Item.useStyle = ItemUseStyleID.Shoot;
             Item.width = 30;
             Item.height = 26;
             Item.useAnimation = 25;
@@ -32,7 +32,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.Arsenal
             Item.knockBack = 2.5f;
             Item.damage = 27;
             Item.value = Item.sellPrice(gold: 10);
-            Item.rare = 7;
+            Item.rare = ItemRarityID.Lime;
             Item.DamageType = DamageClass.MeleeNoSpeed;
             Item.channel = true;
             Item.noMelee = true;
@@ -78,7 +78,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.Arsenal
             time = 2f;
             range = 160;
             speed = 11f;
-            spread = (float)Math.PI / 4;
+            spread = MathF.PI / 4;
             //counterWeightId = mod.ProjectileType("SpiderCounterweight");
         }
 
@@ -93,7 +93,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.Arsenal
             Projectile.frameCounter++;
             if (Projectile.frameCounter % 30 == 0)
             {
-                Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, QwertyMethods.PolarVector(4f + Main.rand.NextFloat(2f), (float)Math.PI * 2f * Main.rand.NextFloat()), ProjectileType<ArsenalSword>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, QwertyMethods.PolarVector(4f + Main.rand.NextFloat(2f), MathF.PI * 2f * Main.rand.NextFloat()), ProjectileType<ArsenalSword>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
             }
         }
     }
@@ -116,7 +116,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.Arsenal
             Projectile.tileCollide = false;
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.localNPCImmunity[target.whoAmI] = -1;
             target.immune[Projectile.owner] = 0;
@@ -130,7 +130,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.Arsenal
             if (!redirect)
             {
                 Projectile.velocity *= .823f;
-                Projectile.rotation += (Projectile.velocity.Length() * (float)Math.PI * .4f + (float)Math.PI / 60) * Math.Sign(Projectile.velocity.X);
+                Projectile.rotation += (Projectile.velocity.Length() * MathF.PI * .4f + MathF.PI / 60) * Math.Sign(Projectile.velocity.X);
                 if (QwertyMethods.ClosestNPC(ref target, 300, Projectile.Center))
                 {
                     redirect = true;

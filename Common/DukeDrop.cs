@@ -29,26 +29,14 @@ namespace QwertyMod.Common
     }
     public class DukeBag : GlobalItem
     {
-        [Obsolete]
-        public override void OpenVanillaBag(string context, Player player, int arg)
+        
+        public override void ModifyItemLoot(Item item, ItemLoot itemLoot)
         {
-            if (context == "bossBag" && arg == ItemID.FishronBossBag)
+            if(item.type == ItemID.FishronBossBag)
             {
-                int itemID = 0;
-                switch (Main.rand.Next(3))
-                {
-                    case 0:
-                        itemID = ItemType<BubbleBrewerBaton>();
-                        break;
-                    case 1:
-                        itemID = ItemType<Cyclone>();
-                        break;
-                    case 2:
-                        itemID = ItemType<Whirlpool>();
-                        break;
-                }
-                player.QuickSpawnItem(new EntitySource_Misc(""), itemID);
+                itemLoot.Add(ItemDropRule.OneFromOptionsNotScalingWithLuck(1, ItemType<BubbleBrewerBaton>(), ItemType<Cyclone>(), ItemType<Whirlpool>()));
             }
         }
+        
     }
 }

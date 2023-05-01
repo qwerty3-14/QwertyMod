@@ -9,8 +9,6 @@ namespace QwertyMod.Content.Items.MiscMaterials
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Etims");
-            Tooltip.SetDefault("Forged from the blood of those slain by gods!");
             ItemID.Sets.ItemNoGravity[Item.type] = true;
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 25;
         }
@@ -20,8 +18,8 @@ namespace QwertyMod.Content.Items.MiscMaterials
         {
             Item.value = 10000;
             Item.width = Item.height = 32;
-            Item.maxStack = 999;
-            Item.rare = 3;
+            Item.maxStack = 9999;
+            Item.rare = ItemRarityID.Orange;
         }
     }
 }

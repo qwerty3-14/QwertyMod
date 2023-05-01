@@ -13,7 +13,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Barrier Spread");
+            //DisplayName,SetDefault("Barrier Spread");
             Main.projFrames[Projectile.type] = 2;
         }
 
@@ -30,8 +30,6 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
             Projectile.tileCollide = false;
             Projectile.light = .6f;
         }
-
-        public int dustTimer;
         private Projectile clearCheck;
 
         public override void AI()
@@ -57,7 +55,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
             }
         }
 
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             if (target.HasBuff(BuffID.PotionSickness))
             {
@@ -74,7 +72,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Static Barrier");
+            //DisplayName,SetDefault("Static Barrier");
 
             Main.projFrames[Projectile.type] = 4;
         }
@@ -90,14 +88,11 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
             Projectile.tileCollide = false;
             Projectile.timeLeft = 1200;
         }
-
-        public int dustTimer;
         private Projectile clearCheck;
-        private int counter = 60;
 
         public override void AI()
         {
-            Projectile.rotation += (float)Math.PI / 30;
+            Projectile.rotation += MathF.PI / 30;
             if (Projectile.timeLeft < (60 * 30))
             {
                 Vector2 flyTo = new Vector2(Projectile.ai[0], Projectile.ai[1]);
@@ -119,7 +114,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Caelite Saw");
+            //DisplayName,SetDefault("Caelite Saw");
         }
 
         public override void SetDefaults()
@@ -139,7 +134,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
 
         public override void AI()
         {
-            Projectile.rotation += (float)Math.PI / 7.5f;
+            Projectile.rotation += MathF.PI / 7.5f;
         }
 
         public override void Kill(int timeLeft)
@@ -165,7 +160,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
         }
 
 
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             target.AddBuff(BuffType<PowerDown>(), 300);
         }
@@ -174,7 +169,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Divine Bolt");
+            //DisplayName,SetDefault("Divine Bolt");
             Main.projFrames[Type] = 4;
         }
         public override void SetDefaults()
@@ -208,7 +203,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
             lightColor = Color.White;
             return base.PreDraw(ref lightColor);
         }
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             target.AddBuff(BuffType<PowerDown>(), 300);
         }

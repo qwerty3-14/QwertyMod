@@ -10,8 +10,8 @@ namespace QwertyMod.Content.Items.Weapon.Minion.LuneArcherMinion
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Lune Archer");
-            Description.SetDefault("Will shoot your enemies in the knee!");
+            //DisplayName,SetDefault("Lune Archer");
+            //Description.SetDefault("Will shoot your enemies in the knee!");
             Main.buffNoSave[Type] = true;
             Main.buffNoTimeDisplay[Type] = true;
         }

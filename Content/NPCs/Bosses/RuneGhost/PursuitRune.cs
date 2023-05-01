@@ -38,7 +38,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
                     Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<PursuitRuneDeath>());
                 }
             }
-            if (Main.netMode != 1)
+            if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 for (int i = 0; i < Main.maxPlayers; i++)
                 {
@@ -50,7 +50,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
                     }
                 }
             }
-            Projectile.rotation.SlowRotation(Projectile.ai[0], (float)Math.PI / 240f);
+            Projectile.rotation.SlowRotation(Projectile.ai[0], MathF.PI / 240f);
             Projectile.velocity = QwertyMethods.PolarVector(12, Projectile.rotation);
             closest = 10000;
         }
@@ -76,7 +76,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
                 Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<PursuitRuneDeath>());
             }
         }
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             target.AddBuff(BuffID.Venom, 180);
         }

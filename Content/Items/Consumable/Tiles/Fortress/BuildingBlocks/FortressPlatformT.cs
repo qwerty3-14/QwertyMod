@@ -31,7 +31,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.BuildingBlocks
             TileObjectData.newTile.LavaDeath = true;
             TileObjectData.addTile(Type);
             AddToArray(ref TileID.Sets.RoomNeeds.CountsAsDoor);
-            AddMapEntry(new Color(162, 184, 185));
+            //AddMapEntry(new Color(162, 184, 185));
             DustType = DustType<FortressDust>();
             ItemDrop = ItemType<FortressPlatform>();
             //disableSmartCursor = true;

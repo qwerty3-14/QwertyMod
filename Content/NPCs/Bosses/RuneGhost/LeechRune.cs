@@ -5,6 +5,7 @@ using System;
 using Terraria;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using Terraria.ID;
 
 namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
 {
@@ -31,7 +32,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
             timer++;
             if (timer == 60)
             {
-                if (Main.netMode != 1)
+                if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     float closest = 10000;
                     for (int i = 0; i < Main.maxPlayers; i++)
@@ -49,7 +50,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
             {
                 Projectile.velocity = QwertyMethods.PolarVector(10, Projectile.ai[0]);
             }
-            Projectile.rotation += Math.Sign(Projectile.velocity.X) * (float)Math.PI / 60f;
+            Projectile.rotation += Math.Sign(Projectile.velocity.X) * MathF.PI / 60f;
         }
         public override void Kill(int timeLeft)
         {
@@ -60,7 +61,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
         }
         public NPC runeGhost;
 
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             foreach (NPC npcSearch in Main.npc)
             {
@@ -72,8 +73,8 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
             }
             if (runeGhost != null && runeGhost.active)
             {
-                runeGhost.life += damage * 40;
-                runeGhost.HealEffect(damage * 40, true);
+                runeGhost.life += info.Damage * 40;
+                runeGhost.HealEffect(info.Damage * 40, true);
 
             }
         }

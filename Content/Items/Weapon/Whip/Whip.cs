@@ -30,7 +30,7 @@ namespace QwertyMod.Content.Items.Weapon.Whip
         protected int tag = -1;
         protected float tipScale = 1f;
         protected float fallOff = 0.3f;
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.damage = (int)(Projectile.damage * (1f - fallOff));
             if (tag != -1)
@@ -38,7 +38,6 @@ namespace QwertyMod.Content.Items.Weapon.Whip
                 target.AddBuff(tag, 240);
             }
             Main.player[Projectile.owner].MinionAttackTargetNPC = target.whoAmI;
-
         }
 
         public void GetWhipSettings(Projectile proj, out float timeToFlyOut, out int segments, out float rangeMultiplier)
@@ -53,7 +52,7 @@ namespace QwertyMod.Content.Items.Weapon.Whip
             float num = proj.ai[0] / timeToFlyOut;
             float num2 = 0.5f;
             float num3 = 1f + num2;
-            float num4 = (float)Math.PI * 10f * (1f - num * num3) * (float)(-proj.spriteDirection) / (float)segments;
+            float num4 = MathF.PI * 10f * (1f - num * num3) * (float)(-proj.spriteDirection) / (float)segments;
             float num5 = num * num3;
             float num6 = 0f;
             if (num5 > 1f)
@@ -69,11 +68,11 @@ namespace QwertyMod.Content.Items.Weapon.Whip
             float num9 = 1f;
             Vector2 playerArmPosition = Main.GetPlayerArmPosition(proj);
             Vector2 vector = playerArmPosition;
-            float num10 = 0f - (float)Math.PI / 2f;
+            float num10 = 0f - MathF.PI / 2f;
             Vector2 value = vector;
-            float num11 = 0f + (float)Math.PI / 2f + (float)Math.PI / 2f * (float)proj.spriteDirection;
+            float num11 = 0f + MathF.PI / 2f + MathF.PI / 2f * (float)proj.spriteDirection;
             Vector2 value2 = vector;
-            float num12 = 0f + (float)Math.PI / 2f;
+            float num12 = 0f + MathF.PI / 2f;
             controlPoints.Add(playerArmPosition);
             for (int i = 0; i < segments; i++)
             {
@@ -112,7 +111,7 @@ namespace QwertyMod.Content.Items.Weapon.Whip
             {
                 Vector2 vector = list[i];
                 Vector2 vector2 = list[i + 1] - vector;
-                float rotation = vector2.ToRotation() - (float)Math.PI / 2f;
+                float rotation = vector2.ToRotation() - MathF.PI / 2f;
                 Microsoft.Xna.Framework.Color color = Lighting.GetColor(vector.ToTileCoordinates(), originalColor);
                 Vector2 scale = new Vector2(1f, (vector2.Length() + 2f) / (float)value2.Height);
                 Main.EntitySpriteDraw(value, value3 - Main.screenPosition, value2, color, rotation, origin, scale, SpriteEffects.None, 0);
@@ -164,7 +163,7 @@ namespace QwertyMod.Content.Items.Weapon.Whip
                 Vector2 vector4 = controlPoints[seg + 1] - vector3;
                 if (flag)
                 {
-                    float rotation = vector4.ToRotation() - (float)Math.PI / 2f;
+                    float rotation = vector4.ToRotation() - MathF.PI / 2f;
                     Microsoft.Xna.Framework.Color color = Lighting.GetColor(vector3.ToTileCoordinates());
                     Main.EntitySpriteDraw(value, vector2 - Main.screenPosition, rectangle, color, rotation, origin, scale, spriteEffects, 0);
                     if(proj.type == ModContent.ProjectileType<Fork.InvaderForkP>())

@@ -11,8 +11,6 @@ namespace QwertyMod.Content.Items.MiscMaterials
 	{
 		public override void SetStaticDefaults() 
         {
-			DisplayName.SetDefault("Soul of Height");
-			Tooltip.SetDefault("'The essence of Caelin'");
 
 			// Registers a vertical animation with 4 frames and each one will last 5 ticks (1/12 second)
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 4));
@@ -28,7 +26,7 @@ namespace QwertyMod.Content.Items.MiscMaterials
         {
 			Item.width = 18;
 			Item.height = 18;
-			Item.maxStack = 999;
+			Item.maxStack = 9999;
 			Item.value = 1000; // Makes the item worth 1 gold.
 			Item.rare = ItemRarityID.Orange;
 		}

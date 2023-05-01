@@ -7,8 +7,8 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Rhuthinium Berzerk");
-            Description.SetDefault("20% increased melee damage and max move speed");
+            //DisplayName,SetDefault("Rhuthinium Berzerk");
+            //Description.SetDefault("20% increased melee damage and max move speed");
             Main.debuff[Type] = false;
             Main.pvpBuff[Type] = false;
             Main.buffNoSave[Type] = true;

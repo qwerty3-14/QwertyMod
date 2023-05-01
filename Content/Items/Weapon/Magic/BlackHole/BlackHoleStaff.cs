@@ -16,8 +16,8 @@ namespace QwertyMod.Content.Items.Weapon.Magic.BlackHole
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Black Hole Staff");
-            Tooltip.SetDefault("Summons a black hole to suck up your enemies!" + "\nThe higher the black hole's damage the stronger the pull strength");
+            //DisplayName,SetDefault("Black Hole Staff");
+            //Tooltip.SetDefault("Summons a black hole to suck up your enemies!" + "\nThe higher the black hole's damage the stronger the pull strength");
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             Item.staff[Item.type] = true;
             //Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(30, 29));
@@ -30,11 +30,11 @@ namespace QwertyMod.Content.Items.Weapon.Magic.BlackHole
             Item.height = 114;
             Item.useTime = 30;
             Item.useAnimation = 30;
-            Item.useStyle = 5;
+            Item.useStyle = ItemUseStyleID.Shoot;
             Item.noMelee = true;
             Item.knockBack = 0f;
             Item.value = 750000;
-            Item.rare = 10;
+            Item.rare = ItemRarityID.Red;
             Item.UseSound = SoundID.Item44;
             Item.autoReuse = false;
             Item.shoot = ProjectileType<BlackHolePlayer>();
@@ -66,7 +66,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.BlackHole
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("BlackHole");
+            //DisplayName,SetDefault("BlackHole");
             Main.projFrames[Projectile.type] = 1;
         }
 
@@ -128,13 +128,13 @@ namespace QwertyMod.Content.Items.Weapon.Magic.BlackHole
             }
 
             direction = (Projectile.Center - player.Center).ToRotation();
-            horiSpeed = (float)Math.Cos(direction) * pullSpeed / 2;
-            vertSpeed = (float)Math.Sin(direction) * pullSpeed / 2;
+            horiSpeed = MathF.Cos(direction) * pullSpeed / 2;
+            vertSpeed = MathF.Sin(direction) * pullSpeed / 2;
             player.velocity += new Vector2(horiSpeed, vertSpeed);
             for (int d = 0; d < (int)(80 * Projectile.scale); d++)
             {
-                float theta = Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI);
-                Dust dust = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(Main.rand.NextFloat(10 * Projectile.scale, 200 * Projectile.scale), theta), DustType<BlackHoleMatter>(), QwertyMethods.PolarVector(6 * Projectile.scale, theta + (float)Math.PI / 2));
+                float theta = Main.rand.NextFloat(-MathF.PI, MathF.PI);
+                Dust dust = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(Main.rand.NextFloat(10 * Projectile.scale, 200 * Projectile.scale), theta), DustType<BlackHoleMatter>(), QwertyMethods.PolarVector(6 * Projectile.scale, theta + MathF.PI / 2));
                 dust.scale = 1f;
             }
 
@@ -144,8 +144,8 @@ namespace QwertyMod.Content.Items.Weapon.Magic.BlackHole
                 if (!dust.noGravity)
                 {
                     direction = (Projectile.Center - dust.position).ToRotation();
-                    horiSpeed = (float)Math.Cos(direction) * pullSpeed * 5;
-                    vertSpeed = (float)Math.Sin(direction) * pullSpeed * 5;
+                    horiSpeed = MathF.Cos(direction) * pullSpeed * 5;
+                    vertSpeed = MathF.Sin(direction) * pullSpeed * 5;
                     dust.velocity += new Vector2(horiSpeed, vertSpeed);
                 }
                 if (dust.type == DustType<BlackHoleMatter>())
@@ -168,8 +168,8 @@ namespace QwertyMod.Content.Items.Weapon.Magic.BlackHole
                 if (!mass.boss && mass.active && mass.knockBackResist != 0f)
                 {
                     direction = (Projectile.Center - mass.Center).ToRotation();
-                    horiSpeed = (float)Math.Cos(direction) * pullSpeed;
-                    vertSpeed = (float)Math.Sin(direction) * pullSpeed;
+                    horiSpeed = MathF.Cos(direction) * pullSpeed;
+                    vertSpeed = MathF.Sin(direction) * pullSpeed;
                     mass.velocity += new Vector2(horiSpeed, vertSpeed);
                     for (int g = 0; g < 1; g++)
                     {
@@ -188,19 +188,19 @@ namespace QwertyMod.Content.Items.Weapon.Magic.BlackHole
                         int num = Player.defaultItemGrabRange;
                         if (new Rectangle((int)Projectile.position.X, (int)Projectile.position.Y, Projectile.width, Projectile.height).Intersects(new Rectangle((int)item.position.X, (int)item.position.Y, item.width, item.height)))
                         {
-                            if (Projectile.owner == Main.myPlayer && (player.inventory[player.selectedItem].type != 0 || player.itemAnimation <= 0))
+                            if (Projectile.owner == Main.myPlayer && (player.inventory[player.selectedItem].type != ItemID.None || player.itemAnimation <= 0))
                             {
                                 if (ItemID.Sets.NebulaPickup[item.type])
                                 {
                                     item.velocity = new Vector2(0, 0);
                                     item.position = player.Center;
                                 }
-                                if (item.type == 58 || item.type == 1734 || item.type == 1867)
+                                if (item.type == ItemID.Heart || item.type == ItemID.CandyApple || item.type == ItemID.CandyCane)
                                 {
                                     item.velocity = new Vector2(0, 0);
                                     item.position = player.Center;
                                 }
-                                else if (item.type == 184 || item.type == 1735 || item.type == 1868)
+                                else if (item.type == ItemID.Star || item.type == ItemID.SoulCake || item.type == ItemID.SugarPlum)
                                 {
                                     item.velocity = new Vector2(0, 0);
                                     item.position = player.Center;
@@ -223,8 +223,8 @@ namespace QwertyMod.Content.Items.Weapon.Magic.BlackHole
                     }
                     /////////////////////
                     direction = (Projectile.Center - item.Center).ToRotation();
-                    horiSpeed = (float)Math.Cos(direction) * pullSpeed;
-                    vertSpeed = (float)Math.Sin(direction) * pullSpeed;
+                    horiSpeed = MathF.Cos(direction) * pullSpeed;
+                    vertSpeed = MathF.Sin(direction) * pullSpeed;
                     item.velocity += new Vector2(horiSpeed, vertSpeed);
                     for (int g = 0; g < 1; g++)
                     {
@@ -238,8 +238,8 @@ namespace QwertyMod.Content.Items.Weapon.Magic.BlackHole
                 if (proj.active && proj.type != ProjectileType<BlackHolePlayer>() && proj.type != ProjectileType<SideLaser>())
                 {
                     direction = (Projectile.Center - proj.Center).ToRotation();
-                    horiSpeed = (float)Math.Cos(direction) * pullSpeed;
-                    vertSpeed = (float)Math.Sin(direction) * pullSpeed;
+                    horiSpeed = MathF.Cos(direction) * pullSpeed;
+                    vertSpeed = MathF.Sin(direction) * pullSpeed;
                     proj.velocity += new Vector2(horiSpeed, vertSpeed);
                     for (int g = 0; g < 1; g++)
                     {

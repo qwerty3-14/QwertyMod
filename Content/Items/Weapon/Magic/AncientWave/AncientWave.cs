@@ -15,8 +15,8 @@ namespace QwertyMod.Content.Items.Weapon.Magic.AncientWave
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Ancient Wave");
-            Tooltip.SetDefault("Blows enemies away");
+            //DisplayName,SetDefault("Ancient Wave");
+            //Tooltip.SetDefault("Blows enemies away");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -28,10 +28,10 @@ namespace QwertyMod.Content.Items.Weapon.Magic.AncientWave
 
             Item.useTime = 40;
             Item.useAnimation = 40;
-            Item.useStyle = 5;
+            Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 100;
             Item.value = 150000;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
             Item.UseSound = SoundID.Item1;
             Item.autoReuse = true;
             Item.width = 28;
@@ -53,7 +53,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.AncientWave
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Ancient Wave");
+            //DisplayName,SetDefault("Ancient Wave");
         }
 
 

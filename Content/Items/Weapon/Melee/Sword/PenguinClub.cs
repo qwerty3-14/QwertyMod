@@ -12,8 +12,8 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Penguin Club");
-            Tooltip.SetDefault("Launches penguins upon hitting an enemy");
+            //DisplayName,SetDefault("Penguin Club");
+            //Tooltip.SetDefault("Launches penguins upon hitting an enemy");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -24,10 +24,10 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword
 
             Item.useTime = 24;
             Item.useAnimation = 24;
-            Item.useStyle = 1;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.knockBack = 2;
             Item.value = 100000;
-            Item.rare = 1;
+            Item.rare = ItemRarityID.Blue;
             Item.UseSound = SoundID.Item1;
 
             Item.width = 48;
@@ -37,9 +37,9 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword
             Item.autoReuse = true;
         }
 
-        public override void OnHitNPC(Player player, NPC target, int damage, float knockBack, bool crit)
+        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            Projectile penguin = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), player.Center, (target.Center - player.Center).SafeNormalize(-Vector2.UnitY) * 6, ProjectileType<SlidingPenguinMelee>(), Item.damage, knockBack, player.whoAmI, ai1: 1)];
+            Projectile penguin = Main.projectile[Projectile.NewProjectile(player.GetSource_ItemUse(Item), player.Center, (target.Center - player.Center).SafeNormalize(-Vector2.UnitY) * 6, ProjectileType<SlidingPenguinMelee>(), Item.damage, hit.Knockback, player.whoAmI, ai1: 1)];
         }
     }
 }

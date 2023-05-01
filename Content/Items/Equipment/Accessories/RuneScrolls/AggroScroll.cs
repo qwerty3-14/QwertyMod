@@ -7,6 +7,7 @@ using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using Terraria.ID;
 
 namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
 {
@@ -14,15 +15,15 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Aggro Scroll");
-            Tooltip.SetDefault("An aggro rune occasionally fires");
+            //DisplayName,SetDefault("Aggro Scroll");
+            //Tooltip.SetDefault("An aggro rune occasionally fires");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()
         {
             Item.value = 500000;
-            Item.rare = 9;
+            Item.rare = ItemRarityID.Cyan;
             Item.DamageType = DamageClass.Magic;
             Item.damage = 500;
 
@@ -67,20 +68,20 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
             timer++;
             if (runOnce)
             {
-                relativePosition = QwertyMethods.PolarVector(50, Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI));
+                relativePosition = QwertyMethods.PolarVector(50, Main.rand.NextFloat(-MathF.PI, MathF.PI));
                 runOnce = false;
             }
             if (timer % 120 == 29)
             {
                 relativeVelocity = Vector2.Zero;
             }
-            if (timer % 120 == 90 && Main.netMode != 1)
+            if (timer % 120 == 90 && Main.netMode != NetmodeID.MultiplayerClient)
             {
-                Projectile.NewProjectile(new EntitySource_Misc(""), player.Center, QwertyMethods.PolarVector(1, Projectile.rotation), ProjectileType<AggroStrikeFriendly>(), Projectile.damage, 0, Projectile.owner);
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), player.Center, QwertyMethods.PolarVector(1, Projectile.rotation), ProjectileType<AggroStrikeFriendly>(), Projectile.damage, 0, Projectile.owner);
             }
             if (timer % 120 == 119)
             {
-                Vector2 goTo = QwertyMethods.PolarVector(50, Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI));
+                Vector2 goTo = QwertyMethods.PolarVector(50, Main.rand.NextFloat(-MathF.PI, MathF.PI));
                 relativeVelocity = (goTo - relativePosition) / 30f;
             }
             relativePosition += relativeVelocity;
@@ -124,7 +125,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
             Projectile.penetrate = -1;
             Projectile.usesLocalNPCImmunity = true;
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.localNPCImmunity[target.whoAmI] = -1;
             target.immune[Projectile.owner] = 0;

@@ -6,6 +6,7 @@ using Terraria.ModLoader;
 using Terraria.WorldBuilding;
 using static Terraria.ModLoader.ModContent;
 using Terraria.GameContent.Creative;
+using System;
 
 namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
 {
@@ -14,14 +15,12 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Vitallum Jeans");
-            Tooltip.SetDefault("Increases max life by 100 \n6% increased damage \nRegenerate 2 life/sec when on the ground");
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()
         {
-            Item.rare = 8;
+            Item.rare = ItemRarityID.Yellow;
             Item.value = Item.sellPrice(gold: 6);
         }
 
@@ -49,9 +48,10 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
                 .AddTile(TileID.MythrilAnvil)
                 .Register();
         }
+        [Obsolete]
         public override void OnCraft(Recipe recipe)
         {
-            Main.LocalPlayer.QuickSpawnItem(new EntitySource_Misc(""), ItemType<VitallumCoreUncharged>(), 1);
+            Main.LocalPlayer.QuickSpawnItem(new EntitySource_Misc("Recipe"), ItemType<VitallumCoreUncharged>(), 1);
         }
     }
 

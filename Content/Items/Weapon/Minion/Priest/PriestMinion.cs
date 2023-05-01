@@ -15,7 +15,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.Priest
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Priest Minion");
+            //DisplayName,SetDefault("Priest Minion");
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             Main.projFrames[Projectile.type] = 6;
         }
@@ -78,7 +78,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.Priest
                             Main.dust[num75].noGravity = true;
                         }
 
-                        Projectile.Center = target.Center + QwertyMethods.PolarVector(80f + 10f * priestCount, player.GetModPlayer<MinionManager>().PriestAngle) + QwertyMethods.PolarVector((40f * priestCount) * ((float)(identity + 1) / (priestCount + 1)) - (20f * priestCount), player.GetModPlayer<MinionManager>().PriestAngle + (float)Math.PI / 2f);
+                        Projectile.Center = target.Center + QwertyMethods.PolarVector(80f + 10f * priestCount, player.GetModPlayer<MinionManager>().PriestAngle) + QwertyMethods.PolarVector((40f * priestCount) * ((float)(identity + 1) / (priestCount + 1)) - (20f * priestCount), player.GetModPlayer<MinionManager>().PriestAngle + MathF.PI / 2f);
                         Projectile.velocity = Vector2.Zero;
                         attacking = true;
                         savedTarget = target;
@@ -133,7 +133,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.Priest
                 }
                 else
                 {
-                    Vector2 goHere = player.Center + QwertyMethods.PolarVector(25f + 5f * priestCount, -(float)Math.PI / 2 + ((float)(identity + 1) / (priestCount + 1)) * (float)Math.PI / 2f * player.direction * -1);
+                    Vector2 goHere = player.Center + QwertyMethods.PolarVector(25f + 5f * priestCount, -MathF.PI / 2 + ((float)(identity + 1) / (priestCount + 1)) * MathF.PI / 2f * player.direction * -1);
                     Vector2 dif = goHere - Projectile.Center;
                     Projectile.spriteDirection = Math.Sign(player.Center.X - Projectile.Center.X);
                     if (dif.Length() > 300f)

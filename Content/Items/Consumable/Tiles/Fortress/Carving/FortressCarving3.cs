@@ -10,8 +10,6 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Carving
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Fortress Carving");
-            Tooltip.SetDefault("");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -20,15 +18,15 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Carving
         {
             Item.width = 16;
             Item.height = 16;
-            Item.maxStack = 999;
+            Item.maxStack = 9999;
             Item.value = 0;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
             Item.createTile = TileType<FortressCarving3T>();
             Item.useTurn = true;
             Item.autoReuse = true;
             Item.useAnimation = 15;
             Item.useTime = 10;
-            Item.useStyle = 1;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.consumable = true;
         }
         public override void AddRecipes()

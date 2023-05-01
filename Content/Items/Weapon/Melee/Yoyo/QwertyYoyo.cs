@@ -16,7 +16,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo
         protected float time = -1f;
         public int yoyoCount = 1;
         public int counterWeightId = -1;
-        public float spread = (float)Math.PI * 2;
+        public float spread = MathF.PI * 2;
 
         public override void AI()
         {
@@ -120,13 +120,13 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo
                             Vector2 vector4 = Main.ReverseGravitySupport(Main.MouseScreen, 0f) + Main.screenPosition;
                             int index = (int)Projectile.localAI[1] % yoyoCount;
                             float rotationDirection = (vector4 - Main.player[Projectile.owner].Center).ToRotation() + (spread / yoyoCount * index);
-                            if(spread < (float)Math.PI * 2)
+                            if(spread < MathF.PI * 2)
                             {
                                 rotationDirection -= spread / 2;
                                 rotationDirection += spread / (2 * (yoyoCount + 1));
                             }
                             float distance = (vector4 - Main.player[Projectile.owner].Center).Length();
-                            vector4 = new Vector2(Main.player[Projectile.owner].Center.X + (float)Math.Cos(rotationDirection) * distance, Main.player[Projectile.owner].Center.Y + (float)Math.Sin(rotationDirection) * distance);
+                            vector4 = new Vector2(Main.player[Projectile.owner].Center.X + MathF.Cos(rotationDirection) * distance, Main.player[Projectile.owner].Center.Y + MathF.Sin(rotationDirection) * distance);
                             //Dust.NewDust(vector4, 0, 0, 1);
                             //Projectile.NewProjectile(vector4, Vector2.Zero, ProjectileID.WoodenArrowFriendly, 10, 0, Projectile.owner);
                             //Main.NewText(vector4);
@@ -296,7 +296,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo
         {
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             //Main.player[Projectile.owner].Counterweight(target.Center, Projectile.damage, Projectile.knockBack, this);
             Main.player[Projectile.owner].GetModPlayer<CustomYoyoPlayer>().Counterweight(target.Center, Projectile.damage, Projectile.knockBack, Projectile, this);
@@ -328,7 +328,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo
             float num3 = Projectile.Center.X - vector.X;
             float num4 = Projectile.Center.Y - vector.Y;
             Math.Sqrt((double)(num3 * num3 + num4 * num4));
-            float rotation = (float)Math.Atan2((double)num4, (double)num3) - 1.57f;
+            float rotation = MathF.Atan2(num4, num3) - 1.57f;
             if (!Projectile.counterweight)
             {
                 int num5 = -1;
@@ -337,7 +337,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo
                     num5 = 1;
                 }
                 num5 *= -1;
-                Main.player[Projectile.owner].itemRotation = (float)Math.Atan2((double)(num4 * (float)num5), (double)(num3 * (float)num5));
+                Main.player[Projectile.owner].itemRotation = MathF.Atan2((num4 * num5), (num3 * num5));
             }
             bool notMain = true;
             if (num3 == 0f && num4 == 0f)
@@ -346,7 +346,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo
             }
             else
             {
-                float num6 = (float)Math.Sqrt((double)(num3 * num3 + num4 * num4));
+                float num6 = MathF.Sqrt(num3 * num3 + num4 * num4);
                 num6 = 12f / num6;
                 num3 *= num6;
                 num4 *= num6;
@@ -358,7 +358,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo
             while (notMain)
             {
                 float num7 = 12f;
-                float num8 = (float)Math.Sqrt((double)(num3 * num3 + num4 * num4));
+                float num8 = MathF.Sqrt((num3 * num3 + num4 * num4));
                 float num9 = num8;
                 if (float.IsNaN(num8) || float.IsNaN(num9))
                 {
@@ -422,7 +422,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo
                             num3 *= 1f - num10;
                         }
                     }
-                    rotation = (float)Math.Atan2((double)num4, (double)num3) - 1.57f;
+                    rotation = MathF.Atan2(num4, num3) - 1.57f;
                     int stringColor = Main.player[Projectile.owner].stringColor;
                     Microsoft.Xna.Framework.Color color = WorldGen.paintColor(stringColor);
                     if (color.R < 75)
@@ -466,7 +466,6 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo
 
     public class CustomYoyoPlayer : ModPlayer
     {
-        private bool farCounter = false;
 
         public void Counterweight(Vector2 hitPos, int dmg, float kb, Projectile parent, QwertyYoyo yoyoData)
         {
@@ -527,7 +526,6 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo
                         }
                     }
                     Projectile.NewProjectile(Projectile.InheritSource(parent), Player.Center.X, Player.Center.Y, vector2.X, vector2.Y, yoyoData.counterWeightId, (int)((double)dmg * 0.8), knockBack, Player.whoAmI, .5f + 1f * ((float)counterCount / (2f * yoyoData.yoyoCount)), 0f);
-                    farCounter = true;
                 }
             }
         }

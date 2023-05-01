@@ -12,8 +12,8 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Rhuthinium Chestplate");
-            Tooltip.SetDefault("8% increased damage");
+            //DisplayName,SetDefault("Rhuthinium Chestplate");
+            //Tooltip.SetDefault("8% increased damage");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
 
         }
@@ -21,7 +21,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
         public override void SetDefaults()
         {
             Item.value = 50000;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
 
             Item.width = 26;
             Item.height = 18;

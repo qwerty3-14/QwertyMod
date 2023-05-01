@@ -12,7 +12,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Sliding Penguin");
+            //DisplayName,SetDefault("Sliding Penguin");
         }
 
         public override void SetDefaults()
@@ -38,7 +38,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert
             Projectile.spriteDirection = -(int)(Projectile.velocity.X * Math.Abs(1f / Projectile.velocity.X));
             if (runOnce)
             {
-                initVel = (float)Math.Abs(Projectile.velocity.Length());
+                initVel = MathF.Abs(Projectile.velocity.Length());
 
                 runOnce = false;
             }
@@ -51,7 +51,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert
                     if (Math.Abs(Projectile.velocity.X) < 1f)
                     {
                         Projectile.friendly = false;
-                        NPC Penguin = Main.npc[NPC.NewNPC(new EntitySource_Misc(""), (int)Projectile.Top.X, (int)Projectile.Top.Y, NPCID.Penguin)];
+                        NPC Penguin = Main.npc[NPC.NewNPC(Projectile.GetSource_FromThis(), (int)Projectile.Top.X, (int)Projectile.Top.Y, NPCID.Penguin)];
                         if (Projectile.ai[1] == 1)
                         {
                             Penguin.SpawnedFromStatue = true;
@@ -76,7 +76,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert
                     Projectile.localNPCImmunity[n] = 10;
                 }
             }
-            Projectile.rotation = Projectile.velocity.ToRotation() + (float)Math.PI / 2;
+            Projectile.rotation = Projectile.velocity.ToRotation() + MathF.PI / 2;
         }
         public override bool OnTileCollide(Vector2 velocityChange)
         {
@@ -88,7 +88,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert
 
             return false;
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.perIDStaticNPCImmunity[Projectile.type][target.whoAmI] = (uint)(Main.GameUpdateCount + 10);
         }

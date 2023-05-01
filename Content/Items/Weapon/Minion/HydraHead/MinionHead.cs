@@ -13,7 +13,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.HydraHead
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Hydra Head");
+            //DisplayName,SetDefault("Hydra Head");
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
             Main.projPet[Projectile.type] = true;
@@ -45,8 +45,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.HydraHead
         public int f = 1;
         public float targetAngle = 90;
         public float s = 1;
-        public float tarX;
-        public float tarY;
         int cooldown = 0;
         public override void AI()
         {

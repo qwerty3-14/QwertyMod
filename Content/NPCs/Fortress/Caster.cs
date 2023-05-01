@@ -22,7 +22,7 @@ namespace QwertyMod.Content.NPCs.Fortress
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("High Preist");
+            //DisplayName,SetDefault("High Preist");
             Main.npcFrameCount[NPC.type] = 9;
         }
 
@@ -92,7 +92,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             ringProjectileCount = 2 - (int)((float)NPC.life / (float)NPC.lifeMax * 2) + 4;
             if (timer == GenerateRingTime)
             {
-                ring = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), NPC.Center, Vector2.Zero, ProjectileType<RingCenter>(), 11, 0, 0, ringProjectileCount, NPC.direction)];
+                ring = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero, ProjectileType<RingCenter>(), 11, 0, 0, ringProjectileCount, NPC.direction)];
                 ring.ai[0] = ringProjectileCount;
                 ring.ai[1] = NPC.direction;
                 castingFrames = true;
@@ -147,7 +147,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             {
                 NPC.ai[0] = 650f;
             }
-            if (NPC.ai[0] >= 650f && Main.netMode != 1)
+            if (NPC.ai[0] >= 650f && Main.netMode != NetmodeID.MultiplayerClient)
             {
                 NPC.ai[0] = 1f;
                 int playerTilePositionX = (int)Main.player[NPC.target].position.X / 16;
@@ -190,7 +190,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             }
         }
 
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
         {
             //timer = 0;
             NPC.ai[0] = 650f;
@@ -259,18 +259,18 @@ namespace QwertyMod.Content.NPCs.Fortress
             {
                 for (int i = 0; i < projectilesInRing; i++)
                 {
-                    //Projectile.NewProjectile(Projectile.Center, Vector2.Zero, mod.ProjectileType("RingOuter"), Projectile.damage, Projectile.knockBack, Projectile.owner, (float)i / (float)projectilesInRing * 2 * (float)Math.PI, Projectile.whoAmI);
+                    //Projectile.NewProjectile(Projectile.Center, Vector2.Zero, mod.ProjectileType("RingOuter"), Projectile.damage, Projectile.knockBack, Projectile.owner, (float)i / (float)projectilesInRing * 2 * MathF.PI, Projectile.whoAmI);
 
                     if (Projectile.ai[1] == 1)
                     {
-                        Projectile p = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center, Vector2.Zero, ProjectileType<RingOuter>(), Projectile.damage, Projectile.knockBack, 0, (float)i / (float)projectilesInRing * 2 * (float)Math.PI, Projectile.whoAmI)];
-                        p.ai[0] = (float)i / (float)projectilesInRing * 2 * (float)Math.PI;
+                        Projectile p = Main.projectile[Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<RingOuter>(), Projectile.damage, Projectile.knockBack, 0, (float)i / (float)projectilesInRing * 2 * MathF.PI, Projectile.whoAmI)];
+                        p.ai[0] = (float)i / (float)projectilesInRing * 2 * MathF.PI;
                         p.ai[1] = Projectile.whoAmI;
                     }
                     else
                     {
-                        Projectile p = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center, Vector2.Zero, ProjectileType<RingOuter>(), Projectile.damage, Projectile.knockBack, 0, (float)i / (float)projectilesInRing * 2 * (float)Math.PI, -Projectile.whoAmI)];
-                        p.ai[0] = (float)i / (float)projectilesInRing * 2 * (float)Math.PI;
+                        Projectile p = Main.projectile[Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<RingOuter>(), Projectile.damage, Projectile.knockBack, 0, (float)i / (float)projectilesInRing * 2 * MathF.PI, -Projectile.whoAmI)];
+                        p.ai[0] = (float)i / (float)projectilesInRing * 2 * MathF.PI;
                         p.ai[1] = -Projectile.whoAmI;
                     }
                 }
@@ -283,7 +283,7 @@ namespace QwertyMod.Content.NPCs.Fortress
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Caelite Sphere");
+            //DisplayName,SetDefault("Caelite Sphere");
             Main.projFrames[Projectile.type] = 4;
         }
 
@@ -299,7 +299,6 @@ namespace QwertyMod.Content.NPCs.Fortress
         }
 
         private bool runOnce = true;
-        private int projectilesInRing = 4;
         private Projectile parent;
         private float radius = 60;
         private Projectile clearCheck;
@@ -323,7 +322,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             parent = Main.projectile[(int)Projectile.ai[1]];
             Projectile.position.X = parent.Center.X - (int)(Math.Cos(Projectile.ai[0]) * radius) - Projectile.width / 2;
             Projectile.position.Y = parent.Center.Y - (int)(Math.Sin(Projectile.ai[0]) * radius) - Projectile.height / 2;
-            Projectile.ai[0] += (float)Math.PI / 120 * spinDirection;
+            Projectile.ai[0] += MathF.PI / 120 * spinDirection;
             for (int p = 0; p < 1000; p++)
             {
                 clearCheck = Main.projectile[p];
@@ -357,9 +356,9 @@ namespace QwertyMod.Content.NPCs.Fortress
             }
         }
 
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            if (Main.rand.Next(3) == 0)
+            if (Main.rand.NextBool(3))
             {
                 target.AddBuff(BuffType<PowerDown>(), 600);
             }

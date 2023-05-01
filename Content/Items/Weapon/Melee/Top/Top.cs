@@ -18,7 +18,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Top
         {
             if (runOnce)
             {
-                initVel = (float)Math.Abs(Projectile.velocity.Length());
+                initVel = MathF.Abs(Projectile.velocity.Length());
                 friction = friction * (initVel - 2);
                 runOnce = false;
             }
@@ -105,7 +105,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Top
             return false;
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.usesIDStaticNPCImmunity = true;
             int immutime = 20;
@@ -114,10 +114,10 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Top
             initVel -= enemyFriction;
         }
 
-        public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            knockback = ((float)Math.Abs(Projectile.velocity.X) / initVel) * Projectile.knockBack;
-            hitDirection = Projectile.velocity.X > 0 ? -1 : 1;
+            modifiers.Knockback.Flat = (MathF.Abs(Projectile.velocity.X) / initVel) * Projectile.knockBack;
+            modifiers.HitDirectionOverride = Projectile.velocity.X > 0 ? -1 : 1;
             TopHit(target);
         }
 

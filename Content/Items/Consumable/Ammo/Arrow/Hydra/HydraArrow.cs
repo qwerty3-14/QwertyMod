@@ -10,8 +10,6 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Hydra
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Hydra Arrow");
-            Tooltip.SetDefault("Splits into 3 arrows");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 99;
         }
 
@@ -21,7 +19,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Hydra
             Item.DamageType = DamageClass.Ranged;
             Item.knockBack = 2;
             Item.value = 5;
-            Item.rare = 5;
+            Item.rare = ItemRarityID.Pink;
             Item.width = 14;
             Item.height = 32;
 
@@ -30,7 +28,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Hydra
             Item.consumable = true;
             Item.shoot = ProjectileType<HydraArrowP>();
             Item.ammo = 40;
-            Item.maxStack = 999;
+            Item.maxStack = 9999;
         }
 
         public override void AddRecipes()

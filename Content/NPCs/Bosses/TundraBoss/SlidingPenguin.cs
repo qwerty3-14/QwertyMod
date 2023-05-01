@@ -13,7 +13,7 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Sliding Penguin");
+            //DisplayName,SetDefault("Sliding Penguin");
             //Main.npcFrameCount[NPC.type] = 4;
         }
 
@@ -33,7 +33,7 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
             NPC.noGravity = false;
         }
 
-        public override void ScaleExpertStats(int numPlayers, float bossLifeScale)
+        public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
         {
             NPC.damage = 15;
             NPC.lifeMax = 13;
@@ -61,11 +61,11 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
             {
                 NPC.TargetClosest(false);
                 Player player = Main.player[NPC.target];
-                NPC.rotation = (player.Center - NPC.Center).ToRotation() + (float)Math.PI;
-                NPC.velocity = QwertyMethods.PolarVector(5, NPC.rotation - (float)Math.PI);
+                NPC.rotation = (player.Center - NPC.Center).ToRotation() + MathF.PI;
+                NPC.velocity = QwertyMethods.PolarVector(5, NPC.rotation - MathF.PI);
                 if (NPC.velocity.X > 0)
                 {
-                    NPC.rotation += (float)Math.PI;
+                    NPC.rotation += MathF.PI;
                 }
                 NPC.ai[1] = 2;
                 NPC.noTileCollide = true;
@@ -102,23 +102,23 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
                 }
                 if (speed <= 0)
                 {
-                    NPC Penguin = Main.npc[NPC.NewNPC(new EntitySource_Misc(""), (int)NPC.Top.X, (int)NPC.Top.Y, NPCID.Penguin)];
+                    NPC Penguin = Main.npc[NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Top.X, (int)NPC.Top.Y, NPCID.Penguin)];
                     NPC.active = false;
                 }
             }
         }
 
-        public override void OnHitByItem(Player player, Item item, int damage, float knockback, bool crit)
+        public override void OnHitByItem(Player player, Item item, NPC.HitInfo hit, int damageDone)
         {
             NPC.ai[0] *= -1;
             NPC.netUpdate = true;
         }
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
         {
             if (NPC.life <= 0)
             {
-                Gore.NewGore(new EntitySource_Misc(""), NPC.position, NPC.velocity, 160);
-                Gore.NewGore(new EntitySource_Misc(""), new Vector2(NPC.position.X, NPC.position.Y), NPC.velocity, 161);
+                Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, 160);
+                Gore.NewGore(NPC.GetSource_Death(), new Vector2(NPC.position.X, NPC.position.Y), NPC.velocity, 161);
             }
         }
     }

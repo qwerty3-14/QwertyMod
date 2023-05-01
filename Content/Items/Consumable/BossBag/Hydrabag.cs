@@ -4,8 +4,17 @@ using QwertyMod.Content.NPCs.Bosses.Hydra;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
 using Terraria.GameContent.Creative;
+using Terraria.ID;
+using Terraria.GameContent.ItemDropRules;
+using QwertyMod.Content.Items.Weapon.Magic.HydraBeam;
+using QwertyMod.Content.Items.Weapon.Magic.HydraMissile;
+using QwertyMod.Content.Items.Weapon.Melee.Javelin.Hydra;
+using QwertyMod.Content.Items.Weapon.Melee.Spear.Hydrent;
+using QwertyMod.Content.Items.Weapon.Minion.HydraHead;
+using QwertyMod.Content.Items.Weapon.Morphs.HydraBarrage;
+using QwertyMod.Content.Items.Weapon.Ranged.Gun;
+using QwertyMod.Content.Items.Tool.Mining;
 
 namespace QwertyMod.Content.Items.Consumable.BossBag
 {
@@ -13,18 +22,16 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Treasure Bag");
-            Tooltip.SetDefault("{$CommonItemTooltip.RightClickToOpen}");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 3;
         }
 
         public override void SetDefaults()
         {
-            Item.maxStack = 999;
+            Item.maxStack = 9999;
             Item.consumable = true;
             Item.width = 76;
             Item.height = 35;
-            Item.rare = 9;
+            Item.rare = ItemRarityID.Cyan;
             Item.expert = true;
             //bossBagNPC = mod.NPCType("Hydra");
         }
@@ -34,24 +41,12 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
         {
             return true;
         }
-
-        public override void RightClick(Player player)
+        public override void ModifyItemLoot(ItemLoot itemLoot)
         {
-            int getHook = Main.rand.Next(0, 100);
-
-            int[] spawnThese = QwertyMod.HydraLoot.Draw(3);
-            player.QuickSpawnItem(new EntitySource_Misc(""), spawnThese[0]);
-            player.QuickSpawnItem(new EntitySource_Misc(""), spawnThese[1]);
-            player.QuickSpawnItem(new EntitySource_Misc(""), spawnThese[2]);
-
-            if (Main.rand.Next(5) == 0)
-            {
-                player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<Hydrator>());
-            }
-
-            player.QuickSpawnItem(new EntitySource_Misc(""), 73, 12);
-            //player.QuickSpawnItem(new EntitySource_Misc(""), mod.ItemType("HydraWings"));
-            player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<HydraScale>(), Main.rand.Next(30, 41));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<Hydrator>(), 5, 1, 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<HydraScale>(), 5, 30, 40));
+            itemLoot.Add(ItemDropRule.Coins(100000, true));
+            itemLoot.Add(ItemDropRule.FewFromOptions(3, 1, new int[] { ModContent.ItemType<HydraBarrage>(), ModContent.ItemType<HydraBeam>(), ModContent.ItemType<HydraCannon>(), ModContent.ItemType<HydraHeadStaff>(), ModContent.ItemType<HydraJavelin>(), ModContent.ItemType<Hydrent>(), ModContent.ItemType<Hydrill>(), ModContent.ItemType<HydraMissileStaff>()}));
         }
     }
 }

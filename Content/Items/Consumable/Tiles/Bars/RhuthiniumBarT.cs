@@ -24,7 +24,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Bars
             DustType = DustType<RhuthiniumDust>();
             HitSound = SoundID.Tink;
             MinPick = 1;
-            AddMapEntry(new Color(81, 97, 66));
+            //AddMapEntry(new Color(81, 97, 66));
             ItemDrop = ItemType<RhuthiniumBar>();
         }
 

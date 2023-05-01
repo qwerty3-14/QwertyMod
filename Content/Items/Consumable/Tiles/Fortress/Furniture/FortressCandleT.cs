@@ -13,10 +13,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Furniture
     {
         public override void SetStaticDefaults()
         {
-            //Main.tileSolidTop[Type] = true;
             Main.tileFrameImportant[Type] = true;
-            //Main.tileNoAttach[Type] = true;
-            //Main.tileTable[Type] = true;
             Main.tileLavaDeath[Type] = true;
             Main.tileLighted[Type] = true;
             TileObjectData.newTile.CopyFrom(TileObjectData.StyleOnTable1x1);
@@ -26,13 +23,9 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Furniture
             };
             TileObjectData.newTile.DrawYOffset = -4;
             TileObjectData.addTile(Type);
-            //AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTable);
-            ModTranslation name = CreateMapEntryName();
-            name.SetDefault("Fortress Candle");
-            AddMapEntry(new Color(162, 184, 185), name);
+            AddMapEntry(new Color(162, 184, 185));
             DustType = DustType<FortressDust>();
             HitSound = QwertyMod.FortressBlocks;
-            // disableSmartCursor = true;
             AdjTiles = new int[] { TileID.Candelabras };
             ItemDrop = ItemType<FortressCandle>();
 

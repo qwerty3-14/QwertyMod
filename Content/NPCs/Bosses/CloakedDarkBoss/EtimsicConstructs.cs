@@ -14,7 +14,7 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Heaven Raider Cannon");
+            //DisplayName,SetDefault("Heaven Raider Cannon");
         }
 
         public override void SetDefaults()
@@ -33,7 +33,7 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
             shootTimer++;
             if (shootTimer == 180)
             {
-                if (Main.netMode != 2)
+                if (Main.netMode != NetmodeID.Server)
                 {
                     SoundEngine.PlaySound(SoundID.Item12, Projectile.Center);
                     //SoundEngine.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/SoundEffects/QuickBeam").WithVolume(.8f).WithPitchVariance(.5f), Projectile.Center);
@@ -75,7 +75,7 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Etimsic Barrier");
+            //DisplayName,SetDefault("Etimsic Barrier");
             Main.projFrames[Projectile.type] = 2;
         }
 
@@ -97,7 +97,7 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
             shootTimer++;
             if (shootTimer == 30)
             {
-                if (Main.netMode != 2)
+                if (Main.netMode != NetmodeID.Server)
                 {
                     SoundEngine.PlaySound(SoundID.Item12, Projectile.Center);
                     // SoundEngine.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/SoundEffects/QuickBeam").WithVolume(.8f).WithPitchVariance(.5f), Projectile.Center);
@@ -116,7 +116,7 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
             for (int i = 0; i < laserLength; i += 4)
             {
                 Main.EntitySpriteDraw(texture, Projectile.Center + QwertyMethods.PolarVector(22 + i, Projectile.rotation) - Main.screenPosition, null, color, Projectile.rotation, Vector2.UnitY * texture.Height * .5f, 1f, SpriteEffects.None, 0);
-                Main.EntitySpriteDraw(texture, Projectile.Center + QwertyMethods.PolarVector(-22 - i, Projectile.rotation) - Main.screenPosition, null, color, Projectile.rotation + (float)Math.PI, Vector2.UnitY * texture.Height * .5f, 1f, SpriteEffects.None, 0);
+                Main.EntitySpriteDraw(texture, Projectile.Center + QwertyMethods.PolarVector(-22 - i, Projectile.rotation) - Main.screenPosition, null, color, Projectile.rotation + MathF.PI, Vector2.UnitY * texture.Height * .5f, 1f, SpriteEffects.None, 0);
             }
         }
 
@@ -149,7 +149,7 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Etimsic Ray");
+            //DisplayName,SetDefault("Etimsic Ray");
         }
 
 

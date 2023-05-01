@@ -18,8 +18,8 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraBeam
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Hydra Beam");
-            Tooltip.SetDefault("Creates a beam of destructive energy from the sky");
+            //DisplayName,SetDefault("Hydra Beam");
+            //Tooltip.SetDefault("Creates a beam of destructive energy from the sky");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -30,10 +30,10 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraBeam
 
             Item.useTime = 28;
             Item.useAnimation = 28;
-            Item.useStyle = 5;
+            Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 1;
             Item.value = 250000;
-            Item.rare = 5;
+            Item.rare = ItemRarityID.Pink;
             Item.UseSound = SoundID.Item1;
             Item.width = 28;
             Item.height = 30;
@@ -62,7 +62,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraBeam
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Beam Head");
+            //DisplayName,SetDefault("Beam Head");
         }
 
         public override bool PreDraw(ref Color lightColor)
@@ -140,15 +140,15 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraBeam
 
         public Projectile shooter;
 
-        public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
             shooter = Main.projectile[(int)Projectile.ai[0]];
-            hitDirection = shooter.velocity.X > 0 ? 1 : -1;
+            modifiers.HitDirectionOverride = shooter.velocity.X > 0 ? 1 : -1;
         }
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Hydra Beam");
+            //DisplayName,SetDefault("Hydra Beam");
         }
 
         public override void SetDefaults()
@@ -163,7 +163,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraBeam
             Projectile.DamageType = DamageClass.Magic;
             Projectile.usesLocalNPCImmunity = true;
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.localNPCImmunity[target.whoAmI] = 12;
             target.immune[Projectile.owner] = 0;
@@ -173,7 +173,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraBeam
 
         public override void AI()
         {
-            float rOffset = (float)Math.PI / 2;
+            float rOffset = MathF.PI / 2;
             shooter = Main.projectile[(int)Projectile.ai[0]];
 
             Vector2 mousePos = Main.MouseWorld;
@@ -186,7 +186,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraBeam
 
             #region Set projectile position
 
-            Vector2 diff = new Vector2((float)Math.Cos(shooter.rotation + rOffset) * 14f, (float)Math.Sin(shooter.rotation + rOffset) * 14f);
+            Vector2 diff = new Vector2(MathF.Cos(shooter.rotation + rOffset) * 14f, MathF.Sin(shooter.rotation + rOffset) * 14f);
             diff.Normalize();
             Projectile.velocity = diff;
             Projectile.direction = Projectile.Center.X > shooter.Center.X ? 1 : -1;
@@ -200,7 +200,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraBeam
             player.heldProj = Projectile.whoAmI;
             player.itemTime = 2;
             player.itemAnimation = 2;
-            player.itemRotation = (float)Math.Atan2(Projectile.velocity.Y * dir, Projectile.velocity.X * dir);
+            player.itemRotation = MathF.Atan2(Projectile.velocity.Y * dir, Projectile.velocity.X * dir);
             */
 
             #endregion Set projectile position

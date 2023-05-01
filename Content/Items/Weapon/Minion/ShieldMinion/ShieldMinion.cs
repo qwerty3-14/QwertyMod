@@ -16,7 +16,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.ShieldMinion
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Shield Minion");
+            //DisplayName,SetDefault("Shield Minion");
             Main.projFrames[Projectile.type] = 2;
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
@@ -93,7 +93,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.ShieldMinion
                     LatestValidVelocity = player.velocity;
                 }
 
-                float myOffset = (((float)Math.PI / 2) * (float)(identity + 1)) / (ShieldCount + 1) - (float)Math.PI / 4;
+                float myOffset = ((MathF.PI / 2) * (float)(identity + 1)) / (ShieldCount + 1) - MathF.PI / 4;
                 if(Main.myPlayer == Projectile.owner)
                 {
                     Projectile.ai[0] = (Main.MouseWorld - player.Center).ToRotation() + myOffset;
@@ -101,7 +101,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.ShieldMinion
                 }
                 flyTo = player.Center + QwertyMethods.PolarVector(Projectile.ai[1] == guarding ? 120 : -50, Projectile.ai[0]);
 
-                if (flyTo != null && flyTo != Vector2.Zero)
+                if (flyTo != Vector2.Zero)
                 {
                     Projectile.velocity = (flyTo - Projectile.Center) * .1f;
                 }
@@ -155,26 +155,26 @@ namespace QwertyMod.Content.Items.Weapon.Minion.ShieldMinion
             ShieldCount = 0;
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.localNPCImmunity[target.whoAmI] = 10;
             target.immune[Projectile.owner] = 0;
-            if (Main.rand.Next(10) == 0 && !target.boss)
+            if (Main.rand.NextBool(10) && !target.boss)
             {
                 target.AddBuff(BuffType<Stunned>(), 120);
             }
         }
 
-        public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
             if (target.GetGlobalNPC<FortressNPCGeneral>().fortressNPC)
             {
-                for (int i = 0; i < damage / 3; i++)
+                for (int i = 0; i < modifiers.FinalDamage.Multiplicative / 3; i++)
                 {
                     Dust d = Dust.NewDustPerfect(Projectile.Center, DustType<BloodforceDust>());
                     d.velocity *= 5f;
                 }
-                damage *= 2;
+                modifiers.FinalDamage *= 2;
             }
         }
 

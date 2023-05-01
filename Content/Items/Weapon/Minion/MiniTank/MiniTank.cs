@@ -14,7 +14,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.MiniTank
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Mini Tank");
+            //DisplayName,SetDefault("Mini Tank");
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
             Main.projPet[Projectile.type] = true;
@@ -113,7 +113,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.MiniTank
                         }
                         else
                         {
-                            aim = (float)Math.PI;
+                            aim = MathF.PI;
                         }
                     }
                     else
@@ -128,15 +128,15 @@ namespace QwertyMod.Content.Items.Weapon.Minion.MiniTank
                 }
                 else
                 {
-                    aim = Projectile.spriteDirection == 1 ? 0 : (float)Math.PI;
+                    aim = Projectile.spriteDirection == 1 ? 0 : MathF.PI;
                 }
                 shootCounter++;
                 gunRotation = QwertyMethods.SlowRotation(gunRotation, aim, 3);
                 if (gunRotation > 0)
                 {
-                    if (gunRotation > (float)Math.PI / 2)
+                    if (gunRotation > MathF.PI / 2)
                     {
-                        gunRotation = (float)Math.PI;
+                        gunRotation = MathF.PI;
                     }
                     else
                     {

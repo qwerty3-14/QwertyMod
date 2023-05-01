@@ -15,8 +15,6 @@ namespace QwertyMod.Content.Items.Consumable.BossSummon
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Summons Noehtnap");
-            DisplayName.SetDefault("Ritual Interrupter");
             ItemID.Sets.SortingPriorityBossSpawns[Item.type] = 13; // This helps sort inventory know this is a boss summoning Item.
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 3;
         }
@@ -27,10 +25,10 @@ namespace QwertyMod.Content.Items.Consumable.BossSummon
             Item.width = 20;
             Item.height = 24;
             Item.maxStack = 20;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
             Item.useAnimation = 45;
             Item.useTime = 45;
-            Item.useStyle = 4;
+            Item.useStyle = ItemUseStyleID.HoldUp;
             Item.UseSound = SoundID.Item44;
             Item.consumable = true;
         }

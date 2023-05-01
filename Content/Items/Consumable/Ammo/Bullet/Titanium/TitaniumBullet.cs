@@ -9,8 +9,6 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Bullet.Titanium
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Titanium Bullet");
-            Tooltip.SetDefault("Spin!");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 99;
         }
 
@@ -20,7 +18,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Bullet.Titanium
             Item.DamageType = DamageClass.Ranged;
             Item.knockBack = 2;
             Item.value = 1;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
             Item.width = 18;
             Item.height = 18;
 
@@ -29,7 +27,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Bullet.Titanium
             Item.consumable = true;
             Item.shoot = ProjectileType<TitaniumBulletP>();
             Item.ammo = 97;
-            Item.maxStack = 999;
+            Item.maxStack = 9999;
         }
 
         public override void AddRecipes()

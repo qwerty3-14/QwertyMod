@@ -5,6 +5,7 @@ using Terraria.Graphics.Shaders;
 using Terraria.ModLoader;
 using QwertyMod.Common.PlayerLayers;
 using Microsoft.Xna.Framework.Graphics;
+using Terraria.ID;
 
 namespace QwertyMod.Content.Items.Equipment.Accessories
 {
@@ -13,14 +14,14 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Gravity Be Gone");
-            Tooltip.SetDefault("Makes you uneffected by gravity\nGrants immunity to fall damage\nMethod of going down not included.");
+            //DisplayName,SetDefault("Gravity Be Gone");
+            //Tooltip.SetDefault("Makes you uneffected by gravity\nGrants immunity to fall damage\nMethod of going down not included.");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
         public override void SetDefaults()
         {
             Item.value = QwertyMod.InvaderGearValue;
-            Item.rare = 8;
+            Item.rare = ItemRarityID.Yellow;
 
             Item.width = 20;
             Item.height = 20;

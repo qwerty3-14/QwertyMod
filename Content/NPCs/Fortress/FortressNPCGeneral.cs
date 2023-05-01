@@ -43,7 +43,7 @@ namespace QwertyMod.Content.NPCs.Fortress
                         {
                             if (gNPC.invaderNPC && Collision.CheckAABBvAABBCollision(npc.position, npc.Size, Main.npc[i].position, Main.npc[i].Size))
                             {
-                                QwertyMethods.PokeNPC(Main.LocalPlayer, Main.npc[i], new EntitySource_Misc(""), npc.damage, DamageClass.Default, 0);
+                                QwertyMethods.PokeNPC(Main.LocalPlayer, Main.npc[i], npc.GetSource_FromAI(), npc.damage, DamageClass.Default, 0);
                                 contactDamageCooldown = 10;
                                 break;
                             }
@@ -74,11 +74,11 @@ namespace QwertyMod.Content.NPCs.Fortress
             return null;
         }
 
-        public override void ModifyHitNPC(Projectile projectile, NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitNPC(Projectile projectile, NPC target, ref NPC.HitModifiers modifiers)
         {
             if (isFromFortressNPC)
             {
-                damage *= 4;
+                modifiers.FinalDamage *= 4;
             }
         }
     }

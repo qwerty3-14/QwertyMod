@@ -10,15 +10,15 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Shaman
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Shaman Warplate");
-            Tooltip.SetDefault("+1 max minions \n14% increased melee speed");
+            //DisplayName,SetDefault("Shaman Warplate");
+            //Tooltip.SetDefault("+1 max minions \n14% increased melee speed");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()
         {
             Item.value = Item.sellPrice(gold: 1);
-            Item.rare = 1;
+            Item.rare = ItemRarityID.Blue;
 
             Item.width = 22;
             Item.height = 12;

@@ -19,8 +19,8 @@ namespace QwertyMod.Content.Items.Weapon.Magic.PursuitRune
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Pursuit Rune Staff");
-            Tooltip.SetDefault("Fires explosive Pursuit Runes!");
+            //DisplayName,SetDefault("Pursuit Rune Staff");
+            //Tooltip.SetDefault("Fires explosive Pursuit Runes!");
             Item.staff[Item.type] = true; //this makes the useStyle animate as a staff instead of as a gun
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
@@ -33,10 +33,10 @@ namespace QwertyMod.Content.Items.Weapon.Magic.PursuitRune
 
             Item.useTime = 20;
             Item.useAnimation = 20;
-            Item.useStyle = 5;
+            Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 2;
             Item.value = 500000;
-            Item.rare = 9;
+            Item.rare = ItemRarityID.Cyan;
             Item.autoReuse = true;
             Item.width = 72;
             Item.height = 72;
@@ -125,17 +125,17 @@ namespace QwertyMod.Content.Items.Weapon.Magic.PursuitRune
             Main.EntitySpriteDraw(RuneSprites.runeTransition[(int)Runes.Pursuit][frame], Projectile.Center - Main.screenPosition, null, new Color(c, c, c, c), Projectile.rotation, new Vector2(10, 5), Vector2.One * 2, 0, 0);
             return false;
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.localNPCImmunity[target.whoAmI] = -1;
             target.immune[Projectile.owner] = 0;
-            Projectile e = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center.X, Projectile.Center.Y, 0, 0, ProjectileType<PursuitRuneBlast>(), Projectile.damage, Projectile.knockBack, Projectile.owner, 1f)];
+            Projectile e = Main.projectile[Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center.X, Projectile.Center.Y, 0, 0, ProjectileType<PursuitRuneBlast>(), Projectile.damage, Projectile.knockBack, Projectile.owner, 1f)];
             e.localNPCImmunity[target.whoAmI] = -1;
         }
 
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center.X, Projectile.Center.Y, 0, 0, ProjectileType<PursuitRuneBlast>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center.X, Projectile.Center.Y, 0, 0, ProjectileType<PursuitRuneBlast>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
             return true;
         }
     }
@@ -143,7 +143,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.PursuitRune
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Rune Blast");
+            //DisplayName,SetDefault("Rune Blast");
         }
 
         public override void SetDefaults()
@@ -170,13 +170,13 @@ namespace QwertyMod.Content.Items.Weapon.Magic.PursuitRune
 
             for (int i = 0; i < 600; i++)
             {
-                float theta = Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI);
+                float theta = Main.rand.NextFloat(-MathF.PI, MathF.PI);
                 Dust dust = Dust.NewDustPerfect(Projectile.Center, DustType<PursuitRuneDeath>(), QwertyMethods.PolarVector(Main.rand.Next(2, 30), theta));
                 dust.noGravity = true;
             }
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.localNPCImmunity[target.whoAmI] = -1;
             target.immune[Projectile.owner] = 0;

@@ -13,8 +13,8 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.Charging
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Charging Shotgun");
-            Tooltip.SetDefault("Right click to add an extra bullet to your next fire");
+            //DisplayName,SetDefault("Charging Shotgun");
+            //Tooltip.SetDefault("Right click to add an extra bullet to your next fire");
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -26,17 +26,17 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.Charging
 
             Item.useTime = 60;
             Item.useAnimation = 60;
-            Item.useStyle = 5;
+            Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 5;
             Item.value = 500000;
-            Item.rare = 9;
+            Item.rare = ItemRarityID.Cyan;
             Item.UseSound = SoundID.Item11;
 
             Item.width = 56;
             Item.height = 34;
 
-            Item.shoot = 97;
-            Item.useAmmo = 97;
+            Item.shoot = ProjectileID.Bullet; 
+            Item.useAmmo = AmmoID.Bullet;
             Item.shootSpeed = 6f;
             Item.noMelee = true;
             Item.autoReuse = true;
@@ -55,8 +55,8 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.Charging
         {
             if (player.altFunctionUse == 2)
             {
-                Item.shoot = 0;
-                Item.useAmmo = 0;
+                Item.shoot = ProjectileID.None;
+                Item.useAmmo = AmmoID.None;
                 Item.useTime = 12;
                 Item.useAnimation = 12;
                 Item.UseSound = new SoundStyle("QwertyMod/Assets/Sounds/click", SoundType.Sound);
@@ -74,8 +74,8 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.Charging
             }
             else
             {
-                Item.shoot = 97;
-                Item.useAmmo = 97;
+                Item.shoot = ProjectileID.Bullet;
+                Item.useAmmo = AmmoID.Bullet;
 
                 Item.useTime = 12;
                 Item.useAnimation = 12;
@@ -108,7 +108,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.Charging
                     float shellShift = MathHelper.ToRadians(-50);
                     float SVar = shellShift + MathHelper.ToRadians(Main.rand.Next(-100, 301) / 10);
                     float Sspeed = .05f * Main.rand.Next(15, 41);
-                    Projectile.NewProjectile(source, position, new Vector2((float)Math.Cos(SVar) * Sspeed * -player.direction, (float)Math.Sin(SVar) * Sspeed), ModContent.ProjectileType<DinoVulcan.Shell>(), 0, 0, Main.myPlayer);
+                    Projectile.NewProjectile(source, position, new Vector2(MathF.Cos(SVar) * Sspeed * -player.direction, MathF.Sin(SVar) * Sspeed), ModContent.ProjectileType<DinoVulcan.Shell>(), 0, 0, Main.myPlayer);
                     Projectile.NewProjectile(source, position, trueSpeed, type, damage, knockback, player.whoAmI);
                 }
                 colorProgress = .02f;

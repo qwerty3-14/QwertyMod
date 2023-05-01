@@ -17,8 +17,8 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Catalyst
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Invader Catalyst");
-            Tooltip.SetDefault("Melee attacks will cause magic explosions for a short time");
+            //DisplayName,SetDefault("Invader Catalyst");
+            //Tooltip.SetDefault("Melee attacks will cause magic explosions for a short time");
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
         public override void SetDefaults()
@@ -31,7 +31,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Catalyst
             Item.mana = 100;
             Item.UseSound = SoundID.Item29;
             Item.useTime = Item.useAnimation = 30;
-            Item.rare = 8;
+            Item.rare = ItemRarityID.Yellow;
 
 
             if (!Main.dedServ)
@@ -65,21 +65,21 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Catalyst
                 SoundEngine.PlaySound(SoundID.Item91, target.Center);
                 for (int i = 0; i < 100; i++)
                 {
-                    float rot = (float)Math.PI * 2f * ((float)i / 30f);
+                    float rot = MathF.PI * 2f * ((float)i / 30f);
                     Dust.NewDustPerfect(target.Center, ModContent.DustType<InvaderGlow>(), QwertyMethods.PolarVector(5f, rot));
                 }
                 QwertyMethods.PokeNPC(Player, target, source, Player.GetModPlayer<CatalystEffect>().CatalystDamage, DamageClass.Magic, 0);
-                //Projectile.NewProjectile(new EntitySource_Misc(""), target.Center, Vector2.Zero, ModContent.ProjectileType<CatalystExplosion>(), Player.GetModPlayer<CatalystEffect>().CatalystDamage, 0, Player.whoAmI);
+                //Projectile.NewProjectile(player.GetSource_Buff(buffIndex), target.Center, Vector2.Zero, ModContent.ProjectileType<CatalystExplosion>(), Player.GetModPlayer<CatalystEffect>().CatalystDamage, 0, Player.whoAmI);
             }
         }
-        public override void OnHitNPC(Item item, NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if(item.CountsAsClass(DamageClass.Melee))
+            if(hit.DamageType == DamageClass.Melee)
             {
-                ProcessCatalystEffect(target, Player.GetSource_ItemUse(item));
+                ProcessCatalystEffect(target, Player.GetSource_ItemUse(Player.HeldItem));
             }
         }
-        public override void OnHitNPCWithProj(Projectile proj, NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
             if(proj.CountsAsClass(DamageClass.Melee))
             {
@@ -91,8 +91,8 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Catalyst
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Catalyst");
-            Description.SetDefault("Why are you reading this GO KILL");
+            //DisplayName,SetDefault("Catalyst");
+            //Description.SetDefault("Why are you reading this GO KILL");
             Main.debuff[Type] = false;
             Main.pvpBuff[Type] = false;
             Main.buffNoSave[Type] = true;
@@ -102,7 +102,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Catalyst
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("explosion");
+            //DisplayName,SetDefault("explosion");
         }
 
         public override void SetDefaults()
@@ -126,7 +126,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Catalyst
             SoundEngine.PlaySound(SoundID.Item91, Projectile.Center);
             for (int i = 0; i < 100; i++)
             {
-                float rot = (float)Math.PI * 2f * ((float)i / 30f);
+                float rot = MathF.PI * 2f * ((float)i / 30f);
                 Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<InvaderGlow>(), QwertyMethods.PolarVector(5f, rot));
             }
         }

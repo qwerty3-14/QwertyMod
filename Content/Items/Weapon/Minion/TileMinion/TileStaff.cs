@@ -12,8 +12,8 @@ namespace QwertyMod.Content.Items.Weapon.Minion.TileMinion
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Tile Staff");
-            Tooltip.SetDefault("Moving diagonally? What's that?");
+            //DisplayName,SetDefault("Tile Staff");
+            //Tooltip.SetDefault("Moving diagonally? What's that?");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
@@ -26,7 +26,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.TileMinion
             Item.width = Item.height = 32;
             Item.useTime = 25;
             Item.useAnimation = 25;
-            Item.useStyle = 1;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.noMelee = true;
             Item.rare = ItemRarityID.LightRed;
             Item.shoot = ProjectileType<TileMinion>();

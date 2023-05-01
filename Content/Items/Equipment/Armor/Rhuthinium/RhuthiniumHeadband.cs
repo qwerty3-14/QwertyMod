@@ -14,8 +14,8 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Rhuthinium Headband");
-            Tooltip.SetDefault("10% increased melee critical strike chance\nIncreases the size of swords by 10%");
+            //DisplayName,SetDefault("Rhuthinium Headband");
+            //Tooltip.SetDefault("10% increased melee critical strike chance\nIncreases the size of swords by 10%");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             Head.Sets.DrawFullHair[Item.headSlot] = true;
         }
@@ -23,7 +23,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
         public override void SetDefaults()
         {
             Item.value = 50000;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
 
             Item.width = 32;
             Item.height = 20;

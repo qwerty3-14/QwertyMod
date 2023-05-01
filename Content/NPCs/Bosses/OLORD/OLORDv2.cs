@@ -29,7 +29,7 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Oversized Laser-emitting Obliteration Radiation-emitting Destroyer");
+            //DisplayName,SetDefault("Oversized Laser-emitting Obliteration Radiation-emitting Destroyer");
             Main.npcFrameCount[NPC.type] = 2;
 
             NPCID.Sets.MPAllowedEnemies[NPC.type] = true; //For allowing use of SpawnOnPlayer in multiplayer
@@ -92,8 +92,6 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
         private bool runOnce = true;
         private Vector2 GoTo;
         private float laserDistanceFromCenter = 800;
-        private bool didHalfDeadSequence = false;
-        private bool halfDeadSqequence = false;
 
         public override void AI()
         {
@@ -131,29 +129,29 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
             //NPC.behindTiles = NPC.hide;
             if (runOnce)
             {
-                if (Main.netMode != 1)
+                if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     for (int t = 0; t < tLaser.Length; t++)
                     {
-                        tLaser[t] = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromAI(), (NPC.Center + turretPos[t] * NPC.scale), QwertyMethods.PolarVector(14f, turret[t].X + (float)Math.PI / 2), ProjectileType<TurretLaser2>(), (int)(1.5f * shotDamage), 3f, Main.myPlayer, (NPC.Center + turretPos[t] * NPC.scale).X, (NPC.Center + turretPos[t] * NPC.scale).Y)];
+                        tLaser[t] = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromAI(), (NPC.Center + turretPos[t] * NPC.scale), QwertyMethods.PolarVector(14f, turret[t].X + MathF.PI / 2), ProjectileType<TurretLaser2>(), (int)(1.5f * shotDamage), 3f, Main.myPlayer, (NPC.Center + turretPos[t] * NPC.scale).X, (NPC.Center + turretPos[t] * NPC.scale).Y)];
                     }
 
                     wall[0] = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center.X + laserDistanceFromCenter, NPC.position.Y, 0, 14f, ProjectileType<SideLaser>(), (int)(shotDamage * 1.5f), 3f, Main.myPlayer, NPC.whoAmI, laserDistanceFromCenter)];
                     wall[1] = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center.X + laserDistanceFromCenter, NPC.position.Y, 0, 14f, ProjectileType<SideLaser>(), (int)(shotDamage * 1.5f), 3f, Main.myPlayer, NPC.whoAmI, -laserDistanceFromCenter)];
-                    superLaser = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center.X, NPC.Center.Y, 0, 14f, ProjectileType<SuperLaser2>(), 5 * shotDamage, 3f, Main.myPlayer, NPC.whoAmI, NPC.rotation + (float)Math.PI / 2)];
+                    superLaser = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center.X, NPC.Center.Y, 0, 14f, ProjectileType<SuperLaser2>(), 5 * shotDamage, 3f, Main.myPlayer, NPC.whoAmI, NPC.rotation + MathF.PI / 2)];
                 }
-                if (Main.netMode != 1)
+                if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     attack = Main.rand.Next(4);
                     NPC.netUpdate = true;
                 }
                 runOnce = false;
             }
-            if (Main.netMode != 1)
+            if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 if (superLaser.type != ProjectileType<SuperLaser2>())
                 {
-                    superLaser = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center.X, NPC.Center.Y, 0, 14f, ProjectileType<SuperLaser2>(), 5 * shotDamage, 3f, Main.myPlayer, NPC.whoAmI, NPC.rotation + (float)Math.PI / 2)];
+                    superLaser = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center.X, NPC.Center.Y, 0, 14f, ProjectileType<SuperLaser2>(), 5 * shotDamage, 3f, Main.myPlayer, NPC.whoAmI, NPC.rotation + MathF.PI / 2)];
                 }
 
                 //superLaser.timeLeft = 10;
@@ -161,7 +159,7 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
                 {
                     if (tLaser[t].type != ProjectileType<TurretLaser2>())
                     {
-                        tLaser[t] = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromAI(), (NPC.Center + turretPos[t] * NPC.scale), QwertyMethods.PolarVector(14f, turret[t].X + (float)Math.PI / 2), ProjectileType<TurretLaser2>(), (int)(1.5f * shotDamage), 3f, Main.myPlayer, (NPC.Center + turretPos[t] * NPC.scale).X, (NPC.Center + turretPos[t] * NPC.scale).Y)];
+                        tLaser[t] = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromAI(), (NPC.Center + turretPos[t] * NPC.scale), QwertyMethods.PolarVector(14f, turret[t].X + MathF.PI / 2), ProjectileType<TurretLaser2>(), (int)(1.5f * shotDamage), 3f, Main.myPlayer, (NPC.Center + turretPos[t] * NPC.scale).X, (NPC.Center + turretPos[t] * NPC.scale).Y)];
                     }
                     tLaser[t].rotation = turret[t].X;
                     tLaser[t].Center = (NPC.Center + turretPos[t] * NPC.scale);
@@ -183,7 +181,7 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
                 {
                     for (int w = 0; w < 2; w++)
                     {
-                        if (wall[w].type != ProjectileType<SideLaser>() && Main.netMode != 1)
+                        if (wall[w].type != ProjectileType<SideLaser>() && Main.netMode != NetmodeID.MultiplayerClient)
                         {
                             wall[w] = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center.X + laserDistanceFromCenter, NPC.position.Y, 0, 14f, ProjectileType<SideLaser>(), (int)(shotDamage * 1.5f), 3f, Main.myPlayer, NPC.whoAmI, laserDistanceFromCenter * w == 1 ? -1 : 1)];
                         }
@@ -246,7 +244,7 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
                 if ((Math.Abs(player.Center.X - NPC.Center.X) > guideWidth || player.Center.Y < NPC.Center.Y + 50))
                 {
                     timer = 0;
-                    if (Main.netMode != 1)
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         NPC.netUpdate = true;
                     }
@@ -288,7 +286,7 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
                             if (timer > attackDuration + startAttacks)
                             {
                                 timer = startAttacks;
-                                if (Main.netMode != 1)
+                                if (Main.netMode != NetmodeID.MultiplayerClient)
                                 {
                                     attack = Main.rand.Next(1, 4);
                                     NPC.netUpdate = true;
@@ -304,20 +302,20 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
                                 frame = 1;
                                 if (timer % 30 == 0)
                                 {
-                                    if (Main.netMode != 1)
+                                    if (Main.netMode != NetmodeID.MultiplayerClient)
                                     {
                                         if (timer % 60 == 0)
                                         {
                                             for (int p = -5; p < 7; p += 2)
                                             {
-                                                Projectile.NewProjectile(NPC.GetSource_FromAI(), new Vector2(NPC.Center.X, NPC.Center.Y + NPC.height / 2), QwertyMethods.PolarVector(3 * NPC.ai[3], p * (float)Math.PI / 12 + (float)Math.PI / 2), ProjectileType<TurretShot>(), shotDamage, 0, Main.myPlayer);
+                                                Projectile.NewProjectile(NPC.GetSource_FromAI(), new Vector2(NPC.Center.X, NPC.Center.Y + NPC.height / 2), QwertyMethods.PolarVector(3 * NPC.ai[3], p * MathF.PI / 12 + MathF.PI / 2), ProjectileType<TurretShot>(), shotDamage, 0, Main.myPlayer);
                                             }
                                         }
                                         else
                                         {
                                             for (int p = -3; p < 4; p++)
                                             {
-                                                Projectile.NewProjectile(NPC.GetSource_FromAI(), new Vector2(NPC.Center.X, NPC.Center.Y + NPC.height / 2), QwertyMethods.PolarVector(3 * NPC.ai[3], p * (float)Math.PI / 6 + (float)Math.PI / 2), ProjectileType<TurretShot>(), shotDamage, 0, Main.myPlayer);
+                                                Projectile.NewProjectile(NPC.GetSource_FromAI(), new Vector2(NPC.Center.X, NPC.Center.Y + NPC.height / 2), QwertyMethods.PolarVector(3 * NPC.ai[3], p * MathF.PI / 6 + MathF.PI / 2), ProjectileType<TurretShot>(), shotDamage, 0, Main.myPlayer);
                                             }
                                         }
                                     }
@@ -346,23 +344,23 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
                                     }
                                     else
                                     {
-                                        turret[t].X = QwertyMethods.SlowRotation(turret[t].X, (player.Center - (NPC.Center + turretPos[t] * NPC.scale)).ToRotation() - (float)Math.PI / 2, 4);
+                                        turret[t].X = QwertyMethods.SlowRotation(turret[t].X, (player.Center - (NPC.Center + turretPos[t] * NPC.scale)).ToRotation() - MathF.PI / 2, 4);
                                         turret[t].Y = 0;
                                         if (timer % 120 == 0)
                                         {
-                                            if (Main.netMode != 1)
+                                            if (Main.netMode != NetmodeID.MultiplayerClient)
                                             {
                                                 for (int r = -1; r < 2; r++)
                                                 {
-                                                    Projectile p = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromAI(), (NPC.Center + turretPos[t] * NPC.scale), QwertyMethods.PolarVector(3 * NPC.ai[3], turret[t].X + (float)Math.PI / 2 + r * (float)Math.PI / 8), ProjectileType<TurretShot>(), shotDamage, 0, Main.myPlayer)];
+                                                    Projectile p = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromAI(), (NPC.Center + turretPos[t] * NPC.scale), QwertyMethods.PolarVector(3 * NPC.ai[3], turret[t].X + MathF.PI / 2 + r * MathF.PI / 8), ProjectileType<TurretShot>(), shotDamage, 0, Main.myPlayer)];
                                                     p.scale = NPC.scale;
                                                 }
                                                 Vector2 center = (NPC.Center + turretPos[t] * NPC.scale);
                                                 for (int i = 0; i < 30; i++)
                                                 {
-                                                    float theta = turret[t].X + (float)Math.PI / 2 + Main.rand.NextFloat(-(float)Math.PI / 3, (float)Math.PI / 3);
+                                                    float theta = turret[t].X + MathF.PI / 2 + Main.rand.NextFloat(-MathF.PI / 3, MathF.PI / 3);
                                                     float dist = Main.rand.NextFloat(60f, 100f);
-                                                    if (Main.netMode != 1)
+                                                    if (Main.netMode != NetmodeID.MultiplayerClient)
                                                     {
                                                         Dust.NewDustPerfect(center, DustType<B4PDust>(), QwertyMethods.PolarVector(dist / 10, theta));
                                                     }
@@ -388,7 +386,7 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
                             if (timer > attackDuration + startAttacks)
                             {
                                 timer = startAttacks;
-                                if (Main.netMode != 1)
+                                if (Main.netMode != NetmodeID.MultiplayerClient)
                                 {
                                     attack = Main.rand.Next(3);
                                     if (attack >= 1)
@@ -417,30 +415,30 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
                                             turret[t].Y = 1;
                                             if (t == 1)
                                             {
-                                                turret[t].X = QwertyMethods.SlowRotation(turret[t].X, (float)Math.PI / 2 * laserProgress, 4);
+                                                turret[t].X = QwertyMethods.SlowRotation(turret[t].X, MathF.PI / 2 * laserProgress, 4);
                                             }
                                             else if (t == 2)
                                             {
-                                                turret[t].X = QwertyMethods.SlowRotation(turret[t].X, -(float)Math.PI / 2 * laserProgress, 4);
+                                                turret[t].X = QwertyMethods.SlowRotation(turret[t].X, -MathF.PI / 2 * laserProgress, 4);
                                             }
                                         }
                                         else
                                         {
-                                            turret[t].X = QwertyMethods.SlowRotation(turret[t].X, (player.Center - (NPC.Center + turretPos[t] * NPC.scale)).ToRotation() - (float)Math.PI / 2, 4);
+                                            turret[t].X = QwertyMethods.SlowRotation(turret[t].X, (player.Center - (NPC.Center + turretPos[t] * NPC.scale)).ToRotation() - MathF.PI / 2, 4);
                                             turret[t].Y = 1;
                                             if (timer % 120 < 60 && timer % 10 == 0)
                                             {
-                                                if (Main.netMode != 1)
+                                                if (Main.netMode != NetmodeID.MultiplayerClient)
                                                 {
-                                                    Projectile p = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromAI(), (NPC.Center + turretPos[t] * NPC.scale), QwertyMethods.PolarVector(3 * NPC.ai[3], turret[t].X + (float)Math.PI / 2), ProjectileType<TurretShot>(), shotDamage, 0, Main.myPlayer)];
+                                                    Projectile p = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromAI(), (NPC.Center + turretPos[t] * NPC.scale), QwertyMethods.PolarVector(3 * NPC.ai[3], turret[t].X + MathF.PI / 2), ProjectileType<TurretShot>(), shotDamage, 0, Main.myPlayer)];
                                                     p.scale = NPC.scale;
 
                                                     Vector2 center = (NPC.Center + turretPos[t] * NPC.scale);
                                                     for (int i = 0; i < 10; i++)
                                                     {
-                                                        float theta = turret[t].X + (float)Math.PI / 2 + Main.rand.NextFloat(-(float)Math.PI / 4, (float)Math.PI / 4);
+                                                        float theta = turret[t].X + MathF.PI / 2 + Main.rand.NextFloat(-MathF.PI / 4, MathF.PI / 4);
                                                         float dist = Main.rand.NextFloat(60f, 100f);
-                                                        if (Main.netMode != 1)
+                                                        if (Main.netMode != NetmodeID.MultiplayerClient)
                                                         {
                                                             Dust.NewDustPerfect(center, DustType<B4PDust>(), QwertyMethods.PolarVector(dist / 10, theta));
                                                         }
@@ -474,7 +472,7 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
                             if (timer > attackDuration + startAttacks)
                             {
                                 timer = startAttacks;
-                                if (Main.netMode != 1)
+                                if (Main.netMode != NetmodeID.MultiplayerClient)
                                 {
                                     attack = Main.rand.Next(3);
                                     if (attack >= 2)
@@ -490,7 +488,7 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
                                 {
                                     frame = 1;
                                 }
-                                if (timer == attackDuration + startAttacks - 480 && Main.netMode != 1)
+                                if (timer == attackDuration + startAttacks - 480 && Main.netMode != NetmodeID.MultiplayerClient)
                                 {
                                     Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center.X, NPC.Center.Y, 0, 14f, ProjectileType<BlackHoleSeed>(), (int)(2.5f * shotDamage), 3f, Main.myPlayer, NPC.ai[3]);
                                 }
@@ -500,16 +498,16 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
                                     turret[t].X = QwertyMethods.SlowRotation(turret[t].X, 0, 4);
                                     if (timer % 120 == t * 30)
                                     {
-                                        if (Main.netMode != 1)
+                                        if (Main.netMode != NetmodeID.MultiplayerClient)
                                         {
-                                            Projectile.NewProjectile(NPC.GetSource_FromAI(), (NPC.Center + turretPos[t] * NPC.scale), QwertyMethods.PolarVector(3 * NPC.ai[3], turret[t].X + (float)Math.PI / 2), ProjectileType<TurretGrav>(), shotDamage, 0, Main.myPlayer);
+                                            Projectile.NewProjectile(NPC.GetSource_FromAI(), (NPC.Center + turretPos[t] * NPC.scale), QwertyMethods.PolarVector(3 * NPC.ai[3], turret[t].X + MathF.PI / 2), ProjectileType<TurretGrav>(), shotDamage, 0, Main.myPlayer);
                                         }
                                         Vector2 center = (NPC.Center + turretPos[t] * NPC.scale);
                                         for (int i = 0; i < 30; i++)
                                         {
-                                            float theta = turret[t].X + (float)Math.PI / 2 + Main.rand.NextFloat(-(float)Math.PI / 3, (float)Math.PI / 3);
+                                            float theta = turret[t].X + MathF.PI / 2 + Main.rand.NextFloat(-MathF.PI / 3, MathF.PI / 3);
                                             float dist = Main.rand.NextFloat(60f, 100f);
-                                            if (Main.netMode != 1)
+                                            if (Main.netMode != NetmodeID.MultiplayerClient)
                                             {
                                                 Dust.NewDustPerfect(center, DustType<B4PDust>(), QwertyMethods.PolarVector(dist / 10, theta));
                                             }
@@ -532,7 +530,7 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
                             if (timer > attackDuration + startAttacks)
                             {
                                 timer = startAttacks;
-                                if (Main.netMode != 1)
+                                if (Main.netMode != NetmodeID.MultiplayerClient)
                                 {
                                     attack = Main.rand.Next(3);
                                     NPC.netUpdate = true;
@@ -541,7 +539,7 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
                             else if (timer > startAttacks + 960)
                             {
                                 frame = 1;
-                                if (timer == startAttacks + 1320 && Main.netMode != 1)
+                                if (timer == startAttacks + 1320 && Main.netMode != NetmodeID.MultiplayerClient)
                                 {
                                     Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center.X, NPC.Center.Y, 0, 7f * NPC.ai[3], ProjectileType<MegaBurst>(), shotDamage, 3f, Main.myPlayer, NPC.ai[3]);
                                 }
@@ -565,22 +563,22 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
                                     {
                                         turret[t].Y = 1;
                                     }
-                                    turret[t].X = QwertyMethods.SlowRotation(turret[t].X, (player.Center - (NPC.Center + turretPos[t] * NPC.scale)).ToRotation() - (float)Math.PI / 2, 4);
+                                    turret[t].X = QwertyMethods.SlowRotation(turret[t].X, (player.Center - (NPC.Center + turretPos[t] * NPC.scale)).ToRotation() - MathF.PI / 2, 4);
                                     if (timer % 90 == 0)
                                     {
-                                        if (Main.netMode != 1)
+                                        if (Main.netMode != NetmodeID.MultiplayerClient)
                                         {
                                             if ((timer % 180 == 0 && t == 0) || (timer % 180 != 0 && t == 3))
                                             {
-                                                Projectile p = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromAI(), (NPC.Center + turretPos[t] * NPC.scale), QwertyMethods.PolarVector(4.5f * NPC.ai[3], turret[t].X + (float)Math.PI / 2), ProjectileType<BurstShot>(), shotDamage, 0, Main.myPlayer)];
+                                                Projectile p = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromAI(), (NPC.Center + turretPos[t] * NPC.scale), QwertyMethods.PolarVector(4.5f * NPC.ai[3], turret[t].X + MathF.PI / 2), ProjectileType<BurstShot>(), shotDamage, 0, Main.myPlayer)];
                                                 p.scale = NPC.scale;
 
                                                 Vector2 center = (NPC.Center + turretPos[t] * NPC.scale);
                                                 for (int i = 0; i < 30; i++)
                                                 {
-                                                    float theta = turret[t].X + (float)Math.PI / 2 + Main.rand.NextFloat(-(float)Math.PI / 3, (float)Math.PI / 3);
+                                                    float theta = turret[t].X + MathF.PI / 2 + Main.rand.NextFloat(-MathF.PI / 3, MathF.PI / 3);
                                                     float dist = Main.rand.NextFloat(60f, 100f);
-                                                    if (Main.netMode != 1)
+                                                    if (Main.netMode != NetmodeID.MultiplayerClient)
                                                     {
                                                         Dust.NewDustPerfect(center, DustType<B4PDust>(), QwertyMethods.PolarVector(dist / 10, theta));
                                                     }
@@ -588,15 +586,15 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
                                             }
                                             if (((timer % 180 == 0 && t == 2) || (timer % 180 != 0 && t == 1)))
                                             {
-                                                Projectile p = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromAI(), (NPC.Center + turretPos[t] * NPC.scale), QwertyMethods.PolarVector(9, turret[t].X + (float)Math.PI / 2), ProjectileType<MagicMineLayer>(), shotDamage, 0, Main.myPlayer, NPC.whoAmI, (player.Center - NPC.Center).Length())];
+                                                Projectile p = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromAI(), (NPC.Center + turretPos[t] * NPC.scale), QwertyMethods.PolarVector(9, turret[t].X + MathF.PI / 2), ProjectileType<MagicMineLayer>(), shotDamage, 0, Main.myPlayer, NPC.whoAmI, (player.Center - NPC.Center).Length())];
                                                 p.scale = NPC.scale;
 
                                                 Vector2 center = (NPC.Center + turretPos[t] * NPC.scale);
                                                 for (int i = 0; i < 10; i++)
                                                 {
-                                                    float theta = turret[t].X + (float)Math.PI / 2 + Main.rand.NextFloat(-(float)Math.PI / 4, (float)Math.PI / 4);
+                                                    float theta = turret[t].X + MathF.PI / 2 + Main.rand.NextFloat(-MathF.PI / 4, MathF.PI / 4);
                                                     float dist = Main.rand.NextFloat(60f, 100f);
-                                                    if (Main.netMode != 1)
+                                                    if (Main.netMode != NetmodeID.MultiplayerClient)
                                                     {
                                                         Dust.NewDustPerfect(center, DustType<B4PDust>(), QwertyMethods.PolarVector(dist / 10, theta));
                                                     }
@@ -618,12 +616,12 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
                     }
 
                     /*
-                    if (Main.netMode == 1)
+                    if (Main.netMode == NetmodeID.MultiplayerClient)
                     {
                         Main.NewText("client: " + attack);
                     }
 
-                    if (Main.netMode == 2) // Server
+                    if (Main.netMode == NetmodeID.Server) // Server
                     {
                         NetMessage.BroadcastChatMessage(Terraria.Localization.NetworkText.FromLiteral("Server: " + attack), Color.Black);
                     }*/
@@ -727,9 +725,9 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
             NPC.SetEventFlagCleared(ref DownedBossSystem.downedOLORD, -1);
         }
 
-        public override void ScaleExpertStats(int numPlayers, float bossLifeScale)
+        public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
         {
-            NPC.lifeMax = (int)(0.75f * NPC.lifeMax * bossLifeScale);
+            NPC.lifeMax = (int)(0.75f * NPC.lifeMax * bossAdjustment);
             NPC.damage = NPC.damage / 2;
         }
 
@@ -806,21 +804,21 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
             Vector2 mousePos = Main.MouseWorld;
             Player player = Main.player[Projectile.owner];
             /*
-            if (Main.netMode == 1)
+            if (Main.netMode == NetmodeID.MultiplayerClient)
             {
                 Main.NewText("client: " + Projectile.whoAmI + ", "+ Projectile.Center);
             }
 
-            if (Main.netMode == 2) // Server
+            if (Main.netMode == NetmodeID.Server) // Server
             {
                 NetMessage.BroadcastChatMessage(Terraria.Localization.NetworkText.FromLiteral("Server: " + Projectile.whoAmI + ", " + Projectile.Center), Color.Black);
             }
             */
             #region Set projectile position
 
-            //Vector2 diff = new Vector2((float)Math.Cos(shooter.rotation + (float)Math.PI / 2) * 14f, (float)Math.Sin(shooter.rotation + (float)Math.PI / 2) * 14f);
+            //Vector2 diff = new Vector2(MathF.Cos(shooter.rotation + MathF.PI / 2) * 14f, MathF.Sin(shooter.rotation + MathF.PI / 2) * 14f);
 
-            Vector2 diff = new Vector2((float)Math.Cos(Projectile.rotation + (float)Math.PI / 2) * 14f, (float)Math.Sin(Projectile.rotation + (float)Math.PI / 2) * 14f);
+            Vector2 diff = new Vector2(MathF.Cos(Projectile.rotation + MathF.PI / 2) * 14f, MathF.Sin(Projectile.rotation + MathF.PI / 2) * 14f);
             diff.Normalize();
             Projectile.velocity = diff;
             //Projectile.direction = Projectile.Center.X > shooter.Center.X ? 1 : -1;
@@ -858,12 +856,12 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
             #endregion
             if (Charge > 10 && !AtMaxCharge)
             {
-                Vector2 center = Projectile.Center + QwertyMethods.PolarVector(-60, Projectile.rotation + (float)Math.PI / 2);
+                Vector2 center = Projectile.Center + QwertyMethods.PolarVector(-60, Projectile.rotation + MathF.PI / 2);
                 for (int i = 0; i < 6; i++)
                 {
-                    float theta = Projectile.rotation + (float)Math.PI / 2 + Main.rand.NextFloat(-(float)Math.PI / 4, (float)Math.PI / 4);
+                    float theta = Projectile.rotation + MathF.PI / 2 + Main.rand.NextFloat(-MathF.PI / 4, MathF.PI / 4);
                     float dist = Main.rand.NextFloat(30f, 60f);
-                    if (Main.netMode != 1)
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         Dust.NewDustPerfect(center + QwertyMethods.PolarVector(dist, theta), DustType<TurretLaserDust>(), QwertyMethods.PolarVector(-dist / 10, theta));
                     }
@@ -899,7 +897,7 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
             }
             else
             {
-                Vector2 center = Projectile.Center + QwertyMethods.PolarVector(-60, Projectile.rotation + (float)Math.PI / 2);
+                Vector2 center = Projectile.Center + QwertyMethods.PolarVector(-60, Projectile.rotation + MathF.PI / 2);
 
                 //float projRotation = shooter.rotation;
                 float projRotation = Projectile.rotation;
@@ -981,7 +979,7 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
         }
 
         // Set custom immunity time on hitting an NPC
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.immune[Projectile.owner] = 5;
         }
@@ -1025,7 +1023,7 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Super Laser");
+            //DisplayName,SetDefault("Super Laser");
         }
 
         public override void SetDefaults()
@@ -1065,12 +1063,12 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
             }
             #region Set projectile position
             /*
-            if (Main.netMode == 1)
+            if (Main.netMode == NetmodeID.MultiplayerClient)
             {
                 Main.NewText("client: "  + Projectile.timeLeft);
             }
 
-            if (Main.netMode == 2) // Server
+            if (Main.netMode == NetmodeID.Server) // Server
             {
                 NetMessage.BroadcastChatMessage(Terraria.Localization.NetworkText.FromLiteral("Server: "  + Projectile.timeLeft), Color.Black);
             }
@@ -1089,7 +1087,7 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
             player.heldProj = Projectile.whoAmI;
             player.itemTime = 2;
             player.itemAnimation = 2;
-            player.itemRotation = (float)Math.Atan2(Projectile.velocity.Y * dir, Projectile.velocity.X * dir);
+            player.itemRotation = MathF.Atan2(Projectile.velocity.Y * dir, Projectile.velocity.X * dir);
             */
             #endregion
 
@@ -1116,12 +1114,12 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
             int chargeFact = (int)(Charge / 20f);
             if (Charge > 10 && !AtMaxCharge)
             {
-                Vector2 center = Projectile.Center + QwertyMethods.PolarVector(-60, Projectile.rotation + (float)Math.PI / 2);
+                Vector2 center = Projectile.Center + QwertyMethods.PolarVector(-60, Projectile.rotation + MathF.PI / 2);
                 for (int i = 0; i < 15; i++)
                 {
-                    float theta = Projectile.rotation + (float)Math.PI / 2 + Main.rand.NextFloat(-5 * (float)Math.PI / 12, 5 * (float)Math.PI / 12);
+                    float theta = Projectile.rotation + MathF.PI / 2 + Main.rand.NextFloat(-5 * MathF.PI / 12, 5 * MathF.PI / 12);
                     float dist = Main.rand.NextFloat(30f, 120f);
-                    if (Main.netMode != 1)
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         Dust.NewDustPerfect(center + QwertyMethods.PolarVector(dist, theta), DustType<TurretLaserDust>(), QwertyMethods.PolarVector(-dist / 10, theta));
                     }
@@ -1243,7 +1241,7 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
         }
 
         // Set custom immunity time on hitting an NPC
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.immune[Projectile.owner] = 5;
         }
@@ -1309,7 +1307,7 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("O.L.O.R.D.'s wall");
+            //DisplayName,SetDefault("O.L.O.R.D.'s wall");
         }
 
         public override void SetDefaults()

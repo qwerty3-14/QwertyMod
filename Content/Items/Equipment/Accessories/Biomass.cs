@@ -11,8 +11,6 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Biomass");
-            Tooltip.SetDefault("Stacks of ammo will slowly grow in size" + "\nGrowth rate is lower for higher value ammo");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -37,7 +35,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
 
         public override void ResetEffects()
         {
-            effect = 00;
+            effect = 0;
         }
 
         public override void PreUpdate()
@@ -65,9 +63,9 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
                     if (item.value > valueStat)
                     {
                         valueStat = item.value;
-                        valueStat = (int)(valueStat / effect);
                     }
-                    if (Main.rand.Next(valueStat * 4) == 0)
+                    valueStat = (int)(valueStat / effect);
+                    if (Main.rand.NextBool(valueStat * 4))
                     {
                         item.stack++;
                     }
@@ -92,7 +90,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
                             {
                                 break;
                             }
-                            if (Main.chest[c].item[i].type == 0)
+                            if (Main.chest[c].item[i].type == ItemID.None)
                             {
                                 Main.chest[c].item[i].SetDefaults(ItemType<Biomass>(), false);
                                 break;

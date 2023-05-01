@@ -9,8 +9,8 @@ namespace QwertyMod.Content.Items.Weapon.Minion.ShieldMinion
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Shield Minion");
-            Description.SetDefault("You got your own personal Phalax!");
+            //DisplayName,SetDefault("Shield Minion");
+            //Description.SetDefault("You got your own personal Phalax!");
             Main.buffNoSave[Type] = true;
             Main.buffNoTimeDisplay[Type] = true;
         }

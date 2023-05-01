@@ -23,17 +23,17 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
             DustType = DustType<FortressDust>();
             HitSound = QwertyMod.FortressBlocks;
             MinPick = 50;
-            AddMapEntry(new Color(162, 184, 185));
+            //AddMapEntry(new Color(162, 184, 185));
             MineResist = 1;
             //drop = mod.ItemType("FortressBrick");
         }
 
         public override void KillTile(int i, int j, ref bool fail, ref bool effectOnly, ref bool noItem)
         {
-            if (Main.netMode != 1 && !fail)
+            if (Main.netMode != NetmodeID.MultiplayerClient && !fail)
             {
                 NPC youngTile = Main.npc[NPC.NewNPC(Wiring.GetNPCSource(i, j), i * 16 + 8, j * 16, NPCType<YoungTile>(), ai3: 1)];
-                youngTile.velocity = QwertyMethods.PolarVector(2, (float)Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI));
+                youngTile.velocity = QwertyMethods.PolarVector(2, (float)Main.rand.NextFloat(-MathF.PI, MathF.PI));
             }
         }
 

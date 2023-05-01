@@ -14,8 +14,8 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.AncientThrow
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Ancient Throw");
-            Tooltip.SetDefault("Its string has been stretched for thousands of years" + "\nRight click to zoom");
+            //DisplayName,SetDefault("Ancient Throw");
+            //Tooltip.SetDefault("Its string has been stretched for thousands of years" + "\nRight click to zoom");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             // These are all related to gamepad controls and don't seem to affect anything else
             ItemID.Sets.Yoyo[Item.type] = true;
@@ -26,7 +26,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.AncientThrow
 
         public override void SetDefaults()
         {
-            Item.useStyle = 5;
+            Item.useStyle = ItemUseStyleID.Shoot;
             Item.width = 16;
             Item.height = 16;
             Item.useAnimation = 25;
@@ -35,7 +35,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.AncientThrow
             Item.knockBack = 2.5f;
             Item.damage = 23;
             Item.value = 150000;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
             Item.DamageType = DamageClass.MeleeNoSpeed;
             Item.channel = true;
             Item.noMelee = true;

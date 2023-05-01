@@ -12,7 +12,6 @@ namespace QwertyMod.Content.Items.Consumable.BossSummon
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Summons the Dino Militia" + "\nThey never died out!");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 3;
         }
 
@@ -21,10 +20,10 @@ namespace QwertyMod.Content.Items.Consumable.BossSummon
             Item.width = 28;
             Item.height = 52;
             Item.maxStack = 20;
-            Item.rare = 6;
+            Item.rare = ItemRarityID.LightPurple; 
             Item.useAnimation = 45;
             Item.useTime = 45;
-            Item.useStyle = 4;
+            Item.useStyle = ItemUseStyleID.HoldUp;
             Item.UseSound = SoundID.Item44;
             Item.consumable = true;
         }
@@ -38,22 +37,22 @@ namespace QwertyMod.Content.Items.Consumable.BossSummon
         {
             string key = "The Dino Militia is coming!";
             Color messageColor = Color.Orange;
-            if (Main.netMode == 2) // Server
+            if (Main.netMode == NetmodeID.Server) // Server
             {
                 Terraria.Chat.ChatHelper.BroadcastChatMessage(NetworkText.FromKey(key), messageColor);
             }
-            else if (Main.netMode == 0) // Single Player
+            else if (Main.netMode == NetmodeID.SinglePlayer) // Single Player
             {
                 Main.NewText(Language.GetTextValue(key), messageColor);
             }
 
-            if (Main.netMode == 0)
+            if (Main.netMode == NetmodeID.SinglePlayer)
             {
                 SoundEngine.PlaySound(SoundID.Roar, player.position);
                 DinoEvent.EventActive = true;
                 DinoEvent.DinoKillCount = 0;
             }
-            if (Main.netMode == 1 && player.whoAmI == Main.myPlayer)
+            if (Main.netMode == NetmodeID.MultiplayerClient && player.whoAmI == Main.myPlayer)
             {
                 ModPacket packet = Mod.GetPacket();
                 packet.Write((byte)ModMessageType.StartDinoEvent);

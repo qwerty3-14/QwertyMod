@@ -26,9 +26,9 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Banners
             TileObjectData.addTile(Type);
             DustType = -1;
             //DisableSmartCursor = true;
-            ModTranslation name = CreateMapEntryName();
-            name.SetDefault("Banner");
-            AddMapEntry(new Color(13, 88, 130), name);
+            //ModTranslation name = CreateMapEntryName();
+            //name.SetDefault("Banner");
+            //AddMapEntry(new Color(13, 88, 130), name);
         }
 
         public override void KillMultiTile(int i, int j, int frameX, int frameY)

@@ -16,7 +16,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.SoEF
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Shotgun of Excessive Force");
+            //DisplayName,SetDefault("Shotgun of Excessive Force");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -36,7 +36,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.SoEF
             Item.useTime = 24;
             Item.useAnimation = 24;
             Item.UseSound = SoundID.Item38;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
             Item.value = 120000;
         }
 
@@ -52,12 +52,12 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.SoEF
             float speed = velocity.Length();
             for (int b = 0; b < bulletCount; b++)
             {
-                Projectile p = Main.projectile[Projectile.NewProjectile(source, position + QwertyMethods.PolarVector(24, dir), QwertyMethods.PolarVector(speed * Main.rand.NextFloat(.7f, 1.4f), dir + Main.rand.NextFloat(-1, 1) * (float)Math.PI / 18), type, damage, knockback, player.whoAmI)];
+                Projectile p = Main.projectile[Projectile.NewProjectile(source, position + QwertyMethods.PolarVector(24, dir), QwertyMethods.PolarVector(speed * Main.rand.NextFloat(.7f, 1.4f), dir + Main.rand.NextFloat(-1, 1) * MathF.PI / 18), type, damage, knockback, player.whoAmI)];
                 p.extraUpdates++;
                 p.GetGlobalProjectile<EtimsProjectile>().effect = true;
             }
 
-            player.velocity = QwertyMethods.PolarVector(12f, dir + (float)Math.PI);
+            player.velocity = QwertyMethods.PolarVector(12f, dir + MathF.PI);
 
             return false;
         }
@@ -84,18 +84,18 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.SoEF
             }
         }
 
-        public override void ModifyHitNPC(Projectile projectile, NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitNPC(Projectile projectile, NPC target, ref NPC.HitModifiers modifiers)
         {
             if (effect)
             {
                 if (target.GetGlobalNPC<FortressNPCGeneral>().fortressNPC)
                 {
-                    for (int i = 0; i < damage / 3; i++)
+                    for (int i = 0; i < modifiers.FinalDamage.Multiplicative / 3; i++)
                     {
                         Dust d = Dust.NewDustPerfect(projectile.Center, DustType<BloodforceDust>());
                         d.velocity *= 5f;
                     }
-                    damage *= 2;
+                    modifiers.FinalDamage *= 2;
                 }
             }
         }

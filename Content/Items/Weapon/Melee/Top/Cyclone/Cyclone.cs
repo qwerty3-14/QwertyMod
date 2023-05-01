@@ -5,6 +5,7 @@ using Terraria;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
 using Terraria.GameContent.Creative;
+using Terraria.ID;
 
 namespace QwertyMod.Content.Items.Weapon.Melee.Top.Cyclone
 {
@@ -12,8 +13,8 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Top.Cyclone
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Cyclone");
-            Tooltip.SetDefault("<3");
+            //DisplayName,SetDefault("Cyclone");
+            //Tooltip.SetDefault("<3");
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
         public override void SetDefaults()
@@ -22,10 +23,10 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Top.Cyclone
             Item.DamageType = DamageClass.MeleeNoSpeed;
             Item.knockBack = 5;
             Item.value = Item.sellPrice(gold: 5);
-            Item.rare = 8;
+            Item.rare = ItemRarityID.Yellow;
             Item.width = 34;
             Item.height = 38;
-            Item.useStyle = 1;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.shootSpeed = 3f;
             Item.useTime = 45;
             Item.useAnimation = 45;
@@ -39,7 +40,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Top.Cyclone
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Cyclone");
+            //DisplayName,SetDefault("Cyclone");
             Main.projFrames[Projectile.type] = 2;
         }
 
@@ -79,7 +80,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Top.Cyclone
                 {
                     segments++;
                 }
-                trigCounter += (float)Math.PI / 30f;
+                trigCounter += MathF.PI / 30f;
             }
         }
         public override void TopHit(NPC target)
@@ -96,7 +97,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Top.Cyclone
                 for (int i = 0; i < segments; i++)
                 {
                     int frame = ((Projectile.frameCounter / 5) + i) % 6;
-                    Vector2 pos = Projectile.Center - Vector2.UnitY * i * height - Vector2.UnitY + Vector2.UnitX * (spoutRadius * (float)Math.Sin(trigCounter + ((float)Math.PI / 3f * i)));
+                    Vector2 pos = Projectile.Center - Vector2.UnitY * i * height - Vector2.UnitY + Vector2.UnitX * (spoutRadius * MathF.Sin(trigCounter + (MathF.PI / 3f * i)));
                     Main.EntitySpriteDraw(texture, pos - Main.screenPosition, new Rectangle(0, height * frame, texture.Width, height), lightColor, 0, new Vector2(texture.Width, height) * .5f, 1, 0, 0);
                 }
             }

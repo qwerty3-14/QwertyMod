@@ -12,7 +12,7 @@ namespace QwertyMod.Content.NPCs.Bosses.BladeBoss
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Phantom Blade");
+            //DisplayName,SetDefault("Phantom Blade");
         }
 
         public override void SetDefaults()
@@ -47,7 +47,7 @@ namespace QwertyMod.Content.NPCs.Bosses.BladeBoss
             {
                 int lengthOffset = -18 + Main.rand.Next(bladeLength);
                 int widthOffset = +Main.rand.Next(bladeWidth) - bladeWidth / 2;
-                Dust dust = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(lengthOffset, Projectile.rotation) + QwertyMethods.PolarVector(widthOffset, Projectile.width + (float)Math.PI / 2), 15);
+                Dust dust = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(lengthOffset, Projectile.rotation) + QwertyMethods.PolarVector(widthOffset, Projectile.width + MathF.PI / 2), 15);
                 dust.noGravity = true;
             }
         }

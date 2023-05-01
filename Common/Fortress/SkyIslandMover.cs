@@ -12,12 +12,11 @@ namespace QwertyMod.Common.Fortress
     {
         private static int numIslandHouses = 0;
         private static int[] floatingIslandStyle = new int[30];
-        private static int houseCount = 0;
         private static bool[] skyLake = new bool[30];
         private static int[] fihX = new int[30];
 
         private static int[] fihY = new int[30];
-        public override void ModifyWorldGenTasks(List<GenPass> tasks, ref float totalWeight)
+        public override void ModifyWorldGenTasks(List<GenPass> tasks, ref double totalWeight)
         {
             #region
             int ShiniesIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Floating Islands"));
@@ -47,7 +46,6 @@ namespace QwertyMod.Common.Fortress
                 tasks.Insert(ShiniesIndex + 1, new PassLegacy("Giving Sky Fortress space", delegate (GenerationProgress progress, GameConfiguration configuration)
                 {
                     numIslandHouses = 0;
-                    houseCount = 0;
                     progress.Message = Lang.gen[12].Value;
                     int num814 = (int)((double)Main.maxTilesX * 0.0008);
                     int num815 = 0;
@@ -62,7 +60,7 @@ namespace QwertyMod.Common.Fortress
                             //Modify where islands can spawn to give the sky fortress space
                             double maxLeft = 0.1;
                             double maxRight = 0.9;
-                            if (WorldGen.dungeonX < Main.maxTilesX * .5f)
+                            if (Main.dungeonX < Main.maxTilesX * .5f)
                             {
                                 maxRight = 0.7;
                             }
@@ -102,7 +100,7 @@ namespace QwertyMod.Common.Fortress
                                     int num823 = 0;
                                     num818 = -1;
                                     int val = WorldGen.genRand.Next(90, num821 - 100);
-                                    val = Math.Min(val, (int)WorldGen.worldSurfaceLow - 50);
+                                    val = Math.Min(val, (int)Main.worldSurface - 50);
                                     if (num815 >= num814)
                                     {
                                         skyLake[numIslandHouses] = true;
@@ -113,7 +111,7 @@ namespace QwertyMod.Common.Fortress
                                         skyLake[numIslandHouses] = false;
                                         if (WorldGen.drunkWorldGen)
                                         {
-                                            if (WorldGen.genRand.Next(2) == 0)
+                                            if (WorldGen.genRand.NextBool(2))
                                             {
                                                 num823 = 3;
                                                 WorldGen.SnowCloudIsland(num819, val);

@@ -16,8 +16,8 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.RuneBlade
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Rune Blade");
-            Tooltip.SetDefault("Launches a spread Mini Ice Runes");
+            //DisplayName,SetDefault("Rune Blade");
+            //Tooltip.SetDefault("Launches a spread Mini Ice Runes");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -28,10 +28,10 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.RuneBlade
 
             Item.useTime = 35;
             Item.useAnimation = 35;
-            Item.useStyle = 1;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.knockBack = 5;
             Item.value = 500000;
-            Item.rare = 9;
+            Item.rare = ItemRarityID.Cyan;
             Item.UseSound = SoundID.Item1;
 
             Item.width = 70;
@@ -75,7 +75,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.RuneBlade
         public override void SetStaticDefaults()
         {
             Main.projFrames[Projectile.type] = 1;
-            DisplayName.SetDefault("Mini Ice Rune");
+            //DisplayName,SetDefault("Mini Ice Rune");
         }
 
         public override void SetDefaults()
@@ -126,7 +126,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.RuneBlade
             return false;
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(BuffID.Frostburn, 1200);
         }

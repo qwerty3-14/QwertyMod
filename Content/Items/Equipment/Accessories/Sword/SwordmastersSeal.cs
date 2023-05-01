@@ -11,14 +11,14 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Sword
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Swordmasters Seal");
-            Tooltip.SetDefault("Greatly enhances swordplay performance!" + "\nMakes your sword much larger" + "\nHitting things with your sword while airborne does more damage" + "\nStriking with a sword increases critical chance");
+            //DisplayName,SetDefault("Swordmasters Seal");
+            //Tooltip.SetDefault("Greatly enhances swordplay performance!" + "\nMakes your sword much larger" + "\nHitting things with your sword while airborne does more damage" + "\nStriking with a sword increases critical chance");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()
         {
-            Item.rare = 7;
+            Item.rare = ItemRarityID.Lime;
             Item.value = Item.sellPrice(0, 50, 0, 0);
             Item.width = 18;
             Item.height = 16;

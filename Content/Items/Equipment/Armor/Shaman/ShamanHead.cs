@@ -14,8 +14,8 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Shaman
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Shaman Skull");
-            Tooltip.SetDefault("6% increased minion damage and melee critical strike chance");
+            //DisplayName,SetDefault("Shaman Skull");
+            //Tooltip.SetDefault("6% increased minion damage and melee critical strike chance");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             Head.Sets.DrawHatHair[Item.headSlot] = true;
         }
@@ -23,7 +23,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Shaman
         public override void SetDefaults()
         {
             Item.value = Item.sellPrice(gold: 1);
-            Item.rare = 1;
+            Item.rare = ItemRarityID.Blue;
 
             Item.width = 22;
             Item.height = 14;

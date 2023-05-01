@@ -10,8 +10,6 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Bullet.Caelite
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Caelite Bullet");
-            Tooltip.SetDefault("Inflicts Caelite Wrath reducing damage that enemies deal by 20%");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 99;
         }
 
@@ -21,16 +19,16 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Bullet.Caelite
             Item.DamageType = DamageClass.Ranged;
             Item.knockBack = 2;
             Item.value = 1;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
             Item.width = 12;
             Item.height = 18;
 
-            Item.shootSpeed = 32;
+            Item.shootSpeed = 16;
 
             Item.consumable = true;
             Item.shoot = ProjectileType<CaeliteBulletP>();
             Item.ammo = 97;
-            Item.maxStack = 999;
+            Item.maxStack = 9999;
         }
 
         public override void AddRecipes()

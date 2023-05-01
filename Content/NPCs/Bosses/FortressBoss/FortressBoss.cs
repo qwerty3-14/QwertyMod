@@ -33,7 +33,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("The Divine Light");
+            //DisplayName,SetDefault("The Divine Light");
             Main.npcFrameCount[NPC.type] = 4;
             NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers(0)
             {
@@ -85,9 +85,9 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
             potionType = ItemID.LesserManaPotion;
         }
 
-        public override void ScaleExpertStats(int numPlayers, float bossLifeScale)
+        public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
         {
-            NPC.lifeMax = (int)(0.75f * NPC.lifeMax * bossLifeScale);
+            NPC.lifeMax = (int)(0.75f * NPC.lifeMax * bossAdjustment);
         }
         public override void OnKill()
         {
@@ -199,7 +199,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
         int damage = 16;
         public override void AI()
         {
-            orbRotatior += (float)Math.PI / 15f;
+            orbRotatior += MathF.PI / 15f;
             for (int i = 0; i < 4; i++)
             {
                 drawSpell[i] = false;
@@ -263,7 +263,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
                         {
                             NPC.TargetClosest(false);
                             player = Main.player[NPC.target];
-                            if (Main.netMode != 1)
+                            if (Main.netMode != NetmodeID.MultiplayerClient)
                             {
                                 Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, QwertyMethods.PolarVector(8f, (player.Center - NPC.Center).ToRotation()), ProjectileType<CaeliteSaw>(), damage, 0);
                             }
@@ -314,11 +314,11 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
             }
             NPC.TargetClosest(false);
             Player player = Main.player[NPC.target];
-            if (Main.netMode != 1)
+            if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 for (int i = 0; i < 12; i++)
                 {
-                    Vector2 endPos = NPC.Center + QwertyMethods.PolarVector(130, (player.Center - NPC.Center).ToRotation() + ((float)i / 11f) * (float)Math.PI - (float)Math.PI / 2f);
+                    Vector2 endPos = NPC.Center + QwertyMethods.PolarVector(130, (player.Center - NPC.Center).ToRotation() + ((float)i / 11f) * MathF.PI - MathF.PI / 2f);
                     Vector2 startPos = NPC.position + spellPositions[i / 3];
                     Projectile projectile = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromAI(), startPos, Vector2.Zero, ProjectileType<Deflect>(), damage, 0, 255, endPos.X, endPos.Y)];
                     projectile.ai[0] = endPos.X;
@@ -368,7 +368,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
             if (!float.IsNaN(angle))
             {
                 SoundEngine.PlaySound(SoundID.Item43, position);
-                if (Main.netMode != 1)
+                if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     Projectile.NewProjectile(NPC.GetSource_FromAI(), position, QwertyMethods.PolarVector(vel, angle), ProjectileType<DivineBolt>(), damage, 0);
                 }
@@ -416,9 +416,9 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
         {
             NPC.TargetClosest(false);
             Player player = Main.player[NPC.target];
-            if (Main.netMode != 1)
+            if (Main.netMode != NetmodeID.MultiplayerClient)
             {
-                QwertyMethods.ProjectileSpread(NPC.GetSource_FromAI(), position, 3, 6f, ProjectileType<BarrierSpread>(), damage, 0, 255, NPC.whoAmI, rotation: (player.Center - position).ToRotation(), spread: (float)Math.PI / 6);
+                QwertyMethods.ProjectileSpread(NPC.GetSource_FromAI(), position, 3, 6f, ProjectileType<BarrierSpread>(), damage, 0, 255, NPC.whoAmI, rotation: (player.Center - position).ToRotation(), spread: MathF.PI / 6);
             }
         }
         void PlanAttackOrder()

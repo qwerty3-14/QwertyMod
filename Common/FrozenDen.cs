@@ -78,7 +78,7 @@ namespace QwertyMod.Common
                     }
                     Main.tile[x - ((denLength - 1) / 2) + l, y - h].LiquidAmount = 0;
                 }
-                int ceilingHeight = (int)((float)Math.Sin(((float)l / (float)denLength) * (float)Math.PI) * (float)denUpperHeight);
+                int ceilingHeight = (int)(MathF.Sin(((float)l / (float)denLength) * MathF.PI) * (float)denUpperHeight);
                 for (int h = 0; h < ceilingHeight; h++)
                 {
                     WorldGen.KillTile(x - ((denLength - 1) / 2) + l, y - h, false, false, true);
@@ -101,7 +101,7 @@ namespace QwertyMod.Common
             }
             for (int l = 0; l < denLength; l++)
             {
-                int ceilingHeight = (int)((float)Math.Sin(((float)l / (float)denLength) * (float)Math.PI) * (float)denUpperHeight);
+                int ceilingHeight = (int)(MathF.Sin(((float)l / (float)denLength) * MathF.PI) * (float)denUpperHeight);
                 for (int h = 0; h < ceilingHeight; h++)
                 {
                     if (l == 35 && h == 16)
@@ -121,7 +121,7 @@ namespace QwertyMod.Common
                         chest.item[slot].SetDefaults(ItemID.LesserHealingPotion, false);
                         chest.item[slot].stack = Main.rand.Next(4, 11);
                         slot++;
-                        if (Main.rand.Next(5) == 0)
+                        if (Main.rand.NextBool(5))
                         {
                             chest.item[slot].SetDefaults(ItemID.IceMirror, false);
                             slot++;
@@ -156,7 +156,7 @@ namespace QwertyMod.Common
                         chest.item[slot].SetDefaults(ItemID.LesserHealingPotion, false);
                         chest.item[slot].stack = Main.rand.Next(4, 11);
                         slot++;
-                        if (Main.rand.Next(5) == 0)
+                        if (Main.rand.NextBool(5))
                         {
                             chest.item[slot].SetDefaults(ItemID.IceMirror, false);
                             slot++;
@@ -180,7 +180,7 @@ namespace QwertyMod.Common
         {
             int layer = 0;
             int xOffset = 0;
-            int xDir = WorldGen.genRand.Next(2) == 0 ? -1 : 1;
+            int xDir = WorldGen.genRand.NextBool(2) ? -1 : 1;
             for (; true; layer++)
             {
                 bool doubleBreak = false;
@@ -245,7 +245,7 @@ namespace QwertyMod.Common
                 }
 
                 xOffset += xDir;
-                if (WorldGen.genRand.Next(25) == 0)
+                if (WorldGen.genRand.NextBool(25))
                 {
                     xDir *= -1;
                 }
@@ -339,7 +339,7 @@ namespace QwertyMod.Common
             }
             return true;
         }
-        public override void ModifyWorldGenTasks(List<GenPass> tasks, ref float totalWeight)
+        public override void ModifyWorldGenTasks(List<GenPass> tasks, ref double totalWeight)
         {
             tasks.Add(new PassLegacy("Carving out a beast's den!", delegate (GenerationProgress progress, GameConfiguration configuration)
             {

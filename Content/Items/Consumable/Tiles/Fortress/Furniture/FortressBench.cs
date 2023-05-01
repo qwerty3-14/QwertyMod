@@ -1,6 +1,7 @@
 using QwertyMod.Content.Items.Consumable.Tiles.Fortress.BuildingBlocks;
 using Terraria.GameContent.Creative;
 using Terraria.ModLoader;
+using Terraria.ID;
 
 using static Terraria.ModLoader.ModContent;
 namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Furniture
@@ -21,7 +22,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Furniture
             Item.autoReuse = true;
             Item.useAnimation = 15;
             Item.useTime = 10;
-            Item.useStyle = 1;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.consumable = true;
             Item.value = 250;
             Item.createTile = TileType<FortressBenchT>();

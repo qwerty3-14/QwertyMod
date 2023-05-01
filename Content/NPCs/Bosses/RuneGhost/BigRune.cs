@@ -6,6 +6,7 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using Terraria.ID;
 
 namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
 {
@@ -39,12 +40,12 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
                         if (!madeRunes)
                         {
                             madeRunes = true;
-                            if (Main.netMode != 1)
+                            if (Main.netMode != NetmodeID.MultiplayerClient)
                             {
                                 for (int i = 0; i < 8; i++)
                                 {
-                                    Projectile p = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center, Vector2.Zero, ProjectileType<AggroRune>(), (int)(Projectile.damage * 1.3f), 0, Main.myPlayer)];
-                                    p.rotation = (i / 8f) * (float)Math.PI * 2;
+                                    Projectile p = Main.projectile[Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<AggroRune>(), (int)(Projectile.damage * 1.3f), 0, Main.myPlayer)];
+                                    p.rotation = (i / 8f) * MathF.PI * 2;
                                 }
                             }
                         }
@@ -52,7 +53,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
                     case (int)Runes.Leech:
                         if (atackTimer % 120 == 1)
                         {
-                            if (Main.netMode != 1)
+                            if (Main.netMode != NetmodeID.MultiplayerClient)
                             {
                                 float closest = 100000;
                                 Player closestPlayer = null;
@@ -66,8 +67,8 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
                                 }
                                 if (closestPlayer != null)
                                 {
-                                    float r = Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI);
-                                    Projectile p = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), closestPlayer.Center + QwertyMethods.PolarVector(160f, r), Vector2.Zero, ProjectileType<LeechRune>(), (int)(Projectile.damage), 0, Main.myPlayer)];
+                                    float r = Main.rand.NextFloat(-MathF.PI, MathF.PI);
+                                    Projectile p = Main.projectile[Projectile.NewProjectile(Projectile.GetSource_FromThis(), closestPlayer.Center + QwertyMethods.PolarVector(160f, r), Vector2.Zero, ProjectileType<LeechRune>(), (int)(Projectile.damage), 0, Main.myPlayer)];
                                 }
                             }
                         }
@@ -76,10 +77,10 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
                         if (!madeRunes)
                         {
                             madeRunes = true;
-                            if (Main.netMode != 2)
+                            if (Main.netMode != NetmodeID.Server)
                             {
-                                Projectile p = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), Main.LocalPlayer.Center, Vector2.Zero, ProjectileType<IceRune>(), (int)(Projectile.damage * 1.6f), 0, Main.myPlayer)];
-                                p.rotation = Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI);
+                                Projectile p = Main.projectile[Projectile.NewProjectile(Projectile.GetSource_FromThis(), Main.LocalPlayer.Center, Vector2.Zero, ProjectileType<IceRune>(), (int)(Projectile.damage * 1.6f), 0, Main.myPlayer)];
+                                p.rotation = Main.rand.NextFloat(-MathF.PI, MathF.PI);
                             }
                             Projectile.Kill();
                         }
@@ -88,11 +89,11 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
                         if (!madeRunes)
                         {
                             madeRunes = true;
-                            if (Main.netMode != 1)
+                            if (Main.netMode != NetmodeID.MultiplayerClient)
                             {
                                 for (int i = 0; i < 4; i++)
                                 {
-                                    Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center, QwertyMethods.PolarVector(20f, (i / 4f) * (float)Math.PI * 2f), ProjectileType<PursuitRune>(), (int)(Projectile.damage * 1f), 0, Main.myPlayer);
+                                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, QwertyMethods.PolarVector(20f, (i / 4f) * MathF.PI * 2f), ProjectileType<PursuitRune>(), (int)(Projectile.damage * 1f), 0, Main.myPlayer);
                                 }
                             }
                             Projectile.Kill();
@@ -137,7 +138,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
             for (int d = 0; d < 300; d++)
             {
                 //Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, mod.DustType(dustName));
-                Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(Main.rand.Next(100), Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI)), dustType);
+                Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(Main.rand.Next(100), Main.rand.NextFloat(-MathF.PI, MathF.PI)), dustType);
             }
         }
     }

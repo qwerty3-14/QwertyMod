@@ -11,15 +11,13 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Invader
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Invader Protector");
-            Tooltip.SetDefault("12% increased damage\n20% chance not to consume ammo\n+1 max minions");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()
         {
             Item.value = QwertyMod.InvaderGearValue;
-            Item.rare = 8;
+            Item.rare = ItemRarityID.Yellow;
 
             Item.width = 30;
             Item.height = 20;

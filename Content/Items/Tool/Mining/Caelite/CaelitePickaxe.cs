@@ -14,8 +14,8 @@ namespace QwertyMod.Content.Items.Tool.Mining.Caelite
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Caelite Pickaxe");
-            Tooltip.SetDefault("Mines a 3x3 area");
+            //DisplayName,SetDefault("Caelite Pickaxe");
+            //Tooltip.SetDefault("Mines a 3x3 area");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -26,10 +26,10 @@ namespace QwertyMod.Content.Items.Tool.Mining.Caelite
 
             Item.useTime = 28;
             Item.useAnimation = 30;
-            Item.useStyle = 1;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.knockBack = 3;
             Item.value = 25000;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
             Item.UseSound = SoundID.Item1;
             Item.useTurn = true;
             Item.width = 32;

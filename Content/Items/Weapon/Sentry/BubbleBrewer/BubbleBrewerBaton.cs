@@ -15,8 +15,8 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.BubbleBrewer
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Bubble Brewer Baton");
-            Tooltip.SetDefault("Summons a bubble brewer\nWorks well as a last line of defense");
+            //DisplayName,SetDefault("Bubble Brewer Baton");
+            //Tooltip.SetDefault("Summons a bubble brewer\nWorks well as a last line of defense");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
@@ -27,10 +27,10 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.BubbleBrewer
             Item.DamageType = DamageClass.Summon;
             Item.knockBack = 1f;
             Item.value = Item.sellPrice(gold: 5);
-            Item.rare = 8;
+            Item.rare = ItemRarityID.Yellow;
             Item.width = 22;
             Item.height = 32;
-            Item.useStyle = 4;
+            Item.useStyle = ItemUseStyleID.HoldUp;
             Item.shootSpeed = 0;
             Item.useTime = 25;
             Item.useAnimation = 25;
@@ -112,7 +112,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.BubbleBrewer
                         SoundEngine.PlaySound(SoundID.ForceRoarPitched, Projectile.Center);
                     }
                     Projectile.frameCounter = 30;
-                    Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.position + bubbleShooterLocation, (target.Center - (Projectile.position + bubbleShooterLocation)).SafeNormalize(Vector2.UnitY) * 12f, ProjectileType<BrewerBubble>(), Projectile.damage, Projectile.knockBack, Projectile.owner, -10f);
+                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position + bubbleShooterLocation, (target.Center - (Projectile.position + bubbleShooterLocation)).SafeNormalize(Vector2.UnitY) * 12f, ProjectileType<BrewerBubble>(), Projectile.damage, Projectile.knockBack, Projectile.owner, -10f);
                     waterLevel--;
                 }
             }

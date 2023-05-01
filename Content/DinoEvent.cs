@@ -47,11 +47,11 @@ namespace QwertyMod.Content
                     NetMessage.SendData(MessageID.WorldData); // Immediately inform clients of new world state.
                 string key = "You drove the dinosaurs to extinction!";
                 Color messageColor = Color.Orange;
-                if (Main.netMode == 2) // Server
+                if (Main.netMode == NetmodeID.Server) // Server
                 {
                     Terraria.Chat.ChatHelper.BroadcastChatMessage(NetworkText.FromKey(key), messageColor);
                 }
-                else if (Main.netMode == 0) // Single Player
+                else if (Main.netMode == NetmodeID.SinglePlayer) // Single Player
                 {
                     Main.NewText(Language.GetTextValue(key), messageColor);
                 }
@@ -161,46 +161,46 @@ namespace QwertyMod.Content
     }
     public class FunnyDinoDeathQuotes : ModPlayer
     {
-        public override bool PreHurt(bool pvp, bool quiet, ref int damage, ref int hitDirection, ref bool crit, ref bool customDamage, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource, ref int cooldownCounter)
+        public override void ModifyHurt(ref Player.HurtModifiers modifiers)
         {
-
-            if (damageSource.SourceProjectileType == ProjectileType<SnowFlake>())
+            /*
+            if (modifiers.DamageSource.SourceProjectileType == ProjectileType<SnowFlake>())
             {
                 damageSource = PlayerDeathReason.ByCustomReason(Player.name + " was driven to extintion by climate change!"); // change death message
             }
-            if (damageSource.SourceProjectileType == ProjectileType<DinoBomb>() || damageSource.SourceProjectileType == ProjectileType<DinoBombExplosion>())
+            if (modifiers.DamageSource.SourceProjectileType == ProjectileType<DinoBomb>() || damageSource.SourceProjectileType == ProjectileType<DinoBombExplosion>())
             {
                 damageSource = PlayerDeathReason.ByCustomReason(Player.name + " was driven to extintion by dino bomb"); // change death message
             }
-            if (damageSource.SourceProjectileType == ProjectileType<TankCannonBall>() || damageSource.SourceProjectileType == ProjectileType<TankCannonBallExplosion>())
+            if (modifiers.DamageSource.SourceProjectileType == ProjectileType<TankCannonBall>() || damageSource.SourceProjectileType == ProjectileType<TankCannonBallExplosion>())
             {
                 damageSource = PlayerDeathReason.ByCustomReason(Player.name + " was driven to extintion by triceratank's cannon"); // change death message
             }
-            if (damageSource.SourceProjectileType == ProjectileType<MeteorFall>())
+            if (modifiers.DamageSource.SourceProjectileType == ProjectileType<MeteorFall>())
             {
                 damageSource = PlayerDeathReason.ByCustomReason(Player.name + " was driven to extintion by meteor!"); // change death message
             }
-            if (damageSource.SourceProjectileType == ProjectileType<MeteorLaunch>())
+            if (modifiers.DamageSource.SourceProjectileType == ProjectileType<MeteorLaunch>())
             {
                 damageSource = PlayerDeathReason.ByCustomReason(Player.name + " was driven to extintion by meteor!"); // change death message
             }
-            if (damageSource.SourceNPCIndex >= 0 && Main.npc[damageSource.SourceNPCIndex].type == NPCType<TheGreatTyrannosaurus>())
+            if (modifiers.DamageSource.SourceNPCIndex >= 0 && Main.npc[damageSource.SourceNPCIndex].type == NPCType<TheGreatTyrannosaurus>())
             {
                 damageSource = PlayerDeathReason.ByCustomReason(Player.name + " was driven to extintion by The Great Tyrannosaurus!");
             }
-            if (damageSource.SourceNPCIndex >= 0 && Main.npc[damageSource.SourceNPCIndex].type == NPCType<Triceratank>())
+            if (modifiers.DamageSource.SourceNPCIndex >= 0 && Main.npc[damageSource.SourceNPCIndex].type == NPCType<Triceratank>())
             {
                 damageSource = PlayerDeathReason.ByCustomReason(Player.name + " was driven to extintion by Triceratank");
             }
-            if (damageSource.SourceNPCIndex >= 0 && Main.npc[damageSource.SourceNPCIndex].type == NPCType<Utah>())
+            if (modifiers.DamageSource.SourceNPCIndex >= 0 && Main.npc[damageSource.SourceNPCIndex].type == NPCType<Utah>())
             {
                 damageSource = PlayerDeathReason.ByCustomReason(Player.name + " was driven to extintion by Utah");
             }
-            if (damageSource.SourceNPCIndex >= 0 && Main.npc[damageSource.SourceNPCIndex].type == NPCType<Velocichopper>())
+            if (modifiers.DamageSource.SourceNPCIndex >= 0 && Main.npc[damageSource.SourceNPCIndex].type == NPCType<Velocichopper>())
             {
                 damageSource = PlayerDeathReason.ByCustomReason(Player.name + " was driven to extintion by Velocichopper");
             }
-            return true;
+            */
         }
     }
 }

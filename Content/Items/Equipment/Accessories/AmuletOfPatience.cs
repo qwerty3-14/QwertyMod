@@ -3,6 +3,7 @@ using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.Graphics.Shaders;
 using Terraria.ModLoader;
+using Terraria.ID;
 
 namespace QwertyMod.Content.Items.Equipment.Accessories
 {
@@ -12,15 +13,13 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Amulet Of Patience");
-            Tooltip.SetDefault("Deal more damage if you do haven't dealt damage in a while");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()
         {
             Item.value = Item.sellPrice(silver: 54);
-            Item.rare = 2;
+            Item.rare = ItemRarityID.Green;
 
             Item.width = 14;
             Item.height = 18;
@@ -30,12 +29,12 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.GetModPlayer<AmuletOfPatienceEffect>().effect = true;
-            if (!hideVisual && player.GetModPlayer<AmuletOfPatienceEffect>().patienceCount == 180 && Main.rand.Next(6) == 0)
+            if (!hideVisual && player.GetModPlayer<AmuletOfPatienceEffect>().patienceCount == 180 && Main.rand.NextBool(6))
             {
-                Dust d = Dust.NewDustPerfect(player.Center + new Vector2((2 * player.direction) + (player.direction == -1 ? -1 : 0), 0), 172);
+                Dust d = Dust.NewDustPerfect(player.Center + new Vector2((2 * player.direction) + (player.direction == -1 ? -1 : 0), 0), DustID.DungeonWater);
                 d.noGravity = true;
                 d.velocity *= .1f;
-                d.shader = GameShaders.Armor.GetSecondaryShader(player.ArmorSetDye(), player);
+                d.shader = GameShaders.Armor.GetSecondaryShader(player.cNeck, player);
             }
         }
     }
@@ -58,22 +57,14 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
             }
         }
 
-        public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
             if (patienceCount > 60)
             {
-                damage += (int)((float)damage * (((float)patienceCount - 60) / 60f));
+                modifiers.FinalDamage *= 1 + (((float)patienceCount - 60) / 60f);
             }
             patienceCount = 0;
         }
-
-        public override void ModifyHitNPC(Item item, NPC target, ref int damage, ref float knockback, ref bool crit)
-        {
-            if (patienceCount > 60)
-            {
-                damage += (int)((float)damage * (((float)patienceCount - 60) / 60f));
-            }
-            patienceCount = 0;
-        }
+        
     }
 }

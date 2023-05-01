@@ -7,6 +7,7 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using Terraria.ID;
 
 namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
 {
@@ -38,20 +39,20 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
             if (timer % 120 == 29)
             {
                 Projectile.velocity = Vector2.Zero;
-                if (Main.netMode != 1)
+                if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     Projectile.netUpdate = true;
                 }
             }
-            if (timer % 120 == 90 && Main.netMode != 1)
+            if (timer % 120 == 90 && Main.netMode != NetmodeID.MultiplayerClient)
             {
-                Projectile.NewProjectile(new EntitySource_Misc(""), middle, QwertyMethods.PolarVector(1, Projectile.rotation), ProjectileType<AggroStrike>(), Projectile.damage, 0);
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), middle, QwertyMethods.PolarVector(1, Projectile.rotation), ProjectileType<AggroStrike>(), Projectile.damage, 0);
             }
             if (timer % 120 == 119)
             {
-                if (Main.netMode != 1)
+                if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
-                    Vector2 goTo = middle + QwertyMethods.PolarVector(200, Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI));
+                    Vector2 goTo = middle + QwertyMethods.PolarVector(200, Main.rand.NextFloat(-MathF.PI, MathF.PI));
                     Projectile.velocity = (goTo - Projectile.Center) / 30f;
                     Projectile.netUpdate = true;
                 }
@@ -75,7 +76,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
         }
         public override void PostDraw(Color lightColor)
         {
-            if (timer % 120 > 30 && timer % 120 < 90 && middle != null)
+            if (timer % 120 > 30 && timer % 120 < 90)
             {
                 Texture2D texture = Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/RuneGhost/AggroLaser").Value;
                 Main.EntitySpriteDraw(texture, middle - Main.screenPosition, null, Color.White, Projectile.rotation, Vector2.UnitY, new Vector2(1500, 1), 0, 0);

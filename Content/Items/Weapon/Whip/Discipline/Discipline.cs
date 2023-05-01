@@ -11,15 +11,15 @@ namespace QwertyMod.Content.Items.Weapon.Whip.Discipline
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Discipline");
-            Tooltip.SetDefault("Your minions will gain speed when attacking struck enemies");
+            //DisplayName,SetDefault("Discipline");
+            //Tooltip.SetDefault("Your minions will gain speed when attacking struck enemies");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
         public override void SetDefaults()
         {
 
             Item.DefaultToWhip(ModContent.ProjectileType<DisciplineP>(), 67, 3, 4, 20);
-            Item.rare = 7;
+            Item.rare = ItemRarityID.Lime;
             Item.value = Item.sellPrice(0, 10, 0, 0);
         }
     }
@@ -27,7 +27,7 @@ namespace QwertyMod.Content.Items.Weapon.Whip.Discipline
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Discipline");
+            //DisplayName,SetDefault("Discipline");
             ProjectileID.Sets.IsAWhip[Type] = true;
         }
         public override void WhipDefaults()
@@ -44,8 +44,8 @@ namespace QwertyMod.Content.Items.Weapon.Whip.Discipline
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Disciplined");
-            Description.SetDefault("Minions will attack faster");
+            //DisplayName,SetDefault("Disciplined");
+            //Description.SetDefault("Minions will attack faster");
             Main.debuff[Type] = true;
         }
     }

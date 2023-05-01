@@ -12,8 +12,8 @@ namespace QwertyMod.Content.Items.Weapon.Minion.HydraHead
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Hydra Head Staff");
-            Tooltip.SetDefault("Summons a hydra head to shoot towards your cursor");
+            //DisplayName,SetDefault("Hydra Head Staff");
+            //Tooltip.SetDefault("Summons a hydra head to shoot towards your cursor");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;

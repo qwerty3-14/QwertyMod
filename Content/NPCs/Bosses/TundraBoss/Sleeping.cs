@@ -13,7 +13,7 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("ZZZZZ...");
+            //DisplayName,SetDefault("ZZZZZ...");
             Main.npcFrameCount[NPC.type] = 2;
         }
 
@@ -49,7 +49,7 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
             FrozenDen.activeSleeper = false;
             if (Main.netMode == NetmodeID.Server)
                 NetMessage.SendData(MessageID.WorldData); // Immediately inform clients of new world state.
-            NPC.NewNPC(new EntitySource_Misc(""), (int)NPC.Center.X, (int)NPC.Center.Y, NPCType<PolarBear>());
+            NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Center.X, (int)NPC.Center.Y, NPCType<PolarBear>());
         }
 
         private int frame;

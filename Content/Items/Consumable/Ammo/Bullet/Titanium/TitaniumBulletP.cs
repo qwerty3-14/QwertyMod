@@ -7,11 +7,6 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Bullet.Titanium
 {
     public class TitaniumBulletP : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault("Titanium Bullet");
-        }
-
         public override void SetDefaults()
         {
             Projectile.extraUpdates = 1;
@@ -33,16 +28,33 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Bullet.Titanium
 
         public override void AI()
         {
-            Projectile.rotation += (float)Math.PI / 15;
+            Projectile.rotation += MathF.PI / 15;
             Projectile.velocity *= .95f;
+            if(Projectile.timeLeft > 270)
+            {
+                
+                Projectile.scale = 1 - ((Projectile.timeLeft - 270) / 30f);
+            }
+            if(Projectile.timeLeft < 6)
+            {
+                Projectile.scale = (Projectile.timeLeft / 6f);
+            }
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            Projectile.damage = (int)(Projectile.damage * .75f);
+            modifiers.HitDirectionOverride = -1 * MathF.Sign(target.Center.X - Projectile.Center.X);
+        }
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            Projectile.damage = (int)(Projectile.damage * .6f);
         }
         public override void Kill(int timeLeft)
         {
             Collision.HitTiles(Projectile.position + Projectile.velocity, Projectile.velocity, Projectile.width, Projectile.height);
+            for(int i = 0; i < 5; i++)
+            { 
+                Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Titanium, Scale: 0.5f);
+            }
         }
     }
 }

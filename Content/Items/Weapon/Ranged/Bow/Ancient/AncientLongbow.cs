@@ -17,14 +17,13 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.Ancient
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Hold to charge up" + "\nFires 3 arrows at max charge" + "\nWooden arrows become ancient arrows");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
 
         public override void SetDefaults()
         {
-            Item.useStyle = 5;
+            Item.useStyle = ItemUseStyleID.Shoot;
             Item.useAnimation = 30;
             Item.useTime = 30;
             Item.shootSpeed = 20f;
@@ -34,7 +33,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.Ancient
             Item.damage = 60;
             Item.shoot = ProjectileType<AncientLongbowP>();
             Item.value = 150000;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
             Item.noMelee = true;
             Item.noUseGraphic = true;
             Item.DamageType = DamageClass.Ranged;
@@ -131,8 +130,8 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.Ancient
                         {
                             num266 = (float)(Main.screenHeight - Main.mouseY) + Main.screenPosition.Y - vector25.Y;
                         }
-                        float num267 = (float)Math.Sqrt((double)(num265 * num265 + num266 * num266));
-                        num267 = (float)Math.Sqrt((double)(num265 * num265 + num266 * num266));
+                        float num267 = MathF.Sqrt((num265 * num265 + num266 * num266));
+                        num267 = MathF.Sqrt((num265 * num265 + num266 * num266));
                         num267 = num264 / num267;
                         num265 *= num267;
                         num266 *= num267;
@@ -166,11 +165,11 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.Ancient
                 Projectile.rotation = (float)(Math.Atan2((double)Projectile.velocity.Y, (double)Projectile.velocity.X) + 1.5700000524520874);
                 if (Main.player[Projectile.owner].direction == 1)
                 {
-                    Main.player[Projectile.owner].itemRotation = (float)Math.Atan2((double)(Projectile.velocity.Y * (float)Projectile.direction), (double)(Projectile.velocity.X * (float)Projectile.direction));
+                    Main.player[Projectile.owner].itemRotation = MathF.Atan2((Projectile.velocity.Y * (float)Projectile.direction), (Projectile.velocity.X * (float)Projectile.direction));
                 }
                 else
                 {
-                    Main.player[Projectile.owner].itemRotation = (float)Math.Atan2((double)(Projectile.velocity.Y * (float)Projectile.direction), (double)(Projectile.velocity.X * (float)Projectile.direction));
+                    Main.player[Projectile.owner].itemRotation = MathF.Atan2((Projectile.velocity.Y * (float)Projectile.direction), (Projectile.velocity.X * (float)Projectile.direction));
                 }
                 Projectile.velocity.X = Projectile.velocity.X * (1f + (float)Main.rand.Next(-3, 4) * 0.01f);
 
@@ -187,13 +186,13 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.Ancient
                     {
                         Ammo = ProjectileType<AncientArrow>();
                     }
-                    if (Main.netMode != 2)
+                    if (Main.netMode != NetmodeID.Server)
                     {
                         arrow = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, Ammo, weaponDamage, weaponKnockback, Projectile.owner)];
                     }
                 }
-                arrow.velocity = QwertyMethods.PolarVector(speed, Projectile.rotation - (float)Math.PI / 2);
-                arrow.Center = Projectile.Center + QwertyMethods.PolarVector(40 - 2 * speed, Projectile.rotation - (float)Math.PI / 2);
+                arrow.velocity = QwertyMethods.PolarVector(speed, Projectile.rotation - MathF.PI / 2);
+                arrow.Center = Projectile.Center + QwertyMethods.PolarVector(40 - 2 * speed, Projectile.rotation - MathF.PI / 2);
                 arrow.friendly = false;
                 arrow.rotation = Projectile.rotation;
                 arrow.timeLeft += arrow.extraUpdates + 1;
@@ -213,7 +212,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.Ancient
                     /*
                     for (int d = 0; d < 3; d++)
                     {
-                        float theta = Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI);
+                        float theta = Main.rand.NextFloat(-MathF.PI, MathF.PI);
                         Dust dust = Dust.NewDustPerfect(arrow.Center + QwertyMethods.PolarVector(40, theta), DustType<AncientGlow>(), QwertyMethods.PolarVector(-8, theta));
                         dust.scale = .5f;
                         dust.alpha = 255;
@@ -234,7 +233,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.Ancient
         public override void Kill(int timeLeft)
         {
             SoundEngine.PlaySound(SoundID.Item5, Projectile.position);
-            arrow.velocity = QwertyMethods.PolarVector(speed, Projectile.rotation - (float)Math.PI / 2);
+            arrow.velocity = QwertyMethods.PolarVector(speed, Projectile.rotation - MathF.PI / 2);
             arrow.friendly = true;
             if (arrow != null && giveTileCollision)
             {
@@ -263,7 +262,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.Ancient
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Ancient Arrow");
+            //DisplayName,SetDefault("Ancient Arrow");
         }
 
 
@@ -280,7 +279,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.Ancient
             Projectile.tileCollide = true;
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.localNPCImmunity[target.whoAmI] = -1;
             target.immune[Projectile.owner] = 0;
@@ -309,22 +308,22 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.Ancient
 
         public override bool PreDraw(ref Color drawColor)
         {
-            orbitalCounter += (float)Math.PI / 60;
+            orbitalCounter += MathF.PI / 60;
 
             if (Math.Cos(orbitalCounter) > 0)
             {
-                Vector2 orbitalLocation = Projectile.Center + QwertyMethods.PolarVector(lengthDown, Projectile.rotation + (float)Math.PI / 2) + QwertyMethods.PolarVector(orbitRadius * (float)Math.Sin(orbitalCounter), Projectile.rotation);
+                Vector2 orbitalLocation = Projectile.Center + QwertyMethods.PolarVector(lengthDown, Projectile.rotation + MathF.PI / 2) + QwertyMethods.PolarVector(orbitRadius * MathF.Sin(orbitalCounter), Projectile.rotation);
                 drawOrbital(drawColor, orbitalLocation);
                 drawArrowCore(drawColor);
-                orbitalLocation = Projectile.Center + QwertyMethods.PolarVector(lengthDown, Projectile.rotation + (float)Math.PI / 2) - QwertyMethods.PolarVector(orbitRadius * (float)Math.Sin(orbitalCounter), Projectile.rotation);
+                orbitalLocation = Projectile.Center + QwertyMethods.PolarVector(lengthDown, Projectile.rotation + MathF.PI / 2) - QwertyMethods.PolarVector(orbitRadius * MathF.Sin(orbitalCounter), Projectile.rotation);
                 drawOrbital(drawColor, orbitalLocation);
             }
             else
             {
-                Vector2 orbitalLocation = Projectile.Center + QwertyMethods.PolarVector(lengthDown, Projectile.rotation + (float)Math.PI / 2) - QwertyMethods.PolarVector(orbitRadius * (float)Math.Sin(orbitalCounter), Projectile.rotation);
+                Vector2 orbitalLocation = Projectile.Center + QwertyMethods.PolarVector(lengthDown, Projectile.rotation + MathF.PI / 2) - QwertyMethods.PolarVector(orbitRadius * MathF.Sin(orbitalCounter), Projectile.rotation);
                 drawOrbital(drawColor, orbitalLocation);
                 drawArrowCore(drawColor);
-                orbitalLocation = Projectile.Center + QwertyMethods.PolarVector(lengthDown, Projectile.rotation + (float)Math.PI / 2) + QwertyMethods.PolarVector(orbitRadius * (float)Math.Sin(orbitalCounter), Projectile.rotation);
+                orbitalLocation = Projectile.Center + QwertyMethods.PolarVector(lengthDown, Projectile.rotation + MathF.PI / 2) + QwertyMethods.PolarVector(orbitRadius * MathF.Sin(orbitalCounter), Projectile.rotation);
                 drawOrbital(drawColor, orbitalLocation);
             }
 

@@ -18,15 +18,15 @@ namespace QwertyMod.Content.Items.Weapon.Whip.Fork
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Invader Fork");
-            Tooltip.SetDefault("Your minions will spawn missiles on hit that do deal 50% of the minion's damage.");
+            //DisplayName,SetDefault("Invader Fork");
+            //Tooltip.SetDefault("Your minions will spawn missiles on hit that do deal 50% of the minion's damage.");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
         public override void SetDefaults()
         {
 
             Item.DefaultToWhip(ModContent.ProjectileType<InvaderForkP>(), 111, 3, 4, 30);
-            Item.rare = 8;
+            Item.rare = ItemRarityID.Yellow;
             Item.value = QwertyMod.InvaderGearValue;
 
             if (!Main.dedServ)
@@ -45,7 +45,7 @@ namespace QwertyMod.Content.Items.Weapon.Whip.Fork
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Invader Fork");
+            //DisplayName,SetDefault("Invader Fork");
             ProjectileID.Sets.IsAWhip[Type] = true;
         }
         public override void WhipDefaults()
@@ -62,8 +62,8 @@ namespace QwertyMod.Content.Items.Weapon.Whip.Fork
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Missile Procing");
-            Description.SetDefault("Minions will cause missiles to fire.");
+            //DisplayName,SetDefault("Missile Procing");
+            //Description.SetDefault("Minions will cause missiles to fire.");
             Main.debuff[Type] = true;
         }
     }
@@ -71,7 +71,7 @@ namespace QwertyMod.Content.Items.Weapon.Whip.Fork
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Tag Missile");
+            //DisplayName,SetDefault("Tag Missile");
         }
         public override void SetDefaults()
         {
@@ -96,7 +96,7 @@ namespace QwertyMod.Content.Items.Weapon.Whip.Fork
                 Projectile.velocity = Vector2.Zero;
                 for (int i = 0; i < 30; i++)
                 {
-                    float rot = (float)Math.PI * 2f * ((float)i / 30f);
+                    float rot = MathF.PI * 2f * ((float)i / 30f);
                     Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<InvaderGlow>(), QwertyMethods.PolarVector(3f, rot));
                 }
             }
@@ -110,7 +110,7 @@ namespace QwertyMod.Content.Items.Weapon.Whip.Fork
             }
             return null;
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             explode();
         }
@@ -132,7 +132,7 @@ namespace QwertyMod.Content.Items.Weapon.Whip.Fork
                 NPC target = null;
                 if(QwertyMethods.ClosestNPC(ref target, 1200, Projectile.Center, false, Main.player[Projectile.owner].MinionAttackTargetNPC))
                 {
-                    Projectile.rotation.SlowRotation((target.Center - Projectile.Center).ToRotation(), (float)Math.PI / 120f);
+                    Projectile.rotation.SlowRotation((target.Center - Projectile.Center).ToRotation(), MathF.PI / 120f);
                 }
                 Projectile.velocity = QwertyMethods.PolarVector(6, Projectile.rotation);
                 Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(-4, Projectile.rotation), ModContent.DustType<InvaderGlow>(), Vector2.Zero, Scale: 0.2f);

@@ -19,7 +19,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Velocichopper");
+            //DisplayName,SetDefault("Velocichopper");
             Main.npcFrameCount[NPC.type] = 4;
             NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers(0)
             {
@@ -108,14 +108,14 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
                 bombTimer++;
                 NPC.direction = rushDirection;
                 NPC.velocity = new Vector2(10 * rushDirection, 0f);
-                if ((NPC.Center.X > player.Center.X + 1200 && rushDirection == 1) || (NPC.Center.X < player.Center.X - 1200 && rushDirection == -1) && Main.netMode != 1)
+                if ((NPC.Center.X > player.Center.X + 1200 && rushDirection == 1) || (NPC.Center.X < player.Center.X - 1200 && rushDirection == -1) && Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     AI_Timer = 0;
                     NPC.netUpdate = true;
                 }
-                if (bombTimer > bombReload && Main.netMode != 1)
+                if (bombTimer > bombReload && Main.netMode != NetmodeID.MultiplayerClient)
                 {
-                    Projectile.NewProjectile(new EntitySource_Misc(""), NPC.Center.X, NPC.Center.Y, 0, 0, ProjectileType<DinoBomb>(), damage, 3f, Main.myPlayer);
+                    Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center.X, NPC.Center.Y, 0, 0, ProjectileType<DinoBomb>(), damage, 3f, Main.myPlayer);
                     bombTimer = 0;
                 }
             }
@@ -140,13 +140,13 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
                 NPC.velocity = new Vector2(0, 0f);
 
                 Reload_Timer++;
-                if (Reload_Timer > reloadTime && Main.netMode != 1)
+                if (Reload_Timer > reloadTime && Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     int Xvar = Main.rand.Next(-50, 50);
 
                     int Yvar = 50 - Xvar;
 
-                    Projectile.NewProjectile(new EntitySource_Misc(""), NPC.Center.X + (100f * NPC.direction), NPC.Center.Y, 5.00f * (1 + Xvar * .01f) * NPC.direction, 5.00f * (1 + Yvar * .01f), 110, damage, 3f, Main.myPlayer);
+                    Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center.X + (100f * NPC.direction), NPC.Center.Y, 5.00f * (1 + Xvar * .01f) * NPC.direction, 5.00f * (1 + Yvar * .01f), 110, damage, 3f, Main.myPlayer);
 
                     Reload_Timer = 0;
                 }
@@ -222,7 +222,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("DinoBomb");
+            //DisplayName,SetDefault("DinoBomb");
         }
 
         public override void SetDefaults()
@@ -252,20 +252,20 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
             Projectile.height = 150;
             Projectile.position.X = Projectile.position.X - (float)(Projectile.width / 2);
             Projectile.position.Y = Projectile.position.Y - (float)(Projectile.height / 2);
-            Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center, new Vector2(0, 0), ProjectileType<DinoBombExplosion>(), Projectile.damage, Projectile.knockBack, player.whoAmI);
+            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, new Vector2(0, 0), ProjectileType<DinoBombExplosion>(), Projectile.damage, Projectile.knockBack, player.whoAmI);
             SoundEngine.PlaySound(SoundID.Item62, Projectile.position);
             for (int i = 0; i < 100; i++)
             {
-                int dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, 31, 0f, 0f, 100, default(Color), 2f);
+                int dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.Smoke, 0f, 0f, 100, default(Color), 2f);
                 Main.dust[dustIndex].velocity *= 1.4f;
             }
             // Fire Dust spawn
             for (int i = 0; i < 160; i++)
             {
-                int dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, 6, 0f, 0f, 100, default(Color), 3f);
+                int dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.Torch, 0f, 0f, 100, default(Color), 3f);
                 Main.dust[dustIndex].noGravity = true;
                 Main.dust[dustIndex].velocity *= 5f;
-                dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, 6, 0f, 0f, 100, default(Color), 2f);
+                dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.Torch, 0f, 0f, 100, default(Color), 2f);
                 Main.dust[dustIndex].velocity *= 3f;
             }
         }
@@ -275,7 +275,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Dino Bomb Explosion");
+            //DisplayName,SetDefault("Dino Bomb Explosion");
         }
 
         public override void SetDefaults()

@@ -14,8 +14,8 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Rhuthinium Cap");
-            Tooltip.SetDefault("10% increased ranged critical chance\n10% chance not to consume ammo");
+            //DisplayName,SetDefault("Rhuthinium Cap");
+            //Tooltip.SetDefault("10% increased ranged critical chance\n10% chance not to consume ammo");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             Head.Sets.DrawHatHair[Item.headSlot] = true;
         }
@@ -23,7 +23,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
         public override void SetDefaults()
         {
             Item.value = 50000;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
 
             Item.width = 26;
             Item.height = 16;

@@ -17,8 +17,8 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.AncientNuke
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Shape shift: Ancient Nuke");
-            Tooltip.SetDefault("Breifly turns you into an ancient nuke that causes a massive explosion when you collide with something... don't worry you'll live");
+            //DisplayName,SetDefault("Shape shift: Ancient Nuke");
+            //Tooltip.SetDefault("Breifly turns you into an ancient nuke that causes a massive explosion when you collide with something... don't worry you'll live");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -36,10 +36,10 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.AncientNuke
 
             Item.useTime = 60;
             Item.useAnimation = 60;
-            Item.useStyle = 5;
+            Item.useStyle = ItemUseStyleID.Shoot;
 
             Item.value = 150000;
-            Item.rare = 1;
+            Item.rare = ItemRarityID.Blue;
 
             Item.noUseGraphic = true;
             Item.width = 18;
@@ -74,7 +74,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.AncientNuke
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Ancient Nuke");
+            //DisplayName,SetDefault("Ancient Nuke");
             Main.projFrames[Projectile.type] = 1;
         }
 
@@ -102,7 +102,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.AncientNuke
             player.Center = Projectile.Center;
             player.immune = true;
             player.immuneTime = 120;
-            player.statDefense = 0;
+            player.statDefense.FinalMultiplier *= 0;
             player.itemAnimation = 2;
             player.itemTime = 2;
             player.fallStart = (int)player.Bottom.Y;
@@ -115,17 +115,17 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.AncientNuke
             //player.buffTime[mod.BuffType("MorphCooldown")]++;
             if (player.controlLeft)
             {
-                Projectile.rotation -= (float)Math.PI / 60;
+                Projectile.rotation -= MathF.PI / 60;
             }
             if (player.controlRight)
             {
-                Projectile.rotation += (float)Math.PI / 60;
+                Projectile.rotation += MathF.PI / 60;
             }
-            Projectile.velocity = QwertyMethods.PolarVector(10, Projectile.rotation - (float)Math.PI / 2);
+            Projectile.velocity = QwertyMethods.PolarVector(10, Projectile.rotation - MathF.PI / 2);
             dustYoffset = 20;
             for (int i = 0; i < 2; i++)
             {
-                Dust dust = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(dustYoffset, Projectile.rotation + (float)Math.PI / 2) + QwertyMethods.PolarVector(Main.rand.Next(-9, 9), Projectile.rotation), DustType<AncientGlow>());
+                Dust dust = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(dustYoffset, Projectile.rotation + MathF.PI / 2) + QwertyMethods.PolarVector(Main.rand.Next(-9, 9), Projectile.rotation), DustType<AncientGlow>());
             }
         }
 
@@ -137,7 +137,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.AncientNuke
             }
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.localNPCImmunity[target.whoAmI] = -1;
             target.immune[Projectile.owner] = 0;
@@ -167,7 +167,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.AncientNuke
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Ancient Fallout");
+            //DisplayName,SetDefault("Ancient Fallout");
         }
 
         public override void SetDefaults()
@@ -193,7 +193,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.AncientNuke
 
             for (int i = 0; i < 1600; i++)
             {
-                float theta = Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI);
+                float theta = Main.rand.NextFloat(-MathF.PI, MathF.PI);
                 Dust dust = Dust.NewDustPerfect(Projectile.Center, DustType<AncientGlow>(), QwertyMethods.PolarVector(Main.rand.Next(2, 120), theta));
                 dust.noGravity = true;
             }
@@ -208,7 +208,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.AncientNuke
             return false;
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.localNPCImmunity[target.whoAmI] = -1;
             target.immune[Projectile.owner] = 0;

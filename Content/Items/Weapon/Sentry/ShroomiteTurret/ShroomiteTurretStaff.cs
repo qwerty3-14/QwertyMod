@@ -13,8 +13,8 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.ShroomiteTurret
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Shroomite Turret Staff");
-            Tooltip.SetDefault("Fire bullets from your inventory.\n50% chance not to consume ammo.");
+            //DisplayName,SetDefault("Shroomite Turret Staff");
+            //Tooltip.SetDefault("Fire bullets from your inventory.\n50% chance not to consume ammo.");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
@@ -23,8 +23,8 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.ShroomiteTurret
         public override void SetDefaults()
         {
             Item.damage = 11;
-            Item.rare = 8;
-            Item.useStyle = 1;
+            Item.rare = ItemRarityID.Yellow;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.value = Item.sellPrice(gold: 1);
             Item.width = Item.height = 28;
             Item.sentry = true;
@@ -84,7 +84,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.ShroomiteTurret
             {
                 if (player.direction == -1)
                 {
-                    gunRotation = (float)Math.PI;
+                    gunRotation = MathF.PI;
                 }
                 runOnce = false;
             }
@@ -94,7 +94,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.ShroomiteTurret
                 shotCooldown++;
                 if (shotCooldown >= 12)
                 {
-                    if (QwertyMethods.AngularDifference(aimRotation, gunRotation) < (float)Math.PI / 8)
+                    if (QwertyMethods.AngularDifference(aimRotation, gunRotation) < MathF.PI / 8)
                     {
                         Shoot();
                     }
@@ -102,7 +102,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.ShroomiteTurret
             }
             else
             {
-                aimRotation = player.direction == 1 ? 0 : (float)Math.PI;
+                aimRotation = player.direction == 1 ? 0 : MathF.PI;
             }
             gunRotation = QwertyMethods.SlowRotation(gunRotation, aimRotation, 5);
             Projectile.velocity.Y = 10;
@@ -116,9 +116,9 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.ShroomiteTurret
         {
             int weaponDamage = Projectile.damage;
             float weaponKnockback = Projectile.knockBack;
-            if (Projectile.UseAmmo(AmmoID.Bullet, ref bullet, ref speedB, ref weaponDamage, ref weaponKnockback, Main.rand.Next(2) == 0))
+            if (Projectile.UseAmmo(AmmoID.Bullet, ref bullet, ref speedB, ref weaponDamage, ref weaponKnockback, Main.rand.NextBool(2)))
             {
-                Projectile bul = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center + QwertyMethods.PolarVector(29, gunRotation), QwertyMethods.PolarVector(10, gunRotation), bullet, weaponDamage, weaponKnockback, Main.myPlayer)];
+                Projectile bul = Main.projectile[Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center + QwertyMethods.PolarVector(29, gunRotation), QwertyMethods.PolarVector(10, gunRotation), bullet, weaponDamage, weaponKnockback, Main.myPlayer)];
                 
                 shotCooldown = 0;
             }

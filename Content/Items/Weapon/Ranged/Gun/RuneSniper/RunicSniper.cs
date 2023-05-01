@@ -12,8 +12,8 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.RuneSniper
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Runic Sniper");
-            Tooltip.SetDefault("x2 damage to enemies far away from you" + "\nRight click to zoom");
+            //DisplayName,SetDefault("Runic Sniper");
+            //Tooltip.SetDefault("x2 damage to enemies far away from you" + "\nRight click to zoom");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -25,16 +25,16 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.RuneSniper
             Item.autoReuse = true;
             Item.useTime = 35;
             Item.useAnimation = 35;
-            Item.useStyle = 5;
+            Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 5;
             Item.value = 500000;
-            Item.rare = 9;
+            Item.rare = ItemRarityID.Cyan;
             Item.UseSound = SoundID.Item11;
 
             Item.width = 74;
             Item.height = 30;
             Item.crit = 25;
-            Item.shoot = 97;
+            Item.shoot = ProjectileID.Bullet;
             Item.useAmmo = AmmoID.Bullet;
             Item.shootSpeed = 36;
             Item.noMelee = true;
@@ -60,12 +60,12 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.RuneSniper
 
     public class DoubleSnipeDamage : ModPlayer
     {
-        public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
         {
             if (proj.CountsAsClass(DamageClass.Ranged) && Player.inventory[Player.selectedItem].type == ItemType<RunicSniper>())
             {
                 if ((target.Center - Player.Center).Length() > 700)
-                    damage *= 2;
+                    modifiers.FinalDamage *= 2;
             }
         }
     }

@@ -16,7 +16,7 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Agent Penguin");
+            //DisplayName,SetDefault("Agent Penguin");
             Main.npcFrameCount[NPC.type] = 2;
         }
 
@@ -66,11 +66,11 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
             else
             {
                 NPC.noGravity = false;
-                if (preJump == -120 || preJump == -180 && Main.netMode != 1)
+                if (preJump == -120 || preJump == -180 && Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     NPC.TargetClosest(true);
                     Vector2 pos = NPC.Center + new Vector2(11 * NPC.spriteDirection * -1, 0);
-                    Projectile p = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), pos, QwertyMethods.PolarVector(11, (Main.player[NPC.target].Center - pos).ToRotation()), ProjectileID.SnowBallFriendly, 10, 0, 255)];
+                    Projectile p = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromAI(), pos, QwertyMethods.PolarVector(11, (Main.player[NPC.target].Center - pos).ToRotation()), ProjectileID.SnowBallFriendly, 10, 0, 255)];
                     p.hostile = true;
                     p.friendly = false;
                 }
@@ -104,17 +104,17 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
                 for (int i = 0; i < diff.Length(); i += 8)
                 {
                     Texture2D rope = Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/TundraBoss/Rope").Value;
-                    spriteBatch.Draw(rope, NPC.Center + QwertyMethods.PolarVector(i, diff.ToRotation()) - screenPos, null, drawColor, diff.ToRotation() + (float)Math.PI / 2, new Vector2(3, 0), 1f, 0, 0);
+                    spriteBatch.Draw(rope, NPC.Center + QwertyMethods.PolarVector(i, diff.ToRotation()) - screenPos, null, drawColor, diff.ToRotation() + MathF.PI / 2, new Vector2(3, 0), 1f, 0, 0);
                 }
             }
             return preJump <= 0;
         }
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
         {
             if (NPC.life <= 0)
             {
-                Gore.NewGore(new EntitySource_Misc(""), NPC.position, NPC.velocity, 160);
-                Gore.NewGore(new EntitySource_Misc(""), new Vector2(NPC.position.X, NPC.position.Y), NPC.velocity, 161);
+                Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, 160);
+                Gore.NewGore(NPC.GetSource_Death(), new Vector2(NPC.position.X, NPC.position.Y), NPC.velocity, 161);
             }
         }
     }

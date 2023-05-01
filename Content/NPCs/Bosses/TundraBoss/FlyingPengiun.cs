@@ -13,7 +13,7 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Flying Penguin");
+            //DisplayName,SetDefault("Flying Penguin");
             Main.npcFrameCount[NPC.type] = 4;
         }
 
@@ -73,7 +73,7 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
                 }
                 NPC.TargetClosest(false);
                 NPC.spriteDirection = -NPC.direction;
-                NPC.rotation = (float)Math.PI;
+                NPC.rotation = MathF.PI;
                 if (!inGround && timer % 10 == 0)
                 {
                     if (frame == 1)
@@ -127,7 +127,7 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
             }
             if (timer > 360)
             {
-                NPC Penguin = Main.npc[NPC.NewNPC(new EntitySource_Misc(""), (int)NPC.Top.X, (int)NPC.Top.Y, NPCID.Penguin)];
+                NPC Penguin = Main.npc[NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Top.X, (int)NPC.Top.Y, NPCID.Penguin)];
                 NPC.active = false;
             }
         }
@@ -136,12 +136,12 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
         {
             NPC.frame.Y = frame * frameHeight;
         }
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
         {
             if (NPC.life <= 0)
             {
-                Gore.NewGore(new EntitySource_Misc(""), NPC.position, NPC.velocity, 160);
-                Gore.NewGore(new EntitySource_Misc(""), new Vector2(NPC.position.X, NPC.position.Y), NPC.velocity, 161);
+                Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, 160);
+                Gore.NewGore(NPC.GetSource_Death(), new Vector2(NPC.position.X, NPC.position.Y), NPC.velocity, 161);
             }
         }
     }

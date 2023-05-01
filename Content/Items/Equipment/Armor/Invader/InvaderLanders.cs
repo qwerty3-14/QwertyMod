@@ -13,15 +13,13 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Invader
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Invader Landers");
-            Tooltip.SetDefault("13% increased damage\n15% increased melee and movement speed\nGrants immunity to fall damage");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()
         {
             Item.value = QwertyMod.InvaderGearValue;
-            Item.rare = 8;
+            Item.rare = ItemRarityID.Yellow;
             Item.width = 22;
             Item.height = 18;
             Item.defense = 15;

@@ -8,8 +8,8 @@ namespace QwertyMod.Content.Items.Tool.Mining.TheDevourer
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("The Devourer");
-            Tooltip.SetDefault("Mines a 9x9 area!");
+            //DisplayName,SetDefault("The Devourer");
+            //Tooltip.SetDefault("Mines a 9x9 area!");
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
         public override void SetDefaults()
@@ -19,10 +19,10 @@ namespace QwertyMod.Content.Items.Tool.Mining.TheDevourer
 
             Item.useTime = 52;
             Item.useAnimation = 52;
-            Item.useStyle = 1;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.knockBack = 3;
             Item.value = 750000;
-            Item.rare = 10;
+            Item.rare = ItemRarityID.Red;
             Item.UseSound = SoundID.Item1;
             Item.scale = 2;
             Item.width = 85;

@@ -8,6 +8,16 @@ using Terraria.GameContent.Creative;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
 using QwertyMod.Content.Items.Equipment.Accessories.Expert.AncientGemstone;
+using Terraria.ID;
+using Terraria.GameContent.ItemDropRules;
+using QwertyMod.Content.Items.Weapon.Magic.AncientMissile;
+using QwertyMod.Content.Items.Weapon.Magic.AncientWave;
+using QwertyMod.Content.Items.Weapon.Melee.Sword.AncientBlade;
+using QwertyMod.Content.Items.Weapon.Melee.Yoyo.AncientThrow;
+using QwertyMod.Content.Items.Weapon.Minion.AncientMinion;
+using QwertyMod.Content.Items.Weapon.Morphs.AncientNuke;
+using QwertyMod.Content.Items.Weapon.Ranged.Bow.Ancient;
+using QwertyMod.Content.Items.Weapon.Ranged.Gun.Ancient;
 
 namespace QwertyMod.Content.Items.Consumable.BossBag
 {
@@ -15,19 +25,17 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Treasure Bag");
-            Tooltip.SetDefault("{$CommonItemTooltip.RightClickToOpen}");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 3;
         }
 
 
         public override void SetDefaults()
         {
-            Item.maxStack = 999;
+            Item.maxStack = 9999;
             Item.consumable = true;
             Item.width = 48;
             Item.height = 32;
-            Item.rare = 9;
+            Item.rare = ItemRarityID.Cyan;
             Item.expert = true;
 
             if (!Main.dedServ)
@@ -40,22 +48,13 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
         {
             return true;
         }
-
-        public override void RightClick(Player player)
+        public override void ModifyItemLoot(ItemLoot itemLoot)
         {
-            int[] loot = QwertyMod.AMLoot.Draw(3);
+            itemLoot.Add(ItemDropRule.FewFromOptionsNotScalingWithLuck(3, 1, ItemType<AncientBlade>(), ItemType<AncientSniper>(), ItemType<AncientWave>(), ItemType<AncientThrow>(), ItemType<AncientMinionStaff>(), ItemType<AncientMissileStaff>(), ItemType<AncientLongbow>(), ItemType<AncientNuke>()));
 
-            foreach (int item in loot)
-            {
-                player.QuickSpawnItem(new EntitySource_Misc(""), item);
-            }
-
-            if (Main.rand.Next(100) < 20)
-            {
-                player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<AncientMiner>());
-            }
-            player.QuickSpawnItem(new EntitySource_Misc(""), 73, 8);
-            player.QuickSpawnItem(new EntitySource_Misc(""), ModContent.ItemType<AncientGemstone>());
+            itemLoot.Add(ItemDropRule.Common(ItemType<AncientMiner>(), 5));
+            itemLoot.Add(ItemDropRule.Common(ItemType<AncientGemstone>(), 1));
+            itemLoot.Add(ItemDropRule.Coins(80000, true));
         }
     }
 }

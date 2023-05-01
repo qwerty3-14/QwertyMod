@@ -14,8 +14,8 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Boomerang.Lune
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Lune Boomerang");
-            Tooltip.SetDefault("Unlimited, pierces enemies" + "\nInflicts Lune curse making enemies more vulnerable to critical hits");
+            //DisplayName,SetDefault("Lune Boomerang");
+            //Tooltip.SetDefault("Unlimited, pierces enemies" + "\nInflicts Lune curse making enemies more vulnerable to critical hits");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -28,10 +28,10 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Boomerang.Lune
             Item.useTime = 20;
             Item.useAnimation = 20;
 
-            Item.useStyle = 5;
+            Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 0;
             Item.value = 20000;
-            Item.rare = 1;
+            Item.rare = ItemRarityID.Blue;
             Item.UseSound = SoundID.Item1;
             Item.noUseGraphic = true;
             Item.width = 18;
@@ -81,7 +81,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Boomerang.Lune
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Lune Boomerang");
+            //DisplayName,SetDefault("Lune Boomerang");
         }
 
         private float speed;
@@ -129,7 +129,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Boomerang.Lune
             }
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(BuffType<LuneCurse>(), 60);
         }

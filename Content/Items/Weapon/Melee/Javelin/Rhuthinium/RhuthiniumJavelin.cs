@@ -19,8 +19,8 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin.Rhuthinium
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Rhuthinium Javelin");
-            Tooltip.SetDefault("Each javelin stuck in the enemy causes them to take 1 extra damage\nMax: 10");
+            //DisplayName,SetDefault("Rhuthinium Javelin");
+            //Tooltip.SetDefault("Each javelin stuck in the enemy causes them to take 1 extra damage\nMax: 10");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -31,12 +31,12 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin.Rhuthinium
             Item.shootSpeed = 10f;
             Item.damage = 20;
             Item.knockBack = 5f;
-            Item.useStyle = 1;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.useAnimation = 18;
             Item.useTime = 18;
             Item.width = 68;
             Item.height = 68;
-            Item.rare = 5;
+            Item.rare = ItemRarityID.Pink;
             Item.crit = 5;
             Item.value = 25000;
             Item.noUseGraphic = true;
@@ -60,8 +60,8 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin.Rhuthinium
         {
             float angle = (velocity).ToRotation();
             float trueSpeed = (velocity).Length();
-            Projectile.NewProjectile(source, player.MountedCenter.X, player.MountedCenter.Y, (float)Math.Cos(angle + MathHelper.ToRadians(Main.rand.Next(-5, 6))) * trueSpeed, (float)Math.Sin(angle + MathHelper.ToRadians(Main.rand.Next(-5, 6))) * trueSpeed, type, damage, knockback, Main.myPlayer, 0f, 0f);
-            Projectile.NewProjectile(source, player.MountedCenter.X, player.MountedCenter.Y, (float)Math.Cos(angle + MathHelper.ToRadians(Main.rand.Next(-5, 6))) * trueSpeed, (float)Math.Sin(angle + MathHelper.ToRadians(Main.rand.Next(-5, 6))) * trueSpeed, type, damage, knockback, Main.myPlayer, 0f, 0f);
+            Projectile.NewProjectile(source, player.MountedCenter.X, player.MountedCenter.Y, MathF.Cos(angle + MathHelper.ToRadians(Main.rand.Next(-5, 6))) * trueSpeed, MathF.Sin(angle + MathHelper.ToRadians(Main.rand.Next(-5, 6))) * trueSpeed, type, damage, knockback, Main.myPlayer, 0f, 0f);
+            Projectile.NewProjectile(source, player.MountedCenter.X, player.MountedCenter.Y, MathF.Cos(angle + MathHelper.ToRadians(Main.rand.Next(-5, 6))) * trueSpeed, MathF.Sin(angle + MathHelper.ToRadians(Main.rand.Next(-5, 6))) * trueSpeed, type, damage, knockback, Main.myPlayer, 0f, 0f);
             return false;
         }
         */
@@ -71,7 +71,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin.Rhuthinium
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("RhuthiniumJavelin");
+            //DisplayName,SetDefault("RhuthiniumJavelin");
         }
 
 
@@ -87,7 +87,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin.Rhuthinium
             Projectile.GetGlobalProjectile<ImplaingProjectile>().damagePerImpaler = 18;
             maxStickingJavelins = 10;
             dropItem = ItemType<RhuthiniumJavelin>();
-            rotationOffset = (float)Math.PI / 4;
+            rotationOffset = MathF.PI / 4;
         }
 
         public override bool PreDraw(ref Color lightColor)
@@ -103,7 +103,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin.Rhuthinium
         {
             for (int i = 0; i < 18; i++)
             {
-                Vector2 dustPos = Projectile.Center + QwertyMethods.PolarVector(Main.rand.Next(80), Projectile.rotation + (float)Math.PI / 4);
+                Vector2 dustPos = Projectile.Center + QwertyMethods.PolarVector(Main.rand.Next(80), Projectile.rotation + MathF.PI / 4);
                 Dust d = Main.dust[Dust.NewDust(dustPos, Projectile.width, Projectile.height, DustType<RhuthiniumDust>())];
                 d.noGravity = true;
             }

@@ -1,6 +1,7 @@
 using Terraria.GameContent.Creative;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using Terraria.ID;
 
 namespace QwertyMod.Content.Items.Consumable.Tiles.Ores
 {
@@ -8,8 +9,8 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Ores
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Lune Ore");
-            Tooltip.SetDefault("Found high in the sky");
+            //DisplayName,SetDefault("Lune Ore");
+            //Tooltip.SetDefault("Found high in the sky");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 100;
         }
 
@@ -17,15 +18,15 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Ores
         {
             Item.width = 16;
             Item.height = 16;
-            Item.maxStack = 999;
+            Item.maxStack = 9999;
             Item.value = 100;
-            Item.rare = 1;
+            Item.rare = ItemRarityID.Blue;
             Item.createTile = TileType<LuneOreT>();
             Item.useTurn = true;
             Item.autoReuse = true;
             Item.useAnimation = 15;
             Item.useTime = 10;
-            Item.useStyle = 1;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.consumable = true;
         }
     }

@@ -10,8 +10,8 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Shaman
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Shaman Pants");
-            Tooltip.SetDefault("+1 max sentries");
+            //DisplayName,SetDefault("Shaman Pants");
+            //Tooltip.SetDefault("+1 max sentries");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -24,7 +24,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Shaman
         public override void SetDefaults()
         {
             Item.value = Item.sellPrice(gold: 1);
-            Item.rare = 1;
+            Item.rare = ItemRarityID.Blue;
             Item.defense = 5;
             Item.width = 20;
             Item.height = 20;

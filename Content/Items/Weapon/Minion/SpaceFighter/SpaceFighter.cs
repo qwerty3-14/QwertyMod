@@ -13,7 +13,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.SpaceFighter
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Space Fighter");
+            //DisplayName,SetDefault("Space Fighter");
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true; //This is necessary for right-click targeting
         }
 
@@ -41,10 +41,10 @@ namespace QwertyMod.Content.Items.Weapon.Minion.SpaceFighter
         {
             Projectile.velocity += QwertyMethods.PolarVector(-.1f, Projectile.velocity.ToRotation());
             Projectile.velocity += QwertyMethods.PolarVector(.2f, Projectile.rotation);
-            Dust d = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(-8, Projectile.rotation) + QwertyMethods.PolarVector(12, Projectile.rotation + (float)Math.PI / 2), 6);
+            Dust d = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(-8, Projectile.rotation) + QwertyMethods.PolarVector(12, Projectile.rotation + MathF.PI / 2), 6);
             d.noGravity = true;
             d.noLight = true;
-            d = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(-8, Projectile.rotation) + QwertyMethods.PolarVector(-12, Projectile.rotation + (float)Math.PI / 2), 6);
+            d = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(-8, Projectile.rotation) + QwertyMethods.PolarVector(-12, Projectile.rotation + MathF.PI / 2), 6);
             d.noGravity = true;
             d.noLight = true;
         }
@@ -92,7 +92,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.SpaceFighter
                 {
                     if (Collision.CheckAABBvAABBCollision(Projectile.position + new Vector2(Projectile.width / 4, Projectile.height / 4), new Vector2(Projectile.width / 2, Projectile.height / 2), Main.projectile[k].position + new Vector2(Main.projectile[k].width / 4, Main.projectile[k].height / 4), new Vector2(Main.projectile[k].width / 2, Main.projectile[k].height / 2)))
                     {
-                        Projectile.velocity += new Vector2((float)Math.Cos((Projectile.Center - Main.projectile[k].Center).ToRotation()) * .1f, (float)Math.Sin((Projectile.Center - Main.projectile[k].Center).ToRotation()) * .1f);
+                        Projectile.velocity += new Vector2(MathF.Cos((Projectile.Center - Main.projectile[k].Center).ToRotation()) * .1f, MathF.Sin((Projectile.Center - Main.projectile[k].Center).ToRotation()) * .1f);
                     }
                 }
             }

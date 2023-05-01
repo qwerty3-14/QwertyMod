@@ -22,12 +22,9 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Furniture
             TileObjectData.newTile.CoordinateHeights = new int[] { 18 };
             TileObjectData.addTile(Type);
             AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTable);
-            ModTranslation name = CreateMapEntryName();
-            name.SetDefault("Fortress Workbench");
-            AddMapEntry(new Color(162, 184, 185), name);
+            AddMapEntry(new Color(162, 184, 185));
             DustType = DustType<FortressDust>();
             HitSound = QwertyMod.FortressBlocks;
-            // disableSmartCursor = true;
             AdjTiles = new int[] { TileID.WorkBenches };
         }
 

@@ -17,8 +17,8 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.RhuthiniumBarrage
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Shape shift: Rhuthinium Barrage");
-            Tooltip.SetDefault("Launches a HUGE barrage of darts dealing massive damage!");
+            //DisplayName,SetDefault("Shape shift: Rhuthinium Barrage");
+            //Tooltip.SetDefault("Launches a HUGE barrage of darts dealing massive damage!");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -37,10 +37,10 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.RhuthiniumBarrage
 
             Item.useTime = 60;
             Item.useAnimation = 60;
-            Item.useStyle = 5;
+            Item.useStyle = ItemUseStyleID.Shoot;
 
             Item.value = 25000;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
             Item.crit = 5;
             Item.noUseGraphic = true;
             Item.width = 18;
@@ -77,7 +77,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.RhuthiniumBarrage
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Rhuthinium Barrage Launcher");
+            //DisplayName,SetDefault("Rhuthinium Barrage Launcher");
             Main.projFrames[Projectile.type] = 1;
         }
 
@@ -105,7 +105,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.RhuthiniumBarrage
             {
                 for (int d = 0; d < 60; d++)
                 {
-                    Darts.Add(Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center, Vector2.Zero, ProjectileType<RhuthiniumBarrageDart>(), Projectile.damage, Projectile.knockBack, Projectile.owner, Main.rand.Next(-14, 15), 0f)]);
+                    Darts.Add(Main.projectile[Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<RhuthiniumBarrageDart>(), Projectile.damage, Projectile.knockBack, Projectile.owner, Main.rand.Next(-14, 15), 0f)]);
                 }
                 runOnce = false;
             }
@@ -114,7 +114,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.RhuthiniumBarrage
             player.Center = Projectile.Center;
             player.itemTime = 2;
             player.itemAnimation = 2;
-            player.statDefense = 0;
+            player.statDefense.FinalMultiplier *= 0;
             player.immune = true;
             player.immuneTime = 2;
             player.GetModPlayer<ShapeShifterPlayer>().noDraw = true;
@@ -124,7 +124,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.RhuthiniumBarrage
             {
                 if (dart.ai[1] == 0 && dart.type == ProjectileType<RhuthiniumBarrageDart>())
                 {
-                    dart.Center = Projectile.Center + QwertyMethods.PolarVector(25, Projectile.rotation) + QwertyMethods.PolarVector(dart.ai[0], Projectile.rotation + (float)Math.PI / 2);
+                    dart.Center = Projectile.Center + QwertyMethods.PolarVector(25, Projectile.rotation) + QwertyMethods.PolarVector(dart.ai[0], Projectile.rotation + MathF.PI / 2);
                     dart.rotation = Projectile.rotation;
                 }
             }
@@ -162,7 +162,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.RhuthiniumBarrage
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Rhuthinium Barrage");
+            //DisplayName,SetDefault("Rhuthinium Barrage");
             Main.projFrames[Projectile.type] = 1;
         }
 
@@ -185,7 +185,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.RhuthiniumBarrage
             for (int i = 0; i < 2; i++)
             {
                 Dust d = Dust.NewDustPerfect(Projectile.Center, DustType<RhuthiniumDust>());
-                d.frame.Y = Main.rand.Next(2) == 0 ? 0 : 10;
+                d.frame.Y = Main.rand.NextBool(2) ? 0 : 10;
                 d.noGravity = true;
             }
         }

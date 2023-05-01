@@ -18,9 +18,9 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Ores
             DustType = DustType<RhuthiniumDust>();
             HitSound = SoundID.Tink;
 
-            ModTranslation name = CreateMapEntryName();
-            name.SetDefault("Rhuthinium Ore");
-            AddMapEntry(new Color(39, 129, 129), name);
+            //ModTranslation name = CreateMapEntryName();
+            //name.SetDefault("Rhuthinium Ore");
+            //AddMapEntry(new Color(39, 129, 129), name);
 
             ItemDrop = ItemType<RhuthiniumOre>();
 

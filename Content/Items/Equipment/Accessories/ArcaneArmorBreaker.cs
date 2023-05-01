@@ -9,8 +9,6 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Arcane Armor Breaker");
-            Tooltip.SetDefault("Magic attacks ignore 10 defense");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 

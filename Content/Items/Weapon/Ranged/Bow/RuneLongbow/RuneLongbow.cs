@@ -20,14 +20,13 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.RuneLongbow
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Hold to charge up" + "\nFires 3 arrows at max charge" + "\nWooden arrows become aggro rune strikes");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
 
         public override void SetDefaults()
         {
-            Item.useStyle = 5;
+            Item.useStyle = ItemUseStyleID.Shoot;
             Item.useAnimation = 30;
             Item.useTime = 30;
             Item.shootSpeed = 20f;
@@ -35,10 +34,9 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.RuneLongbow
             Item.width = 50;
             Item.height = 18;
             Item.damage = 250;
-            //Item.reuseDelay = 30;
             Item.shoot = ProjectileType<RuneLongbowP>();
             Item.value = 500000;
-            Item.rare = 9;
+            Item.rare = ItemRarityID.Cyan;
             Item.noMelee = true;
             Item.noUseGraphic = true;
             Item.DamageType = DamageClass.Ranged;
@@ -149,8 +147,8 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.RuneLongbow
                         {
                             num266 = (float)(Main.screenHeight - Main.mouseY) + Main.screenPosition.Y - vector25.Y;
                         }
-                        float num267 = (float)Math.Sqrt((double)(num265 * num265 + num266 * num266));
-                        num267 = (float)Math.Sqrt((double)(num265 * num265 + num266 * num266));
+                        float num267 = MathF.Sqrt((num265 * num265 + num266 * num266));
+                        num267 = MathF.Sqrt((num265 * num265 + num266 * num266));
                         num267 = num264 / num267;
                         num265 *= num267;
                         num266 *= num267;
@@ -184,11 +182,11 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.RuneLongbow
                 Projectile.rotation = (float)(Math.Atan2((double)Projectile.velocity.Y, (double)Projectile.velocity.X) + 1.5700000524520874);
                 if (Main.player[Projectile.owner].direction == 1)
                 {
-                    Main.player[Projectile.owner].itemRotation = (float)Math.Atan2((double)(Projectile.velocity.Y * (float)Projectile.direction), (double)(Projectile.velocity.X * (float)Projectile.direction));
+                    Main.player[Projectile.owner].itemRotation = MathF.Atan2((Projectile.velocity.Y * (float)Projectile.direction), (Projectile.velocity.X * (float)Projectile.direction));
                 }
                 else
                 {
-                    Main.player[Projectile.owner].itemRotation = (float)Math.Atan2((double)(Projectile.velocity.Y * (float)Projectile.direction), (double)(Projectile.velocity.X * (float)Projectile.direction));
+                    Main.player[Projectile.owner].itemRotation = MathF.Atan2((Projectile.velocity.Y * (float)Projectile.direction), (Projectile.velocity.X * (float)Projectile.direction));
                 }
                 Projectile.velocity.X = Projectile.velocity.X * (1f + (float)Main.rand.Next(-3, 4) * 0.01f);
 
@@ -204,13 +202,13 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.RuneLongbow
                     {
                         Ammo = ProjectileType<RuneArrow>();
                     }
-                    if (Main.netMode != 2)
+                    if (Main.netMode != NetmodeID.Server)
                     {
-                        arrow = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center.X, Projectile.Center.Y, 0, 0, Ammo, weaponDamage, weaponKnockback, Projectile.owner)];
+                        arrow = Main.projectile[Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center.X, Projectile.Center.Y, 0, 0, Ammo, weaponDamage, weaponKnockback, Projectile.owner)];
                     }
                 }
-                arrow.velocity = QwertyMethods.PolarVector(speed, Projectile.rotation - (float)Math.PI / 2);
-                arrow.Center = Projectile.Center + QwertyMethods.PolarVector(40 - 2 * speed, Projectile.rotation - (float)Math.PI / 2);
+                arrow.velocity = QwertyMethods.PolarVector(speed, Projectile.rotation - MathF.PI / 2);
+                arrow.Center = Projectile.Center + QwertyMethods.PolarVector(40 - 2 * speed, Projectile.rotation - MathF.PI / 2);
                 arrow.friendly = false;
                 arrow.rotation = Projectile.rotation;
                 arrow.timeLeft += arrow.extraUpdates + 1;
@@ -243,7 +241,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.RuneLongbow
         public override void Kill(int timeLeft)
         {
             SoundEngine.PlaySound(SoundID.Item5, Projectile.position);
-            arrow.velocity = QwertyMethods.PolarVector(speed, Projectile.rotation - (float)Math.PI / 2);
+            arrow.velocity = QwertyMethods.PolarVector(speed, Projectile.rotation - MathF.PI / 2);
             arrow.friendly = true;
             if (arrow != null && giveTileCollision)
             {
@@ -251,8 +249,8 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.RuneLongbow
             }
             if (timer >= maxTime)
             {
-                Projectile.NewProjectile(new EntitySource_Misc(""), arrow.Center, QwertyMethods.PolarVector(arrow.velocity.Length(), arrow.velocity.ToRotation() + (float)Math.PI / 64f), arrow.type, arrow.damage, arrow.knockBack, Projectile.owner);
-                Projectile.NewProjectile(new EntitySource_Misc(""), arrow.Center, QwertyMethods.PolarVector(arrow.velocity.Length(), arrow.velocity.ToRotation() - (float)Math.PI / 64f), arrow.type, arrow.damage, arrow.knockBack, Projectile.owner);
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), arrow.Center, QwertyMethods.PolarVector(arrow.velocity.Length(), arrow.velocity.ToRotation() + MathF.PI / 64f), arrow.type, arrow.damage, arrow.knockBack, Projectile.owner);
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), arrow.Center, QwertyMethods.PolarVector(arrow.velocity.Length(), arrow.velocity.ToRotation() - MathF.PI / 64f), arrow.type, arrow.damage, arrow.knockBack, Projectile.owner);
             }
         }
 
@@ -279,7 +277,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.RuneLongbow
             Projectile.penetrate = -1;
             Projectile.usesLocalNPCImmunity = true;
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.localNPCImmunity[target.whoAmI] = -1;
             target.immune[Projectile.owner] = 0;
@@ -328,7 +326,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.RuneLongbow
             else
             {
                 Texture2D texture = TextureAssets.Projectile[Projectile.type].Value;
-                Main.EntitySpriteDraw(texture, Projectile.Center + QwertyMethods.PolarVector(8, Projectile.rotation - (float)Math.PI / 2f) - Main.screenPosition, null, Color.White, Projectile.rotation, Projectile.Size * .5f, 1f, 0, 0);
+                Main.EntitySpriteDraw(texture, Projectile.Center + QwertyMethods.PolarVector(8, Projectile.rotation - MathF.PI / 2f) - Main.screenPosition, null, Color.White, Projectile.rotation, Projectile.Size * .5f, 1f, 0, 0);
             }
             return false;
         }

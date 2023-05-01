@@ -18,8 +18,6 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Dart.Invader
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Invader Dart");
-            Tooltip.SetDefault("Explodes into a static sphere");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 99;
         }
         public override void SetDefaults()
@@ -32,9 +30,9 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Dart.Invader
             Item.shoot = ProjectileType<InvaderDartP>();
             Item.shootSpeed = 3;
             Item.knockBack = 1;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
             Item.consumable = true;
-            Item.maxStack = 999;
+            Item.maxStack = 9999;
             if (!Main.dedServ)
             {
                 Item.GetGlobalItem<ItemUseGlow>().glowTexture = Request<Texture2D>("QwertyMod/Content/Items/Consumable/Ammo/Dart/Invader/InvaderDart_Glow").Value;
@@ -59,7 +57,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Dart.Invader
         }
         public override void AI()
         {
-            Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(-6, Projectile.rotation + (float)Math.PI / 2), ModContent.DustType<InvaderGlow>(), Vector2.Zero, 100);
+            Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(-6, Projectile.rotation + MathF.PI / 2), ModContent.DustType<InvaderGlow>(), Vector2.Zero, 100);
         }
         public override void Kill(int timeLeft)
         {
@@ -85,7 +83,6 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Dart.Invader
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Sphere");
             Main.projFrames[Projectile.type] = 5;
         }
         public override void SetDefaults()
@@ -103,7 +100,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Dart.Invader
                 NPC target = null;
                 if (QwertyMethods.ClosestNPC(ref target, 150, Projectile.Center))
                 {
-                    Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center, QwertyMethods.PolarVector(3, (target.Center - Projectile.Center).ToRotation()), ModContent.ProjectileType<FriendlyInvaderZap>(), Projectile.damage, 0, Projectile.owner);
+                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, QwertyMethods.PolarVector(3, (target.Center - Projectile.Center).ToRotation()), ModContent.ProjectileType<FriendlyInvaderZap>(), Projectile.damage, 0, Projectile.owner);
                 }
             }
             Projectile.frameCounter++;
@@ -115,7 +112,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Dart.Invader
                     Projectile.frame = 0;
                 }
             }
-            Projectile.rotation += (float)Math.PI / 240f;
+            Projectile.rotation += MathF.PI / 240f;
         }
         public override bool PreDraw(ref Color lightColor)
         {
@@ -150,7 +147,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Dart.Invader
             }
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.localNPCImmunity[target.whoAmI] = -1;
             target.immune[Projectile.owner] = 0;

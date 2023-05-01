@@ -18,8 +18,6 @@ namespace QwertyMod.Content.Items.Weapon.Magic.GalacticEnragement
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Galactic Enragement");
-            Tooltip.SetDefault("All the stars!");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -29,7 +27,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.GalacticEnragement
             Item.DamageType = DamageClass.Magic;
             Item.knockBack = 1;
             Item.value = 50000;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
             Item.width = 38;
             Item.height = 16;
             Item.useStyle = 20;

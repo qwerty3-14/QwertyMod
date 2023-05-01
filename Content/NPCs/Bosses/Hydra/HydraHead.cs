@@ -18,7 +18,7 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Hydra Head");
+            //DisplayName,SetDefault("Hydra Head");
             Main.npcFrameCount[NPC.type] = 6;
         }
 
@@ -38,7 +38,7 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
             NPC.noGravity = true;
             NPC.dontTakeDamage = false;
             NPC.noTileCollide = true;
-            NPC.rotation = (float)Math.PI / 2;
+            NPC.rotation = MathF.PI / 2;
             NPC.lifeMax = 2000;
             if (!Main.dedServ)
             {
@@ -54,14 +54,14 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
 				new FlavorTextBestiaryInfoElement("It's a Hydra!")
             });
         }
-        public override void ScaleExpertStats(int numPlayers, float bossLifeScale)
+        public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
         {
             NPC.lifeMax = 2000;
             NPC.damage = (int)(NPC.damage * .7f);
         }
 
         private NPC Body = null;
-        private float headSpread = 3f * (float)Math.PI / 4f;
+        private float headSpread = 3f * MathF.PI / 4f;
         private bool runOnce = true;
         private float rotateTo;
         private Vector2 flyTo;
@@ -127,7 +127,7 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
                 }
 
                 float rotationOffset = (headSpread * (((float)whichHeadAmI + 1) / ((float)headCount + 1))) - headSpread / 2f;
-                Vector2 offSet = QwertyMethods.PolarVector(400, -(float)Math.PI / 2 + rotationOffset);
+                Vector2 offSet = QwertyMethods.PolarVector(400, -MathF.PI / 2 + rotationOffset);
                 offSet.X *= 1.5f;
 
                 flyTo = Body.Center + offSet;
@@ -140,11 +140,11 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
                         laser.Kill();
                         laser = null;
                     }
-                    if (Main.netMode != 1)
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         if (!beamAttack)
                         {
-                            Projectile.NewProjectile(new EntitySource_Misc(""), NPC.Center + QwertyMethods.PolarVector(50, NPC.rotation), QwertyMethods.PolarVector(5, NPC.rotation), ProjectileType<HydraBreath>(), projDamge, 0f, Main.myPlayer);
+                            Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center + QwertyMethods.PolarVector(50, NPC.rotation), QwertyMethods.PolarVector(5, NPC.rotation), ProjectileType<HydraBreath>(), projDamge, 0f, Main.myPlayer);
                         }
                     }
                     attacking = false;
@@ -156,18 +156,18 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
                 }
                 else
                 {
-                    if (Main.rand.Next(20) == 0 && Main.netMode != 1)
+                    if (Main.rand.NextBool(20) && Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         attacking = true;
                         if (Main.rand.NextFloat(10) < Math.Abs(player.velocity.X) && ((NPC.Center.X > player.Center.X && player.velocity.X > 0) || (NPC.Center.X < player.Center.X && player.velocity.X < 0)))
                         {
                             beamAttack = true;
                             attackTimer = -beamTime;
-                            rotateTo = (float)Math.PI / 2;
+                            rotateTo = MathF.PI / 2;
                         }
                         else
                         {
-                            rotateTo = (player.Center - NPC.Center).ToRotation() + (Main.rand.NextFloat(1, -1) * (float)Math.PI / 8);
+                            rotateTo = (player.Center - NPC.Center).ToRotation() + (Main.rand.NextFloat(1, -1) * MathF.PI / 8);
                             attackTimer = -shotWarming;
                         }
                         NPC.netUpdate = true;
@@ -177,12 +177,12 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
                 {
                     if (attackTimer < -beamTime / 2)
                     {
-                        float dir = NPC.rotation + Main.rand.NextFloat(-1, 1) * (float)Math.PI / 4;
+                        float dir = NPC.rotation + Main.rand.NextFloat(-1, 1) * MathF.PI / 4;
                         Dust.NewDustPerfect(NPC.Center + QwertyMethods.PolarVector(50, NPC.rotation), DustType<HydraBeamGlow>(), QwertyMethods.PolarVector(6, dir));
                     }
                     else if (attackTimer == -beamTime / 2)
                     {
-                        laser = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), NPC.Center.X, NPC.Center.Y, 0f, 0f, ProjectileType<HydraBeamT>(), (int)(projDamge * 1.5f), 3f, Main.myPlayer, NPC.whoAmI, 420)];
+                        laser = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center.X, NPC.Center.Y, 0f, 0f, ProjectileType<HydraBeamT>(), (int)(projDamge * 1.5f), 3f, Main.myPlayer, NPC.whoAmI, 420)];
                     }
                     else
                     {
@@ -245,9 +245,9 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
 
                 for (int h = 0; h < 2; h++)
                 {
-                    if (Main.netMode != 1 && Body.active && Body.type == NPCType<Hydra>())
+                    if (Main.netMode != NetmodeID.MultiplayerClient && Body.active && Body.type == NPCType<Hydra>())
                     {
-                        NPC.NewNPC(new EntitySource_Misc(""), (int)NPC.Center.X, (int)NPC.Center.Y, NPCType<HydraHead>(), ai0: Body.whoAmI, ai1: NPC.ai[1]);
+                        NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Center.X, (int)NPC.Center.Y, NPCType<HydraHead>(), ai0: Body.whoAmI, ai1: NPC.ai[1]);
                     }
                 }
             }

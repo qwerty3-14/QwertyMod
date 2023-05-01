@@ -13,15 +13,15 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Lune Bracelet");
-            Tooltip.SetDefault("Lets you do a weak dash and empowers other dashes slightly");
+            //DisplayName,SetDefault("Lune Bracelet");
+            //Tooltip.SetDefault("Lets you do a weak dash and empowers other dashes slightly");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()
         {
             Item.value = 10000;
-            Item.rare = 1;
+            Item.rare = ItemRarityID.Blue;
 
             Item.width = 28;
             Item.height = 22;

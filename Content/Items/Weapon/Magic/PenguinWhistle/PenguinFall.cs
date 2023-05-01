@@ -11,7 +11,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.PenguinWhistle
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Penguin Fall");
+            //DisplayName,SetDefault("Penguin Fall");
             Main.projFrames[Projectile.type] = 2;
         }
 
@@ -29,7 +29,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.PenguinWhistle
 
         public override void Kill(int timeLeft)
         {
-            NPC Penguin = Main.npc[NPC.NewNPC(new EntitySource_Misc(""), (int)Projectile.Top.X, (int)Projectile.Top.Y, NPCID.Penguin)];
+            NPC Penguin = Main.npc[NPC.NewNPC(Projectile.GetSource_FromThis(), (int)Projectile.Top.X, (int)Projectile.Top.Y, NPCID.Penguin)];
 
             Penguin.SpawnedFromStatue = true;
         }
@@ -80,8 +80,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.PenguinWhistle
             set { Projectile.ai[1] = value; }
         }
 
-        public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit,
-            ref int hitDirection)
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
             // If you'd use the example above, you'd do: isStickingToTarget = 1f;
             // and: targetWhoAmI = (float)target.whoAmI;

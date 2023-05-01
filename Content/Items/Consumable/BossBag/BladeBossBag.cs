@@ -6,6 +6,16 @@ using Terraria.DataStructures;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
 using Terraria.GameContent.Creative;
+using Terraria.ID;
+using Terraria.GameContent.ItemDropRules;
+using QwertyMod.Content.Items.MiscMaterials;
+using QwertyMod.Content.Items.Weapon.Magic.Swordpocalypse;
+using QwertyMod.Content.Items.Weapon.Melee.Javelin.Imperium;
+using QwertyMod.Content.Items.Weapon.Melee.Sword.ImperiousTheIV;
+using QwertyMod.Content.Items.Weapon.Melee.Yoyo.Arsenal;
+using QwertyMod.Content.Items.Weapon.Minion.Longsword;
+using QwertyMod.Content.Items.Weapon.Morphs.Swordquake;
+using QwertyMod.Content.Items.Weapon.Whip.Discipline;
 
 namespace QwertyMod.Content.Items.Consumable.BossBag
 {
@@ -14,18 +24,16 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Treasure Bag");
-            Tooltip.SetDefault("{$CommonItemTooltip.RightClickToOpen}");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 3;
         }
 
         public override void SetDefaults()
         {
-            Item.maxStack = 999;
+            Item.maxStack = 9999;
             Item.consumable = true;
             Item.width = 36;
             Item.height = 34;
-            Item.rare = 9;
+            Item.rare = ItemRarityID.Cyan;
             Item.expert = true;
             //bossBagNPC = mod.NPCType("BladeBoss");
         }
@@ -35,20 +43,12 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
         {
             return true;
         }
-
-        public override void RightClick(Player player)
+        public override void ModifyItemLoot(ItemLoot itemLoot)
         {
-            int[] spawnThese = QwertyMod.ImperiousLoot.Draw(3);
-            player.QuickSpawnItem(new EntitySource_Misc(""), (spawnThese[0]));
-            player.QuickSpawnItem(new EntitySource_Misc(""), (spawnThese[1]));
-            player.QuickSpawnItem(new EntitySource_Misc(""), (spawnThese[2]));
-
-            player.QuickSpawnItem(new EntitySource_Misc(""), 73, 15);
-            if (Main.rand.Next(4) == 0)
-            {
-                player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<SwordsmanBadge>());
-            }
-            player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<ImperiousSheath>());
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<SwordsmanBadge>(), 4));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<ImperiousSheath>(), 1));
+            itemLoot.Add(ItemDropRule.Coins(150000, true));
+            itemLoot.Add(ItemDropRule.FewFromOptions(3, 1, ItemType<BladedArrowShaft>(), ItemType<ImperiousTheIV>(), ItemType<Imperium>(), ItemType<SwordStormStaff>(), ItemType<Arsenal>(), ItemType<Discipline>(), ItemType<SwordMinionStaff>(), ItemType<Swordquake>()));
         }
     }
 }

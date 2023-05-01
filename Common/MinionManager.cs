@@ -55,9 +55,9 @@ namespace QwertyMod.Common
 
         public override void PreUpdate()
         {
-            mythrilPrismRotation += (float)Math.PI / 90f;
+            mythrilPrismRotation += MathF.PI / 90f;
             PriestSynchroniser++;
-            PriestAngle = Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI);
+            PriestAngle = Main.rand.NextFloat(-MathF.PI, MathF.PI);
         }
     }
 }

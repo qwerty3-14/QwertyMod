@@ -4,6 +4,7 @@ using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using Terraria.ID;
 
 namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
 {
@@ -11,15 +12,15 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Leech Scroll");
-            Tooltip.SetDefault("Ranged attacks may summon leech runes that can heal you");
+            //DisplayName,SetDefault("Leech Scroll");
+            //Tooltip.SetDefault("Ranged attacks may summon leech runes that can heal you");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()
         {
             Item.value = 500000;
-            Item.rare = 9;
+            Item.rare = ItemRarityID.Cyan;
             Item.DamageType = DamageClass.Ranged;
             Item.damage = 50;
 
@@ -52,12 +53,9 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
             Projectile.DamageType = DamageClass.Ranged;
         }
 
-        public int runeTimer;
         public float startDistance = 200f;
-        public float direction;
         public float runeSpeed = 10;
         public bool runOnce = true;
-        public float aim;
 
         public override void AI()
         {
@@ -72,12 +70,12 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
             }
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (!target.immortal && !target.SpawnedFromStatue)
             {
                 Player player = Main.player[Projectile.owner];
-                if (Main.rand.Next(2) == 0)
+                if (Main.rand.NextBool(2))
                 {
                     player.statLife++;
                     player.HealEffect(1, true);

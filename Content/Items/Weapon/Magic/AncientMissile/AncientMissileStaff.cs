@@ -18,8 +18,8 @@ namespace QwertyMod.Content.Items.Weapon.Magic.AncientMissile
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Ancient Missile Staff");
-            Tooltip.SetDefault("Fires explosive Ancient Missiles!");
+            //DisplayName,SetDefault("Ancient Missile Staff");
+            //Tooltip.SetDefault("Fires explosive Ancient Missiles!");
             Item.staff[Item.type] = true; //this makes the useStyle animate as a staff instead of as a gun
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
@@ -32,10 +32,10 @@ namespace QwertyMod.Content.Items.Weapon.Magic.AncientMissile
 
             Item.useTime = 21;
             Item.useAnimation = 21;
-            Item.useStyle = 5;
+            Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 2;
             Item.value = 150000;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
             //Item.UseSound = SoundID.Item1;
             Item.autoReuse = true;
             Item.width = 72;
@@ -75,7 +75,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.AncientMissile
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Ancient Missile");
+            //DisplayName,SetDefault("Ancient Missile");
 
             Main.projFrames[Projectile.type] = 2;
         }
@@ -127,10 +127,10 @@ namespace QwertyMod.Content.Items.Weapon.Magic.AncientMissile
                     }
                 }
             }
-            Dust dust = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(26, Projectile.rotation + (float)Math.PI / 2) + QwertyMethods.PolarVector(Main.rand.Next(-6, 6), Projectile.rotation), DustType<AncientGlow>());
+            Dust dust = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(26, Projectile.rotation + MathF.PI / 2) + QwertyMethods.PolarVector(Main.rand.Next(-6, 6), Projectile.rotation), DustType<AncientGlow>());
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.localNPCImmunity[target.whoAmI] = -1;
             target.immune[Projectile.owner] = 0;
@@ -161,7 +161,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.AncientMissile
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Ancient Blast");
+            //DisplayName,SetDefault("Ancient Blast");
         }
 
         public override void SetDefaults()
@@ -190,13 +190,13 @@ namespace QwertyMod.Content.Items.Weapon.Magic.AncientMissile
 
             for (int i = 0; i < 400; i++)
             {
-                float theta = Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI);
+                float theta = Main.rand.NextFloat(-MathF.PI, MathF.PI);
                 Dust dust = Dust.NewDustPerfect(Projectile.Center, DustType<AncientGlow>(), QwertyMethods.PolarVector(Main.rand.Next(2, 20), theta));
                 dust.noGravity = true;
             }
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.localNPCImmunity[target.whoAmI] = -1;
             target.immune[Projectile.owner] = 0;

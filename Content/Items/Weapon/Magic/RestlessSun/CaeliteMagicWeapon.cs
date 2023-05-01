@@ -16,8 +16,8 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RestlessSun
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Restless Sun");
-            Tooltip.SetDefault("Blessed by higher beings this weapon excels in large open areas!");
+            //DisplayName,SetDefault("Restless Sun");
+            //Tooltip.SetDefault("Blessed by higher beings this weapon excels in large open areas!");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -27,10 +27,10 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RestlessSun
             Item.DamageType = DamageClass.Magic;
             Item.knockBack = 1;
             Item.value = 50000;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
             Item.width = 24;
             Item.height = 28;
-            Item.useStyle = 5;
+            Item.useStyle = ItemUseStyleID.Shoot;
             Item.shootSpeed = 12f;
             Item.useTime = 34;
             Item.useAnimation = 34;
@@ -50,7 +50,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RestlessSun
             if (rng == 0)
             {
                 int numberOfProjectiles = 10;
-                float spread = (float)Math.PI / 2;
+                float spread = MathF.PI / 2;
                 float speed = velocity.Length();
                 for (int p = 0; p < numberOfProjectiles; p++)
                 {
@@ -61,9 +61,9 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RestlessSun
             else if (rng < 10)
             {
                 float speed = velocity.Length();
-                direction = (velocity.ToRotation() - (float)Math.PI / 6);
+                direction = (velocity.ToRotation() - MathF.PI / 6);
                 Projectile.NewProjectile(source, position, QwertyMethods.PolarVector(speed, direction), type, damage, knockback, player.whoAmI);
-                direction = (velocity.ToRotation() + (float)Math.PI / 6);
+                direction = (velocity.ToRotation() + MathF.PI / 6);
                 Projectile.NewProjectile(source, position, QwertyMethods.PolarVector(speed, direction), type, damage, knockback, player.whoAmI);
             }
             else
@@ -77,7 +77,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RestlessSun
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Restless Sun");
+            //DisplayName,SetDefault("Restless Sun");
         }
 
         public override void SetDefaults()
@@ -97,9 +97,9 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RestlessSun
         }
 
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Main.rand.Next(10) == 0)
+            if (Main.rand.NextBool(10))
             {
                 target.AddBuff(BuffType<PowerDown>(), 120);
             }
@@ -108,11 +108,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RestlessSun
         }
 
         private NPC target;
-        private NPC possibleTarget;
-        private bool foundTarget;
         private float maxDistance = 10000f;
-        private float distance;
-        private int timer;
         private float speed = 24;
         private bool runOnce = true;
         private float direction;
@@ -126,23 +122,14 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RestlessSun
                 runOnce = false;
             }
             Player player = Main.player[Projectile.owner];
-            for (int k = 0; k < 200; k++)
-            {
-                possibleTarget = Main.npc[k];
-                if (!Collision.CheckAABBvAABBCollision(Projectile.position, Projectile.Size, possibleTarget.position, possibleTarget.Size))
-                {
-                    Projectile.localNPCImmunity[k] = 0;
-                }
-            }
-            if (QwertyMethods.ClosestNPC(ref target, maxDistance, Projectile.Center))
+            if (QwertyMethods.ClosestNPC(ref target, maxDistance, Projectile.Center, specialCondition: delegate (NPC possibleTarget) { return Projectile.localNPCImmunity[possibleTarget.whoAmI] == 0;}))
             {
                 direction = QwertyMethods.SlowRotation(direction, (target.Center - Projectile.Center).ToRotation(), 10f);
             }
-            Projectile.velocity = new Vector2((float)Math.Cos(direction) * speed, (float)Math.Sin(direction) * speed);
-            foundTarget = false;
+            Projectile.velocity = new Vector2(MathF.Cos(direction) * speed, MathF.Sin(direction) * speed);
             maxDistance = 10000f;
             Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<CaeliteDust>());
-            Projectile.rotation += (float)Math.PI / 7.5f;
+            Projectile.rotation += MathF.PI / 7.5f;
         }
 
         public override void Kill(int timeLeft)

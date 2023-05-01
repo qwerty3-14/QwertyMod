@@ -10,12 +10,8 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Rhuthinium
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Rhuthinium Arrow");
-            Tooltip.SetDefault("Does more damage to enemies farther away from you");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 99;
         }
-
-
         public override void SetDefaults()
         {
             Item.shootSpeed = 3f;
@@ -23,11 +19,11 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Rhuthinium
             Item.damage = 12;
             Item.width = 14;
             Item.height = 32;
-            Item.maxStack = 999;
+            Item.maxStack = 9999;
             Item.consumable = true;
             Item.ammo = AmmoID.Arrow;
             Item.knockBack = 2f;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
             Item.value = 5;
             Item.DamageType = DamageClass.Ranged;
         }

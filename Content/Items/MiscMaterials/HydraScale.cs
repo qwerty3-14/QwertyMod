@@ -1,5 +1,6 @@
 using Terraria.ModLoader;
 using Terraria.GameContent.Creative;
+using Terraria.ID;
 
 namespace QwertyMod.Content.Items.MiscMaterials
 {
@@ -7,8 +8,6 @@ namespace QwertyMod.Content.Items.MiscMaterials
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Hydra Scale");
-            Tooltip.SetDefault("");
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 25;
         }
 
@@ -16,11 +15,11 @@ namespace QwertyMod.Content.Items.MiscMaterials
         {
             Item.width = 24;
             Item.height = 30;
-            Item.maxStack = 999;
+            Item.maxStack = 9999;
             Item.value = 100;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
             Item.value = 500;
-            Item.rare = 5;
+            Item.rare = ItemRarityID.Pink;
         }
     }
 }

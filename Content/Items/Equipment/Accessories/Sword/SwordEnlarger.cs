@@ -2,6 +2,7 @@ using QwertyMod.Common;
 using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ModLoader;
+using Terraria.ID;
 
 namespace QwertyMod.Content.Items.Equipment.Accessories.Sword
 {
@@ -9,15 +10,13 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Sword
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Sword Enlarger");
-            Tooltip.SetDefault("Greatly increases the size of your sword!");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()
         {
             Item.value = 200000;
-            Item.rare = 2;
+            Item.rare = ItemRarityID.Green;
 
             Item.width = 16;
             Item.height = 22;
@@ -27,7 +26,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Sword
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.GetModPlayer<CommonStats>().weaponSize += 0.7f;
+            player.GetModPlayer<CommonStats>().weaponSize += 0.25f;
         }
     }
 }

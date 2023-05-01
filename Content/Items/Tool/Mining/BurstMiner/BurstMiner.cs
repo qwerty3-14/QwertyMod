@@ -10,8 +10,8 @@ namespace QwertyMod.Content.Items.Tool.Mining.BurstMiner
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Stream Miner");
-            Tooltip.SetDefault("");
+            //DisplayName,SetDefault("Stream Miner");
+            //Tooltip.SetDefault("");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -24,10 +24,10 @@ namespace QwertyMod.Content.Items.Tool.Mining.BurstMiner
             Item.useAnimation = 9;
             Item.tileBoost = -1;
 
-            Item.useStyle = 1;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.knockBack = 3;
             Item.value = Item.sellPrice(silver: 54);
-            Item.rare = 2;
+            Item.rare = ItemRarityID.Green;
             Item.UseSound = SoundID.Item1;
 
             Item.width = 30;
@@ -39,7 +39,7 @@ namespace QwertyMod.Content.Items.Tool.Mining.BurstMiner
 
         public override void MeleeEffects(Player player, Rectangle hitbox)
         {
-            int num292 = Dust.NewDust(new Vector2((float)hitbox.X, (float)hitbox.Y), hitbox.Width, hitbox.Height, 172, player.velocity.X * 0.2f + (float)(player.direction * 3), player.velocity.Y * 0.2f, 100, default(Color), 0.9f);
+            int num292 = Dust.NewDust(new Vector2((float)hitbox.X, (float)hitbox.Y), hitbox.Width, hitbox.Height, DustID.DungeonWater, player.velocity.X * 0.2f + (float)(player.direction * 3), player.velocity.Y * 0.2f, 100, default(Color), 0.9f);
             Main.dust[num292].noGravity = true;
             Main.dust[num292].velocity *= 0.1f;
         }

@@ -18,8 +18,6 @@ namespace QwertyMod.Content.Items.Weapon.Magic.EnlightenedConfusion
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Enlightened Confusion");
-            Tooltip.SetDefault("Doesd not actually inflict confusion, confusing.");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
         public override void SetDefaults()
@@ -29,10 +27,10 @@ namespace QwertyMod.Content.Items.Weapon.Magic.EnlightenedConfusion
             Item.DamageType = DamageClass.Magic;
             Item.knockBack = 1;
             Item.value = 50000;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
             Item.width = 26;
             Item.height = 18;
-            Item.useStyle = 5;
+            Item.useStyle = ItemUseStyleID.Shoot;
             Item.shootSpeed = 10f;
             Item.useTime = 20;
             Item.useAnimation = 20;
@@ -56,7 +54,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.EnlightenedConfusion
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Sacred Daze");
+            //DisplayName,SetDefault("Sacred Daze");
         }
 
         public override void SetDefaults()
@@ -89,7 +87,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.EnlightenedConfusion
                 Projectile.velocity = Vector2.Zero;
                 for (int i = 0; i < 60; i++)
                 {
-                    float rot = (float)Math.PI * 2f * ((float)i / 30f);
+                    float rot = MathF.PI * 2f * ((float)i / 30f);
                     Dust.NewDustPerfect(Projectile.Center, DustType<CaeliteDust>(), QwertyMethods.PolarVector(6f, rot));
                 }
             }
@@ -103,18 +101,18 @@ namespace QwertyMod.Content.Items.Weapon.Magic.EnlightenedConfusion
             }
             return null;
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             explode();
             if (!target.boss)
             {
                 target.AddBuff(BuffType<Stunned>(), 60);
             }
-            if (Main.rand.Next(2) == 0)
+            if (Main.rand.NextBool(2))
             {
                 target.AddBuff(BuffType<PowerDown>(), 120);
             }
-            if (Main.rand.Next(2) == 0)
+            if (Main.rand.NextBool(2))
             {
                 target.AddBuff(BuffID.CursedInferno, 240);
             }
@@ -124,7 +122,6 @@ namespace QwertyMod.Content.Items.Weapon.Magic.EnlightenedConfusion
             explode();
             return false;
         }
-        bool runOnce = true;
         public override void AI()
         {
             if (!exploded)

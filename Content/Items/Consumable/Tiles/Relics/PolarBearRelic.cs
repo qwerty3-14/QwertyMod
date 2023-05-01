@@ -17,7 +17,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Relics
 	{
 		public override void SetStaticDefaults() 
 		{
-			DisplayName.SetDefault("Polar Exterminator Relic");
+			//DisplayName,SetDefault("Polar Exterminator Relic");
 
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
 		}
@@ -39,7 +39,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Relics
 		public override string RelicTextureName => "QwertyMod/Content/Items/Consumable/Tiles/Relics/PolarBearRelicT";
 		public override void KillMultiTile(int i, int j, int frameX, int frameY) 
         {
-			Item.NewItem(new EntitySource_Misc(""), i * 16, j * 16, 32, 32, ModContent.ItemType<PolarBearRelic>());
+			Item.NewItem(new EntitySource_TileBreak(i, j), i * 16, j * 16, 32, 32, ModContent.ItemType<PolarBearRelic>());
 		}
 	}
 }

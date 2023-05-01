@@ -29,12 +29,9 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Furniture
             TileObjectData.addAlternate(1); //facing right will use the second texture style
             TileObjectData.addTile(Type);
             AddToArray(ref TileID.Sets.RoomNeeds.CountsAsChair);
-            ModTranslation name = CreateMapEntryName();
-            name.SetDefault("Fortress Chair");
-            AddMapEntry(new Color(162, 184, 185), name);
+            AddMapEntry(new Color(162, 184, 185));
             DustType = DustType<FortressDust>();
             HitSound = QwertyMod.FortressBlocks;
-            // disableSmartCursor = true;
             AdjTiles = new int[] { TileID.Chairs };
         }
 

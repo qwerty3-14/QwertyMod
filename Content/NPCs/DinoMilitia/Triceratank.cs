@@ -18,7 +18,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Triceratank");
+            //DisplayName,SetDefault("Triceratank");
             Main.npcFrameCount[NPC.type] = 6;
             NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers(0)
             {
@@ -83,7 +83,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
                     NetMessage.SendData(MessageID.WorldData); // Immediately inform clients of new world state.
             }
         }
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
         {
             for (int i = 0; i < 10; i++)
             {
@@ -110,9 +110,9 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
             if (AI_Timer > walkTime)
             {
                 //Projectile.NewProjectile(NPC.Center.X+(78f*NPC.direction), NPC.Center.Y-34f, 1f*NPC.direction, 0, 102, damage, 3f, Main.myPlayer);
-                if (Main.netMode != 1)
+                if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
-                    Projectile.NewProjectile(new EntitySource_Misc(""), NPC.Center.X + (78f * NPC.direction), NPC.Center.Y - 34f, 10f * NPC.direction, 0, ProjectileType<TankCannonBall>(), damage, 3f, Main.myPlayer);
+                    Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center.X + (78f * NPC.direction), NPC.Center.Y - 34f, 10f * NPC.direction, 0, ProjectileType<TankCannonBall>(), damage, 3f, Main.myPlayer);
                 }
 
                 AI_Timer = 0;
@@ -165,7 +165,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Triceratank's cannon");
+            //DisplayName,SetDefault("Triceratank's cannon");
         }
 
         public override void SetDefaults()
@@ -190,16 +190,16 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
                 SoundEngine.PlaySound(SoundID.Item62, Projectile.position);
                 for (int i = 0; i < 50; i++)
                 {
-                    int dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, 31, 0f, 0f, 100, default(Color), 2f);
+                    int dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.Smoke, 0f, 0f, 100, default(Color), 2f);
                     Main.dust[dustIndex].velocity *= .6f;
                 }
                 // Fire Dust spawn
                 for (int i = 0; i < 80; i++)
                 {
-                    int dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, 6, 0f, 0f, 100, default(Color), 3f);
+                    int dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.Torch, 0f, 0f, 100, default(Color), 3f);
                     Main.dust[dustIndex].noGravity = true;
                     Main.dust[dustIndex].velocity *= 2f;
-                    dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, 6, 0f, 0f, 100, default(Color), 2f);
+                    dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.Torch, 0f, 0f, 100, default(Color), 2f);
                     Main.dust[dustIndex].velocity *= 1f;
                 }
                 runOnce = false;
@@ -213,20 +213,20 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
             Projectile.height = 75;
             Projectile.position.X = Projectile.position.X - (float)(Projectile.width / 2);
             Projectile.position.Y = Projectile.position.Y - (float)(Projectile.height / 2);
-            Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center, new Vector2(0, 0), ProjectileType<TankCannonBallExplosion>(), Projectile.damage, Projectile.knockBack, player.whoAmI);
+            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, new Vector2(0, 0), ProjectileType<TankCannonBallExplosion>(), Projectile.damage, Projectile.knockBack, player.whoAmI);
             SoundEngine.PlaySound(SoundID.Item62, Projectile.position);
             for (int i = 0; i < 50; i++)
             {
-                int dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, 31, 0f, 0f, 100, default(Color), 2f);
+                int dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.Smoke, 0f, 0f, 100, default(Color), 2f);
                 Main.dust[dustIndex].velocity *= 1.4f;
             }
             // Fire Dust spawn
             for (int i = 0; i < 80; i++)
             {
-                int dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, 6, 0f, 0f, 100, default(Color), 3f);
+                int dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.Torch, 0f, 0f, 100, default(Color), 3f);
                 Main.dust[dustIndex].noGravity = true;
                 Main.dust[dustIndex].velocity *= 5f;
-                dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, 6, 0f, 0f, 100, default(Color), 2f);
+                dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.Torch, 0f, 0f, 100, default(Color), 2f);
                 Main.dust[dustIndex].velocity *= 3f;
             }
         }
@@ -236,7 +236,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Tank Cannon Ball Explosion");
+            //DisplayName,SetDefault("Tank Cannon Ball Explosion");
         }
 
         public override void SetDefaults()

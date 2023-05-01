@@ -12,8 +12,8 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("The Blue Sphere");
-            Tooltip.SetDefault("Magic attacks pierce 2 extra enemies\n Projectiles that normally don't pierce will use local immunity\n10% reduced magic damage\nExtra pierces will do reduced damage when hitting the same target multiple times");
+            //DisplayName,SetDefault("The Blue Sphere");
+            //Tooltip.SetDefault("Magic attacks pierce 2 extra enemies\n Projectiles that normally don't pierce will use local immunity\n10% reduced magic damage\nExtra pierces will do reduced damage when hitting the same target multiple times");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -67,13 +67,13 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
             }
         }
 
-        public override void ModifyHitNPC(Projectile projectile, NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitNPC(Projectile projectile, NPC target, ref NPC.HitModifiers modifiers)
         {
             if (gotBoost && projectile.penetrate > 0)
             {
                 if (projectile.penetrate <= Main.player[projectile.owner].GetModPlayer<MagicPierePlayer>().pierceBoost)
                 {
-                    damage = (int)((float)damage / (float)Math.Pow(2, hitCounts[target.whoAmI]));
+                    modifiers.FinalDamage *= (1f / MathF.Pow(2, hitCounts[target.whoAmI]));
                 }
                 if (projectile.penetrate <= Main.player[projectile.owner].GetModPlayer<MagicPierePlayer>().pierceBoost || hitCounts[target.whoAmI] < 1)
                 {

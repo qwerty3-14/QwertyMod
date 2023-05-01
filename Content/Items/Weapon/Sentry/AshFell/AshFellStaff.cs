@@ -15,8 +15,8 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.AshFell
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Ash  Fell Staff");
-            Tooltip.SetDefault("Thi Sentry suffocates your foes with ash missiles!");
+            //DisplayName,SetDefault("Ash  Fell Staff");
+            //Tooltip.SetDefault("Thi Sentry suffocates your foes with ash missiles!");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
@@ -25,14 +25,14 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.AshFell
         public override void SetDefaults()
         {
             Item.value = 54000;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
             Item.damage = 22;
             Item.knockBack = 3f;
             Item.width = Item.height = 44;
             Item.mana = 20;
             Item.useTime = 25;
             Item.useAnimation = 25;
-            Item.useStyle = 1;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.noMelee = true;
             Item.UseSound = SoundID.Item44;
             Item.DamageType = DamageClass.Summon;
@@ -50,7 +50,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.AshFell
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Ash fell");
+            //DisplayName,SetDefault("Ash fell");
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
         }
         public override void SetDefaults()
@@ -92,7 +92,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.AshFell
                     {
                         //shoot
                         missileCounters[i] = 0;
-                        Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center + QwertyMethods.PolarVector(2f, Projectile.rotation) + QwertyMethods.PolarVector(missileLoadPosition * (i == 0 ? 1 : -1), Projectile.rotation + (float)Math.PI / 2),
+                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center + QwertyMethods.PolarVector(2f, Projectile.rotation) + QwertyMethods.PolarVector(missileLoadPosition * (i == 0 ? 1 : -1), Projectile.rotation + MathF.PI / 2),
                             QwertyMethods.PolarVector(2f, Projectile.rotation), ModContent.ProjectileType<AshMissile>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
                     }
                 }
@@ -104,7 +104,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.AshFell
             for (int i = 0; i < missileCounters.Length; i++)
             {
                 Main.EntitySpriteDraw(missile,
-                    Projectile.Center + QwertyMethods.PolarVector(2f, Projectile.rotation) + QwertyMethods.PolarVector(missileLoadPosition * (float)missileCounters[i] / missileTime * (i == 0 ? 1 : -1), Projectile.rotation + (float)Math.PI / 2) - Main.screenPosition,
+                    Projectile.Center + QwertyMethods.PolarVector(2f, Projectile.rotation) + QwertyMethods.PolarVector(missileLoadPosition * (float)missileCounters[i] / missileTime * (i == 0 ? 1 : -1), Projectile.rotation + MathF.PI / 2) - Main.screenPosition,
                     missile.Frame(), lightColor, Projectile.rotation, missile.Size() * .5f, 1f, SpriteEffects.None, 0);
             }
 
@@ -159,10 +159,10 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.AshFell
                     Projectile.width = Projectile.height = blastSize;
                     Projectile.Center = oldCenter;
                 }
-                Projectile.rotation += (float)Math.PI / 10;
+                Projectile.rotation += MathF.PI / 10;
                 for (int d = 0; d < 5; d++)
                 {
-                    Dust dust = Dust.NewDustPerfect(Projectile.Center, 36, QwertyMethods.PolarVector(4, Projectile.rotation + ((float)Math.PI * 2 * d) / 5), Scale: .5f);
+                    Dust dust = Dust.NewDustPerfect(Projectile.Center, 36, QwertyMethods.PolarVector(4, Projectile.rotation + (MathF.PI * 2 * d) / 5), Scale: .5f);
                     dust.noGravity = true;
                 }
                 Projectile.velocity = Vector2.Zero;
@@ -179,7 +179,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.AshFell
             }
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (Projectile.timeLeft > finalTime)
             {
@@ -214,7 +214,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.AshFell
                 {
                     if (Main.chest[c].item[0].type == ItemID.DarkLance || Main.chest[c].item[0].type == ItemID.Flamelash || Main.chest[c].item[0].type == ItemID.FlowerofFire || Main.chest[c].item[0].type == ItemID.Sunfury || Main.chest[c].item[0].type == ItemID.HellwingBow)
                     {
-                        if (Main.rand.Next(4) == 0)
+                        if (Main.rand.NextBool(4))
                         {
                             for (int i = 0; i < Main.chest[c].item.Length; i++)
                             {

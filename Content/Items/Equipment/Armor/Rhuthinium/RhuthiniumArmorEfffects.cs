@@ -6,6 +6,7 @@ using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using Terraria.ID;
 
 namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
 {
@@ -28,34 +29,34 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
             if (summonSet && summonCounter > 60)
             {
                 summonCounter = 0;
-                float rot = Main.rand.NextFloat() * 2f * (float)Math.PI;
-                Projectile.NewProjectile(new EntitySource_Misc(""), position + QwertyMethods.PolarVector(240, rot), QwertyMethods.PolarVector(4f, rot + (float)Math.PI), ProjectileType<RhuthimisWraith>(), (int)(30 * Player.GetDamage(DamageClass.Summon).Multiplicative), (int)(5f + Player.GetKnockback(DamageClass.Summon).Multiplicative), Player.whoAmI);
+                float rot = Main.rand.NextFloat() * 2f * MathF.PI;
+                Projectile.NewProjectile(new EntitySource_Misc("SetBonus_Rhuthinium"), position + QwertyMethods.PolarVector(240, rot), QwertyMethods.PolarVector(4f, rot + MathF.PI), ProjectileType<RhuthimisWraith>(), (int)(30 * Player.GetDamage(DamageClass.Summon).Multiplicative), (int)(5f + Player.GetKnockback(DamageClass.Summon).Multiplicative), Player.whoAmI);
             }
         }
 
-        public override void OnHitNPC(Item item, NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (item.CountsAsClass(DamageClass.Melee) && meleeSet && target.life < damage)
+            if (hit.DamageType == DamageClass.Melee && meleeSet && target.life < damageDone)
             {
                 Player.AddBuff(BuffType<RhuthiniumMight>(), 300);
             }
             RhuthimisWraith(target.Center);
         }
 
-        public override void OnHitNPCWithProj(Projectile proj, NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (proj.CountsAsClass(DamageClass.Melee) && meleeSet && target.life < damage)
+            if (proj.CountsAsClass(DamageClass.Melee) && meleeSet && target.life < damageDone)
             {
                 Player.AddBuff(BuffType<RhuthiniumMight>(), 300);
             }
-            if (proj.CountsAsClass(DamageClass.Magic) && magicSet && crit)
+            if (proj.CountsAsClass(DamageClass.Magic) && magicSet && hit.Crit)
             {
-                Player.statMana += damage / 2;
-                Player.ManaEffect(damage / 2);
+                Player.statMana += damageDone / 2;
+                Player.ManaEffect(damageDone / 2);
                 Player.AddBuff(BuffType<RhuthiniumMagic>(), 300);
                 for (int num71 = 0; num71 < 5; num71++)
                 {
-                    int num72 = Dust.NewDust(Player.position, Player.width, Player.height, 45, 0f, 0f, 255, default(Color), (float)Main.rand.Next(20, 26) * 0.1f);
+                    int num72 = Dust.NewDust(Player.position, Player.width, Player.height, DustID.ManaRegeneration, 0f, 0f, 255, default(Color), (float)Main.rand.Next(20, 26) * 0.1f);
                     Main.dust[num72].noLight = true;
                     Main.dust[num72].noGravity = true;
                     Main.dust[num72].velocity *= 0.5f;
@@ -63,8 +64,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
             }
             RhuthimisWraith(target.Center);
         }
-        [Obsolete]
-        public override void Hurt(bool pvp, bool quiet, double damage, int hitDirection, bool crit)
+        public override void OnHurt(Player.HurtInfo info)
         {
             rangedCounter = 0;
         }
@@ -92,7 +92,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("RhuthimisWraith");
+            //DisplayName,SetDefault("RhuthimisWraith");
         }
 
         public override void SetDefaults()
@@ -108,7 +108,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
             Projectile.DamageType = DamageClass.Summon;
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.localNPCImmunity[target.whoAmI] = -1;
             target.immune[Projectile.owner] = 0;
@@ -116,7 +116,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
 
         public override void AI()
         {
-            Projectile.rotation = Projectile.velocity.ToRotation() + (float)Math.PI / 2;
+            Projectile.rotation = Projectile.velocity.ToRotation() + MathF.PI / 2;
             if (Projectile.timeLeft > 80)
             {
                 Projectile.alpha = (int)(255f * (40f - (120f - Projectile.timeLeft)) / 40f);

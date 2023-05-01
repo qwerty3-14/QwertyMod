@@ -11,7 +11,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.MiniTank
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Tank!!");
+            //DisplayName,SetDefault("Tank!!");
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             ProjectileID.Sets.MinionShot[Projectile.type] = true;
         }
@@ -42,17 +42,17 @@ namespace QwertyMod.Content.Items.Weapon.Minion.MiniTank
                 SoundEngine.PlaySound(SoundID.Item62, Projectile.position);
                 for (int i = 0; i < 4; i++)
                 {
-                    int dustIndex = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, 31, 0f, 0f, 100, default(Color), 1f);
+                    int dustIndex = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Smoke, 0f, 0f, 100, default(Color), 1f);
                     Main.dust[dustIndex].velocity *= .6f;
                     Main.dust[dustIndex].noGravity = true;
                 }
                 // Fire Dust spawn
                 for (int i = 0; i < 8; i++)
                 {
-                    int dustIndex = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, 6, 0f, 0f, 100, default(Color), 1.5f);
+                    int dustIndex = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Torch, 0f, 0f, 100, default(Color), 1.5f);
                     Main.dust[dustIndex].noGravity = true;
                     Main.dust[dustIndex].velocity *= 2f;
-                    dustIndex = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, 6, 0f, 0f, 100, default(Color), 1f);
+                    dustIndex = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Torch, 0f, 0f, 100, default(Color), 1f);
                     Main.dust[dustIndex].velocity *= 1f;
                     Main.dust[dustIndex].noGravity = true;
                 }
@@ -60,7 +60,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.MiniTank
             }
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.localNPCImmunity[target.whoAmI] = -1;
             target.immune[Projectile.owner] = 0;
@@ -81,18 +81,18 @@ namespace QwertyMod.Content.Items.Weapon.Minion.MiniTank
             SoundEngine.PlaySound(SoundID.Item62, Projectile.position);
             for (int i = 0; i < 4; i++)
             {
-                float theta = Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI);
-                Dust dustIndex = Dust.NewDustPerfect(Projectile.Center, 31, QwertyMethods.PolarVector(Main.rand.NextFloat() * 2f, theta), Scale: .5f);
+                float theta = Main.rand.NextFloat(-MathF.PI, MathF.PI);
+                Dust dustIndex = Dust.NewDustPerfect(Projectile.Center, DustID.Smoke, QwertyMethods.PolarVector(Main.rand.NextFloat() * 2f, theta), Scale: .5f);
                 dustIndex.noGravity = true;
             }
             // Fire Dust spawn
             for (int i = 0; i < 8; i++)
             {
-                float theta = Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI);
-                Dust dustIndex = Dust.NewDustPerfect(Projectile.Center, 6, QwertyMethods.PolarVector(Main.rand.NextFloat() * 2f, theta), Scale: .5f);
+                float theta = Main.rand.NextFloat(-MathF.PI, MathF.PI);
+                Dust dustIndex = Dust.NewDustPerfect(Projectile.Center, DustID.Torch, QwertyMethods.PolarVector(Main.rand.NextFloat() * 2f, theta), Scale: .5f);
                 dustIndex.noGravity = true;
-                theta = Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI);
-                dustIndex = Dust.NewDustPerfect(Projectile.Center, 6, QwertyMethods.PolarVector(Main.rand.NextFloat() * 2f, theta), Scale: 1f);
+                theta = Main.rand.NextFloat(-MathF.PI, MathF.PI);
+                dustIndex = Dust.NewDustPerfect(Projectile.Center, DustID.Torch, QwertyMethods.PolarVector(Main.rand.NextFloat() * 2f, theta), Scale: 1f);
                 dustIndex.noGravity = true;
             }
         }
@@ -102,7 +102,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.MiniTank
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Tank!!");
+            //DisplayName,SetDefault("Tank!!");
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             ProjectileID.Sets.MinionShot[Projectile.type] = true;
         }
@@ -122,7 +122,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.MiniTank
             Projectile.DamageType = DamageClass.Summon;
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.localNPCImmunity[target.whoAmI] = -1;
             target.immune[Projectile.owner] = 0;

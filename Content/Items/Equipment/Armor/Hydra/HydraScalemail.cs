@@ -13,15 +13,13 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Hydra
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Hydra Scalemail");
-            Tooltip.SetDefault("+0.5 life/sec regen rate" + "\n+1 max minions");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()
         {
             Item.value = 50000;
-            Item.rare = 5;
+            Item.rare = ItemRarityID.Pink;
 
             Item.width = 30;
             Item.height = 20;

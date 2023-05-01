@@ -4,6 +4,7 @@ using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using Terraria.ID;
 
 namespace QwertyMod.Content.Items.Weapon.Magic.PenguinWhistle
 {
@@ -11,8 +12,8 @@ namespace QwertyMod.Content.Items.Weapon.Magic.PenguinWhistle
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Penguin Whistle");
-            Tooltip.SetDefault("Calls flying penguins!");
+            //DisplayName,SetDefault("Penguin Whistle");
+            //Tooltip.SetDefault("Calls flying penguins!");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -25,11 +26,11 @@ namespace QwertyMod.Content.Items.Weapon.Magic.PenguinWhistle
             Item.useTime = 39;
             Item.useAnimation = 39;
             //Item.reuseDelay = 60;
-            Item.useStyle = 3;
+            Item.useStyle = ItemUseStyleID.HoldUp;
             Item.noMelee = true;
             Item.knockBack = 1f;
             Item.value = 100000;
-            Item.rare = 1;
+            Item.rare = ItemRarityID.Blue;
 
             Item.autoReuse = true;
             Item.shoot = ProjectileType<PenguinFall>();

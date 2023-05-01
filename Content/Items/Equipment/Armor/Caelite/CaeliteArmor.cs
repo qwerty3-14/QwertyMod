@@ -15,15 +15,15 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Caelite
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Caelite Armor");
-            Tooltip.SetDefault("Magic attacks against airborn enemies do 20% more damage" + "\nMelee attacks against grounded enemies do 20% more damage");
+            //DisplayName,SetDefault("Caelite Armor");
+            //Tooltip.SetDefault("Magic attacks against airborn enemies do 20% more damage" + "\nMelee attacks against grounded enemies do 20% more damage");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()
         {
             Item.value = 30000;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
 
             Item.width = 22;
             Item.height = 12;
@@ -76,9 +76,9 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Caelite
             setBonus = false;
         }
 
-        public override void OnHitNPCWithProj(Projectile proj, NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Player.GetModPlayer<CaeliteHelmEffect>().hasEffect && damage > target.life && (proj.CountsAsClass(DamageClass.Magic) || proj.CountsAsClass(DamageClass.Melee)))
+            if (Player.GetModPlayer<CaeliteHelmEffect>().hasEffect && damageDone > target.life && (proj.CountsAsClass(DamageClass.Magic) || proj.CountsAsClass(DamageClass.Melee)))
             {
                 target.value = (int)(target.value * 1.25f);
             }
@@ -91,7 +91,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Caelite
 
         public override bool InstancePerEntity => true;
 
-        public override void ModifyHitNPC(Projectile projectile, NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitNPC(Projectile projectile, NPC target, ref NPC.HitModifiers modifiers)
         {
             if (g)
             {
@@ -104,11 +104,11 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Caelite
                 {
                     if (Main.player[projectile.owner].GetModPlayer<CaeliteSetBonus>().setBonus)
                     {
-                        damage = (int)(damage * 1.25f);
+                        modifiers.FinalDamage *= 1.25f;
                     }
                     else
                     {
-                        damage = (int)(damage * 1.2f);
+                        modifiers.FinalDamage *= 1.25f;
                     }
                 }
                 if (projectile.CountsAsClass(DamageClass.Melee) && WorldUtils.Find(origin, Searches.Chain(new Searches.Down(4), new GenCondition[]
@@ -118,11 +118,11 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Caelite
                 {
                     if (Main.player[projectile.owner].GetModPlayer<CaeliteSetBonus>().setBonus)
                     {
-                        damage = (int)(damage * 1.25f);
+                        modifiers.FinalDamage *= 1.25f;
                     }
                     else
                     {
-                        damage = (int)(damage * 1.2f);
+                        modifiers.FinalDamage *= 1.25f;
                     }
                 }
             }

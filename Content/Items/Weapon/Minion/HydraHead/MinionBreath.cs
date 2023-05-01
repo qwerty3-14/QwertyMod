@@ -10,7 +10,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.HydraHead
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Minion Breath");
+            //DisplayName,SetDefault("Minion Breath");
             Main.projFrames[Projectile.type] = 1;
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             ProjectileID.Sets.MinionShot[Projectile.type] = true;

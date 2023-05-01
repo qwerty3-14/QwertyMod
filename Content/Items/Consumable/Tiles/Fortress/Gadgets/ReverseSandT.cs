@@ -18,9 +18,9 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
 
             DustType = DustType<DnasDust>();
 
-            ModTranslation name = CreateMapEntryName();
-            name.SetDefault("Dnas");
-            AddMapEntry(Color.Blue, name);
+            //ModTranslation name = CreateMapEntryName();
+            //name.SetDefault("Dnas");
+            //AddMapEntry(Color.Blue, name);
 
             ItemDrop = ItemType<ReverseSand>();
         }
@@ -30,7 +30,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
             if (!Main.tile[i, j - 1].HasTile)
             {
                 WorldGen.KillTile(i, j, noItem: true);
-                Projectile.NewProjectile(new EntitySource_Misc(""), new Vector2(i, j) * 16 + new Vector2(8, 8), Vector2.Zero, ProjectileType<ReverseSandBall>(), 50, 0f, Main.myPlayer);
+                Projectile.NewProjectile(new EntitySource_TileBreak(i, j), new Vector2(i, j) * 16 + new Vector2(8, 8), Vector2.Zero, ProjectileType<ReverseSandBall>(), 50, 0f, Main.myPlayer);
             }
         }
 
@@ -39,7 +39,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
             if (!Main.tile[i, j - 1].HasTile)
             {
                 WorldGen.KillTile(i, j, noItem: true);
-                Projectile.NewProjectile(new EntitySource_Misc(""), new Vector2(i, j) * 16 + new Vector2(8, 8), Vector2.Zero, ProjectileType<ReverseSandBall>(), 50, 0f, Main.myPlayer);
+                Projectile.NewProjectile(new EntitySource_TileBreak(i, j), new Vector2(i, j) * 16 + new Vector2(8, 8), Vector2.Zero, ProjectileType<ReverseSandBall>(), 50, 0f, Main.myPlayer);
             }
         }
 
@@ -49,7 +49,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
             if (!Main.tile[i, j - 1].HasTile)
             {
                 WorldGen.KillTile(i, j, noItem: true);
-                Projectile.NewProjectile(new EntitySource_Misc(""), entityCoord, Vector2.Zero, ProjectileType<ReverseSandBall>(), 50, 0f, Main.myPlayer);
+                Projectile.NewProjectile(new EntitySource_TileBreak(i, j), entityCoord, Vector2.Zero, ProjectileType<ReverseSandBall>(), 50, 0f, Main.myPlayer);
             }
 
             //if(Main.LocalPlayer.Top.Y- entityCoord.Y <16 && Main.LocalPlayer.Top.Y - entityCoord.Y >0 && Math.Abs(Main.LocalPlayer.Top.X-entityCoord.X)<16)
@@ -79,7 +79,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
             // Main.NewText(Projectile.width);
             Projectile.width = 14;
             Projectile.height = 14;
-            if (Main.rand.Next(2) == 0)
+            if (Main.rand.NextBool(2))
             {
                 int num129 = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustType<DnasDust>(), 0f, Projectile.velocity.Y / 2f, 0, default(Color), 1f);
                 Dust dust = Main.dust[num129];

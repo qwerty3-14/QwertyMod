@@ -14,8 +14,8 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.RunicThrow
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Runic Throw");
-            Tooltip.SetDefault("Ridiculously long string" + "\nRight click to zoom");
+            //DisplayName,SetDefault("Runic Throw");
+            //Tooltip.SetDefault("Ridiculously long string" + "\nRight click to zoom");
 
             // These are all related to gamepad controls and don't seem to affect anything else
             ItemID.Sets.Yoyo[Item.type] = true;
@@ -26,7 +26,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.RunicThrow
 
         public override void SetDefaults()
         {
-            Item.useStyle = 5;
+            Item.useStyle = ItemUseStyleID.Shoot;
             Item.width = 30;
             Item.height = 26;
             Item.useAnimation = 25;
@@ -35,7 +35,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.RunicThrow
             Item.knockBack = 2.5f;
             Item.damage = 130;
             Item.value = 500000;
-            Item.rare = 9;
+            Item.rare = ItemRarityID.Cyan;
             Item.DamageType = DamageClass.MeleeNoSpeed;
             Item.channel = true;
             Item.noMelee = true;

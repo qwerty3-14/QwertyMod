@@ -13,8 +13,8 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Spear.Hydrent
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Fire Hydrent");
-            Tooltip.SetDefault("Shoots hydra breath");
+            //DisplayName,SetDefault("Fire Hydrent");
+            //Tooltip.SetDefault("Shoots hydra breath");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.Spears[Item.type] = true;
         }
@@ -22,7 +22,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Spear.Hydrent
         public override void SetDefaults()
         {
             Item.damage = 100;
-            Item.useStyle = 5;
+            Item.useStyle = ItemUseStyleID.Shoot;
             Item.useAnimation = 18;
             Item.useTime = 18;
             Item.shootSpeed = 3.7f;
@@ -31,7 +31,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Spear.Hydrent
             Item.height = 104;
             Item.scale = 1f;
             Item.value = 250000;
-            Item.rare = 5;
+            Item.rare = ItemRarityID.Pink;
 
             Item.DamageType = DamageClass.Melee;
             Item.noMelee = true; // Important because the spear is actually a projectile instead of an Item. This prevents the melee hitbox of this Item.
@@ -52,7 +52,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Spear.Hydrent
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Fire Hydrent");
+            //DisplayName,SetDefault("Fire Hydrent");
         }
 
         public override void SetDefaults()
@@ -78,13 +78,11 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Spear.Hydrent
             set { Projectile.ai[0] = value; }
         }
 
-        public int debugTimer;
         public float movefactSpeed = 1f;
         public float maxDistance = 720;
         public float vel;
         public bool runOnce = true;
         private int streamCounter = 0;
-        float boost = 0f;
         public override void AI()
         {
             // Since we access the owner player instance so much, it's useful to create a helper local variable for this
@@ -93,7 +91,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Spear.Hydrent
             // Here we set some of the projectile's owner properties, such as held item and itemtime, along with projectile direction and position based on the player
             Vector2 ownerMountedCenter = projOwner.RotatedRelativePoint(projOwner.MountedCenter, true);
             vel = maxDistance / projOwner.itemAnimationMax / 2;
-            Projectile.velocity = new Vector2((float)Math.Cos(Projectile.velocity.ToRotation()) * vel, (float)Math.Sin(Projectile.velocity.ToRotation()) * vel);
+            Projectile.velocity = new Vector2(MathF.Cos(Projectile.velocity.ToRotation()) * vel, MathF.Sin(Projectile.velocity.ToRotation()) * vel);
             Projectile.direction = projOwner.direction;
             projOwner.heldProj = Projectile.whoAmI;
             projOwner.itemTime = projOwner.itemAnimation;
@@ -119,7 +117,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Spear.Hydrent
                             streamCounter++;
                             if (streamCounter % 6 == 0)
                             {
-                                Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center + QwertyMethods.PolarVector((Projectile.velocity * movementFactor).Length(), Projectile.rotation - (3 * (float)Math.PI / 4)) + QwertyMethods.PolarVector(-7f + (7f * ((streamCounter / 6) % 3)), Projectile.rotation - (1 * (float)Math.PI / 4)), QwertyMethods.PolarVector(16f, Projectile.rotation - (3 * (float)Math.PI / 4)), ProjectileType<HydrentBreath>(), (int)(Projectile.damage * .4f), Projectile.knockBack, Projectile.owner);
+                                Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center + QwertyMethods.PolarVector((Projectile.velocity * movementFactor).Length(), Projectile.rotation - (3 * MathF.PI / 4)) + QwertyMethods.PolarVector(-7f + (7f * ((streamCounter / 6) % 3)), Projectile.rotation - (1 * MathF.PI / 4)), QwertyMethods.PolarVector(16f, Projectile.rotation - (3 * MathF.PI / 4)), ProjectileType<HydrentBreath>(), (int)(Projectile.damage * .4f), Projectile.knockBack, Projectile.owner);
                             }
                         }
                     }
@@ -151,16 +149,9 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Spear.Hydrent
             {
                 Projectile.rotation -= MathHelper.ToRadians(90f);
             }
-            /*
-            if (!noDust)
-            {
-                Dust k = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(-4, Projectile.rotation - (3 * (float)Math.PI / 4)) + QwertyMethods.PolarVector(4, Projectile.rotation - (1 * (float)Math.PI / 4)), 172);
-                k.velocity = Vector2.Zero;
-            }
-            */
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.localNPCImmunity[target.whoAmI] = 10;
             target.immune[Projectile.owner] = 0;
@@ -172,7 +163,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Spear.Hydrent
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Hydrent Breath");
+            //DisplayName,SetDefault("Hydrent Breath");
         }
 
         public override void SetDefaults()

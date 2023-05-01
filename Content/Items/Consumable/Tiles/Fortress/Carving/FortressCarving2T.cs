@@ -29,8 +29,6 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Carving
             DustType = DustType<FortressDust>();
             HitSound = QwertyMod.FortressBlocks;
 
-            ModTranslation name = CreateMapEntryName();
-            name.SetDefault("Fortress Carving");
             AddMapEntry(new Color(162, 184, 185));
         }
 

@@ -15,7 +15,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.LeechRune
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Leech Rune");
+            //DisplayName,SetDefault("Leech Rune");
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
             Main.projPet[Projectile.type] = true;
@@ -65,7 +65,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.LeechRune
 
             if (runOnce)
             {
-                if (Main.netMode != 2)
+                if (Main.netMode != NetmodeID.Server)
                 {
                     moveTo = Projectile.Center;
                     Projectile.netUpdate = true;
@@ -84,18 +84,18 @@ namespace QwertyMod.Content.Items.Weapon.Minion.LeechRune
                     }
                     for (int i = 0; i < minionRingDustQty; i++)
                     {
-                        float theta = Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI);
+                        float theta = Main.rand.NextFloat(-MathF.PI, MathF.PI);
 
                         Dust dust = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(minionRingRadius, theta), DustType<LeechRuneDeath>(), QwertyMethods.PolarVector(-minionRingRadius / 10, theta));
                         dust.noGravity = true;
                     }
-                    if (Main.netMode != 2)
+                    if (Main.netMode != NetmodeID.Server)
                     {
-                        Projectile.ai[1] = Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI);
+                        Projectile.ai[1] = Main.rand.NextFloat(-MathF.PI, MathF.PI);
                         Projectile.netUpdate = true;
                     }
-                    moveTo = new Vector2(target.Center.X + (float)Math.Cos(Projectile.ai[1]) * 120, target.Center.Y + (float)Math.Sin(Projectile.ai[1]) * 180);
-                    if (Main.netMode != 2)
+                    moveTo = new Vector2(target.Center.X + MathF.Cos(Projectile.ai[1]) * 120, target.Center.Y + MathF.Sin(Projectile.ai[1]) * 180);
+                    if (Main.netMode != NetmodeID.Server)
                     {
                         Projectile.netUpdate = true;
                     }
@@ -114,7 +114,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.LeechRune
                         SoundEngine.PlaySound(SoundID.Item8, Projectile.Center);
                         for (int i = 0; i < minionRingDustQty; i++)
                         {
-                            float theta = Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI);
+                            float theta = Main.rand.NextFloat(-MathF.PI, MathF.PI);
                             Dust dust = Dust.NewDustPerfect(Projectile.Center, DustType<LeechRuneDeath>(), QwertyMethods.PolarVector(minionRingRadius / 10, theta));
                             dust.noGravity = true;
                         }
@@ -123,7 +123,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.LeechRune
                 }
                 if (charging)
                 {
-                    Projectile.velocity = new Vector2((float)Math.Cos(rot), (float)Math.Sin(rot)) * chargeSpeed;
+                    Projectile.velocity = new Vector2(MathF.Cos(rot), MathF.Sin(rot)) * chargeSpeed;
                 }
                 else
                 {
@@ -141,27 +141,27 @@ namespace QwertyMod.Content.Items.Weapon.Minion.LeechRune
                     SoundEngine.PlaySound(SoundID.Item8, Projectile.Center);
                     for (int i = 0; i < minionRingDustQty; i++)
                     {
-                        float theta = Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI);
+                        float theta = Main.rand.NextFloat(-MathF.PI, MathF.PI);
                         Dust dust = Dust.NewDustPerfect(Projectile.Center, DustType<LeechRuneDeath>(), QwertyMethods.PolarVector(minionRingRadius / 10, theta));
                         dust.noGravity = true;
                     }
                 }
                 if ((Projectile.Center - player.Center).Length() > 300)
                 {
-                    if (Main.netMode != 2)
+                    if (Main.netMode != NetmodeID.Server)
                     {
-                        Projectile.ai[1] = Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI);
+                        Projectile.ai[1] = Main.rand.NextFloat(-MathF.PI, MathF.PI);
                         Projectile.netUpdate = true;
                     }
                     for (int i = 0; i < minionRingDustQty; i++)
                     {
-                        float theta = Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI);
+                        float theta = Main.rand.NextFloat(-MathF.PI, MathF.PI);
 
                         Dust dust = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(minionRingRadius, theta), DustType<LeechRuneDeath>(), QwertyMethods.PolarVector(-minionRingRadius / 10, theta));
                         dust.noGravity = true;
                     }
                     noTargetTimer = 0;
-                    moveTo = new Vector2(player.Center.X + (float)Math.Cos(Projectile.ai[1]) * 100, player.Center.Y + (float)Math.Sin(Projectile.ai[1]) * 100);
+                    moveTo = new Vector2(player.Center.X + MathF.Cos(Projectile.ai[1]) * 100, player.Center.Y + MathF.Sin(Projectile.ai[1]) * 100);
                     justTeleported = true;
                 }
 
@@ -177,12 +177,12 @@ namespace QwertyMod.Content.Items.Weapon.Minion.LeechRune
             }
 
             Projectile.frameCounter++;
-            Projectile.rotation += Math.Sign(Projectile.velocity.X) * (float)Math.PI / 60f;
+            Projectile.rotation += Math.Sign(Projectile.velocity.X) * MathF.PI / 60f;
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (!target.immortal && !target.SpawnedFromStatue && Main.rand.Next(5) == 0)
+            if (!target.immortal && !target.SpawnedFromStatue && Main.rand.NextBool(5))
             {
                 Player player = Main.player[Projectile.owner];
                 player.statLife++;

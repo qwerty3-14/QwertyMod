@@ -9,6 +9,8 @@ using Terraria.DataStructures;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
 using Terraria.GameContent.Creative;
+using Terraria.ID;
+using Terraria.GameContent.ItemDropRules;
 
 namespace QwertyMod.Content.Items.Consumable.BossBag
 {
@@ -16,18 +18,16 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Treasure Bag");
-            Tooltip.SetDefault("{$CommonItemTooltip.RightClickToOpen}");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 3;
         }
 
         public override void SetDefaults()
         {
-            Item.maxStack = 999;
+            Item.maxStack = 9999;
             Item.consumable = true;
             Item.width = 60;
             Item.height = 34;
-            Item.rare = 9;
+            Item.rare = ItemRarityID.Cyan;
             Item.expert = true;
             //bossBagNPC = mod.NPCType("WeakPoint");
         }
@@ -36,32 +36,14 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
         {
             return true;
         }
-
-        public override void RightClick(Player player)
+        public override void ModifyItemLoot(ItemLoot itemLoot)
         {
-            int mainLoot = 0;
-            switch (Main.rand.Next(5))
-            {
-                case 0:
-                    mainLoot = ItemType<BlackHoleStaff>();
-                    break;
-                case 1:
-                    mainLoot = ItemType<ExplosivePierce>();
-                    break;
-                case 2:
-                    mainLoot = ItemType<DreadnoughtStaff>();
-                    break;
-                case 3:
-                    mainLoot = ItemType<B4Bow>();
-                    break;
-            }
-            player.QuickSpawnItem(new EntitySource_Misc(""), mainLoot);
-
-            if (Main.rand.Next(5) == 0)
-            {
-                player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<TheDevourer>());
-            }
-            player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<B4ExpertItem>());
+            itemLoot.Add(ItemDropRule.Common(ItemID.Penguin, 1, 40, 80));
+            
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<TheDevourer>(), 5));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<B4ExpertItem>(), 1));
+            itemLoot.Add(ItemDropRule.Coins(1000000, true));
+            itemLoot.Add(ItemDropRule.FewFromOptions(1, 1, ItemType<BlackHoleStaff>(), ItemType<ExplosivePierce>(), ItemType<DreadnoughtStaff>(), ItemType<B4Bow>()));
         }
     }
 }

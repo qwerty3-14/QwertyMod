@@ -2,32 +2,31 @@
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Microsoft.Xna.Framework;
 
 namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Gun
 {
     public class GunArrowP : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault("Gun Arrow");
-        }
 
         public override void SetDefaults()
         {
             Projectile.aiStyle = 1;
+            AIType = ProjectileID.Bullet;
             Projectile.width = 10;
             Projectile.height = 10;
-            Projectile.friendly = true;
+            
             Projectile.penetrate = 1;
             Projectile.DamageType = DamageClass.Ranged;
             Projectile.arrow = true;
-            Projectile.timeLeft = 60 * 5;
+            Projectile.timeLeft = 99;
             Projectile.tileCollide = true;
+            Projectile.friendly = true;
         }
 
         public int timer = 0;
         public int bullet = 14;
-        public float speed = 14f;
+        public float speed = 8f;
 
         //public Item item = new item();
         public override void AI()
@@ -36,12 +35,14 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Gun
             timer++;
             int weaponDamage = Projectile.damage;
             float weaponKnockback = Projectile.knockBack;
-
-            if (Projectile.timeLeft == (60 * 5 - 10) || Projectile.timeLeft == (60 * 5 - 60))
+            
+            Projectile.velocity *= .94f;
+            if (Projectile.timeLeft % 20 == 0 && Projectile.timeLeft < 90)
             {
-                if (Projectile.UseAmmo(AmmoID.Bullet, ref bullet, ref speed, ref weaponDamage, ref weaponKnockback, false))
+                if (Projectile.UseAmmo(AmmoID.Bullet, ref bullet, ref speed, ref weaponDamage, ref weaponKnockback, !Main.rand.NextBool(4)))
                 {
                     Projectile b = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Projectile.velocity + QwertyMethods.PolarVector(speed, Projectile.velocity.ToRotation()), bullet, weaponDamage, weaponKnockback, Main.myPlayer)];
+                    b.damage = (int)(b.damage * 0.4f);
                     SoundEngine.PlaySound(SoundID.Item11, Projectile.Center);
                 }
 
@@ -52,6 +53,23 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Gun
         public override void Kill(int timeLeft)
         {
             Collision.HitTiles(Projectile.position + Projectile.velocity, Projectile.velocity, Projectile.width, Projectile.height);
+        }
+        public override bool OnTileCollide(Vector2 velocityChange)
+        {
+            if (Projectile.velocity.X != velocityChange.X)
+            {
+                Projectile.velocity.X = -velocityChange.X;
+            }
+            if (Projectile.velocity.Y != velocityChange.Y)
+            {
+                Projectile.velocity.Y = -velocityChange.Y;
+            }
+            Projectile.damage = (int)(Projectile.damage * 1.5f);
+            return false;
+        }
+        public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
+        {
+            return false;
         }
     }
 }

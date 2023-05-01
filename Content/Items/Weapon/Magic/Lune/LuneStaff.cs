@@ -16,8 +16,8 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Lune
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Lune Staff");
-            Tooltip.SetDefault("Fires a Lune crest to zap enemies" + "\nInflicts Lune curse making enemies more vulnerable to critical hits");
+            //DisplayName,SetDefault("Lune Staff");
+            //Tooltip.SetDefault("Fires a Lune crest to zap enemies" + "\nInflicts Lune curse making enemies more vulnerable to critical hits");
             Item.staff[Item.type] = true; //this makes the useStyle animate as a staff instead of as a gun
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
@@ -30,11 +30,11 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Lune
             Item.height = 40;
             Item.useTime = 30;
             Item.useAnimation = 30;
-            Item.useStyle = 5;
+            Item.useStyle = ItemUseStyleID.Shoot;
             Item.noMelee = true;
             Item.knockBack = 1f;
             Item.value = 20000;
-            Item.rare = 1;
+            Item.rare = ItemRarityID.Blue;
             Item.UseSound = SoundID.Item43;
             Item.shoot = ProjectileType<LuneCrest>();
             Item.DamageType = DamageClass.Magic;
@@ -81,12 +81,11 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Lune
         }
 
         private bool runOnce = true;
-        private float radius = 10;
         NPC target;
         int timer = 0;
-        public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            damage = 0;
+            modifiers.FinalDamage *= 0;
         }
         public override void AI()
         {
@@ -94,14 +93,14 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Lune
             {
                 runOnce = false;
             }
-            Projectile.rotation += (float)Math.PI / 15;
+            Projectile.rotation += MathF.PI / 15;
             Projectile.velocity *= .95f;
             timer++;
             if (timer % 26 == 0)
             {
                 if (QwertyMethods.ClosestNPC(ref target, 400, Projectile.Center, false, -1))
                 {
-                    QwertyMethods.PokeNPC(Main.player[Projectile.owner], target, new EntitySource_Misc(""), Projectile.damage, DamageClass.Magic, Projectile.knockBack);
+                    QwertyMethods.PokeNPC(Main.player[Projectile.owner], target, Projectile.GetSource_FromThis(), Projectile.damage, DamageClass.Magic, Projectile.knockBack);
                     for (int d = 0; d < (target.Center - Projectile.Center).Length(); d += 4)
                     {
                         Dust.NewDust(Projectile.Center + QwertyMethods.PolarVector(d, (target.Center - Projectile.Center).ToRotation()), 0, 0, DustType<LuneDust>());

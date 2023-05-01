@@ -15,8 +15,6 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.HolyExiler
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Holy Exiler");
-            Tooltip.SetDefault("Higher beings will help you shoot your enemies!");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -28,17 +26,17 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.HolyExiler
             Item.useTime = 34;
             Item.useAnimation = 34;
 
-            Item.useStyle = 5;
+            Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 2f;
             Item.value = 50000;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
             Item.UseSound = SoundID.Item5;
 
             Item.width = 32;
             Item.height = 62;
 
-            Item.shoot = 40;
-            Item.useAmmo = 40;
+            Item.shoot = ProjectileID.WoodenArrowFriendly;
+            Item.useAmmo = AmmoID.Arrow;
             Item.shootSpeed = 12f;
             Item.noMelee = true;
             Item.autoReuse = true;
@@ -48,7 +46,6 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.HolyExiler
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            //Vector2 trueSpeed = new Vector2(speedX, speedY).RotatedByRandom(MathHelper.ToRadians(15));
             arrow = Main.projectile[Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI)];
             arrow.GetGlobalProjectile<ArrowWarping>().warpedArrow = true;
             return false;
@@ -66,7 +63,6 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.HolyExiler
         private List<int> targets = new List<int>();
         private float maxDistance = 300;
         private Projectile portal1;
-        private Projectile portal2;
         private float teleportDistance = 80;
         private int teleportTries = 100;
 
@@ -90,17 +86,17 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.HolyExiler
                         target = Main.npc[targets[Main.rand.Next(targets.Count)]]; // pick a random value in the targets list and use that to pick a target
                         for (int c = 0; c < teleportTries; c++)
                         {
-                            if (Main.netMode != 1) // don't run on client
+                            if (Main.netMode != NetmodeID.MultiplayerClient) // don't run on client
                             {
                                 //Use the NPC.ai[0] variable as it's easy to sync in multiplayer
                                 //server sync whenever randomizing so the client and server won't disagree
-                                projectile.ai[0] = Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI); // sets the NPC.ai[0] variable to a random radian angle
+                                projectile.ai[0] = Main.rand.NextFloat(-MathF.PI, MathF.PI); // sets the NPC.ai[0] variable to a random radian angle
                                 projectile.netUpdate = true; // update the client's NPC.ai[0] variable  to be equal to the server's
                             }
-                            Vector2 teleTo = new Vector2(target.Center.X + (float)Math.Cos(projectile.ai[0]) * teleportDistance, target.Center.Y + (float)Math.Sin(projectile.ai[0]) * teleportDistance);
+                            Vector2 teleTo = new Vector2(target.Center.X + MathF.Cos(projectile.ai[0]) * teleportDistance, target.Center.Y + MathF.Sin(projectile.ai[0]) * teleportDistance);
                             if (Collision.CanHit(new Vector2(teleTo.X - projectile.width / 2, teleTo.Y - projectile.height / 2), projectile.width, projectile.height, target.position, target.width, target.height))// checks if there are no tiles between player and potential teleport spot
                             {
-                                portal1 = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), teleTo, Vector2.Zero, ProjectileType<ArrowPortal>(), projectile.damage, projectile.knockBack, projectile.owner, projectile.type, 12f)];
+                                portal1 = Main.projectile[Projectile.NewProjectile(projectile.GetSource_FromThis(), teleTo, Vector2.Zero, ProjectileType<ArrowPortal>(), projectile.damage, projectile.knockBack, projectile.owner, projectile.type, 12f)];
                                 portal1.rotation = (target.Center - teleTo).ToRotation();
                                 portal1.timeLeft = (i + 1) * 15;
                                 break; //end for loop
@@ -140,8 +136,6 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.HolyExiler
             {
                 Dust dust = Main.dust[Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<CaeliteDust>())];
                 dust.scale = .5f;
-                //dust.velocity =Vector2.Zero;
-                //dust.frame.Y = 0;
                 if (Projectile.timeLeft < activeTime / 5)
                 {
                     Projectile.frame = 0;
@@ -164,7 +158,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.HolyExiler
                 }
                 if (Projectile.timeLeft == activeTime / 2)
                 {
-                    Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center, QwertyMethods.PolarVector(Projectile.ai[1], Projectile.rotation), (int)Projectile.ai[0], Projectile.damage, Projectile.knockBack, Projectile.owner);
+                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, QwertyMethods.PolarVector(Projectile.ai[1], Projectile.rotation), (int)Projectile.ai[0], Projectile.damage, Projectile.knockBack, Projectile.owner);
                 }
                 Projectile.alpha = 0;
             }

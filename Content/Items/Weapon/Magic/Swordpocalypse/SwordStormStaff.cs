@@ -14,8 +14,8 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Swordpocalypse
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Swordpocalypse");
-            Tooltip.SetDefault("Unleashes a barrage of swords!");
+            //DisplayName,SetDefault("Swordpocalypse");
+            //Tooltip.SetDefault("Unleashes a barrage of swords!");
             Item.staff[Item.type] = true; //this makes the useStyle animate as a staff instead of as a gun
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
@@ -28,11 +28,11 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Swordpocalypse
             Item.height = 46;
             Item.useTime = 4;
             Item.useAnimation = 20;
-            Item.useStyle = 5;
+            Item.useStyle = ItemUseStyleID.Shoot;
             Item.noMelee = true;
             Item.knockBack = 1f;
             Item.value = 500000;
-            Item.rare = 7;
+            Item.rare = ItemRarityID.Lime;
             Item.UseSound = SoundID.Item43;
             Item.autoReuse = true;
             Item.shoot = ProjectileType<SwordDrop>();
@@ -51,8 +51,8 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Swordpocalypse
             {
                 float trueSpeed = velocity.Length();
                 float rot = velocity.ToRotation();
-                Vector2 Rposition = position + QwertyMethods.PolarVector(-1200, rot + Main.rand.NextFloat(-(float)Math.PI / 32, (float)Math.PI / 32));
-                Vector2 goHere = Main.MouseWorld + QwertyMethods.PolarVector(Main.rand.NextFloat(-40, 40), rot + (float)Math.PI / 2);
+                Vector2 Rposition = position + QwertyMethods.PolarVector(-1200, rot + Main.rand.NextFloat(-MathF.PI / 32, MathF.PI / 32));
+                Vector2 goHere = Main.MouseWorld + QwertyMethods.PolarVector(Main.rand.NextFloat(-40, 40), rot + MathF.PI / 2);
                 Vector2 diff = goHere - Rposition;
                 float dist = diff.Length();
 
@@ -67,7 +67,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Swordpocalypse
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Sworddrop");
+            //DisplayName,SetDefault("Sworddrop");
         }
 
         public override void SetDefaults()
@@ -83,7 +83,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Swordpocalypse
             Projectile.extraUpdates = 2;
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.localNPCImmunity[target.whoAmI] = Projectile.localNPCHitCooldown; //set local immunity
             target.immune[Projectile.owner] = 0; //disable normal immune mechanic
@@ -92,7 +92,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Swordpocalypse
         {
             Projectile.ai[0] -= Projectile.velocity.Length();
             Projectile.tileCollide = Projectile.ai[0] <= 0;
-            Projectile.rotation = Projectile.velocity.ToRotation() + (float)Math.PI / 2;
+            Projectile.rotation = Projectile.velocity.ToRotation() + MathF.PI / 2;
         }
     }
 }

@@ -1,6 +1,7 @@
 using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ModLoader;
+using Terraria.ID;
 
 namespace QwertyMod.Content.Items.Equipment.Accessories
 {
@@ -9,15 +10,15 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Dino Tooth");
-            Tooltip.SetDefault("Increases armor penetration by 18");
+            //DisplayName,SetDefault("Dino Tooth");
+            //Tooltip.SetDefault("Increases armor penetration by 18");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()
         {
             Item.value = 10000;
-            Item.rare = 6;
+            Item.rare = ItemRarityID.LightPurple;
             Item.width = 14;
             Item.height = 20;
             Item.accessory = true;

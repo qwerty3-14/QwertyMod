@@ -14,22 +14,20 @@ namespace QwertyMod.Content.Items.Pet
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Lightling");
-            Tooltip.SetDefault("Emits light");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()
         {
             Item.damage = 0;
-            Item.useStyle = 1;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.shoot = ProjectileType<LightlingP>();
             Item.width = 16;
             Item.height = 30;
             Item.UseSound = SoundID.Item2;
             Item.useAnimation = 20;
             Item.useTime = 20;
-            Item.rare = 8;
+            Item.rare = ItemRarityID.Yellow;
             Item.noMelee = true;
             Item.value = Item.sellPrice(0, 5, 50, 0);
             Item.buffType = BuffType<LightlingBuff>();
@@ -47,9 +45,7 @@ namespace QwertyMod.Content.Items.Pet
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Lightling");
             Main.projFrames[Projectile.type] = 2;
-            //Main.projPet[Projectile.type] = true;
             ProjectileID.Sets.LightPet[Projectile.type] = true;;
         }
 
@@ -115,8 +111,8 @@ namespace QwertyMod.Content.Items.Pet
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Lightling");
-            Description.SetDefault("Emits light");
+            //DisplayName,SetDefault("Lightling");
+            //Description.SetDefault("Emits light");
             Main.buffNoTimeDisplay[Type] = true;
             Main.lightPet[Type] = true;
         }
@@ -128,7 +124,7 @@ namespace QwertyMod.Content.Items.Pet
             bool petProjectileNotSpawned = player.ownedProjectileCounts[ProjectileType<LightlingP>()] <= 0;
             if (petProjectileNotSpawned && player.whoAmI == Main.myPlayer)
             {
-                Projectile.NewProjectile(new EntitySource_Misc(""), player.Center.X, player.Center.Y, 0f, 0f, ProjectileType<LightlingP>(), 0, 0f, player.whoAmI, 0f, 0f);
+                Projectile.NewProjectile(player.GetSource_Buff(buffIndex), player.Center.X, player.Center.Y, 0f, 0f, ProjectileType<LightlingP>(), 0, 0f, player.whoAmI, 0f, 0f);
             }
         }
     }

@@ -9,8 +9,6 @@ namespace QwertyMod.Content.Buffs
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Gravity Flipped");
-            Description.SetDefault("Newton be malding");
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = true;
             Main.buffNoSave[Type] = true;
@@ -19,6 +17,7 @@ namespace QwertyMod.Content.Buffs
         public override void Update(Player player, ref int buffIndex)
         {
             player.GetModPlayer<AntiGravity>().forcedAntiGravity = 10;
+            player.mount.Dismount(player);
         }
     }
 }

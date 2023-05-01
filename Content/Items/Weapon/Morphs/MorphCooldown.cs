@@ -7,8 +7,8 @@ namespace QwertyMod.Content.Items.Weapon.Morphs
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Quick Morph Cool down");
-            Description.SetDefault("Can't use another quick morph!");
+            //DisplayName,SetDefault("Quick Morph Cool down");
+            //Description.SetDefault("Can't use another quick morph!");
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = false;
             Main.buffNoSave[Type] = true;

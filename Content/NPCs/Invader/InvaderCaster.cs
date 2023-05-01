@@ -22,7 +22,6 @@ namespace QwertyMod.Content.NPCs.Invader
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Invader Caster");
             Main.npcFrameCount[NPC.type] = 4;
         }
         public override void SetDefaults()
@@ -34,16 +33,20 @@ namespace QwertyMod.Content.NPCs.Invader
             NPC.defense = 20;
             NPC.lifeMax = 600;
             NPC.value = 5000;
-            //NPC.alpha = 100;
-            NPC.HitSound = SoundID.NPCHit4;
-            NPC.DeathSound = SoundID.NPCDeath14;
+            NPC.HitSound = new SoundStyle("QwertyMod/Assets/Sounds/invcrawler_hurt1");
+            NPC.DeathSound = new SoundStyle("QwertyMod/Assets/Sounds/invcrawler_death");
             NPC.knockBackResist = 0f;
             NPC.noGravity = false;
             NPC.buffImmune[BuffID.Confused] = false;
             NPC.GetGlobalNPC<InvaderNPCGeneral>().invaderNPC = true;
         }
+
+        public override void HitEffect(NPC.HitInfo hit)
+        {
+            shotCounter = 60;
+        }
         int preTimer = 120;
-        int shotCounter = 0;
+        int shotCounter = 60;
         public override void AI()
         {
             NPC.damage = 0;
@@ -62,6 +65,17 @@ namespace QwertyMod.Content.NPCs.Invader
             }
             else
             {
+                if(Main.netMode != NetmodeID.Server && Main.rand.NextBool(12000))
+                {
+                    if(Main.rand.NextBool(2))
+                    {
+                        SoundEngine.PlaySound(new SoundStyle("QwertyMod/Assets/Sounds/invcrawler_idle1"), NPC.Center);
+                    }
+                    else
+                    {
+                        SoundEngine.PlaySound(new SoundStyle("QwertyMod/Assets/Sounds/invcrawler_idle2"), NPC.Center);
+                    }
+                }
                 NPC.dontTakeDamage = false;
                 shotCounter--;
                 Entity target = InvaderNPCGeneral.FindTarget(NPC, true);
@@ -88,7 +102,7 @@ namespace QwertyMod.Content.NPCs.Invader
                         if (Main.netMode != NetmodeID.MultiplayerClient)
                         {
                             SoundEngine.PlaySound(SoundID.Item157, shootFrom);
-                            Projectile.NewProjectile(new EntitySource_Misc(""), shootFrom, QwertyMethods.PolarVector(3, (target.Center - shootFrom).ToRotation()), ModContent.ProjectileType<InvaderZap>(), 20, 0, 0);
+                            Projectile.NewProjectile(NPC.GetSource_FromAI(), shootFrom, QwertyMethods.PolarVector(3, (target.Center - shootFrom).ToRotation()), ModContent.ProjectileType<InvaderZap>(), 20, 0, 0);
                         }
                     }
                     else if (shotCounter <= 0 && NPC.velocity.X == 0)
@@ -96,7 +110,7 @@ namespace QwertyMod.Content.NPCs.Invader
                         if (Main.netMode != NetmodeID.MultiplayerClient)
                         {
                             SoundEngine.PlaySound(SoundID.Item157, shootFrom);
-                            Projectile.NewProjectile(new EntitySource_Misc(""), shootFrom, QwertyMethods.PolarVector(5, (target.Center - shootFrom).ToRotation()), ModContent.ProjectileType<InvaderSphere>(), 20, 0, 0);
+                            Projectile.NewProjectile(NPC.GetSource_FromAI(), shootFrom, QwertyMethods.PolarVector(5, (target.Center - shootFrom).ToRotation()), ModContent.ProjectileType<InvaderSphere>(), 20, 0, 0);
                         }
                         shotCounter = 180;
                     }
@@ -138,18 +152,24 @@ namespace QwertyMod.Content.NPCs.Invader
                 NPC.frame.Y = 0;
             }
         }
+
+		int pulseCounter = 0;
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
             if (preTimer > 0)
             {
                 return false;
             }
-
+            Texture2D texture = TextureAssets.Npc[NPC.type].Value;
             spriteBatch.Draw(TextureAssets.Npc[NPC.type].Value, NPC.Center - screenPos,
             NPC.frame, drawColor, NPC.rotation,
             new Vector2(NPC.width * 0.5f, NPC.height * 0.5f), 1f, NPC.spriteDirection != 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0f);
+
+
+			pulseCounter++;
+
             spriteBatch.Draw(Request<Texture2D>("QwertyMod/Content/NPCs/Invader/InvaderCaster_Glow").Value, NPC.Center - screenPos,
-            NPC.frame, Color.White, NPC.rotation,
+            new Rectangle(0, ((pulseCounter % 40) / 10) * texture.Height / 4, texture.Width, texture.Height / 4), Color.White, NPC.rotation,
             new Vector2(NPC.width * 0.5f, NPC.height * 0.5f), 1f, NPC.spriteDirection != 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0f);
 
             return false;
@@ -206,7 +226,7 @@ namespace QwertyMod.Content.NPCs.Invader
             }
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.localNPCImmunity[target.whoAmI] = -1;
             target.immune[Projectile.owner] = 0;
@@ -256,7 +276,7 @@ namespace QwertyMod.Content.NPCs.Invader
             }
             return base.Colliding(projHitbox, targetHitbox);
         }
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             target.immuneTime = 18;
             cantHit = true;
@@ -269,7 +289,7 @@ namespace QwertyMod.Content.NPCs.Invader
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Sphere");
+            //DisplayName,SetDefault("Sphere");
             Main.projFrames[Projectile.type] = 5;
         }
         public override void SetDefaults()
@@ -287,7 +307,7 @@ namespace QwertyMod.Content.NPCs.Invader
                 Entity target = InvaderProjectile.FindTarget(Projectile, 150);
                 if (target != null)
                 {
-                    Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center, QwertyMethods.PolarVector(3, (target.Center - Projectile.Center).ToRotation()), ModContent.ProjectileType<InvaderZap>(), 20, 0, 0);
+                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, QwertyMethods.PolarVector(3, (target.Center - Projectile.Center).ToRotation()), ModContent.ProjectileType<InvaderZap>(), 20, 0, 0);
                 }
             }
             Projectile.frameCounter++;
@@ -299,7 +319,7 @@ namespace QwertyMod.Content.NPCs.Invader
                     Projectile.frame = 0;
                 }
             }
-            Projectile.rotation += (float)Math.PI / 240f;
+            Projectile.rotation += MathF.PI / 240f;
         }
         public override bool PreDraw(ref Color lightColor)
         {

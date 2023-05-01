@@ -1,5 +1,6 @@
 using Terraria.GameContent.Creative;
 using Terraria.ModLoader;
+using Terraria.ID;
 
 namespace QwertyMod.Content.Items.MiscMaterials
 {
@@ -7,8 +8,6 @@ namespace QwertyMod.Content.Items.MiscMaterials
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Fortress Harpy Beak");
-            Tooltip.SetDefault("Lightweight and sturdy, goes well with Caelite when making weapons");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 25;
         }
 
@@ -16,8 +15,8 @@ namespace QwertyMod.Content.Items.MiscMaterials
         {
             Item.width = 18;
             Item.height = 20;
-            Item.maxStack = 999;
-            Item.rare = 4;
+            Item.maxStack = 9999;
+            Item.rare = ItemRarityID.LightRed;
             Item.value = 2500;
         }
     }

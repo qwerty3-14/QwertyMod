@@ -15,8 +15,8 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.ImperiousTheIV
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Imperious The IV");
-            Tooltip.SetDefault("Hitting enemies launches richoching swords");
+            //DisplayName,SetDefault("Imperious The IV");
+            //Tooltip.SetDefault("Hitting enemies launches richoching swords");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -27,10 +27,10 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.ImperiousTheIV
 
             Item.useTime = 12;
             Item.useAnimation = 12;
-            Item.useStyle = 1;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.knockBack = 3;
             Item.value = Item.sellPrice(gold: 10);
-            Item.rare = 7;
+            Item.rare = ItemRarityID.Lime;
             Item.UseSound = SoundID.Item1;
             Item.scale = 1.8f;
             Item.width = 40;
@@ -43,7 +43,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.ImperiousTheIV
         {
         }
 
-        public override void OnHitNPC(Player player, NPC target, int damage, float knockBack, bool crit)
+        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (player.whoAmI == Main.myPlayer && !target.immortal && player.ownedProjectileCounts[ProjectileType<ImperiousTheV>()] < 40)
             {
@@ -58,7 +58,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.ImperiousTheIV
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Imperious The V");
+            //DisplayName,SetDefault("Imperious The V");
         }
 
         public override void SetDefaults()
@@ -88,7 +88,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.ImperiousTheIV
                 Projectile.localNPCImmunity[(int)Projectile.ai[0]] = -1;
                 runOnce = false;
             }
-            Projectile.rotation = Projectile.velocity.ToRotation() + (float)Math.PI / 2;
+            Projectile.rotation = Projectile.velocity.ToRotation() + MathF.PI / 2;
             if (QwertyMethods.ClosestNPC(ref target, 400, Projectile.Center, true, specialCondition: delegate (NPC possibleTarget) { return Projectile.localNPCImmunity[possibleTarget.whoAmI] == 0; }))
             {
                 Projectile.velocity = (target.Center - Projectile.Center).SafeNormalize(-Vector2.UnitY) * 10f;

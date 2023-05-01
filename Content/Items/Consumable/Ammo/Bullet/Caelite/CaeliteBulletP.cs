@@ -5,15 +5,12 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using System;
 
 namespace QwertyMod.Content.Items.Consumable.Ammo.Bullet.Caelite
 {
     public class CaeliteBulletP : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault("Caelite Bullet");
-        }
 
         public override void SetDefaults()
         {
@@ -27,7 +24,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Bullet.Caelite
             Projectile.scale = 1.2f;
             Projectile.timeLeft = 600;
             Projectile.DamageType = DamageClass.Ranged;
-            Projectile.extraUpdates = 1;
+            Projectile.extraUpdates = 2;
         }
 
         public override bool PreDraw(ref Color lightColor)
@@ -46,20 +43,29 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Bullet.Caelite
 
         public override void Kill(int timeLeft)
         {
-            for (int i = 0; i < 16; i++)
+            for(int i =0; i < 30; i++)
             {
-                Dust d = Dust.NewDustPerfect(Projectile.Center, DustType<CaeliteDust>());
-                d.frame.Y = 0;
-                d.velocity *= 2;
+                int d = i % 6;
+                if(d == 4)
+                {
+                    d = 2;
+                }
+                if(d == 5)
+                {
+                    d = 1;
+                }
+                Dust dust = Dust.NewDustPerfect(Projectile.Center, DustType<CaeliteDust>(), QwertyMethods.PolarVector(d * 1, Projectile.velocity.ToRotation() + 2 * MathF.PI * ((float)i / 30f)));
+                dust.frame.Y = 0;
+                //dust.velocity *= 2;
             }
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(BuffType<PowerDown>(), 300);
         }
 
-        public override void OnHitPvp(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             target.AddBuff(BuffType<PowerDown>(), 300);
         }

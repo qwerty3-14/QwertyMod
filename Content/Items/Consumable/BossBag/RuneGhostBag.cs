@@ -9,6 +9,8 @@ using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using Terraria.ID;
+using Terraria.GameContent.ItemDropRules;
 
 namespace QwertyMod.Content.Items.Consumable.BossBag
 {
@@ -16,19 +18,17 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Treasure Bag");
-            Tooltip.SetDefault("{$CommonItemTooltip.RightClickToOpen}");
             Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(10, 36));
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 3;
         }
 
         public override void SetDefaults()
         {
-            Item.maxStack = 999;
+            Item.maxStack = 9999;
             Item.consumable = true;
             Item.width = 32;
             Item.height = 32;
-            Item.rare = 9;
+            Item.rare = ItemRarityID.Cyan;
             Item.expert = true;
             //bossBagNPC = mod.NPCType("RuneSpector");
         }
@@ -38,43 +38,16 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
         {
             return true;
         }
-
-        public override void RightClick(Player player)
+        public override void ModifyItemLoot(ItemLoot itemLoot)
         {
-            int runeCount = Main.rand.Next(30, 41);
-            int selectScroll = Main.rand.Next(1, 5);
-            if (Main.rand.Next(7) == 0)
-            {
-                player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<RuneGhostMask>());
-            }
+            itemLoot.Add(ItemDropRule.Common(ItemID.Penguin, 1, 40, 80));
             
-            if (Main.rand.Next(7) == 0)
-            {
-                player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<RunicRobe>());
-            }
-
-
-            if (selectScroll == 1)
-            {
-                player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<IceScroll>());
-            }
-            if (selectScroll == 2)
-            {
-                player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<PursuitScroll>());
-            }
-            if (selectScroll == 3)
-            {
-                player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<LeechScroll>());
-            }
-            if (selectScroll == 4)
-            {
-                player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<AggroScroll>());
-            }
-
-            player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<HyperRunestone>());
-            player.QuickSpawnItem(new EntitySource_Misc(""), 73, 35);
-
-            player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<CraftingRune>(), runeCount);
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<RuneGhostMask>(), 7));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<RunicRobe>(), 7));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<HyperRunestone>(), 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<CraftingRune>(), 1, 30, 40));
+            itemLoot.Add(ItemDropRule.Coins(350000, true));
+            itemLoot.Add(ItemDropRule.FewFromOptions(1, 1, ItemType<IceScroll>(), ItemType<PursuitScroll>(), ItemType<LeechScroll>(), ItemType<AggroScroll>()));
         }
     }
 }

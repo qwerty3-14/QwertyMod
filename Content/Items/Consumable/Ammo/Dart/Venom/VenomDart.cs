@@ -10,8 +10,8 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Dart.Venom
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Venom Dart");
-            Tooltip.SetDefault("Creates venom clouds when hitting enemies");
+            ////DisplayName,SetDefault("Venom Dart");
+            ////Tooltip.SetDefault("Creates venom clouds when hitting enemies");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 99;
         }
         public override void SetDefaults()
@@ -24,9 +24,9 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Dart.Venom
             Item.shoot = ProjectileType<VenomDartP>();
             Item.shootSpeed = 3;
             Item.knockBack = 1;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
             Item.consumable = true;
-            Item.maxStack = 999;
+            Item.maxStack = 9999;
         }
         public override void AddRecipes()
         {

@@ -19,15 +19,15 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Gale
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Gale Swiftplate");
-            Tooltip.SetDefault("+10% chance to dodge an attack" + "\n+10% critical strike chance" + "\nAllows you to cling to walls" + "\nDamage increased by 20% while clinging to walls");
+            //DisplayName,SetDefault("Gale Swiftplate");
+            //Tooltip.SetDefault("+10% chance to dodge an attack" + "\n+10% critical strike chance" + "\nAllows you to cling to walls" + "\nDamage increased by 20% while clinging to walls");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()
         {
             Item.value = Item.sellPrice(0, 0, 75, 0);
-            Item.rare = 4;
+            Item.rare = ItemRarityID.LightRed;
             Item.defense = 2;
             //Item.vanity = true;
             Item.width = 20;
@@ -68,7 +68,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Gale
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Gale Knife");
+            //DisplayName,SetDefault("Gale Knife");
         }
 
         public override void SetDefaults()
@@ -88,7 +88,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Gale
 
         public int dustTimer;
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.localNPCImmunity[target.whoAmI] = Projectile.localNPCHitCooldown;
             target.immune[Projectile.owner] = 0;
@@ -134,7 +134,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Gale
             {
                 for (int b = 0; b < 10; b++)
                 {
-                    orb[b, Player.whoAmI] = new Vector3(0, 2 * (float)Math.PI * (b / (float)10), 0);
+                    orb[b, Player.whoAmI] = new Vector3(0, 2 * MathF.PI * (b / (float)10), 0);
                 }
                 runOnce = false;
             }
@@ -164,10 +164,10 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Gale
                             if (orb[b, Player.whoAmI].X != 0)
                             {
                                 Vector2 Position = Player.Center;
-                                Position.X += (float)Math.Sin(orb[b, Player.whoAmI].Y) * 50;
-                                Position.Y += (float)Math.Sin(orb[b, Player.whoAmI].Y) * 50 * (float)Math.Sin(counter);
+                                Position.X += MathF.Sin(orb[b, Player.whoAmI].Y) * 50;
+                                Position.Y += MathF.Sin(orb[b, Player.whoAmI].Y) * 50 * MathF.Sin(counter);
                                 float speed = 10;
-                                Projectile.NewProjectile(new EntitySource_Misc(""), Position, (Main.MouseWorld - Position).SafeNormalize(-Vector2.UnitY) * speed, ProjectileType<GaleKnife>(), (int)(75f * Player.GetDamage(DamageClass.Generic).Multiplicative), 3f, Player.whoAmI);
+                                Projectile.NewProjectile(new EntitySource_Misc("SetBonus_Gale"), Position, (Main.MouseWorld - Position).SafeNormalize(-Vector2.UnitY) * speed, ProjectileType<GaleKnife>(), (int)(75f * Player.GetDamage(DamageClass.Generic).Multiplicative), 3f, Player.whoAmI);
                                 orb[b, Player.whoAmI].X = 0;
                             }
                         }
@@ -206,25 +206,25 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Gale
                 }
                 timer = 0;
             }
-            counter += (float)Math.PI / 120;
+            counter += MathF.PI / 120;
             for (int b = 0; b < 10; b++)
             {
                 /*
-                if (Main.netMode == 1)
+                if (Main.netMode == NetmodeID.MultiplayerClient)
                 {
                     Main.NewText("client: " + "Hello");
                 }
 
-                if (Main.netMode == 2) // Server
+                if (Main.netMode == NetmodeID.Server) // Server
                 {
                     NetMessage.BroadcastChatMessage(Terraria.Localization.NetworkText.FromLiteral("Server: " + "Hello"), Color.White);
                 }
                 */
-                orb[b, Player.whoAmI].Y += (float)Math.PI / 60 * Player.direction;
+                orb[b, Player.whoAmI].Y += MathF.PI / 60 * Player.direction;
                 //orb[b].Z = orb[b].Y ;
                 if (orb[b, Player.whoAmI].X != 0)
                 {
-                    if ((float)Math.Cos(orb[b, Player.whoAmI].Y) < 0)
+                    if (MathF.Cos(orb[b, Player.whoAmI].Y) < 0)
                     {
                         orb[b, Player.whoAmI].X = 1;
                     }
@@ -254,7 +254,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Gale
                 return;
             }
             Player drawPlayer = drawInfo.drawPlayer;
-            GaleSetBonus modPlayer = drawPlayer.GetModPlayer<GaleSetBonus>();
+            if(!drawPlayer.TryGetModPlayer<GaleSetBonus>(out GaleSetBonus modPlayer)){ return; }
             Mod mod = ModLoader.GetMod("QwertyMod");
 
             Texture2D texture = Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Gale/GaleOrb").Value;
@@ -266,9 +266,9 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Gale
                     int drawX = (int)(drawPlayer.position.X - Main.screenPosition.X);
                     int drawY = (int)(drawPlayer.position.Y - Main.screenPosition.Y);
                     Vector2 Position = drawPlayer.Center;
-                    Position.X += (float)Math.Sin(modPlayer.orb[b, drawPlayer.whoAmI].Y) * 50;
-                    Position.Y += (float)Math.Sin(modPlayer.orb[b, drawPlayer.whoAmI].Y) * 50 * (float)Math.Sin(modPlayer.counter);
-                    //Main.NewText(b + ", " + (float)Math.Sin(modPlayer.orb[b].Y) * 50);
+                    Position.X += MathF.Sin(modPlayer.orb[b, drawPlayer.whoAmI].Y) * 50;
+                    Position.Y += MathF.Sin(modPlayer.orb[b, drawPlayer.whoAmI].Y) * 50 * MathF.Sin(modPlayer.counter);
+                    //Main.NewText(b + ", " + MathF.Sin(modPlayer.orb[b].Y) * 50);
                     Vector2 origin = new Vector2((float)drawPlayer.legFrame.Width * 0.5f, (float)drawPlayer.legFrame.Height * 0.5f);
                     Vector2 pos = new Vector2((float)((int)(Position.X - Main.screenPosition.X - (float)(drawPlayer.bodyFrame.Width / 2) + (float)(drawPlayer.width / 2))), (float)((int)(Position.Y - Main.screenPosition.Y + (float)drawPlayer.height - (float)drawPlayer.bodyFrame.Height + 4f))) + drawPlayer.bodyPosition + new Vector2((float)(drawPlayer.bodyFrame.Width / 2), (float)(drawPlayer.bodyFrame.Height / 2));
                     pos.Y -= drawPlayer.mount.PlayerOffset;
@@ -297,7 +297,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Gale
                 return;
             }
             Player drawPlayer = drawInfo.drawPlayer;
-            GaleSetBonus modPlayer = drawPlayer.GetModPlayer<GaleSetBonus>();
+            if(!drawPlayer.TryGetModPlayer<GaleSetBonus>(out GaleSetBonus modPlayer)){ return; }
             Mod mod = ModLoader.GetMod("QwertyMod");
 
             Texture2D texture = Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Gale/GaleOrb").Value;
@@ -309,9 +309,9 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Gale
                     int drawX = (int)(drawPlayer.position.X - Main.screenPosition.X);
                     int drawY = (int)(drawPlayer.position.Y - Main.screenPosition.Y);
                     Vector2 Position = drawPlayer.Center;
-                    Position.X += (float)Math.Sin(modPlayer.orb[b, drawPlayer.whoAmI].Y) * 50;
-                    Position.Y += (float)Math.Sin(modPlayer.orb[b, drawPlayer.whoAmI].Y) * 50 * (float)Math.Sin(modPlayer.counter);
-                    //Main.NewText(b + ", " + (float)Math.Sin(modPlayer.orb[b].Y) * 50);
+                    Position.X += MathF.Sin(modPlayer.orb[b, drawPlayer.whoAmI].Y) * 50;
+                    Position.Y += MathF.Sin(modPlayer.orb[b, drawPlayer.whoAmI].Y) * 50 * MathF.Sin(modPlayer.counter);
+                    //Main.NewText(b + ", " + MathF.Sin(modPlayer.orb[b].Y) * 50);
                     Vector2 origin = new Vector2((float)drawPlayer.legFrame.Width * 0.5f, (float)drawPlayer.legFrame.Height * 0.5f);
                     Vector2 pos = new Vector2((float)((int)(Position.X - Main.screenPosition.X - (float)(drawPlayer.bodyFrame.Width / 2) + (float)(drawPlayer.width / 2))), (float)((int)(Position.Y - Main.screenPosition.Y + (float)drawPlayer.height - (float)drawPlayer.bodyFrame.Height + 4f))) + drawPlayer.bodyPosition + new Vector2((float)(drawPlayer.bodyFrame.Width / 2), (float)(drawPlayer.bodyFrame.Height / 2));
                     pos.Y -= drawPlayer.mount.PlayerOffset;

@@ -6,6 +6,7 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
+using Terraria.ID;
 
 namespace QwertyMod.Content.NPCs.Invader
 {
@@ -40,12 +41,15 @@ namespace QwertyMod.Content.NPCs.Invader
         public static void SpawnIn(NPC npc)
         {
             Point origin = npc.Bottom.ToTileCoordinates();
-
-            while (!WorldUtils.Find(origin, Searches.Chain(new Searches.Down(2), new GenCondition[]
+            for(int i = 0; i < 4000; i++)
             {
-                                        new Terraria.WorldBuilding.Conditions.IsSolid()
-            }), out _))
-            {
+                if(WorldUtils.Find(origin, Searches.Chain(new Searches.Down(2), new GenCondition[]
+                {
+                                            new Terraria.WorldBuilding.Conditions.IsSolid()
+                }), out _))
+                {
+                    break;
+                }
                 npc.position.Y++;
                 origin = npc.Bottom.ToTileCoordinates();
             }
@@ -58,13 +62,27 @@ namespace QwertyMod.Content.NPCs.Invader
             int dustCount = width;
             for (int i = 0; i < dustCount; i++)
             {
-                float rot = (float)Math.PI * 2f * ((float)i / dustCount);
+                float rot = MathF.PI * 2f * ((float)i / dustCount);
                 Vector2 unitVector = QwertyMethods.PolarVector(1f, rot);
                 Dust d = Dust.NewDustPerfect(npc.Top + new Vector2(unitVector.X * width, unitVector.Y * height), ModContent.DustType<InvaderGlow>(), Vector2.UnitY * npc.height * 0.09f);
                 d.noGravity = true;
                 d.frame.Y = 0;
                 d.scale *= 2;
             }
+        }
+        public override bool PreAI(NPC npc)
+        {
+            if(invaderNPC && npc.ai[3] > 0)
+            {
+                npc.noTileCollide = true;
+                npc.ai[3]--;
+                if(npc.ai[3] == 0 && Main.netMode != NetmodeID.MultiplayerClient)
+                {
+                    npc.StrikeInstantKill();
+                }
+                return false;
+            }
+            return true;
         }
         int idleWalkTimer = 0;
         public static void WalkerIdle(NPC npc, float speed)
@@ -117,7 +135,7 @@ namespace QwertyMod.Content.NPCs.Invader
                         {
                             if (gNPC.fortressNPC && Collision.CheckAABBvAABBCollision(npc.position, npc.Size, Main.npc[i].position, Main.npc[i].Size))
                             {
-                                QwertyMethods.PokeNPC(Main.LocalPlayer, Main.npc[i], new EntitySource_Misc(""), npc.damage, DamageClass.Default, 0);
+                                QwertyMethods.PokeNPC(Main.LocalPlayer, Main.npc[i], npc.GetSource_FromAI(), npc.damage, DamageClass.Default, 0);
                                 contactDamageCooldown = 10;
                                 break;
                             }
@@ -147,11 +165,11 @@ namespace QwertyMod.Content.NPCs.Invader
             }
             return null;
         }
-        public override void ModifyHitNPC(Projectile projectile, NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitNPC(Projectile projectile, NPC target, ref NPC.HitModifiers modifiers)
         {
             if (isInvaderProjectile)
             {
-                damage *= 4;
+                modifiers.FinalDamage *= 4;
             }
         }
         public static Entity FindTarget(Projectile projectile, float maxRange)

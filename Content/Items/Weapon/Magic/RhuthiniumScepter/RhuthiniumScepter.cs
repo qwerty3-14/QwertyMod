@@ -15,7 +15,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RhuthiniumScepter
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Rhuthinium Scepter");
+            //DisplayName,SetDefault("Rhuthinium Scepter");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -38,7 +38,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RhuthiniumScepter
             Item.knockBack = 1.2f;
             Item.DamageType = DamageClass.Magic;
             Item.value = 25000;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
         }
 
         public override void AddRecipes()
@@ -49,7 +49,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RhuthiniumScepter
         }
 
         private Vector2 staveHoldOffset = new Vector2(0, -10);
-        private float staveHoldRotation = (float)Math.PI / 8;
+        private float staveHoldRotation = MathF.PI / 8;
         public override void UseStyle(Player player, Rectangle heldItemFrame)
         {
             player.bodyFrame.Y = player.bodyFrame.Height * 3; //force the player to a specific frame
@@ -65,15 +65,15 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RhuthiniumScepter
             }
             vector24 -= new Vector2(player.bodyFrame.Width - player.width, player.bodyFrame.Height - 42) / 2f;
             player.itemLocation = player.position + vector24;
-            float trueRotation = (float)Math.PI / 2 - player.itemRotation + (float)Math.PI;
-            player.itemLocation += new Vector2((float)Math.Cos(trueRotation), (float)Math.Sin(trueRotation)) * staveHoldOffset.Y;
-            player.itemLocation += new Vector2((float)Math.Cos(trueRotation + (float)Math.PI / 2), (float)Math.Sin(trueRotation + (float)Math.PI / 2)) * staveHoldOffset.X * player.direction;
+            float trueRotation = MathF.PI / 2 - player.itemRotation + MathF.PI;
+            player.itemLocation += new Vector2(MathF.Cos(trueRotation), MathF.Sin(trueRotation)) * staveHoldOffset.Y;
+            player.itemLocation += new Vector2(MathF.Cos(trueRotation + MathF.PI / 2), MathF.Sin(trueRotation + MathF.PI / 2)) * staveHoldOffset.X * player.direction;
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             position = new Vector2(player.Center.X + (float)Main.rand.Next(-100, 101), player.Center.Y + (float)Main.rand.Next(-100, 101) - 600);
-            velocity = QwertyMethods.PolarVector(Item.shootSpeed, (Main.MouseWorld - position).ToRotation() + (float)Math.PI / 16 - (float)Math.PI / 8 * Main.rand.NextFloat());
+            velocity = QwertyMethods.PolarVector(Item.shootSpeed, (Main.MouseWorld - position).ToRotation() + MathF.PI / 16 - MathF.PI / 8 * Main.rand.NextFloat());
             Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
             return false;
         }
@@ -83,7 +83,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RhuthiniumScepter
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Rhuthinium Bolt");
+            //DisplayName,SetDefault("Rhuthinium Bolt");
         }
 
         public override void SetDefaults()
@@ -115,7 +115,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RhuthiniumScepter
             if (QwertyMethods.ClosestNPC(ref target, 250, Projectile.Center))
             {
                 float rot = (Projectile.velocity.ToRotation());
-                rot.SlowRotation((target.Center - Projectile.Center).ToRotation(), (float)Math.PI / 60);
+                rot.SlowRotation((target.Center - Projectile.Center).ToRotation(), MathF.PI / 60);
                 Projectile.velocity = QwertyMethods.PolarVector(10, rot);
             }
         }

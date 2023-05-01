@@ -15,8 +15,8 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.HydraBarrage
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Shape shift: Hydra Barrage");
-            Tooltip.SetDefault("Launches a barrage of hydra breath");
+            //DisplayName,SetDefault("Shape shift: Hydra Barrage");
+            //Tooltip.SetDefault("Launches a barrage of hydra breath");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -31,10 +31,10 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.HydraBarrage
 
             Item.useTime = 60;
             Item.useAnimation = 60;
-            Item.useStyle = 5;
+            Item.useStyle = ItemUseStyleID.Shoot;
 
             Item.value = 250000;
-            Item.rare = 5;
+            Item.rare = ItemRarityID.Pink;
             Item.noUseGraphic = true;
             Item.width = 18;
             Item.height = 32;
@@ -61,7 +61,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.HydraBarrage
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("HydraBarrage Barrage Base");
+            //DisplayName,SetDefault("HydraBarrage Barrage Base");
             Main.projFrames[Projectile.type] = 1;
         }
 
@@ -96,7 +96,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.HydraBarrage
             player.Center = Projectile.Center;
             player.immune = true;
             player.immuneTime = 2;
-            player.statDefense = 0;
+            player.statDefense.FinalMultiplier *= 0;
             player.GetModPlayer<ShapeShifterPlayer>().noDraw = true;
         }
 
@@ -124,7 +124,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.HydraBarrage
         {
             if (runOnce)
             {
-                offset = QwertyMethods.PolarVector(100, Main.rand.NextFloat() * (float)Math.PI * 2f);
+                offset = QwertyMethods.PolarVector(100, Main.rand.NextFloat() * MathF.PI * 2f);
                 runOnce = false;
             }
             Projectile.scale = Projectile.ai[0];
@@ -164,7 +164,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.HydraBarrage
             Texture2D neckBase = Request<Texture2D>("QwertyMod/Content/Items/Weapon/Morphs/HydraBarrage/HydraBarrageBase").Value;
             for (float f = 0; f < (Projectile.Center - Main.player[Projectile.owner].Center).Length(); f += neck.Height * Projectile.scale)
             {
-                Main.EntitySpriteDraw(f == 0 ? neckBase : neck, Main.player[Projectile.owner].Center - Main.screenPosition + QwertyMethods.PolarVector(f, (Projectile.Center - Main.player[Projectile.owner].Center).ToRotation()), null, lightColor, (Projectile.Center - Main.player[Projectile.owner].Center).ToRotation() + (float)Math.PI / 2, neck.Size() * .5f, Vector2.One * Projectile.scale, 0, 0);
+                Main.EntitySpriteDraw(f == 0 ? neckBase : neck, Main.player[Projectile.owner].Center - Main.screenPosition + QwertyMethods.PolarVector(f, (Projectile.Center - Main.player[Projectile.owner].Center).ToRotation()), null, lightColor, (Projectile.Center - Main.player[Projectile.owner].Center).ToRotation() + MathF.PI / 2, neck.Size() * .5f, Vector2.One * Projectile.scale, 0, 0);
             }
             Texture2D texture = TextureAssets.Projectile[Projectile.type].Value;
             Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition, null, lightColor, Projectile.rotation, Vector2.One * 36f, Vector2.One * Projectile.scale, 0, 0);
@@ -176,7 +176,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.HydraBarrage
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Barrage Breath");
+            //DisplayName,SetDefault("Barrage Breath");
         }
 
         public override void SetDefaults()

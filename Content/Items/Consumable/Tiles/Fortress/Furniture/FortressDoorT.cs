@@ -41,14 +41,11 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Furniture
             TileObjectData.addAlternate(0);
             TileObjectData.addTile(Type);
             AddToArray(ref TileID.Sets.RoomNeeds.CountsAsDoor);
-            ModTranslation name = CreateMapEntryName();
-            name.SetDefault("Fortress Door");
-            AddMapEntry(new Color(162, 184, 185), name);
+            AddMapEntry(new Color(162, 184, 185));
             DustType = DustType<FortressDust>();
             HitSound = QwertyMod.FortressBlocks;
-            // disableSmartCursor = true;
             AdjTiles = new int[] { TileID.ClosedDoor };
-            OpenDoorID = TileType<FortressDoorOpen>();
+			TileID.Sets.OpenDoorID[Type] = ModContent.TileType<FortressDoorOpen>();
         }
 
         public override bool HasSmartInteract(int i, int j, SmartInteractScanSettings settings)
@@ -124,13 +121,13 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Furniture
             AddToArray(ref TileID.Sets.RoomNeeds.CountsAsDoor);
             TileID.Sets.HousingWalls[Type] = true; //needed for non-solid blocks to count as walls
             TileID.Sets.HasOutlines[Type] = true;
-            ModTranslation name = CreateMapEntryName();
-            name.SetDefault("Fortress Door");
-            AddMapEntry(new Color(162, 184, 185), name);
+            //ModTranslation name = CreateMapEntryName();
+            //name.SetDefault("Fortress Door");
+            //AddMapEntry(new Color(162, 184, 185), name);
             DustType = DustType<FortressDust>();
             // disableSmartCursor = true;
             AdjTiles = new int[] { TileID.OpenDoor };
-            CloseDoorID = TileType<FortressDoorClosed>();
+			TileID.Sets.CloseDoorID[Type] = ModContent.TileType<FortressDoorClosed>();
         }
 
         public override bool HasSmartInteract(int i, int j, SmartInteractScanSettings settings)

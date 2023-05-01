@@ -9,8 +9,6 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Combined
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Phantom Sphere");
-            Tooltip.SetDefault("Magic attacks pierce 2 extra enemies\nProjectiles that normally don't pierce will use local immunity\nMagic attacks ignore 15 defense\n10% reduced magic damage\nExtra pierces will do reduced damage when hitting the same target multiple times");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 

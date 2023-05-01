@@ -13,8 +13,6 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Combined
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Fiery Whetstone");
-            Tooltip.SetDefault("Melee attacks ingnite enemies\nMelee attacks do an extra 30% damage as magic damage\nEnemies immune to fire are immune to the extra damage.");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -66,7 +64,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Combined
             effect = 0f;
         }
 
-        public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
         {
             if (effect != 0f && !target.buffImmune[BuffID.OnFire] && proj.CountsAsClass(DamageClass.Melee))
             {
@@ -74,11 +72,11 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Combined
             }
         }
 
-        public override void ModifyHitNPC(Terraria.Item item, NPC target, ref int damage, ref float knockback, ref bool crit)
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            if (effect != 0f && !target.buffImmune[BuffID.OnFire] && item.CountsAsClass(DamageClass.Melee))
+            if (effect != 0f && !target.buffImmune[BuffID.OnFire] && modifiers.DamageType == DamageClass.Melee)
             {
-                QwertyMethods.PokeNPC(Player, target, new EntitySource_Misc(""), damage * effect * Player.GetDamage(DamageClass.Magic).Multiplicative, DamageClass.Magic);
+                QwertyMethods.PokeNPC(Player, target, new EntitySource_Misc(""), modifiers.FinalDamage.Multiplicative * effect * Player.GetDamage(DamageClass.Magic).Multiplicative, DamageClass.Magic);
             }
         }
     }

@@ -42,7 +42,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Dart.Venom
                 }
             }
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.perIDStaticNPCImmunity[Projectile.type][target.whoAmI] = Main.GameUpdateCount + 10;
             target.immune[Projectile.owner] = 0;

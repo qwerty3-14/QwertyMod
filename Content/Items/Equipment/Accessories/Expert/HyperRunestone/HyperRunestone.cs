@@ -2,6 +2,7 @@ using QwertyMod.Common;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.GameContent.Creative;
+using Terraria.ID;
 
 namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.HyperRunestone
 {
@@ -9,8 +10,8 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.HyperRunestone
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Hyper Runestone");
-            Tooltip.SetDefault("Makes other dashes more powerful or can be used to grant a dash on its own" + "\nMakes you invincible when dashing" + "\nThis effect needs four seconds to recharge");
+            //DisplayName,SetDefault("Hyper Runestone");
+            //Tooltip.SetDefault("Makes other dashes more powerful or can be used to grant a dash on its own" + "\nMakes you invincible when dashing" + "\nThis effect needs four seconds to recharge");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -20,9 +21,9 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.HyperRunestone
             Item.height = 76;
             Item.maxStack = 1;
             Item.value = 500000;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
 
-            Item.rare = 9;
+            Item.rare = ItemRarityID.Cyan;
             Item.expert = true;
             Item.accessory = true;
         }

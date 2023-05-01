@@ -26,7 +26,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Rune Ghost");
+            //DisplayName,SetDefault("Rune Ghost");
             Main.npcFrameCount[NPC.type] = 8;
         }
 
@@ -66,9 +66,9 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
 				new FlavorTextBestiaryInfoElement("An ancient powerful sorcerer sought Godhood. Although he remains a powerful being long after death he is still tied to the mortal realm. Was this a failure? or had the sourcerer changed his mind on Godhood?")
             });
         }
-        public override void ScaleExpertStats(int numPlayers, float bossLifeScale)
+        public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
         {
-            NPC.lifeMax = (int)(NPC.lifeMax * 0.625f * bossLifeScale);
+            NPC.lifeMax = (int)(NPC.lifeMax * 0.625f * bossAdjustment);
         }
         public override bool CheckActive()
         {
@@ -105,7 +105,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
                     phase++;
                 }
             }
-            if (Main.netMode != 1)
+            if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 goTo = player.Center + Vector2.UnitY * goToYOffset + Vector2.UnitX * Main.rand.NextFloat(-400, 400);
                 NPC.velocity = castingSpeed * ((goTo - NPC.Center) / flightTimeMax);
@@ -182,11 +182,11 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
                     if (castTime >= 60 && drawRune)
                     {
                         drawRune = false;
-                        if (Main.netMode != 1)
+                        if (Main.netMode != NetmodeID.MultiplayerClient)
                         {
                             for (int i = 0; i < phase + 1; i++)
                             {
-                                Projectile rune = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), NPC.Top + QwertyMethods.PolarVector(-120, (float)Math.PI * ((float)(i + 1) / (phase + 2))), Vector2.Zero, ProjectileType<BigRune>(), Main.expertMode ? 30 : 40, 0, Main.myPlayer)];
+                                Projectile rune = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Top + QwertyMethods.PolarVector(-120, MathF.PI * ((float)(i + 1) / (phase + 2))), Vector2.Zero, ProjectileType<BigRune>(), Main.expertMode ? 30 : 40, 0, Main.myPlayer)];
 
                                 int newRune = lastRune == 5 ? Main.rand.Next(4) : Main.rand.Next(3);
                                 if (newRune >= lastRune)
@@ -218,7 +218,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
                         drawRune = true;
                         casting = true;
                         castTime = 0;
-                        if (Main.netMode != 1)
+                        if (Main.netMode != NetmodeID.MultiplayerClient)
                         {
                             NPC.netUpdate = true;
                         }

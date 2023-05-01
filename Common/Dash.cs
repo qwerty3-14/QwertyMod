@@ -147,11 +147,11 @@ namespace QwertyMod.Common
                             int num12;
                             if (Player.velocity.Y == 0f)
                             {
-                                num12 = Dust.NewDust(new Vector2(Player.position.X, Player.position.Y + (float)Player.height - 4f), Player.width, 8, 31, 0f, 0f, 100, default(Color), 1.4f);
+                                num12 = Dust.NewDust(new Vector2(Player.position.X, Player.position.Y + (float)Player.height - 4f), Player.width, 8, DustID.Smoke, 0f, 0f, 100, default(Color), 1.4f);
                             }
                             else
                             {
-                                num12 = Dust.NewDust(new Vector2(Player.position.X, Player.position.Y + (float)(Player.height / 2) - 8f), Player.width, 16, 31, 0f, 0f, 100, default(Color), 1.4f);
+                                num12 = Dust.NewDust(new Vector2(Player.position.X, Player.position.Y + (float)(Player.height / 2) - 8f), Player.width, 16, DustID.Smoke, 0f, 0f, 100, default(Color), 1.4f);
                             }
                             Main.dust[num12].velocity *= 0.1f;
                             Main.dust[num12].scale *= 1f + (float)Main.rand.Next(20) * 0.01f;
@@ -255,11 +255,11 @@ namespace QwertyMod.Common
                                 Main.dust[num18].scale *= 1f + (float)Main.rand.Next(20) * 0.01f;
                                 Main.dust[num18].shader = GameShaders.Armor.GetSecondaryShader(Player.cShoe, Player);
                             }
-                            int num19 = Gore.NewGore(new EntitySource_Misc(""), new Vector2(Player.position.X + (float)(Player.width / 2) - 24f, Player.position.Y + (float)(Player.height / 2) - 34f), default(Vector2), Main.rand.Next(61, 64), 1f);
+                            int num19 = Gore.NewGore(new EntitySource_Misc("PlayerDash"), new Vector2(Player.position.X + (float)(Player.width / 2) - 24f, Player.position.Y + (float)(Player.height / 2) - 34f), default(Vector2), Main.rand.Next(61, 64), 1f);
                             Main.gore[num19].velocity.X = (float)Main.rand.Next(-50, 51) * 0.01f;
                             Main.gore[num19].velocity.Y = (float)Main.rand.Next(-50, 51) * 0.01f;
                             Main.gore[num19].velocity *= 0.4f;
-                            num19 = Gore.NewGore(new EntitySource_Misc(""), new Vector2(Player.position.X + (float)(Player.width / 2) - 24f, Player.position.Y + (float)(Player.height / 2) - 14f), default(Vector2), Main.rand.Next(61, 64), 1f);
+                            num19 = Gore.NewGore(new EntitySource_Misc("PlayerDash"), new Vector2(Player.position.X + (float)(Player.width / 2) - 24f, Player.position.Y + (float)(Player.height / 2) - 14f), default(Vector2), Main.rand.Next(61, 64), 1f);
                             Main.gore[num19].velocity.X = (float)Main.rand.Next(-50, 51) * 0.01f;
                             Main.gore[num19].velocity.Y = (float)Main.rand.Next(-50, 51) * 0.01f;
                             Main.gore[num19].velocity *= 0.4f;
@@ -286,15 +286,16 @@ namespace QwertyMod.Common
         {
             Player drawPlayer = drawInfo.drawPlayer;
             Mod mod = ModLoader.GetMod("QwertyMod");
-            if (drawPlayer.GetModPlayer<Dash>().hyperRune && drawPlayer.GetModPlayer<Dash>().hyperRuneTimer >= 180)
+            if(!drawPlayer.TryGetModPlayer<Dash>(out Dash modPlayer)){ return; }
+            if (modPlayer.hyperRune && modPlayer.hyperRuneTimer >= 180)
             {
-                float c = (float)(drawPlayer.GetModPlayer<Dash>().hyperRuneTimer - 180) / 60f;
+                float c = (float)(modPlayer.hyperRuneTimer - 180) / 60f;
                 if (c > 1f)
                 {
                     c = 1f;
                 }
                 Color drawColor = new Color(c, c, c, c);
-                float rotation = drawPlayer.GetModPlayer<CommonStats>().genericCounter * (float)Math.PI / 60f;
+                float rotation = drawPlayer.GetModPlayer<CommonStats>().genericCounter * MathF.PI / 60f;
                 Texture2D texture = Request<Texture2D>("QwertyMod/Common/SignalRune").Value;
                 DrawData d = new DrawData(texture, drawInfo.Position + drawPlayer.Size * 0.5f - Main.screenPosition, null, drawColor, rotation, texture.Size() * 0.5f, 1f, drawInfo.playerEffect, 0);
                 drawInfo.DrawDataCache.Add(d);

@@ -12,8 +12,8 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.DartLauncher.Whirpool
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Whirlpool");
-            Tooltip.SetDefault("Uses darts as ammo");
+            //DisplayName,SetDefault("Whirlpool");
+            //Tooltip.SetDefault("Uses darts as ammo");
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -23,14 +23,14 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.DartLauncher.Whirpool
             Item.DamageType = DamageClass.Ranged;
             Item.knockBack = 7f;
             Item.value = Item.sellPrice(gold: 5);
-            Item.rare = 8;
+            Item.rare = ItemRarityID.Yellow;
             Item.width = 48;
             Item.height = 30;
-            Item.useStyle = 5;
+            Item.useStyle = ItemUseStyleID.Shoot;
             Item.shootSpeed = 15f;
             Item.useTime = 15;
             Item.useAnimation = 15;
-            Item.shoot = 10;
+            Item.shoot = ProjectileID.PoisonDart;
             Item.useAmmo = AmmoID.Dart;
             Item.noUseGraphic = false;
             Item.noMelee = true;
@@ -40,12 +40,12 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.DartLauncher.Whirpool
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             float r = (velocity).ToRotation();
-            position += QwertyMethods.PolarVector(-12f, r) + QwertyMethods.PolarVector(-12f * player.direction, r + (float)Math.PI / 2);
+            position += QwertyMethods.PolarVector(-12f, r) + QwertyMethods.PolarVector(-12f * player.direction, r + MathF.PI / 2);
             Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
             int amt = Main.rand.Next(2) + 2;
             for (int i = 0; i < amt; i++)
             {
-                Dust.NewDustPerfect(position + QwertyMethods.PolarVector(30f, r), 217, QwertyMethods.PolarVector(Main.rand.NextFloat() * 3f + 1f, r + Main.rand.NextFloat(-(float)Math.PI / 16, (float)Math.PI / 16)), 100);
+                Dust.NewDustPerfect(position + QwertyMethods.PolarVector(30f, r), 217, QwertyMethods.PolarVector(Main.rand.NextFloat() * 3f + 1f, r + Main.rand.NextFloat(-MathF.PI / 16, MathF.PI / 16)), 100);
             }
             return false;
         }

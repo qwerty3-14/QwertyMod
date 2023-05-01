@@ -14,8 +14,8 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Boomerang.Rhuthinium
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Rhuthinium Boomerang");
-            Tooltip.SetDefault("Hold down the throw button to make it fly further" + "\nRight click to make the boomerang stationary");
+            //DisplayName,SetDefault("Rhuthinium Boomerang");
+            //Tooltip.SetDefault("Hold down the throw button to make it fly further" + "\nRight click to make the boomerang stationary");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -28,10 +28,10 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Boomerang.Rhuthinium
 
             Item.useTime = 14;
             Item.useAnimation = 14;
-            Item.useStyle = 5;
+            Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 0;
             Item.value = 25000;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
             Item.UseSound = SoundID.Item1;
             Item.noUseGraphic = true;
             Item.width = 28;
@@ -78,7 +78,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Boomerang.Rhuthinium
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("RhuthiniumBoomerang");
+            //DisplayName,SetDefault("RhuthiniumBoomerang");
         }
 
         public int timer;
@@ -88,10 +88,10 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Boomerang.Rhuthinium
 
         public override void AI()
         {
-            if (Main.rand.Next(10) == 0)
+            if (Main.rand.NextBool(10))
             {
                 Dust d = Main.dust[Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<RhuthiniumDust>())];
-                d.frame.Y = Main.rand.Next(2) == 0 ? 0 : 10;
+                d.frame.Y = Main.rand.NextBool(2) ? 0 : 10;
                 d.noGravity = true;
             }
             Player player = Main.player[Projectile.owner];
@@ -117,9 +117,9 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Boomerang.Rhuthinium
                 Projectile.tileCollide = false;
                 float speed = 10;
                 float direction = (player.Center - Projectile.Center).ToRotation();
-                Projectile.velocity.X = speed * (float)Math.Cos(direction);
-                Projectile.velocity.Y = speed * (float)Math.Sin(direction);
-                float distance = (float)Math.Sqrt((player.Center.X - Projectile.Center.X) * (player.Center.X - Projectile.Center.X) + (player.Center.Y - Projectile.Center.Y) * (player.Center.Y - Projectile.Center.Y));
+                Projectile.velocity.X = speed * MathF.Cos(direction);
+                Projectile.velocity.Y = speed * MathF.Sin(direction);
+                float distance = MathF.Sqrt((player.Center.X - Projectile.Center.X) * (player.Center.X - Projectile.Center.X) + (player.Center.Y - Projectile.Center.Y) * (player.Center.Y - Projectile.Center.Y));
                 if (distance < 10)
                 {
                     Projectile.Kill();

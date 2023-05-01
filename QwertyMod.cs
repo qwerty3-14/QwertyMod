@@ -85,6 +85,7 @@ using QwertyMod.Content.NPCs.Bosses.OLORD;
 using QwertyMod.Content.NPCs.Bosses.RuneGhost;
 using QwertyMod.Content.NPCs.Bosses.TundraBoss;
 using QwertyMod.Content.NPCs.DinoMilitia;
+using QwertyMod.Content.NPCs.Bosses.InvaderBattleship;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -94,6 +95,9 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
 using QwertyMod.Content.Items.Equipment.Vanity.RunicRobe;
+using QwertyMod.Content.Items.Equipment.Armor.Hero;
+using QwertyMod.Content.Items.Equipment.VanityAccessories.Corset;
+using QwertyMod.Content.Items.Equipment.Vanity.ScarletBallGown;
 
 namespace QwertyMod
 {
@@ -131,6 +135,13 @@ namespace QwertyMod
         public static int invaderLanderFemale = 0;
         public static int RuneLegMale = 0;
         public static int RuneLegFemale = 0;
+        public static int HeroShieldHandOn = 0;
+        public static int HeroShieldShield = 0;
+        public static int HeroShieldShieldUp = 0;
+        public static int HeroPantsMale = 0;
+        public static int HeroPantsFemale = 0;
+        public static int CorsetMale = 0;
+        public static int BallGownSkirt = 0;
         public static SoundStyle FortressBlocks;
         public const int InvaderGearValue = 500000;
         public override void Load()
@@ -194,9 +205,23 @@ namespace QwertyMod
                 invaderLanderFemale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Invader/InvaderLanders_FemaleLegs", EquipType.Legs, GetModItem(ItemType<InvaderLanders>()));
                 RuneLegMale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Vanity/RunicRobe/RunicRobe_Legs", EquipType.Legs, GetModItem(ItemType<RunicRobe>()));
                 RuneLegFemale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Vanity/RunicRobe/RunicRobe_FemaleLegs", EquipType.Legs, GetModItem(ItemType<RunicRobe>()));
+
+                HeroShieldHandOn = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Hero/HeroShield_HandsOn", EquipType.HandsOn, GetModItem(ItemType<HeroShield>()));
+                HeroShieldShield = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Hero/HeroShield_Shield", EquipType.Shield, GetModItem(ItemType<HeroShield>()));
+                HeroShieldShieldUp = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Hero/HeroShield_ShieldUp", EquipType.Shield, name: "ShieldUp");
+
+                HeroPantsMale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Hero/HeroPants_Legs", EquipType.Legs, GetModItem(ItemType<HeroPants>()));
+                HeroPantsFemale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Hero/HeroPants_FemaleLegs", EquipType.Legs, GetModItem(ItemType<HeroPants>()));
+
+                CorsetMale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/VanityAccessories/Corset/Corset_WaistMale", EquipType.Waist, name: "CorsetMale");
+
+                BallGownSkirt = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Vanity/ScarletBallGown/ScarletBallGown_Legs", EquipType.Legs, GetModItem(ItemType<ScarletBallGown>()));
+
                 Main.QueueMainThreadAction(() =>
                 {
                     RuneSprites.BuildRunes();
+                    NoehtnapAnimations.BuildAnims();
+                    Turret.LoadTextures();
                 });
 
             }
@@ -274,7 +299,7 @@ namespace QwertyMod
         {
             LocalCursor[id] = Main.MouseWorld;
 
-            if (Main.netMode == 1)
+            if (Main.netMode == NetmodeID.MultiplayerClient)
             {
                 ModPacket packet = Instance.GetPacket();
                 packet.Write((byte)ModMessageType.UpdateLocalCursor); // Message type, you would need to create an enum for this

@@ -12,8 +12,8 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Enchanted Whetstone");
-            Tooltip.SetDefault("Melee attacks deal an extra 20% damage as magic damage");
+            //DisplayName,SetDefault("Enchanted Whetstone");
+            //Tooltip.SetDefault("Melee attacks deal an extra 20% damage as magic damage");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -64,7 +64,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
             effect = 0f;
         }
 
-        public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
         {
             if (effect != 0f && proj.CountsAsClass(DamageClass.Melee))
             {
@@ -72,11 +72,11 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
             }
         }
 
-        public override void ModifyHitNPC(Item item, NPC target, ref int damage, ref float knockback, ref bool crit)
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            if (effect != 0f && item.CountsAsClass(DamageClass.Melee))
+            if (effect != 0f && modifiers.DamageType == DamageClass.Melee)
             {
-                QwertyMethods.PokeNPC(Player, target, new EntitySource_Misc(""), damage * effect * Player.GetDamage(DamageClass.Magic).Multiplicative, DamageClass.Magic);
+                QwertyMethods.PokeNPC(Player, target, new EntitySource_Misc("Accesory_EnchantedWhetstone"), modifiers.FinalDamage.Multiplicative * effect * Player.GetDamage(DamageClass.Magic).Multiplicative, DamageClass.Magic);
             }
         }
     }

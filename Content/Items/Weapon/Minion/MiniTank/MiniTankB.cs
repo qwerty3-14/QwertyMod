@@ -9,8 +9,8 @@ namespace QwertyMod.Content.Items.Weapon.Minion.MiniTank
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Mini Tank");
-            Description.SetDefault("Build an army... trust nobody!");
+            //DisplayName,SetDefault("Mini Tank");
+            //Description.SetDefault("Build an army... trust nobody!");
             Main.buffNoSave[Type] = true;
             Main.buffNoTimeDisplay[Type] = true;
         }

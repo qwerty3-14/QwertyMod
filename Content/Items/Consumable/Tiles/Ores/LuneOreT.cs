@@ -19,9 +19,9 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Ores
             DustType = DustType<LuneDust>();
             HitSound = SoundID.Tink;
 
-            ModTranslation name = CreateMapEntryName();
-            name.SetDefault("Lune Ore");
-            AddMapEntry(new Color(102, 143, 204), name);
+            //ModTranslation name = CreateMapEntryName();
+            //name.SetDefault("Lune Ore");
+            //AddMapEntry(new Color(102, 143, 204), name);
 
             ItemDrop = ItemType<LuneOre>();
 

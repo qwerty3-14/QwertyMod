@@ -12,8 +12,8 @@ namespace QwertyMod.Content.Items.Weapon.Minion.MiniTank
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Mini Tank Staff");
-            Tooltip.SetDefault("Summons a Mini Tank!");
+            //DisplayName,SetDefault("Mini Tank Staff");
+            //Tooltip.SetDefault("Summons a Mini Tank!");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
@@ -27,11 +27,11 @@ namespace QwertyMod.Content.Items.Weapon.Minion.MiniTank
             Item.height = 38;
             Item.useTime = 25;
             Item.useAnimation = 25;
-            Item.useStyle = 1;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.noMelee = true;
             Item.knockBack = 5f;
             Item.value = 200000;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
             Item.UseSound = SoundID.Item44;
             Item.shoot = ProjectileType<MiniTank>();
             Item.DamageType = DamageClass.Summon;

@@ -15,7 +15,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Utahraptor");
+            //DisplayName,SetDefault("Utahraptor");
             Main.npcFrameCount[NPC.type] = 4;
         }
 
@@ -71,7 +71,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
                     NetMessage.SendData(MessageID.WorldData); // Immediately inform clients of new world state.
             }
         }
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
         {
             for (int i = 0; i < 10; i++)
             {

@@ -13,8 +13,8 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.Lune
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Lune Trickshooter");
-            Tooltip.SetDefault("Musket balls are converted to Lune trick shots!" + "\nTrick shots can bounce off walls 3 times and gain significant damage if they do so");
+            //DisplayName,SetDefault("Lune Trickshooter");
+            //Tooltip.SetDefault("Musket balls are converted to Lune trick shots!" + "\nTrick shots can bounce off walls 3 times and gain significant damage if they do so");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -25,17 +25,17 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.Lune
             Item.crit = 15;
             Item.useTime = 28;
             Item.useAnimation = 28;
-            Item.useStyle = 5;
+            Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 1;
             Item.value = 20000;
-            Item.rare = 1;
+            Item.rare = ItemRarityID.Blue;
             Item.UseSound = SoundID.Item11;
 
             Item.width = 54;
             Item.height = 30;
 
-            Item.shoot = 97;
-            Item.useAmmo = 97;
+            Item.shoot = ProjectileID.Bullet;
+            Item.useAmmo = AmmoID.Bullet;
             Item.shootSpeed = 9f;
             Item.noMelee = true;
         }
@@ -103,7 +103,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.Lune
             return true;
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             bounceCounter = 3;
         }

@@ -14,8 +14,8 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Vitallum Core");
-            Tooltip.SetDefault("Uncharged, kill enemies to charge it.\nWhen charged can be used in crafting, removing the charge. \n");
+            //DisplayName,SetDefault("Vitallum Core");
+            //Tooltip.SetDefault("Uncharged, kill enemies to charge it.\nWhen charged can be used in crafting, removing the charge. \n");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -27,7 +27,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
             Item.width = 13;
             Item.height = 13;
             Item.value = 10000;
-            Item.rare = 8;
+            Item.rare = ItemRarityID.Yellow;
             Item.maxStack = 1;
         }
         public override ModItem Clone(Item item)
@@ -46,7 +46,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
             if (charge > maxCharge)
             {
                 Item.TurnToAir();
-                player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<VitallumCoreCharged>(), 1);
+                player.QuickSpawnItem(new EntitySource_Misc("Recipe"), ItemType<VitallumCoreCharged>(), 1);
             }
         }
 
@@ -67,8 +67,8 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Vitallum Core");
-            Tooltip.SetDefault("Charged, ready for crafting.");
+            //DisplayName,SetDefault("Vitallum Core");
+            //Tooltip.SetDefault("Charged, ready for crafting.");
             Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(10, 6));
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
@@ -78,7 +78,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
             Item.width = 13;
             Item.height = 13;
             Item.value = 10000;
-            Item.rare = 8;
+            Item.rare = ItemRarityID.Yellow;
             Item.maxStack = 1;
         }
     }
@@ -94,7 +94,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
             gainCharges = false;
         }
 
-        public override void OnHitNPC(Item item, NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (gainCharges && target.life < 0)
             {
@@ -102,7 +102,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
             }
         }
 
-        public override void OnHitNPCWithProj(Projectile proj, NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (gainCharges && target.life < 0)
             {
@@ -129,12 +129,11 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
 
     public class CoreBagDrop : GlobalItem
     {
-        [Obsolete]
-        public override void OpenVanillaBag(string context, Player player, int arg)
+        public override void ModifyItemLoot(Item item, ItemLoot itemLoot)
         {
-            if (context == "bossBag" && arg == ItemID.PlanteraBossBag)
+            if(item.type == ItemID.FishronBossBag)
             {
-                player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<VitallumCoreUncharged>());
+                itemLoot.Add(ItemDropRule.Common(ItemType<VitallumCoreUncharged>()));
             }
         }
     }

@@ -5,6 +5,7 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using Terraria.ID;
 
 
 namespace QwertyMod.Content.NPCs.Bosses.OLORD
@@ -13,7 +14,7 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Pew Pew");
+            //DisplayName,SetDefault("Pew Pew");
         }
 
         public override void SetDefaults()
@@ -33,9 +34,9 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
 
         public override void Kill(int timeLeft)
         {
-            if (Main.netMode != 1)
+            if (Main.netMode != NetmodeID.MultiplayerClient)
             {
-                Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center.X, Projectile.Center.Y, 0, 0, ProjectileType<BlackHole>(), Projectile.damage, 3f, Main.myPlayer, Projectile.ai[0]);
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center.X, Projectile.Center.Y, 0, 0, ProjectileType<BlackHole>(), Projectile.damage, 3f, Main.myPlayer, Projectile.ai[0]);
             }
         }
     }
@@ -44,7 +45,7 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("BlackHole");
+            //DisplayName,SetDefault("BlackHole");
             Main.projFrames[Projectile.type] = 1;
         }
 
@@ -69,7 +70,6 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
         public int frameTimer;
         public Dust dust;
         public Item item;
-        private int dustCounter;
 
         public override void AI()
         {
@@ -83,8 +83,8 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
                 if (player.active && !player.dead)
                 {
                     direction = (Projectile.Center - player.Center).ToRotation();
-                    horiSpeed = (float)Math.Cos(direction) * pullSpeed / 2;
-                    vertSpeed = (float)Math.Sin(direction) * pullSpeed / 2;
+                    horiSpeed = MathF.Cos(direction) * pullSpeed / 2;
+                    vertSpeed = MathF.Sin(direction) * pullSpeed / 2;
                     player.velocity += new Vector2(horiSpeed, vertSpeed);
 
                     for (int i = 0; i < 1; i++)
@@ -98,16 +98,16 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
             {
                 Dust blackEs = Main.dust[Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, mod.DustType("B4PDust"), 0, 0)];
                 direction = (Projectile.Center - blackEs.position).ToRotation();
-                horiSpeed = (float)Math.Cos(direction) * pullSpeed * 50;
-                vertSpeed = (float)Math.Sin(direction) * pullSpeed * 50;
+                horiSpeed = MathF.Cos(direction) * pullSpeed * 50;
+                vertSpeed = MathF.Sin(direction) * pullSpeed * 50;
                 blackEs.velocity += new Vector2(horiSpeed, vertSpeed);
             }
             */
 
             for (int d = 0; d < 80; d++)
             {
-                float theta = Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI);
-                Dust dust = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(Main.rand.NextFloat(10, 200), theta), DustType<BlackHoleMatter>(), QwertyMethods.PolarVector(6, theta + (float)Math.PI / 2));
+                float theta = Main.rand.NextFloat(-MathF.PI, MathF.PI);
+                Dust dust = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(Main.rand.NextFloat(10, 200), theta), DustType<BlackHoleMatter>(), QwertyMethods.PolarVector(6, theta + MathF.PI / 2));
                 dust.scale = 1f;
             }
 
@@ -117,8 +117,8 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
                 if (!dust.noGravity)
                 {
                     direction = (Projectile.Center - dust.position).ToRotation();
-                    horiSpeed = (float)Math.Cos(direction) * pullSpeed * 5;
-                    vertSpeed = (float)Math.Sin(direction) * pullSpeed * 5;
+                    horiSpeed = MathF.Cos(direction) * pullSpeed * 5;
+                    vertSpeed = MathF.Sin(direction) * pullSpeed * 5;
                     dust.velocity += new Vector2(horiSpeed, vertSpeed);
                 }
                 if (dust.type == DustType<BlackHoleMatter>())
@@ -141,8 +141,8 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
                 if (!mass.boss && mass.active && mass.knockBackResist != 0f)
                 {
                     direction = (Projectile.Center - mass.Center).ToRotation();
-                    horiSpeed = (float)Math.Cos(direction) * pullSpeed;
-                    vertSpeed = (float)Math.Sin(direction) * pullSpeed;
+                    horiSpeed = MathF.Cos(direction) * pullSpeed;
+                    vertSpeed = MathF.Sin(direction) * pullSpeed;
                     mass.velocity += new Vector2(horiSpeed, vertSpeed);
                     for (int g = 0; g < 1; g++)
                     {
@@ -156,8 +156,8 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
                 if (item.position != new Vector2(0, 0))
                 {
                     direction = (Projectile.Center - item.Center).ToRotation();
-                    horiSpeed = (float)Math.Cos(direction) * pullSpeed;
-                    vertSpeed = (float)Math.Sin(direction) * pullSpeed;
+                    horiSpeed = MathF.Cos(direction) * pullSpeed;
+                    vertSpeed = MathF.Sin(direction) * pullSpeed;
                     item.velocity += new Vector2(horiSpeed, vertSpeed);
                     for (int g = 0; g < 1; g++)
                     {
@@ -171,8 +171,8 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
                 if (proj.active && proj.type != ProjectileType<BlackHole>() && proj.type != ProjectileType<SideLaser>())
                 {
                     direction = (Projectile.Center - proj.Center).ToRotation();
-                    horiSpeed = (float)Math.Cos(direction) * pullSpeed;
-                    vertSpeed = (float)Math.Sin(direction) * pullSpeed;
+                    horiSpeed = MathF.Cos(direction) * pullSpeed;
+                    vertSpeed = MathF.Sin(direction) * pullSpeed;
                     proj.velocity += new Vector2(horiSpeed, vertSpeed);
                     for (int g = 0; g < 1; g++)
                     {
@@ -187,7 +187,7 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Pew Pew");
+            //DisplayName,SetDefault("Pew Pew");
         }
 
 
@@ -207,7 +207,7 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
         public override void AI()
         {
             Player player = Main.player[Projectile.owner];
-            Projectile.rotation += (float)Math.PI / 30;
+            Projectile.rotation += MathF.PI / 30;
             for (int i = 0; i < 1; i++)
             {
                 int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<B4PDust>());
@@ -218,10 +218,10 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
 
         public override void Kill(int timeLeft)
         {
-            if (Main.netMode != 1)
+            if (Main.netMode != NetmodeID.MultiplayerClient)
             {
-                QwertyMethods.ProjectileSpread(new EntitySource_Misc(""), Projectile.Center, 4, shotSpeed, ProjectileType<TurretShot>(), Projectile.damage, Projectile.knockBack, Main.myPlayer);
-                QwertyMethods.ProjectileSpread(new EntitySource_Misc(""), Projectile.Center, 4, shotSpeed * 1.5f, ProjectileType<TurretShot>(), Projectile.damage, Projectile.knockBack, Main.myPlayer, rotation: (float)Math.PI / 4);
+                QwertyMethods.ProjectileSpread(Projectile.GetSource_FromThis(), Projectile.Center, 4, shotSpeed, ProjectileType<TurretShot>(), Projectile.damage, Projectile.knockBack, Main.myPlayer);
+                QwertyMethods.ProjectileSpread(Projectile.GetSource_FromThis(), Projectile.Center, 4, shotSpeed * 1.5f, ProjectileType<TurretShot>(), Projectile.damage, Projectile.knockBack, Main.myPlayer, rotation: MathF.PI / 4);
             }
         }
     }
@@ -232,7 +232,7 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Pew Pew");
+            //DisplayName,SetDefault("Pew Pew");
         }
 
         public override void SetDefaults()
@@ -251,7 +251,7 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
         public override void AI()
         {
             Player player = Main.player[Projectile.owner];
-            Projectile.rotation += (float)Math.PI / 30;
+            Projectile.rotation += MathF.PI / 30;
             for (int i = 0; i < 3; i++)
             {
                 int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<B4PDust>());
@@ -265,9 +265,9 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
         {
             for (int r = 0; r < 6; r++)
             {
-                if (Main.netMode != 1)
+                if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
-                    Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center.X, Projectile.Center.Y, (float)Math.Cos(r * (2 * Math.PI / 6)) * shotSpeed * 1.5f, (float)Math.Sin(r * (2 * Math.PI / 6)) * shotSpeed * 1.5f, ProjectileType<BurstShot2>(), Projectile.damage, 0, Main.myPlayer);
+                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center.X, Projectile.Center.Y, MathF.Cos(r * (2 * MathF.PI / 6)) * shotSpeed * 1.5f, MathF.Sin(r * (2 * MathF.PI / 6)) * shotSpeed * 1.5f, ProjectileType<BurstShot2>(), Projectile.damage, 0, Main.myPlayer);
                 }
             }
         }

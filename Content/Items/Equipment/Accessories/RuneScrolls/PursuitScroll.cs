@@ -14,8 +14,8 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Pursuit Scroll");
-            Tooltip.SetDefault("Minions ocasionaly shoot pursuit runes");
+            //DisplayName,SetDefault("Pursuit Scroll");
+            //Tooltip.SetDefault("Minions ocasionaly shoot pursuit runes");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
 
         }
@@ -23,7 +23,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
         public override void SetDefaults()
         {
             Item.value = 500000;
-            Item.rare = 9;
+            Item.rare = ItemRarityID.Cyan;
             Item.DamageType = DamageClass.Summon;
             Item.damage = 40;
 
@@ -60,14 +60,9 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
             Projectile.DamageType = DamageClass.Summon;
         }
 
-        public int runeTimer;
         public NPC target;
-
         public float runeSpeed = 10;
-        public float runeDirection;
-        public float runeTargetDirection;
         public bool runOnce = true;
-        public int f;
 
         public override void AI()
         {
@@ -88,7 +83,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
             Projectile.velocity = new Vector2((float)(Math.Cos(Projectile.rotation) * runeSpeed), (float)(Math.Sin(Projectile.rotation) * runeSpeed));
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(BuffID.Venom, 1200);
         }
@@ -119,7 +114,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
                 {
                     if (QwertyMethods.ClosestNPC(ref target, 1000, projectile.Center, false, player.MinionAttackTargetNPC))
                     {
-                        Projectile.NewProjectile(new EntitySource_Misc(""), projectile.Center, (target.Center - projectile.Center).SafeNormalize(Vector2.UnitY) * runeSpeed, ProjectileType<PursuitRuneFreindly>(), (int)(40f * player.GetDamage(DamageClass.Summon).Multiplicative), projectile.knockBack, projectile.owner);
+                        Projectile.NewProjectile(projectile.GetSource_FromThis(), projectile.Center, (target.Center - projectile.Center).SafeNormalize(Vector2.UnitY) * runeSpeed, ProjectileType<PursuitRuneFreindly>(), (int)(40f * player.GetDamage(DamageClass.Summon).Multiplicative), projectile.knockBack, projectile.owner);
                         runeCounter = 0;
                     }
 

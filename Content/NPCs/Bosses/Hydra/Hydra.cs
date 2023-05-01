@@ -27,7 +27,7 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Hydra");
+            //DisplayName,SetDefault("Hydra");
             Main.npcFrameCount[NPC.type] = 5;
 
             NPCID.Sets.MPAllowedEnemies[NPC.type] = true; //For allowing use of SpawnOnPlayer in multiplayer
@@ -75,11 +75,6 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
             return false;
         }
 
-        public override bool? CanHitNPC(NPC target)
-        {
-            return false;
-        }
-
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
             return 0f;
@@ -90,7 +85,7 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
             potionType = ItemID.GreaterHealingPotion;
         }
 
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
         {
             if (NPC.life <= 0)
             {
@@ -155,7 +150,7 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
                 }
                 for (int h = 0; h < 3; h++)
                 {
-                    if (Main.netMode != 1)
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Center.X + h, (int)NPC.Center.Y, NPCType<HydraHead>(), ai0: NPC.whoAmI, ai1: h);
                     }
@@ -164,7 +159,7 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
             }
 
             Player player = Main.player[NPC.target];
-            if (Main.netMode != 1)
+            if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 player = Main.player[NPC.target];
                 NPC.TargetClosest(true);

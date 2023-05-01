@@ -15,8 +15,8 @@ namespace QwertyMod.Content.Items.Weapon.Magic.StaffOfJob
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Staff Of Job");
-            Tooltip.SetDefault("Inflicts grave misery at the victim near your cursor!");
+            //DisplayName,SetDefault("Staff Of Job");
+            //Tooltip.SetDefault("Inflicts grave misery at the victim near your cursor!");
             Item.staff[Item.type] = true; //this makes the useStyle animate as a staff instead of as a gun
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
@@ -30,11 +30,11 @@ namespace QwertyMod.Content.Items.Weapon.Magic.StaffOfJob
             Item.damage = 10;
             Item.mana = ModLoader.HasMod("TRAEProject") ? 40 : 10;
             Item.shootSpeed = 1f;
-            Item.shoot = 1;
+            Item.shoot = ProjectileID.WoodenArrowFriendly;
             Item.useTime = 30;
             Item.useAnimation = 30;
             Item.UseSound = SoundID.Item20;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
             Item.value = 120000;
         }
 
@@ -74,11 +74,11 @@ namespace QwertyMod.Content.Items.Weapon.Magic.StaffOfJob
             if (MiseryTime > 0)
             {
                 MiseryTime--;
-                trigCounter += 250 * (float)Math.PI / (60f * 240f);
+                trigCounter += 250 * MathF.PI / (60f * 240f);
                 miseryCounter++;
                 if (miseryCounter % 6 == 0)
                 {
-                    QwertyMethods.PokeNPC(Main.player[MiseryCauser], npc, new EntitySource_Misc(""), MiseryIntensity, DamageClass.Magic);
+                    QwertyMethods.PokeNPC(Main.player[MiseryCauser], npc, Main.player[MiseryCauser].GetSource_ItemUse(Main.player[MiseryCauser].HeldItem), MiseryIntensity, DamageClass.Magic);
                 }
             }
             else
@@ -139,7 +139,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.StaffOfJob
             {
                 for (int i = 0; i < painRings; i++)
                 {
-                    Texture2D curve = DrawCurve(npc.width + 50, npc.height + 50, i * ((float)Math.PI) / painRings, false);
+                    Texture2D curve = DrawCurve(npc.width + 50, npc.height + 50, i * (MathF.PI) / painRings, false);
                     spriteBatch.Draw(curve, npc.Center - screenPos,
                            curve.Frame(), Color.White, 0f,
                            curve.Size() * .5f, 2f, SpriteEffects.None, 0f);
@@ -154,7 +154,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.StaffOfJob
             {
                 for (int i = 0; i < painRings; i++)
                 {
-                    Texture2D curve = DrawCurve(npc.width + 50, npc.height + 50, i * ((float)Math.PI) / painRings, true);
+                    Texture2D curve = DrawCurve(npc.width + 50, npc.height + 50, i * (MathF.PI) / painRings, true);
                     spriteBatch.Draw(curve, npc.Center - screenPos,
                            curve.Frame(), Color.White, 0f,
                            curve.Size() * .5f, 2f, SpriteEffects.None, 0f);

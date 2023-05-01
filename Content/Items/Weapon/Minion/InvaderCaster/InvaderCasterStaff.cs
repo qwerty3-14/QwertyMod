@@ -21,8 +21,8 @@ namespace QwertyMod.Content.Items.Weapon.Minion.InvaderCaster
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Invader Caster Staff");
-            Tooltip.SetDefault("Summons an invader caster to fight for you.");
+            //DisplayName,SetDefault("Invader Caster Staff");
+            //Tooltip.SetDefault("Summons an invader caster to fight for you.");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
@@ -36,7 +36,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.InvaderCaster
             Item.height = 32;
             Item.useTime = 25;
             Item.useAnimation = 25;
-            Item.useStyle = 1;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.noMelee = true;
             Item.knockBack = 3f;
             Item.value = QwertyMod.InvaderGearValue;
@@ -63,7 +63,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.InvaderCaster
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Invader Caster");
+            //DisplayName,SetDefault("Invader Caster");
             Main.projFrames[Projectile.type] = 4;
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
@@ -146,7 +146,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.InvaderCaster
             int dustCount = width;
             for (int i = 0; i < dustCount; i++)
             {
-                float rot = (float)Math.PI * 2f * ((float)i / dustCount);
+                float rot = MathF.PI * 2f * ((float)i / dustCount);
                 Vector2 unitVector = QwertyMethods.PolarVector(1f, rot);
                 Dust d = Dust.NewDustPerfect(projectile.Bottom + new Vector2(unitVector.X * width, unitVector.Y * height), ModContent.DustType<InvaderGlow>(), Vector2.UnitY * projectile.height * -0.09f);
                 d.noGravity = true;
@@ -156,7 +156,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.InvaderCaster
 
             for (int i = 0; i < dustCount; i++)
             {
-                float rot = (float)Math.PI * 2f * ((float)i / dustCount);
+                float rot = MathF.PI * 2f * ((float)i / dustCount);
                 Vector2 unitVector = QwertyMethods.PolarVector(1f, rot);
                 Dust d = Dust.NewDustPerfect(Main.player[projectile.owner].Top + new Vector2(unitVector.X * width, unitVector.Y * height), ModContent.DustType<InvaderGlow>(), Vector2.UnitY * projectile.height * 0.09f);
                 d.noGravity = true;
@@ -177,7 +177,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.InvaderCaster
 				projectile.timeLeft = 2;
 			}
 		}
-		static void ReturnModeCheck(Projectile projectile)
+		static bool ReturnModeCheck(Projectile projectile)
         {
 
 			Player player = Main.player[projectile.owner];
@@ -191,12 +191,15 @@ namespace QwertyMod.Content.Items.Weapon.Minion.InvaderCaster
 				if(!Collision.CanHit(player, projectile) || (player.Center - projectile.Center).Length() > 3000)
 				{
 					EnterReturnMode(projectile);
+					return true;
 				}
 				else if (projectile.localAI[0] == 0f && Math.Abs(player.Center.Y - projectile.Center.Y) > nearGround * 16)
                 {
 					EnterReturnMode(projectile);
+					return true;
 				}
 			}
+			return false;
 		}
 		static void IdlePositioning(Projectile projectile, ref bool moveLeft, ref bool moveRight)
         {
@@ -228,6 +231,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.InvaderCaster
 
 			float maxDistance = 100000f;
 			NPC target = null;
+			float sphereShotSpeed = 15;
 			if (QwertyMethods.ClosestNPC(ref target, maxDistance, projectile.Center, false, projectile.OwnerMinionAttackTargetNPC != null ? projectile.OwnerMinionAttackTargetNPC.whoAmI : -1))
 			{
 				float horizontalDist = target.Center.X - (projectile.Center.X);
@@ -253,20 +257,24 @@ namespace QwertyMod.Content.Items.Weapon.Minion.InvaderCaster
                         if (Main.netMode != NetmodeID.MultiplayerClient)
                         {
                             SoundEngine.PlaySound(SoundID.Item157, shootFrom);
-                            Projectile.NewProjectile(new EntitySource_Misc(""), shootFrom, QwertyMethods.PolarVector(3, (target.Center - shootFrom).ToRotation()), ModContent.ProjectileType<MinionInvaderZap>(), projectile.damage, projectile.knockBack, projectile.owner);
+                            Projectile.NewProjectile(projectile.GetSource_FromThis(), shootFrom, QwertyMethods.PolarVector(3, (target.Center - shootFrom).ToRotation()), ModContent.ProjectileType<MinionInvaderZap>(), projectile.damage, projectile.knockBack, projectile.owner);
                         }
                         projectile.localAI[0] = attackRecencyCooldown;
 						projectile.ai[1] = attackCooldown;
                     }
+					else if(ReturnModeCheck(projectile))
+					{
+
+					}
                     else //if(Math.Abs(target.Center.X - projectile.Center.X) < distRequired + 10)
                     {
+                        SoundEngine.PlaySound(SoundID.Item157, shootFrom);
                         if (Main.netMode != NetmodeID.MultiplayerClient)
                         {
-                            SoundEngine.PlaySound(SoundID.Item157, shootFrom);
-							float aimAt = QwertyMethods.PredictiveAim(shootFrom, 8, target.Center, target.velocity);
+							float aimAt = QwertyMethods.PredictiveAim(shootFrom, sphereShotSpeed, target.Center, target.velocity);
 							if(!float.IsNaN(aimAt))
 							{
-								Projectile.NewProjectile(new EntitySource_Misc(""), shootFrom, QwertyMethods.PolarVector(8, aimAt), ModContent.ProjectileType<MinionSphere>(), projectile.damage, projectile.knockBack, projectile.owner);
+								Projectile.NewProjectile(projectile.GetSource_FromThis(), shootFrom, QwertyMethods.PolarVector(sphereShotSpeed, aimAt), ModContent.ProjectileType<MinionSphere>(), projectile.damage, projectile.knockBack, projectile.owner);
 							}
                         }
                         projectile.localAI[0] = attackRecencyCooldown + 60;
@@ -480,14 +488,17 @@ namespace QwertyMod.Content.Items.Weapon.Minion.InvaderCaster
 				projectile.velocity.Y = 10f;
 			}
 		}
+		int pulseCounter = 0;
         public override bool PreDraw(ref Color lightColor)
         {
             Texture2D texture = TextureAssets.Projectile[Projectile.type].Value;
             Main.EntitySpriteDraw(texture, new Vector2(Projectile.Center.X - Main.screenPosition.X, Projectile.Center.Y - Main.screenPosition.Y),
                         new Rectangle(0, Projectile.frame * texture.Height / 4, texture.Width, texture.Height / 4), lightColor, Projectile.rotation,
                         new Vector2(texture.Width * 0.5f, (float)Projectile.height * 0.5f), 1f, SpriteEffects.None, 0);
+			
+			pulseCounter++;
             Main.EntitySpriteDraw(Request<Texture2D>("QwertyMod/Content/Items/Weapon/Minion/InvaderCaster/InvaderCasterMinion_Glow").Value, new Vector2(Projectile.Center.X - Main.screenPosition.X, Projectile.Center.Y - Main.screenPosition.Y),
-                        new Rectangle(0, Projectile.frame * texture.Height / 4, texture.Width, texture.Height / 4), Color.White, Projectile.rotation,
+                        new Rectangle(0, ((pulseCounter % 40) / 10) * texture.Height / 4, texture.Width, texture.Height / 4), Color.White, Projectile.rotation,
                         new Vector2(texture.Width * 0.5f, (float)Projectile.height * 0.5f), 1f, SpriteEffects.None, 0);
             return false;
         }
@@ -496,7 +507,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.InvaderCaster
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Sphere");
+            //DisplayName,SetDefault("Sphere");
             Main.projFrames[Projectile.type] = 5;
         }
         public override void SetDefaults()
@@ -512,9 +523,10 @@ namespace QwertyMod.Content.Items.Weapon.Minion.InvaderCaster
             if (counter % 10 == 1)
             {
                 NPC target = null;
-                if (QwertyMethods.ClosestNPC(ref target, 150, Projectile.Center))
+                if (QwertyMethods.ClosestNPC(ref target, 200, Projectile.Center))
                 {
-                    Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center, QwertyMethods.PolarVector(3, (target.Center - Projectile.Center).ToRotation()), ModContent.ProjectileType<MinionInvaderZap>(), Projectile.damage, 0, Projectile.owner);
+					Projectile.velocity *= 0.4f;
+                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, QwertyMethods.PolarVector(3, (target.Center - Projectile.Center).ToRotation()), ModContent.ProjectileType<MinionInvaderZap>(), Projectile.damage, 0, Projectile.owner);
                 }
             }
             Projectile.frameCounter++;
@@ -526,7 +538,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.InvaderCaster
                     Projectile.frame = 0;
                 }
             }
-            Projectile.rotation += (float)Math.PI / 240f;
+            Projectile.rotation += MathF.PI / 240f;
         }
         public override bool PreDraw(ref Color lightColor)
         {
@@ -539,7 +551,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.InvaderCaster
         
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Zap");
+            //DisplayName,SetDefault("Zap");
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             ProjectileID.Sets.MinionShot[Projectile.type] = true;
         }
@@ -568,7 +580,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.InvaderCaster
             }
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.localNPCImmunity[target.whoAmI] = -1;
             target.immune[Projectile.owner] = 0;

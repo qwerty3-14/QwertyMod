@@ -10,27 +10,25 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Bullet.Palladium
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Palladium Bullet");
-            Tooltip.SetDefault("Right click to redirect in flight!");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 99;
         }
 
         public override void SetDefaults()
         {
-            Item.damage = 10;
+            Item.damage = 19;
             Item.DamageType = DamageClass.Ranged;
-            Item.knockBack = 2;
+            Item.knockBack = 6;
             Item.value = 1;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
             Item.width = 16;
             Item.height = 22;
 
-            Item.shootSpeed = 16;
+            Item.shootSpeed = 2;
 
             Item.consumable = true;
             Item.shoot = ProjectileType<PalladiumBulletP>();
             Item.ammo = 97;
-            Item.maxStack = 999;
+            Item.maxStack = 9999;
         }
 
         public override void AddRecipes()

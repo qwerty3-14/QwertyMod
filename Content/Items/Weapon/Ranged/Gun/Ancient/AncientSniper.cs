@@ -13,8 +13,8 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.Ancient
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Ancient Sniper");
-            Tooltip.SetDefault("Harness the ancient power of sniping" + "\nRight click to zoom");
+            //DisplayName,SetDefault("Ancient Sniper");
+            //Tooltip.SetDefault("Harness the ancient power of sniping" + "\nRight click to zoom");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -26,10 +26,10 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.Ancient
 
             Item.useTime = 35;
             Item.useAnimation = 35;
-            Item.useStyle = 5;
+            Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 5;
             Item.value = 150000;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
             Item.UseSound = SoundID.Item11;
             if (!Main.dedServ)
             {
@@ -40,8 +40,8 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.Ancient
             Item.width = 92;
             Item.height = 30;
             Item.crit = 25;
-            Item.shoot = 97;
-            Item.useAmmo = 97;
+            Item.shoot = ProjectileID.Bullet;
+            Item.useAmmo = AmmoID.Bullet;
             Item.shootSpeed = 36;
             Item.noMelee = true;
             //Item.GetGlobalItem<ItemUseGlow>().glowTexture = Request<Texture2D>("Items/AncientItems/AncientSniper_Glow");

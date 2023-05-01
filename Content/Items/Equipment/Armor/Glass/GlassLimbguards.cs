@@ -11,8 +11,6 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Glass
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Glass Limbguards");
-            Tooltip.SetDefault("Walk right for 12% increased ranged damage\nWalk left for 12% increased magic damage");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             Legs.Sets.HidesBottomSkin[Item.legSlot] = true;
         }
@@ -20,7 +18,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Glass
         public override void SetDefaults()
         {
             Item.value = 10000;
-            Item.rare = 1;
+            Item.rare = ItemRarityID.Blue;
 
             Item.width = 22;
             Item.height = 12;

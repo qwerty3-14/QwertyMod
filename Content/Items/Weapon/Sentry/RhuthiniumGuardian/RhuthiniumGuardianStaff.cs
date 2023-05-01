@@ -17,8 +17,8 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.RhuthiniumGuardian
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Rhuthinium Guardian Staff");
-            Tooltip.SetDefault("Summons an extremely slow guardian to shoot at your enemies");
+            //DisplayName,SetDefault("Rhuthinium Guardian Staff");
+            //Tooltip.SetDefault("Summons an extremely slow guardian to shoot at your enemies");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
@@ -33,11 +33,11 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.RhuthiniumGuardian
             Item.height = 38;
             Item.useTime = 25;
             Item.useAnimation = 25;
-            Item.useStyle = 1;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.noMelee = true;
             Item.knockBack = 10f;
             Item.value = 25000;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
             Item.UseSound = SoundID.Item44;
             Item.shoot = ProjectileType<RhuthiniumGuardian>();
             Item.DamageType = DamageClass.Summon;
@@ -62,7 +62,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.RhuthiniumGuardian
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Rhuthinium Guardian");
+            //DisplayName,SetDefault("Rhuthinium Guardian");
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true; //This is necessary for right-click targeting
         }
 
@@ -99,7 +99,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.RhuthiniumGuardian
             Main.player[Projectile.owner].UpdateMaxTurrets();
             Player player = Main.player[Projectile.owner];
 
-            Projectile.rotation += (float)Math.PI / 60;   //this make the projctile to rotate
+            Projectile.rotation += MathF.PI / 60;   //this make the projctile to rotate
 
             if (QwertyMethods.ClosestNPC(ref confirmTarget, 100000, Projectile.Center, false, player.MinionAttackTargetNPC))
             {
@@ -113,8 +113,8 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.RhuthiniumGuardian
                 }
                 if (timer >= 600)
                 {
-                    if (Main.netMode != 1)
-                        Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center, QwertyMethods.PolarVector(shardVelocity, Aim), ProjectileType<RhuthiniumShard>(), Projectile.damage, Projectile.knockBack, Main.myPlayer, 0f, 0f);
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, QwertyMethods.PolarVector(shardVelocity, Aim), ProjectileType<RhuthiniumShard>(), Projectile.damage, Projectile.knockBack, Main.myPlayer, 0f, 0f);
                     timer = 0;
                 }
             }
@@ -190,7 +190,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.RhuthiniumGuardian
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Rhuthinium Shard");
+            //DisplayName,SetDefault("Rhuthinium Shard");
         }
 
         public override void SetDefaults()
@@ -208,10 +208,10 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.RhuthiniumGuardian
 
         public override void AI()
         {
-            if (Main.rand.Next(10) == 0)
+            if (Main.rand.NextBool(10))
             {
                 Dust d = Main.dust[Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<RhuthiniumDust>())];
-                d.frame.Y = Main.rand.Next(2) == 0 ? 0 : 10;
+                d.frame.Y = Main.rand.NextBool(2) ? 0 : 10;
                 d.noGravity = true;
             }
         }
@@ -221,7 +221,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.RhuthiniumGuardian
             for (int i = 0; i < 12; i++)
             {
                 Dust d = Dust.NewDustPerfect(Projectile.Center, DustType<RhuthiniumDust>());
-                d.frame.Y = Main.rand.Next(2) == 0 ? 0 : 10;
+                d.frame.Y = Main.rand.NextBool(2) ? 0 : 10;
                 d.noGravity = true;
             }
         }

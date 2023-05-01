@@ -15,8 +15,8 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.AntiAir
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Anti Air Sentry Wrench");
-            Tooltip.SetDefault("Summons a stationary anti air sentry");
+            //DisplayName,SetDefault("Anti Air Sentry Wrench");
+            //Tooltip.SetDefault("Summons a stationary anti air sentry");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
@@ -30,11 +30,11 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.AntiAir
             Item.height = 56;
             Item.useTime = 25;
             Item.useAnimation = 25;
-            Item.useStyle = 1;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.noMelee = true;
             Item.knockBack = 10f;
             Item.value = 25000;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
             Item.UseSound = SoundID.Item44;
             Item.autoReuse = true;
             Item.shoot = ProjectileType<AntiAirSentry>();
@@ -54,7 +54,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.AntiAir
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Anti Air Sentry");
+            //DisplayName,SetDefault("Anti Air Sentry");
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             Main.projFrames[Projectile.type] = 3;
         }
@@ -100,8 +100,8 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.AntiAir
             if (QwertyMethods.ClosestNPC(ref validTarget, 2000, Projectile.Center, false, Main.player[Projectile.owner].MinionAttackTargetNPC, delegate (NPC possibleTarget) { Point origin = possibleTarget.Center.ToTileCoordinates(); Point point; return !WorldUtils.Find(origin, Searches.Chain(new Searches.Down(12), new GenCondition[] { new Conditions.IsSolid() }), out point) && Math.Abs(possibleTarget.Center.X - Projectile.Center.X) < maxDistanceX && Projectile.Center.Y - possibleTarget.Center.Y > minimumHeight; }) && timer > ReloadTime)
             {
                 playAttackFrame = true;
-                if (Main.netMode != 1)
-                    Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center.X + (16 * secondShot), Projectile.Center.Y - 30, 0, -5f, ProjectileType<SentryAntiAir>(), Projectile.damage, Projectile.knockBack, Main.myPlayer, validTarget.Center.Y, rocketDirection);
+                if (Main.netMode != NetmodeID.MultiplayerClient)
+                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center.X + (16 * secondShot), Projectile.Center.Y - 30, 0, -5f, ProjectileType<SentryAntiAir>(), Projectile.damage, Projectile.knockBack, Main.myPlayer, validTarget.Center.Y, rocketDirection);
 
                 secondShot *= -1;
 
@@ -141,7 +141,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.AntiAir
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Anti Air Rocket");
+            //DisplayName,SetDefault("Anti Air Rocket");
         }
 
         public override void SetDefaults()
@@ -190,10 +190,10 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.AntiAir
                     }
                 }
             }
-            Dust dust = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(26, Projectile.rotation + (float)Math.PI / 2) + QwertyMethods.PolarVector(Main.rand.Next(-6, 6), Projectile.rotation), 6);
+            Dust dust = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(26, Projectile.rotation + MathF.PI / 2) + QwertyMethods.PolarVector(Main.rand.Next(-6, 6), Projectile.rotation), 6);
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.localNPCImmunity[target.whoAmI] = -1;
             target.immune[Projectile.owner] = 0;
@@ -206,16 +206,16 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.AntiAir
             SoundEngine.PlaySound(SoundID.Item62, Projectile.position);
             for (int i = 0; i < 50; i++)
             {
-                int dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, 31, 0f, 0f, 100, default(Color), 2f);
+                int dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.Smoke, 0f, 0f, 100, default(Color), 2f);
                 Main.dust[dustIndex].velocity *= .6f;
             }
             // Fire Dust spawn
             for (int i = 0; i < 80; i++)
             {
-                int dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, 6, 0f, 0f, 100, default(Color), 3f);
+                int dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.Torch, 0f, 0f, 100, default(Color), 3f);
                 Main.dust[dustIndex].noGravity = true;
                 Main.dust[dustIndex].velocity *= 2f;
-                dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, 6, 0f, 0f, 100, default(Color), 2f);
+                dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.Torch, 0f, 0f, 100, default(Color), 2f);
                 Main.dust[dustIndex].velocity *= 1f;
             }
         }

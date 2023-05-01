@@ -15,8 +15,8 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraMissile
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Hydra Missile Rod");
-            Tooltip.SetDefault("Fires a Hydra head that explodes and splits into more hydra heads which explodes and splits into more hydra heads!");
+            //DisplayName,SetDefault("Hydra Missile Rod");
+            //Tooltip.SetDefault("Fires a Hydra head that explodes and splits into more hydra heads which explodes and splits into more hydra heads!");
             Item.staff[Item.type] = true; //this makes the useStyle animate as a staff instead of as a gun
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
@@ -29,11 +29,11 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraMissile
             Item.height = 100;
             Item.useTime = 28;
             Item.useAnimation = 28;
-            Item.useStyle = 5;
+            Item.useStyle = ItemUseStyleID.Shoot;
             Item.noMelee = true;
             Item.knockBack = 1f;
             Item.value = 250000;
-            Item.rare = 5;
+            Item.rare = ItemRarityID.Pink;
             Item.UseSound = SoundID.Item43;
             Item.autoReuse = true;
             Item.shoot = ProjectileType<HydraMissileBig>();
@@ -82,7 +82,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraMissile
             if (runOnce)
             {
                 direction = Projectile.velocity.ToRotation();
-                Projectile.rotation = direction + ((float)Math.PI / 2);
+                Projectile.rotation = direction + (MathF.PI / 2);
                 runOnce = false;
             }
             Player player = Main.player[Projectile.owner];
@@ -90,14 +90,9 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraMissile
             {
                 direction = QwertyMethods.SlowRotation(direction, (target.Center - Projectile.Center).ToRotation(), 3f);
             }
-            Projectile.velocity = new Vector2((float)Math.Cos(direction) * speed, (float)Math.Sin(direction) * speed);
+            Projectile.velocity = new Vector2(MathF.Cos(direction) * speed, MathF.Sin(direction) * speed);
             Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<HydraBeamGlow>());
-            Projectile.rotation = direction + ((float)Math.PI / 2);
-        }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
-        {
-            //Projectile.localNPCImmunity[target.whoAmI] = -1;
-            //target.immune[Projectile.owner] = 0;
+            Projectile.rotation = direction + (MathF.PI / 2);
         }
 
         public override void Kill(int timeLeft)
@@ -114,8 +109,8 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraMissile
             //Main.PlaySound(SoundID.Item62, Projectile.position);
             for (int g = 0; g < 2; g++)
             {
-                float launchDirection = Main.rand.NextFloat() * (float)Math.PI * 2;
-                Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, new Vector2((float)Math.Cos(launchDirection) * speed, (float)Math.Sin(launchDirection) * speed), ProjectileType<HydraMissileMedium>(), (int)(Projectile.damage * .6f), Projectile.knockBack * .6f, Projectile.owner);
+                float launchDirection = Main.rand.NextFloat() * MathF.PI * 2;
+                Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, new Vector2(MathF.Cos(launchDirection) * speed, MathF.Sin(launchDirection) * speed), ProjectileType<HydraMissileMedium>(), (int)(Projectile.damage * .6f), Projectile.knockBack * .6f, Projectile.owner);
             }
         }
     }
@@ -131,15 +126,9 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraMissile
             Projectile.DamageType = DamageClass.Magic;
             Projectile.penetrate = 1;
             Projectile.timeLeft = 300;
-            //Projectile.usesLocalNPCImmunity = true;
         }
 
         private NPC target;
-        private NPC possibleTarget;
-        private bool foundTarget;
-        private float maxDistance = 10000f;
-        private float distance;
-        private int timer;
         private float speed = 15;
         private bool runOnce = true;
         private float direction;
@@ -149,7 +138,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraMissile
             if (runOnce)
             {
                 direction = Projectile.velocity.ToRotation();
-                Projectile.rotation = direction + ((float)Math.PI / 2);
+                Projectile.rotation = direction + (MathF.PI / 2);
                 runOnce = false;
             }
             Player player = Main.player[Projectile.owner];
@@ -157,12 +146,12 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraMissile
             {
                 direction = QwertyMethods.SlowRotation(direction, (target.Center - Projectile.Center).ToRotation(), 3f);
             }
-            Projectile.velocity = new Vector2((float)Math.Cos(direction) * speed, (float)Math.Sin(direction) * speed);
+            Projectile.velocity = new Vector2(MathF.Cos(direction) * speed, MathF.Sin(direction) * speed);
             Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<HydraBeamGlow>());
-            Projectile.rotation = direction + ((float)Math.PI / 2);
+            Projectile.rotation = direction + (MathF.PI / 2);
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             //Projectile.localNPCImmunity[target.whoAmI] = -1;
             //target.immune[Projectile.owner] = 0;
@@ -182,8 +171,8 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraMissile
             //Main.PlaySound(SoundID.Item62, Projectile.position);
             for (int g = 0; g < 2; g++)
             {
-                float launchDirection = Main.rand.NextFloat() * (float)Math.PI * 2;
-                Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, new Vector2((float)Math.Cos(launchDirection) * speed, (float)Math.Sin(launchDirection) * speed), ProjectileType<HydraMissileSmall>(), (int)(Projectile.damage * .6f), Projectile.knockBack * .6f, Projectile.owner);
+                float launchDirection = Main.rand.NextFloat() * MathF.PI * 2;
+                Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, new Vector2(MathF.Cos(launchDirection) * speed, MathF.Sin(launchDirection) * speed), ProjectileType<HydraMissileSmall>(), (int)(Projectile.damage * .6f), Projectile.knockBack * .6f, Projectile.owner);
             }
         }
     }
@@ -203,11 +192,6 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraMissile
         }
 
         private NPC target;
-        private NPC possibleTarget;
-        private bool foundTarget;
-        private float maxDistance = 10000f;
-        private float distance;
-        private int timer;
         private float speed = 15;
         private bool runOnce = true;
         private float direction;
@@ -217,7 +201,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraMissile
             if (runOnce)
             {
                 direction = Projectile.velocity.ToRotation();
-                Projectile.rotation = direction + ((float)Math.PI / 2);
+                Projectile.rotation = direction + (MathF.PI / 2);
                 runOnce = false;
             }
             Player player = Main.player[Projectile.owner];
@@ -225,12 +209,12 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraMissile
             {
                 direction = QwertyMethods.SlowRotation(direction, (target.Center - Projectile.Center).ToRotation(), 3f);
             }
-            Projectile.velocity = new Vector2((float)Math.Cos(direction) * speed, (float)Math.Sin(direction) * speed);
+            Projectile.velocity = new Vector2(MathF.Cos(direction) * speed, MathF.Sin(direction) * speed);
             Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<HydraBeamGlow>());
-            Projectile.rotation = direction + ((float)Math.PI / 2);
+            Projectile.rotation = direction + (MathF.PI / 2);
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
         }
 

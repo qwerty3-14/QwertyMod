@@ -7,6 +7,8 @@ using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using Terraria.ID;
+using Terraria.GameContent.ItemDropRules;
 
 namespace QwertyMod.Content.Items.Consumable.BossBag
 {
@@ -14,19 +16,17 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Treasure Bag");
-            Tooltip.SetDefault("{$CommonItemTooltip.RightClickToOpen}");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 3;
         }
 
 
         public override void SetDefaults()
         {
-            Item.maxStack = 999;
+            Item.maxStack = 9999;
             Item.consumable = true;
             Item.width = 48;
             Item.height = 32;
-            Item.rare = 9;
+            Item.rare = ItemRarityID.Cyan;
             Item.expert = true;
             //bossBagNPC = mod.NPCType("CloakedDarkBoss");
         }
@@ -36,19 +36,12 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
         {
             return true;
         }
-
-        public override void RightClick(Player player)
+        public override void ModifyItemLoot(ItemLoot itemLoot)
         {
-            player.QuickSpawnItem(new EntitySource_Misc(""), 73, 8);
-            //player.QuickSpawnItem(new EntitySource_Misc(""), mod.ItemType("Doppleganger"));
-
-            int number = Item.NewItem(new EntitySource_Misc(""), (int)player.position.X, (int)player.position.Y, player.width, player.height, ItemType<Doppleganger>(), 1, false, 0, false, false);
-            if (Main.netMode == 1)
-            {
-                NetMessage.SendData(21, -1, -1, null, number, 1f, 0f, 0f, 0, 0, 0);
-            }
-
-            player.QuickSpawnItem(new EntitySource_Misc(""), ItemType<Etims>(), 20 + Main.rand.Next(17));
+            itemLoot.Add(ItemDropRule.Common(ItemType<Etims>(), 1, 20, 36));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<Doppleganger>(), 1));
+            itemLoot.Add(ItemDropRule.Coins(80000, true));
+            
         }
     }
 }

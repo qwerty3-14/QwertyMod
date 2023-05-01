@@ -10,7 +10,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Relics
 	{
 		public override void SetStaticDefaults() 
 		{
-			DisplayName.SetDefault("Imperious Relic");
+			//DisplayName,SetDefault("Imperious Relic");
 
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
 		}
@@ -32,7 +32,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Relics
 		public override string RelicTextureName => "QwertyMod/Content/Items/Consumable/Tiles/Relics/ImperiousRelicT";
 		public override void KillMultiTile(int i, int j, int frameX, int frameY) 
         {
-			Item.NewItem(new EntitySource_Misc(""), i * 16, j * 16, 32, 32, ModContent.ItemType<ImperiousRelic>());
+			Item.NewItem(new EntitySource_TileBreak(i, j), i * 16, j * 16, 32, 32, ModContent.ItemType<ImperiousRelic>());
 		}
 	}
 }

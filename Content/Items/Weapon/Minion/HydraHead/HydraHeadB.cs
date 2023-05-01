@@ -9,8 +9,8 @@ namespace QwertyMod.Content.Items.Weapon.Minion.HydraHead
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Hydra Head");
-            Description.SetDefault("The Hydra Head will assist your firepower!");
+            //DisplayName,SetDefault("Hydra Head");
+            //Description.SetDefault("The Hydra Head will assist your firepower!");
             Main.buffNoSave[Type] = true;
             Main.buffNoTimeDisplay[Type] = true;
         }

@@ -14,8 +14,6 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Bloody Medallion");
-            Tooltip.SetDefault("Doubles magic damage" + "\nWhat normaly drains mana drains you instead!" + "\nLess effective with certain weapons");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -73,7 +71,6 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
         {
             return base.Clone(item, itemClone);
         }
-        private int k;
         int GetLifeCost(int manaCost)
         {
             return (int)MathHelper.Max(manaCost / (ModLoader.HasMod("TRAEProject") ? 6 : 3), 1);

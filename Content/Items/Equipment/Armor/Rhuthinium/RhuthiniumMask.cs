@@ -13,8 +13,8 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Rhuthinium Guise");
-            Tooltip.SetDefault("+1 max minions \n5% increased critical strike chance");
+            //DisplayName,SetDefault("Rhuthinium Guise");
+            //Tooltip.SetDefault("+1 max minions \n5% increased critical strike chance");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             Head.Sets.DrawFullHair[Item.headSlot] = true;
         }
@@ -22,7 +22,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
         public override void SetDefaults()
         {
             Item.value = 50000;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
 
             Item.width = 22;
             Item.height = 14;

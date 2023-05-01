@@ -20,7 +20,7 @@ namespace QwertyMod.Content.NPCs.Fortress
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Fortress Harpy");
+            //DisplayName,SetDefault("Fortress Harpy");
             Main.npcFrameCount[NPC.type] = 4;//number of frames, frames will be cut from your nps's png evenly vertically
         }
 
@@ -62,7 +62,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             }
             return 0f;
         }
-        public override void HitEffect(int hitDirection, double damage)//run whenever enemy is hit should be used for visuals like gore
+        public override void HitEffect(NPC.HitInfo hit)//run whenever enemy is hit should be used for visuals like gore
         {
         }
         public override void ModifyNPCLoot(NPCLoot npcLoot)
@@ -115,7 +115,7 @@ namespace QwertyMod.Content.NPCs.Fortress
                         float shootDirection = (player.Center - NPC.Center).ToRotation(); // find the direction the player is in
                         for (int p = -1; p < 2; p++) //this will repeat 3 times for 3 projectiles
                         {
-                            Projectile.NewProjectile(new EntitySource_Misc(""), NPC.Center, QwertyMethods.PolarVector(6, shootDirection + ((float)Math.PI / 8 * p)), ProjectileType<FortressHarpyProjectile>(), damage, 0, 0); // shoots a projectile
+                            Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, QwertyMethods.PolarVector(6, shootDirection + (MathF.PI / 8 * p)), ProjectileType<FortressHarpyProjectile>(), damage, 0, 0); // shoots a projectile
                         }
                         attackTimer = 0; // resets attackTimer needer for the once per second effect
                     }
@@ -151,8 +151,8 @@ namespace QwertyMod.Content.NPCs.Fortress
                 }
                 //////////////
 
-                verticalFlightTimer += (float)Math.PI / 60; //add this amount to the flight timer every frame, it is used as a radian value so this means it will go 180 degrees every second
-                NPC.velocity.Y = (float)Math.Cos(verticalFlightTimer) * verticalSpeed; //the up and down flying motion uses a cosine function,
+                verticalFlightTimer += MathF.PI / 60; //add this amount to the flight timer every frame, it is used as a radian value so this means it will go 180 degrees every second
+                NPC.velocity.Y = MathF.Cos(verticalFlightTimer) * verticalSpeed; //the up and down flying motion uses a cosine function,
                                                                                        //It is based on a sine wave on a graph as x continually increases Y goes from 1 - -1
                                                                                        //Cosine is the derivitive of Sine the harpy flies in a sine wave pattern
                                                                                        //Vertical speed increases the speed it flies up and down othersie it'll just range from 1 - -1
@@ -166,14 +166,14 @@ namespace QwertyMod.Content.NPCs.Fortress
             }
         }
 
-        public override void OnHitByProjectile(Projectile projectile, int damage, float knockback, bool crit) // this is run whenever the npc is hit by a projectile
+        public override void OnHitByProjectile(Projectile projectile, NPC.HitInfo hit, int damageDone) // this is run whenever the npc is hit by a projectile
         {
             if (playerDistance > 600) //this checks the distance, it will make it fly away if it's getting 'sniped
             {
                 clinged = false;
                 timer = 0;
             }
-            else if (Main.rand.Next(5) == 0) // if the player is in 'valid' range it will randomly fly away
+            else if (Main.rand.NextBool(5)) // if the player is in 'valid' range it will randomly fly away
             {
                 clinged = false;
                 timer = 0;
@@ -198,7 +198,7 @@ namespace QwertyMod.Content.NPCs.Fortress
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Fortress Harpy Projectile");
+            //DisplayName,SetDefault("Fortress Harpy Projectile");
         }
 
         public override void SetDefaults()

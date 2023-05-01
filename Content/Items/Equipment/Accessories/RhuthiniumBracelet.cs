@@ -13,15 +13,15 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Rhuthinium Bracelet");
-            Tooltip.SetDefault("Increases grappling hook pull speed");
+            //DisplayName,SetDefault("Rhuthinium Bracelet");
+            //Tooltip.SetDefault("Increases grappling hook pull speed");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()
         {
             Item.value = 10000;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
 
             Item.width = 28;
             Item.height = 22;

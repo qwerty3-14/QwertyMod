@@ -13,7 +13,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Mosquitto");
+            //DisplayName,SetDefault("Mosquitto");
             Main.npcFrameCount[NPC.type] = 4;
         }
 
@@ -45,7 +45,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
             return 0f;
         }
 
-        public override void ModifyHitPlayer(Player target, ref int damage, ref bool crit)
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
             target.AddBuff(BuffType<DinoPox>(), 480);
             if (Main.expertMode)
@@ -62,7 +62,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
             timer++;
             if (runOnce)
             {
-                NPC.velocity = new Vector2((float)Math.Cos(NPC.ai[0]) * 6f * NPC.direction, -(float)Math.Sin(NPC.ai[0]) * 6f);
+                NPC.velocity = new Vector2(MathF.Cos(NPC.ai[0]) * 6f * NPC.direction, -MathF.Sin(NPC.ai[0]) * 6f);
 
                 runOnce = false;
             }

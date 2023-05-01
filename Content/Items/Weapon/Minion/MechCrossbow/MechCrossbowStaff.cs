@@ -14,8 +14,8 @@ namespace QwertyMod.Content.Items.Weapon.Minion.MechCrossbow
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Mech Crossbow Staff");
-            Tooltip.SetDefault("Summons a mechanised crossbow to shoot arrows from your inventory at enemies\nWooden arrows are converted into tagging bolts");
+            //DisplayName,SetDefault("Mech Crossbow Staff");
+            //Tooltip.SetDefault("Summons a mechanised crossbow to shoot arrows from your inventory at enemies\nWooden arrows are converted into tagging bolts");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
@@ -29,7 +29,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.MechCrossbow
             Item.height = 32;
             Item.useTime = 25;
             Item.useAnimation = 25;
-            Item.useStyle = 1;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.noMelee = true;
             Item.knockBack = 1f;
             Item.value = 35000;
@@ -60,7 +60,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.MechCrossbow
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Mech Crossbow");
+            //DisplayName,SetDefault("Mech Crossbow");
             Main.projFrames[Projectile.type] = 1;
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
@@ -86,7 +86,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.MechCrossbow
             cycleTIme = 40;
             shootSpeed = 13;
             holdOffset = 10;
-            rotSpeed = (float)Math.PI / 15f;
+            rotSpeed = MathF.PI / 15f;
         }
         public override void AI()
         {
@@ -109,7 +109,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.MechCrossbow
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Tagging Bolt");
+            //DisplayName,SetDefault("Tagging Bolt");
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             ProjectileID.Sets.MinionShot[Projectile.type] = true;
         }

@@ -14,8 +14,8 @@ namespace QwertyMod.Content.Items.Weapon.Minion.AncientMinion
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Ancient Minion Staff");
-            Tooltip.SetDefault("Summons an ancient minion to fight for you!");
+            //DisplayName,SetDefault("Ancient Minion Staff");
+            //Tooltip.SetDefault("Summons an ancient minion to fight for you!");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;

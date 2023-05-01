@@ -10,8 +10,8 @@ namespace QwertyMod.Content.Items.Weapon.Minion.AncientMinion
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Ancient Minion");
-            Description.SetDefault("The Ancient Minion will fight for you!");
+            //DisplayName,SetDefault("Ancient Minion");
+            //Description.SetDefault("The Ancient Minion will fight for you!");
             Main.buffNoSave[Type] = true;
             Main.buffNoTimeDisplay[Type] = true;
         }

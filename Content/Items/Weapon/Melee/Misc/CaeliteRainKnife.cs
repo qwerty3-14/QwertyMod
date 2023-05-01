@@ -7,6 +7,7 @@ using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using Terraria.ID;
 
 
 namespace QwertyMod.Content.Items.Weapon.Melee.Misc
@@ -15,8 +16,8 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Misc
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Divine Hail Knife");
-            Tooltip.SetDefault("Higher beings will throw these from the sky!");
+            //DisplayName,SetDefault("Divine Hail Knife");
+            //Tooltip.SetDefault("Higher beings will throw these from the sky!");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -26,10 +27,10 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Misc
             Item.DamageType = DamageClass.MeleeNoSpeed;
             Item.knockBack = 1;
             Item.value = 50000;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
             Item.width = 14;
             Item.height = 34;
-            Item.useStyle = 1;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.shootSpeed = 12f;
             Item.useTime = 5;
             Item.useAnimation = 15;
@@ -45,8 +46,8 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Misc
             position = new Vector2((Main.MouseWorld.X + player.Center.X) / 2f + Main.rand.Next(-100, 100), position.Y - 600);
             float trueSpeed = velocity.Length();
             int shift = Main.rand.Next(-50, 50);
-            velocity.X = (float)Math.Cos((new Vector2(Main.MouseWorld.X + shift, Main.MouseWorld.Y) - position).ToRotation()) * trueSpeed;
-            velocity.Y = (float)Math.Sin((new Vector2(Main.MouseWorld.X + shift, Main.MouseWorld.Y) - position).ToRotation()) * trueSpeed;
+            velocity.X = MathF.Cos((new Vector2(Main.MouseWorld.X + shift, Main.MouseWorld.Y) - position).ToRotation()) * trueSpeed;
+            velocity.Y = MathF.Sin((new Vector2(Main.MouseWorld.X + shift, Main.MouseWorld.Y) - position).ToRotation()) * trueSpeed;
             Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
             return false;
         }
@@ -55,7 +56,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Misc
         {
             public override void SetStaticDefaults()
             {
-                DisplayName.SetDefault("Caelite Rain Knife");
+                //DisplayName,SetDefault("Caelite Rain Knife");
             }
 
             public override void SetDefaults()
@@ -72,10 +73,9 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Misc
 
             private bool runOnce = true;
             private float outOfPhaseHeight;
-
-            public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+            public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
             {
-                if (Main.rand.Next(10) == 0)
+                if (Main.rand.NextBool(10))
                 {
                     target.AddBuff(BuffType<PowerDown>(), 120);
                 }
@@ -83,7 +83,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Misc
 
             public override void AI()
             {
-                if (Main.rand.Next(10) == 0)
+                if (Main.rand.NextBool(10))
                 {
                     Dust dust = Dust.NewDustPerfect(Projectile.Center, DustType<CaeliteDust>(), Vector2.Zero);
                     dust.frame.Y = 0;

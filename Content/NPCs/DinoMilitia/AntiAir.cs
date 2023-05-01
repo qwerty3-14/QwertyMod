@@ -20,7 +20,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Anti Air");
+            //DisplayName,SetDefault("Anti Air");
             Main.npcFrameCount[NPC.type] = 5;
         }
 
@@ -80,7 +80,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
                     NetMessage.SendData(MessageID.WorldData); // Immediately inform clients of new world state.
             }
         }
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
         {
             for (int i = 0; i < 10; i++)
             {
@@ -123,9 +123,9 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
                 {
                     if (secondShot)
                     {
-                        if (Main.netMode != 1)
+                        if (Main.netMode != NetmodeID.MultiplayerClient)
                         {
-                            Projectile.NewProjectile(new EntitySource_Misc(""), NPC.Center.X - (17f * NPC.direction), NPC.Center.Y - 40f, 0f, -10f, ProjectileType<AntiAirRocket>(), damage, 3f, Main.myPlayer);
+                            Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center.X - (17f * NPC.direction), NPC.Center.Y - 40f, 0f, -10f, ProjectileType<AntiAirRocket>(), damage, 3f, Main.myPlayer);
                         }
                         //Projectile.NewProjectile(NPC.Center.X-(17f*NPC.direction), NPC.Center.Y-40f, 0f, 0f, 102, damage, 3f, Main.myPlayer);
                         secondShot = false;
@@ -133,9 +133,9 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
                     }
                     else
                     {
-                        if (Main.netMode != 1)
+                        if (Main.netMode != NetmodeID.MultiplayerClient)
                         {
-                            Projectile.NewProjectile(new EntitySource_Misc(""), NPC.Center.X + (23f * NPC.direction), NPC.Center.Y - 40f, 0f, -10f, ProjectileType<AntiAirRocket>(), damage, 3f, Main.myPlayer);
+                            Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center.X + (23f * NPC.direction), NPC.Center.Y - 40f, 0f, -10f, ProjectileType<AntiAirRocket>(), damage, 3f, Main.myPlayer);
                         }
                         //Projectile.NewProjectile(NPC.Center.X+(23f*NPC.direction), NPC.Center.Y-40f, 0f, 0f, 102, damage, 3f, Main.myPlayer);
                         secondShot = true;
@@ -222,7 +222,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Anti Air Rocket");
+            //DisplayName,SetDefault("Anti Air Rocket");
         }
 
         public override void SetDefaults()
@@ -240,7 +240,6 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
 
         public bool runOnce = true;
         public int dustTimer;
-        private float direction;
         private float missileAcceleration = .5f;
         private float topSpeed = 10f;
         private int timer;
@@ -261,7 +260,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
             if (timer > 30)
             {
                 //Player player = Main.player[Projectile.owner];
-                if (Main.netMode != 1)
+                if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     for (int i = 0; i < Main.maxPlayers; i++)
                     {
@@ -273,14 +272,14 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
                         }
                     }
                 }
-                Projectile.velocity += new Vector2((float)Math.Cos(Projectile.ai[0]) * missileAcceleration, (float)Math.Sin(Projectile.ai[0]) * missileAcceleration);
+                Projectile.velocity += new Vector2(MathF.Cos(Projectile.ai[0]) * missileAcceleration, MathF.Sin(Projectile.ai[0]) * missileAcceleration);
                 if (Projectile.velocity.Length() > topSpeed)
                 {
                     Projectile.velocity = Projectile.velocity.SafeNormalize(-Vector2.UnitY) * 10;
                 }
             }
             //int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, mod.DustType("AncientGlow"), 0, 0, 0, default(Color), .4f);
-            Dust dust = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(26, Projectile.rotation + (float)Math.PI / 2) + QwertyMethods.PolarVector(Main.rand.Next(-6, 6), Projectile.rotation), 6);
+            Dust dust = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(26, Projectile.rotation + MathF.PI / 2) + QwertyMethods.PolarVector(Main.rand.Next(-6, 6), Projectile.rotation), 6);
             closest = 10000;
         }
         public override void Kill(int timeLeft)
@@ -288,16 +287,16 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
             SoundEngine.PlaySound(SoundID.Item62, Projectile.position);
             for (int i = 0; i < 14; i++)
             {
-                int dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, 31, 0f, 0f, 100, default(Color), 2f);
+                int dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.Smoke, 0f, 0f, 100, default(Color), 2f);
                 Main.dust[dustIndex].velocity *= .6f;
             }
             // Fire Dust spawn
             for (int i = 0; i < 20; i++)
             {
-                int dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, 6, 0f, 0f, 100, default(Color), 3f);
+                int dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.Torch, 0f, 0f, 100, default(Color), 3f);
                 Main.dust[dustIndex].noGravity = true;
                 Main.dust[dustIndex].velocity *= 2f;
-                dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, 6, 0f, 0f, 100, default(Color), 2f);
+                dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.Torch, 0f, 0f, 100, default(Color), 2f);
                 Main.dust[dustIndex].velocity *= 1f;
             }
         }

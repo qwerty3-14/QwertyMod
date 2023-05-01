@@ -37,7 +37,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
             DustType = DustType<FortressDust>();
             HitSound = QwertyMod.FortressBlocks;
             MinPick = 50;
-            AddMapEntry(new Color(162, 184, 185));
+            //AddMapEntry(new Color(162, 184, 185));
             MineResist = 1;
             ItemDrop = ItemType<FortressTrap>();
         }
@@ -79,7 +79,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
             }
 
             Main.tile[i, j].TileFrameX = (short)(num248 * 18);
-            if (Main.netMode == 1)
+            if (Main.netMode == NetmodeID.MultiplayerClient)
             {
                 NetMessage.SendTileSquare(-1, Player.tileTargetX, Player.tileTargetY, 1, TileChangeType.None);
             }
@@ -103,9 +103,9 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
                     drawColor.B = 50;
                 }
                 drawColor.A = Main.mouseTextColor;
-                if (!Main.gamePaused && Main.rand.Next(30) == 0)
+                if (!Main.gamePaused && Main.rand.NextBool(30))
                 {
-                    int num51 = Dust.NewDust(new Vector2((float)(j * 16), (float)(i * 16)), 16, 16, 60, 0f, 0f, 100, default(Microsoft.Xna.Framework.Color), 0.3f);
+                    int num51 = Dust.NewDust(new Vector2((float)(j * 16), (float)(i * 16)), 16, 16, DustID.RedTorch, 0f, 0f, 100, default(Microsoft.Xna.Framework.Color), 0.3f);
                     Main.dust[num51].fadeIn = 1f;
                     Main.dust[num51].velocity *= 0.1f;
                     Main.dust[num51].noLight = true;
@@ -145,7 +145,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Caleite Pulse");
+            //DisplayName,SetDefault("Caleite Pulse");
             Main.projFrames[Projectile.type] = 2;
         }
 
@@ -174,7 +174,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
             }
             else if (timer > (int)Projectile.ai[0])
             {
-                if (Main.rand.Next(2) == 0)
+                if (Main.rand.NextBool(2))
                 {
                     Dust dust2 = Main.dust[Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<CaeliteDust>())];
                     dust2.scale = .5f;
@@ -198,12 +198,12 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
             return true;
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(BuffType<PowerDown>(), 1200);
         }
 
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             target.AddBuff(BuffType<PowerDown>(), 1200);
         }

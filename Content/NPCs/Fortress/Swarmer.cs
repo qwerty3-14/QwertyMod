@@ -17,7 +17,7 @@ namespace QwertyMod.Content.NPCs.Fortress
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Fortress Swarmer");
+            //DisplayName,SetDefault("Fortress Swarmer");
             Main.npcFrameCount[NPC.type] = 2;//number of frames, frames will be cut from your nps's png evenly vertically
         }
 
@@ -145,13 +145,13 @@ namespace QwertyMod.Content.NPCs.Fortress
                     float CollisionLineLength = Main.projectile[p].velocity.Length() * 60 * (1 + Main.projectile[p].extraUpdates); //this is basicly how far the selected projectile will travel in 1 second
                     float maxProjectileWidth = Main.projectile[p].Size.Length() * 5f; // fly further away from larger projectiles
                     float col = 0f;
-                    if (Main.projectile[p].friendly && Main.projectile[p].active && Collision.CheckAABBvLineCollision(NPC.position, NPC.Size, Main.projectile[p].Center + QwertyMethods.PolarVector(maxProjectileWidth / 4f, Main.projectile[p].velocity.ToRotation() + (float)Math.PI / 2), Main.projectile[p].Center + QwertyMethods.PolarVector(maxProjectileWidth / 4f, Main.projectile[p].velocity.ToRotation() + (float)Math.PI / 2) + QwertyMethods.PolarVector(CollisionLineLength, Main.projectile[p].velocity.ToRotation()), maxProjectileWidth / 2f, ref col))
+                    if (Main.projectile[p].friendly && Main.projectile[p].active && Collision.CheckAABBvLineCollision(NPC.position, NPC.Size, Main.projectile[p].Center + QwertyMethods.PolarVector(maxProjectileWidth / 4f, Main.projectile[p].velocity.ToRotation() + MathF.PI / 2), Main.projectile[p].Center + QwertyMethods.PolarVector(maxProjectileWidth / 4f, Main.projectile[p].velocity.ToRotation() + MathF.PI / 2) + QwertyMethods.PolarVector(CollisionLineLength, Main.projectile[p].velocity.ToRotation()), maxProjectileWidth / 2f, ref col))
                     {
-                        NPC.velocity += QwertyMethods.PolarVector(maxSpeed, Main.projectile[p].velocity.ToRotation() + (float)Math.PI / 2);
+                        NPC.velocity += QwertyMethods.PolarVector(maxSpeed, Main.projectile[p].velocity.ToRotation() + MathF.PI / 2);
                     }
-                    else if (Main.projectile[p].friendly && Main.projectile[p].active && Collision.CheckAABBvLineCollision(NPC.position, NPC.Size, Main.projectile[p].Center - QwertyMethods.PolarVector(maxProjectileWidth / 4f, Main.projectile[p].velocity.ToRotation() + (float)Math.PI / 2), Main.projectile[p].Center - QwertyMethods.PolarVector(maxProjectileWidth / 4f, Main.projectile[p].velocity.ToRotation() + (float)Math.PI / 2) + QwertyMethods.PolarVector(CollisionLineLength, Main.projectile[p].velocity.ToRotation()), maxProjectileWidth / 2f, ref col))
+                    else if (Main.projectile[p].friendly && Main.projectile[p].active && Collision.CheckAABBvLineCollision(NPC.position, NPC.Size, Main.projectile[p].Center - QwertyMethods.PolarVector(maxProjectileWidth / 4f, Main.projectile[p].velocity.ToRotation() + MathF.PI / 2), Main.projectile[p].Center - QwertyMethods.PolarVector(maxProjectileWidth / 4f, Main.projectile[p].velocity.ToRotation() + MathF.PI / 2) + QwertyMethods.PolarVector(CollisionLineLength, Main.projectile[p].velocity.ToRotation()), maxProjectileWidth / 2f, ref col))
                     {
-                        NPC.velocity += QwertyMethods.PolarVector(maxSpeed, Main.projectile[p].velocity.ToRotation() - (float)Math.PI / 2);
+                        NPC.velocity += QwertyMethods.PolarVector(maxSpeed, Main.projectile[p].velocity.ToRotation() - MathF.PI / 2);
                     }
                 }
             }
@@ -161,7 +161,7 @@ namespace QwertyMod.Content.NPCs.Fortress
                 NPC.velocity = NPC.velocity.SafeNormalize(-Vector2.UnitY) * maxSpeed;
             }
             NPC.velocity *= (NPC.confused ? -1 : 1);
-            NPC.rotation = NPC.velocity.ToRotation() + (float)Math.PI / 2;
+            NPC.rotation = NPC.velocity.ToRotation() + MathF.PI / 2;
             maxSpeed = 4;
         }
 
@@ -170,7 +170,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             return 0f;
         }
 
-        public override void OnHitByProjectile(Projectile projectile, int damage, float knockback, bool crit) // this is run whenever the npc is hit by a projectile
+        public override void OnHitByProjectile(Projectile projectile, NPC.HitInfo hit, int damageDone) // this is run whenever the npc is hit by a projectile
         {
         }
 
@@ -192,7 +192,7 @@ namespace QwertyMod.Content.NPCs.Fortress
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Swarm");
+            //DisplayName,SetDefault("Swarm");
             Main.npcFrameCount[NPC.type] = 2;//number of frames, frames will be cut from your nps's png evenly vertically
         }
 
@@ -232,7 +232,7 @@ namespace QwertyMod.Content.NPCs.Fortress
 
         public override void AI()
         {
-            if (Main.netMode != 1)
+            if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 swarmSize = Main.rand.Next(14, 20);
                 if (Main.hardMode)
@@ -241,7 +241,7 @@ namespace QwertyMod.Content.NPCs.Fortress
                 }
                 for (int s = 0; s < swarmSize; s++)
                 {
-                    NPC.NewNPC(new EntitySource_Misc(""), (int)NPC.Center.X, (int)NPC.Center.Y, NPCType<Swarmer>());
+                    NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Center.X, (int)NPC.Center.Y, NPCType<Swarmer>());
                 }
             }
             NPC.active = false;

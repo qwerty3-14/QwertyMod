@@ -19,8 +19,8 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.EtimsSword
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("The Massacre");
-            Tooltip.SetDefault("Right click on the ground for an uppercut" + "\nRight click in the air to slam down!" + "\nKilling an enemy grants immunity to hostile projectiles for a short time.");
+            //DisplayName,SetDefault("The Massacre");
+            //Tooltip.SetDefault("Right click on the ground for an uppercut" + "\nRight click in the air to slam down!" + "\nKilling an enemy grants immunity to hostile projectiles for a short time.");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -38,7 +38,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.EtimsSword
             Item.noUseGraphic = true;
             Item.useTime = 18;
             Item.useAnimation = 18;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
             Item.value = 120000;
             Item.useTurn = true;
             Item.scale = 1.8f;
@@ -107,7 +107,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.EtimsSword
                         {
                             //Main.NewText("Slamming");
                             Player.bodyFrame.Y = Player.bodyFrame.Height * 4;
-                            shift = (float)Math.PI / 2;
+                            shift = MathF.PI / 2;
 
                             if (Player.velocity.Y != 0)
                             {
@@ -122,7 +122,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.EtimsSword
                         }
                         else if (uppercut)
                         {
-                            shift = (float)Math.PI / 2 * ((float)Player.itemAnimation / (float)Player.itemAnimationMax) - (float)Math.PI / 4;
+                            shift = MathF.PI / 2 * ((float)Player.itemAnimation / (float)Player.itemAnimationMax) - MathF.PI / 4;
 
                             if (Player.itemAnimation < Player.itemAnimationMax * .5f)
                             {
@@ -151,15 +151,15 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.EtimsSword
                     {
                         if (Player.itemAnimation < Player.itemAnimationMax * .25f)
                         {
-                            shift = (float)Math.PI / -4 * ((Player.itemAnimation) / (Player.itemAnimationMax * .25f));
+                            shift = MathF.PI / -4 * ((Player.itemAnimation) / (Player.itemAnimationMax * .25f));
                         }
                         else if (Player.itemAnimation < Player.itemAnimationMax * .75f)
                         {
-                            shift = (float)Math.PI / -2 * (1 - (Player.itemAnimation - (Player.itemAnimationMax * .25f)) / (Player.itemAnimationMax * .5f)) + (float)Math.PI / 4;
+                            shift = MathF.PI / -2 * (1 - (Player.itemAnimation - (Player.itemAnimationMax * .25f)) / (Player.itemAnimationMax * .5f)) + MathF.PI / 4;
                         }
                         else
                         {
-                            shift = (float)Math.PI / 4 * (1 - (Player.itemAnimation - (Player.itemAnimationMax * .75f)) / (Player.itemAnimationMax * .25f));
+                            shift = MathF.PI / 4 * (1 - (Player.itemAnimation - (Player.itemAnimationMax * .75f)) / (Player.itemAnimationMax * .25f));
                         }
                         if (Player.itemAnimation < Player.itemAnimationMax * .15f)
                         {
@@ -187,7 +187,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.EtimsSword
                         Player.itemAnimation = 0;
                     }
 
-                    Player.itemRotation = (float)Math.PI / -4 + Player.direction * ((float)Math.PI / 2 + shift);
+                    Player.itemRotation = MathF.PI / -4 + Player.direction * (MathF.PI / 2 + shift);
                     //Main.NewText(MathHelper.ToDegrees(Player.itemRotation));
 
                     Vector2 vector24 = Main.OffsetsPlayerOnhand[Player.bodyFrame.Y / 56] * 2f;
@@ -207,7 +207,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.EtimsSword
                     for (int n = 0; n < Main.npc.Length; n++)
                     {
                         localNPCImmunity[n]--;
-                        if (Main.npc[n].active && !Main.npc[n].dontTakeDamage && (!Main.npc[n].friendly || (Main.npc[n].type == 22 && Player.killGuide) || (Main.npc[n].type == 54 && Player.killClothier)) && Player.itemAnimation > 0 && localNPCImmunity[n] <= 0 && Collision.CheckAABBvLineCollision(Main.npc[n].position, Main.npc[n].Size, Player.itemLocation, Player.itemLocation + QwertyMethods.PolarVector(swordLength, Player.itemRotation - (float)Math.PI / 4)))
+                        if (Main.npc[n].active && !Main.npc[n].dontTakeDamage && (!Main.npc[n].friendly || (Main.npc[n].type == NPCID.Guide && Player.killGuide) || (Main.npc[n].type == NPCID.Clothier && Player.killClothier)) && Player.itemAnimation > 0 && localNPCImmunity[n] <= 0 && Collision.CheckAABBvLineCollision(Main.npc[n].position, Main.npc[n].Size, Player.itemLocation, Player.itemLocation + QwertyMethods.PolarVector(swordLength, Player.itemRotation - MathF.PI / 4)))
                         {
                             localNPCImmunity[n] = item.useAnimation / 3;
                             int damageBeforeVariance = Player.GetWeaponDamage(item);
@@ -232,7 +232,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.EtimsSword
                             }
                             //////////////////////
 
-                            Projectile p = QwertyMethods.PokeNPC(Player, Main.npc[n], new EntitySource_Misc(""), damageBeforeVariance, DamageClass.Melee, item.knockBack);
+                            Projectile p = QwertyMethods.PokeNPC(Player, Main.npc[n], Player.GetSource_ItemUse(item), damageBeforeVariance, DamageClass.Melee, item.knockBack);
                             if (item.type == ItemType<EtimsSword>())
                             {
                                 p.GetGlobalProjectile<EtimsProjectile>().effect = true;
@@ -257,9 +257,10 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.EtimsSword
     {
         public bool yes = false;
         public override bool InstancePerEntity => true;
-        public override void OnHitNPC(Projectile projectile, NPC target, int damage, float knockback, bool crit)
+        
+        public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (damage > target.life && !target.SpawnedFromStatue && projectile.GetGlobalProjectile<GiveAntiProjectileOnKill>().yes)
+            if (damageDone > target.life && !target.SpawnedFromStatue && projectile.GetGlobalProjectile<GiveAntiProjectileOnKill>().yes)
             {
                 Main.player[projectile.owner].AddBuff(BuffType<AntiProjectile>(), 360);
             }

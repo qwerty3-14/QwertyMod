@@ -18,7 +18,7 @@ namespace QwertyMod.Content.NPCs.Fortress
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Guard Tile");
+            //DisplayName,SetDefault("Guard Tile");
             Main.npcFrameCount[NPC.type] = 8;
         }
 
@@ -51,6 +51,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             BannerItem = ItemType<GuardTileBanner>();
             NPC.buffImmune[BuffID.Confused] = false;
         }
+        
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
         {
             // Sets the description of this NPC that is listed in the bestiary
@@ -60,12 +61,8 @@ namespace QwertyMod.Content.NPCs.Fortress
                 new FlavorTextBestiaryInfoElement("Enchanted tiles may fuse together if they think the threat to thier fortress is great enough.")
             });
         }
-        public override void ScaleExpertStats(int numPlayers, float bossLifeScale)
-        {
-            NPC.damage = 180;
-        }
 
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
         {
             if (NPC.life <= 0)
             {
@@ -111,7 +108,6 @@ namespace QwertyMod.Content.NPCs.Fortress
         private int timer;
         private int rushCooldown = 60;
         private int frame;
-        private int frameTimer;
 
         public override void AI()
         {

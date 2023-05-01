@@ -13,8 +13,8 @@ namespace QwertyMod.Content.Items.Weapon.Minion.LeechRune
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Leech Rune Staff");
-            Tooltip.SetDefault("Summons an leech rune to fight for you!" + "\nchance to steal life");
+            //DisplayName,SetDefault("Leech Rune Staff");
+            //Tooltip.SetDefault("Summons an leech rune to fight for you!" + "\nchance to steal life");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;

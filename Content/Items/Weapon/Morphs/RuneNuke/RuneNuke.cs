@@ -20,8 +20,8 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.RuneNuke
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Shape shift: Rune Nuke");
-            Tooltip.SetDefault("Breifly turns you into an rune nuke that causes a massive explosion when you collide with something... and releases a bunch of leech runes");
+            //DisplayName,SetDefault("Shape shift: Rune Nuke");
+            //Tooltip.SetDefault("Breifly turns you into an rune nuke that causes a massive explosion when you collide with something... and releases a bunch of leech runes");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -40,10 +40,10 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.RuneNuke
             Item.DamageType = DamageClass.Summon;
             Item.useTime = 60;
             Item.useAnimation = 60;
-            Item.useStyle = 5;
+            Item.useStyle = ItemUseStyleID.Shoot;
 
             Item.value = 500000;
-            Item.rare = 9;
+            Item.rare = ItemRarityID.Cyan;
 
             Item.noUseGraphic = true;
             Item.width = 18;
@@ -83,7 +83,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.RuneNuke
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Rune Nuke");
+            //DisplayName,SetDefault("Rune Nuke");
             Main.projFrames[Projectile.type] = 1;
         }
 
@@ -111,7 +111,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.RuneNuke
             player.Center = Projectile.Center;
             player.immune = true;
             player.immuneTime = 120;
-            player.statDefense = 0;
+            player.statDefense.FinalMultiplier *= 0;
             player.itemAnimation = 2;
             player.itemTime = 2;
             player.fallStart = (int)player.Bottom.Y;
@@ -120,17 +120,17 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.RuneNuke
             player.AddBuff(BuffType<MorphCooldown>(), (int)((27 * player.GetModPlayer<ShapeShifterPlayer>().coolDownDuration) * 60f));
             if (player.controlLeft)
             {
-                Projectile.rotation -= (float)Math.PI / 60;
+                Projectile.rotation -= MathF.PI / 60;
             }
             if (player.controlRight)
             {
-                Projectile.rotation += (float)Math.PI / 60;
+                Projectile.rotation += MathF.PI / 60;
             }
-            Projectile.velocity = QwertyMethods.PolarVector(10, Projectile.rotation - (float)Math.PI / 2);
+            Projectile.velocity = QwertyMethods.PolarVector(10, Projectile.rotation - MathF.PI / 2);
             dustYoffset = 20;
             for (int i = 0; i < 2; i++)
             {
-                Dust dust = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(dustYoffset, Projectile.rotation + (float)Math.PI / 2) + QwertyMethods.PolarVector(Main.rand.Next(-9, 9), Projectile.rotation), DustType<LeechRuneDeath>());
+                Dust dust = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(dustYoffset, Projectile.rotation + MathF.PI / 2) + QwertyMethods.PolarVector(Main.rand.Next(-9, 9), Projectile.rotation), DustType<LeechRuneDeath>());
             }
         }
 
@@ -138,21 +138,21 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.RuneNuke
         {
             if (timeLeft == 0)
             {
-                Projectile e = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center.X, Projectile.Center.Y, 0, 0, ProjectileType<RuneFallout>(), Projectile.damage, Projectile.knockBack, Projectile.owner)];
+                Projectile e = Main.projectile[Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center.X, Projectile.Center.Y, 0, 0, ProjectileType<RuneFallout>(), Projectile.damage, Projectile.knockBack, Projectile.owner)];
             }
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.localNPCImmunity[target.whoAmI] = -1;
             target.immune[Projectile.owner] = 0;
-            Projectile e = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center.X, Projectile.Center.Y, 0, 0, ProjectileType<RuneFallout>(), Projectile.damage, Projectile.knockBack, Projectile.owner)];
+            Projectile e = Main.projectile[Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center.X, Projectile.Center.Y, 0, 0, ProjectileType<RuneFallout>(), Projectile.damage, Projectile.knockBack, Projectile.owner)];
             e.localNPCImmunity[target.whoAmI] = -1;
         }
 
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            Projectile e = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center.X, Projectile.Center.Y, 0, 0, ProjectileType<RuneFallout>(), Projectile.damage, Projectile.knockBack, Projectile.owner)];
+            Projectile e = Main.projectile[Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center.X, Projectile.Center.Y, 0, 0, ProjectileType<RuneFallout>(), Projectile.damage, Projectile.knockBack, Projectile.owner)];
             return true;
         }
 
@@ -172,7 +172,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.RuneNuke
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Rune Fallout");
+            //DisplayName,SetDefault("Rune Fallout");
         }
 
         public override void SetDefaults()
@@ -198,7 +198,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.RuneNuke
 
             for (int i = 0; i < 1600; i++)
             {
-                float theta = Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI);
+                float theta = Main.rand.NextFloat(-MathF.PI, MathF.PI);
                 Dust dust = Dust.NewDustPerfect(Projectile.Center, DustType<LeechRuneDeath>(), QwertyMethods.PolarVector(Main.rand.Next(2, 120), theta));
                 dust.noGravity = true;
             }
@@ -213,13 +213,13 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.RuneNuke
             return false;
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.localNPCImmunity[target.whoAmI] = -1;
             target.immune[Projectile.owner] = 0;
 
             float theta = MathHelper.ToRadians(Main.rand.Next(0, 360));
-            Projectile p = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), target.Center + QwertyMethods.PolarVector(150, theta), QwertyMethods.PolarVector(-10, theta), ProjectileType<LeechRuneFreindly>(), (int)(50 * Main.player[Projectile.owner].GetDamage(DamageClass.Summon).Multiplicative), 3f, Main.myPlayer)];
+            Projectile p = Main.projectile[Projectile.NewProjectile(Projectile.GetSource_FromThis(), target.Center + QwertyMethods.PolarVector(150, theta), QwertyMethods.PolarVector(-10, theta), ProjectileType<LeechRuneFreindly>(), (int)(50 * Main.player[Projectile.owner].GetDamage(DamageClass.Summon).Multiplicative), 3f, Main.myPlayer)];
             p.DamageType = DamageClass.Summon;
         }
 

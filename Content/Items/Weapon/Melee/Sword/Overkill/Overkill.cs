@@ -19,8 +19,8 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.Overkill
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Overkill");
-            Tooltip.SetDefault("just need to get airborne....");
+            //DisplayName,SetDefault("Overkill");
+            //Tooltip.SetDefault("just need to get airborne....");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -37,7 +37,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.Overkill
             Item.noUseGraphic = true;
             Item.useTime = 45;
             Item.useAnimation = 45;
-            Item.rare = 8;
+            Item.rare = ItemRarityID.Yellow;
             Item.value = QwertyMod.InvaderGearValue;
             Item.useTurn = false;
         }
@@ -50,10 +50,10 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.Overkill
         public override void UseStyle(Player player, Rectangle heldItemFrame)
         {
 
-            float rotation = 2f * ((float)player.itemAnimation / player.itemAnimationMax) * (float)Math.PI * -player.direction;
+            float rotation = 2f * ((float)player.itemAnimation / player.itemAnimationMax) * MathF.PI * -player.direction;
             if(((float)player.itemAnimation / player.itemAnimationMax) > 0.5f)
             {
-                rotation =  (float)Math.PI * -player.direction;
+                rotation =  MathF.PI * -player.direction;
             }
             else
             {
@@ -64,11 +64,11 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.Overkill
                 player.velocity.Y += (player.gravity * player.jumpSpeedBoost * 1.25f) ;
             }
             player.SetCompositeArmFront(enabled: true, Player.CompositeArmStretchAmount.Full, rotation);
-            player.itemRotation = rotation + (float)Math.PI / 2;
+            player.itemRotation = rotation + MathF.PI / 2;
 
             Vector2 pointPoisition = player.RotatedRelativePoint(player.MountedCenter, false, true);
             player.itemLocation = pointPoisition + new Vector2(-4 * player.direction, -3);
-            player.itemLocation += QwertyMethods.PolarVector(12, rotation + (float)Math.PI / 2) ;
+            player.itemLocation += QwertyMethods.PolarVector(12, rotation + MathF.PI / 2) ;
         }
         public override bool? UseItem(Player player)
         {
@@ -96,10 +96,10 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.Overkill
                     for (int n = 0; n < Main.npc.Length; n++)
                     {
                         localNPCImmunity[n]--;
-                        if (Main.npc[n].active && !Main.npc[n].dontTakeDamage && (!Main.npc[n].friendly || (Main.npc[n].type == 22 && Player.killGuide) || (Main.npc[n].type == 54 && Player.killClothier)) && Player.itemAnimation > 0 && localNPCImmunity[n] <= 0 && Collision.CheckAABBvLineCollision(Main.npc[n].position, Main.npc[n].Size, Player.itemLocation, Player.itemLocation + QwertyMethods.PolarVector(swordLength, Player.itemRotation + (float)Math.PI / 2 * -Player.direction)))
+                        if (Main.npc[n].active && !Main.npc[n].dontTakeDamage && (!Main.npc[n].friendly || (Main.npc[n].type == NPCID.Guide && Player.killGuide) || (Main.npc[n].type == NPCID.Clothier && Player.killClothier)) && Player.itemAnimation > 0 && localNPCImmunity[n] <= 0 && Collision.CheckAABBvLineCollision(Main.npc[n].position, Main.npc[n].Size, Player.itemLocation, Player.itemLocation + QwertyMethods.PolarVector(swordLength, Player.itemRotation + MathF.PI / 2 * -Player.direction)))
                         {
                             localNPCImmunity[n] = item.useAnimation / 2;
-                            Projectile p = QwertyMethods.PokeNPC(Player, Main.npc[n], new EntitySource_Misc(""), 
+                            Projectile p = QwertyMethods.PokeNPC(Player, Main.npc[n], Player.GetSource_ItemUse(item), 
                             Player.GetWeaponDamage(item), DamageClass.Melee, item.knockBack);
                             p.GetGlobalProjectile<EtimsProjectile>().effect = true;
                             

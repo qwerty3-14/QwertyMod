@@ -1,14 +1,15 @@
 using Terraria.GameContent.Creative;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using Terraria.ID;
 namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
 {
     public class ReverseSand : ModItem
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Dnas");
-            Tooltip.SetDefault("");
+            //DisplayName,SetDefault("Dnas");
+            //Tooltip.SetDefault("");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 100;
         }
 
@@ -16,15 +17,15 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
         {
             Item.width = 16;
             Item.height = 16;
-            Item.maxStack = 999;
+            Item.maxStack = 9999;
             Item.value = 0;
-            Item.rare = 1;
+            Item.rare = ItemRarityID.Blue;
             Item.createTile = TileType<ReverseSandT>();
             Item.useTurn = true;
             Item.autoReuse = true;
             Item.useAnimation = 15;
             Item.useTime = 10;
-            Item.useStyle = 1;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.consumable = true;
         }
     }

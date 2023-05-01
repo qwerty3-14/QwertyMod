@@ -1,0 +1,2289 @@
+Mods: {
+	QwertyMod: {
+		Biomes.FortressBiome.DisplayName: Fortress Biome
+
+		Buffs: {
+			CameraIssues: {
+				DisplayName: Camera Issues
+				Description: I'm not sorry...
+			}
+
+			CriticalFailure: {
+				DisplayName: Critical Failure
+				Description: Critical strike chance reduced by 40%
+			}
+
+			Darkness: {
+				DisplayName: Darkness
+				Description: You knew this was coming...
+			}
+
+			DinoPox: {
+				DisplayName: Dino Pox
+				Description: Deadly enough to kill a dinosaur
+			}
+
+			GravityFlipped: {
+				DisplayName: Gravity Flipped
+				Description: Newton be malding
+			}
+
+			HealingHalt: {
+				DisplayName: Healing Halt
+				Description: Can't regenrate life or get over your potion sickness
+			}
+
+			Impaled: {
+				DisplayName: Impaled
+				Description: Ouch!
+			}
+
+			LuneCurse: {
+				DisplayName: Moon Cooldown
+				Description: Can't shoot another moon yet!
+			}
+
+			NormalGravity: {
+				DisplayName: Normal gravity
+				Description: Prevents high altitudes from reducing your gravity
+			}
+
+			Overrdrive: {
+				DisplayName: Overdrive
+				Description: RWARRR!
+			}
+
+			OverrdriveCooldown: {
+				DisplayName: Overdrive Cooldown
+				Description: For your safety and the safety of others we cannot allow you to use overdrive at this moment
+			}
+
+			PeriodicConfusion: {
+				DisplayName: Periodic Confusion
+				Description: Controls reverse sometimes...
+			}
+
+			PowerDown: {
+				DisplayName: Caelite Wrath
+				Description: You deal 20% less damage!
+			}
+
+			Stunned: {
+				DisplayName: Stunned
+				Description: If you can read this you're hacking!
+			}
+
+			CaeliteImbune: {
+				DisplayName: Weapon Imbue: Caelite Wrath
+				Description: Melee Attacks reduce the damage enemies deal
+			}
+
+			ImperialCourage: {
+				DisplayName: Imperial Courage
+				Description: 25% increased critical chance
+			}
+
+			ArcanelyTuned: {
+				DisplayName: Arcanely Tuned
+				Description: If you can read this you're hacking!
+			}
+
+			MoonCooldown: {
+				DisplayName: Moon Cooldown
+				Description: Can't shoot another moon yet!
+			}
+
+			RhuthiniumFocus: {
+				DisplayName: Rhuthinium Focus
+				Description: 10% increased ranged damage
+			}
+
+			RhuthiniumMagic: {
+				DisplayName: Rhuthinium Magic
+				Description: 10% increased magic damage
+			}
+
+			RhuthiniumMight: {
+				DisplayName: Rhuthinium Berzerk
+				Description: 20% increased melee damage and max move speed
+			}
+
+			SpiritCallCooldown: {
+				DisplayName: Spirit Call Cooldown
+				Description: War spirits need rest too
+			}
+
+			LightlingBuff: {
+				DisplayName: Lightling
+				Description: Emits light
+			}
+
+			CatalystBuff: {
+				DisplayName: Catalyst
+				Description: Why are you reading this GO KILL
+			}
+
+			AntiProjectile: {
+				DisplayName: Anti Projectile
+				Description: Somehow they can never hit you!
+			}
+
+			AncientMinionB: {
+				DisplayName: Ancient Minion
+				Description: The Ancient Minion will fight for you!
+			}
+
+			ChlorophyteSniperB: {
+				DisplayName: Chlorophyte Sniper
+				Description: The Chlorophyte Sniper will fight for you!
+			}
+
+			GlassSpikeB: {
+				DisplayName: Glass Spike
+				Description: Way worse than stepping on legos!
+			}
+
+			HydraHeadB: {
+				DisplayName: Hydra Head
+				Description: The Hydra Head will assist your firepower!
+			}
+
+			InvaderCasterB: {
+				DisplayName: Invader Caster
+				Description: The Invader Caster will fight for you!
+			}
+
+			RunicMinionB: {
+				DisplayName: Leech Rune
+				Description: The Leech rune will fight for you!
+			}
+
+			SwordMinionBuff: {
+				DisplayName: Sword Minion
+				Description: The embodiment of force multiplication
+			}
+
+			LuneArcherB: {
+				DisplayName: Lune Archer
+				Description: Will shoot your enemies in the knee!
+			}
+
+			MechCrossbowB: {
+				DisplayName: Mech Crossbow
+				Description: Will shoot your enemies in the knee!
+			}
+
+			MiniTankB: {
+				DisplayName: Mini Tank
+				Description: Build an army... trust nobody!
+			}
+
+			PriestMinionB: {
+				DisplayName: Priest Minion
+				Description: Higher beings fight for you!
+			}
+
+			ShieldMinionB: {
+				DisplayName: Shield Minion
+				Description: You got your own personal Phalax!
+			}
+
+			SpaceFighterB: {
+				DisplayName: Space fighter
+				Description: Breaking news! You're in SPACE!
+			}
+
+			TileMinionB: {
+				DisplayName: Tile Minion
+				Description: Up up down down left right left right...
+			}
+
+			UrQuanB: {
+				DisplayName: Ur-Quan Dreadnought
+				Description: Submit or die foolish human!
+			}
+
+			MorphCooldown: {
+				DisplayName: Quick Morph Cool down
+				Description: Can't use another quick morph!
+			}
+
+			DisciplineTag: {
+				DisplayName: Disciplined
+				Description: Minions will attack faster
+			}
+
+			ForkTag: {
+				DisplayName: Missile Procing
+				Description: Minions will cause missiles to fire.
+			}
+		}
+
+		Projectiles: {
+			DarknessBorder.DisplayName: Darkness Border
+			AdamantiteArrowP.DisplayName: Adamantite Arrow
+			CobaltArrowP.DisplayName: Cobalt Arrow
+			GunArrowP.DisplayName: Gun Arrow
+			HydraArrowP.DisplayName: Hydra Arrow
+			MythrilArrowP.DisplayName: Mythril Arrow
+			RhuthiniumArrowP.DisplayName: Rhuthinium Arrow
+			CaeliteBulletP.DisplayName: Caelite Bullet
+			OrichalcumBulletP.DisplayName: Orichalcum Bullet
+			PalladiumBulletP.DisplayName: Palladium Bullet
+			TitaniumBulletP.DisplayName: Titanium Bullet
+			DartSphere.DisplayName: Sphere
+			FriendlyInvaderZap.DisplayName: Friendly Invader Zap
+			InvaderDartP.DisplayName: Invader Dart
+			NanoDartP.DisplayName: Nano Dart
+			Nanoprobe.DisplayName: Nanoprobe
+			DartBeam.DisplayName: Rhuthinium Dart
+			RhuthiniumDartP.DisplayName: Rhuthinium Dart
+			VenomCloud.DisplayName: Venom Cloud
+			VenomDartP.DisplayName: Venom Dart
+			FortressTrapP.DisplayName: Caleite Pulse
+			ReverseSandBall.DisplayName: Reverse Sand Ball
+			ImperiousP.DisplayName: Imperious
+			SlidingPenguinGeneric.DisplayName: Sliding Penguin
+			AggroRuneFriendly.DisplayName: Aggro Rune Friendly
+			AggroStrikeFriendly.DisplayName: Aggro Strike Friendly
+			IceRuneFreindly.DisplayName: Ice Rune Freindly
+			LeechRuneFreindly.DisplayName: Leech Rune Freindly
+			PursuitRuneFreindly.DisplayName: Pursuit Rune Freindly
+			ArmCannonLaser.DisplayName: Arm Cannon Laser
+			GaleKnife.DisplayName: Gale Knife
+			PrismDazzle.DisplayName: Prism Dazzle
+			MoonTarget.DisplayName: Moon Target
+			RhuthimisWraith.DisplayName: RhuthimisWraith
+			LaunchingHookP.DisplayName: ${ProjectileName.GemHookAmethyst}
+			LightlingP.DisplayName: Lightling
+			HydraBobber.DisplayName: Hydra Bobber
+			HydrillP.DisplayName: Hydrill
+			AncientBlastFriendly.DisplayName: Ancient Blast
+			AncientMissileP.DisplayName: Ancient Missile
+			AncientWaveP.DisplayName: Ancient Wave
+			BlackHolePlayer.DisplayName: BlackHole
+			CatalystExplosion.DisplayName: explosion
+			EnlightenedConfusionP.DisplayName: Sacred Daze
+			MosquittoF.DisplayName: Mosquitto
+			SnowFlakeF.DisplayName: Snow Flake
+			BeamHead.DisplayName: Beam Head
+			HeadBeam.DisplayName: Hydra Beam
+			HydraMissileBig.DisplayName: Hydra Missile Big
+			HydraMissileMedium.DisplayName: Hydra Missile Medium
+			HydraMissileSmall.DisplayName: Hydra Missile Small
+			LuneCrest.DisplayName: Lune Crest
+			PenguinFall.DisplayName: Penguin Fall
+			EPexplosion.DisplayName: EP explosion
+			EPShot.DisplayName: EPShot
+			PursuitRuneBlast.DisplayName: Rune Blast
+			PursuitRuneMissile.DisplayName: Pursuit Rune Missile
+			CaeliteMagicProjectile.DisplayName: Restless Sun
+			RhuthiniumBolt.DisplayName: Rhuthinium Bolt
+			RhuthiniumVaporizerP.DisplayName: Rhuthinium Vaporizer
+			IceRuneTome.DisplayName: Ice Rune Tome
+			RunicWaveP.DisplayName: Runic Wave
+			SacredDazeP.DisplayName: Sacred Daze
+			SwordDrop.DisplayName: Sworddrop
+			CaeliteBoomerangP.DisplayName: Caelite Boomerang
+			LuneBoomerangP.DisplayName: Lune Boomerang
+			RhuthiniumBoomerangP.DisplayName: RhuthiniumBoomerang
+			AnkylosaurusTail.DisplayName: Ankylosaurus Tail
+			HydraJavelinP.DisplayName: Hydra Javelin
+			ImperiumP.DisplayName: Imperium
+			RhuthiniumJavelinP.DisplayName: RhuthiniumJavelin
+			CaeliteRainKnifeP.DisplayName: Caelite Rain Knife
+			HydrentBreath.DisplayName: Hydrent Breath
+			HydrentP.DisplayName: Fire Hydrent
+			HydrospearP.DisplayName: Hydrospear
+			HydrospearStream.DisplayName: Hydrospear Stream
+			AncientOrb.DisplayName: Ancient Orb
+			ImperiousTheV.DisplayName: Imperious The V
+			MiniIceRune.DisplayName: Mini Ice Rune
+			SlidingPenguinMelee.DisplayName: Sliding Penguin
+			CycloneP.DisplayName: Cyclone
+			LuneTopP.DisplayName: Lune Top
+			AncientThrowP.DisplayName: Ancient Throw P
+			ArachnoyoP.DisplayName: Arachnoyo P
+			SpiderCounterweight.DisplayName: Spider Counterweight
+			ArsenalP.DisplayName: Arsenal P
+			ArsenalSword.DisplayName: Arsenal Sword
+			RunicThrowP.DisplayName: Runic Throw P
+			AncientMinionFreindly.DisplayName: Ancient Minion
+			ChlorophyteSnipe.DisplayName: Chlorophyte Snipe
+			ChlorophyteSniper.DisplayName: Chlorophyte Sniper
+			GlassSpike.DisplayName: Glass Spike
+			MinionBreath.DisplayName: Minion Breath
+			MinionHead.DisplayName: Hydra Head
+			InvaderCasterMinion.DisplayName: Invader Caster
+			MinionInvaderZap.DisplayName: Zap
+			MinionSphere.DisplayName: Sphere
+			RunicMinionFreindly.DisplayName: Leech Rune
+			SwordMinion.DisplayName: Longsword
+			LuneArcher.DisplayName: Lune Archer
+			MechCrossbowMinion.DisplayName: Mech Crossbow
+			TaggingBolt.DisplayName: Tagging Bolt
+			MiniTank.DisplayName: Mini Tank
+			MiniTankBlast.DisplayName: Tank!!
+			MiniTankCannonBallFreindly.DisplayName: Tank!!
+			PriestMinion.DisplayName: Priest Minion
+			PriestPulse.DisplayName: Preist Pulse
+			ShieldMinion.DisplayName: Shield Minion
+			FighterLaser.DisplayName: Fighter Laser
+			SpaceFighter.DisplayName: Space Fighter
+			TileMinion.DisplayName: Tile Minion
+			Dreadnought.DisplayName: Ur-Quan Dreadnought
+			Fighter.DisplayName: Fighter
+			Fusion.DisplayName: Fusion Blast
+			AncientFallout.DisplayName: Ancient Fallout
+			AncientNukeMorph.DisplayName: Ancient Nuke
+			HydraBarrageBase.DisplayName: HydraBarrage Barrage Base
+			HydraBarrageBreath.DisplayName: Barrage Breath
+			HydraBarrageHead.DisplayName: Hydra Barrage Head
+			RhuthiniumBarrageDart.DisplayName: Rhuthinium Barrage
+			RhuthiniumBarrageLauncher.DisplayName: Rhuthinium Barrage Launcher
+			RuneFallout.DisplayName: Rune Fallout
+			RuneNukeMorph.DisplayName: Rune Nuke
+			SwordlagmitePlayer.DisplayName: Swordlagmite
+			SwordquakeP.DisplayName: Swordquake
+			AncientArrow.DisplayName: Ancient Arrow
+			AncientLongbowP.DisplayName: Ancient Longbow P
+			ArrowPortal.DisplayName: Arrow Portal
+			RuneArrow.DisplayName: Rune Arrow
+			RuneLongbowP.DisplayName: Rune Longbow P
+			CaeliteDart.DisplayName: Caelite Dart
+			ShotgunMinion.DisplayName: Shotgun Minion
+			DinoVulcanP.DisplayName: Dino Vulcan P
+			Shell.DisplayName: Shell
+			DoomBreath.DisplayName: Doom Breath
+			Trickshot.DisplayName: Trickshot
+			SlidingPenguinRanged.DisplayName: Sliding Penguin
+			AqueousP.DisplayName: Aqueous
+			BladedArrowP.DisplayName: Bladed Arrow P
+			AntiAirSentry.DisplayName: Anti Air Sentry
+			SentryAntiAir.DisplayName: Anti Air Rocket
+			AshFell.DisplayName: Ash fell
+			AshMissile.DisplayName: Ash Missile
+			BrewerBubble.DisplayName: Brewer Bubble
+			BubbleBrewer.DisplayName: Bubble Brewer
+			RhuthiniumGuardian.DisplayName: Rhuthinium Guardian
+			RhuthiniumShard.DisplayName: Rhuthinium Shard
+			RiptideP.DisplayName: Riptide
+			RiptideStream.DisplayName: Riptide Stream
+			ShroomiteTurretBase.DisplayName: Shroomite Turret Base
+			CaeliteSentry.DisplayName: Sky bound spiral
+			DisciplineP.DisplayName: Discipline
+			InvaderForkP.DisplayName: Invader Fork
+			TagMissile.DisplayName: Tag Missile
+			AncientBlast.DisplayName: Ancient Blast
+			AncientEnergy.DisplayName: Ancient Energy
+			AncientMissile.DisplayName: Ancient Missile
+			PhantomBlade.DisplayName: Phantom Blade
+			Swordlacmite.DisplayName: Swordlagmite
+			Swordpocalypse.DisplayName: Swordpocalypse
+			Cloak.DisplayName: Cloak
+			EtimsicCannon.DisplayName: Heaven Raider Cannon
+			EtimsicRay.DisplayName: Etimsic Ray
+			EtimsicWall.DisplayName: Etimsic Barrier
+			Warning.DisplayName: Warning
+			BarrierSpread.DisplayName: Barrier Spread
+			CaeliteSaw.DisplayName: Caelite Saw
+			Deflect.DisplayName: Static Barrier
+			DivineBolt.DisplayName: Divine Bolt
+			HydraBeamT.DisplayName: Hydra Beam
+			HydraBreath.DisplayName: Hydra Breath
+			BattleshipMissile.DisplayName: Invader Battleship Missile
+			BattleshipShot.DisplayName: Invader Battleship Shot
+			InvaderRay.DisplayName: Invader Battleship Shot
+			SpellBeam.DisplayName: Invader Battleship Beam
+			StrikeDroneBeam.DisplayName: Invader Battleship Beam
+			BlackHole.DisplayName: BlackHole
+			BlackHoleSeed.DisplayName: Pew Pew
+			BurstShot.DisplayName: Pew Pew
+			BurstShot2.DisplayName: Pew Pew
+			MagicMine.DisplayName: Magic Mine
+			MagicMineLayer.DisplayName: Magic Mine
+			MegaBurst.DisplayName: Pew Pew
+			SideLaser.DisplayName: O.L.O.R.D.'s wall
+			SuperLaser2.DisplayName: Super Laser
+			TurretGrav.DisplayName: Pew Pew
+			TurretLaser2.DisplayName: Turret Laser2
+			TurretShot.DisplayName: Pew Pew
+			AggroRune.DisplayName: Aggro Rune
+			AggroStrike.DisplayName: Aggro Strike
+			BigRune.DisplayName: Big Rune
+			IceRune.DisplayName: Ice Rune
+			LeechRune.DisplayName: Leech Rune
+			PursuitRune.DisplayName: Pursuit Rune
+			AntiAirRocket.DisplayName: Anti Air Rocket
+			DinoBomb.DisplayName: DinoBomb
+			DinoBombExplosion.DisplayName: Dino Bomb Explosion
+			MeteorFall.DisplayName: Meteor
+			MeteorLaunch.DisplayName: Meteor
+			SnowFlake.DisplayName: SnowFlake
+			TankCannonBall.DisplayName: Triceratank's cannon
+			TankCannonBallExplosion.DisplayName: Tank Cannon Ball Explosion
+			FortressHarpyProjectile.DisplayName: Fortress Harpy Projectile
+			MollusketSnipe.DisplayName: Mollusket Snipe
+			RingCenter.DisplayName: Ring Center
+			RingOuter.DisplayName: Caelite Sphere
+			InvaderBeam.DisplayName: Invader Behemoth
+			InvaderFighterBlast.DisplayName: Invader Fighter
+			InvaderMicroMissile.DisplayName: Invader Fighter
+			InvaderSphere.DisplayName: Sphere
+			InvaderSwordHitbox.DisplayName: Invader Behemoth
+			InvaderZap.DisplayName: Invader Zap
+			MinionPoke.DisplayName: Zap
+			Poke.DisplayName: Poke
+			PokeMagic.DisplayName: Poke Magic
+			PokeMelee.DisplayName: Poke Melee
+			PokeRanged.DisplayName: Poke Ranged
+			PokeSummon.DisplayName: Poke Summon
+			FlybyBeam.DisplayName: Invader Battleship Beam
+			InvaderExhaust.DisplayName: Invader Exhaust
+			BattleshipDebris_BackWithGun.DisplayName: Battleship Debris_ Back With Gun
+			BattleshipDebris_Engine.DisplayName: Battleship Debris_ Engine
+			BattleshipDebris_Launcher.DisplayName: Battleship Debris_ Launcher
+			BattleshipDebris_Center.DisplayName: Battleship Debris_ Center
+			BattleshipDebris_FrontWithGun.DisplayName: Battleship Debris_ Front With Gun
+			ThrowShield.DisplayName: Throw Shield
+			EtimsSphere.DisplayName: Etims Sphere
+			RailSphere.DisplayName: Rail Sphere
+			Judgement.DisplayName: Judgement
+			FinalJudgement.DisplayName: Final Judgement
+			ShooterBeam.DisplayName: Shooter Beam
+		}
+
+		Items: {
+			B4ExpertItem: {
+				DisplayName: Soul Rod
+				Tooltip: Moves you toward your cursor when used
+			}
+
+			AdamantiteArrow: {
+				DisplayName: Adamantite Arrow
+				Tooltip: Gives your enemies a nasty punch
+			}
+
+			CobaltArrow: {
+				DisplayName: Cobalt Arrow
+				Tooltip: Remains stationarry until you right click, which sends it flying at your cursor
+			}
+
+			GunArrow: {
+				DisplayName: Gun Arrow
+				Tooltip: Slows down in flight firing up to 4 bullets that do 40% damage
+			}
+
+			HydraArrow: {
+				DisplayName: Hydra Arrow
+				Tooltip: Splits into 3 arrows
+			}
+
+			MythrilArrow: {
+				DisplayName: Mythril Arrow
+				Tooltip: Pierces enemies and blocks, short range
+			}
+
+			RhuthiniumArrow: {
+				DisplayName: Rhuthinium Arrow
+				Tooltip: Does more damage to enemies farther away from you
+			}
+
+			CaeliteBullet: {
+				DisplayName: Caelite Bullet
+				Tooltip: Inflicts Caelite Wrath reducing damage that enemies deal by 20%
+			}
+
+			OrichalcumBullet: {
+				DisplayName: Orichalcum Bullet
+				Tooltip: Upon hitting an enemy flies toward another enemy
+			}
+
+			PalladiumBullet: {
+				DisplayName: Palladium Bullet
+				Tooltip:
+					'''
+					A heavy bullet
+					Slain enemies drop extra hearts
+					'''
+			}
+
+			TitaniumBullet: {
+				DisplayName: Titanium Bullet
+				Tooltip:
+					'''
+					Rapidly slows down until stationary when fired
+					Can hit up to 3 times
+					Loses 40% damage on each hit
+					'''
+			}
+
+			InvaderDart: {
+				DisplayName: Invader Dart
+				Tooltip: Explodes into a static sphere
+			}
+
+			NanoDart: {
+				DisplayName: Nano Dart
+				Tooltip: Breaks into a cluster of homing nanites
+			}
+
+			RhuthiniumDart: {
+				DisplayName: Rhuthinium Dart
+				Tooltip: Flies around you and fires 3 beams before breaking
+			}
+
+			VenomDart: {
+				DisplayName: Venom Dart
+				Tooltip: Creates venom clouds when hitting enemies
+			}
+
+			AncientMachineBag: {
+				DisplayName: Treasure Bag
+				Tooltip: "{$CommonItemTooltip.RightClickToOpen}"
+			}
+
+			B4Bag: {
+				DisplayName: Treasure Bag
+				Tooltip: "{$CommonItemTooltip.RightClickToOpen}"
+			}
+
+			BladeBossBag: {
+				DisplayName: Treasure Bag
+				Tooltip: "{$CommonItemTooltip.RightClickToOpen}"
+			}
+
+			FortressBossBag: {
+				DisplayName: Treasure Bag
+				Tooltip: "{$CommonItemTooltip.RightClickToOpen}"
+			}
+
+			HydraBag: {
+				DisplayName: Treasure Bag
+				Tooltip: "{$CommonItemTooltip.RightClickToOpen}"
+			}
+
+			NoehtnapBag: {
+				DisplayName: Treasure Bag
+				Tooltip: "{$CommonItemTooltip.RightClickToOpen}"
+			}
+
+			RuneGhostBag: {
+				DisplayName: Treasure Bag
+				Tooltip: "{$CommonItemTooltip.RightClickToOpen}"
+			}
+
+			TundraBossBag: {
+				DisplayName: Treasure Bag
+				Tooltip: "{$CommonItemTooltip.RightClickToOpen}"
+			}
+
+			AncientEmblem: {
+				DisplayName: Ancient Emblem
+				Tooltip: Summons The Ancient Machine
+			}
+
+			B4Summon: {
+				DisplayName: O.L.O.R.D. summon
+				Tooltip: Summons the Oversized Laser-emitting Obliteration Radiation-emitting Destroyer
+			}
+
+			BladeBossSummon: {
+				DisplayName: Icon of the Conqueror
+				Tooltip: Summons Imperious
+			}
+
+			DinoEgg: {
+				DisplayName: Dino Egg
+				Tooltip:
+					'''
+					Summons the Dino Militia
+					They never died out!
+					'''
+			}
+
+			FortressBossSummon: {
+				DisplayName: Pendant of the Sky God
+				Tooltip: Can be used at the altar
+			}
+
+			HydraSummon: {
+				DisplayName: Hydra Food
+				Tooltip: Summons The Hydra
+			}
+
+			RitualInterupter: {
+				DisplayName: Ritual Interrupter
+				Tooltip: Summons Noehtnap
+			}
+
+			SummoningRune: {
+				DisplayName: Summoning Rune
+				Tooltip: Summons The Rune Ghost
+			}
+
+			CaeliteFlask: {
+				DisplayName: Flask of Caelite Wrath
+				Tooltip: Melee attacks inflict caelite wrath
+			}
+
+			AntiAirBanner: {
+				DisplayName: Anti Air Banner
+				Tooltip: ""
+			}
+
+			CasterBanner: {
+				DisplayName: High Preist Banner
+				Tooltip: ""
+			}
+
+			CrawlerBanner: {
+				DisplayName: Mollusket Banner
+				Tooltip: ""
+			}
+
+			FortressFlierBanner: {
+				DisplayName: Fortress Harpy Banner
+				Tooltip: ""
+			}
+
+			GuardTileBanner: {
+				DisplayName: Guard Tile Banner
+				Tooltip: ""
+			}
+
+			HopperBanner: {
+				DisplayName: Enchanted Tile Banner
+				Tooltip: ""
+			}
+
+			SpectorBanner: {
+				DisplayName: Sneaking Ghost Banner
+				Tooltip: ""
+			}
+
+			SwarmerBanner: {
+				DisplayName: Fortress Swarmer Banner
+				Tooltip: ""
+			}
+
+			TriceratankBanner: {
+				DisplayName: Triceratank Banner
+				Tooltip: ""
+			}
+
+			UtahBanner: {
+				DisplayName: Utah Banner
+				Tooltip: ""
+			}
+
+			VelocichopperBanner: {
+				DisplayName: Velocichopper Banner
+				Tooltip: ""
+			}
+
+			CaeliteBar: {
+				DisplayName: Caelite Bar
+				Tooltip: ""
+			}
+
+			LuneBar: {
+				DisplayName: Lune Bar
+				Tooltip: ""
+			}
+
+			RhuthiniumBar: {
+				DisplayName: Rhuthinium Bar
+				Tooltip: ""
+			}
+
+			ChiselledFortressBrick: {
+				DisplayName: Chiseled Fortress Brick
+				Tooltip: ""
+			}
+
+			FortressBrick: {
+				DisplayName: Fortress Brick
+				Tooltip: ""
+			}
+
+			FortressPillar: {
+				DisplayName: Fortress Pillar
+				Tooltip: ""
+			}
+
+			FortressPlatform: {
+				DisplayName: Fortress Platform
+				Tooltip: ""
+			}
+
+			FortressWall: {
+				DisplayName: Fortress Wall
+				Tooltip: ""
+			}
+
+			FortressCarving1: {
+				DisplayName: Fortress Carving
+				Tooltip: ""
+			}
+
+			FortressCarving2: {
+				DisplayName: Fortress Carving
+				Tooltip: ""
+			}
+
+			FortressCarving3: {
+				DisplayName: Fortress Carving
+				Tooltip: ""
+			}
+
+			FortressBathtub: {
+				DisplayName: Fortress Bathtub
+				Tooltip: ""
+			}
+
+			FortressBed: {
+				DisplayName: Fortress Bed
+				Tooltip: ""
+			}
+
+			FortressBench: {
+				DisplayName: Fortress Bench
+				Tooltip: ""
+			}
+
+			FortressBookcase: {
+				DisplayName: Fortress Bookcase
+				Tooltip: ""
+			}
+
+			FortressCandelabra: {
+				DisplayName: Fortress Candelabra
+				Tooltip: ""
+			}
+
+			FortressCandle: {
+				DisplayName: Fortress Candle
+				Tooltip: ""
+			}
+
+			FortressChair: {
+				DisplayName: Fortress Chair
+				Tooltip: ""
+			}
+
+			FortressChandelier: {
+				DisplayName: Fortress Chandelier
+				Tooltip: ""
+			}
+
+			FortressClock: {
+				DisplayName: Fortress Clock
+				Tooltip: ""
+			}
+
+			FortressCouch: {
+				DisplayName: Fortress Couch
+				Tooltip: ""
+			}
+
+			FortressDoor: {
+				DisplayName: Fortress Door
+				Tooltip: ""
+			}
+
+			FortressLamp: {
+				DisplayName: Fortress Lamp
+				Tooltip: ""
+			}
+
+			FortressLantern: {
+				DisplayName: Fortress Lantern
+				Tooltip: ""
+			}
+
+			FortressPiano: {
+				DisplayName: Fortress Piano
+				Tooltip: ""
+			}
+
+			FortressSink: {
+				DisplayName: Fortress Sink
+				Tooltip: ""
+			}
+
+			FortressTable: {
+				DisplayName: Fortress Table
+				Tooltip: ""
+			}
+
+			DnasBrick: {
+				DisplayName: Dnas Painted Fortress Brick
+				Tooltip: The underside of the brick is painted with Dnas you know what will happen if you bonk your head on it...
+			}
+
+			FakeFortressBrick: {
+				DisplayName: Enchanted Fortress Brick
+				Tooltip: Comes alive when broken or powered!
+			}
+
+			FortressTrap: {
+				DisplayName: Caelite Pulse Trap
+				Tooltip: Shoots 2 pulses
+			}
+
+			Launchpad: {
+				DisplayName: Launchpad
+				Tooltip: ""
+			}
+
+			ReverseSand: {
+				DisplayName: Dnas
+				Tooltip: ""
+			}
+
+			MusicBoxBeastOfThreeHeads: {
+				DisplayName: Music Box (Beast of Three Heads)
+				Tooltip: ""
+			}
+
+			MusicBoxBladeOfAGod: {
+				DisplayName: Music Box (Blade of a God)
+				Tooltip: ""
+			}
+
+			MusicBoxBuiltToDestroy: {
+				DisplayName: Music Box (Built to Destroy)
+				Tooltip: ""
+			}
+
+			MusicBoxEPIC: {
+				DisplayName: Music Box (Energised Planetary Incineration Climax)
+				Tooltip: ""
+			}
+
+			MusicBoxHeavenlyFortress: {
+				DisplayName: Music Box (Energised Planetary Incineration Climax)
+				Tooltip: ""
+			}
+
+			MusicBoxHigherBeing: {
+				DisplayName: Music Box (Higher Being)
+				Tooltip: ""
+			}
+
+			MusicBoxOldDinosNewGuns: {
+				DisplayName: Music Box (Old Dinos New Guns)
+				Tooltip: ""
+			}
+
+			MusicBoxTheConjurer: {
+				DisplayName: Music Box (The Conjurer)
+				Tooltip: ""
+			}
+
+			MusicBoxTheGodsBleed: {
+				DisplayName: Music Box (The Gods Bleed)
+				Tooltip: ""
+			}
+
+			LuneOre: {
+				DisplayName: Lune Ore
+				Tooltip: Found high in the sky
+			}
+
+			RhuthiniumOre: {
+				DisplayName: Rhuthinium Ore
+				Tooltip: ""
+			}
+
+			AncientMachineRelic: {
+				DisplayName: Ancient Machine Relic
+				Tooltip: ""
+			}
+
+			DivineLightRelic: {
+				DisplayName: Divine Light Relic
+				Tooltip: ""
+			}
+
+			HydraRelic: {
+				DisplayName: Hydra Relic
+				Tooltip: ""
+			}
+
+			ImperiousRelic: {
+				DisplayName: Imperious Relic
+				Tooltip: ""
+			}
+
+			NoehtnapRelic: {
+				DisplayName: Noehtnap Relic
+				Tooltip: ""
+			}
+
+			OLORDRelic: {
+				DisplayName: OLORD Relic
+				Tooltip: ""
+			}
+
+			PolarBearRelic: {
+				DisplayName: Polar Exterminator Relic
+				Tooltip: ""
+			}
+
+			RuneGhostRelic: {
+				DisplayName: Rune Ghost Relic
+				Tooltip: ""
+			}
+
+			TyrantRelic: {
+				DisplayName: The Great Tyranasaurous Relic
+				Tooltip: ""
+			}
+
+			AncientMachineTrophy: {
+				DisplayName: Ancient Machine Trophy
+				Tooltip: ""
+			}
+
+			BladeBossTrophy: {
+				DisplayName: Imperious Trophy
+				Tooltip: ""
+			}
+
+			FortressBossTrophy: {
+				DisplayName: Divine Light Trophy
+				Tooltip: ""
+			}
+
+			HydraTrophy: {
+				DisplayName: Hydra Trophy
+				Tooltip: ""
+			}
+
+			PolarTrophy: {
+				DisplayName: Polar Exterminator Trophy
+				Tooltip: ""
+			}
+
+			AmuletOfPatience: {
+				DisplayName: Amulet Of Patience
+				Tooltip: Deal more damage if you do haven't dealt damage in a while
+			}
+
+			ArcaneArmorBreaker: {
+				DisplayName: Arcane Armor Breaker
+				Tooltip: Magic attacks ignore 10 defense
+			}
+
+			Biomass: {
+				DisplayName: Biomass
+				Tooltip:
+					'''
+					Stacks of ammo will slowly grow in size
+					Growth rate is lower for higher value ammo
+					'''
+			}
+
+			BloodyMedalion: {
+				DisplayName: Bloody Medallion
+				Tooltip:
+					'''
+					Doubles magic damage
+					What normaly drains mana drains you instead!
+					Less effective with certain weapons
+					'''
+			}
+
+			FieryWhetstone: {
+				DisplayName: Fiery Whetstone
+				Tooltip:
+					'''
+					Melee attacks ingnite enemies
+					Melee attacks do an extra 30% damage as magic damage
+					Enemies immune to fire are immune to the extra damage.
+					'''
+			}
+
+			GuardEmblem: {
+				DisplayName: Guard Emblem
+				Tooltip:
+					'''
+					8 defense 
+					10% increased damage 
+					Enemies are more likely to target you
+					'''
+			}
+
+			PhantomSphere: {
+				DisplayName: Phantom Sphere
+				Tooltip:
+					'''
+					Magic attacks pierce 2 extra enemies
+					Projectiles that normally don't pierce will use local immunity
+					Magic attacks ignore 15 defense
+					10% reduced magic damage
+					Extra pierces will do reduced damage when hitting the same target multiple times
+					'''
+			}
+
+			DinoTooth: {
+				DisplayName: Dino Tooth
+				Tooltip: Increases armor penetration by 18
+			}
+
+			EnchantedWhetstone: {
+				DisplayName: Enchanted Whetstone
+				Tooltip: Melee attacks deal an extra 20% damage as magic damage
+			}
+
+			AncientGemstone: {
+				DisplayName: Ancient Gemstone
+				Tooltip: Allows you use quick morphs while still on cooldown... at the cost of your life!
+			}
+
+			Doppleganger: {
+				DisplayName: Doppleganger
+				Tooltip:
+					'''
+					Pretends to be the accesory placed above it.
+					The gods forbid equiping the same accesory twice!
+					Tampering with such an unusual artifact is not advised.
+					'''
+			}
+
+			HyperRunestone: {
+				DisplayName: Hyper Runestone
+				Tooltip:
+					'''
+					Makes other dashes more powerful or can be used to grant a dash on its own
+					Makes you invincible when dashing
+					This effect needs four seconds to recharge
+					'''
+			}
+
+			PenguinGenerator: {
+				DisplayName: Penguin Generator
+				Tooltip: Attacks have a 10% chance to release penguins
+			}
+
+			ImperiousSheath: {
+				DisplayName: Imperious's Sheath
+				Tooltip:
+					'''
+					After dealing 10,000 damage you can summon Imperious to fight for you breifly with the 'Special Ability' key
+					Can be changed in controls
+					'''
+			}
+
+			GravityBeGone: {
+				DisplayName: Gravity Be Gone
+				Tooltip:
+					'''
+					Makes you uneffected by gravity
+					Grants immunity to fall damage
+					Method of going down not included.
+					'''
+			}
+
+			LuneBracelet: {
+				DisplayName: Lune Bracelet
+				Tooltip: Lets you do a weak dash and empowers other dashes slightly
+			}
+
+			RhuthiniumBracelet: {
+				DisplayName: Rhuthinium Bracelet
+				Tooltip: Increases grappling hook pull speed
+			}
+
+			AggroScroll: {
+				DisplayName: Aggro Scroll
+				Tooltip: An aggro rune occasionally fires
+			}
+
+			IceScroll: {
+				DisplayName: Ice Scroll
+				Tooltip: Summons two ice runes to orbit you
+			}
+
+			LeechScroll: {
+				DisplayName: Leech Scroll
+				Tooltip: Ranged attacks may summon leech runes that can heal you
+			}
+
+			PursuitScroll: {
+				DisplayName: Pursuit Scroll
+				Tooltip: Minions ocasionaly shoot pursuit runes
+			}
+
+			SkywardHilt: {
+				DisplayName: Skyward Hilt
+				Tooltip: Swords deal 30% more damage while airborne
+			}
+
+			SwordEnlarger: {
+				DisplayName: Sword Enlarger
+				Tooltip: Increases sword size by 25%
+			}
+
+			SwordmastersSeal: {
+				DisplayName: Swordmasters Seal
+				Tooltip:
+					'''
+					Greatly enhances swordplay performance!
+					Makes your sword 25% larger
+					Hitting things with your sword while airborne does 25% more damage
+					Striking with a sword increases critical strike chance by 25%
+					'''
+			}
+
+			SwordsmanBadge: {
+				DisplayName: Swordsman Badge
+				Tooltip: Striking with a sword increases critical strike chance by 25%
+			}
+
+			TheBlueSphere: {
+				DisplayName: The Blue Sphere
+				Tooltip:
+					'''
+					Magic attacks pierce 2 extra enemies
+					Projectiles that normally don't pierce will use local immunity
+					10% reduced magic damage
+					Extra pierces will do reduced damage when hitting the same target multiple times
+					'''
+			}
+
+			Tricerashield: {
+				DisplayName: Tricerashield
+				Tooltip:
+					'''
+					Allows you to dash into an enemy
+					Provides immunity to knockback
+					'''
+			}
+
+			BionicEye: {
+				DisplayName: Bionic Eye
+				Tooltip:
+					'''
+					30% reduced cooldown on morphs
+					10% increased critical strike chance
+					Grants enhanced vision
+					'''
+			}
+
+			BionicImplants: {
+				DisplayName: Bionic Implants
+				Tooltip:
+					'''
+					30% reduced cooldown on morphs
+					Your offhand is replaced with a laser cannon!
+					'''
+			}
+
+			BionicLimbs: {
+				DisplayName: Bionic Limbs
+				Tooltip:
+					'''
+					30% reduced cooldown on morphs
+					Significantly increases horizontal acceleration
+					'''
+			}
+
+			CaeliteArmor: {
+				DisplayName: Caelite Armor
+				Tooltip:
+					'''
+					Magic attacks against airborn enemies do 20% more damage
+					Melee attacks against grounded enemies do 20% more damage
+					'''
+			}
+
+			CaeliteGreaves: {
+				DisplayName: Caelite Reinforcmentss
+				Tooltip: Melee and magic attacks hasten the cooldown for healing potions
+			}
+
+			CaeliteHelm: {
+				DisplayName: Caelite Helm
+				Tooltip: Enemies killed by melee or magic attacks drop more money!
+			}
+
+			GaleSwiftHelm: {
+				DisplayName: Gale Swift Helm
+				Tooltip:
+					'''
+					+6% chance to dodge an attack
+					+12% critical strike chance
+					Greatly increased damage after dodging
+					'''
+			}
+
+			GaleSwiftplate: {
+				DisplayName: Gale Swiftplate
+				Tooltip:
+					'''
+					+10% chance to dodge an attack
+					+10% critical strike chance
+					Allows you to cling to walls
+					Damage increased by 20% while clinging to walls
+					'''
+			}
+
+			GaleSwiftRobes: {
+				DisplayName: Gale Swift Robes
+				Tooltip:
+					'''
+					+9% chance to dodge an attack
+					+8% critical strike chance
+					'''
+			}
+
+			GlassAbsorber: {
+				DisplayName: Glass Absorber
+				Tooltip:
+					'''
+					12% chance not to consume ammo
+					12% reduced mana usage
+					'''
+			}
+
+			GlassHelm: {
+				DisplayName: Glass Headset
+				Tooltip: A glass prism orbits you zapping enemies
+			}
+
+			GlassLimbguards: {
+				DisplayName: Glass Limbguards
+				Tooltip:
+					'''
+					Walk right for 12% increased ranged damage
+					Walk left for 12% increased magic damage
+					'''
+			}
+
+			HydraHelmet: {
+				DisplayName: Hydra Maw
+				Tooltip:
+					'''
+					+0.5 life/sec regen rate
+					+10% summon damage
+					'''
+			}
+
+			HydraLeggings: {
+				DisplayName: Hydra Extensions
+				Tooltip:
+					'''
+					+0.5 life/sec regen rate
+					+10% summon damage and movement speed
+					'''
+			}
+
+			HydraScalemail: {
+				DisplayName: Hydra Scalemail
+				Tooltip:
+					'''
+					+0.5 life/sec regen rate
+					+1 max minions
+					'''
+			}
+
+			InvaderLanders: {
+				DisplayName: Invader Landers
+				Tooltip:
+					'''
+					13% increased damage
+					15% increased melee and movement speed
+					Grants immunity to fall damage
+					'''
+			}
+
+			InvaderPercepticals: {
+				DisplayName: Invader Percepticals
+				Tooltip:
+					'''
+					10% increased damage and critical strike chance
+					Increases maximum mana by 80
+					Reduces mana useage by 15%
+					'''
+			}
+
+			InvaderProtector: {
+				DisplayName: Invader Protector
+				Tooltip:
+					'''
+					12% increased damage
+					20% chance not to consume ammo
+					+1 max minions
+					'''
+			}
+
+			LuneCrestplate: {
+				DisplayName: Lune Crestplate
+				Tooltip:
+					'''
+					Ranged attacks pierce an extra enemy.
+					 Projectiles that normally don't pierce will use local immunity
+					'''
+			}
+
+			LuneHat: {
+				DisplayName: Lune Hat
+				Tooltip:
+					'''
+					+8% ranged crit
+					Improves vision
+					'''
+			}
+
+			LuneLeggings: {
+				DisplayName: Lune Runners
+				Tooltip:
+					'''
+					10% increased movement speed
+					8% increased ranged crit
+					'''
+			}
+
+			RhuthiniumCap: {
+				DisplayName: Rhuthinium Cap
+				Tooltip:
+					'''
+					10% increased ranged critical chance
+					10% chance not to consume ammo
+					'''
+			}
+
+			RhuthiniumChestplate: {
+				DisplayName: Rhuthinium Chestplate
+				Tooltip: 8% increased damage
+			}
+
+			RhuthiniumGreaves: {
+				DisplayName: Rhuthinium Greaves
+				Tooltip: Lets you dash
+			}
+
+			RhuthiniumHat: {
+				DisplayName: Rhuthinium Scalp
+				Tooltip:
+					'''
+					10% increased magic critical chance 
+					10% reduced mana useage
+					'''
+			}
+
+			RhuthiniumHeadband: {
+				DisplayName: Rhuthinium Headband
+				Tooltip:
+					'''
+					10% increased melee critical strike chance
+					Increases the size of swords by 10%
+					'''
+			}
+
+			RhuthiniumMask: {
+				DisplayName: Rhuthinium Guise
+				Tooltip:
+					'''
+					+1 max minions 
+					5% increased critical strike chance
+					'''
+			}
+
+			ShamanBody: {
+				DisplayName: Shaman Warplate
+				Tooltip:
+					'''
+					+1 max minions 
+					14% increased melee speed
+					'''
+			}
+
+			ShamanHead: {
+				DisplayName: Shaman Skull
+				Tooltip: 6% increased minion damage and melee critical strike chance
+			}
+
+			ShamanLegs: {
+				DisplayName: Shaman Pants
+				Tooltip: +1 max sentries
+			}
+
+			VitallumCoreCharged: {
+				DisplayName: Vitallum Core
+				Tooltip: Charged, ready for crafting.
+			}
+
+			VitallumCoreUncharged: {
+				DisplayName: Vitallum Core
+				Tooltip:
+					'''
+					Uncharged, kill enemies to charge it.
+					When charged can be used in crafting, removing the charge. 
+
+					'''
+			}
+
+			VitallumHeadress: {
+				DisplayName: Vitallum Headress
+				Tooltip:
+					'''
+					Increases max life by 80 
+					7% increased damage 
+					 Drain life from nearby enemies
+					'''
+			}
+
+			VitallumJeans: {
+				DisplayName: Vitallum Jeans
+				Tooltip:
+					'''
+					Increases max life by 100 
+					6% increased damage 
+					Regenerate 2 life/sec when on the ground
+					'''
+			}
+
+			VitallumLifeguard: {
+				DisplayName: Vitallum Lifeguard
+				Tooltip:
+					'''
+					Increases max life by 120 
+					Every 10 missing health increases damage by 1%
+					'''
+			}
+
+			LaunchingHook: {
+				DisplayName: Launching Hook
+				Tooltip: ""
+			}
+
+			DivineLightMask: {
+				DisplayName: Divine Light Mask
+				Tooltip: ""
+			}
+
+			PolarMask: {
+				DisplayName: Polar Exterminator Mask
+				Tooltip: ""
+			}
+
+			RuneGhostMask: {
+				DisplayName: Rune Ghost Mask
+				Tooltip: ""
+			}
+
+			RunicRobe: {
+				DisplayName: Ancient Runic Robe
+				Tooltip: remeber this?
+			}
+
+			ExpertChalice: {
+				DisplayName: Chalice of the Light
+				Tooltip:
+					'''
+					Reusable
+					Gives you 2 seconds of invinsibility after drinking
+					'''
+			}
+
+			BladedArrowShaft: {
+				DisplayName: Bladed Arrow Shaft
+				Tooltip: Used to craft a powerful arrow!
+			}
+
+			CaeliteCore: {
+				DisplayName: Shining Core
+				Tooltip: ""
+			}
+
+			CraftingRune: {
+				DisplayName: Rune
+				Tooltip: ""
+			}
+
+			Etims: {
+				DisplayName: Etims
+				Tooltip: Forged from the blood of those slain by gods!
+			}
+
+			FortressHarpyBeak: {
+				DisplayName: Fortress Harpy Beak
+				Tooltip: Lightweight and sturdy, goes well with Caelite when making weapons
+			}
+
+			HydraScale: {
+				DisplayName: Hydra Scale
+				Tooltip: ""
+			}
+
+			InvaderPlating: {
+				DisplayName: Invader Scrap
+				Tooltip: Leftover invader parts
+			}
+
+			SoulOfHeight: {
+				DisplayName: Soul of Height
+				Tooltip: "'The essence of Caelin'"
+			}
+
+			Lightling: {
+				DisplayName: Lightling
+				Tooltip: Emits light
+			}
+
+			Hydrator: {
+				DisplayName: The Hydrator
+				Tooltip: Three bobbers are better than one!
+			}
+
+			AncientMiner: {
+				DisplayName: Ancient Miner
+				Tooltip: Mines a 3x3 area
+			}
+
+			BurstMiner: {
+				DisplayName: Stream Miner
+				Tooltip: ""
+			}
+
+			CaelitePickaxe: {
+				DisplayName: Caelite Pickaxe
+				Tooltip: Mines a 3x3 area
+			}
+
+			Hydrill: {
+				DisplayName: Hydrill
+				Tooltip: Mines a 3x3 area
+			}
+
+			RuneMiner: {
+				DisplayName: Rune Miner
+				Tooltip: Mines a 5x5 area
+			}
+
+			TheDevourer: {
+				DisplayName: The Devourer
+				Tooltip: Mines a 9x9 area!
+			}
+
+			AncientMissileStaff: {
+				DisplayName: Ancient Missile Staff
+				Tooltip: Fires explosive Ancient Missiles!
+			}
+
+			AncientWave: {
+				DisplayName: Ancient Wave
+				Tooltip: Blows enemies away
+			}
+
+			BlackHoleStaff: {
+				DisplayName: Black Hole Staff
+				Tooltip:
+					'''
+					Summons a black hole to suck up your enemies!
+					The higher the black hole's damage the stronger the pull strength
+					'''
+			}
+
+			InvaderCatalyst: {
+				DisplayName: Invader Catalyst
+				Tooltip: Melee attacks will cause magic explosions for a short time
+			}
+
+			EnlightenedConfusion: {
+				DisplayName: Enlightened Confusion
+				Tooltip: Doesd not actually inflict confusion, confusing.
+			}
+
+			TheTyrantsExtinctionGun: {
+				DisplayName: The Tyrant's Extinction Gun
+				Tooltip:
+					'''
+					Left click shoots climate change!
+					Right click shoots disease!
+					'''
+			}
+
+			GalacticEnragment: {
+				DisplayName: Galactic Enragement
+				Tooltip: All the stars!
+			}
+
+			HydraBeam: {
+				DisplayName: Hydra Beam
+				Tooltip: Creates a beam of destructive energy from the sky
+			}
+
+			HydraMissileStaff: {
+				DisplayName: Hydra Missile Rod
+				Tooltip: Fires a Hydra head that explodes and splits into more hydra heads which explodes and splits into more hydra heads!
+			}
+
+			LuneStaff: {
+				DisplayName: Lune Staff
+				Tooltip:
+					'''
+					Fires a Lune crest to zap enemies
+					Inflicts Lune curse making enemies more vulnerable to critical hits
+					'''
+			}
+
+			PenguinWhistle: {
+				DisplayName: Penguin Whistle
+				Tooltip: Calls flying penguins!
+			}
+
+			ExplosivePierce: {
+				DisplayName: Plasma Cannon
+				Tooltip: Fires projectiles that pierce through enemies exploding every time they hit something!
+			}
+
+			PursuitRuneStaff: {
+				DisplayName: Pursuit Rune Staff
+				Tooltip: Fires explosive Pursuit Runes!
+			}
+
+			CaeliteMagicWeapon: {
+				DisplayName: Restless Sun
+				Tooltip: Blessed by higher beings this weapon excels in large open areas!
+			}
+
+			RhuthiniumScepter: {
+				DisplayName: Rhuthinium Scepter
+				Tooltip: ""
+			}
+
+			RhuthiniumVaporizer: {
+				DisplayName: Rhuthinium Vaporizer
+				Tooltip: ""
+			}
+
+			RunicWave: {
+				DisplayName: Runic Wave
+				Tooltip: Cast a wave that draws ice runes in flight
+			}
+
+			SacredDaze: {
+				DisplayName: Sacred Daze
+				Tooltip: Stuns those who are not worthy!
+			}
+
+			StaffOfJob: {
+				DisplayName: Staff Of Job
+				Tooltip: Inflicts grave misery at the victim near your cursor!
+			}
+
+			SwordStormStaff: {
+				DisplayName: Swordpocalypse
+				Tooltip: Unleashes a barrage of swords!
+			}
+
+			CaeliteBoomerang: {
+				DisplayName: Angelic Tracker
+				Tooltip: Higher beings will guide your boomerang!
+			}
+
+			LuneBoomerang: {
+				DisplayName: Lune Boomerang
+				Tooltip:
+					'''
+					Unlimited, pierces enemies
+					Inflicts Lune curse making enemies more vulnerable to critical hits
+					'''
+			}
+
+			RhuthiniumBoomerang: {
+				DisplayName: Rhuthinium Boomerang
+				Tooltip:
+					'''
+					Hold down the throw button to make it fly further
+					Right click to make the boomerang stationary
+					'''
+			}
+
+			DinoFlail: {
+				DisplayName: Ankylosaurus Tail
+				Tooltip: Critical hits stun enemies
+			}
+
+			HydraJavelin: {
+				DisplayName: Hydra Javelin
+				Tooltip:
+					'''
+					Throws three javelins at once
+					Each javelin reduces the contact damage enemies deal
+					Max: 15
+					'''
+			}
+
+			Imperium: {
+				DisplayName: Imperium
+				Tooltip: Enemies will take 35% more damage from swords while this is stuck in them
+			}
+
+			RhuthiniumJavelin: {
+				DisplayName: Rhuthinium Javelin
+				Tooltip:
+					'''
+					Each javelin stuck in the enemy causes them to take 1 extra damage
+					Max: 10
+					'''
+			}
+
+			CaeliteRainKnife: {
+				DisplayName: Divine Hail Knife
+				Tooltip: Higher beings will throw these from the sky!
+			}
+
+			Hydrent: {
+				DisplayName: Fire Hydrent
+				Tooltip: Shoots hydra breath
+			}
+
+			Hydrospear: {
+				DisplayName: Hydrospear
+				Tooltip: ""
+			}
+
+			AncientBlade: {
+				DisplayName: Ancient Blade
+				Tooltip: Launches a spread of orbs
+			}
+
+			EtimsSword: {
+				DisplayName: The Massacre
+				Tooltip:
+					'''
+					Right click on the ground for an uppercut
+					Right click in the air to slam down!
+					Killing an enemy grants immunity to hostile projectiles for a short time.
+					'''
+			}
+
+			ImperiousTheIV: {
+				DisplayName: Imperious The IV
+				Tooltip: Hitting enemies launches richoching swords
+			}
+
+			Overkill: {
+				DisplayName: Overkill
+				Tooltip: just need to get airborne....
+			}
+
+			PenguinClub: {
+				DisplayName: Penguin Club
+				Tooltip: Launches penguins upon hitting an enemy
+			}
+
+			RunicBlade: {
+				DisplayName: Rune Blade
+				Tooltip: Launches a spread Mini Ice Runes
+			}
+
+			Cyclone: {
+				DisplayName: Cyclone
+				Tooltip: <3
+			}
+
+			LuneTop: {
+				DisplayName: Lune Top
+				Tooltip: Inflicts Lune curse making enemies more vulnerable to critical hits
+			}
+
+			AncientThrow: {
+				DisplayName: Ancient Throw
+				Tooltip:
+					'''
+					Its string has been stretched for thousands of years
+					Right click to zoom
+					'''
+			}
+
+			Arachnoyo: {
+				DisplayName: Aracnoyo
+				Tooltip: Throws 8 yoyos at once!
+			}
+
+			Arsenal: {
+				DisplayName: Arsenal
+				Tooltip: Creates lingering blades!
+			}
+
+			RunicThrow: {
+				DisplayName: Runic Throw
+				Tooltip:
+					'''
+					Ridiculously long string
+					Right click to zoom
+					'''
+			}
+
+			AncientMinionStaff: {
+				DisplayName: Ancient Minion Staff
+				Tooltip: Summons an ancient minion to fight for you!
+			}
+
+			ChlorophyteSniperStaff: {
+				DisplayName: Chlorophyte Sniper Staff
+				Tooltip:
+					'''
+					Summons a Chlorophyte Sniper to execute your foes! +
+					Burst damage minion
+					'''
+			}
+
+			GlassSpikeStaff: {
+				DisplayName: Glass Spike Staff
+				Tooltip:
+					'''
+					Summon spikes that rest on the ground, damaging enemies that step on them 
+					Will reposition if you walk away
+					'''
+			}
+
+			HydraHeadStaff: {
+				DisplayName: Hydra Head Staff
+				Tooltip: Summons a hydra head to shoot towards your cursor
+			}
+
+			InvaderCasterStaff: {
+				DisplayName: Invader Caster Staff
+				Tooltip: Summons an invader caster to fight for you.
+			}
+
+			RunicMinionStaff: {
+				DisplayName: Leech Rune Staff
+				Tooltip:
+					'''
+					Summons an leech rune to fight for you!
+					chance to steal life
+					'''
+			}
+
+			SwordMinionStaff: {
+				DisplayName: The Longsword Staff
+				Tooltip: Who needs a horde of minions when you have a giant longsword?
+			}
+
+			LuneArcherStaff: {
+				DisplayName: Lune Archer Staff
+				Tooltip: Summons a lune archer to shoot arrows from your inventory at enemies
+			}
+
+			MechCrossbowStaff: {
+				DisplayName: Mech Crossbow Staff
+				Tooltip:
+					'''
+					Summons a mechanised crossbow to shoot arrows from your inventory at enemies
+					Wooden arrows are converted into tagging bolts
+					'''
+			}
+
+			MiniTankStaff: {
+				DisplayName: Mini Tank Staff
+				Tooltip: Summons a Mini Tank!
+			}
+
+			PriestStaff: {
+				DisplayName: Priest Staff
+				Tooltip: Do I even need to explain how higher beings are involved with this?
+			}
+
+			ShieldMinionStaff: {
+				DisplayName: Shield Minion Staff
+				Tooltip:
+					'''
+					Slams intruders that get too close to you! +
+					Burst damage minion
+					'''
+			}
+
+			SpaceFighterStaff: {
+				DisplayName: Space Fighter Staff
+				Tooltip: ""
+			}
+
+			TileStaff: {
+				DisplayName: Tile Staff
+				Tooltip: Moving diagonally? What's that?
+			}
+
+			DreadnoughtStaff: {
+				DisplayName: Rod of Command
+				Tooltip: Used by Ur-Quan lords to issue commands
+			}
+
+			AncientNuke: {
+				DisplayName: Shape shift: Ancient Nuke
+				Tooltip: Breifly turns you into an ancient nuke that causes a massive explosion when you collide with something... don't worry you'll live
+			}
+
+			HydraBarrage: {
+				DisplayName: Shape shift: Hydra Barrage
+				Tooltip: Launches a barrage of hydra breath
+			}
+
+			RhuthiniumBarrage: {
+				DisplayName: Shape shift: Rhuthinium Barrage
+				Tooltip: Launches a HUGE barrage of darts dealing massive damage!
+			}
+
+			RuneNuke: {
+				DisplayName: Shape shift: Rune Nuke
+				Tooltip: Breifly turns you into an rune nuke that causes a massive explosion when you collide with something... and releases a bunch of leech runes
+			}
+
+			Swordquake: {
+				DisplayName: Shape Shift: Swordquake
+				Tooltip: Turn into a sword that causes a deadly swordquake upon striking the ground!
+			}
+
+			AncientLongbow: {
+				DisplayName: Ancient Longbow
+				Tooltip:
+					'''
+					Hold to charge up
+					Fires 3 arrows at max charge
+					Wooden arrows become ancient arrows
+					'''
+			}
+
+			B4Bow: {
+				DisplayName: Possesing Bow
+				Tooltip: Arrows fired from this will chase your enemies!
+			}
+
+			DivineBanishment: {
+				DisplayName: Divine Banishment
+				Tooltip: Higher beings will help you shoot your enemies!
+			}
+
+			HolyExiler: {
+				DisplayName: Holy Exiler
+				Tooltip: Higher beings will help you shoot your enemies!
+			}
+
+			RuneLongbow: {
+				DisplayName: Rune Longbow
+				Tooltip:
+					'''
+					Hold to charge up
+					Fires 3 arrows at max charge
+					Wooden arrows become aggro rune strikes
+					'''
+			}
+
+			SkyShot: {
+				DisplayName: Sky Shot
+				Tooltip:
+					'''
+					Uses darts as ammo
+					Higher beings have loaded an additional dart.
+					'''
+			}
+
+			SuperSkyShot: {
+				DisplayName: Super Sky Shot
+				Tooltip:
+					'''
+					Uses darts as ammo
+					Higher beings have loaded many extra darts
+					'''
+			}
+
+			Whirlpool: {
+				DisplayName: Whirlpool
+				Tooltip: Uses darts as ammo
+			}
+
+			AncientSniper: {
+				DisplayName: Ancient Sniper
+				Tooltip:
+					'''
+					Harness the ancient power of sniping
+					Right click to zoom
+					'''
+			}
+
+			ChargingShotgun: {
+				DisplayName: Charging Shotgun
+				Tooltip: Right click to add an extra bullet to your next fire
+			}
+
+			ChromeShotgunDefault: {
+				DisplayName: Chrome Shotgun
+				Tooltip: Right click to switch between 4 modes
+			}
+
+			DinoVulcan: {
+				DisplayName: Dino Vulcan
+				Tooltip:
+					'''
+					Builds up in speed while used
+					66% chance not to consume ammo
+					'''
+			}
+
+			HydraCannon: {
+				DisplayName: Hydra Cannon
+				Tooltip: Killing enemies releases a powerful wave of destruction
+			}
+
+			LuneTrickshooter: {
+				DisplayName: Lune Trickshooter
+				Tooltip:
+					'''
+					Musket balls are converted to Lune trick shots!
+					Trick shots can bounce off walls 3 times and gain significant damage if they do so
+					'''
+			}
+
+			RunicSniper: {
+				DisplayName: Runic Sniper
+				Tooltip:
+					'''
+					x2 damage to enemies far away from you
+					Right click to zoom
+					'''
+			}
+
+			InvaderShooter: {
+				DisplayName: Invader Shooter
+				Tooltip: Shoots a piercing beam that spawns bullets on hit
+			}
+
+			ShotgunOfExcessiveForce: {
+				DisplayName: Shotgun of Excessive Force
+				Tooltip: ""
+			}
+
+			PenguinLauncher: {
+				DisplayName: Penguin Launcher
+				Tooltip: Uses penguins as ammo
+			}
+
+			Aqueous: {
+				DisplayName: Aqueous
+				Tooltip: Shot from your bow alongside normal arrows
+			}
+
+			BladedArrow: {
+				DisplayName: Bladed Arrow
+				Tooltip: Shot from your bow alongside normal arrows
+			}
+
+			AntiAirWrench: {
+				DisplayName: Anti Air Sentry Wrench
+				Tooltip: Summons a stationary anti air sentry
+			}
+
+			AshFellStaff: {
+				DisplayName: Ash  Fell Staff
+				Tooltip: Thi Sentry suffocates your foes with ash missiles!
+			}
+
+			BubbleBrewerBaton: {
+				DisplayName: Bubble Brewer Baton
+				Tooltip:
+					'''
+					Summons a bubble brewer
+					Works well as a last line of defense
+					'''
+			}
+
+			RhuthiniumGuardianStaff: {
+				DisplayName: Rhuthinium Guardian Staff
+				Tooltip: Summons an extremely slow guardian to shoot at your enemies
+			}
+
+			Riptide: {
+				DisplayName: Riptide Sentry Staff
+				Tooltip: ""
+			}
+
+			ShroomiteTurretStaff: {
+				DisplayName: Shroomite Turret Staff
+				Tooltip:
+					'''
+					Fire bullets from your inventory.
+					50% chance not to consume ammo.
+					'''
+			}
+
+			CaeliteSentryStaff: {
+				DisplayName: Sky Spiral Staff
+				Tooltip: Higher beings will punish all enemies near this sentry!
+			}
+
+			Discipline: {
+				DisplayName: Discipline
+				Tooltip: Your minions will gain speed when attacking struck enemies
+			}
+
+			InvaderFork: {
+				DisplayName: Invader Fork
+				Tooltip: Your minions will spawn missiles on hit that do deal 50% of the minion's damage.
+			}
+
+			CocktailDressSkirt: {
+				DisplayName: Cocktail Dress Skirt
+				Tooltip: ""
+			}
+
+			CocktailDressTop: {
+				DisplayName: Cocktail Dress Top
+				Tooltip: ""
+			}
+
+			HeroPlate: {
+				DisplayName: Hero Plate
+				Tooltip: 8% increased melee damage
+			}
+
+			HeroPants: {
+				DisplayName: Hero Pants
+				Tooltip: 20% increased movement speed
+			}
+
+			HeroShield: {
+				DisplayName: Hero Shield
+				Tooltip: 8% increased melee critical strike chance
+			}
+
+			FaceMask: {
+				DisplayName: Face Mask
+				Tooltip: ""
+			}
+
+			Shrug: {
+				DisplayName: Silver Shrug
+				Tooltip: Vanity Accesory
+			}
+
+			Jacket: {
+				DisplayName: Jacket
+				Tooltip: Vanity Accesory
+			}
+
+			Corset: {
+				DisplayName: Corset
+				Tooltip: ""
+			}
+
+			SuitSkirt: {
+				DisplayName: Suit Skirt
+				Tooltip: ""
+			}
+
+			ScarletBallGown: {
+				DisplayName: Scarlet Ball Gown
+				Tooltip: ""
+			}
+
+			ScarletFan: {
+				DisplayName: Scarlet Fan
+				Tooltip: Gives you and idle animation
+			}
+
+			CasualSkirt: {
+				DisplayName: Casual Skirt
+				Tooltip: ""
+			}
+
+			Purse: {
+				DisplayName: Purse
+				Tooltip: ""
+			}
+		}
+
+		NPCs: {
+			AncientMachine.DisplayName: Ancient Machine
+			AncientMinion.DisplayName: Ancient Minion
+			BladeHitbox.DisplayName: Imperious
+			Imperious.DisplayName: Imperious
+			CloakedDarkBoss.DisplayName: Noehtnap
+			FortressBoss.DisplayName: The Divine Light
+			Hydra.DisplayName: Hydra
+			HydraHead.DisplayName: Hydra Head
+			BattleshipStrikeDrone.DisplayName: Strike Drone
+			InvaderBattleship.DisplayName: Invader Battleship
+			OLORDv2.DisplayName: Oversized Laser-emitting Obliteration Radiation-emitting Destroyer
+			RuneGhost.DisplayName: Rune Ghost
+			AgentPenguin.DisplayName: Agent Penguin
+			FlyingPenguin.DisplayName: Flying Penguin
+			PolarBear.DisplayName: Polar Exterminator
+			Sleeping.DisplayName: ZZZZZ...
+			SlidingPenguin.DisplayName: Sliding Penguin
+			AntiAir.DisplayName: Anti Air
+			Mosquitto.DisplayName: Mosquitto
+			TheGreatTyrannosaurus.DisplayName: The Great Tyrannosaurus
+			Triceratank.DisplayName: Triceratank
+			Utah.DisplayName: Utahraptor
+			Velocichopper.DisplayName: Velocichopper
+			Caster.DisplayName: High Preist
+			Crawler.DisplayName: Mollusket
+			FortressFlier.DisplayName: Fortress Harpy
+			GuardTile.DisplayName: Guard Tile
+			Hopper.DisplayName: Enchanted Tile
+			Swarm.DisplayName: Swarm
+			Swarmer.DisplayName: Fortress Swarmer
+			YoungTile.DisplayName: Young Tile
+			InvaderBehemoth.DisplayName: Invader Behemoth
+			InvaderCaster.DisplayName: Invader Caster
+			InvaderFighter.DisplayName: Invader Fighter
+			InvaderBattleship2.DisplayName: Invader Battleship2
+			FrontGunPiece.DisplayName: Front Gun Piece
+			BackGunPiece.DisplayName: Back Gun Piece
+			MissileLauncherPiece.DisplayName: Missile Launcher Piece
+			EnginePiece.DisplayName: Engine Piece
+			DistressPiece.DisplayName: Distress Piece
+			CenterPiece.DisplayName: Center Piece
+			InvaderNoehtnap.DisplayName: Invader Noehtnap
+			NoehtnapClone.DisplayName: Invader Noehtnap
+		}
+
+		Tiles: {
+			FortressAltar.MapEntry: Altar
+			BannersT.MapEntry: Banner
+			FortressCarving1T.MapEntry: Fortress Carving
+			FortressCarving2T.MapEntry: Fortress Carving
+			FortressCarving3T.MapEntry: Fortress Carving
+			FortressBathtubT.MapEntry: Fortress Bathtub
+			FortressBedT.MapEntry: Fortress Bed
+			FortressBenchT.MapEntry: Fortress Workbench
+			FortressBookcaseT.MapEntry: Fortress Bookcase
+			FortressCandelabraT.MapEntry: Fortress Candelabra
+			FortressCandleT.MapEntry: Fortress Candle
+			FortressChairT.MapEntry: Fortress Chair
+			FortressChandelierT.MapEntry: Fortress Chandelier
+			FortressClockT.MapEntry: Mods.QwertyMod.MapObject.FortressClockT
+			FortressCouchT.MapEntry: Fortress Couch
+			FortressDoorClosed.MapEntry: Fortress Door
+			FortressDoorOpen.MapEntry: Fortress Door
+			FortressLampT.MapEntry: Fortress Lamp
+			FortressLanternT.MapEntry: Fortress Latern
+			FortressPianoT.MapEntry: Fortress Piano
+			FortressSinkT.MapEntry: Fortress Sink
+			FortressTableT.MapEntry: Fortress Table
+			LaunchPadT.MapEntry: Launchpad
+			ReverseSandT.MapEntry: Dnas
+			MusicBoxBeastOfThreeHeadsT.MapEntry: Music Box
+			MusicBoxBladeOfAGodT.MapEntry: Music Box
+			MusicBoxBuiltToDestroyT.MapEntry: Music Box
+			MusicBoxEPICT.MapEntry: Music Box
+			MusicBoxHeavenlyFortressT.MapEntry: Music Box
+			MusicBoxHigherBeingT.MapEntry: Music Box
+			MusicBoxOldDinosNewGunsT.MapEntry: Music Box
+			MusicBoxTheConjurerT.MapEntry: Music Box
+			MusicBoxTheGodsBleedT.MapEntry: Music Box
+			LuneOreT.MapEntry: Lune Ore
+			RhuthiniumOreT.MapEntry: Rhuthinium Ore
+		}
+
+		"Keybinds.Yet Another Special Ability Key.DisplayName": Yet Another Special Ability
+	}
+}

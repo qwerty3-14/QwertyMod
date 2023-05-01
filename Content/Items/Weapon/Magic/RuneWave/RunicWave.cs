@@ -17,8 +17,8 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RuneWave
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Runic Wave");
-            Tooltip.SetDefault("Cast a wave that draws ice runes in flight");
+            //DisplayName,SetDefault("Runic Wave");
+            //Tooltip.SetDefault("Cast a wave that draws ice runes in flight");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -29,10 +29,10 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RuneWave
 
             Item.useTime = 40;
             Item.useAnimation = 40;
-            Item.useStyle = 5;
+            Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 100;
             Item.value = 500000;
-            Item.rare = 9;
+            Item.rare = ItemRarityID.Cyan;
             Item.UseSound = SoundID.Item1;
             Item.autoReuse = true;
             Item.width = 28;
@@ -59,7 +59,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RuneWave
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Runic Wave");
+            //DisplayName,SetDefault("Runic Wave");
             Main.projFrames[Projectile.type] = 1;
         }
 
@@ -94,17 +94,17 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RuneWave
             {
                 float startDistance = 100;
 
-                ice1 = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center.X + (float)Math.Cos(0) * startDistance, Projectile.Center.Y + (float)Math.Sin(0) * startDistance, 0, 0, ProjectileType<IceRuneTome>(), Projectile.damage, 3f, Main.myPlayer)];
-                ice2 = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), player.Center.X + (float)Math.Cos(Math.PI) * startDistance, player.Center.Y + (float)Math.Sin(Math.PI) * startDistance, 0, 0, ProjectileType<IceRuneTome>(), Projectile.damage, 3f, Main.myPlayer)];
+                ice1 = Main.projectile[Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center.X + MathF.Cos(0) * startDistance, Projectile.Center.Y + MathF.Sin(0) * startDistance, 0, 0, ProjectileType<IceRuneTome>(), Projectile.damage, 3f, Main.myPlayer)];
+                ice2 = Main.projectile[Projectile.NewProjectile(Projectile.GetSource_FromThis(), player.Center.X + MathF.Cos(MathF.PI) * startDistance, player.Center.Y + MathF.Sin(MathF.PI) * startDistance, 0, 0, ProjectileType<IceRuneTome>(), Projectile.damage, 3f, Main.myPlayer)];
                 runOnce = false;
             }
             ice1.rotation += (float)((2 * Math.PI) / (Math.PI * 2 * 100 / iceRuneSpeed));
-            ice1.velocity.X = iceRuneSpeed * (float)Math.Cos(ice1.rotation) + Projectile.velocity.X;
-            ice1.velocity.Y = iceRuneSpeed * (float)Math.Sin(ice1.rotation) + Projectile.velocity.Y;
+            ice1.velocity.X = iceRuneSpeed * MathF.Cos(ice1.rotation) + Projectile.velocity.X;
+            ice1.velocity.Y = iceRuneSpeed * MathF.Sin(ice1.rotation) + Projectile.velocity.Y;
 
             ice2.rotation += (float)((2 * Math.PI) / (Math.PI * 2 * 100 / iceRuneSpeed));
-            ice2.velocity.X = iceRuneSpeed * (float)Math.Cos(ice2.rotation) + Projectile.velocity.X;
-            ice2.velocity.Y = iceRuneSpeed * (float)Math.Sin(ice2.rotation) + Projectile.velocity.Y;
+            ice2.velocity.X = iceRuneSpeed * MathF.Cos(ice2.rotation) + Projectile.velocity.X;
+            ice2.velocity.Y = iceRuneSpeed * MathF.Sin(ice2.rotation) + Projectile.velocity.Y;
 
             if (dustTimer > 5)
             {
@@ -136,24 +136,20 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RuneWave
             Projectile.timeLeft = 60 * 3;
             Projectile.DamageType = DamageClass.Magic;
         }
-
-        public int runeTimer;
         public float startDistance = 200f;
-        public float direction;
         public float runeSpeed = 10;
         public bool runOnce = true;
-        public float aim;
 
         public override void AI()
         {
             Player player = Main.player[Projectile.owner];
             if (runOnce)
             {
-                Projectile.rotation = (player.Center - Projectile.Center).ToRotation() - (float)Math.PI / 2;
+                Projectile.rotation = (player.Center - Projectile.Center).ToRotation() - MathF.PI / 2;
                 runOnce = false;
             }
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(BuffID.Frostburn, 1200);
         }

@@ -2,7 +2,7 @@
 using QwertyMod.Content.Items.Equipment.Hook;
 using QwertyMod.Content.Items.Tool.Mining.BurstMiner;
 using QwertyMod.Content.Items.Weapon.Melee.Spear.Hydrospear;
-using QwertyMod.Content.Items.Weapon.Ranged.SuperArrow.Aqueous;
+using QwertyMod.Content.Items.Equipment.Accessories.SuperArrow.Aqueous;
 using QwertyMod.Content.Items.Weapon.Sentry.Riptide;
 using System.Collections.Generic;
 using Terraria;

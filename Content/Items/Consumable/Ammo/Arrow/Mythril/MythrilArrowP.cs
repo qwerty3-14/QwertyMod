@@ -5,11 +5,6 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Mythril
 {
     public class MythrilArrowP : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault("Mythril Arrow");
-        }
-
         public override void SetDefaults()
         {
             Projectile.aiStyle = 1;

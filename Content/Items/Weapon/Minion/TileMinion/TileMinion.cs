@@ -13,7 +13,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.TileMinion
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Tile Minion");
+            //DisplayName,SetDefault("Tile Minion");
             Main.projFrames[Projectile.type] = 3;
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true; //This is necessary for right-click targeting
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 2;
@@ -33,7 +33,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.TileMinion
             Projectile.localNPCHitCooldown = 30;
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.localNPCImmunity[target.whoAmI] = Projectile.localNPCHitCooldown;
             target.immune[Projectile.owner] = 0;

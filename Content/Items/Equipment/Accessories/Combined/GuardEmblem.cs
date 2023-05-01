@@ -9,8 +9,6 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Combined
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Guard Emblem");
-            Tooltip.SetDefault("8 defense \n10% increased damage \nEnemies are more likely to target you");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 

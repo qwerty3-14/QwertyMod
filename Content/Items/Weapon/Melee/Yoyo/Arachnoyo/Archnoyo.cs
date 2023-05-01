@@ -15,8 +15,8 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.Arachnoyo
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Aracnoyo");
-            Tooltip.SetDefault("Throws 8 yoyos at once!");
+            //DisplayName,SetDefault("Aracnoyo");
+            //Tooltip.SetDefault("Throws 8 yoyos at once!");
             ItemID.Sets.Yoyo[Item.type] = true;
             ItemID.Sets.GamepadExtraRange[Item.type] = 15;
             ItemID.Sets.GamepadSmartQuickReach[Item.type] = true;
@@ -25,7 +25,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.Arachnoyo
 
         public override void SetDefaults()
         {
-            Item.useStyle = 5;
+            Item.useStyle = ItemUseStyleID.Shoot;
             Item.width = 30;
             Item.height = 26;
             Item.useAnimation = 25;
@@ -34,7 +34,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.Arachnoyo
             Item.knockBack = 2.5f;
             Item.damage = 38;
             Item.value = 50000;
-            Item.rare = 4;
+            Item.rare = ItemRarityID.LightRed;
             Item.DamageType = DamageClass.MeleeNoSpeed;
             Item.channel = true;
             Item.noMelee = true;
@@ -133,12 +133,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.Arachnoyo
         // ai[0] is -1f once YoyosLifeTimeMultiplier is reached, when the player is stoned/frozen, when the yoyo is too far away, or the player is no longer clicking the shoot button.
         // ai[0] being negative makes the yoyo move back towards the player
         // Any AI method can be used for dust, spawning projectiles, etc specific to your yoyo.
-        private float range = 120;
-
-        private float speed = 13f;
-        private float time = -1f;
-        private Vector2 modifiedMousePosition;
-        private int frameTimer;
+          private int frameTimer;
 
         public override void AI()
         {
@@ -395,7 +390,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.Arachnoyo
                 vector9 *= num10;
                 Projectile.velocity = (Projectile.velocity * (num11 - 1f) + vector9) / num11;
             }
-            Projectile.rotation = (Projectile.Center - Main.player[Projectile.owner].Center).ToRotation() + (float)Math.PI / 2;
+            Projectile.rotation = (Projectile.Center - Main.player[Projectile.owner].Center).ToRotation() + MathF.PI / 2;
         }
         public override void SendExtraAI(BinaryWriter writer)
         {
@@ -443,8 +438,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.Arachnoyo
             vector.Y += Main.player[Projectile.owner].gfxOffY;
             float num3 = Projectile.Center.X - vector.X;
             float num4 = Projectile.Center.Y - vector.Y;
-            Math.Sqrt((double)(num3 * num3 + num4 * num4));
-            float rotation = (float)Math.Atan2((double)num4, (double)num3) - 1.57f;
+            float rotation = MathF.Atan2(num4, num3) - 1.57f;
             if (!Projectile.counterweight)
             {
                 int num5 = -1;
@@ -453,7 +447,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.Arachnoyo
                     num5 = 1;
                 }
                 num5 *= -1;
-                Main.player[Projectile.owner].itemRotation = (float)Math.Atan2((double)(num4 * (float)num5), (double)(num3 * (float)num5));
+                Main.player[Projectile.owner].itemRotation = MathF.Atan2((num4 * (float)num5), (num3 * (float)num5));
             }
             bool notMain = true;
             if (num3 == 0f && num4 == 0f)
@@ -462,7 +456,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.Arachnoyo
             }
             else
             {
-                float num6 = (float)Math.Sqrt((double)(num3 * num3 + num4 * num4));
+                float num6 = MathF.Sqrt((num3 * num3 + num4 * num4));
                 num6 = 12f / num6;
                 num3 *= num6;
                 num4 *= num6;
@@ -474,7 +468,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.Arachnoyo
             while (notMain)
             {
                 float num7 = 12f;
-                float num8 = (float)Math.Sqrt((double)(num3 * num3 + num4 * num4));
+                float num8 = MathF.Sqrt((num3 * num3 + num4 * num4));
                 float num9 = num8;
                 if (float.IsNaN(num8) || float.IsNaN(num9))
                 {
@@ -538,7 +532,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.Arachnoyo
                             num3 *= 1f - num10;
                         }
                     }
-                    rotation = (float)Math.Atan2((double)num4, (double)num3) - 1.57f;
+                    rotation = MathF.Atan2(num4, num3) - 1.57f;
                     int stringColor = Main.player[Projectile.owner].stringColor;
                     Microsoft.Xna.Framework.Color color = WorldGen.paintColor(stringColor);
                     if (color.R < 75)
@@ -579,7 +573,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.Arachnoyo
             return true;
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(BuffID.Venom, 360);
             int num8 = Main.DamageVar((float)Projectile.damage);

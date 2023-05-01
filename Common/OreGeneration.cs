@@ -50,7 +50,7 @@ namespace QwertyMod.Common
                 {
                     WorldGen.OreRunner(
                         WorldGen.genRand.Next(0, Main.maxTilesX), // X Coord of the tile
-                        WorldGen.genRand.Next((int)WorldGen.rockLayer, Main.maxTilesY - 200), // Y Coord of the tile
+                        WorldGen.genRand.Next((int)Main.rockLayer, Main.maxTilesY - 200), // Y Coord of the tile
                         (double)WorldGen.genRand.Next(18, 28), // Strength (High = more)
                         WorldGen.genRand.Next(5, 6), // Steps
                         (ushort)TileType<RhuthiniumOreT>() // The tile type that will be spawned
@@ -58,11 +58,11 @@ namespace QwertyMod.Common
                 }
                 string key = "Rhuthimis has blessed your world with Rhuthinium!";
                 Color messageColor = Color.Cyan;
-                if (Main.netMode == 2) // Server
+                if (Main.netMode == NetmodeID.Server) // Server
                 {
                     Terraria.Chat.ChatHelper.BroadcastChatMessage(NetworkText.FromKey(key), messageColor);
                 }
-                else if (Main.netMode == 0) // Single Player
+                else if (Main.netMode == NetmodeID.SinglePlayer) // Single Player
                 {
                     Main.NewText(Language.GetTextValue(key), messageColor);
                 }
@@ -70,7 +70,7 @@ namespace QwertyMod.Common
             }
         }
 
-        public override void ModifyWorldGenTasks(List<GenPass> tasks, ref float totalWeight)
+        public override void ModifyWorldGenTasks(List<GenPass> tasks, ref double totalWeight)
         {
             tasks.Add(new PassLegacy("Placing ore in space!", delegate (GenerationProgress progress, GameConfiguration configuration)
            {
@@ -107,7 +107,7 @@ namespace QwertyMod.Common
             }
             double maxLeft = 0.1;
             double maxRight = 0.9;
-            if (WorldGen.dungeonX < Main.maxTilesX * .5f)
+            if (Main.dungeonX < Main.maxTilesX * .5f)
             {
                 maxLeft = 0.3;
             }

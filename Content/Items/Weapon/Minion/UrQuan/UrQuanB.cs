@@ -9,8 +9,8 @@ namespace QwertyMod.Content.Items.Weapon.Minion.UrQuan
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Ur-Quan Dreadnought");
-            Description.SetDefault("Submit or die foolish human!");
+            //DisplayName,SetDefault("Ur-Quan Dreadnought");
+            //Description.SetDefault("Submit or die foolish human!");
             Main.buffNoSave[Type] = true;
             Main.buffNoTimeDisplay[Type] = true;
         }

@@ -7,6 +7,7 @@ using Terraria.GameContent.Creative;
 using Terraria.GameInput;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using Terraria.ID;
 
 namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.Sheath
 {
@@ -15,9 +16,9 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.Sheath
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Imperious's Sheath");
+            //DisplayName,SetDefault("Imperious's Sheath");
 
-            Tooltip.SetDefault("After dealing 10,000 damage you can summon Imperious to fight for you breifly with the " + "'" + "Special Ability" + "' key" + "\nCan be changed in controls");
+            //Tooltip.SetDefault("After dealing 10,000 damage you can summon Imperious to fight for you breifly with the " + "'" + "Special Ability" + "' key" + "\nCan be changed in controls");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -28,7 +29,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.Sheath
         public override void SetDefaults()
         {
             Item.value = 200000;
-            Item.rare = 7;
+            Item.rare = ItemRarityID.Lime;
             Item.expert = true;
 
             Item.width = 34;
@@ -73,19 +74,19 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.Sheath
             effect = false;
         }
 
-        public override void OnHitNPCWithProj(Projectile proj, NPC target, int damage, float knockback, bool crit) //runs when an npc is hit by the player's projectile
+        public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone) //runs when an npc is hit by the player's projectile
         {
             if (proj.owner == Player.whoAmI && effect && !target.immortal && proj.type != ProjectileType<ImperiousP>()) //check if vallid npc and effect is active
             {
-                damageTally += damage; //count up
+                damageTally += damageDone; //count up
             }
         }
 
-        public override void OnHitNPC(Item item, NPC target, int damage, float knockback, bool crit) //runs when an npc is hit by an item (sword blade)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) //runs when an npc is hit by an item (sword blade)
         {
             if (effect && !target.immortal)  //check if vallid npc  and effect is active
             {
-                damageTally += damage; //count up
+                damageTally += damageDone; //count up
             }
         }
 
@@ -103,7 +104,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.Sheath
             {
                 if (effect && damageTally >= damageTallyMax)
                 {
-                    Projectile.NewProjectile(new EntitySource_Misc(""), Player.Center, Vector2.Zero, ProjectileType<ImperiousP>(), (int)(500f * Player.GetDamage(DamageClass.Summon).Multiplicative), 8f * Player.GetKnockback(DamageClass.Summon).Multiplicative, Player.whoAmI); //summons Imperious to fight!
+                    Projectile.NewProjectile(new EntitySource_Misc("Accesory_ImperiousSheath"), Player.Center, Vector2.Zero, ProjectileType<ImperiousP>(), (int)(500f * Player.GetDamage(DamageClass.Summon).Multiplicative), 8f * Player.GetKnockback(DamageClass.Summon).Multiplicative, Player.whoAmI); //summons Imperious to fight!
                     damageTally = 0; //resets the tally
 
                 }
@@ -128,12 +129,12 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.Sheath
             Projectile.penetrate = -1;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 20;
-            Projectile.rotation = (float)Math.PI;
+            Projectile.rotation = MathF.PI;
             Player player = Main.player[Projectile.owner];
             rotateDirection = player.direction;
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.localNPCImmunity[target.whoAmI] = Projectile.localNPCHitCooldown; //local immunity
             target.immune[Projectile.owner] = 0;
@@ -141,18 +142,17 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.Sheath
 
         private float bladeWidth = 74;
         private float HiltLength = 94;
-        private float HiltWidth = 84;
         private Vector2 BladeStart;
         private Vector2 BladeTip;
         private float BladeLength = 300;
 
         public override void AI()
         {
-            BladeStart = Projectile.Center + QwertyMethods.PolarVector(HiltLength / 2, Projectile.rotation + (float)Math.PI / 2);
-            BladeTip = Projectile.Center + QwertyMethods.PolarVector((HiltLength / 2) + BladeLength, Projectile.rotation + (float)Math.PI / 2);
+            BladeStart = Projectile.Center + QwertyMethods.PolarVector(HiltLength / 2, Projectile.rotation + MathF.PI / 2);
+            BladeTip = Projectile.Center + QwertyMethods.PolarVector((HiltLength / 2) + BladeLength, Projectile.rotation + MathF.PI / 2);
             Player player = Main.player[Projectile.owner];
             Projectile.Center = player.Center;
-            Projectile.rotation += (float)Math.PI / 15 * rotateDirection;
+            Projectile.rotation += MathF.PI / 15 * rotateDirection;
         }
 
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) //custom collision

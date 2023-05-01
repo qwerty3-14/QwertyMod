@@ -13,7 +13,7 @@ namespace QwertyMod.Content.Items.Tool.Mining
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Mines a 3x3 area");
+            //Tooltip.SetDefault("Mines a 3x3 area");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -33,7 +33,7 @@ namespace QwertyMod.Content.Items.Tool.Mining
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 6;
             Item.value = 250000;
-            Item.rare = 5;
+            Item.rare = ItemRarityID.Pink;
             Item.UseSound = SoundID.Item23;
             Item.autoReuse = true;
             Item.shoot = ProjectileType<HydrillP>();

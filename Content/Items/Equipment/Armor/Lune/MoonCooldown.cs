@@ -7,8 +7,6 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Lune
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Moon Cooldown");
-            Description.SetDefault("Can't shoot another moon yet!");
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = false;
             Main.buffNoSave[Type] = true;

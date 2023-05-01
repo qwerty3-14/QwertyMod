@@ -15,8 +15,6 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Hydra
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Hydra Maw");
-            Tooltip.SetDefault("+0.5 life/sec regen rate" + "\n+10% summon damage");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             Head.Sets.DrawHatHair[Item.headSlot] = true;
         }
@@ -25,7 +23,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Hydra
         public override void SetDefaults()
         {
             Item.value = 50000;
-            Item.rare = 5;
+            Item.rare = ItemRarityID.Pink;
 
             Item.width = 28;
             Item.height = 22;
@@ -105,7 +103,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Hydra
                             {
                                 for (float i = 0; i < spareSlots; i += projectile.minionSlots)
                                 {
-                                    Player.SpawnMinionOnCursor(new EntitySource_Misc(""), projectile.owner, projectile.type, projectile.originalDamage, projectile.knockBack);
+                                    Player.SpawnMinionOnCursor(projectile.GetSource_FromThis(), projectile.owner, projectile.type, projectile.originalDamage, projectile.knockBack);
                                 }
                                 break;
                             }

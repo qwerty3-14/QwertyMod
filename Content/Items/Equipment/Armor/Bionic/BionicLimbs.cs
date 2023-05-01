@@ -12,15 +12,13 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Bionic
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Bionic Limbs");
-            Tooltip.SetDefault("30% reduced cooldown on morphs\nSignificantly increases horizontal acceleration");
             Legs.Sets.HidesBottomSkin[Item.legSlot] = true;
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()
         {
-            Item.rare = 5;
+            Item.rare = ItemRarityID.Pink;
             Item.value = Item.sellPrice(gold: 5);
             Item.defense = 7;
         }
@@ -28,7 +26,8 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Bionic
         public override void UpdateEquip(Player player)
         {
             player.GetModPlayer<ShapeShifterPlayer>().coolDownDuration *= 0.7f;
-            player.runAcceleration += 0.8f;
+            player.runAcceleration += 0.5f;
+            player.runSlowdown += 0.5f;
 
         }
 

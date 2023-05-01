@@ -16,14 +16,14 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Bionic
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Bionic Implants");
-            Tooltip.SetDefault("30% reduced cooldown on morphs\nYour offhand is replaced with a laser cannon!");
+            //DisplayName,SetDefault("Bionic Implants");
+            //Tooltip.SetDefault("30% reduced cooldown on morphs\nYour offhand is replaced with a laser cannon!");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()
         {
-            Item.rare = 5;
+            Item.rare = ItemRarityID.Pink;
             Item.value = Item.sellPrice(gold: 5);
             Item.defense = 7;
         }
@@ -98,8 +98,8 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Bionic
                             armCannonCountdown = 5;
                         }
                         setDirection = Player.direction;
-                        Player.SetCompositeArmBack(enabled: true, Player.CompositeArmStretchAmount.Full, (float)aimDirection - (float)Math.PI / 2);
-                        Projectile.NewProjectile(new EntitySource_Misc(""), Player.MountedCenter, QwertyMethods.PolarVector(shotSpeed, (float)aimDirection), ModContent.ProjectileType<ArmCannonLaser>(), (int)(30f * Player.GetDamage(DamageClass.Generic).Multiplicative), 0, Player.whoAmI);
+                        Player.SetCompositeArmBack(enabled: true, Player.CompositeArmStretchAmount.Full, (float)aimDirection - MathF.PI / 2);
+                        Projectile.NewProjectile(new EntitySource_Misc("SetBonus_Bionic"), Player.MountedCenter, QwertyMethods.PolarVector(shotSpeed, (float)aimDirection), ModContent.ProjectileType<ArmCannonLaser>(), (int)(30f * Player.GetDamage(DamageClass.Generic).Multiplicative), 0, Player.whoAmI);
                         SoundEngine.PlaySound(SoundID.Item157, Player.MountedCenter);
                     }
 
@@ -121,7 +121,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Bionic
                 }
                 if (aimDirection != null)
                 {
-                    Player.SetCompositeArmBack(enabled: true, Player.CompositeArmStretchAmount.Full, (float)aimDirection - (float)Math.PI / 2);
+                    Player.SetCompositeArmBack(enabled: true, Player.CompositeArmStretchAmount.Full, (float)aimDirection - MathF.PI / 2);
                 }
             }
             overdriveTime--;

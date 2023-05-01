@@ -18,10 +18,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Furniture
             Main.tileFrameImportant[Type] = true;
             Main.tileNoAttach[Type] = true;
             Main.tileTable[Type] = true;
-
-            //Main.tileContainer[Type] = true;
             Main.tileLavaDeath[Type] = true;
-            //TileID.Sets.HasOutlines[Type] = true;
 
             TileObjectData.newTile.Width = 3;
             TileObjectData.newTile.Height = 4;
@@ -41,13 +38,9 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Furniture
             TileObjectData.newTile.LavaDeath = true;
 
             TileObjectData.addTile(Type);
-            //AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTable);
-            ModTranslation name = CreateMapEntryName();
-            name.SetDefault("Fortress Bookcase");
-            AddMapEntry(new Color(162, 184, 185), name);
+            AddMapEntry(new Color(162, 184, 185));
             DustType = DustType<FortressDust>();
             HitSound = QwertyMod.FortressBlocks;
-            //// disableSmartCursor = true;
             AdjTiles = new int[] { TileID.Bookcases };
         }
 

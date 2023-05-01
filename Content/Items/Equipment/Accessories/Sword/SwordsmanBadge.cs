@@ -2,6 +2,7 @@
 using Terraria.GameContent.Creative;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using Terraria.ID;
 
 namespace QwertyMod.Content.Items.Equipment.Accessories.Sword
 {
@@ -11,14 +12,14 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Sword
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Swordsman Badge");
-            Tooltip.SetDefault("Striking with a sword increases critical rate");
+            //DisplayName,SetDefault("Swordsman Badge");
+            //Tooltip.SetDefault("Striking with a sword increases critical rate");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()
         {
-            Item.rare = 7;
+            Item.rare = ItemRarityID.Lime;
             Item.value = Item.sellPrice(0, 10, 0, 0);
 
             Item.width = Item.height = 20;
@@ -38,7 +39,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Sword
         {
             critOnHit = false;
         }
-        public override void OnHitNPC(Item item, NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (critOnHit)
             {

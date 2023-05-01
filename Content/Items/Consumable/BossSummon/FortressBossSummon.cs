@@ -8,8 +8,6 @@ namespace QwertyMod.Content.Items.Consumable.BossSummon
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Pendant of the Sky God");
-            Tooltip.SetDefault("Can be used at the altar");
             ItemID.Sets.SortingPriorityBossSpawns[Item.type] = 13; // This helps sort inventory know this is a boss summoning Item.
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 3;
         }
@@ -18,15 +16,15 @@ namespace QwertyMod.Content.Items.Consumable.BossSummon
         {
             Item.width = 30;
             Item.height = 24;
-            Item.maxStack = 999;
+            Item.maxStack = 9999;
             Item.value = 10000;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
 
             Item.useTurn = true;
 
             Item.useAnimation = 45;
             Item.useTime = 45;
-            Item.useStyle = 1;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.consumable = true;
         }
     }

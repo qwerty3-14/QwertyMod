@@ -24,7 +24,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Bars
             DustType = DustType<CaeliteDust>();
             HitSound = SoundID.Tink;
             MinPick = 1;
-            AddMapEntry(new Color(220, 192, 110));
+            //AddMapEntry(new Color(220, 192, 110));
             ItemDrop = ItemType<CaeliteBar>();
         }
 

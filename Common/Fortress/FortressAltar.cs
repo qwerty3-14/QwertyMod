@@ -8,6 +8,7 @@ using Terraria.Enums;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 using static Terraria.ModLoader.ModContent;
+using Terraria.ID;
 
 
 namespace QwertyMod.Common.Fortress
@@ -27,9 +28,9 @@ namespace QwertyMod.Common.Fortress
             HitSound = QwertyMod.FortressBlocks;
             MinPick = 10000;
 
-            ModTranslation name = CreateMapEntryName();
-            name.SetDefault("Altar");
-            AddMapEntry(new Color(162, 184, 185), name);
+            //ModTranslation name = CreateMapEntryName();
+            //name.SetDefault("Altar");
+            //AddMapEntry(new Color(162, 184, 185), name);
         }
 
         public override bool RightClick(int i, int j)
@@ -42,7 +43,7 @@ namespace QwertyMod.Common.Fortress
                 {
                     if (player.inventory[b].type == ItemType<FortressBossSummon>() && player.inventory[b].stack > 0) //this checks if the slot has the valid item
                     {
-                        if (Main.netMode == 0)
+                        if (Main.netMode == NetmodeID.SinglePlayer)
                         {
                             int npcID = NPC.NewNPC(NPC.GetBossSpawnSource(player.whoAmI), i * 16, j * 16 - 200, NPCType<FortressBoss>());
                         }

@@ -6,8 +6,8 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.EtimsSword
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Anti Projectile");
-            Description.SetDefault("Somehow they can never hit you!");
+            //DisplayName,SetDefault("Anti Projectile");
+            //Description.SetDefault("Somehow they can never hit you!");
 
         }
     }

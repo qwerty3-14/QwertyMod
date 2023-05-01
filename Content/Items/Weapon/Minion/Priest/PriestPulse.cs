@@ -11,7 +11,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.Priest
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Preist Pulse");
+            //DisplayName,SetDefault("Preist Pulse");
             Main.projFrames[Projectile.type] = 2;
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             ProjectileID.Sets.MinionShot[Projectile.type] = true;
@@ -33,9 +33,9 @@ namespace QwertyMod.Content.Items.Weapon.Minion.Priest
             Projectile.frameCounter++;
             Projectile.frame = Projectile.frameCounter % 40 > 20 ? 1 : 0;
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Main.rand.Next(10) == 0)
+            if (Main.rand.NextBool(10))
             {
                 target.AddBuff(BuffType<PowerDown>(), 120);
             }

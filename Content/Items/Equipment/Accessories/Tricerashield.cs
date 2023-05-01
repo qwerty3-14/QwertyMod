@@ -7,6 +7,7 @@ using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using Terraria.ID;
 
 namespace QwertyMod.Content.Items.Equipment.Accessories
 {
@@ -15,15 +16,15 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Tricerashield");
-            Tooltip.SetDefault("Allows you to dash into an enemy" + "\nProvides immunity to knockback");
+            //DisplayName,SetDefault("Tricerashield");
+            //Tooltip.SetDefault("Allows you to dash into an enemy" + "\nProvides immunity to knockback");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()
         {
             Item.value = 10000;
-            Item.rare = 6;
+            Item.rare = ItemRarityID.LightPurple;
             Item.damage = 180;
             Item.DamageType = DamageClass.Melee;
             Item.width = 20;
@@ -89,7 +90,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
                 }
                 if (drawPlayer.shieldRaised)
                 {
-                    float num92 = (float)Math.Sin((double)(Main.time * 6.28318548f));
+                    float num92 = MathF.Sin(((float)Main.time * 6.28318548f));
                     float x2 = 2.5f + 1.5f * num92;
                     Microsoft.Xna.Framework.Color color33 = color12;
                     color33.A = 0;
@@ -107,7 +108,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
                 if (drawPlayer.shieldRaised)
                 {
                     Microsoft.Xna.Framework.Color color34 = color12;
-                    float num94 = (float)Math.Sin((double)(Main.time * 3.14159274f));
+                    float num94 = MathF.Sin(((float)Main.time * 3.14159274f));
                     color34.A = (byte)((float)color34.A * (0.5f + 0.5f * num94));
                     color34 *= 0.5f + 0.5f * num94;
                     value = new DrawData(Request<Texture2D>("QwertyMod/Content/Items/Equipment/Accessories/Tricerashield_Shield").Value, new Vector2((float)((int)(Position.X - Main.screenPosition.X - (float)(BigShieldFrame.Width / 2) + (float)(drawPlayer.width / 2))), (float)((int)(Position.Y - Main.screenPosition.Y + (float)drawPlayer.height - (float)BigShieldFrame.Height + 4f))) + drawPlayer.bodyPosition + new Vector2((float)(BigShieldFrame.Width / 2), (float)(BigShieldFrame.Height / 2)) + zero, BigShieldFrame, color34, drawPlayer.bodyRotation, origin, 1f, drawInfo.playerEffect, 0);

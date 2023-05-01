@@ -15,22 +15,22 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.Doppleganger
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Doppleganger");
-            Tooltip.SetDefault("Pretends to be the accesory placed above it.\nThe gods forbid equiping the same accesory twice!\nTampering with such an unusual artifact is not advised.");
+            //DisplayName,SetDefault("Doppleganger");
+            //Tooltip.SetDefault("Pretends to be the accesory placed above it.\nThe gods forbid equiping the same accesory twice!\nTampering with such an unusual artifact is not advised.");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()
         {
             Item.accessory = true;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
             Item.expert = true;
             Item.value = 500000;
             Item.width = 32;
             Item.height = 22;
             Item.GetGlobalItem<DoppleItem>().isDoppleganger = true;
         }
-        public override bool PreReforge()
+        public override void PreReforge()
         {
             Player player = Main.LocalPlayer;
             if (player.difficulty != 2)
@@ -45,10 +45,11 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.Doppleganger
             {
                 if (Main.npc[n].active && Main.npc[n].type == NPCID.GoblinTinkerer)
                 {
-                    Main.npc[n].StrikeNPC(999, 0f, 0);
+                    NPC.HitInfo hit = new NPC.HitInfo();
+                    hit.InstantKill = true;
+                    Main.npc[n].StrikeNPC(hit);
                 }
             }
-            return false;
         }
 
         public override bool PreDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)

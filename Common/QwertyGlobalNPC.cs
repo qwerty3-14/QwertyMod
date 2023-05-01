@@ -22,20 +22,20 @@ namespace QwertyMod.Common
             }
             return base.PreAI(npc);
         }
-        public override void ModifyHitByProjectile(NPC npc, Projectile projectile, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitByProjectile(NPC npc, Projectile projectile, ref NPC.HitModifiers modifiers)
         {
-            if (npc.HasBuff(BuffType<LuneCurse>()) && crit)
+            
+            if (npc.HasBuff(BuffType<LuneCurse>()))
             {
-                //Main.NewText("Boost!");
-                damage = (int)(damage * 1.2f);
+                modifiers.CritDamage += 0.4f;
             }
         }
 
-        public override void ModifyHitByItem(NPC npc, Player player, Item item, ref int damage, ref float knockback, ref bool crit)
+        public override void ModifyHitByItem(NPC npc, Player player, Item item, ref NPC.HitModifiers modifiers)
         {
-            if (npc.HasBuff(BuffType<LuneCurse>()) && crit)
+            if (npc.HasBuff(BuffType<LuneCurse>()))
             {
-                damage = (int)(damage * 1.2f);
+                modifiers.CritDamage += 0.4f;
             }
         }
         private float stunCounter = 0;
@@ -56,31 +56,31 @@ namespace QwertyMod.Common
                 float scale = widthForScale / 100f;
                 float stunnedHorizontalMovement = (npc.width / 2) * 1.5f;
                 float heightofStunned = (npc.height / 2) * 1.2f;
-                stunCounter += (float)Math.PI / 60;
+                stunCounter += MathF.PI / 60;
                 Texture2D texture = Request<Texture2D>("QwertyMod/Common/Stun").Value;
-                //Main.NewText((float)Math.Sin(stunCounter));
-                if ((float)Math.Cos(stunCounter) > 0)
+                //Main.NewText(MathF.Sin(stunCounter));
+                if (MathF.Cos(stunCounter) > 0)
                 {
-                    Vector2 CenterOfStunned = new Vector2(npc.Center.X + (float)Math.Sin(stunCounter) * stunnedHorizontalMovement, npc.Center.Y - heightofStunned);
+                    Vector2 CenterOfStunned = new Vector2(npc.Center.X + MathF.Sin(stunCounter) * stunnedHorizontalMovement, npc.Center.Y - heightofStunned);
 
                     spriteBatch.Draw(texture, new Vector2(CenterOfStunned.X - Main.screenPosition.X, CenterOfStunned.Y - Main.screenPosition.Y),
                             new Rectangle(0, 0, texture.Width, texture.Height), drawColor, stunCounter,
                             new Vector2(texture.Width * 0.5f, texture.Height * 0.5f), scale, SpriteEffects.None, 0f);
 
-                    CenterOfStunned = new Vector2(npc.Center.X - (float)Math.Sin(stunCounter) * stunnedHorizontalMovement, npc.Center.Y - heightofStunned);
+                    CenterOfStunned = new Vector2(npc.Center.X - MathF.Sin(stunCounter) * stunnedHorizontalMovement, npc.Center.Y - heightofStunned);
                     spriteBatch.Draw(texture, new Vector2(CenterOfStunned.X - Main.screenPosition.X, CenterOfStunned.Y - Main.screenPosition.Y),
                             new Rectangle(0, 0, texture.Width, texture.Height), drawColor, stunCounter,
                             new Vector2(texture.Width * 0.5f, texture.Height * 0.5f), scale, SpriteEffects.None, 0f);
                 }
                 else
                 {
-                    Vector2 CenterOfStunned = new Vector2(npc.Center.X - (float)Math.Sin(stunCounter) * stunnedHorizontalMovement, npc.Center.Y - heightofStunned);
+                    Vector2 CenterOfStunned = new Vector2(npc.Center.X - MathF.Sin(stunCounter) * stunnedHorizontalMovement, npc.Center.Y - heightofStunned);
 
                     spriteBatch.Draw(texture, new Vector2(CenterOfStunned.X - Main.screenPosition.X, CenterOfStunned.Y - Main.screenPosition.Y),
                             new Rectangle(0, 0, texture.Width, texture.Height), drawColor, stunCounter,
                             new Vector2(texture.Width * 0.5f, texture.Height * 0.5f), scale, SpriteEffects.None, 0f);
 
-                    CenterOfStunned = new Vector2(npc.Center.X + (float)Math.Sin(stunCounter) * stunnedHorizontalMovement, npc.Center.Y - heightofStunned);
+                    CenterOfStunned = new Vector2(npc.Center.X + MathF.Sin(stunCounter) * stunnedHorizontalMovement, npc.Center.Y - heightofStunned);
                     spriteBatch.Draw(texture, new Vector2(CenterOfStunned.X - Main.screenPosition.X, CenterOfStunned.Y - Main.screenPosition.Y),
                             new Rectangle(0, 0, texture.Width, texture.Height), drawColor, stunCounter,
                             new Vector2(texture.Width * 0.5f, texture.Height * 0.5f), scale, SpriteEffects.None, 0f);

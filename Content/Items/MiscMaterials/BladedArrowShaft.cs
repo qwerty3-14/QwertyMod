@@ -1,6 +1,7 @@
 ﻿using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ModLoader;
+using Terraria.ID;
 
 namespace QwertyMod.Content.Items.MiscMaterials
 {
@@ -9,13 +10,12 @@ namespace QwertyMod.Content.Items.MiscMaterials
 
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Used to craft a powerful arrow!");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()
         {
-            Item.rare = 7;
+            Item.rare = ItemRarityID.Lime;
             Item.value = Item.sellPrice(0, 10, 0, 0);
             Item.width = 26;
             Item.height = 14;

@@ -15,8 +15,6 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Gale
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Gale Swift Helm");
-            Tooltip.SetDefault("+6% chance to dodge an attack" + "\n+12% critical strike chance" + "\nGreatly increased damage after dodging");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             Head.Sets.DrawHatHair[Item.headSlot] = true;
         }
@@ -24,7 +22,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Gale
         public override void SetDefaults()
         {
             Item.value = Item.sellPrice(0, 0, 75, 0);
-            Item.rare = 4;
+            Item.rare = ItemRarityID.LightRed;
             Item.defense = 1;
             //Item.vanity = true;
             Item.width = 20;

@@ -22,7 +22,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
         {
             for (int i = 0; i < 4; i++)
             {
-                if (Collision.CheckAABBvAABBCollision(targetHitbox.TopLeft(), targetHitbox.Size(), Projectile.Center + QwertyMethods.PolarVector(dist, Projectile.rotation + i * (float)Math.PI / 2f) + new Vector2(-18, -18), new Vector2(36, 36)))
+                if (Collision.CheckAABBvAABBCollision(targetHitbox.TopLeft(), targetHitbox.Size(), Projectile.Center + QwertyMethods.PolarVector(dist, Projectile.rotation + i * MathF.PI / 2f) + new Vector2(-18, -18), new Vector2(36, 36)))
                 {
                     return true;
                 }
@@ -36,7 +36,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
             timer++;
             if (Projectile.timeLeft > 150)
             {
-                Projectile.rotation += (float)Math.PI / 60f;
+                Projectile.rotation += MathF.PI / 60f;
             }
             if (Projectile.timeLeft > 120)
             {
@@ -52,7 +52,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
         {
             for (int i = 0; i < 4; i++)
             {
-                Vector2 pos = Projectile.Center + QwertyMethods.PolarVector(dist, Projectile.rotation + i * (float)Math.PI / 2f) + new Vector2(-18, -18);
+                Vector2 pos = Projectile.Center + QwertyMethods.PolarVector(dist, Projectile.rotation + i * MathF.PI / 2f) + new Vector2(-18, -18);
                 for (int d = 0; d <= 40; d++)
                 {
                     Dust.NewDust(pos, 36, 36, DustType<IceRuneDeath>());
@@ -74,12 +74,12 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
                 {
                     frame = 19;
                 }
-                Main.EntitySpriteDraw(RuneSprites.runeTransition[(int)Runes.IceRune][frame], Projectile.Center + QwertyMethods.PolarVector(dist, Projectile.rotation + i * (float)Math.PI / 2f) - Main.screenPosition, null, new Color(c, c, c, c), Projectile.rotation, new Vector2(9, 9), Vector2.One * 2, 0, 0);
+                Main.EntitySpriteDraw(RuneSprites.runeTransition[(int)Runes.IceRune][frame], Projectile.Center + QwertyMethods.PolarVector(dist, Projectile.rotation + i * MathF.PI / 2f) - Main.screenPosition, null, new Color(c, c, c, c), Projectile.rotation, new Vector2(9, 9), Vector2.One * 2, 0, 0);
             }
 
             return false;
         }
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             target.AddBuff(BuffID.Frozen, 60);
         }

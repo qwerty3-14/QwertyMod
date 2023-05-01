@@ -12,8 +12,8 @@ namespace QwertyMod.Content.Items.Weapon.Minion.ChloroSniper
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Chlorophyte Sniper Staff");
-            Tooltip.SetDefault("Summons a Chlorophyte Sniper to execute your foes! +\nBurst damage minion");
+            //DisplayName,SetDefault("Chlorophyte Sniper Staff");
+            //Tooltip.SetDefault("Summons a Chlorophyte Sniper to execute your foes! +\nBurst damage minion");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;

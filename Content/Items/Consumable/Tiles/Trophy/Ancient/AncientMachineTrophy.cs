@@ -4,6 +4,7 @@ using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using Terraria.ID;
 
 namespace QwertyMod.Content.Items.Consumable.Tiles.Trophy.Ancient
 {
@@ -11,7 +12,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Trophy.Ancient
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Ancient Machine Trophy");
+            //DisplayName,SetDefault("Ancient Machine Trophy");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -25,7 +26,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Trophy.Ancient
             Item.autoReuse = true;
             Item.useAnimation = 15;
             Item.useTime = 10;
-            Item.useStyle = 1;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.consumable = true;
             Item.value = 50000;
             Item.createTile = TileType<AncientMachineTrophyT>();

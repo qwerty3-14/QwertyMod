@@ -2,6 +2,7 @@ using Terraria;
 using Terraria.ModLoader;
 using QwertyMod.Common;
 using System;
+using Microsoft.Xna.Framework;
 
 namespace QwertyMod.Content.Buffs
 {
@@ -9,8 +10,8 @@ namespace QwertyMod.Content.Buffs
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Camera Issues");
-            Description.SetDefault("I'm not sorry...");
+            ////DisplayName,SetDefault("Camera Issues");
+            ////Description.SetDefault("I'm not sorry...");
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = true;
             Main.buffNoSave[Type] = true;
@@ -34,14 +35,14 @@ namespace QwertyMod.Content.Buffs
         }
         public override void PostUpdate()
         {
-            rot += (float)Math.PI / 120f;
+            rot += MathF.PI / 120f;
         }
 
         public override void ModifyScreenPosition()
         {
             if (shake)
             {
-                Main.screenPosition += QwertyMethods.PolarVector(50, rot);
+                Main.screenPosition += QwertyMethods.PolarVector(50, rot) + Vector2.UnitY * MathF.Sin(rot) * 200;
             }
         }
     }

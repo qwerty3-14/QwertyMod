@@ -24,9 +24,9 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
             HitSound = QwertyMod.FortressBlocks;
             MinPick = 1;
 
-            ModTranslation name = CreateMapEntryName();
-            name.SetDefault("Launchpad");
-            AddMapEntry(new Color(162, 184, 185), name);
+            //ModTranslation name = CreateMapEntryName();
+            //name.SetDefault("Launchpad");
+            //AddMapEntry(new Color(162, 184, 185), name);
         }
 
         public override bool CanPlace(int i, int j)

@@ -14,13 +14,13 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.DinoVulcan
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Builds up in speed while used" + "\n66% chance not to consume ammo");
+            //Tooltip.SetDefault("Builds up in speed while used" + "\n66% chance not to consume ammo");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()
         {
-            Item.useStyle = 5;
+            Item.useStyle = ItemUseStyleID.Shoot;
             Item.useAnimation = 30;
             Item.useTime = 30;
             Item.shootSpeed = 20f;
@@ -30,7 +30,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.DinoVulcan
             Item.damage = 20;
 
             Item.shoot = ProjectileType<DinoVulcanP>();
-            Item.rare = 6;
+            Item.rare = ItemRarityID.LightPurple;
             Item.value = Item.sellPrice(0, 10, 0, 0);
             Item.noMelee = true;
             Item.noUseGraphic = true;
@@ -136,8 +136,8 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.DinoVulcan
                         {
                             num266 = (float)(Main.screenHeight - Main.mouseY) + Main.screenPosition.Y - vector25.Y;
                         }
-                        float num267 = (float)Math.Sqrt((double)(num265 * num265 + num266 * num266));
-                        num267 = (float)Math.Sqrt((double)(num265 * num265 + num266 * num266));
+                        float num267 = MathF.Sqrt((num265 * num265 + num266 * num266));
+                        num267 = MathF.Sqrt((num265 * num265 + num266 * num266));
                         num267 = num264 / num267;
                         num265 *= num267;
                         num266 *= num267;
@@ -171,16 +171,16 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.DinoVulcan
                 Projectile.rotation = (float)(Math.Atan2((double)Projectile.velocity.Y, (double)Projectile.velocity.X) + 1.5700000524520874);
                 if (Main.player[Projectile.owner].direction == 1)
                 {
-                    Main.player[Projectile.owner].itemRotation = (float)Math.Atan2((double)(Projectile.velocity.Y * (float)Projectile.direction), (double)(Projectile.velocity.X * (float)Projectile.direction));
+                    Main.player[Projectile.owner].itemRotation = MathF.Atan2((Projectile.velocity.Y * (float)Projectile.direction), (Projectile.velocity.X * (float)Projectile.direction));
                 }
                 else
                 {
-                    Main.player[Projectile.owner].itemRotation = (float)Math.Atan2((double)(Projectile.velocity.Y * (float)Projectile.direction), (double)(Projectile.velocity.X * (float)Projectile.direction));
+                    Main.player[Projectile.owner].itemRotation = MathF.Atan2((Projectile.velocity.Y * (float)Projectile.direction), (Projectile.velocity.X * (float)Projectile.direction));
                 }
                 Projectile.velocity.X = Projectile.velocity.X * (1f + (float)Main.rand.Next(-3, 4) * 0.01f);
-                if (Main.rand.Next(6) == 0)
+                if (Main.rand.NextBool(6))
                 {
-                    int num268 = Dust.NewDust(Projectile.position + Projectile.velocity * (float)Main.rand.Next(6, 10) * 0.1f, Projectile.width, Projectile.height, 31, 0f, 0f, 80, default(Color), 1.4f);
+                    int num268 = Dust.NewDust(Projectile.position + Projectile.velocity * (float)Main.rand.Next(6, 10) * 0.1f, Projectile.width, Projectile.height, DustID.Smoke, 0f, 0f, 80, default(Color), 1.4f);
                     Dust dust51 = Main.dust[num268];
                     dust51.position.X = dust51.position.X - 4f;
                     Main.dust[num268].noGravity = true;
@@ -204,8 +204,8 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.DinoVulcan
                     player.PickAmmo(player.HeldItem, out Ammo, out speed, out weaponDamage, out weaponKnockback, out _);
                     if (player.whoAmI == Main.myPlayer)
                     {
-                        Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center.X, Projectile.Center.Y, (float)Math.Cos(VarA) * speed, (float)Math.Sin(VarA) * speed, Ammo, weaponDamage, weaponKnockback, Main.myPlayer);
-                        Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center.X, Projectile.Center.Y, (float)Math.Cos(SVarA) * SspeedA * -player.direction, (float)Math.Sin(SVarA) * SspeedA, ProjectileType<Shell>(), 0, 0, Main.myPlayer);
+                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center.X, Projectile.Center.Y, MathF.Cos(VarA) * speed, MathF.Sin(VarA) * speed, Ammo, weaponDamage, weaponKnockback, Main.myPlayer);
+                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center.X, Projectile.Center.Y, MathF.Cos(SVarA) * SspeedA * -player.direction, MathF.Sin(SVarA) * SspeedA, ProjectileType<Shell>(), 0, 0, Main.myPlayer);
 
                     }
 
@@ -228,7 +228,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.DinoVulcan
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Shell");
+            //DisplayName,SetDefault("Shell");
         }
 
         public override void SetDefaults()

@@ -21,7 +21,7 @@ namespace QwertyMod.Content.NPCs.Fortress
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Enchanted Tile");
+            //DisplayName,SetDefault("Enchanted Tile");
             Main.npcFrameCount[NPC.type] = 4;
             NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers(0)
             {
@@ -72,7 +72,7 @@ namespace QwertyMod.Content.NPCs.Fortress
                 new FlavorTextBestiaryInfoElement("The high preists' were unable to defend the fortress on their own, so Caelin gave them the enchanted tile.")
             });
         }
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
         {
             if (NPC.life <= 0)
             {
@@ -194,15 +194,15 @@ namespace QwertyMod.Content.NPCs.Fortress
                 preSetTimer--;
                 NPC.dontTakeDamage = true;
                 NPC.velocity = Vector2.Zero;
-                float d = Main.rand.NextFloat() * (float)Math.PI * 2;
-                Dust dusty = Dust.NewDustPerfect(NPC.position + new Vector2(Main.rand.Next(NPC.width), Main.rand.Next(NPC.height)) + QwertyMethods.PolarVector(30f, d + (float)Math.PI), DustType<FortressDust>(), QwertyMethods.PolarVector(3f, d), Scale: .5f);
+                float d = Main.rand.NextFloat() * MathF.PI * 2;
+                Dust dusty = Dust.NewDustPerfect(NPC.position + new Vector2(Main.rand.Next(NPC.width), Main.rand.Next(NPC.height)) + QwertyMethods.PolarVector(30f, d + MathF.PI), DustType<FortressDust>(), QwertyMethods.PolarVector(3f, d), Scale: .5f);
                 dusty.noGravity = true;
                 if (preSetTimer == 0 && spawnChildren)
                 {
                     int children = Main.rand.Next(3);
                     for (int i = 0; i < children; i++)
                     {
-                        NPC.NewNPC(new EntitySource_Misc(""), (int)NPC.Center.X + Main.rand.Next(-40, 41), (int)NPC.Center.Y, NPCType<YoungTile>());
+                        NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Center.X + Main.rand.Next(-40, 41), (int)NPC.Center.Y, NPCType<YoungTile>());
                     }
                 }
             }
@@ -219,7 +219,7 @@ namespace QwertyMod.Content.NPCs.Fortress
                 if (flipped)
                 {
                     gravity = 0f;
-                    NPC.rotation = (float)Math.PI;
+                    NPC.rotation = MathF.PI;
                     Entity player = FortressNPCGeneral.FindTarget(NPC, true);
                     if (Collision.CheckAABBvLineCollision(player.position, player.Size, NPC.Center, NPC.Center + new Vector2(0, 1000)) && Collision.CanHit(NPC.Center, 0, 0, player.Center, 0, 0))
                     {

@@ -13,8 +13,6 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Invader
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Invader Percepticals");
-            Tooltip.SetDefault("10% increased damage and critical strike chance\nIncreases maximum mana by 80\nReduces mana useage by 15%");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             Head.Sets.DrawFullHair[Item.headSlot] = true;
         }
@@ -23,7 +21,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Invader
         public override void SetDefaults()
         {
             Item.value = QwertyMod.InvaderGearValue;
-            Item.rare = 8;
+            Item.rare = ItemRarityID.Yellow;
 
             Item.width = 28;
             Item.height = 22;

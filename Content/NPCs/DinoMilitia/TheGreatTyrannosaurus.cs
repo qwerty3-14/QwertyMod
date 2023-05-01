@@ -20,7 +20,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("The Great Tyrannosaurus");
+            //DisplayName,SetDefault("The Great Tyrannosaurus");
             Main.npcFrameCount[NPC.type] = 4;
             NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers(0)
             {
@@ -66,9 +66,9 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
                 new FlavorTextBestiaryInfoElement("They made fun of his arms... so he got better ones!")
             });
         }
-        public override void ScaleExpertStats(int numPlayers, float bossLifeScale)
+        public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
         {
-            NPC.lifeMax = (int)(NPC.lifeMax * 0.6f * bossLifeScale);
+            NPC.lifeMax = (int)(NPC.lifeMax * 0.6f * bossAdjustment);
             NPC.damage = (int)(NPC.damage * .6f);
         }
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
@@ -100,7 +100,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
         public override bool CheckActive()
         {
             Player player = Main.player[NPC.target];
-            float playerDistance = (float)Math.Sqrt((NPC.Center.X - player.Center.X) * (NPC.Center.X - player.Center.X) + (NPC.Center.Y - player.Center.Y) * (NPC.Center.Y - player.Center.Y));
+            float playerDistance = MathF.Sqrt((NPC.Center.X - player.Center.X) * (NPC.Center.X - player.Center.X) + (NPC.Center.Y - player.Center.Y) * (NPC.Center.Y - player.Center.Y));
             if (playerDistance > 2000f)
             {
                 return true;
@@ -108,7 +108,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
             return false;
         }
 
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
         {
             if (NPC.life <= 0)
             {
@@ -139,7 +139,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
         public int multiplayerAttackCycle = 1;
         private int[] attackreloadTimes = new int[] { 10, 4, 30 };
         private Vector2 gunOffset = new Vector2(78, 76);
-        private float gunRot = (float)Math.PI;
+        private float gunRot = MathF.PI;
         private int meteorTime;
         private int gunFrame = 0;
 
@@ -181,7 +181,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
 
                 if (attack == 2)
                 {
-                    gunRot = NPC.spriteDirection == 1 ? 0f : (float)Math.PI;
+                    gunRot = NPC.spriteDirection == 1 ? 0f : MathF.PI;
                 }
                 else
                 {
@@ -194,22 +194,22 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
                 if ((timer - walkTime) % attackreloadTimes[attack] == 0)
                 {
                     SoundEngine.PlaySound(SoundID.DoubleJump, NPC.position + gunOffset);
-                    if (Main.netMode != 1)
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         float spread = MathHelper.ToRadians(Main.rand.Next(-15, 15));
 
                         switch (attack)
                         {
                             case 0:
-                                Projectile.NewProjectile(new EntitySource_Misc(""), NPC.position + gunOffset + QwertyMethods.PolarVector(56, gunRot), QwertyMethods.PolarVector(10f, gunRot + spread), ProjectileType<SnowFlake>(), damage, 3f, Main.myPlayer);
+                                Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.position + gunOffset + QwertyMethods.PolarVector(56, gunRot), QwertyMethods.PolarVector(10f, gunRot + spread), ProjectileType<SnowFlake>(), damage, 3f, Main.myPlayer);
                                 break;
 
                             case 1:
-                                NPC.NewNPC(new EntitySource_Misc(""), (int)(NPC.position + gunOffset + QwertyMethods.PolarVector(56, gunRot)).X, (int)(NPC.position + gunOffset + QwertyMethods.PolarVector(56, gunRot)).Y, NPCType<Mosquitto>(), 0, spread, NPC.direction);
+                                NPC.NewNPC(NPC.GetSource_FromAI(), (int)(NPC.position + gunOffset + QwertyMethods.PolarVector(56, gunRot)).X, (int)(NPC.position + gunOffset + QwertyMethods.PolarVector(56, gunRot)).Y, NPCType<Mosquitto>(), 0, spread, NPC.direction);
                                 break;
 
                             case 2:
-                                Projectile.NewProjectile(new EntitySource_Misc(""), NPC.Center + new Vector2(-24 * NPC.direction, -74f), Vector2.UnitY * -40f, ProjectileType<MeteorLaunch>(), damage, 3f, Main.myPlayer);
+                                Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center + new Vector2(-24 * NPC.direction, -74f), Vector2.UnitY * -40f, ProjectileType<MeteorLaunch>(), damage, 3f, Main.myPlayer);
 
                                 break;
                         }
@@ -228,16 +228,16 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
                     gunOffset.Y += 2;
                 }
                 NPC.aiStyle = 3;
-                gunRot = NPC.spriteDirection == 1 ? 0f : (float)Math.PI;
+                gunRot = NPC.spriteDirection == 1 ? 0f : MathF.PI;
                 if (meteorsLaunched)
                 {
                     meteorTime++;
                     if (meteorTime > 10)
                     {
-                        if (Main.netMode != 1)
+                        if (Main.netMode != NetmodeID.MultiplayerClient)
                         {
                             int Xvar = Main.rand.Next(-750, 750);
-                            Projectile.NewProjectile(new EntitySource_Misc(""), player.Center.X + Xvar * 1.0f, player.Center.Y - 800f, 0f, 10f, ProjectileType<MeteorFall>(), damage, 3f, Main.myPlayer);
+                            Projectile.NewProjectile(NPC.GetSource_FromAI(), player.Center.X + Xvar * 1.0f, player.Center.Y - 800f, 0f, 10f, ProjectileType<MeteorFall>(), damage, 3f, Main.myPlayer);
                         }
                         meteorTime = 0;
                     }
@@ -310,7 +310,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
             bool flip = NPC.spriteDirection == 1;
             Texture2D gun = Request<Texture2D>("QwertyMod/Content/NPCs/DinoMilitia/TheTyrantsExtinctionGun").Value;
             spriteBatch.Draw(gun, NPC.position + gunOffset - screenPos,
-                       new Rectangle(0, frameHeight * gunFrame, 80, frameHeight), drawColor, gunRot + (float)Math.PI,
+                       new Rectangle(0, frameHeight * gunFrame, 80, frameHeight), drawColor, gunRot + MathF.PI,
                        new Vector2(70, 14), NPC.scale, flip ? SpriteEffects.FlipVertically : SpriteEffects.None, 0f);
         }
     }
@@ -319,7 +319,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("SnowFlake");
+            //DisplayName,SetDefault("SnowFlake");
         }
 
         public override void SetDefaults()
@@ -358,7 +358,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Meteor");
+            //DisplayName,SetDefault("Meteor");
         }
 
         public override void SetDefaults()
@@ -383,16 +383,16 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
                 SoundEngine.PlaySound(SoundID.Item62, Projectile.position);
                 for (int i = 0; i < 50; i++)
                 {
-                    int dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, 31, 0f, 0f, 100, default(Color), 2f);
+                    int dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.Smoke, 0f, 0f, 100, default(Color), 2f);
                     Main.dust[dustIndex].velocity *= 1.4f;
                 }
                 // Fire Dust spawn
                 for (int i = 0; i < 80; i++)
                 {
-                    int dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, 6, 0f, 0f, 100, default(Color), 3f);
+                    int dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.Torch, 0f, 0f, 100, default(Color), 3f);
                     Main.dust[dustIndex].noGravity = true;
                     Main.dust[dustIndex].velocity *= 5f;
-                    dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, 6, 0f, 0f, 100, default(Color), 2f);
+                    dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.Torch, 0f, 0f, 100, default(Color), 2f);
                     Main.dust[dustIndex].velocity *= 3f;
                 }
                 runOnce = false;
@@ -405,7 +405,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Meteor");
+            //DisplayName,SetDefault("Meteor");
         }
 
         public override void SetDefaults()
@@ -428,21 +428,21 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
 
         public override bool OnTileCollide(Vector2 velocityChange)
         {
-            if (Main.netMode != 1)
+            if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 SoundEngine.PlaySound(SoundID.Item62, Projectile.position);
                 for (int i = 0; i < 50; i++)
                 {
-                    int dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, 31, 0f, 0f, 100, default(Color), 2f);
+                    int dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.Smoke, 0f, 0f, 100, default(Color), 2f);
                     Main.dust[dustIndex].velocity *= 1.4f;
                 }
                 // Fire Dust spawn
                 for (int i = 0; i < 80; i++)
                 {
-                    int dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, 6, 0f, 0f, 100, default(Color), 3f);
+                    int dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.Torch, 0f, 0f, 100, default(Color), 3f);
                     Main.dust[dustIndex].noGravity = true;
                     Main.dust[dustIndex].velocity *= 5f;
-                    dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, 6, 0f, 0f, 100, default(Color), 2f);
+                    dustIndex = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.Torch, 0f, 0f, 100, default(Color), 2f);
                     Main.dust[dustIndex].velocity *= 3f;
                 }
             }

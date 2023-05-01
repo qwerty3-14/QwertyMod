@@ -23,7 +23,7 @@ namespace QwertyMod.Content.NPCs.Fortress
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Mollusket");
+            //DisplayName,SetDefault("Mollusket");
             Main.npcFrameCount[NPC.type] = 1;
             NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers(0)
             {
@@ -73,7 +73,7 @@ namespace QwertyMod.Content.NPCs.Fortress
                 new FlavorTextBestiaryInfoElement("I have so many questions about this thing and I don't think anyone has an answer for them.")
             });
         }
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
         {
             if (NPC.life <= 0)
             {
@@ -162,13 +162,13 @@ namespace QwertyMod.Content.NPCs.Fortress
                 preSetTimer--;
                 NPC.dontTakeDamage = true;
                 NPC.velocity = Vector2.Zero;
-                float d = Main.rand.NextFloat() * (float)Math.PI * 2;
-                Dust dusty = Dust.NewDustPerfect(NPC.position + new Vector2(Main.rand.Next(NPC.width), Main.rand.Next(NPC.height)) + QwertyMethods.PolarVector(30f, d + (float)Math.PI), DustType<FortressDust>(), QwertyMethods.PolarVector(3f, d), Scale: .5f);
+                float d = Main.rand.NextFloat() * MathF.PI * 2;
+                Dust dusty = Dust.NewDustPerfect(NPC.position + new Vector2(Main.rand.Next(NPC.width), Main.rand.Next(NPC.height)) + QwertyMethods.PolarVector(30f, d + MathF.PI), DustType<FortressDust>(), QwertyMethods.PolarVector(3f, d), Scale: .5f);
                 dusty.noGravity = true;
             }
             else
             {
-                shootFrom = NPC.Center + QwertyMethods.PolarVector(gunShift, NPC.rotation) * -startDirection + QwertyMethods.PolarVector(gunShiftUp, NPC.rotation - (float)Math.PI / 2);
+                shootFrom = NPC.Center + QwertyMethods.PolarVector(gunShift, NPC.rotation) * -startDirection + QwertyMethods.PolarVector(gunShiftUp, NPC.rotation - MathF.PI / 2);
                 int speed = 2;
                 if (NPC.ai[1] == 0f)
                 {
@@ -220,7 +220,7 @@ namespace QwertyMod.Content.NPCs.Fortress
                     {
                         float shootSpeed = 24;
 
-                        Projectile.NewProjectile(new EntitySource_Misc(""), shootFrom.X, shootFrom.Y, (float)Math.Cos(aimDirection) * shootSpeed, (float)Math.Sin(aimDirection) * shootSpeed, ProjectileType<MollusketSnipe>(), NPC.downedGolemBoss ? 50 : 15, 0, 0);
+                        Projectile.NewProjectile(NPC.GetSource_FromAI(), shootFrom.X, shootFrom.Y, MathF.Cos(aimDirection) * shootSpeed, MathF.Sin(aimDirection) * shootSpeed, ProjectileType<MollusketSnipe>(), NPC.downedGolemBoss ? 50 : 15, 0, 0);
                         timer = 0;
                     }
                     if (timer > 60)
@@ -248,7 +248,7 @@ namespace QwertyMod.Content.NPCs.Fortress
                     NPC.velocity.X = (float)(speed * NPC.direction);
                     NPC.velocity.Y = (float)(speed * NPC.directionY);
                     NPC.rotation = NPC.velocity.ToRotation();
-                    NPC.rotation += (float)Math.PI / 4 * startDirection;
+                    NPC.rotation += MathF.PI / 4 * startDirection;
                     aimDirection = NPC.rotation;
                     /*
                     if(NPC.velocity.X >0 && NPC.velocity.Y >0)
@@ -257,15 +257,15 @@ namespace QwertyMod.Content.NPCs.Fortress
                     }
                     else if(NPC.velocity.X < 0 && NPC.velocity.Y > 0)
                     {
-                        NPC.rotation = (float)Math.PI;
+                        NPC.rotation = MathF.PI;
                     }
                     else if (NPC.velocity.X > 0 && NPC.velocity.Y < 0)
                     {
-                        NPC.rotation = (float)Math.PI;
+                        NPC.rotation = MathF.PI;
                     }
                     else if (NPC.velocity.X < 0 && NPC.velocity.Y < 0)
                     {
-                        NPC.rotation = (float)Math.PI;
+                        NPC.rotation = MathF.PI;
                     }
                     */
                     //NPC.spriteDirection = NPC.direction;
@@ -365,7 +365,7 @@ namespace QwertyMod.Content.NPCs.Fortress
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Mollusket Snipe");
+            //DisplayName,SetDefault("Mollusket Snipe");
         }
 
         public override void SetDefaults()
@@ -401,7 +401,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             }
         }
 
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             target.AddBuff(BuffType<PowerDown>(), 480);
         }

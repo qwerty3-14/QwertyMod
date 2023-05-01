@@ -19,8 +19,8 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.Swordquake
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Shape Shift: Swordquake");
-            Tooltip.SetDefault("Turn into a sword that causes a deadly swordquake upon striking the ground!");
+            //DisplayName,SetDefault("Shape Shift: Swordquake");
+            //Tooltip.SetDefault("Turn into a sword that causes a deadly swordquake upon striking the ground!");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -39,9 +39,9 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.Swordquake
 
             Item.useTime = 60;
             Item.useAnimation = 60;
-            Item.useStyle = 5;
+            Item.useStyle = ItemUseStyleID.Shoot;
 
-            Item.rare = 7;
+            Item.rare = ItemRarityID.Lime;
             Item.value = Item.sellPrice(0, 10, 0, 0);
             Item.noUseGraphic = true;
             Item.width = 38;
@@ -58,7 +58,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.Swordquake
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Swordquake");
+            //DisplayName,SetDefault("Swordquake");
         }
 
         public override void SetDefaults()
@@ -83,12 +83,12 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.Swordquake
             player.Center = Projectile.Center;
             player.immune = true;
             player.immuneTime = 2;
-            player.statDefense = 0;
+            player.statDefense.FinalMultiplier *= 0;
             Projectile.velocity = Vector2.Zero;
             player.GetModPlayer<ShapeShifterPlayer>().noDraw = true;
             if (runOnce)
             {
-                Projectile.rotation = player.direction == 1 ? (float)Math.PI : 0;
+                Projectile.rotation = player.direction == 1 ? MathF.PI : 0;
                 runOnce = false;
             }
 
@@ -100,7 +100,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.Swordquake
             {
                 if (Projectile.timeLeft < 30)
                 {
-                    Projectile.rotation += player.direction * (float)Math.PI / 15;
+                    Projectile.rotation += player.direction * MathF.PI / 15;
                     if (!Collision.CanHit(Projectile.Center, 0, 0, Projectile.Center + QwertyMethods.PolarVector(180, Projectile.rotation), 0, 0))
                     {
                         Projectile.timeLeft = 30;
@@ -141,7 +141,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.Swordquake
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Swordlagmite");
+            //DisplayName,SetDefault("Swordlagmite");
             ProjectileID.Sets.DontAttachHideToAlpha[Projectile.type] = true; // projectiles with hide but without this will draw in the lighting values of the owner player.
         }
 
@@ -166,7 +166,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.Swordquake
         {
             return base.CanHitNPC(target);
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.usesIDStaticNPCImmunity = true;
             int immutime = 300;

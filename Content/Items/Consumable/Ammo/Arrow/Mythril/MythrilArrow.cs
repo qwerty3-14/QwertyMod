@@ -10,8 +10,6 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Mythril
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Mythril Arrow");
-            Tooltip.SetDefault("Pierces enemies and blocks, short range");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 99;
         }
 
@@ -21,7 +19,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Mythril
             Item.DamageType = DamageClass.Ranged;
             Item.knockBack = 2;
             Item.value = 5;
-            Item.rare = 3;
+            Item.rare = ItemRarityID.Orange;
             Item.width = 22;
             Item.height = 32;
 
@@ -30,7 +28,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Mythril
             Item.consumable = true;
             Item.shoot = ProjectileType<MythrilArrowP>();
             Item.ammo = 40;
-            Item.maxStack = 999;
+            Item.maxStack = 9999;
         }
 
         public override void AddRecipes()

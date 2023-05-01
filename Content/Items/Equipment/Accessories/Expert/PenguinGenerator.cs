@@ -4,6 +4,7 @@ using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using Terraria.ID;
 
 namespace QwertyMod.Content.Items.Equipment.Accessories.Expert
 {
@@ -11,15 +12,15 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Penguin Generator");
-            Tooltip.SetDefault("Attacks have a 10% chance to release penguins");
+            //DisplayName,SetDefault("Penguin Generator");
+            //Tooltip.SetDefault("Attacks have a 10% chance to release penguins");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()
         {
             Item.value = 100000;
-            Item.rare = 1;
+            Item.rare = ItemRarityID.Blue;
             Item.expert = true;
 
             Item.width = 28;
@@ -50,25 +51,24 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert
             effect = false;
         }
 
-        public override void OnHitNPC(Item item, NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Main.rand.Next(10) == 0 && effect && !target.immortal)
+            if (Main.rand.NextBool(10) && effect && !target.immortal)
             {
                 for (int i = 0; i < 2; i++)
                 {
-                    Projectile penguin = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc(""), Player.Center, new Vector2(6 - 12 * i, 0), ProjectileType<SlidingPenguinGeneric>(), damage, 0, Player.whoAmI)];
+                    Projectile penguin = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc("Accesory_PenguinGenerator"), Player.Center, new Vector2(6 - 12 * i, 0), ProjectileType<SlidingPenguinGeneric>(), damageDone, 0, Player.whoAmI)];
                     penguin.GetGlobalProjectile<PenguinLimit>().realeasedPenguin = true;
                 }
             }
         }
-
-        public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Main.rand.Next(10) == 0 && effect && !target.immortal)
+            if (Main.rand.NextBool(10) && effect && !target.immortal)
             {
                 for (int i = 0; i < 2; i++)
                 {
-                    Projectile penguin = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(proj), Player.Center, new Vector2(6 - 12 * i, 0), ProjectileType<SlidingPenguinGeneric>(), damage, 0, Player.whoAmI)];
+                    Projectile penguin = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(proj), Player.Center, new Vector2(6 - 12 * i, 0), ProjectileType<SlidingPenguinGeneric>(), damageDone, 0, Player.whoAmI)];
                     penguin.GetGlobalProjectile<PenguinLimit>().realeasedPenguin = true;
                 }
             }

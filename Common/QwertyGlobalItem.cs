@@ -28,5 +28,12 @@ namespace QwertyMod.Common
                 }
             }
         }
+        public override void ModifyItemScale(Item item, Player player, ref float scale)
+        {
+            if(item.useStyle == ItemUseStyleID.Swing)
+            {
+                scale *= player.GetModPlayer<CommonStats>().weaponSize;
+            }
+        }
     }
 }

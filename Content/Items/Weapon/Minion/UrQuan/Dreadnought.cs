@@ -14,7 +14,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.UrQuan
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Ur-Quan Dreadnought");
+            //DisplayName,SetDefault("Ur-Quan Dreadnought");
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             Main.projFrames[Projectile.type] = 1;
             ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
@@ -70,8 +70,8 @@ namespace QwertyMod.Content.Items.Weapon.Minion.UrQuan
                 {
                     fighterCounter = 60;
                     SoundEngine.PlaySound(new SoundStyle("QwertyMod/Assets/Sounds/UrQuan-Launch"), Projectile.Center);
-                    fighters.Add(Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center + QwertyMethods.PolarVector(-40, Projectile.rotation) + QwertyMethods.PolarVector(10, Projectile.rotation + (float)Math.PI / 2), QwertyMethods.PolarVector(4, Projectile.rotation + 3 * (float)Math.PI / 4), ProjectileType<Fighter>(), (int)(Projectile.damage / 6f), 0, Projectile.owner, Projectile.whoAmI)]);
-                    fighters.Add(Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center + QwertyMethods.PolarVector(-40, Projectile.rotation) + QwertyMethods.PolarVector(10, Projectile.rotation - (float)Math.PI / 2), QwertyMethods.PolarVector(4, Projectile.rotation - 3 * (float)Math.PI / 4), ProjectileType<Fighter>(), (int)(Projectile.damage / 6f), 0, Projectile.owner, Projectile.whoAmI)]);
+                    fighters.Add(Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center + QwertyMethods.PolarVector(-40, Projectile.rotation) + QwertyMethods.PolarVector(10, Projectile.rotation + MathF.PI / 2), QwertyMethods.PolarVector(4, Projectile.rotation + 3 * MathF.PI / 4), ProjectileType<Fighter>(), (int)(Projectile.damage / 6f), 0, Projectile.owner, Projectile.whoAmI)]);
+                    fighters.Add(Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center + QwertyMethods.PolarVector(-40, Projectile.rotation) + QwertyMethods.PolarVector(10, Projectile.rotation - MathF.PI / 2), QwertyMethods.PolarVector(4, Projectile.rotation - 3 * MathF.PI / 4), ProjectileType<Fighter>(), (int)(Projectile.damage / 6f), 0, Projectile.owner, Projectile.whoAmI)]);
                 }
                 if ((target.Center - Projectile.Center).Length() < 300)
                 {
@@ -104,7 +104,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.UrQuan
                 {
                     if (Collision.CheckAABBvAABBCollision(Projectile.position + new Vector2(Projectile.width / 4, Projectile.height / 4), new Vector2(Projectile.width / 2, Projectile.height / 2), Main.projectile[k].position + new Vector2(Main.projectile[k].width / 4, Main.projectile[k].height / 4), new Vector2(Main.projectile[k].width / 2, Main.projectile[k].height / 2)))
                     {
-                        Projectile.velocity += new Vector2((float)Math.Cos((Projectile.Center - Main.projectile[k].Center).ToRotation()) * .1f, (float)Math.Sin((Projectile.Center - Main.projectile[k].Center).ToRotation()) * .1f);
+                        Projectile.velocity += new Vector2(MathF.Cos((Projectile.Center - Main.projectile[k].Center).ToRotation()) * .1f, MathF.Sin((Projectile.Center - Main.projectile[k].Center).ToRotation()) * .1f);
                     }
                 }
             }

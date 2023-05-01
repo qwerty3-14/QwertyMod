@@ -15,8 +15,8 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Flail.Ankylosaurus
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Ankylosaurus Tail");
-            Tooltip.SetDefault("Critical hits stun enemies");
+            //DisplayName,SetDefault("Ankylosaurus Tail");
+            //Tooltip.SetDefault("Critical hits stun enemies");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -31,9 +31,9 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Flail.Ankylosaurus
             Item.height = 32;
             Item.useTime = 45;
             Item.useAnimation = 45;
-            Item.useStyle = 5;
+            Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 3;
-            Item.rare = 6;
+            Item.rare = ItemRarityID.LightPurple;
             Item.value = Item.sellPrice(0, 10, 0, 0);
             Item.UseSound = SoundID.Item1;
             Item.autoReuse = false;
@@ -64,7 +64,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Flail.Ankylosaurus
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Ankylosaurus Tail");
+            //DisplayName,SetDefault("Ankylosaurus Tail");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 5;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 0;
         }
@@ -93,11 +93,11 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Flail.Ankylosaurus
         public override void ExtraAI()
         {
             Player player = Main.player[Projectile.owner];
-            Projectile.rotation = (player.Center - Projectile.Center).ToRotation() + (float)Math.PI / 2;
+            Projectile.rotation = (player.Center - Projectile.Center).ToRotation() + MathF.PI / 2;
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (!target.boss && crit)
+            if (!target.boss && hit.Crit)
             {
                 target.AddBuff(BuffType<Stunned>(), 240);
             }

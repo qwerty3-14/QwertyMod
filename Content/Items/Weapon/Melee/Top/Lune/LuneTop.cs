@@ -12,8 +12,8 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Top.Lune
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Lune Top");
-            Tooltip.SetDefault("Inflicts Lune curse making enemies more vulnerable to critical hits");
+            //DisplayName,SetDefault("Lune Top");
+            //Tooltip.SetDefault("Inflicts Lune curse making enemies more vulnerable to critical hits");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -23,10 +23,10 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Top.Lune
             Item.DamageType = DamageClass.MeleeNoSpeed;
             Item.knockBack = 5;
             Item.value = 20000;
-            Item.rare = 1;
+            Item.rare = ItemRarityID.Blue;
             Item.width = 30;
             Item.height = 38;
-            Item.useStyle = 1;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.shootSpeed = 4.5f;
             Item.useTime = 32;
             Item.useAnimation = 32;
@@ -47,7 +47,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Top.Lune
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Lune Top");
+            //DisplayName,SetDefault("Lune Top");
         }
 
         public override void SetDefaults()

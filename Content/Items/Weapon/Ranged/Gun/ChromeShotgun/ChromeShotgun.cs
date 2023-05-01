@@ -15,8 +15,8 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.ChromeShotgun
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Chrome Shotgun");
-            Tooltip.SetDefault("Right click to switch between 4 modes");
+            //DisplayName,SetDefault("Chrome Shotgun");
+            //Tooltip.SetDefault("Right click to switch between 4 modes");
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -36,17 +36,17 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.ChromeShotgun
 
             Item.useTime = 30;
             Item.useAnimation = 30;
-            Item.useStyle = 5;
+            Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 1;
             Item.value = 500000;
-            Item.rare = 7;
+            Item.rare = ItemRarityID.Lime;
 
             Item.noUseGraphic = true;
             Item.width = 54;
             Item.height = 22;
 
-            Item.shoot = 97;
-            Item.useAmmo = 97;
+            Item.shoot = ProjectileID.Bullet;
+            Item.useAmmo = AmmoID.Bullet;
             Item.shootSpeed = 9f;
             Item.noMelee = true;
             Item.GetGlobalItem<ItemUseGlow>().glowOffsetX = (int)DefaultHoldOffset.X;
@@ -110,13 +110,13 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.ChromeShotgun
             else
             {
                 Item.UseSound = SoundID.Item11;
-                Item.useStyle = 5;
+                Item.useStyle = ItemUseStyleID.Shoot;
             }
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            if (Item.useStyle == 5)
+            if (Item.useStyle == ItemUseStyleID.Shoot)
             {
                 float direction = velocity.ToRotation();
                 float horizontalShift = DefaultMuzzleOffset.X;
@@ -143,27 +143,27 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.ChromeShotgun
                         verticalShift = MinionMuzzleOffset.Y;
                         break;
                 }
-                position += QwertyMethods.PolarVector(horizontalShift, direction) + QwertyMethods.PolarVector(verticalShift * player.direction, direction + (float)Math.PI / 2);
+                position += QwertyMethods.PolarVector(horizontalShift, direction) + QwertyMethods.PolarVector(verticalShift * player.direction, direction + MathF.PI / 2);
                 switch (Item.GetGlobalItem<ChromeGunToggle>().mode)
                 {
                     case 0:
                         for (int p = 0; p < 3; p++)
                         {
-                            Projectile.NewProjectile(source, position, velocity.RotatedBy((((float)(p + 1) / 4f) * (float)Math.PI / 16f) - (float)Math.PI / 32f), type, damage, knockback, player.whoAmI);
+                            Projectile.NewProjectile(source, position, velocity.RotatedBy((((float)(p + 1) / 4f) * MathF.PI / 16f) - MathF.PI / 32f), type, damage, knockback, player.whoAmI);
                         }
                         break;
 
                     case 1:
                         for (int p = 0; p < 4; p++)
                         {
-                            Projectile.NewProjectile(source, position, velocity.RotatedBy(Math.PI).RotatedBy((((float)(p + 1) / 5f) * (float)Math.PI / 8f) - (float)Math.PI / 16f), type, damage, knockback, player.whoAmI);
+                            Projectile.NewProjectile(source, position, velocity.RotatedBy(Math.PI).RotatedBy((((float)(p + 1) / 5f) * MathF.PI / 8f) - MathF.PI / 16f), type, damage, knockback, player.whoAmI);
                         }
                         break;
 
                     case 2:
                         for (int p = 0; p < 2; p++)
                         {
-                            Projectile.NewProjectile(source, position + QwertyMethods.PolarVector(p * 2, velocity.ToRotation() + (float)Math.PI / 2), velocity, type, damage, knockback, player.whoAmI);
+                            Projectile.NewProjectile(source, position + QwertyMethods.PolarVector(p * 2, velocity.ToRotation() + MathF.PI / 2), velocity, type, damage, knockback, player.whoAmI);
                         }
                         break;
 
@@ -231,7 +231,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.ChromeShotgun
                 NPC gunTarget = new NPC();
                 if (QwertyMethods.ClosestNPC(ref gunTarget, 450, GunPositions[i], false, player.MinionAttackTargetNPC))
                 {
-                    GunRotations[i] = QwertyMethods.SlowRotation(GunRotations[i], (gunTarget.Center - GunPositions[i]).ToRotation() + (float)Math.PI / 2 * (i == 1 ? 1 : -1) - Projectile.rotation, 6);
+                    GunRotations[i] = QwertyMethods.SlowRotation(GunRotations[i], (gunTarget.Center - GunPositions[i]).ToRotation() + MathF.PI / 2 * (i == 1 ? 1 : -1) - Projectile.rotation, 6);
                     if (shotCounter % 30 == i * 15)
                     {
                         int bullet = ProjectileID.Bullet;
@@ -242,7 +242,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.ChromeShotgun
                         player.PickAmmo(player.HeldItem, out bullet, out speedB, out weaponDamage, out kb, out _, false);
                         if (canShoot)
                         {
-                            Projectile.NewProjectile(new EntitySource_Misc(""), GunPositions[i], QwertyMethods.PolarVector(16, GunRotations[i] + Projectile.rotation + (float)Math.PI / 2 * (i == 0 ? 1 : -1)), bullet, weaponDamage, kb, Projectile.owner);
+                            Projectile.NewProjectile(Projectile.GetSource_FromThis(), GunPositions[i], QwertyMethods.PolarVector(16, GunRotations[i] + Projectile.rotation + MathF.PI / 2 * (i == 0 ? 1 : -1)), bullet, weaponDamage, kb, Projectile.owner);
                         }
                     }
                 }
@@ -251,20 +251,20 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.ChromeShotgun
                     GunRotations[i] = QwertyMethods.SlowRotation(GunRotations[i], 0f, 6);
                 }
             }
-            GunPositions[0] = Projectile.Center + QwertyMethods.PolarVector(13, Projectile.rotation) + QwertyMethods.PolarVector(14, Projectile.rotation + (float)Math.PI / 2);
-            GunPositions[1] = Projectile.Center + QwertyMethods.PolarVector(13, Projectile.rotation) + QwertyMethods.PolarVector(14, Projectile.rotation - (float)Math.PI / 2);
+            GunPositions[0] = Projectile.Center + QwertyMethods.PolarVector(13, Projectile.rotation) + QwertyMethods.PolarVector(14, Projectile.rotation + MathF.PI / 2);
+            GunPositions[1] = Projectile.Center + QwertyMethods.PolarVector(13, Projectile.rotation) + QwertyMethods.PolarVector(14, Projectile.rotation - MathF.PI / 2);
         }
 
         public override bool PreDraw(ref Color lightColor)
         {
             Texture2D core = TextureAssets.Projectile[Projectile.type].Value;
-            Main.EntitySpriteDraw(core, Projectile.Center - Main.screenPosition, core.Frame(), lightColor, Projectile.rotation - (float)Math.PI / 2, core.Size() * .5f, 1f, SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(core, Projectile.Center - Main.screenPosition, core.Frame(), lightColor, Projectile.rotation - MathF.PI / 2, core.Size() * .5f, 1f, SpriteEffects.None, 0);
 
             Texture2D rightGun = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Ranged/Gun/ChromeShotgun/ShotgunMinionRightGun").Value;
-            Main.EntitySpriteDraw(rightGun, GunPositions[1] - Main.screenPosition, rightGun.Frame(), lightColor, Projectile.rotation + GunRotations[1] - (float)Math.PI / 2, new Vector2(8, 8), 1f, SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(rightGun, GunPositions[1] - Main.screenPosition, rightGun.Frame(), lightColor, Projectile.rotation + GunRotations[1] - MathF.PI / 2, new Vector2(8, 8), 1f, SpriteEffects.None, 0);
 
             Texture2D leftGun = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Ranged/Gun/ChromeShotgun/ShotgunMinionLeftGun").Value;
-            Main.EntitySpriteDraw(leftGun, GunPositions[0] - Main.screenPosition, leftGun.Frame(), lightColor, Projectile.rotation + GunRotations[0] - (float)Math.PI / 2, new Vector2(leftGun.Width - 8, 8), 1f, SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(leftGun, GunPositions[0] - Main.screenPosition, leftGun.Frame(), lightColor, Projectile.rotation + GunRotations[0] - MathF.PI / 2, new Vector2(leftGun.Width - 8, 8), 1f, SpriteEffects.None, 0);
             return false;
         }
     }
@@ -300,7 +300,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.ChromeShotgun
                 }
                 if (Player.HeldItem.type == ModContent.ItemType<ChromeShotgunDefault>() && Player.HeldItem.GetGlobalItem<ChromeGunToggle>().mode == 3 && Player.ownedProjectileCounts[ModContent.ProjectileType<ShotgunMinion>()] < 1)
                 {
-                    Projectile.NewProjectile(new EntitySource_Misc(""), Player.Center, Vector2.Zero, ModContent.ProjectileType<ShotgunMinion>(), Player.HeldItem.damage, Player.HeldItem.knockBack, Player.whoAmI);
+                    Projectile.NewProjectile(Player.GetSource_ItemUse(item), Player.Center, Vector2.Zero, ModContent.ProjectileType<ShotgunMinion>(), Player.HeldItem.damage, Player.HeldItem.knockBack, Player.whoAmI);
                 }
             }
         }

@@ -16,7 +16,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.AncientMinion
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Ancient Minion");
+            //DisplayName,SetDefault("Ancient Minion");
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             Main.projFrames[Projectile.type] = 1;
             ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
@@ -91,17 +91,17 @@ namespace QwertyMod.Content.Items.Weapon.Minion.AncientMinion
                     }
                     for (int i = 0; i < minionRingDustQty; i++)
                     {
-                        float theta = Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI);
+                        float theta = Main.rand.NextFloat(-MathF.PI, MathF.PI);
 
                         Dust dust = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(minionRingRadius, theta), DustType<AncientGlow>(), QwertyMethods.PolarVector(-minionRingRadius / 10, theta));
                         dust.noGravity = true;
                     }
-                    if (Main.netMode != 2)
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
-                        Projectile.ai[1] = Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI);
+                        Projectile.ai[1] = Main.rand.NextFloat(-MathF.PI, MathF.PI);
                         Projectile.netUpdate = true;
                     }
-                    moveTo = new Vector2(target.Center.X + (float)Math.Cos(Projectile.ai[1]) * 120, target.Center.Y + (float)Math.Sin(Projectile.ai[1]) * 180);
+                    moveTo = new Vector2(target.Center.X + MathF.Cos(Projectile.ai[1]) * 120, target.Center.Y + MathF.Sin(Projectile.ai[1]) * 180);
                     if (Main.netMode != NetmodeID.Server)
                     {
                         Projectile.netUpdate = true;
@@ -122,7 +122,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.AncientMinion
                         SoundEngine.PlaySound(SoundID.Item8, Projectile.Center);
                         for (int i = 0; i < minionRingDustQty; i++)
                         {
-                            float theta = Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI);
+                            float theta = Main.rand.NextFloat(-MathF.PI, MathF.PI);
                             Dust dust = Dust.NewDustPerfect(Projectile.Center, DustType<AncientGlow>(), QwertyMethods.PolarVector(minionRingRadius / 10, theta));
                             dust.noGravity = true;
                         }
@@ -131,7 +131,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.AncientMinion
                 }
                 if (charging)
                 {
-                    Projectile.velocity = new Vector2((float)Math.Cos(Projectile.rotation), (float)Math.Sin(Projectile.rotation)) * chargeSpeed;
+                    Projectile.velocity = new Vector2(MathF.Cos(Projectile.rotation), MathF.Sin(Projectile.rotation)) * chargeSpeed;
                 }
                 else
                 {
@@ -149,27 +149,27 @@ namespace QwertyMod.Content.Items.Weapon.Minion.AncientMinion
                     SoundEngine.PlaySound(SoundID.Item8, Projectile.Center);
                     for (int i = 0; i < minionRingDustQty; i++)
                     {
-                        float theta = Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI);
+                        float theta = Main.rand.NextFloat(-MathF.PI, MathF.PI);
                         Dust dust = Dust.NewDustPerfect(Projectile.Center, DustType<AncientGlow>(), QwertyMethods.PolarVector(minionRingRadius / 10, theta));
                         dust.noGravity = true;
                     }
                 }
                 if ((Projectile.Center - player.Center).Length() > 300)
                 {
-                    if (Main.netMode != 2)
+                    if (Main.netMode != NetmodeID.Server)
                     {
-                        Projectile.ai[1] = Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI);
+                        Projectile.ai[1] = Main.rand.NextFloat(-MathF.PI, MathF.PI);
                         Projectile.netUpdate = true;
                     }
                     for (int i = 0; i < minionRingDustQty; i++)
                     {
-                        float theta = Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI);
+                        float theta = Main.rand.NextFloat(-MathF.PI, MathF.PI);
 
                         Dust dust = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(minionRingRadius, theta), DustType<AncientGlow>(), QwertyMethods.PolarVector(-minionRingRadius / 10, theta));
                         dust.noGravity = true;
                     }
                     noTargetTimer = 0;
-                    moveTo = new Vector2(player.Center.X + (float)Math.Cos(Projectile.ai[1]) * 100, player.Center.Y + (float)Math.Sin(Projectile.ai[1]) * 100);
+                    moveTo = new Vector2(player.Center.X + MathF.Cos(Projectile.ai[1]) * 100, player.Center.Y + MathF.Sin(Projectile.ai[1]) * 100);
                     justTeleported = true;
                 }
 

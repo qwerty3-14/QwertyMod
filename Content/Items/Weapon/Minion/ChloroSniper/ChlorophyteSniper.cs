@@ -16,7 +16,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.ChloroSniper
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Chlorophyte Sniper");
+            //DisplayName,SetDefault("Chlorophyte Sniper");
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true; //This is necessary for right-click targeting
         }
 
@@ -71,10 +71,10 @@ namespace QwertyMod.Content.Items.Weapon.Minion.ChloroSniper
             timer++;
             if (sniperCount != 0)
             {
-                hoverOffset = (float)Math.Sin(player.GetModPlayer<MinionManager>().mythrilPrismRotation * 4f + (float)Math.PI * ((float)identity / sniperCount)) * 6;
+                hoverOffset = MathF.Sin(player.GetModPlayer<MinionManager>().mythrilPrismRotation * 4f + MathF.PI * ((float)identity / sniperCount)) * 6;
 
                 Projectile.ai[0] = 40f;
-                flyTo = player.Center + QwertyMethods.PolarVector(35f + 7f * sniperCount, -(float)Math.PI * ((float)(identity + 1) / (sniperCount + 1)));
+                flyTo = player.Center + QwertyMethods.PolarVector(35f + 7f * sniperCount, -MathF.PI * ((float)(identity + 1) / (sniperCount + 1)));
 
                 if (timer > 30)
                 {
@@ -92,18 +92,18 @@ namespace QwertyMod.Content.Items.Weapon.Minion.ChloroSniper
                 if (QwertyMethods.ClosestNPC(ref target, 100000, Projectile.Center, false, player.MinionAttackTargetNPC) && timer > 240)
                 {
                     SoundEngine.PlaySound(SoundID.Item92, Projectile.Center);
-                    Projectile.NewProjectile(new EntitySource_Misc(""), Projectile.Center + Vector2.UnitY * hoverOffset, QwertyMethods.PolarVector(10, (target.Center - Projectile.Center).ToRotation()), ProjectileType<ChlorophyteSnipe>(), Projectile.damage, Projectile.knockBack, player.whoAmI);
+                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center + Vector2.UnitY * hoverOffset, QwertyMethods.PolarVector(10, (target.Center - Projectile.Center).ToRotation()), ProjectileType<ChlorophyteSnipe>(), Projectile.damage, Projectile.knockBack, player.whoAmI);
                     Projectile.velocity += QwertyMethods.PolarVector(-6, (target.Center - Projectile.Center).ToRotation());
                     timer = 0;
                 }
-                float rot = Projectile.velocity.X * (float)Math.PI / 30;
-                Projectile.rotation.SlowRotation(rot, (float)Math.PI / 30);
+                float rot = Projectile.velocity.X * MathF.PI / 30;
+                Projectile.rotation.SlowRotation(rot, MathF.PI / 30);
                 int dustAmt = Math.Min(timer / 60, 4);
                 for (int i = 0; i < dustAmt; i++)
                 {
-                    if (Main.rand.Next(2) == 0)
+                    if (Main.rand.NextBool(2))
                     {
-                        Dust d = Dust.NewDustPerfect(Projectile.Center + Vector2.UnitY * hoverOffset, 75, QwertyMethods.PolarVector(Main.rand.NextFloat() * dustAmt * .9f, Main.rand.NextFloat() * (float)Math.PI * 2), Projectile.alpha);
+                        Dust d = Dust.NewDustPerfect(Projectile.Center + Vector2.UnitY * hoverOffset, 75, QwertyMethods.PolarVector(Main.rand.NextFloat() * dustAmt * .9f, Main.rand.NextFloat() * MathF.PI * 2), Projectile.alpha);
                         d.noGravity = true;
                     }
                 }
