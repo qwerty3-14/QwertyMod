@@ -3,11 +3,17 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.ModLoader;
+using Terraria.ID;
 
 namespace QwertyMod.Content.Items.Consumable.Ammo.Dart.Rhuthinium
 {
     public class DartBeam : ModProjectile
     {
+        public override void SetStaticDefaults()
+        {
+            Main.projFrames[Projectile.type] = 4;
+            ProjectileID.Sets.DrawScreenCheckFluff[Projectile.type] = 5000;
+        }
         public override void SetDefaults()
         {
             Projectile.DamageType = DamageClass.Ranged;

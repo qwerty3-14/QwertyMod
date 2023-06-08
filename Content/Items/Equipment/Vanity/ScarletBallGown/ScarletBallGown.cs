@@ -20,15 +20,41 @@ namespace QwertyMod.Content.Items.Equipment.Vanity.ScarletBallGown
         {
             Item.width = 34;
             Item.height = 30;
-            Item.rare = ItemRarityID.Blue;
+            Item.rare = ItemRarityID.White;
             Item.vanity = true;
-            Item.value = Item.buyPrice(gold: 50);
+            Item.value = Item.sellPrice(silver: 60);
         }
 
         public override void SetMatch(bool male, ref int equipSlot, ref bool robes)
         {
             robes = true;
             equipSlot = QwertyMod.BallGownSkirt;
+        }
+        public override void AddRecipes()
+        {
+            CreateRecipe(1)
+				.AddIngredient(ItemID.Silk, 20)
+				.AddIngredient(ItemID.TissueSample, 6)
+                .AddTile(TileID.Loom)
+                .Register();
+        }
+    }
+    public class GownHoldUp : ModPlayer
+    {
+        public override void PostUpdate()
+        {
+            if(Player.legs == QwertyMod.BallGownSkirt && (Player.mount.Active || Player.sitting.isSitting))
+            {
+                Player.legs = QwertyMod.BallGownSkirtAlt;
+            }
+            /*
+            if(Player.legs == QwertyMod.BallGownSkirt && !Player.compositeBackArm.enabled && !Player.compositeFrontArm.enabled && Player.velocity.Y == 0 && Player.velocity.X != 0 && Player.itemAnimation == 0)
+            {
+                Player.legs = QwertyMod.BallGownSkirtAlt;
+                Player.SetCompositeArmBack(true, Player.CompositeArmStretchAmount.Full, MathF.PI / -16f * Player.direction);
+                Player.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, MathF.PI / 16f * Player.direction);
+            }
+            */
         }
     }
 }

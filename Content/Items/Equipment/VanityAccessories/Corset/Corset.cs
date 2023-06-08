@@ -47,7 +47,7 @@ namespace QwertyMod.Content.Items.Equipment.VanityAccessories.Corset
         {
             Player drawPlayer = drawInfo.drawPlayer;
             Mod mod = ModLoader.GetMod("QwertyMod");
-            if(drawPlayer.body == EquipLoader.GetEquipSlot(mod, "Corset", EquipType.Body) || drawPlayer.body == EquipLoader.GetEquipSlot(mod, "ScarletBallGown", EquipType.Body) || drawPlayer.waist == EquipLoader.GetEquipSlot(mod, "Corset", EquipType.Waist))
+            if(!drawInfo.hidesTopSkin && (drawPlayer.body == EquipLoader.GetEquipSlot(mod, "Corset", EquipType.Body) || drawPlayer.body == EquipLoader.GetEquipSlot(mod, "ScarletBallGown", EquipType.Body) || drawPlayer.waist == EquipLoader.GetEquipSlot(mod, "Corset", EquipType.Waist)))
             {
                 if (drawInfo.usesCompositeTorso) 
                 {
@@ -66,6 +66,10 @@ namespace QwertyMod.Content.Items.Equipment.VanityAccessories.Corset
                 drawInfo.hidesTopSkin = true;
                 drawInfo.Position.Y += drawInfo.torsoOffset;
                 Texture2D texture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/VanityAccessories/Corset/CorsetSlimmedBody").Value;
+                if(drawInfo.skinVar > 9)
+                {
+                    texture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/VanityAccessories/Corset/SlimmedMannequin").Value;
+                }
                 DrawData drawData = new DrawData(texture, new Vector2((int)(drawInfo.Position.X - Main.screenPosition.X - (float)(drawInfo.drawPlayer.bodyFrame.Width / 2) + (float)(drawInfo.drawPlayer.width / 2)), (int)(drawInfo.Position.Y - Main.screenPosition.Y + (float)drawInfo.drawPlayer.height - (float)drawInfo.drawPlayer.bodyFrame.Height + 4f)) + drawInfo.drawPlayer.bodyPosition + new Vector2(drawInfo.drawPlayer.bodyFrame.Width / 2, drawInfo.drawPlayer.bodyFrame.Height / 2), drawInfo.drawPlayer.bodyFrame, drawInfo.colorBodySkin, drawInfo.drawPlayer.bodyRotation, drawInfo.bodyVect, 1f, drawInfo.playerEffect, 0);
                 drawData.shader = drawInfo.skinDyePacked;
                 DrawData item = drawData;
@@ -105,7 +109,10 @@ namespace QwertyMod.Content.Items.Equipment.VanityAccessories.Corset
                     drawinfo.DrawDataCache.Add(drawData);
 				}
                 Texture2D texture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/VanityAccessories/Corset/CorsetSlimmedBody").Value;
-
+                if(drawinfo.skinVar > 9)
+                {
+                    texture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/VanityAccessories/Corset/SlimmedMannequin").Value;
+                }
 				drawData = new DrawData(texture, vector, drawinfo.compTorsoFrame, drawinfo.colorBodySkin, bodyRotation, drawinfo.bodyVect, 1f, drawinfo.playerEffect, 0) 
                 {
 					shader = drawinfo.skinDyePacked

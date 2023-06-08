@@ -11,6 +11,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Dart.Nano
         public override void SetStaticDefaults()
         {
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 99;
+            AmmoID.Sets.IsSpecialist[Item.type] = true;
         }
         public override void SetDefaults()
         {

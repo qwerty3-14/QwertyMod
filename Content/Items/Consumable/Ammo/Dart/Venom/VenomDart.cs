@@ -10,9 +10,8 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Dart.Venom
     {
         public override void SetStaticDefaults()
         {
-            ////DisplayName,SetDefault("Venom Dart");
-            ////Tooltip.SetDefault("Creates venom clouds when hitting enemies");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 99;
+            AmmoID.Sets.IsSpecialist[Item.type] = true;
         }
         public override void SetDefaults()
         {

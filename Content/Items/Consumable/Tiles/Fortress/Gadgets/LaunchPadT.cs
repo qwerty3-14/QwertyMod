@@ -26,7 +26,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
 
             //ModTranslation name = CreateMapEntryName();
             //name.SetDefault("Launchpad");
-            //AddMapEntry(new Color(162, 184, 185), name);
+            AddMapEntry(new Color(162, 184, 185));
         }
 
         public override bool CanPlace(int i, int j)

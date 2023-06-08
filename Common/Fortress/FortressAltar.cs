@@ -9,6 +9,11 @@ using Terraria.ModLoader;
 using Terraria.ObjectData;
 using static Terraria.ModLoader.ModContent;
 using Terraria.ID;
+using Microsoft.Xna.Framework.Graphics;
+using System;
+using Terraria.Graphics.Shaders;
+using Terraria.GameContent;
+using QwertyMod.Content.NPCs.Bosses.InvaderBattleship;
 
 
 namespace QwertyMod.Common.Fortress
@@ -37,6 +42,23 @@ namespace QwertyMod.Common.Fortress
         {
             Player player = Main.LocalPlayer;
             //QwertyMethods.ServerClientCheck();
+            if(SkyFortress.beingInvaded)
+            {
+                if (!NPC.AnyNPCs(NPCType<InvaderBattleship>()) && BattleshipSpawnIn.spawnTimer == -1)
+                {
+                    for (int b = 0; b < 58; b++) // this searches every invintory slot
+                    {
+                        if (player.inventory[b].type == ItemType<GodSealKeycard>() && player.inventory[b].stack > 0) //this checks if the slot has the valid item
+                        {
+                            
+                            BattleshipSpawnIn.spawnTimer = BattleshipSpawnIn.spawnTime + BattleshipSpawnIn.scanTime + BattleshipSpawnIn.alarmTime;
+                            player.inventory[b].stack--;
+                            break;
+                        }
+                    }
+                }
+                return true;
+            }
             if (!NPC.AnyNPCs(NPCType<FortressBoss>()))
             {
                 for (int b = 0; b < 58; b++) // this searches every invintory slot
@@ -69,7 +91,7 @@ namespace QwertyMod.Common.Fortress
             Player player = Main.LocalPlayer;
             player.noThrow = 2;
             player.cursorItemIconEnabled = true;
-            player.cursorItemIconID = ItemType<FortressBossSummon>();
+            player.cursorItemIconID = SkyFortress.beingInvaded ? ItemType<GodSealKeycard>() : ItemType<FortressBossSummon>();
         }
 
         public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
@@ -82,6 +104,50 @@ namespace QwertyMod.Common.Fortress
         public override bool CanExplode(int i, int j)
         {
             return false;
+        }
+        public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
+        {
+            if(!SkyFortress.beingInvaded)
+            {
+                return;
+            }
+            Vector2 zero = new Vector2(Main.offScreenRange, Main.offScreenRange);
+            if(Main.tile[i, j].TileFrameX == 36 && Main.tile[i, j].TileFrameY == 18)
+            {
+                spriteBatch.End();
+                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointWrap, DepthStencilState.Default, RasterizerState.CullNone);
+                
+
+                Terraria.Graphics.Effects.Filters.Scene["Vortex"].GetShader().UseIntensity(1f).UseProgress(0f);
+                DrawData value84 = new DrawData(Main.Assets.Request<Texture2D>("Images/Misc/Perlin").Value, 
+                new Vector2((i * 16) - 9, j * 16) + zero - Main.screenPosition, 
+                new Microsoft.Xna.Framework.Rectangle(0, 0, 160, 100), 
+                Color.Crimson, 0f, 
+                new Vector2(80f, 50f), 
+                1f, 
+                SpriteEffects.None, 0);
+
+                GameShaders.Misc["ForceField"].UseColor(Color.Crimson);
+                GameShaders.Misc["ForceField"].Apply(value84);
+                value84.Draw(spriteBatch);
+                spriteBatch.End();
+                
+                spriteBatch.Begin();
+                return;
+            }
+            if(Main.tile[i, j].TileFrameX != 0 || Main.tile[i, j].TileFrameY != 0)
+            {
+                return;
+            }
+            float offset = 10 * MathF.Sin((float)Main.time * MathF.PI / 180) - 10;
+            if (Main.drawToScreen)
+            {
+                zero = Vector2.Zero;
+            }
+            Texture2D texture = ModContent.Request<Texture2D>("QwertyMod/Common/Fortress/GodSeal").Value;
+            spriteBatch.Draw(texture, new Vector2((i * 16) + 24, j * 16 + offset) + zero - Main.screenPosition, null, Color.White, 0f, new Vector2(34, 106), 1f, SpriteEffects.None, 0f);
+
+            
         }
     }
 }

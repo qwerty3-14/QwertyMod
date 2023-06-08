@@ -33,16 +33,6 @@ namespace QwertyMod.Content.Items.Equipment.Vanity.SuitSkirt
                 .Register();
         }
     }
-	public class HeelMountedOffset : ModPlayer
-	{
-		public override void PostUpdateEquips()
-		{
-			if((Player.legs == EquipLoader.GetEquipSlot(Mod, "SuitSkirt", EquipType.Legs) || Player.legs == EquipLoader.GetEquipSlot(Mod, "CocktailDressSkirt", EquipType.Legs)) && !Player.mount.Active) 
-			{
-				Player.MountedCenter = new Vector2(Player.MountedCenter.X, Player.MountedCenter.Y - 2);
-			}
-		}
-	}
 	public class HeelOffset : PlayerDrawLayer
 	{
 		public override void SetStaticDefaults()
@@ -58,7 +48,7 @@ namespace QwertyMod.Content.Items.Equipment.Vanity.SuitSkirt
         protected override void Draw(ref PlayerDrawSet drawinfo)
 		{
             Player drawPlayer = drawinfo.drawPlayer;
-			if ((drawPlayer.legs == EquipLoader.GetEquipSlot(Mod, "SuitSkirt", EquipType.Legs) || drawPlayer.legs == EquipLoader.GetEquipSlot(Mod, "CocktailDressSkirt", EquipType.Legs)) && !drawPlayer.mount.Active && !drawinfo.hidesBottomSkin && !HeelLegs.IsBottomOverridden(ref drawinfo)) 
+			if ((drawPlayer.legs == EquipLoader.GetEquipSlot(Mod, "SuitSkirt", EquipType.Legs) || drawPlayer.legs == EquipLoader.GetEquipSlot(Mod, "CocktailDressSkirt", EquipType.Legs) || drawPlayer.legs == QwertyMod.PurpleSkirt || drawPlayer.legs == QwertyMod.PurpleSkirtAlt) && !drawPlayer.mount.Active && !drawinfo.hidesBottomSkin && !HeelLegs.IsBottomOverridden(ref drawinfo)) 
 			{
 				drawinfo.Position.Y -= 2;
 			}
@@ -81,10 +71,14 @@ namespace QwertyMod.Content.Items.Equipment.Vanity.SuitSkirt
         {
             Player drawPlayer = drawinfo.drawPlayer;
             Mod mod = ModLoader.GetMod("QwertyMod");
-            if ((drawPlayer.legs == EquipLoader.GetEquipSlot(Mod, "SuitSkirt", EquipType.Legs) || drawPlayer.legs == EquipLoader.GetEquipSlot(Mod, "CocktailDressSkirt", EquipType.Legs)) && !drawinfo.hidesBottomSkin && !IsBottomOverridden(ref drawinfo)) 
+            if (!drawinfo.hidesBottomSkin && (drawPlayer.legs == EquipLoader.GetEquipSlot(Mod, "SuitSkirt", EquipType.Legs) || drawPlayer.legs == EquipLoader.GetEquipSlot(Mod, "CocktailDressSkirt", EquipType.Legs) || drawPlayer.legs == QwertyMod.PurpleSkirt || drawPlayer.legs == QwertyMod.PurpleSkirtAlt) && !drawinfo.hidesBottomSkin && !IsBottomOverridden(ref drawinfo)) 
             {
                 drawinfo.hidesBottomSkin = true;
                 Texture2D texture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/Vanity/SuitSkirt/HeelLegs").Value;
+				if(drawinfo.skinVar > 9)
+                {
+                    texture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/Vanity/SuitSkirt/MannequinHeelLegs").Value;
+                }
 				if (drawinfo.isSitting) 
                 {
 					DrawSittingLegs(ref drawinfo, texture, drawinfo.colorLegs);

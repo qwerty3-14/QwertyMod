@@ -34,7 +34,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.BuildingBlocks
             MinPick = 50;
             AddMapEntry(new Color(162, 184, 185));
             MineResist = 1;
-            ItemDrop = ItemType<ChiselledFortressBrick>();
+            //ItemDrop = ItemType<ChiselledFortressBrick>();
         }
 
         public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)

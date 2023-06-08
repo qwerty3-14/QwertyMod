@@ -9,6 +9,12 @@ using Terraria.IO;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
 using static Terraria.ModLoader.ModContent;
+using Terraria.ModLoader.IO;
+using System.IO;
+using Microsoft.Xna.Framework;
+using Terraria.Net;
+using Terraria.Localization;
+using Terraria.ID;
 
 namespace QwertyMod.Common.Fortress
 {
@@ -32,14 +38,14 @@ namespace QwertyMod.Common.Fortress
             if (player.InModBiome(GetInstance<FortressBiome>()))
             {
 
-                if (NPC.AnyNPCs(NPCType<FortressBoss>()) || NPC.AnyNPCs(NPCType<InvaderBattleship>()))
+                if (NPC.AnyNPCs(NPCType<FortressBoss>()) || NPC.AnyNPCs(NPCType<InvaderBattleship>()) || BattleshipSpawnIn.spawnTimer > -1)
                 {
                     spawnRate = 0;
                     maxSpawns = 0;
                 }
                 else
                 {
-                    if (NPC.downedGolemBoss)
+                    if (SkyFortress.beingInvaded)
                     {
                         if (Main.dayTime)
                         {
@@ -94,10 +100,74 @@ namespace QwertyMod.Common.Fortress
     public class SkyFortress : ModSystem
     {
         public static int fortressBrick;
+        public static bool beingInvaded = false;
+        public static bool initalInvasion = false;
+        public override void OnWorldLoad()
+        {
+            beingInvaded = false;
+            initalInvasion = false;
+        }
+
+        public override void OnWorldUnload()
+        {
+            beingInvaded = false;
+            initalInvasion = false;
+        }
+        public override void SaveWorldData(TagCompound tag)
+        {
+            if(beingInvaded)
+            {
+                tag["beingInvaded"] = true;
+            }
+            if(initalInvasion)
+            {
+                tag["initalInvasion"] = true;
+            }
+        }
+        public override void LoadWorldData(TagCompound tag)
+        {
+            beingInvaded = tag.ContainsKey("beingInvaded");
+            initalInvasion = tag.ContainsKey("initalInvasion");
+        }
+
+        public override void NetSend(BinaryWriter writer)
+        {
+            //Order of operations is important and has to match that of NetReceive
+            var flags = new BitsByte();
+            flags[0] = beingInvaded;
+            flags[1] = initalInvasion;
+        }
+
+        public override void NetReceive(BinaryReader reader)
+        {
+            //Order of operations is important and has to match that of NetSend
+            BitsByte flags = reader.ReadByte();
+            beingInvaded = flags[0];
+            initalInvasion = flags[1];
+        }
 
         public override void ResetNearbyTileEffects()
         {
             fortressBrick = 0;
+        }
+        public override void PreUpdateWorld()
+        {
+            if(!initalInvasion && NPC.downedPlantBoss)
+            {
+                beingInvaded = true;
+                initalInvasion = true;
+                
+                string key = "The sky fortress is being invaded!";
+                Color messageColor = Color.Green;
+                if (Main.netMode == NetmodeID.Server) // Server
+                {
+                    Terraria.Chat.ChatHelper.BroadcastChatMessage(NetworkText.FromKey(key), messageColor);
+                }
+                else if (Main.netMode == NetmodeID.SinglePlayer) // Single Player
+                {
+                    Main.NewText(Language.GetTextValue(key), messageColor);
+                }
+            }
         }
 
         public override void TileCountsAvailable(ReadOnlySpan<int> tileCounts)

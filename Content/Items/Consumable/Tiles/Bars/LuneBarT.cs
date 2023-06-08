@@ -25,7 +25,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Bars
             HitSound = SoundID.Tink;
             MinPick = 1;
             //AddMapEntry(new Color(102, 143, 204));
-            ItemDrop = ItemType<LuneBar>();
+            //ItemDrop = ItemType<LuneBar>();
         }
 
         public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)

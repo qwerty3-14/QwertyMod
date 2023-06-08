@@ -24,11 +24,18 @@ namespace QwertyMod.Content.Items.Equipment.Vanity.ScarletBallGown
         {
             Item.width = 34;
             Item.height = 30;
-            Item.rare = ItemRarityID.Blue;
-            Item.vanity = true;
-            Item.value = Item.buyPrice(gold: 3);
             Item.accessory = true;
-            Item.value = Item.buyPrice(gold: 20);
+            Item.rare = ItemRarityID.White;
+            Item.vanity = true;
+            Item.value = Item.sellPrice(silver: 30);
+        }
+        public override void AddRecipes()
+        {
+            CreateRecipe(1)
+				.AddIngredient(ItemID.Silk, 10)
+				.AddIngredient(ItemID.TissueSample, 3)
+                .AddTile(TileID.Loom)
+                .Register();
         }
     }
     public class Fan : ModPlayer
@@ -87,6 +94,10 @@ namespace QwertyMod.Content.Items.Equipment.Vanity.ScarletBallGown
             {
                 Vector2 offset = drawPlayer.GetBackHandPosition(Player.CompositeArmStretchAmount.Full, drawPlayer.direction * -2f * MathF.PI / 8f) - drawPlayer.MountedCenter;
                 Vector2 drawAt = drawPlayer.MountedCenter + offset;
+                if ((drawPlayer.legs == EquipLoader.GetEquipSlot(Mod, "SuitSkirt", EquipType.Legs) || drawPlayer.legs == EquipLoader.GetEquipSlot(Mod, "CocktailDressSkirt", EquipType.Legs)) && !drawPlayer.mount.Active) 
+                {
+                    drawAt.Y -= 2;
+                }
                 int fHeight = 56;
                 if (drawPlayer.bodyFrame.Y == 7 * fHeight || drawPlayer.bodyFrame.Y == 8 * fHeight || drawPlayer.bodyFrame.Y == 9 * fHeight || drawPlayer.bodyFrame.Y == 14 * fHeight || drawPlayer.bodyFrame.Y == 15 * fHeight || drawPlayer.bodyFrame.Y == 16 * fHeight)
                 {

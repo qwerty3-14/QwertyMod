@@ -23,7 +23,7 @@ namespace QwertyMod.Content.Items.Tool.Mining.Ancient
             Item.damage = 29;
             Item.DamageType = DamageClass.Melee;
 
-            Item.useTime = 22;
+            Item.useTime = 40;
             Item.useAnimation = 30;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.knockBack = 3;
@@ -36,8 +36,8 @@ namespace QwertyMod.Content.Items.Tool.Mining.Ancient
             //Item.crit = 5;
             Item.autoReuse = true;
             Item.useTurn = true;
-            Item.pick = 100;
-            Item.tileBoost = 2;
+            Item.pick = 95;
+            Item.tileBoost = 1;
             Item.GetGlobalItem<AoePick>().miningRadius = 1;
             if (!Main.dedServ)
             {

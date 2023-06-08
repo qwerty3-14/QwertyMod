@@ -33,7 +33,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.BuildingBlocks
             AddToArray(ref TileID.Sets.RoomNeeds.CountsAsDoor);
             //AddMapEntry(new Color(162, 184, 185));
             DustType = DustType<FortressDust>();
-            ItemDrop = ItemType<FortressPlatform>();
+            //ItemDrop = ItemType<FortressPlatform>();
             //disableSmartCursor = true;
             AdjTiles = new int[] { TileID.Platforms };
         }

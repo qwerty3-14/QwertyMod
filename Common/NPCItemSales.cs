@@ -9,6 +9,7 @@ using QwertyMod.Content.Items.Weapon.Ranged.Gun.Charging;
 using QwertyMod.Content.Items.Equipment.Armor.Hero;
 using QwertyMod.Content.Items.Equipment.Vanity.CocktailDress;
 using QwertyMod.Content.Items.Equipment.Vanity.ScarletBallGown;
+using QwertyMod.Content.Items.Equipment.Vanity.PurpleDress;
 using QwertyMod.Content.Items.Equipment.VanityAccessories;
 using QwertyMod.Content.Items.Equipment.Vanity.Casual;
 
@@ -18,30 +19,20 @@ namespace QwertyMod.Common
     {
         public override void ModifyShop(NPCShop shop)
         {
-            
-            if (shop.NpcType == NPCID.SkeletonMerchant && Main.moonPhase < 4)
+            if (shop.NpcType == NPCID.SkeletonMerchant)
             {
-                shop.Add<ArcaneArmorBreaker>();
+                shop.Add<ArcaneArmorBreaker>(Condition.MoonPhasesEven);
             }
             if (shop.NpcType == NPCID.ArmsDealer)
             {
-                if (DownedBossSystem.downedAncient)
-                {
-                    shop.Add<MiniTankStaff>();
-                }
-                if (DownedBossSystem.downedRuneGhost)
-                {
-                    shop.Add<ChargingShotgun>();
-                }
-                if(shop.NpcType == NPCID.Clothier && !Main.dayTime)
-                {
-                    shop.Add<CocktailDressTop>();
-                    shop.Add<CocktailDressSkirt>();
-                }
-                if(shop.NpcType == NPCID.Clothier && Main.dayTime)
-                {
-                    shop.Add<CasualSkirt>();
-                }
+                shop.Add<MiniTankStaff>(new Condition("downedAM", () => DownedBossSystem.downedAncient));
+                shop.Add<ChargingShotgun>(new Condition("downedRunGhost", () => DownedBossSystem.downedRuneGhost));
+            }
+            if(shop.NpcType == NPCID.Clothier)
+            {
+                shop.Add<CocktailDressTop>(Condition.TimeNight);
+                shop.Add<CocktailDressSkirt>(Condition.TimeNight);
+                shop.Add<CasualSkirt>(Condition.TimeDay);
             }
         }
         public override void SetupTravelShop(int[] shop, ref int nextSlot)
@@ -62,10 +53,25 @@ namespace QwertyMod.Common
                     nextSlot++;
                 break;
                 case 1:
-                    shop[nextSlot] = ItemType<ScarletBallGown>();
-                    nextSlot++;
-                    shop[nextSlot] = ItemType<ScarletFan>();
-                    nextSlot++;
+                    if(WorldGen.crimson)
+                    {
+                        shop[nextSlot] = ItemType<PurpleBonnet>();
+                        nextSlot++;
+                        shop[nextSlot] = ItemType<PurpleDress>();
+                        nextSlot++;
+                        shop[nextSlot] = ItemType<PurpleUmbrella>();
+                        nextSlot++;
+                    }
+                    else
+                    {
+                        shop[nextSlot] = ItemType<ScarletHat>();
+                        nextSlot++;
+                        shop[nextSlot] = ItemType<ScarletBallGown>();
+                        nextSlot++;
+                        shop[nextSlot] = ItemType<ScarletFan>();
+                        nextSlot++;
+                    }
+                    
                 break;
                 case 2:
                     shop[nextSlot] = ItemType<Shrug>();
@@ -79,16 +85,6 @@ namespace QwertyMod.Common
                     shop[nextSlot] = ItemType<Purse>();
                     nextSlot++;
                 break;
-            }
-            if(Main.rand.NextBool(8) && NPC.downedBoss2)
-            {
-                shop[nextSlot] = ItemType<HeroPlate>();
-                nextSlot++;
-                shop[nextSlot] = ItemType<HeroPants>();
-                nextSlot++;
-                shop[nextSlot] = ItemType<HeroShield>();
-                nextSlot++;
-
             }
         }
     }

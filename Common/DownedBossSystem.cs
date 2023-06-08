@@ -17,6 +17,7 @@ namespace QwertyMod.Common
         public static bool downedDivineLight = false;
         public static bool downedOLORD = false;
         public static bool downedDinos = false;
+        public static bool downedBattleship = false;
         //public static bool downedOtherBoss = false;
 
         public override void OnWorldLoad()
@@ -30,6 +31,7 @@ namespace QwertyMod.Common
             downedDivineLight = false;
             downedOLORD = false;
             downedDinos = false;
+            downedBattleship = false;
             //downedOtherBoss = false;
         }
 
@@ -44,6 +46,7 @@ namespace QwertyMod.Common
             downedDivineLight = false;
             downedOLORD = false;
             downedDinos = false;
+            downedBattleship = false;
             //downedOtherBoss = false;
         }
         public override void SaveWorldData(TagCompound tag)
@@ -85,6 +88,10 @@ namespace QwertyMod.Common
             {
                 tag["downedDinos"] = true;
             }
+            if (downedBattleship)
+            {
+                tag["downedBattleship"] = true;
+            }
             //if (downedOtherBoss) {
             //	downed.Add("downedOtherBoss");
             //}
@@ -102,6 +109,7 @@ namespace QwertyMod.Common
             downedDivineLight = tag.ContainsKey("downedDivineLight");
             downedOLORD = tag.ContainsKey("downedOLORD");
             downedDinos = tag.ContainsKey("downedDinos");
+            downedBattleship = tag.ContainsKey("downedBattleship");
             //downedOtherBoss = downed.Contains("downedOtherBoss");
         }
 
@@ -121,6 +129,7 @@ namespace QwertyMod.Common
             writer.Write(flags);
             flags = new BitsByte();
             flags[0] = downedDinos;
+            flags [1] = downedBattleship;
             writer.Write(flags);
             /*
 			Remember that Bytes/BitsByte only have up to 8 entries. If you have more than 8 flags you want to sync, use multiple BitsByte:
@@ -180,6 +189,7 @@ namespace QwertyMod.Common
             downedOLORD = flags[7];
             flags = reader.ReadByte();
             downedDinos = flags[0];
+            downedBattleship = flags[1];
             //downedOtherBoss = flags[1];
 
             // As mentioned in NetSend, BitBytes can contain up to 8 values. If you have more, be sure to read the additional data:

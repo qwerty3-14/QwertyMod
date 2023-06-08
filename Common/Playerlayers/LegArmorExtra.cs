@@ -27,11 +27,30 @@ namespace QwertyMod.Common.Playerlayers
             Mod mod = ModLoader.GetMod("QwertyMod");
             if (OnLegDraw.LegDictionary.ContainsKey(drawPlayer.legs))
             {
-                Color color12 = drawInfo.colorArmorHead;
+                Color color12 = drawInfo.colorArmorLegs;
                 bool glowmask = OnLegDraw.LegDictionary[drawPlayer.legs].glowmask;
                 if (glowmask)
                 {
                     color12 = Color.White;
+                }
+                int defaultColor = OnLegDraw.LegDictionary[drawPlayer.legs].useDefaultColor;
+                if(defaultColor != -1)
+                {
+                    switch(defaultColor)
+                    {
+                        case 0:
+                        color12 = drawPlayer.shirtColor;
+                        break;
+                        case 1:
+                        color12 = drawPlayer.underShirtColor;
+                        break;
+                        case 2:
+                        color12 = drawPlayer.GetImmuneAlphaPure(Lighting.GetColorClamped((int)((double)drawInfo.Position.X + (double)drawPlayer.width * 0.5) / 16, (int)(((double)drawInfo.Position.Y + (double)drawPlayer.height * 0.75) / 16.0), drawPlayer.shoeColor), drawInfo.shadow);
+                        break;
+                        case 3:
+                        color12 = drawPlayer.GetImmuneAlphaPure(Lighting.GetColorClamped((int)((double)drawInfo.Position.X + (double)drawPlayer.width * 0.5) / 16, (int)(((double)drawInfo.Position.Y + (double)drawPlayer.height * 0.75) / 16.0), drawPlayer.shoeColor), drawInfo.shadow);
+                        break;
+                    }
                 }
                 Texture2D texture = OnLegDraw.LegDictionary[drawPlayer.legs].texture;
                 int useShader = OnLegDraw.LegDictionary[drawPlayer.legs].useShader;
@@ -189,12 +208,14 @@ namespace QwertyMod.Common.Playerlayers
         public Texture2D femaleTexture;
         public bool glowmask = true;
         public int useShader = -1;
-        public OnLegDraw(Texture2D texture, Texture2D femaleTexture, bool glowmask = true, int useShader = -1)
+        public int useDefaultColor = -1;
+        public OnLegDraw(Texture2D texture, Texture2D femaleTexture, bool glowmask = true, int useShader = -1, int useDefaultColor = -1)
         {
             this.texture = texture;
             this.femaleTexture = femaleTexture;
             this.glowmask = glowmask;
             this.useShader = useShader;
+            this.useDefaultColor = useDefaultColor;
         }
         public static void RegisterLegs()
         {
@@ -211,6 +232,10 @@ namespace QwertyMod.Common.Playerlayers
             leg = new OnLegDraw(Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Bionic/BionicLimbs_Legs_Glow", immediate).Value, Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Bionic/BionicLimbs_FemaleLegs_Glow", immediate).Value);
             LegDictionary.Add(QwertyMod.BionicLegMale, leg);
             LegDictionary.Add(QwertyMod.BionicLegFemale, leg);
+            //leg = new OnLegDraw(Request<Texture2D>("QwertyMod/Content/Items/Equipment/Vanity/Casual/CasualSkirt_Skirt", immediate).Value, Request<Texture2D>("QwertyMod/Content/Items/Equipment/Vanity/Casual/CasualSkirt_Skirt", immediate).Value, false, useDefaultColor: 2);
+            //LegDictionary.Add(EquipLoader.GetEquipSlot(QwertyMod.Instance, "CasualSkirt", EquipType.Legs), leg);
+            leg = new OnLegDraw(Request<Texture2D>("QwertyMod/Content/Items/Equipment/Vanity/Casual/CasualSkirt_Shoes", immediate).Value, Request<Texture2D>("QwertyMod/Content/Items/Equipment/Vanity/Casual/CasualSkirt_Shoes", immediate).Value, false, 3, 3);
+            LegDictionary.Add(EquipLoader.GetEquipSlot(QwertyMod.Instance, "CasualSkirt", EquipType.Legs), leg);
 
             leg = new OnLegDraw(Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Invader/InvaderLanders_Legs_Glow", immediate).Value,
             Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Invader/InvaderLanders_FemaleLegs_Glow", immediate).Value);

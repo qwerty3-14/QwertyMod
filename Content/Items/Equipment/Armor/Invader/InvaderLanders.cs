@@ -18,7 +18,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Invader
 
         public override void SetDefaults()
         {
-            Item.value = QwertyMod.InvaderGearValue;
+            Item.value = GearStats.InvaderGearValue;
             Item.rare = ItemRarityID.Yellow;
             Item.width = 22;
             Item.height = 18;

@@ -26,7 +26,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.GalacticEnragement
             Item.damage = 20;
             Item.DamageType = DamageClass.Magic;
             Item.knockBack = 1;
-            Item.value = 50000;
+            Item.value = GearStats.TrueCaeliteWeaponValue;
             Item.rare = ItemRarityID.Orange;
             Item.width = 38;
             Item.height = 16;

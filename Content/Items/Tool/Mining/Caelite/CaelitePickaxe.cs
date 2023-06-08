@@ -24,7 +24,7 @@ namespace QwertyMod.Content.Items.Tool.Mining.Caelite
             Item.damage = 7;
             Item.DamageType = DamageClass.Melee;
 
-            Item.useTime = 28;
+            Item.useTime = 22;
             Item.useAnimation = 30;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.knockBack = 3;
@@ -36,7 +36,7 @@ namespace QwertyMod.Content.Items.Tool.Mining.Caelite
             Item.height = 32;
             //Item.crit = 5;
             Item.autoReuse = true;
-            Item.pick = 95;
+            Item.pick = 100;
             Item.tileBoost = 2;
             Item.GetGlobalItem<AoePick>().miningRadius = 1;
         }

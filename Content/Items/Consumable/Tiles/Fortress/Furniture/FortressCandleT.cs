@@ -27,7 +27,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Furniture
             DustType = DustType<FortressDust>();
             HitSound = QwertyMod.FortressBlocks;
             AdjTiles = new int[] { TileID.Candelabras };
-            ItemDrop = ItemType<FortressCandle>();
+            //ItemDrop = ItemType<FortressCandle>();
 
             AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
         }

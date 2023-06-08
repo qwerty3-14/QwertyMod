@@ -184,7 +184,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.AncientMissile
             Player player = Main.player[Projectile.owner];
             Projectile.width = 150;
             Projectile.height = 150;
-            Projectile.FriendlyFire();
+            //Projectile.FriendlyFire();
 
             SoundEngine.PlaySound(SoundID.Item62, Projectile.position);
 

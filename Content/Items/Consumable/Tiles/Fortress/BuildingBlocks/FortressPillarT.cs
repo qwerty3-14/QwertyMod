@@ -25,7 +25,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.BuildingBlocks
             AddMapEntry(new Color(162, 184, 185));
             HitSound = QwertyMod.FortressBlocks;
             DustType = DustType<FortressDust>();
-            ItemDrop = ItemType<FortressPillar>();
+            //ItemDrop = ItemType<FortressPillar>();
         }
 
         public override void KillTile(int i, int j, ref bool fail, ref bool effectOnly, ref bool noItem)

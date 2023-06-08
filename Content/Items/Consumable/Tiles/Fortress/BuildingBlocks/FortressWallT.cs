@@ -12,7 +12,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.BuildingBlocks
         {
             Main.wallHouse[Type] = true;
             DustType = DustType<FortressDust>();
-            ItemDrop = ItemType<FortressWall>();
+            //ItemDrop = ItemType<FortressWall>();
             AddMapEntry(new Color(76, 80, 92));
         }
 

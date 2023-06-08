@@ -75,7 +75,9 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.Doppleganger
                     frameCount = Main.itemAnimations[mimicId].FrameCount;
                 }
                 float greaterLength = Math.Max(mimicTexture.Width, mimicTexture.Height / frameCount);
-                spriteBatch.Draw(mimicTexture, position + Vector2.UnitY * -3, new Rectangle(0, 0, mimicTexture.Width, mimicTexture.Height / frameCount), new Color(180, 100, 100, 255), 0, origin, (44f / greaterLength) * scale, SpriteEffects.None, 0f);
+                //spriteBatch.Draw(mimicTexture, position + Vector2.UnitY * -3, new Rectangle(0, 0, mimicTexture.Width, mimicTexture.Height / frameCount), new Color(180, 100, 100, 255), 0, origin, (44f / greaterLength) * scale, SpriteEffects.None, 0f);
+                spriteBatch.Draw(mimicTexture, position, new Rectangle(0, 0, mimicTexture.Width, mimicTexture.Height / frameCount), new Color(180, 100, 100, 255), 0, new Vector2(mimicTexture.Width, mimicTexture.Height / frameCount) * 0.5f, (44f / greaterLength) * scale, SpriteEffects.None, 0f);
+                
 
                 return false;
             }

@@ -21,11 +21,11 @@ namespace QwertyMod.Content.Items.MiscMaterials
             spriteBatch.Draw
                 (
                     RuneSprites.runeCycle[f],
-                    position - new Vector2(2f, 2f),
+                    position,
                     null,
                     Color.White,
                     0,
-                    origin,
+                    new Vector2(31, 31) * 0.5f,
                     scale * 2,
                     SpriteEffects.None,
                     0f
@@ -35,14 +35,15 @@ namespace QwertyMod.Content.Items.MiscMaterials
         public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
         {
             int f = (Main.LocalPlayer.GetModPlayer<ItemFrameCounter>().frameCounter / 4) % 80;
+			Vector2 position = Item.Center - Main.screenPosition;
             spriteBatch.Draw
                 (
                     RuneSprites.runeCycle[f],
-                    Item.position - Main.screenPosition + Vector2.One * 54,
+                    position,
                     null,
                     Color.White,
-                    0,
-                    new Vector2(27, 27),
+                    rotation,
+                    new Vector2(31, 31) * 0.5f,
                     scale * 2,
                     SpriteEffects.None,
                     0f
@@ -52,8 +53,8 @@ namespace QwertyMod.Content.Items.MiscMaterials
 
         public override void SetDefaults()
         {
-            Item.width = 54;
-            Item.height = 54;
+            Item.width = 62;
+            Item.height = 62;
             Item.maxStack = 9999;
             Item.value = 100;
             Item.rare = ItemRarityID.Orange;

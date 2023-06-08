@@ -12,6 +12,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Dart.Rhuthinium
         public override void SetStaticDefaults()
         {
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 99;
+            AmmoID.Sets.IsSpecialist[Item.type] = true;
         }
 
         public override void SetDefaults()

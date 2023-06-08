@@ -8,6 +8,8 @@ using Terraria.Graphics.Shaders;
 using Terraria.ModLoader;
 using QwertyMod.Content.Items.Weapon.Whip.Fork;
 using Terraria.ID;
+using QwertyMod.Content.NPCs.Invader;
+using QwertyMod.Content.NPCs.Fortress;
 
 namespace QwertyMod.Common
 {
@@ -22,6 +24,8 @@ namespace QwertyMod.Common
         public float hookSpeed = 1f;
         public float weaponSize = 1f;
         public int normalGravity = 0;
+        public bool higherBeingFriendly = false;
+        public bool InvaderFiendly = false;
         
         public override void ResetEffects()
         {
@@ -32,6 +36,8 @@ namespace QwertyMod.Common
             hookSpeed = 1f;
             weaponSize = 1f;
             normalGravity--;
+            higherBeingFriendly = false;
+            InvaderFiendly = false;
         }
         public override void PreUpdate()
         {
@@ -46,15 +52,17 @@ namespace QwertyMod.Common
         }
         public override void PostUpdate()
         {
+            
         }
-        public override void ModifyHurt(ref Player.HurtModifiers modifiers)
+        public override bool FreeDodge(Player.HurtInfo info)
         {
             int dodgeRng = Main.rand.Next(100);
             if (dodgeRng < dodgeChance && dodgeRng < 80)
             {
                 Player.NinjaDodge();
-                modifiers.FinalDamage *= 0;
+                return true;
             }
+            return base.FreeDodge(info);
         }
         public override void PostUpdateEquips()
         {
@@ -68,6 +76,24 @@ namespace QwertyMod.Common
                 {
                     damageBoostFromDodge = false;
                 }
+            }
+            if(higherBeingFriendly)
+            {
+                Player.npcTypeNoAggro[ModContent.NPCType<Caster>()] = true;
+                Player.npcTypeNoAggro[ModContent.NPCType<Crawler>()] = true;
+                Player.npcTypeNoAggro[ModContent.NPCType<Hopper>()] = true;
+                Player.npcTypeNoAggro[ModContent.NPCType<YoungTile>()] = true;
+                Player.npcTypeNoAggro[ModContent.NPCType<GuardTile>()] = true;
+                Player.npcTypeNoAggro[ModContent.NPCType<FortressFlier>()] = true;
+                Player.npcTypeNoAggro[ModContent.NPCType<Swarmer>()] = true;
+            }
+            if(InvaderFiendly)
+            {
+                Player.npcTypeNoAggro[ModContent.NPCType<InvaderBehemoth>()] = true;
+                Player.npcTypeNoAggro[ModContent.NPCType<InvaderElite>()] = true;
+                Player.npcTypeNoAggro[ModContent.NPCType<InvaderCaster>()] = true;
+                Player.npcTypeNoAggro[ModContent.NPCType<InvaderFighter>()] = true;
+
             }
         }
         public int negativeCritChance = 0;

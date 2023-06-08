@@ -23,7 +23,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Catalyst
         }
         public override void SetDefaults()
         {
-            Item.value = QwertyMod.InvaderGearValue;
+            Item.value = GearStats.InvaderGearValue;
             Item.useStyle = ItemUseStyleID.HoldUp;
             Item.DamageType = DamageClass.Magic;
             Item.noMelee = true;

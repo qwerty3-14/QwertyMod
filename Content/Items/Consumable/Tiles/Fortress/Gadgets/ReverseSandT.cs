@@ -20,9 +20,9 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
 
             //ModTranslation name = CreateMapEntryName();
             //name.SetDefault("Dnas");
-            //AddMapEntry(Color.Blue, name);
+            AddMapEntry(Color.Blue);
 
-            ItemDrop = ItemType<ReverseSand>();
+            //ItemDrop = ItemType<ReverseSand>();
         }
 
         public override void RandomUpdate(int i, int j)

@@ -23,7 +23,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Ores
             //name.SetDefault("Lune Ore");
             //AddMapEntry(new Color(102, 143, 204), name);
 
-            ItemDrop = ItemType<LuneOre>();
+            //ItemDrop = ItemType<LuneOre>();
 
             MinPick = 65;
         }

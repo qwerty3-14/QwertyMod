@@ -26,7 +26,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.EnlightenedConfusion
             Item.crit = 773;
             Item.DamageType = DamageClass.Magic;
             Item.knockBack = 1;
-            Item.value = 50000;
+            Item.value = GearStats.TrueCaeliteWeaponValue;
             Item.rare = ItemRarityID.Orange;
             Item.width = 26;
             Item.height = 18;

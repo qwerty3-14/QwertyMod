@@ -76,7 +76,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Caelite
                 }
                 else
                 {
-                    healAmount -= healAmount;
+                    healLimiter -= healAmount;
                 }
                 if (Player.GetModPlayer<CaeliteSetBonus>().setBonus)
                 {
@@ -98,7 +98,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Caelite
                 }
                 else
                 {
-                    healAmount -= healAmount;
+                    healLimiter -= healAmount;
                 }
                 if (Player.GetModPlayer<CaeliteSetBonus>().setBonus)
                 {

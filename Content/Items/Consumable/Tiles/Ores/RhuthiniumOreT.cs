@@ -20,9 +20,9 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Ores
 
             //ModTranslation name = CreateMapEntryName();
             //name.SetDefault("Rhuthinium Ore");
-            //AddMapEntry(new Color(39, 129, 129), name);
+            AddMapEntry(new Color(39, 129, 129));
 
-            ItemDrop = ItemType<RhuthiniumOre>();
+            //ItemDrop = ItemType<RhuthiniumOre>();
 
             MinPick = 1;
         }

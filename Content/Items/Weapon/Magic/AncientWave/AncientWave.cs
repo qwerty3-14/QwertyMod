@@ -23,13 +23,13 @@ namespace QwertyMod.Content.Items.Weapon.Magic.AncientWave
 
         public override void SetDefaults()
         {
-            Item.damage = 31;
+            Item.damage = 50;
             Item.DamageType = DamageClass.Magic;
 
             Item.useTime = 40;
             Item.useAnimation = 40;
             Item.useStyle = ItemUseStyleID.Shoot;
-            Item.knockBack = 100;
+            Item.knockBack = 8;
             Item.value = 150000;
             Item.rare = ItemRarityID.Orange;
             Item.UseSound = SoundID.Item1;
@@ -67,7 +67,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.AncientWave
             Projectile.penetrate = -1;
             Projectile.DamageType = DamageClass.Magic;
             Projectile.tileCollide = false;
-            Projectile.timeLeft = 60 * 15;
+            Projectile.timeLeft = 60 * 2;
         }
 
         public int dustTimer;

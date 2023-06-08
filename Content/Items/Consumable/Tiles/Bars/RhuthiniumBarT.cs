@@ -25,7 +25,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Bars
             HitSound = SoundID.Tink;
             MinPick = 1;
             //AddMapEntry(new Color(81, 97, 66));
-            ItemDrop = ItemType<RhuthiniumBar>();
+            //ItemDrop = ItemType<RhuthiniumBar>();
         }
 
         public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)

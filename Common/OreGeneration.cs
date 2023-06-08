@@ -197,4 +197,80 @@ namespace QwertyMod.Common
             OreGeneration.PlaceOreInIslands();
         }
     }
+    
+    internal class RhuthiniumGeneration : ModCommand
+    {
+        public override CommandType Type
+        {
+            get { return CommandType.Chat; }
+        }
+
+        public override string Command
+        {
+            get { return "createRhuthinium"; }
+        }
+        public override void Action(CommandCaller caller, string input, string[] args)
+        {
+            for (int i = 0; i < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 6E-06); i++)
+            {
+                WorldGen.OreRunner(
+                    WorldGen.genRand.Next(0, Main.maxTilesX), // X Coord of the tile
+                    WorldGen.genRand.Next((int)Main.rockLayer, Main.maxTilesY - 200), // Y Coord of the tile
+                    (double)WorldGen.genRand.Next(18, 28), // Strength (High = more)
+                    WorldGen.genRand.Next(5, 6), // Steps
+                    (ushort)TileType<RhuthiniumOreT>() // The tile type that will be spawned
+                    );
+            }
+            string key = "Rhuthimis has blessed your world with Rhuthinium!";
+            Color messageColor = Color.Cyan;
+            if (Main.netMode == NetmodeID.Server) // Server
+            {
+                Terraria.Chat.ChatHelper.BroadcastChatMessage(NetworkText.FromKey(key), messageColor);
+            }
+            else if (Main.netMode == NetmodeID.SinglePlayer) // Single Player
+            {
+                Main.NewText(Language.GetTextValue(key), messageColor);
+            }
+        }
+    }
+    internal class RhuthiniumScan : ModCommand
+    {
+        public override CommandType Type
+        {
+            get { return CommandType.Chat; }
+        }
+
+        public override string Command
+        {
+            get { return "scanRhuthinium"; }
+        }
+
+        public override void Action(CommandCaller caller, string input, string[] args)
+        {
+            int count = 0;
+            for(int i = 0; i < Main.tile.Width; i++)
+            {
+                for(int j = 0; j < Main.tile.Height; j++)
+                {
+                    if(Main.tile[i, j].HasTile && Main.tile[i, j].TileType == ModContent.TileType<RhuthiniumOreT>())
+                    {
+                        count++;
+                    }
+                }
+            }
+            if(count <= 0)
+            {
+                if(NPC.downedBoss3)
+                {
+                    Main.NewText("No Rhutinium found, something went wrong");
+                }
+                else
+                {
+                    Main.NewText("No Rhutinium found, as expected since you haven't killed skeletron");
+                }
+                return;
+            }
+            Main.NewText(count + " Rhuthnium found in this world, keep looking!");
+        }
+    }
 }
