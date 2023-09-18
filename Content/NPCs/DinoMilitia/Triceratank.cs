@@ -206,7 +206,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
             }
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             Player player = Main.player[Projectile.owner];
             Projectile.width = 75;
