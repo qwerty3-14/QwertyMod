@@ -28,7 +28,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Hero
         {
             Item.value = Item.buyPrice(gold: 20);
             Item.rare = ItemRarityID.Blue;
-            Item.width = 28;
+            Item.width = 14;
             Item.height = 22;
             Item.defense = 6;
             Item.accessory = true;

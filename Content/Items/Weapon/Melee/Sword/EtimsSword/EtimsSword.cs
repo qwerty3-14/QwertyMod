@@ -42,6 +42,8 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.EtimsSword
             Item.value = 120000;
             Item.useTurn = true;
             Item.scale = 1.8f;
+            Item.shootsEveryUse = true;
+            Item.shoot = ModContent.ProjectileType<EtimsSwordP>();
         }
 
 
@@ -61,189 +63,209 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.EtimsSword
         {
             return true;
         }
+        
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
+            if (player.altFunctionUse == 2)
+            {
+                Projectile.NewProjectile(source, position, Vector2.Zero, type, damage, knockback, player.whoAmI, 2);
+                return false;
+            }
+            return true;
+        }
     }
-
-    public class AltSword : ModPlayer
+    public class EtimsSwordP : ModProjectile
     {
-        private int[] localNPCImmunity = new int[Main.npc.Length];
+        public override void SetDefaults()
+        {
+            Projectile.timeLeft = 18;
+            Projectile.width = Projectile.height = 10;
+            Projectile.hostile = false;
+            Projectile.friendly = true;
+            Projectile.tileCollide = false;
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = 6;
+            Projectile.penetrate = -1;
+        }
         private bool uppercut = false;
         private bool slam = false;
-        private bool hasRightClicked = false;
-
-        public override void PostItemCheck()
+        private bool checkedRightClick = false;
+        public override void AI()
         {
-            if (!Player.inventory[Player.selectedItem].IsAir)
+            Player player = Main.player[Projectile.owner];
+            Projectile.Center = player.MountedCenter;
+            player.heldProj = Projectile.whoAmI;
+            Point origin = player.Bottom.ToTileCoordinates();
+            Point point;
+            Item item = player.HeldItem;
+            Projectile.localNPCHitCooldown = item.useAnimation / 3;
+            if (Projectile.ai[0] == 2 && !checkedRightClick)
             {
-                Point origin = Player.Bottom.ToTileCoordinates();
-                Point point;
-                Item item = Player.inventory[Player.selectedItem];
-                //Main.NewText(Player.itemAnimation  + " / " + Player.itemAnimationMax);
-
-                if (item.useStyle == 101)
+                if (WorldUtils.Find(origin, Searches.Chain(new Searches.Down(3), new GenCondition[]
+                                    {
+                                    new Conditions.IsSolid()
+                                    }), out point))
                 {
-                    if (Main.mouseRight && !hasRightClicked)
+                    player.itemAnimation = player.itemAnimationMax;
+                    player.velocity.Y = -10 - player.jumpSpeedBoost;
+                    uppercut = true;
+                    slam = false;
+                }
+                else
+                {
+                    player.velocity.Y = 10;
+                    slam = true;
+                    uppercut = false;
+                }
+            }
+            checkedRightClick = true;
+            float shift = 0f;
+            if (player.itemAnimation > 0 && uppercut || slam)
+            {
+                if (slam)
+                {
+                    //Main.NewText("Slamming");
+                    player.bodyFrame.Y = player.bodyFrame.Height * 4;
+                    shift = MathF.PI / 2;
+                    if (player.velocity.Y != 0)
                     {
-                        if (WorldUtils.Find(origin, Searches.Chain(new Searches.Down(3), new GenCondition[]
-                                            {
-                                            new Conditions.IsSolid()
-                                            }), out point))
-                        {
-                            Player.itemAnimation = Player.itemAnimationMax;
-                            Player.velocity.Y = -10 - Player.jumpSpeedBoost;
-                            uppercut = true;
-                            slam = false;
-                        }
-                        else
-                        {
-                            Player.velocity.Y = 10;
-                            slam = true;
-                            uppercut = false;
-                        }
-                    }
-                    float shift = 0f;
-                    if (Player.itemAnimation > 0 && uppercut || slam)
-                    {
-                        if (slam)
-                        {
-                            //Main.NewText("Slamming");
-                            Player.bodyFrame.Y = Player.bodyFrame.Height * 4;
-                            shift = MathF.PI / 2;
-
-                            if (Player.velocity.Y != 0)
-                            {
-                                Player.itemAnimation = 2;
-                            }
-                            else
-                            {
-                                Player.itemAnimation = 0;
-                                slam = false;
-                            }
-                            Player.velocity.Y = 10;
-                        }
-                        else if (uppercut)
-                        {
-                            shift = MathF.PI / 2 * ((float)Player.itemAnimation / (float)Player.itemAnimationMax) - MathF.PI / 4;
-
-                            if (Player.itemAnimation < Player.itemAnimationMax * .5f)
-                            {
-                                Player.bodyFrame.Y = Player.bodyFrame.Height * 2;
-                            }
-                            else if (Player.itemAnimation < Player.itemAnimationMax * .25f)
-                            {
-                                Player.bodyFrame.Y = Player.bodyFrame.Height * 3;
-                            }
-                            else
-                            {
-                                Player.bodyFrame.Y = Player.bodyFrame.Height * 4;
-                            }
-                            if (Player.itemAnimation < 2)
-                            {
-                                Player.itemAnimation = 2;
-                            }
-                            if (Player.velocity.Y >= 0)
-                            {
-                                Player.itemAnimation = 0;
-                                uppercut = false;
-                            }
-                        }
+                        player.itemAnimation = 3;
                     }
                     else
                     {
-                        if (Player.itemAnimation < Player.itemAnimationMax * .25f)
-                        {
-                            shift = MathF.PI / -4 * ((Player.itemAnimation) / (Player.itemAnimationMax * .25f));
-                        }
-                        else if (Player.itemAnimation < Player.itemAnimationMax * .75f)
-                        {
-                            shift = MathF.PI / -2 * (1 - (Player.itemAnimation - (Player.itemAnimationMax * .25f)) / (Player.itemAnimationMax * .5f)) + MathF.PI / 4;
-                        }
-                        else
-                        {
-                            shift = MathF.PI / 4 * (1 - (Player.itemAnimation - (Player.itemAnimationMax * .75f)) / (Player.itemAnimationMax * .25f));
-                        }
-                        if (Player.itemAnimation < Player.itemAnimationMax * .15f)
-                        {
-                            Player.bodyFrame.Y = Player.bodyFrame.Height * 3;
-                        }
-                        else if (Player.itemAnimation < Player.itemAnimationMax * .35f)
-                        {
-                            Player.bodyFrame.Y = Player.bodyFrame.Height * 2;
-                        }
-                        else if (Player.itemAnimation < Player.itemAnimationMax * .65f)
-                        {
-                            Player.bodyFrame.Y = Player.bodyFrame.Height * 3;
-                        }
-                        else if (Player.itemAnimation < Player.itemAnimationMax * .85f)
-                        {
-                            Player.bodyFrame.Y = Player.bodyFrame.Height * 4;
-                        }
-                        else
-                        {
-                            Player.bodyFrame.Y = Player.bodyFrame.Height * 3;
-                        }
+                        player.itemAnimation = 0;
+                        slam = false;
                     }
-                    if (Main.mouseRight && !slam && !uppercut)
-                    {
-                        Player.itemAnimation = 0;
-                    }
+                    player.velocity.Y = 10;
+                }
+                else if (uppercut)
+                {
+                    shift = MathF.PI / 2 * ((float)player.itemAnimation / (float)player.itemAnimationMax) - MathF.PI / 4;
 
-                    Player.itemRotation = MathF.PI / -4 + Player.direction * (MathF.PI / 2 + shift);
-                    //Main.NewText(MathHelper.ToDegrees(Player.itemRotation));
-
-                    Vector2 vector24 = Main.OffsetsPlayerOnhand[Player.bodyFrame.Y / 56] * 2f;
-                    if (Player.direction != 1)
+                    if (player.itemAnimation < player.itemAnimationMax * .5f)
                     {
-                        vector24.X = (float)Player.bodyFrame.Width - vector24.X;
+                        player.bodyFrame.Y = player.bodyFrame.Height * 2;
                     }
-                    if (Player.gravDir != 1f)
+                    else if (player.itemAnimation < player.itemAnimationMax * .25f)
                     {
-                        vector24.Y = (float)Player.bodyFrame.Height - vector24.Y;
+                        player.bodyFrame.Y = player.bodyFrame.Height * 3;
                     }
-                    vector24 -= new Vector2((float)(Player.bodyFrame.Width - Player.width), (float)(Player.bodyFrame.Height - 42)) / 2f;
-                    Player.itemLocation = Player.position + vector24;
-
-                    float swordLength = new Vector2((TextureAssets.Item[item.type].Value).Width, (TextureAssets.Item[item.type].Value).Height).Length();
-                    swordLength *= item.scale;
-                    for (int n = 0; n < Main.npc.Length; n++)
+                    else
                     {
-                        localNPCImmunity[n]--;
-                        if (Main.npc[n].active && !Main.npc[n].dontTakeDamage && (!Main.npc[n].friendly || (Main.npc[n].type == NPCID.Guide && Player.killGuide) || (Main.npc[n].type == NPCID.Clothier && Player.killClothier)) && Player.itemAnimation > 0 && localNPCImmunity[n] <= 0 && Collision.CheckAABBvLineCollision(Main.npc[n].position, Main.npc[n].Size, Player.itemLocation, Player.itemLocation + QwertyMethods.PolarVector(swordLength, Player.itemRotation - MathF.PI / 4)))
-                        {
-                            localNPCImmunity[n] = item.useAnimation / 3;
-                            int damageBeforeVariance = Player.GetWeaponDamage(item);
-                            if (slam || uppercut)
-                            {
-                                damageBeforeVariance *= 2;
-                            }
-                            if (slam)
-                            {
-                                Player.immune = true;
-                                if (Player.immuneTime < 60)
-                                {
-                                    Player.immuneTime = 60;
-                                }
-                            }
-                            if (!WorldUtils.Find(origin, Searches.Chain(new Searches.Down(3), new GenCondition[]
-                                            {
-                                            new Conditions.IsSolid()
-                                            }), out point) && Player.GetModPlayer<SkywardHiltEffect>().effect && Player.grappling[0] == -1)
-                            {
-                                damageBeforeVariance *= 2;
-                            }
-                            //////////////////////
-
-                            Projectile p = QwertyMethods.PokeNPC(Player, Main.npc[n], Player.GetSource_ItemUse(item), damageBeforeVariance, DamageClass.Melee, item.knockBack);
-                            if (item.type == ItemType<EtimsSword>())
-                            {
-                                p.GetGlobalProjectile<EtimsProjectile>().effect = true;
-                                p.GetGlobalProjectile<GiveAntiProjectileOnKill>().yes = true;
-                            }
-                        }
+                        player.bodyFrame.Y = player.bodyFrame.Height * 4;
                     }
-                    hasRightClicked = (Main.mouseRight);
+                    if (player.itemAnimation < 2)
+                    {
+                        player.itemAnimation = 2;
+                    }
+                    if (player.velocity.Y >= 0)
+                    {
+                        player.itemAnimation = 0;
+                        uppercut = false;
+                    }
                 }
             }
+            else
+            {
+                if (player.itemAnimation < player.itemAnimationMax * .25f)
+                {
+                    shift = MathF.PI / -4 * ((player.itemAnimation) / (player.itemAnimationMax * .25f));
+                }
+                else if (player.itemAnimation < player.itemAnimationMax * .75f)
+                {
+                    shift = MathF.PI / -2 * (1 - (player.itemAnimation - (player.itemAnimationMax * .25f)) / (player.itemAnimationMax * .5f)) + MathF.PI / 4;
+                }
+                else
+                {
+                    shift = MathF.PI / 4 * (1 - (player.itemAnimation - (player.itemAnimationMax * .75f)) / (player.itemAnimationMax * .25f));
+                }
+                if (player.itemAnimation < player.itemAnimationMax * .15f)
+                {
+                    player.bodyFrame.Y = player.bodyFrame.Height * 3;
+                }
+                else if (player.itemAnimation < player.itemAnimationMax * .35f)
+                {
+                    player.bodyFrame.Y = player.bodyFrame.Height * 2;
+                }
+                else if (player.itemAnimation < player.itemAnimationMax * .65f)
+                {
+                    player.bodyFrame.Y = player.bodyFrame.Height * 3;
+                }
+                else if (player.itemAnimation < player.itemAnimationMax * .85f)
+                {
+                    player.bodyFrame.Y = player.bodyFrame.Height * 4;
+                }
+                else
+                {
+                    player.bodyFrame.Y = player.bodyFrame.Height * 3;
+                }
+            }
+            /*
+            if (Main.mouseRight && !slam && !uppercut)
+            {
+                player.itemAnimation = 0;
+            }
+            */
+
+            player.itemRotation = MathF.PI / -4 + player.direction * (MathF.PI / 2 + shift);
+            //Main.NewText(MathHelper.ToDegrees(Player.itemRotation));
+
+            Vector2 vector24 = Main.OffsetsPlayerOnhand[player.bodyFrame.Y / 56] * 2f;
+            if (player.direction != 1)
+            {
+                vector24.X = (float)player.bodyFrame.Width - vector24.X;
+            }
+            if (player.gravDir != 1f)
+            {
+                vector24.Y = (float)player.bodyFrame.Height - vector24.Y;
+            }
+            vector24 -= new Vector2((float)(player.bodyFrame.Width - player.width), (float)(player.bodyFrame.Height - 42)) / 2f;
+            player.itemLocation = player.position + vector24;
+
+            player.itemTime = player.itemAnimation;
+            Projectile.timeLeft = player.itemAnimation;
+            
         }
+        public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
+        {
+            Player player = Main.player[Projectile.owner];
+            Item item = player.HeldItem;
+            float swordLength = new Vector2((TextureAssets.Item[item.type].Value).Width, (TextureAssets.Item[item.type].Value).Height).Length();
+            swordLength *= item.scale;
+            return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), player.itemLocation, player.itemLocation + QwertyMethods.PolarVector(swordLength, player.itemRotation - MathF.PI / 4));
+        }
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            if (slam || uppercut)
+            {
+                modifiers.FinalDamage *= 2;
+            }
+        }
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            Player player = Main.player[Projectile.owner];
+            if (slam)
+            {
+                player.immune = true;
+                if (player.immuneTime < 60)
+                {
+                    player.immuneTime = 60;
+                }
+            }
+            if (damageDone > target.life && !target.SpawnedFromStatue)
+            {
+                Main.player[Projectile.owner].AddBuff(BuffType<AntiProjectile>(), 360);
+            }
+
+        }
+
+        public override bool PreDraw(ref Color lightColor)
+        {
+            return false;
+        }
+    }
+    public class AltSword : ModPlayer
+    {
         public override bool CanBeHitByProjectile(Projectile proj)
         {
             if (Player.HasBuff(BuffType<AntiProjectile>()))
@@ -251,19 +273,6 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.EtimsSword
                 return false;
             }
             return base.CanBeHitByProjectile(proj);
-        }
-    }
-    public class GiveAntiProjectileOnKill : GlobalProjectile
-    {
-        public bool yes = false;
-        public override bool InstancePerEntity => true;
-        
-        public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            if (damageDone > target.life && !target.SpawnedFromStatue && projectile.GetGlobalProjectile<GiveAntiProjectileOnKill>().yes)
-            {
-                Main.player[projectile.owner].AddBuff(BuffType<AntiProjectile>(), 360);
-            }
         }
     }
     public class WeirdSword : PlayerDrawLayer

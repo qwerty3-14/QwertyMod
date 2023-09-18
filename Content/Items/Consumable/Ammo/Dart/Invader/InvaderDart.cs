@@ -60,7 +60,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Dart.Invader
         {
             Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(-6, Projectile.rotation + MathF.PI / 2), ModContent.DustType<InvaderGlow>(), Vector2.Zero, 100);
         }
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             for (int r = 0; r < 1; r++)
             {

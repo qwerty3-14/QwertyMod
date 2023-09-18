@@ -22,8 +22,8 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
             Item.rare = ItemRarityID.Blue;
 
             Item.value = 1000;
-            Item.width = 14;
-            Item.height = 14;
+            Item.width = 32;
+            Item.height = 34;
 
             Item.accessory = true;
         }
@@ -48,6 +48,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
             if (effect)
             {
                 Player.spaceGun = false;
+                /*
                 if (Player.HeldItem != null)
                 {
                     if (Player.HeldItem.type == ItemID.CrimsonRod || Player.HeldItem.type == ItemID.NimbusRod || Player.HeldItem.type == ItemID.MagnetSphere)
@@ -59,6 +60,23 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
                         Player.GetDamage(DamageClass.Magic) *= 2f;
                     }
                 }
+                */
+
+            }
+        }
+		public override void PostItemCheck()
+        {
+            if(Player.statMana < Player.statManaMax2 && effect && Player.itemAnimation > 0)
+            {
+                int amt = Player.statManaMax2 - Player.statMana;
+                int lifeDrain = BloodMedialionItemEffect.GetLifeCost(amt);
+                Player.statMana += amt;
+                Player.statLife -= lifeDrain;
+                if (Player.statLife <= 0)
+                {
+                    Player.KillMe(PlayerDeathReason.ByCustomReason(Player.name + " madly drained " + (Player.Male ? "his" : "her") + " lifeforce!"), lifeDrain, 0);
+                }
+                
 
             }
         }
@@ -71,10 +89,11 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
         {
             return base.Clone(item, itemClone);
         }
-        int GetLifeCost(int manaCost)
+        public static int GetLifeCost(int manaCost)
         {
-            return (int)MathHelper.Max(manaCost / (ModLoader.HasMod("TRAEProject") ? 6 : 3), 1);
+            return (int)MathHelper.Max(manaCost / (ModLoader.HasMod("TRAEProject") ? 2 : 1), 1);
         }
+		/*
         public override void UseAnimation(Item item, Player player)
         {
             if (player.GetModPlayer<BloodMedalionEffect>().effect && item.mana > 0)
@@ -92,7 +111,16 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
                 player.manaCost = 0f;
             }
         }
-
+        */
+		public override void ModifyWeaponDamage(Item item, Player player, ref StatModifier damage)
+		{
+			if(player.GetModPlayer<BloodMedalionEffect>().effect)
+            {
+                damage *= 2;
+            }
+		}
+        
+        
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
             if (!item.IsAir && Main.LocalPlayer.GetModPlayer<BloodMedalionEffect>().effect)
@@ -112,6 +140,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
                 }
             }
         }
+        
     }
     public class BloodyMedalionDrop : GlobalNPC
     {

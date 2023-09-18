@@ -23,6 +23,8 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Bionic
             Item.rare = ItemRarityID.Pink;
             Item.value = Item.sellPrice(gold: 5);
             Item.defense = 7;
+            Item.width = 16;
+            Item.height = 18;
         }
 
         public override void UpdateEquip(Player player)

@@ -84,7 +84,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin.Rhuthinium
             Projectile.DamageType = DamageClass.Melee;
             Projectile.penetrate = 1;
             Projectile.GetGlobalProjectile<ImplaingProjectile>().CanImpale = true;
-            Projectile.GetGlobalProjectile<ImplaingProjectile>().damagePerImpaler = 18;
+            Projectile.GetGlobalProjectile<ImplaingProjectile>().damagePerImpaler = 12;
             maxStickingJavelins = 10;
             dropItem = ItemType<RhuthiniumJavelin>();
             rotationOffset = MathF.PI / 4;

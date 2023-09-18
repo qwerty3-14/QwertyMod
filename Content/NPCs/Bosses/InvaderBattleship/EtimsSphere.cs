@@ -61,7 +61,7 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
                 }
             }
         }
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             foreach(Point loc in cleanUp)
             {

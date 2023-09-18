@@ -7,6 +7,8 @@ using Terraria.Enums;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 using static Terraria.ModLoader.ModContent;
+using QwertyMod.Content.NPCs.DinoMilitia;
+using Terraria.GameContent.Drawing;
 
 namespace QwertyMod.Content.Items.Consumable.Tiles.Banners
 {
@@ -14,79 +16,38 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Banners
     {
         public override void SetStaticDefaults()
         {
+            DustType = -1;
+
             Main.tileFrameImportant[Type] = true;
             Main.tileNoAttach[Type] = true;
             Main.tileLavaDeath[Type] = true;
-            TileObjectData.newTile.CopyFrom(TileObjectData.Style1x2Top);
-            TileObjectData.newTile.Height = 3;
-            TileObjectData.newTile.CoordinateHeights = new int[] { 16, 16, 16 };
-            TileObjectData.newTile.StyleHorizontal = true;
-            TileObjectData.newTile.AnchorTop = new AnchorData(AnchorType.SolidTile | AnchorType.SolidSide | AnchorType.SolidBottom, TileObjectData.newTile.Width, 0);
-            TileObjectData.newTile.StyleWrapLimit = 111;
-            TileObjectData.addTile(Type);
-            DustType = -1;
-            //DisableSmartCursor = true;
-            //ModTranslation name = CreateMapEntryName();
-            //name.SetDefault("Banner");
-            //AddMapEntry(new Color(13, 88, 130), name);
+            
+			TileObjectData.newTile.CopyFrom(TileObjectData.Style1x2Top);
+			TileObjectData.newTile.Height = 3;
+			TileObjectData.newTile.CoordinateHeights = new int[3]
+			{
+				16,
+				16,
+				16
+			};
+			TileObjectData.newTile.StyleHorizontal = true;
+			TileObjectData.newTile.AnchorTop = new AnchorData(AnchorType.SolidTile | AnchorType.SolidSide | AnchorType.SolidBottom | AnchorType.PlanterBox, TileObjectData.newTile.Width, 0);
+			TileObjectData.newTile.StyleWrapLimit = 111;
+			TileObjectData.newTile.DrawYOffset = -2;
+			TileObjectData.newAlternate.CopyFrom(TileObjectData.newTile);
+			TileObjectData.newAlternate.AnchorTop = new AnchorData(AnchorType.Platform, TileObjectData.newTile.Width, 0);
+			TileObjectData.newAlternate.DrawYOffset = -10;
+			TileObjectData.addAlternate(0);
+			TileObjectData.addTile(Type);
         }
-
-        public override void KillMultiTile(int i, int j, int frameX, int frameY)
-        {
-            int style = frameX / 18;
-            int item;
-            switch (style)
-            {
-                case 0:
-                    item = ItemType<HopperBanner>();
-                    break;
-
-                case 1:
-                    item = ItemType<CrawlerBanner>();
-                    break;
-
-                case 2:
-                    item = ItemType<GuardTileBanner>();
-                    break;
-
-                case 3:
-                    item = ItemType<FortressFlierBanner>();
-                    break;
-
-                case 4:
-                    item = ItemType<CasterBanner>();
-                    break;
-
-                case 5:
-                    item = ItemType<SpectorBanner>();
-                    break;
-
-                case 6:
-                    item = ItemType<TriceratankBanner>();
-                    break;
-
-                case 7:
-                    item = ItemType<UtahBanner>();
-                    break;
-
-                case 8:
-                    item = ItemType<VelocichopperBanner>();
-                    break;
-
-                case 9:
-                    item = ItemType<AntiAirBanner>();
-                    break;
-
-                case 10:
-                    item = ItemType<SwarmerBanner>();
-                    break;
-
-                default:
-                    return;
+		public override void SetDrawPositions(int i, int j, ref int width, ref int offsetY, ref int height, ref short tileFrameX, ref short tileFrameY)
+		{
+            if((tileFrameY == 0 && Main.tileSolidTop[Main.tile[i, j - 1].TileType]) || (tileFrameY == 18 && Main.tileSolidTop[Main.tile[i, j - 2].TileType]) || (tileFrameY == 36 && Main.tileSolidTop[Main.tile[i, j - 3].TileType]))
+            { 
+                offsetY -= 8;
             }
-            Item.NewItem(new EntitySource_TileBreak(i, j), i * 16, j * 16, 16, 48, item);
-        }
-
+			base.SetDrawPositions(i, j, ref width, ref offsetY, ref height, ref tileFrameX, ref tileFrameY);
+		}
         public override void NearbyEffects(int i, int j, bool closer)
         {
             if (closer)
@@ -119,7 +80,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Banners
                 case 5:
                     type = NPCType<Spector>();
                     break;
-
+                    */
                 case 6:
                     type = NPCType<Triceratank>();
                     break;
@@ -135,7 +96,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Banners
                 case 9:
                     type = NPCType<AntiAir>();
                     break;
-                    */
+
                     case 10:
                         type = NPCType<Swarmer>();
                         break;
@@ -143,10 +104,6 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Banners
                     default:
                         return;
                 }
-                /*
-                player.HasNPCBannerBuff[type] = true;
-                player.hasBanner = true;
-                */
             }
         }
 

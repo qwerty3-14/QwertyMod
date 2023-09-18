@@ -62,7 +62,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraBeam
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Beam Head");
+            ProjectileID.Sets.DrawScreenCheckFluff[Projectile.type] = 5000;
         }
 
         public override bool PreDraw(ref Color lightColor)

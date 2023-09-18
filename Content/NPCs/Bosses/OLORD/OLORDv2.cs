@@ -55,7 +55,7 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
             NPC.netAlways = true;
 
             NPC.scale = 1f;
-            NPC.lifeMax = 120000;
+            NPC.lifeMax = 180000;
             if (!Main.dedServ)
             {
                 Music = MusicLoader.GetMusicSlot(Mod, "Assets/Music/EnergisedPlanetaryIncinerationClimax");
@@ -240,7 +240,6 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
                 timer++;
                 frame = 0;
                 int startAttacks = 420;
-
                 if ((Math.Abs(player.Center.X - NPC.Center.X) > guideWidth || player.Center.Y < NPC.Center.Y + 50))
                 {
                     timer = 0;
@@ -276,6 +275,10 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
                 if (timer > startAttacks)
                 {
                     int startShooting = 60;
+                    if(((float)NPC.life / NPC.lifeMax) < 0.5f)
+                    {
+                        startShooting = 10;
+                    }
 
                     switch (attack)
                     {
@@ -300,11 +303,16 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
                                     shootLaser[t] = true;
                                 }
                                 frame = 1;
-                                if (timer % 30 == 0)
+                                int cooldown = 30;
+                                if((((float)NPC.life / NPC.lifeMax) < 0.5f))
+                                {
+                                    cooldown = 15;
+                                }
+                                if (timer % cooldown == 0)
                                 {
                                     if (Main.netMode != NetmodeID.MultiplayerClient)
                                     {
-                                        if (timer % 60 == 0)
+                                        if (timer % (cooldown * 2) == 0)
                                         {
                                             for (int p = -5; p < 7; p += 2)
                                             {
@@ -346,7 +354,7 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
                                     {
                                         turret[t].X = QwertyMethods.SlowRotation(turret[t].X, (player.Center - (NPC.Center + turretPos[t] * NPC.scale)).ToRotation() - MathF.PI / 2, 4);
                                         turret[t].Y = 0;
-                                        if (timer % 120 == 0)
+                                        if (timer % 120 == 0 || ((((float)NPC.life / NPC.lifeMax) < 0.5f) && timer % 120 == 60))
                                         {
                                             if (Main.netMode != NetmodeID.MultiplayerClient)
                                             {
@@ -432,7 +440,11 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
                                                 {
                                                     Projectile p = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromAI(), (NPC.Center + turretPos[t] * NPC.scale), QwertyMethods.PolarVector(3 * NPC.ai[3], turret[t].X + MathF.PI / 2), ProjectileType<TurretShot>(), shotDamage, 0, Main.myPlayer)];
                                                     p.scale = NPC.scale;
-
+                                                    if(((float)NPC.life / NPC.lifeMax) < 0.5f)
+                                                    {
+                                                        p = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromAI(), (NPC.Center + turretPos[t] * NPC.scale), QwertyMethods.PolarVector(4.5f * NPC.ai[3], turret[t].X + MathF.PI / 2), ProjectileType<TurretShot>(), shotDamage, 0, Main.myPlayer)];
+                                                        p.scale = NPC.scale;
+                                                    }
                                                     Vector2 center = (NPC.Center + turretPos[t] * NPC.scale);
                                                     for (int i = 0; i < 10; i++)
                                                     {
@@ -496,7 +508,12 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
                                 {
                                     turret[t].Y = 0;
                                     turret[t].X = QwertyMethods.SlowRotation(turret[t].X, 0, 4);
-                                    if (timer % 120 == t * 30)
+                                    int cooldown = 30;
+                                    if(((float)NPC.life / NPC.lifeMax) < 0.5f)
+                                    {
+                                        cooldown = 20;
+                                    }
+                                    if (timer % (cooldown * 4) == t * cooldown)
                                     {
                                         if (Main.netMode != NetmodeID.MultiplayerClient)
                                         {
@@ -572,6 +589,17 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
                                             {
                                                 Projectile p = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromAI(), (NPC.Center + turretPos[t] * NPC.scale), QwertyMethods.PolarVector(4.5f * NPC.ai[3], turret[t].X + MathF.PI / 2), ProjectileType<BurstShot>(), shotDamage, 0, Main.myPlayer)];
                                                 p.scale = NPC.scale;
+                                                if(((float)NPC.life / NPC.lifeMax) < 0.5f)
+                                                {
+                                                    for(int i = 0; i < 5; i++)
+                                                    {
+                                                        if(i != 2)
+                                                        {
+                                                            p = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromAI(), (NPC.Center + turretPos[t] * NPC.scale), QwertyMethods.PolarVector(4.5f * NPC.ai[3], turret[t].X + MathF.PI / 2 + (MathF.PI / 2f) * ((i + 1) / 6f) - (MathF.PI / 4f)), ProjectileType<TurretShot>(), shotDamage, 0, Main.myPlayer)];
+                                                            p.scale = NPC.scale;
+                                                        }
+                                                    }
+                                                }
 
                                                 Vector2 center = (NPC.Center + turretPos[t] * NPC.scale);
                                                 for (int i = 0; i < 30; i++)
@@ -1307,7 +1335,7 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
 
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("O.L.O.R.D.'s wall");
+            ProjectileID.Sets.DrawScreenCheckFluff[Projectile.type] = 5000;
         }
 
         public override void SetDefaults()
@@ -1412,15 +1440,13 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
         // Change the way of collision check of the projectile
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
-            // We can only collide if we are at max charge, which is when the laser is actually fired
-
-            Player player = Main.player[Projectile.owner];
-            Vector2 unit = Projectile.velocity;
+            if (Charge < MaxChargeValue)
+            {
+                return false;
+            }
             float point = 0f;
-            // Run an AABB versus Line check to look for collisions, look up AABB collision first to see how it works
-            // It will look for collisions on the given line using AABB
-            return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), new Vector2(shooter.Center.X + Projectile.ai[1], shooter.Center.Y + downFromCenter),
-                new Vector2(shooter.Center.X + Projectile.ai[1], shooter.Center.Y + downFromCenter) + unit * Distance, 316, ref point);
+            return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), 
+            Projectile.Center, Projectile.Center + Vector2.UnitY * 4000, 316, ref point);
         }
 
         public override bool ShouldUpdatePosition()

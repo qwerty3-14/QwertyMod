@@ -27,7 +27,6 @@ namespace QwertyMod.Content.Items.Tool.Mining.TheDevourer
             Item.scale = 2;
             Item.width = 85;
             Item.height = 82;
-            //Item.crit = 5;
             Item.autoReuse = true;
             Item.useTurn = true;
             Item.pick = 250;

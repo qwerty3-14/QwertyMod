@@ -72,11 +72,6 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Furniture
             }
         }
 
-        public override void KillMultiTile(int i, int j, int frameX, int frameY)
-        {
-            Item.NewItem(new EntitySource_TileBreak(i, j), i * 16, j * 16, 32, 16, ItemType<FortressCandelabra>());
-        }
-
         public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
         {
             ulong randSeed = Main.TileFrameSeed ^ (ulong)((int)j << 32 | (long)((ulong)i));

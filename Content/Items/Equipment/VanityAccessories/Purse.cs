@@ -16,7 +16,7 @@ namespace QwertyMod.Content.Items.Equipment.VanityAccessories
         public override void SetDefaults()
         {
             Item.width = 10;
-            Item.height = 10;
+            Item.height = 12;
             Item.rare = ItemRarityID.Blue;
             Item.vanity = true;
             Item.value = Item.buyPrice(gold: 3);

@@ -18,8 +18,8 @@ namespace QwertyMod.Content.Items.Equipment.Vanity.SuitSkirt
 
         public override void SetDefaults()
         {
-            Item.width = 34;
-            Item.height = 30;
+            Item.width = 22;
+            Item.height = 14;
             Item.rare = ItemRarityID.White;
             Item.vanity = true;
             Item.value = Item.sellPrice(silver: 10);

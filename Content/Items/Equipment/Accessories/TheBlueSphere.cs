@@ -73,7 +73,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
             {
                 if (projectile.penetrate <= Main.player[projectile.owner].GetModPlayer<MagicPierePlayer>().pierceBoost)
                 {
-                    modifiers.FinalDamage *= (1f / MathF.Pow(2, hitCounts[target.whoAmI]));
+                    modifiers.FinalDamage *= (1f / MathF.Pow(4, hitCounts[target.whoAmI]));
                 }
                 if (projectile.penetrate <= Main.player[projectile.owner].GetModPlayer<MagicPierePlayer>().pierceBoost || hitCounts[target.whoAmI] < 1)
                 {

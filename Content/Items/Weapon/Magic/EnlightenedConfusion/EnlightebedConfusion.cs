@@ -28,8 +28,8 @@ namespace QwertyMod.Content.Items.Weapon.Magic.EnlightenedConfusion
             Item.knockBack = 1;
             Item.value = GearStats.TrueCaeliteWeaponValue;
             Item.rare = ItemRarityID.Orange;
-            Item.width = 26;
-            Item.height = 18;
+            Item.width = 28;
+            Item.height = 26;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.shootSpeed = 10f;
             Item.useTime = 20;

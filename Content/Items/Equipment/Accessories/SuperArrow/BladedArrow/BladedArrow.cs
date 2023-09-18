@@ -22,8 +22,8 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.SuperArrow.BladedArrow
             Item.knockBack = .5f;
             Item.rare = ItemRarityID.Lime;
             Item.value = Item.sellPrice(0, 10, 0, 0);
-            Item.width = 2;
-            Item.height = 2;
+            Item.width = 14;
+            Item.height = 32;
             Item.crit = 25;
             Item.shootSpeed = 12f;
             Item.useTime = 180;

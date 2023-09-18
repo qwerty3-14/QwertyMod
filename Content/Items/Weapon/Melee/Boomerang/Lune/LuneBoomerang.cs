@@ -34,8 +34,8 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Boomerang.Lune
             Item.rare = ItemRarityID.Blue;
             Item.UseSound = SoundID.Item1;
             Item.noUseGraphic = true;
-            Item.width = 18;
-            Item.height = 32;
+            Item.width = 34;
+            Item.height = 34;
 
             Item.shoot = ProjectileType<LuneBoomerangP>();
             Item.shootSpeed = 10f;

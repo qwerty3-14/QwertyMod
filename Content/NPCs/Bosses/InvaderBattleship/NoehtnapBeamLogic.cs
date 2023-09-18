@@ -17,6 +17,7 @@ using QwertyMod.Content.Buffs;
 using QwertyMod.Content.Dusts;
 using QwertyMod.Common.Fortress;
 using QwertyMod.Content.NPCs.Invader;
+using System.Linq; 
 
 
 namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
@@ -37,16 +38,6 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
             int spinTime = 60;
             NoehtnapSpells.UpdateSpell(NPC.GetSource_FromAI(), Spell.AimedShot, NPC.Center, startTime + startSpin + (int)windUpTime * 2 + spinTime - armBeamAttackCounter, out pupilDirection, out pupilStareOutAmount);
             
-            int counter = 0;
-            for(int i = 0; i < 1000; i++)
-            {
-                if(Main.projectile[i].active && Main.projectile[i].type == ModContent.ProjectileType<FlybyBeam>())
-                {
-                    QwertyMethods.ServerClientCheck("" + i);
-                    counter++;
-                }
-            }
-            //QwertyMethods.ServerClientCheck("" + counter);
             armBeamAttackCounter++;
             if(armBeamAttackCounter < startTime)
             {
@@ -87,27 +78,33 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
                 if(armBeamAttackCounter >= startTime)
                 {
                     Vector2 beamPosition = armPos[i] + QwertyMethods.PolarVector(20, rot);
+                    if(beamIndexes[i] != -1)
+                    {
+                        Projectile beam = Main.projectile.FirstOrDefault(x => x.identity == beamIndexes[i]);
+                        if(beam != null && beam.timeLeft <= FlybyBeam.openTime && armBeamAttackCounter < startTime + startSpin + windUpTime + spinTime)
+                        {
+                            beam.timeLeft = FlybyBeam.openTime;
+                        }
+                        if(beam != null && (!beam.active || beam.type != ModContent.ProjectileType<FlybyBeam>()))
+                        {
+                            beamIndexes[i] = -1;
+                        }
+                        else if(beam != null)
+                        {
+                            beam.ai[0] = 0;
+                            beam.Center = beamPosition;
+                            beam.rotation = rot;
+                        }
+                    }
                     if(armBeamAttackCounter < startTime + startSpin + windUpTime + spinTime)
                     {
-                        if(beamIndexes[i] == -1)
+                        if(beamIndexes[i] == -1 && Main.netMode != NetmodeID.MultiplayerClient)
                         {
-                            beamIndexes[i] = Projectile.NewProjectile(NPC.GetSource_FromAI(), beamPosition, QwertyMethods.PolarVector(1, rot), ModContent.ProjectileType<FlybyBeam>(), 2 * (Main.expertMode ? InvaderBattleship.expertDamage : InvaderBattleship.normalDamage), 0, ai0: -1);
+                            beamIndexes[i] = Projectile.NewProjectile(NPC.GetSource_FromAI(), beamPosition, QwertyMethods.PolarVector(1, rot), ModContent.ProjectileType<FlybyBeam>(), 2 * (Main.expertMode ? InvaderBattleship.expertDamage : InvaderBattleship.normalDamage), 0);
+                            beamIndexes[i] = Main.projectile[beamIndexes[i]].identity;
+                            
+                            NPC.netUpdate = true;
                         }
-                        if(beamIndexes[i] != -1 && Main.projectile[beamIndexes[i]].timeLeft <= FlybyBeam.openTime)
-                        {
-                            Main.projectile[beamIndexes[i]].timeLeft = FlybyBeam.openTime;
-                        }
-                    }
-                    if(beamIndexes[i] != -1 && (!Main.projectile[beamIndexes[i]].active || Main.projectile[beamIndexes[i]].type != ModContent.ProjectileType<FlybyBeam>()))
-                    {
-                        beamIndexes[i] = -1;
-                    }
-                    else if(beamIndexes[i] != -1)
-                    {
-                       
-                        Main.projectile[beamIndexes[i]].ai[0] = 0;
-                        Main.projectile[beamIndexes[i]].Center = beamPosition;
-                        Main.projectile[beamIndexes[i]].rotation = rot;
                     }
                 }
             }

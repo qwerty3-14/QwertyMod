@@ -54,5 +54,18 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Dart.Nano
         {
             target.AddBuff(BuffID.Confused, 60 * 10);
         }
+        public override bool OnTileCollide(Vector2 velocityChange)
+        {
+            if (Projectile.velocity.X != velocityChange.X)
+            {
+                Projectile.velocity.X = -velocityChange.X;
+            }
+            if (Projectile.velocity.Y != velocityChange.Y)
+            {
+                Projectile.velocity.Y = -velocityChange.Y;
+            }
+            Projectile.damage = (int)(Projectile.damage * 1.5f);
+            return false;
+        }
     }
 }

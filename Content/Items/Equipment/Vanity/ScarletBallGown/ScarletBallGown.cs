@@ -14,12 +14,14 @@ namespace QwertyMod.Content.Items.Equipment.Vanity.ScarletBallGown
         {
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ArmorIDs.Body.Sets.HidesBottomSkin[Item.bodySlot] = true;
+            ArmorIDs.Legs.Sets.HidesBottomSkin[QwertyMod.BallGownSkirt] = true;
+            ArmorIDs.Legs.Sets.HidesBottomSkin[QwertyMod.BallGownSkirtAlt] = true;
         }
 
         public override void SetDefaults()
         {
-            Item.width = 34;
-            Item.height = 30;
+            Item.width = 26;
+            Item.height = 22;
             Item.rare = ItemRarityID.White;
             Item.vanity = true;
             Item.value = Item.sellPrice(silver: 60);

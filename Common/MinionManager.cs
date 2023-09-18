@@ -25,6 +25,7 @@ namespace QwertyMod.Common
         public bool RuneMinion = false;
         public bool MechCrossbow = false;
         public bool CasterMinion = false;
+        public bool DVRMinion = false;
         public int PriestSynchroniser = 0;
         public float PriestAngle = 0f;
         public bool HighPriestMinion = false;
@@ -53,6 +54,7 @@ namespace QwertyMod.Common
             MechCrossbow = false;
             CasterMinion = false;
             HighPriestMinion = false;
+            DVRMinion = false;
         }
 
         public override void PreUpdate()
@@ -60,6 +62,25 @@ namespace QwertyMod.Common
             mythrilPrismRotation += MathF.PI / 90f;
             PriestSynchroniser++;
             PriestAngle = Main.rand.NextFloat(-MathF.PI, MathF.PI);
+        }
+        public static int GetIdentity(Projectile minion)
+        {
+            int identity = 0;
+            for (int p = 0; p < 1000; p++)
+            {
+                if (Main.projectile[p].type == minion.type && Main.projectile[p].owner == minion.owner)
+                {
+                    if (p == minion.whoAmI)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        identity++;
+                    }
+                }
+            }
+            return identity;
         }
     }
 }

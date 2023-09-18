@@ -15,8 +15,6 @@ namespace QwertyMod.Content.Items.Weapon.Magic.StaffOfJob
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Staff Of Job");
-            //Tooltip.SetDefault("Inflicts grave misery at the victim near your cursor!");
             Item.staff[Item.type] = true; //this makes the useStyle animate as a staff instead of as a gun
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
@@ -28,7 +26,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.StaffOfJob
             Item.width = Item.height = 48;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.damage = 10;
-            Item.mana = ModLoader.HasMod("TRAEProject") ? 40 : 10;
+            Item.mana = ModLoader.HasMod("TRAEProject") ? 30 : 10;
             Item.shootSpeed = 1f;
             Item.shoot = ProjectileID.WoodenArrowFriendly;
             Item.useTime = 30;
@@ -46,7 +44,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.StaffOfJob
             if (QwertyMethods.ClosestNPC(ref target, 100, Main.MouseWorld, true))
             {
                 target.GetGlobalNPC<GraveMisery>().MiseryIntensity = (damage);
-                target.GetGlobalNPC<GraveMisery>().MiseryTime = 4 * 60;
+                target.GetGlobalNPC<GraveMisery>().MiseryTime = ModLoader.HasMod("TRAEProject") ? 60 * 60 : 4 * 60;
                 target.GetGlobalNPC<GraveMisery>().MiseryCauser = player.whoAmI;
             }
             return false;
@@ -76,9 +74,18 @@ namespace QwertyMod.Content.Items.Weapon.Magic.StaffOfJob
                 MiseryTime--;
                 trigCounter += 250 * MathF.PI / (60f * 240f);
                 miseryCounter++;
+                if(ModLoader.HasMod("TRAEProject") && (int)(Main.player[MiseryCauser].manaCost * 4) > Main.player[MiseryCauser].statMana)
+                {
+                    MiseryTime = 0;
+                    return;
+                }
                 if (miseryCounter % 6 == 0)
                 {
-                    QwertyMethods.PokeNPC(Main.player[MiseryCauser], npc, Main.player[MiseryCauser].GetSource_ItemUse(Main.player[MiseryCauser].HeldItem), MiseryIntensity, DamageClass.Magic);
+                    if(ModLoader.HasMod("TRAEProject"))
+                    {
+                        Main.player[MiseryCauser].statMana -= (int)(Main.player[MiseryCauser].manaCost * 4);
+                    }
+                    QwertyMethods.PokeNPC(Main.player[MiseryCauser], npc, Main.player[MiseryCauser].GetSource_ItemUse(Main.player[MiseryCauser].HeldItem), MiseryIntensity, DamageClass.Magic, 0, 20);
                 }
             }
             else

@@ -46,21 +46,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.Priest
             {
                 Projectile.timeLeft = 2;
             }
-            int identity = 0;
-            for (int p = 0; p < 1000; p++)
-            {
-                if (Main.projectile[p].type == Projectile.type)
-                {
-                    if (p == Projectile.whoAmI)
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        identity++;
-                    }
-                }
-            }
+            int identity = MinionManager.GetIdentity(Projectile);
             int priestCount = player.ownedProjectileCounts[Projectile.type];
             if (priestCount != 0)
             {
@@ -110,11 +96,11 @@ namespace QwertyMod.Content.Items.Weapon.Minion.Priest
                         float? aimAt = null;
                         if (savedTarget != null)
                         {
-                            aimAt = QwertyMethods.PredictiveAim(shotPos, shootSpeed, savedTarget.Center, savedTarget.velocity);
+                            aimAt = QwertyMethods.PredictiveAim(shotPos, shootSpeed * 2, savedTarget.Center, savedTarget.velocity);
                         }
                         else if (QwertyMethods.ClosestNPC(ref target, 2000, Projectile.Center, false, player.MinionAttackTargetNPC))
                         {
-                            aimAt = QwertyMethods.PredictiveAim(shotPos, shootSpeed, target.Center, target.velocity);
+                            aimAt = QwertyMethods.PredictiveAim(shotPos, shootSpeed * 2, target.Center, target.velocity);
                         }
                         if (aimAt != null && !float.IsNaN(((float)aimAt)))
                         {
@@ -126,7 +112,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.Priest
                             if (aimAt != null && !float.IsNaN(((float)aimAt)))
                             {
 
-                                Projectile.NewProjectile(Projectile.InheritSource(Projectile), shotPos, QwertyMethods.PolarVector(10f, (float)aimAt), ProjectileType<PriestPulse>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                                Projectile.NewProjectile(Projectile.InheritSource(Projectile), shotPos, QwertyMethods.PolarVector(shootSpeed, (float)aimAt), ProjectileType<PriestPulse>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
                             }
                         }
                     }

@@ -56,6 +56,13 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.B4Bow
             Vector2 trueSpeed = velocity.RotatedByRandom(MathHelper.ToRadians(15));
             arrow = Main.projectile[Projectile.NewProjectile(source, position.X, position.Y, trueSpeed.X, trueSpeed.Y, type, damage, knockback, player.whoAmI)];
             arrow.GetGlobalProjectile<arrowHoming>().B4HomingArrow = true;
+            if(Main.netMode != NetmodeID.SinglePlayer)
+            {
+                ModPacket packet = Mod.GetPacket();
+                packet.Write((byte)ModMessageType.AmmoEnchantArrowHoming);
+                packet.Write(arrow.identity);
+                packet.Send();
+            }
             return false;
         }
     }

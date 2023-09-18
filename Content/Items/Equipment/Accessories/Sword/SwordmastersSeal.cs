@@ -20,15 +20,15 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Sword
         {
             Item.rare = ItemRarityID.Lime;
             Item.value = Item.sellPrice(0, 50, 0, 0);
-            Item.width = 18;
-            Item.height = 16;
+            Item.width = 28;
+            Item.height = 28;
             Item.accessory = true;
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.GetModPlayer<SkywardHiltEffect>().effect = true;
-            player.GetModPlayer<CommonStats>().weaponSize += 1f;
+            player.GetModPlayer<CommonStats>().weaponSize += 0.25f;
             player.GetModPlayer<BadgeEffect>().critOnHit = true;
         }
         public override void AddRecipes()

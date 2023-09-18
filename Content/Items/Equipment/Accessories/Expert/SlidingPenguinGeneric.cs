@@ -27,6 +27,14 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert
             Projectile.tileCollide = true;
             Projectile.usesIDStaticNPCImmunity = true;
         }
+        public override bool? CanHitNPC(NPC target)
+        {
+            if(target.type == NPCID.Penguin || target.type == NPCID.PenguinBlack || target.type == NPCID.CorruptPenguin || target.type == NPCID.CrimsonPenguin)
+            {
+                return false;
+            }
+            return null;
+        }
 
         private bool runOnce = true;
         private float initVel;

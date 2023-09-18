@@ -53,7 +53,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Bullet.Palladium
                 Item.NewItem(target.GetSource_DropAsItem(), target.position, target.Size, ItemID.Heart);
             }
         }
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             Collision.HitTiles(Projectile.position + Projectile.velocity, Projectile.velocity, Projectile.width, Projectile.height);
         }

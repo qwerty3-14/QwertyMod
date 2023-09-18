@@ -23,8 +23,8 @@ namespace QwertyMod.Content.Items.Equipment.VanityAccessories.Corset
 
         public override void SetDefaults()
         {
-            Item.width = 34;
-            Item.height = 30;
+            Item.width = 14;
+            Item.height = 12;
             Item.rare = ItemRarityID.Blue;
             Item.vanity = true;
             Item.value = Item.buyPrice(gold: 3);

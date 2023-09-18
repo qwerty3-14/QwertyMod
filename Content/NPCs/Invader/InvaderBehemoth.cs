@@ -17,6 +17,7 @@ using Terraria.GameContent.ItemDropRules;
 using QwertyMod.Content.Items.MiscMaterials;
 using QwertyMod.Content.Items.Weapon.Melee.Sword.Overkill;
 using Terraria.Audio;
+using QwertyMod.Common;
 
 namespace QwertyMod.Content.NPCs.Invader
 {
@@ -33,7 +34,7 @@ namespace QwertyMod.Content.NPCs.Invader
             NPC.aiStyle = -1;
             NPC.damage = 200;
             NPC.defense = 80;
-            NPC.lifeMax = 2000;
+            NPC.lifeMax = 6000;
             NPC.value = 10000;
             //NPC.alpha = 100;
             NPC.HitSound = new SoundStyle("QwertyMod/Assets/Sounds/invbehemoth_hurt3");
@@ -108,7 +109,10 @@ namespace QwertyMod.Content.NPCs.Invader
                         {
                             SoundEngine.PlaySound(new SoundStyle("QwertyMod/Assets/Sounds/invbehemoth_strike"), NPC.Center);
                             Vector2 here = shootFrom + new Vector2(60 * NPC.direction, 9);
-                            Projectile.NewProjectile(NPC.GetSource_FromAI(), here, Vector2.Zero, ModContent.ProjectileType<InvaderSwordHitbox>(), 200, 0, 0);
+                            if(Main.netMode != NetmodeID.MultiplayerClient)
+                            {
+                                Projectile.NewProjectile(NPC.GetSource_FromAI(), here, Vector2.Zero, ModContent.ProjectileType<InvaderSwordHitbox>(), 200, 0, Main.myPlayer);
+                            }
                         }
                         if (swordTimer >= 60)
                         {
@@ -122,9 +126,9 @@ namespace QwertyMod.Content.NPCs.Invader
                         {
                             beamDirection = (target.Center - shootFrom).ToRotation();
                         }
-                        if (beamChargeup == 120)
+                        if (beamChargeup == 120 && Main.netMode != NetmodeID.MultiplayerClient)
                         {
-                            Projectile.NewProjectile(NPC.GetSource_FromAI(), shootFrom, QwertyMethods.PolarVector(1f, beamDirection + beamSweepAngle / 2f), ModContent.ProjectileType<InvaderBeam>(), 80, 0, 0);
+                            Projectile.NewProjectile(NPC.GetSource_FromAI(), shootFrom, QwertyMethods.PolarVector(1f, beamDirection + beamSweepAngle / 2f), ModContent.ProjectileType<InvaderBeam>(), 80, 0, Main.myPlayer);
                         }
                         if (beamChargeup < 120)
                         {
@@ -255,7 +259,7 @@ namespace QwertyMod.Content.NPCs.Invader
 
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
-            if (spawnInfo.Player.InModBiome(ModContent.GetInstance<FortressBiome>()) && NPC.downedGolemBoss)
+            if (spawnInfo.Player.InModBiome(ModContent.GetInstance<FortressBiome>()) && SkyFortress.beingInvaded)
             {
                 return 20f;
             }

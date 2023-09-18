@@ -21,7 +21,6 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
 {
     public partial class InvaderBattleship : ModNPC
     {
-        int warmupTimer = 0;
         float gunDebrisTimer = -60;
         float launcherDebrisTimer = -120;
         float engineDebrisTimer = -180;

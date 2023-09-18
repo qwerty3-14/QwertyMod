@@ -2,6 +2,8 @@
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using QwertyMod.Content.Items.Equipment.Accessories;
+using Terraria.GameContent.ItemDropRules;
 
 namespace QwertyMod.Common
 {
@@ -30,9 +32,17 @@ namespace QwertyMod.Common
         }
         public override void ModifyItemScale(Item item, Player player, ref float scale)
         {
-            if(item.useStyle == ItemUseStyleID.Swing)
+            if(item.useStyle == ItemUseStyleID.Swing && item.DamageType == DamageClass.Melee && item.damage > 0)
             {
                 scale *= player.GetModPlayer<CommonStats>().weaponSize;
+            }
+        }
+        
+        public override void ModifyItemLoot(Item item, ItemLoot itemLoot)
+        {
+            if(item.type == ItemID.DungeonFishingCrate || item.type == ItemID.DungeonFishingCrateHard)
+            {
+				itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<VulgarDictionary>(), 10));
             }
         }
     }

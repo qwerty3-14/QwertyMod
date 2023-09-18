@@ -20,8 +20,8 @@ namespace QwertyMod.Content.Items.Equipment.Vanity.PurpleDress
 
         public override void SetDefaults()
         {
-            Item.width = 34;
-            Item.height = 30;
+            Item.width = 50;
+            Item.height = 54;
             Item.rare = ItemRarityID.White;
             Item.accessory = true;
             Item.value = Item.sellPrice(silver: 30);

@@ -24,7 +24,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.Riptide
 
         public override void SetDefaults()
         {
-            Item.damage = 4;
+            Item.damage = 3;
             Item.mana = 20;
             Item.width = 32;
             Item.height = 32;
@@ -81,6 +81,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.Riptide
             Projectile.penetrate = -1;
             Projectile.tileCollide = true;
             Projectile.usesLocalNPCImmunity = true;
+            Projectile.DamageType = DamageClass.Summon;
             //Projectile.hide = true; // Prevents projectile from being drawn normally. Use in conjunction with DrawBehind.
         }
 
@@ -129,6 +130,10 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.Riptide
 
     public class RiptideStream : ModProjectile
     {
+        public override void SetStaticDefaults()
+        {
+            //ProjectileID.Sets.SentryShot[Projectile.type] = true;
+        }
         public override void SetDefaults()
         {
             Projectile.width = 4;
@@ -156,7 +161,8 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.Riptide
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            modifiers.Knockback.Flat = 0;
+            modifiers.Knockback *= 0;
+            modifiers.ArmorPenetration += 10;
         }
     }
 }

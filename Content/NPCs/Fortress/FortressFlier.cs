@@ -33,7 +33,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             NPC.defense = 28; // defense of enemy
             NPC.lifeMax = 330; //maximum life doubled automaticly in expert
 
-            if (NPC.downedGolemBoss)
+            if (SkyFortress.beingInvaded)
             {
                 NPC.lifeMax = 660;
             }
@@ -94,44 +94,49 @@ namespace QwertyMod.Content.NPCs.Fortress
                 runOnce = false;
             }
             Entity player = FortressNPCGeneral.FindTarget(NPC, true);
+            if(player != null)
+            {
+                playerDistance = (player.Center - NPC.Center).Length(); // finds the distance between this enemy and player
 
-            playerDistance = (player.Center - NPC.Center).Length(); // finds the distance between this enemy and player
-
-            timer++;
+                timer++;
+            }
             if (clinged) //run when the enemy is clinged to the wall
             {
                 NPC.velocity.X = 0; // set velocity to 0 (no movement)
                 NPC.velocity.Y = 0;// set velocity to 0 (no movement)
-                if (timer > 10 && playerDistance < 200 && Collision.CanHit(NPC.Center, 0, 0, player.Center, 0, 0)) // this checks if the player is too close and not behind tiles, the timer is so it doesn't immediatly stick to a wall it jumps off
+                if(player != null)
                 {
-                    clinged = false; // stop sticking to the wall
-                    timer = 0; //reset timer
-                }
-                else if (Collision.CanHit(NPC.Center, 0, 0, player.Center, 0, 0) && playerDistance < 600) // this checks if the player is close but not too close and not behind tiles
-                {
-                    attackTimer++; // this timer is used so the attack isn't every frame
-                    if (attackTimer >= 60) //this will be true when the timer is above 60 frames (1 second)
+                    if (timer > 10 && playerDistance < 200 && Collision.CanHit(NPC.Center, 0, 0, player.Center, 0, 0)) // this checks if the player is too close and not behind tiles, the timer is so it doesn't immediatly stick to a wall it jumps off
                     {
-                        float shootDirection = (player.Center - NPC.Center).ToRotation(); // find the direction the player is in
-                        for (int p = -1; p < 2; p++) //this will repeat 3 times for 3 projectiles
+                        clinged = false; // stop sticking to the wall
+                        timer = 0; //reset timer
+                    }
+                    else if (Collision.CanHit(NPC.Center, 0, 0, player.Center, 0, 0) && playerDistance < 600) // this checks if the player is close but not too close and not behind tiles
+                    {
+                        attackTimer++; // this timer is used so the attack isn't every frame
+                        if (attackTimer >= 60) //this will be true when the timer is above 60 frames (1 second)
                         {
-                            Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, QwertyMethods.PolarVector(6, shootDirection + (MathF.PI / 8 * p)), ProjectileType<FortressHarpyProjectile>(), damage, 0, 0); // shoots a projectile
+                            float shootDirection = (player.Center - NPC.Center).ToRotation(); // find the direction the player is in
+                            for (int p = -1; p < 2; p++) //this will repeat 3 times for 3 projectiles
+                            {
+                                Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, QwertyMethods.PolarVector(6, shootDirection + (MathF.PI / 8 * p)), ProjectileType<FortressHarpyProjectile>(), damage, 0, Main.myPlayer); // shoots a projectile
+                            }
+                            attackTimer = 0; // resets attackTimer needer for the once per second effect
                         }
-                        attackTimer = 0; // resets attackTimer needer for the once per second effect
+                        else if (attackTimer > 45)  //this will be true when the timer is above 45 frames (.75 seconds)
+                        {
+                            frame = 3; // change the frame to signal it's about to attack
+                        }
+                        else
+                        {
+                            frame = 2; // change the frame to normal cling
+                        }
                     }
-                    else if (attackTimer > 45)  //this will be true when the timer is above 45 frames (.75 seconds)
+                    else // player too far away or can't be seen
                     {
-                        frame = 3; // change the frame to signal it's about to attack
+                        attackTimer = 0;
+                        frame = 2;
                     }
-                    else
-                    {
-                        frame = 2; // change the frame to normal cling
-                    }
-                }
-                else // player too far away or can't be seen
-                {
-                    attackTimer = 0;
-                    frame = 2;
                 }
             }
             else
@@ -213,6 +218,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             Projectile.timeLeft = 120;
             Projectile.tileCollide = true;
             Projectile.GetGlobalProjectile<FortressNPCProjectile>().isFromFortressNPC = true;
+            Projectile.GetGlobalProjectile<FortressNPCProjectile>().EvEMultiplier = 5f;
             Projectile.friendly = true;
         }
 

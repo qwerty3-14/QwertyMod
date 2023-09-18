@@ -18,6 +18,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
         public bool summonSet = false;
         private int rangedCounter = 0;
         private int summonCounter = 0;
+        private int manaLimiter = 60;
 
         public override void ResetEffects()
         {
@@ -51,8 +52,15 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
             }
             if (proj.CountsAsClass(DamageClass.Magic) && magicSet && hit.Crit)
             {
-                Player.statMana += damageDone / 2;
-                Player.ManaEffect(damageDone / 2);
+                if(manaLimiter > 0)
+                {
+                    Player.statMana += damageDone / 2;
+                    Player.ManaEffect(damageDone / 2);
+                    if(ModLoader.HasMod("TRAEProject"))
+                    { 
+                        manaLimiter -= damageDone * 6;
+                    }
+                }
                 Player.AddBuff(BuffType<RhuthiniumMagic>(), 300);
                 for (int num71 = 0; num71 < 5; num71++)
                 {
@@ -71,6 +79,10 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
 
         public override void PreUpdate()
         {
+            if(manaLimiter < 60)
+            {
+                manaLimiter++;
+            }
             summonCounter++;
             rangedCounter++;
             if (rangedCounter > 300 && rangedSet)

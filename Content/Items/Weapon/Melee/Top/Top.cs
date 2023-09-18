@@ -116,7 +116,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Top
 
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            modifiers.Knockback.Flat = (MathF.Abs(Projectile.velocity.X) / initVel) * Projectile.knockBack;
+            //modifiers.Knockback.Flat = (MathF.Abs(Projectile.velocity.X) / initVel) * Projectile.knockBack;
             modifiers.HitDirectionOverride = Projectile.velocity.X > 0 ? -1 : 1;
             TopHit(target);
         }

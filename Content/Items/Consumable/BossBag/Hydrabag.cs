@@ -46,8 +46,9 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
         public override void ModifyItemLoot(ItemLoot itemLoot)
         {
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<Hydrator>(), 5, 1, 1));
-            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<HydraScale>(), 5, 30, 40));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<HydraScale>(), 1, 30, 40));
             itemLoot.Add(ItemDropRule.Coins(100000, true));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<Autosummoner>(), 1, 1, 1));
             itemLoot.Add(ItemDropRule.FewFromOptions(3, 1, new int[] { ModContent.ItemType<HydraBarrage>(), ModContent.ItemType<HydraBeam>(), ModContent.ItemType<HydraCannon>(), ModContent.ItemType<HydraHeadStaff>(), ModContent.ItemType<HydraJavelin>(), ModContent.ItemType<Hydrent>(), ModContent.ItemType<Hydrill>(), ModContent.ItemType<HydraMissileStaff>()}));
         }
     }

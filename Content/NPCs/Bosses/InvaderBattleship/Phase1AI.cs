@@ -16,6 +16,7 @@ using Terraria.Audio;
 using QwertyMod.Content.Buffs;
 using QwertyMod.Content.Dusts;
 using QwertyMod.Common.Fortress;
+using System.Linq; 
 
 
 namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
@@ -239,16 +240,23 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
                     
                     for(int i = 0; i < 2; i++)
                     {
+                        
                         float emmiterX =  NPC.position.X + (NPC.direction == 1 ? centerEyeX : (NPC.width - centerEyeX));
                         Vector2 beamPosition = new Vector2(emmiterX, i == 0 ? (NPC.position.Y - 18) : (NPC.Bottom.Y + 18)) + NPC.velocity;
-                        if(beamIndexes[i] == -1)
+                        if(beamIndexes[i] == -1 && Main.netMode != NetmodeID.MultiplayerClient)
                         {
                             beamIndexes[i] = Projectile.NewProjectile(NPC.GetSource_FromAI(), beamPosition, Vector2.UnitY * (i == 0 ? -1 : 1), ModContent.ProjectileType<FlybyBeam>(), 2 * (Main.expertMode ? expertDamage : normalDamage), 0);
+                            beamIndexes[i] = Main.projectile[beamIndexes[i]].identity;
                         }
-                        if(beamIndexes[i] != -1 && Main.projectile[beamIndexes[i]].timeLeft <= FlybyBeam.openTime)
+                        if(beamIndexes[i] != -1)
                         {
-                            Main.projectile[beamIndexes[i]].timeLeft = FlybyBeam.openTime;
+                            Projectile beam = Main.projectile.FirstOrDefault(x => x.identity == beamIndexes[i]);
+                            if(beam != null && beam.timeLeft <= FlybyBeam.openTime)
+                            {
+                                beam.timeLeft = FlybyBeam.openTime;
+                            }
                         }
+                        
                         
                     }
                     
@@ -263,16 +271,26 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
             }
             for(int i = 0; i < 2; i++)
             {
+                
                 float emmiterX =  NPC.position.X + (NPC.direction == 1 ? centerEyeX : (NPC.width - centerEyeX));
                 Vector2 beamPosition = new Vector2(emmiterX, i == 0 ? (NPC.position.Y - 18) : (NPC.Bottom.Y + 18)) + NPC.velocity;
-                if(beamIndexes[i] != -1 && (!Main.projectile[beamIndexes[i]].active || Main.projectile[beamIndexes[i]].type != ModContent.ProjectileType<FlybyBeam>()))
+                
+                if(beamIndexes[i] != -1)
                 {
-                    beamIndexes[i] = -1;
+                    Projectile beam = Main.projectile.FirstOrDefault(x => x.identity == beamIndexes[i]);
+                    if(beam != null)
+                    {
+                        if((!beam.active || beam.type != ModContent.ProjectileType<FlybyBeam>()))
+                        {
+                            beamIndexes[i] = -1;
+                        }
+                        else
+                        {
+                            beam.Center = beamPosition;
+                        }
+                    }
                 }
-                else if(beamIndexes[i] != -1)
-                {
-                    Main.projectile[beamIndexes[i]].Center = beamPosition;
-                }
+                
             }
 
         }
@@ -280,7 +298,6 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
         int distressCounter = 0;
         float distressRotation = -MathF.PI / 2f;
         bool doDistress = false;
-        bool distressActivated =  false;
         void UpdateDistress()
         {
             if(doDistress && distressCounter < 120)
@@ -305,7 +322,6 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
                             Vector2 spawnHere = Main.player[NPC.target].Center;
                             NPC.NewNPC(NPC.GetSource_FromAI(), (int)spawnHere.X, (int)spawnHere.Y, ModContent.NPCType<Invader.InvaderBehemoth>());
                         }
-                        distressActivated = true;
                     }
                     distressFrame = ((distressCounter / 6) % 4) + 1;
 
@@ -454,27 +470,7 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
             turrets[0] = new BattleshipTurret(NPC, new Vector2(60, 39) - NPC.Size / 2f);
             turrets[1] = new BattleshipTurret(NPC, new Vector2(221, 39) - NPC.Size / 2f);
             launcher = new BattleshipMissileLauncher(NPC, new Vector2(79, 86) - NPC.Size / 2f);
-            RemoveEnemies();
             Warp();
-        }
-        void RemoveEnemies()
-        {
-            for(int i = 0; i < Main.npc.Length; i++)
-            {
-                if(Main.npc[i].active)
-                {
-                    if(Main.npc[i].GetGlobalNPC<Invader.InvaderNPCGeneral>().invaderNPC && i != NPC.whoAmI)
-                    {
-                        Main.npc[i].GetGlobalNPC<Invader.InvaderNPCGeneral>().invaderNPC = false;
-                        Main.npc[i].life = 0;
-                        Main.npc[i].active = false;
-                    }
-                    if(Main.netMode != NetmodeID.MultiplayerClient && Main.npc[i].GetGlobalNPC<Fortress.FortressNPCGeneral>().fortressNPC)
-                    {
-                        Main.npc[i].StrikeInstantKill();
-                    }
-                }
-            }
         }
         void Explode()
         {

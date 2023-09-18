@@ -27,13 +27,13 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.AncientThrow
         public override void SetDefaults()
         {
             Item.useStyle = ItemUseStyleID.Shoot;
-            Item.width = 16;
-            Item.height = 16;
+            Item.width = 30;
+            Item.height = 26;
             Item.useAnimation = 25;
             Item.useTime = 25;
             Item.shootSpeed = 16f;
             Item.knockBack = 2.5f;
-            Item.damage = 23;
+            Item.damage = 20;
             Item.value = 150000;
             Item.rare = ItemRarityID.Orange;
             Item.DamageType = DamageClass.MeleeNoSpeed;

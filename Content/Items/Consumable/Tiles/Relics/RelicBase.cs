@@ -45,7 +45,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Relics
 			// Unload the extra texture displayed on the pedestal
 			RelicTexture = null;
 		}
-
+		
 		public override void SetStaticDefaults() 
 		{
 			Main.tileShine[Type] = 400; // Responsible for golden particles
@@ -58,7 +58,11 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Relics
 			TileObjectData.newTile.Direction = TileObjectDirection.PlaceLeft; // Player faces to the left
 			TileObjectData.newTile.StyleHorizontal = false; // Based on how the alternate sprites are positioned on the sprite (by default, true)
 
-		
+			// This controls how styles are laid out in the texture file. This tile is special in that all styles will use the same texture section to draw the pedestal.
+			TileObjectData.newTile.StyleWrapLimitVisualOverride = 2;
+			TileObjectData.newTile.StyleMultiplier = 2;
+			TileObjectData.newTile.StyleWrapLimit = 2;
+			TileObjectData.newTile.styleLineSkipVisualOverride = 0; // This forces the tile preview to draw as if drawing the 1st style.
 
 			// Register an alternate tile data with flipped direction
 			TileObjectData.newAlternate.CopyFrom(TileObjectData.newTile); // Copy everything from above, saves us some code
@@ -70,7 +74,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Relics
 
 			// Register map name and color
 			// "MapObject.Relic" refers to the translation key for the vanilla "Relic" text
-			//AddMapEntry(new Color(233, 207, 94), Language.GetText("MapObject.Relic"));
+			AddMapEntry(new Color(233, 207, 94), Language.GetText("MapObject.Relic"));
 		}
 
 		public override bool CreateDust(int i, int j, ref int type) 

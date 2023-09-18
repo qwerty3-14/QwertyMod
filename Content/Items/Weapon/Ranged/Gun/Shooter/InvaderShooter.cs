@@ -31,7 +31,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.Shooter
             Item.useAnimation = 30;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 5;
-            Item.value = QwertyMod.InvaderGearValue;
+            Item.value = GearStats.InvaderGearValue;
             Item.rare = ItemRarityID.Yellow;
             Item.UseSound = SoundID.Item11;
             if (!Main.dedServ)

@@ -32,10 +32,8 @@ namespace QwertyMod.Content.Items.Tool.Mining.Rune
             Item.value = 500000;
             Item.rare = ItemRarityID.Cyan;
             Item.UseSound = SoundID.Item1;
-            //Item.prefix = 0;
-            Item.width = 16;
-            Item.height = 16;
-            //Item.crit = 5;
+            Item.width = 66;
+            Item.height = 66;
             Item.autoReuse = true;
             Item.useTurn = true;
             Item.pick = 200;

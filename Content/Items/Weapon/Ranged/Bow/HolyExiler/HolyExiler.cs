@@ -32,8 +32,8 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.HolyExiler
             Item.rare = ItemRarityID.Orange;
             Item.UseSound = SoundID.Item5;
 
-            Item.width = 32;
-            Item.height = 62;
+            Item.width = 18;
+            Item.height = 46;
 
             Item.shoot = ProjectileID.WoodenArrowFriendly;
             Item.useAmmo = AmmoID.Arrow;
@@ -48,6 +48,14 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.HolyExiler
         {
             arrow = Main.projectile[Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI)];
             arrow.GetGlobalProjectile<ArrowWarping>().warpedArrow = true;
+
+            if(Main.netMode != NetmodeID.SinglePlayer)
+            {
+                ModPacket packet = Mod.GetPacket();
+                packet.Write((byte)ModMessageType.AmmoEnchantArrowWarping);
+                packet.Write(arrow.identity);
+                packet.Send();
+            }
             return false;
         }
     }
@@ -66,7 +74,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.HolyExiler
         private float teleportDistance = 80;
         private int teleportTries = 100;
 
-        public override void Kill(Projectile projectile, int timeLeft)
+        public override void OnKill(Projectile projectile, int timeLeft)
         {
             if (warpedArrow)
             {

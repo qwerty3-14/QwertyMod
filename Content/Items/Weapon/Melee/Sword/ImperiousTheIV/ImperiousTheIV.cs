@@ -6,17 +6,14 @@ using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using Terraria.GameContent;
 
 namespace QwertyMod.Content.Items.Weapon.Melee.Sword.ImperiousTheIV
 {
     public class ImperiousTheIV : ModItem
     {
-
-
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Imperious The IV");
-            //Tooltip.SetDefault("Hitting enemies launches richoching swords");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -32,30 +29,31 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.ImperiousTheIV
             Item.value = Item.sellPrice(gold: 10);
             Item.rare = ItemRarityID.Lime;
             Item.UseSound = SoundID.Item1;
-            Item.scale = 1.8f;
+            Item.scale = 1f;
             Item.width = 40;
             Item.height = 40;
             Item.crit = 20;
+            Item.noMelee = true;
             Item.autoReuse = true;
+            Item.shoot = ModContent.ProjectileType<ImperiousTheIVAura>();
+            Item.shootsEveryUse = true;
+            Item.shootSpeed = 1;
+        }
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
+            Projectile.NewProjectileDirect(source, player.MountedCenter - velocity * 2, velocity * 5, type, damage, knockback, Main.myPlayer,
+                            player.direction * player.gravDir, player.itemAnimationMax, player.GetAdjustedItemScale(player.HeldItem));
+                        NetMessage.SendData(MessageID.PlayerControls, -1, -1, null, player.whoAmI);
+            return false;
         }
 
         public override void MeleeEffects(Player player, Rectangle hitbox)
         {
         }
-
-        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            if (player.whoAmI == Main.myPlayer && !target.immortal && player.ownedProjectileCounts[ProjectileType<ImperiousTheV>()] < 40)
-            {
-                Projectile.NewProjectile(player.GetSource_ItemUse(Item), target.Center, Vector2.Zero, ProjectileType<ImperiousTheV>(), player.GetWeaponDamage(Item), 0.1f, player.whoAmI, target.whoAmI);
-            }
-        }
     }
 
     public class ImperiousTheV : ModProjectile
     {
-
-
         public override void SetStaticDefaults()
         {
             //DisplayName,SetDefault("Imperious The V");
@@ -98,5 +96,23 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.ImperiousTheIV
                 Projectile.Kill();
             }
         }
+    }
+
+    public class ImperiousTheIVAura : SwordAura
+    {
+        public override void AuraDefaults()
+        {
+            scaleIncrease = 0.2f;
+
+            frontColor = new Color(123, 145, 227);
+            middleColor = new Color(163, 211, 225);
+            backColor = new Color(242, 253, 255);
+        }
+
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            Projectile.NewProjectile(Projectile.GetSource_FromThis(), target.Center, Vector2.Zero, ProjectileType<ImperiousTheV>(), Main.player[Projectile.owner].GetWeaponDamage(Main.player[Projectile.owner].HeldItem), 0.1f, Main.player[Projectile.owner].whoAmI, target.whoAmI);
+        }
+
     }
 }

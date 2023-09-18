@@ -9,8 +9,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.Priest
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Priest Minion");
-            //Description.SetDefault("Higher beings fight for you!");
             Main.buffNoSave[Type] = true;
             Main.buffNoTimeDisplay[Type] = true;
         }

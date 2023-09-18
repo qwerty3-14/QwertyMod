@@ -19,7 +19,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.Longsword
             Main.projFrames[Projectile.type] = 1;
             ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
             Main.projPet[Projectile.type] = true;
-            ProjectileID.Sets.MinionShot[Projectile.type] = true;
         }
         public override bool MinionContactDamage()
         {
@@ -164,9 +163,9 @@ namespace QwertyMod.Content.Items.Weapon.Minion.Longsword
 
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            modifiers.SourceDamage.Base *= Projectile.minionSlots;
+            modifiers.FinalDamage *= Projectile.minionSlots;
         }
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             Player player = Main.player[Projectile.owner];
             if (player.GetModPlayer<MinionManager>().SwordMinion)

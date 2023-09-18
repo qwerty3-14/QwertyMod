@@ -69,7 +69,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
             Main.EntitySpriteDraw(RuneSprites.runeTransition[(int)Runes.Pursuit][frame], Projectile.Center - Main.screenPosition, null, new Color(c, c, c, c), Projectile.rotation, new Vector2(10, 5), Vector2.One * 2, 0, 0);
             return false;
         }
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             for (int d = 0; d <= 40; d++)
             {

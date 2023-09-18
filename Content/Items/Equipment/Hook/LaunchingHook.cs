@@ -24,6 +24,8 @@ namespace QwertyMod.Content.Items.Equipment.Hook
             Item.shoot = ProjectileType<LaunchingHookP>();
             Item.value = 50000;
             Item.rare = ItemRarityID.Pink;
+            Item.width = 26;
+            Item.height = 32;
         }
     }
 

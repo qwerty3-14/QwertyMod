@@ -108,7 +108,7 @@ namespace QwertyMod
         }
 
 
-        public static void SlowRotation(this ref float currentRotation, float targetAngle, float speed)
+        public static bool SlowRotation(this ref float currentRotation, float targetAngle, float speed)
         {
             int f = 1; //this is used to switch rotation direction
             float actDirection = new Vector2(MathF.Cos(currentRotation), MathF.Sin(currentRotation)).ToRotation();
@@ -138,6 +138,8 @@ namespace QwertyMod
             }
             actDirection = new Vector2(MathF.Cos(actDirection), MathF.Sin(actDirection)).ToRotation();
             currentRotation = actDirection;
+
+            return currentRotation == targetAngle;
         }
         public static void SlowRotWhileAvoid(this ref float currentRotation, float targetAngle, float speed, float avoid)
         {
@@ -412,7 +414,7 @@ namespace QwertyMod
             return me;
         }
 
-        public static Projectile PokeNPC(Player player, NPC npc, IEntitySource source, float damage, DamageClass damageClass, float knockback = 0f)
+        public static Projectile PokeNPC(Player player, NPC npc, IEntitySource source, float damage, DamageClass damageClass, float knockback = 0f, int AP = 0)
         {
             int id = ProjectileType<Poke>();
             if(damageClass == DamageClass.Melee)
@@ -423,7 +425,7 @@ namespace QwertyMod
             {
                 id = ProjectileType<PokeRanged>();
             }
-            if(damageClass == DamageClass.Melee)
+            if(damageClass == DamageClass.Magic)
             {
                 id = ProjectileType<PokeMagic>();
             }
@@ -431,8 +433,9 @@ namespace QwertyMod
             {
                 id = ProjectileType<PokeSummon>();
             }
-            Projectile p = Main.projectile[Projectile.NewProjectile(source, npc.Center, Vector2.Zero, id, (int)damage, knockback, player.whoAmI)];
+            Projectile p = Main.projectile[Projectile.NewProjectile(source, npc.Center, Vector2.Zero, id, (int)damage, knockback, player.whoAmI, ai1: AP)];
             p.ai[0] = npc.whoAmI;
+            p.ai[1] = AP;
             //p.DamageType = damageClass;
             return p;
         }
@@ -488,6 +491,7 @@ namespace QwertyMod
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
+            modifiers.ArmorPenetration += (int)Projectile.ai[1];
             modifiers.HitDirectionOverride = Math.Sign(target.Center.X - Main.player[Projectile.owner].Center.X);
         }
         public override bool? CanHitNPC(NPC target)
@@ -517,6 +521,7 @@ namespace QwertyMod
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
+            modifiers.ArmorPenetration += (int)Projectile.ai[1];
             modifiers.HitDirectionOverride = Math.Sign(target.Center.X - Main.player[Projectile.owner].Center.X);
         }
         public override bool? CanHitNPC(NPC target)
@@ -546,6 +551,7 @@ namespace QwertyMod
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
+            modifiers.ArmorPenetration += (int)Projectile.ai[1];
             modifiers.HitDirectionOverride = Math.Sign(target.Center.X - Main.player[Projectile.owner].Center.X);
         }
         public override bool? CanHitNPC(NPC target)
@@ -575,6 +581,7 @@ namespace QwertyMod
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
+            modifiers.ArmorPenetration += (int)Projectile.ai[1];
             modifiers.HitDirectionOverride = Math.Sign(target.Center.X - Main.player[Projectile.owner].Center.X);
         }
         public override bool? CanHitNPC(NPC target)
@@ -604,6 +611,7 @@ namespace QwertyMod
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
+            modifiers.ArmorPenetration += (int)Projectile.ai[1];
             modifiers.HitDirectionOverride = Math.Sign(target.Center.X - Main.player[Projectile.owner].Center.X);
         }
         public override bool? CanHitNPC(NPC target)

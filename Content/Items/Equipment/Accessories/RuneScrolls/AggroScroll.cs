@@ -27,8 +27,8 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
             Item.DamageType = DamageClass.Magic;
             Item.damage = 500;
 
-            Item.width = 54;
-            Item.height = 56;
+            Item.width = 34;
+            Item.height = 34;
 
             Item.accessory = true;
         }

@@ -39,7 +39,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.MiniTank
         }
 
         private int tankCount = 0;
-        private int identity = 0;
         private const float terminalVelocity = 10;
         private const float garvityAcceleration = .2f;
         private float gotoX;
@@ -59,21 +58,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.MiniTank
                 Projectile.timeLeft = 2;
             }
             tankCount = player.ownedProjectileCounts[ProjectileType<MiniTank>()];
-            identity = 0;
-            for (int p = 0; p < 1000; p++)
-            {
-                if (Main.projectile[p].type == ProjectileType<MiniTank>() && Main.projectile[p].active)
-                {
-                    if (p == Projectile.whoAmI)
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        identity++;
-                    }
-                }
-            }
             if (returnToPlayer)
             {
                 Projectile.velocity = (player.Top - Projectile.Center) * .1f;
@@ -95,7 +79,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.MiniTank
                 {
                     Projectile.velocity.Y += garvityAcceleration;
                 }
-                gotoX = player.Center.X + -player.direction * (player.width / 2 + spacing + (identity * spacing));
+                gotoX = player.Center.X + -player.direction * (player.width / 2 + spacing + (MinionManager.GetIdentity(Projectile) * spacing));
                 Projectile.velocity.X = (gotoX - Projectile.Center.X) * .1f;
                 if (Math.Abs(Projectile.velocity.X) > maxSpeedX)
                 {

@@ -19,6 +19,11 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Combined
             Item.width = 28;
             Item.height = 28;
             Item.accessory = true;
+            Item.defense = 8;
+            if(ModLoader.HasMod("TRAEProject"))
+            {
+                Item.defense = 10;
+            }
         }
         public override void AddRecipes()
         {
@@ -31,7 +36,6 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Combined
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.GetDamage(DamageClass.Generic) += 0.1f;
-            player.statDefense += 8;
             player.aggro += 400;
         }
     }

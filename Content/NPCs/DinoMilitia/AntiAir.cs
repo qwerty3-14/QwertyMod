@@ -282,7 +282,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
             Dust dust = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(26, Projectile.rotation + MathF.PI / 2) + QwertyMethods.PolarVector(Main.rand.Next(-6, 6), Projectile.rotation), 6);
             closest = 10000;
         }
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             SoundEngine.PlaySound(SoundID.Item62, Projectile.position);
             for (int i = 0; i < 14; i++)

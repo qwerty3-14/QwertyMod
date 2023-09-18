@@ -25,8 +25,8 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.DivineBanishment
             Item.damage = 90;
             Item.DamageType = DamageClass.Ranged;
 
-            Item.useTime = 30;
-            Item.useAnimation = 30;
+            Item.useTime = 22;
+            Item.useAnimation = 22;
 
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 2f;
@@ -50,8 +50,23 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.DivineBanishment
         {
             arrow = Main.projectile[Projectile.NewProjectile(source, position + QwertyMethods.PolarVector(6, velocity.ToRotation() + MathF.PI/2), velocity, type, damage, knockback, player.whoAmI)];
             arrow.GetGlobalProjectile<ArrowWarping>().warpedArrow = true;
+            if(Main.netMode != NetmodeID.SinglePlayer)
+            {
+                ModPacket packet = Mod.GetPacket();
+                packet.Write((byte)ModMessageType.AmmoEnchantArrowWarping);
+                packet.Write(arrow.identity);
+                packet.Send();
+            }
+
             arrow = Main.projectile[Projectile.NewProjectile(source, position + QwertyMethods.PolarVector(-6, velocity.ToRotation() + MathF.PI/2), velocity, type, damage, knockback, player.whoAmI)];
             arrow.GetGlobalProjectile<ArrowWarping>().warpedArrow = true;
+            if(Main.netMode != NetmodeID.SinglePlayer)
+            {
+                ModPacket packet = Mod.GetPacket();
+                packet.Write((byte)ModMessageType.AmmoEnchantArrowWarping);
+                packet.Write(arrow.identity);
+                packet.Send();
+            }
             return false;
         }
 

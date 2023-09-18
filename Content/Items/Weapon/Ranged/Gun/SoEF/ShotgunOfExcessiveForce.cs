@@ -16,7 +16,6 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.SoEF
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Shotgun of Excessive Force");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -55,9 +54,17 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.SoEF
                 Projectile p = Main.projectile[Projectile.NewProjectile(source, position + QwertyMethods.PolarVector(24, dir), QwertyMethods.PolarVector(speed * Main.rand.NextFloat(.7f, 1.4f), dir + Main.rand.NextFloat(-1, 1) * MathF.PI / 18), type, damage, knockback, player.whoAmI)];
                 p.extraUpdates++;
                 p.GetGlobalProjectile<EtimsProjectile>().effect = true;
+                if(Main.netMode != NetmodeID.SinglePlayer)
+                {
+                    ModPacket packet = Mod.GetPacket();
+                    packet.Write((byte)ModMessageType.AmmoEnchantEtims);
+                    packet.Write(p.identity);
+                    packet.Send();
+                }
             }
 
             player.velocity = QwertyMethods.PolarVector(12f, dir + MathF.PI);
+            NetMessage.SendData(MessageID.PlayerControls, number: player.whoAmI);
 
             return false;
         }

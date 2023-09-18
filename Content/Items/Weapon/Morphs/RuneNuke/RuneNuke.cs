@@ -46,8 +46,8 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.RuneNuke
             Item.rare = ItemRarityID.Cyan;
 
             Item.noUseGraphic = true;
-            Item.width = 18;
-            Item.height = 32;
+            Item.width = 30;
+            Item.height = 30;
             if (!Main.dedServ)
             {
                 Item.GetGlobalItem<ItemUseGlow>().glowTexture = Request<Texture2D>("QwertyMod/Content/Items/Weapon/Morphs/RuneNuke/RuneNuke_Glow").Value;
@@ -134,7 +134,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.RuneNuke
             }
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             if (timeLeft == 0)
             {

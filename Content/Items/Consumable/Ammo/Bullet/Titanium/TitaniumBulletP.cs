@@ -48,7 +48,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Bullet.Titanium
         {
             Projectile.damage = (int)(Projectile.damage * .6f);
         }
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             Collision.HitTiles(Projectile.position + Projectile.velocity, Projectile.velocity, Projectile.width, Projectile.height);
             for(int i = 0; i < 5; i++)

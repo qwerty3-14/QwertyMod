@@ -46,16 +46,8 @@ namespace QwertyMod.Content.NPCs.Bosses.BladeBoss
                 PortraitPositionYOverride = 0f,
             };
             NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, drawModifiers);
-
-            //Specify the debuffs it is immune to
-            NPCDebuffImmunityData debuffData = new NPCDebuffImmunityData
-            {
-                SpecificallyImmuneTo = new int[] {
-                    BuffID.Poisoned,
-                    BuffID.Ichor
-                }
-            };
-            NPCID.Sets.DebuffImmunitySets.Add(Type, debuffData);
+            NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Poisoned] = true;
+            NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Ichor] = true;
         }
 
         public override void SetDefaults()
@@ -698,16 +690,8 @@ namespace QwertyMod.Content.NPCs.Bosses.BladeBoss
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Imperious");
-            //Specify the debuffs it is immune to
-            NPCDebuffImmunityData debuffData = new NPCDebuffImmunityData
-            {
-                SpecificallyImmuneTo = new int[] {
-                    BuffID.Poisoned,
-                    BuffID.Ichor
-                }
-            };
-            NPCID.Sets.DebuffImmunitySets.Add(Type, debuffData);
+            NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Poisoned] = true;
+            NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Ichor] = true;
         }
 
         public override void SetDefaults()
@@ -970,7 +954,7 @@ namespace QwertyMod.Content.NPCs.Bosses.BladeBoss
             Projectile.rotation = Projectile.velocity.ToRotation();
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             for (int d = 0; d < 40; d++)
             {

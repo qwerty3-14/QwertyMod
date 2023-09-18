@@ -16,6 +16,9 @@ using Terraria.Audio;
 using QwertyMod.Content.Buffs;
 using QwertyMod.Content.Dusts;
 using QwertyMod.Common.Fortress;
+using QwertyMod.Content.Items.Equipment.Accessories.Expert;
+using QwertyMod.Content.Items.Consumable.BossBag;
+using QwertyMod.Content.Items.MiscMaterials;
 
 
 namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
@@ -36,16 +39,9 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
                 PortraitPositionYOverride = 0f,
             };
             NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, drawModifiers);
-
-            //Specify the debuffs it is immune to
-            NPCDebuffImmunityData debuffData = new NPCDebuffImmunityData
-            {
-                SpecificallyImmuneTo = new int[] {
-                    BuffID.Poisoned,
-                    BuffID.Confused
-                }
-            };
-            NPCID.Sets.DebuffImmunitySets.Add(Type, debuffData);
+            
+            NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Poisoned] = true;
+            NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Ichor] = true;
         }
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
         {
@@ -56,6 +52,12 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
                 BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Sky,
                 new FlavorTextBestiaryInfoElement("An ancient civilization created a super advanced AI. Its first task 'Replace God'")
             });
+        }
+        public override void OnKill()
+        {
+            NPC.SetEventFlagCleared(ref DownedBossSystem.downedBattleship, -1);
+            SkyFortress.beingInvaded = false;
+
         }
 
         public override void SetDefaults()
@@ -70,7 +72,7 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
             NPC.boss = true;
             if (!Main.dedServ)
             {
-                Music = MusicLoader.GetMusicSlot(Mod, "Assets/Music/BuiltToDestroy");
+                Music = MusicLoader.GetMusicSlot(Mod, "Assets/Music/Accomplices");
             }
             NPC.knockBackResist = 0;
             NPC.HitSound = new SoundStyle("QwertyMod/Assets/Sounds/invbattleship_hurt1");
@@ -208,6 +210,9 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
             writer.Write(gunDebrislife[1]);
             writer.Write(gunDebrislifeMax[0]);
             writer.Write(gunDebrislifeMax[1]);
+
+            writer.Write(beamIndexes[0]);
+            writer.Write(beamIndexes[1]);
         }
 
         public override void ReceiveExtraAI(BinaryReader reader)
@@ -223,6 +228,34 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
             gunDebrislife[1] = reader.ReadInt32();
             gunDebrislifeMax[0] = reader.ReadInt32();
             gunDebrislifeMax[1] = reader.ReadInt32();
+
+            beamIndexes[0] = reader.ReadInt32();
+            beamIndexes[1] = reader.ReadInt32();
+        }
+
+        public override void ModifyNPCLoot(NPCLoot npcLoot)
+        {
+            //Add the treasure bag (automatically checks for expert mode)
+            npcLoot.Add(ItemDropRule.BossBag(ItemType<BattleshipBag>())); //this requires you to set BossBag in SetDefaults accordingly
+
+            LeadingConditionRule notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
+
+            //notExpertRule.OnSuccess(ItemDropRule.OneFromOptionsNotScalingWithLuck(1, ItemType<CaeliteMagicWeapon>(), ItemType<HolyExiler>(), ItemType<CaeliteRainKnife>(), ItemType<PriestStaff>()));
+            //Finally add the leading rule
+            //npcLoot.Add(notExpertRule);
+
+            notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
+            notExpertRule.OnSuccess(ItemDropRule.Common(ItemType<InvaderPlating>(), 1, 80, 140));
+            npcLoot.Add(notExpertRule);
+
+            //Trophies are spawned with 1/10 chance
+           // npcLoot.Add(ItemDropRule.Common(ItemType<FortressBossTrophy>(), 10));
+
+
+			// ItemDropRule.MasterModeCommonDrop for the relic
+			//npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<Items.Consumable.Tiles.Relics.DivineLightRelic>()));
+
+            base.ModifyNPCLoot(npcLoot);
         }
     }
     

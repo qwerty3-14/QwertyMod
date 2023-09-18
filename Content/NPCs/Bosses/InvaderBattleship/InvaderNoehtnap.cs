@@ -28,18 +28,11 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
             Main.npcFrameCount[NPC.type] = 5;
 
             NPCID.Sets.MPAllowedEnemies[NPC.type] = true; //For allowing use of SpawnOnPlayer in multiplayer
-
-           
-
-            //Specify the debuffs it is immune to
-            NPCDebuffImmunityData debuffData = new NPCDebuffImmunityData
-            {
-                SpecificallyImmuneTo = new int[] {
-                    BuffID.Poisoned,
-                    BuffID.Confused
-                }
-            };
-            NPCID.Sets.DebuffImmunitySets.Add(Type, debuffData);
+            
+            NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Poisoned] = true;
+            NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Ichor] = true;
+            
+            NPCID.Sets.NoMultiplayerSmoothingByType[NPC.type] = true;
         }
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
         {
@@ -103,7 +96,7 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
         public override bool CheckDead()
         {
 
-            if(deathCounter > 0)
+            if(deathCounter > knockoutTime)
             {
                 return true;
             }
@@ -154,6 +147,7 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
             {
                 armBeamAttackCounter = -1;
                 deathCounter++;
+                NPC.velocity = Vector2.Zero;
                 if(deathCounter > startPunchin && deathCounter < finalPunch)
                 {
                     if(deathCounter % 30 == 0)
@@ -507,6 +501,10 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
             writer.Write(activeSpellCountdown);
             writer.Write(dualSphereTimer);
             writer.Write(teleportframe);
+            for(int i = 0; i < 4; i++)
+            {
+                writer.Write(beamIndexes[i]);
+            }
         }
 
         public override void ReceiveExtraAI(BinaryReader reader)
@@ -519,6 +517,10 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
             activeSpellCountdown = reader.ReadInt32();
             dualSphereTimer = reader.ReadInt32();
             teleportframe = reader.ReadInt32();
+            for(int i = 0; i < 4; i++)
+            {
+                beamIndexes[i] = reader.ReadInt32();
+            }
         }
     }
 

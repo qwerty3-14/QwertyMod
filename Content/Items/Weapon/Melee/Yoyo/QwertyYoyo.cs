@@ -17,6 +17,8 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo
         public int yoyoCount = 1;
         public int counterWeightId = -1;
         public float spread = MathF.PI * 2;
+        public float TRAERangeModifier = 1f;
+        public float TRAESpeedModifier = 1f;
 
         public override void AI()
         {
@@ -78,12 +80,109 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo
 
                 float useRange = range;
                 float useSpeed = speed;
+                /*
+                if(ModLoader.HasMod("TRAEProj"))
+                {
+
+                }
+                */
+                
+                if (ModLoader.TryGetMod("TRAEProj", out Mod TRAEProj))
+                {
+                    Main.NewText("TRAELOADED");
+                    int radicalID = -1;
+                    if(TRAEProj.TryFind("Radical", out ModPrefix Radical))
+                    {
+                        radicalID = Radical.Type;
+                        Main.NewText("huh");
+                    }
+                    int ExtremeID = -1;
+                    if(TRAEProj.TryFind("Extreme", out ModPrefix Extreme))
+                    {
+                        ExtremeID = Extreme.Type;
+                    }
+                    int PoundingID = -1;
+                    if(TRAEProj.TryFind("Pounding", out ModPrefix Pounding))
+                    {
+                        PoundingID = Pounding.Type;
+                    }
+                    int ZonedID = -1;
+                    if(TRAEProj.TryFind("Zoned", out ModPrefix Zoned))
+                    {
+                        ZonedID = Zoned.Type;
+                    }
+                    int RelentlessID = -1;
+                    if(TRAEProj.TryFind("Relentless", out ModPrefix Relentless))
+                    {
+                        RelentlessID = Relentless.Type;
+                    }
+                    int TrickyID = -1;
+                    if(TRAEProj.TryFind("Tricky", out ModPrefix Tricky))
+                    {
+                        TrickyID = Tricky.Type;
+                    }
+                    int ExtendedID = -1;
+                    if(TRAEProj.TryFind("Extended", out ModPrefix Extended))
+                    {
+                        ExtendedID = Extended.Type;
+                    }
+                    int BadID = -1;
+                    if(TRAEProj.TryFind("Bad", out ModPrefix Bad))
+                    {
+                        BadID = Bad.Type;
+                    }
+                    int curPrefix = Main.player[Projectile.owner].HeldItem.prefix;
+                    if(curPrefix == radicalID && radicalID != -1)
+                    {
+                        TRAERangeModifier = 1.1f;
+                        TRAESpeedModifier = 1.1f;
+                    }
+                    if(curPrefix == ExtendedID && ExtendedID != -1)
+                    {
+                        TRAERangeModifier = 1.1f;
+                        TRAESpeedModifier = 1.1f;
+                    }
+                    if(curPrefix == PoundingID && PoundingID != -1)
+                    {
+                        TRAERangeModifier = 1f;
+                        TRAESpeedModifier = 1.2f;
+                    }
+                    if(curPrefix == ZonedID && ZonedID != -1)
+                    {
+                        TRAERangeModifier = 1.3f;
+                        TRAESpeedModifier = 0.8f;
+                    }
+                    if(curPrefix == RelentlessID && RelentlessID != -1)
+                    {
+                        TRAERangeModifier = 0.7f;
+                        TRAESpeedModifier = 1.2f;
+                    }
+                    if(curPrefix == TrickyID && TrickyID != -1)
+                    {
+                        TRAERangeModifier = 1.2f;
+                        TRAESpeedModifier = 1.2f;
+                    }
+                    if(curPrefix == ExtendedID && ExtendedID != -1)
+                    {
+                        TRAERangeModifier = 1.2f;
+                        TRAESpeedModifier = 1.0f;
+                    }
+                    if(curPrefix == BadID && BadID != -1)
+                    {
+                        TRAERangeModifier = 0.9f;
+                        TRAESpeedModifier = 0.9f;
+                    }
+                    useRange *= TRAERangeModifier;
+                    useSpeed *= TRAESpeedModifier;
+                    
+                }
+                
                 if (Main.player[Projectile.owner].yoyoString)
                 {
                     useRange = useRange * 1.25f + 30f;
                 }
-                useRange /= (1f + Main.player[Projectile.owner].GetAttackSpeed(DamageClass.Melee) * 3f) / 4f;
-                useSpeed /= (1f + Main.player[Projectile.owner].GetAttackSpeed(DamageClass.Melee) * 3f) / 4f;
+                useRange *= (1f + Main.player[Projectile.owner].GetAttackSpeed(DamageClass.Melee) * 3f) / 4f;
+                useSpeed *= (1f + Main.player[Projectile.owner].GetAttackSpeed(DamageClass.Melee) * 3f) / 4f;
                 float num11 = 14f - useSpeed / 2f;
                 float num12 = 5f + useSpeed / 2f;
                 if (Orbital)

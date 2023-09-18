@@ -67,44 +67,31 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RuneWave
         {
             Projectile.aiStyle = 1;
             AIType = ProjectileID.Bullet;
-            Projectile.width = 48;
-            Projectile.height = 48;
+            Projectile.width = 80;
+            Projectile.height = 80;
             Projectile.friendly = true;
             Projectile.penetrate = -1;
             Projectile.DamageType = DamageClass.Magic;
             Projectile.tileCollide = false;
             Projectile.timeLeft = 60 * 3;
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = 8;
         }
 
         public int dustTimer;
-        public int timer;
         private bool runOnce = true;
         private float iceRuneSpeed = 10;
-        private Projectile ice1;
-        private Projectile ice2;
+        float iceRuneRotCounter = 0;
+        float runeDist = 100;
 
         public override void AI()
         {
             Player player = Main.player[Projectile.owner];
             Projectile.frame = (int)Projectile.ai[1];
             dustTimer++;
-            timer++;
+            iceRuneRotCounter += (float)((2 * Math.PI) / (Math.PI * 2 * 100 / iceRuneSpeed));
 
-            if (runOnce)
-            {
-                float startDistance = 100;
-
-                ice1 = Main.projectile[Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center.X + MathF.Cos(0) * startDistance, Projectile.Center.Y + MathF.Sin(0) * startDistance, 0, 0, ProjectileType<IceRuneTome>(), Projectile.damage, 3f, Main.myPlayer)];
-                ice2 = Main.projectile[Projectile.NewProjectile(Projectile.GetSource_FromThis(), player.Center.X + MathF.Cos(MathF.PI) * startDistance, player.Center.Y + MathF.Sin(MathF.PI) * startDistance, 0, 0, ProjectileType<IceRuneTome>(), Projectile.damage, 3f, Main.myPlayer)];
-                runOnce = false;
-            }
-            ice1.rotation += (float)((2 * Math.PI) / (Math.PI * 2 * 100 / iceRuneSpeed));
-            ice1.velocity.X = iceRuneSpeed * MathF.Cos(ice1.rotation) + Projectile.velocity.X;
-            ice1.velocity.Y = iceRuneSpeed * MathF.Sin(ice1.rotation) + Projectile.velocity.Y;
-
-            ice2.rotation += (float)((2 * Math.PI) / (Math.PI * 2 * 100 / iceRuneSpeed));
-            ice2.velocity.X = iceRuneSpeed * MathF.Cos(ice2.rotation) + Projectile.velocity.X;
-            ice2.velocity.Y = iceRuneSpeed * MathF.Sin(ice2.rotation) + Projectile.velocity.Y;
+                
 
             if (dustTimer > 5)
             {
@@ -116,47 +103,27 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RuneWave
         public override bool PreDraw(ref Color lightColor)
         {
             lightColor = Color.White;
+            for(int i = 0; i < 4; i++)
+            {
+                float rot = iceRuneRotCounter + (MathF.PI * 2f * (i / 4f));
+                Vector2 runeCenter = Projectile.Center + QwertyMethods.PolarVector(runeDist, rot);
+                Texture2D texture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Magic/RuneWave/IceRuneTome").Value;
+                Main.EntitySpriteDraw(texture, runeCenter - Main.screenPosition, null, Color.White, iceRuneRotCounter, new Vector2(18, 18), 1f, SpriteEffects.None, 0);
+            }
             return true;
         }
-    }
-
-    internal class IceRuneTome : ModProjectile
-    {
-        public override void SetDefaults()
+        public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
-            Projectile.aiStyle = -1;
-
-            Projectile.width = 36;
-            Projectile.height = 36;
-            Projectile.friendly = true;
-            Projectile.hostile = false;
-            Projectile.penetrate = -1;
-            Projectile.alpha = 0;
-            Projectile.tileCollide = false;
-            Projectile.timeLeft = 60 * 3;
-            Projectile.DamageType = DamageClass.Magic;
-        }
-        public float startDistance = 200f;
-        public float runeSpeed = 10;
-        public bool runOnce = true;
-
-        public override void AI()
-        {
-            Player player = Main.player[Projectile.owner];
-            if (runOnce)
+            for(int i = 0; i < 4; i++)
             {
-                Projectile.rotation = (player.Center - Projectile.Center).ToRotation() - MathF.PI / 2;
-                runOnce = false;
+                float rot = iceRuneRotCounter + (MathF.PI * 2f * (i / 4f));
+                Vector2 runeCenter = Projectile.Center + QwertyMethods.PolarVector(runeDist, rot);
+                if(Collision.CheckAABBvAABBCollision(runeCenter + new Vector2(-18, -18), new Vector2(36, 36), targetHitbox.TopLeft(), targetHitbox.Size()))
+                {
+                    return true;
+                }
             }
-        }
-        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            target.AddBuff(BuffID.Frostburn, 1200);
-        }
-        public override bool PreDraw(ref Color lightColor)
-        {
-            lightColor = Color.White;
-            return base.PreDraw(ref lightColor);
+            return null;
         }
     }
 }

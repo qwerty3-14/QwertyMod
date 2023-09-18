@@ -26,8 +26,8 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin.Imperium
             Item.useStyle = ItemUseStyleID.Swing;
             Item.useAnimation = 40;
             Item.useTime = 40;
-            Item.width = 68;
-            Item.height = 68;
+            Item.width = 40;
+            Item.height = 40;
             Item.maxStack = 1;
             Item.rare = ItemRarityID.Lime;
             Item.value = Item.sellPrice(0, 10, 0, 0);

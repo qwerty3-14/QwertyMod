@@ -91,6 +91,8 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
     {
         public override void SetStaticDefaults()
         {
+            Main.projFrames[Projectile.type] = 4;
+            ProjectileID.Sets.DrawScreenCheckFluff[Projectile.type] = 5000;
         }
         public const int openTime = 60;
         public override void SetDefaults()

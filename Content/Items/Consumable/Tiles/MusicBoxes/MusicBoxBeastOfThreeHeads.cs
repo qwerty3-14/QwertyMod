@@ -54,7 +54,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.MusicBoxes
 
         public override void KillMultiTile(int i, int j, int frameX, int frameY)
         {
-            Item.NewItem(new EntitySource_TileBreak(i, j), i * 16, j * 16, 16, 48, ModContent.ItemType<MusicBoxBuiltToDestroy>());
+            Item.NewItem(new EntitySource_TileBreak(i, j), i * 16, j * 16, 16, 48, ModContent.ItemType<MusicBoxBeastOfThreeHeads>());
         }
 
         public override void MouseOver(int i, int j)
@@ -62,7 +62,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.MusicBoxes
             Player player = Main.LocalPlayer;
             player.noThrow = 2;
             player.cursorItemIconEnabled = true;
-            player.cursorItemIconID = ModContent.ItemType<MusicBoxBuiltToDestroy>();
+            player.cursorItemIconID = ModContent.ItemType<MusicBoxBeastOfThreeHeads>();
         }
     }
 }

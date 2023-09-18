@@ -24,8 +24,8 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Swordpocalypse
         {
             Item.damage = 30;
             Item.mana = ModLoader.HasMod("TRAEProject") ? 54 : 10;
-            Item.width = 46;
-            Item.height = 46;
+            Item.width = 58;
+            Item.height = 58;
             Item.useTime = 4;
             Item.useAnimation = 20;
             Item.useStyle = ItemUseStyleID.Shoot;

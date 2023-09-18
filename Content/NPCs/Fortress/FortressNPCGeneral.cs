@@ -3,6 +3,7 @@ using System;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
+using QwertyMod.Common;
 
 namespace QwertyMod.Content.NPCs.Fortress
 {
@@ -10,11 +11,20 @@ namespace QwertyMod.Content.NPCs.Fortress
     {
         public override bool InstancePerEntity => true;
         public bool fortressNPC = false;
-        public bool contactDamageToInvaders = false;
+        public float contactDamageToInvaders = 0;
         public static Entity FindTarget(NPC npc, bool allowFlip = false)
         {
-            npc.TargetClosest(false);
-            float maxDist = (Main.player[npc.target].Center - npc.Center).Length() - Main.player[npc.target].aggro;
+            Entity target = null;
+            float maxDist = 10000;
+            for (int i = 0; i < Main.maxPlayers; i++)
+            {
+                if (Main.player[i].active && (Main.player[i].Center - npc.Center).Length() - Main.player[i].aggro < maxDist && !Main.player[i].GetModPlayer<CommonStats>().higherBeingFriendly)
+                {
+                    target = Main.player[i];
+                    npc.target = i;
+                    maxDist = (Main.player[npc.target].Center - npc.Center).Length() - Main.player[npc.target].aggro;
+                }
+            }
             NPC npcTarget = null;
             if (QwertyMethods.ClosestNPC(ref npcTarget, maxDist, npc.Center, false, -1, delegate (NPC possibleTarget) { return possibleTarget.GetGlobalNPC<InvaderNPCGeneral>().invaderNPC; }))
             {
@@ -24,16 +34,21 @@ namespace QwertyMod.Content.NPCs.Fortress
                 }
                 return npcTarget;
             }
+            if (target == null && npcTarget == null)
+            {
+                return null;
+            }
             if (allowFlip && Collision.CanHitLine(npc.Center, 0, 0, Main.player[npc.target].Center, 0, 0))
             {
-                npc.TargetClosest(true);
+                npc.direction = Math.Sign(Main.player[npc.target].Center.X - npc.Center.X);
             }
             return Main.player[npc.target];
         }
+
         int contactDamageCooldown = 0;
         public override void PostAI(NPC npc)
         {
-            if (contactDamageToInvaders)
+            if (contactDamageToInvaders > 0)
             {
                 if (contactDamageCooldown <= 0)
                 {
@@ -43,7 +58,9 @@ namespace QwertyMod.Content.NPCs.Fortress
                         {
                             if (gNPC.invaderNPC && Collision.CheckAABBvAABBCollision(npc.position, npc.Size, Main.npc[i].position, Main.npc[i].Size))
                             {
-                                QwertyMethods.PokeNPC(Main.LocalPlayer, Main.npc[i], npc.GetSource_FromAI(), npc.damage, DamageClass.Default, 0);
+                                NPC.HitInfo hitInfo = new NPC.HitInfo();
+                                hitInfo.Damage = (int)(npc.damage * contactDamageToInvaders);
+                                Main.npc[i].StrikeNPC(hitInfo, false, true);
                                 contactDamageCooldown = 10;
                                 break;
                             }
@@ -57,13 +74,23 @@ namespace QwertyMod.Content.NPCs.Fortress
     public class FortressNPCProjectile : GlobalProjectile
     {
         public bool isFromFortressNPC = false;
+        public float EvEMultiplier = 1f;
         public override bool InstancePerEntity => true;
         public override void SetDefaults(Projectile projectile)
         {
             if (isFromFortressNPC)
             {
                 projectile.friendly = true;
+                projectile.npcProj = true;
             }
+        }
+        public override bool CanHitPlayer(Projectile projectile, Player target)
+        {
+            if(isFromFortressNPC && target.GetModPlayer<CommonStats>().higherBeingFriendly)
+            {
+                return false;
+            }
+            return true;
         }
         public override bool? CanHitNPC(Projectile projectile, NPC target)
         {
@@ -78,7 +105,7 @@ namespace QwertyMod.Content.NPCs.Fortress
         {
             if (isFromFortressNPC)
             {
-                modifiers.FinalDamage *= 4;
+                modifiers.FinalDamage *= 4 * EvEMultiplier;
             }
         }
     }

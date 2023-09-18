@@ -28,7 +28,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Dart.Nano
             target.immune[Projectile.owner] = 0;
             target.AddBuff(BuffID.Confused, 60 * 10);
         }
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             for (int r = 0; r < 5; r++)
             {

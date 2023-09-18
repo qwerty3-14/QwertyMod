@@ -40,7 +40,6 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
         }
         BattleshipMissileLauncher launcher;
         bool runOnce = true;
-        int shotTimer = 0;
         public override void AI()
         {
             NPC.damage = 0;

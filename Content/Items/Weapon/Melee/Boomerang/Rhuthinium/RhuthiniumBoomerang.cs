@@ -52,14 +52,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Boomerang.Rhuthinium
 
         public override bool CanUseItem(Player player)
         {
-            for (int i = 0; i < 1000; ++i)
-            {
-                if (Main.projectile[i].active && Main.projectile[i].owner == Main.myPlayer && Main.projectile[i].type == Item.shoot)
-                {
-                    return false;
-                }
-            }
-            return true;
+            return player.ownedProjectileCounts[Item.shoot] <= 0;
         }
     }
 
@@ -103,28 +96,49 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Boomerang.Rhuthinium
             }
             Projectile.rotation += MathHelper.ToRadians(20 * spinDirection);
             timer++;
-            if (Main.mouseRight)
+            switch((int)Projectile.ai[2])
             {
-                Projectile.velocity.X = 0;
-                Projectile.velocity.Y = 0;
+                case 0:
+                    Projectile.velocity = origonalVelocity;
+                break;
+                case 1:
+                    Projectile.velocity.X = 0;
+                    Projectile.velocity.Y = 0;
+                break;
+                case 2:
+                    Projectile.tileCollide = false;
+                    float speed = 10;
+                    float direction = (player.Center - Projectile.Center).ToRotation();
+                    Projectile.velocity.X = speed * MathF.Cos(direction);
+                    Projectile.velocity.Y = speed * MathF.Sin(direction);
+                    float distance = MathF.Sqrt((player.Center.X - Projectile.Center.X) * (player.Center.X - Projectile.Center.X) + (player.Center.Y - Projectile.Center.Y) * (player.Center.Y - Projectile.Center.Y));
+                    if (distance < 10)
+                    {
+                        Projectile.Kill();
+                    }
+                break;
             }
-            else if (player.channel)
+            if(Main.myPlayer == Projectile.owner)
             {
-                Projectile.velocity = origonalVelocity;
-            }
-            else
-            {
-                Projectile.tileCollide = false;
-                float speed = 10;
-                float direction = (player.Center - Projectile.Center).ToRotation();
-                Projectile.velocity.X = speed * MathF.Cos(direction);
-                Projectile.velocity.Y = speed * MathF.Sin(direction);
-                float distance = MathF.Sqrt((player.Center.X - Projectile.Center.X) * (player.Center.X - Projectile.Center.X) + (player.Center.Y - Projectile.Center.Y) * (player.Center.Y - Projectile.Center.Y));
-                if (distance < 10)
+                float oldValue = Projectile.ai[2];
+                if (Main.mouseRight)
                 {
-                    Projectile.Kill();
+                    Projectile.ai[2] = 1;
+                }
+                else if (player.channel)
+                {
+                    Projectile.ai[2] = 0;
+                }
+                else
+                {
+                    Projectile.ai[2] = 2;
+                }
+                if(oldValue != Projectile.ai[2])
+                {
+                    Projectile.netUpdate = true;
                 }
             }
+            
         }
 
         public override bool OnTileCollide(Vector2 velocityChange)

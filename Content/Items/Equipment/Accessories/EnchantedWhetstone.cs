@@ -58,17 +58,19 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
     public class WhetStoneEffect : ModPlayer
     {
         public float effect = 0f;
+        public int AP = 0;
 
         public override void ResetEffects()
         {
             effect = 0f;
+            AP = 0;
         }
 
         public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
         {
             if (effect != 0f && proj.CountsAsClass(DamageClass.Melee))
             {
-                QwertyMethods.PokeNPC(Player, target, Projectile.InheritSource(proj), proj.GetGlobalProjectile<MagicBonusOnProj>().magicBoost * Player.GetDamage(DamageClass.Magic).Multiplicative, DamageClass.Magic);
+                QwertyMethods.PokeNPC(Player, target, Projectile.InheritSource(proj), proj.GetGlobalProjectile<MagicBonusOnProj>().magicBoost * Player.GetDamage(DamageClass.Magic).Multiplicative, DamageClass.Magic, 0, AP);
             }
         }
 
@@ -76,7 +78,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
         {
             if (effect != 0f && modifiers.DamageType == DamageClass.Melee)
             {
-                QwertyMethods.PokeNPC(Player, target, new EntitySource_Misc("Accesory_EnchantedWhetstone"), modifiers.FinalDamage.Multiplicative * effect * Player.GetDamage(DamageClass.Magic).Multiplicative, DamageClass.Magic);
+                QwertyMethods.PokeNPC(Player, target, new EntitySource_Misc("Accesory_EnchantedWhetstone"), modifiers.FinalDamage.Multiplicative * effect * Player.GetDamage(DamageClass.Magic).Multiplicative, DamageClass.Magic, 0, AP);
             }
         }
     }

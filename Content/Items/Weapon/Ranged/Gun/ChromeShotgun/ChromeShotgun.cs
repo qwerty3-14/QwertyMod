@@ -18,6 +18,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.ChromeShotgun
             //DisplayName,SetDefault("Chrome Shotgun");
             //Tooltip.SetDefault("Right click to switch between 4 modes");
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
+            ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
         }
 
         private Vector2 DefaultHoldOffset = new Vector2(-8, 0);
@@ -52,6 +53,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.ChromeShotgun
             Item.GetGlobalItem<ItemUseGlow>().glowOffsetX = (int)DefaultHoldOffset.X;
             Item.GetGlobalItem<ItemUseGlow>().glowOffsetY = (int)DefaultHoldOffset.Y;
             Item.autoReuse = true;
+            Item.UseSound = SoundID.Item11;
         }
 
 
@@ -76,8 +78,10 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.ChromeShotgun
         }
         public override bool AltFunctionUse(Player player)
         {
+            
             return true;
         }
+        
 
         public override void UseAnimation(Player player)
         {
@@ -105,17 +109,21 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.ChromeShotgun
             }
             if (player.altFunctionUse == 2)
             {
-                Item.useStyle = 103;
             }
             else
             {
-                Item.UseSound = SoundID.Item11;
                 Item.useStyle = ItemUseStyleID.Shoot;
             }
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
+
+            if (player.altFunctionUse == 2)
+            {
+                Projectile.NewProjectile(source, position, Vector2.Zero, ModContent.ProjectileType<ChromeShotgunP>(), damage, knockback, player.whoAmI);
+                return false;
+            }
             if (Item.useStyle == ItemUseStyleID.Shoot)
             {
                 float direction = velocity.ToRotation();
@@ -168,7 +176,8 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.ChromeShotgun
                         break;
 
                     case 3:
-                        return true;
+                        Projectile.NewProjectile(source, position + QwertyMethods.PolarVector(-4 * player.direction, velocity.ToRotation() + MathF.PI / 2), velocity, type, damage, knockback, player.whoAmI);
+                        return false;
                 }
             }
             return false;
@@ -185,6 +194,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.ChromeShotgun
             Projectile.hostile = false;
             Projectile.DamageType = DamageClass.Ranged;
             Projectile.timeLeft = 2;
+            Projectile.tileCollide = false;
         }
 
         private NPC target;
@@ -239,7 +249,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.ChromeShotgun
                         float speedB = 14f;
                         int weaponDamage = Projectile.damage;
                         float kb = Projectile.knockBack;
-                        player.PickAmmo(player.HeldItem, out bullet, out speedB, out weaponDamage, out kb, out _, false);
+                        player.PickAmmo(player.HeldItem, out bullet, out speedB, out weaponDamage, out kb, out _, true);
                         if (canShoot)
                         {
                             Projectile.NewProjectile(Projectile.GetSource_FromThis(), GunPositions[i], QwertyMethods.PolarVector(16, GunRotations[i] + Projectile.rotation + MathF.PI / 2 * (i == 0 ? 1 : -1)), bullet, weaponDamage, kb, Projectile.owner);
@@ -275,37 +285,53 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.ChromeShotgun
         //public override bool CloneNewInstances => true;
         public override bool InstancePerEntity => true;
     }
-
-    public class ChromeGunUseDraw : ModPlayer
+    public class ChromeShotgunP : ModProjectile
     {
-        public override void PostItemCheck()
+        int spinTime = 30;
+        public override void SetDefaults()
         {
-            if (!Player.inventory[Player.selectedItem].IsAir)
+            Projectile.timeLeft = spinTime;
+            Projectile.width = Projectile.height = 10;
+            Projectile.hostile = false;
+            Projectile.friendly = true;
+            Projectile.tileCollide = false;
+        }
+        public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
+        {
+            return false;
+        }
+        public override void AI()
+        {
+            Player player = Main.player[Projectile.owner];
+            Projectile.Center = player.MountedCenter;
+            player.heldProj = Projectile.whoAmI;
+            Item item = player.HeldItem;
+            player.itemAnimationMax = spinTime;
+            player.itemAnimation = Projectile.timeLeft;
+            player.bodyFrame.Y = player.bodyFrame.Height * 3;
+            player.itemRotation = (float)(-Math.PI * 2f * player.direction) * ((float)Projectile.timeLeft / spinTime);
+            player.itemLocation.X = player.position.X + (float)player.width * 0.5f - (float)TextureAssets.Item[item.type].Value.Width * 0.5f - (float)(player.direction * 2);
+            player.itemLocation.Y = player.MountedCenter.Y - (float)TextureAssets.Item[item.type].Value.Height * 0.5f;
+            if(Projectile.timeLeft == spinTime / 2)
             {
-                Item item = Player.inventory[Player.selectedItem];
-                if (item.useStyle == 103 && Player.itemAnimation > 0)
+                item.GetGlobalItem<ChromeGunToggle>().mode++;
+                if(item.GetGlobalItem<ChromeGunToggle>().mode == 3 && player.ownedProjectileCounts[ModContent.ProjectileType<ShotgunMinion>()] <= 0)
                 {
-                    Player.bodyFrame.Y = Player.bodyFrame.Height * 3;
-                    Player.itemRotation = (float)(-Math.PI * 2f * Player.direction) * ((float)Player.itemAnimation / Player.itemAnimationMax);
-                    Player.itemLocation.X = Player.position.X + (float)Player.width * 0.5f - (float)TextureAssets.Item[item.type].Value.Width * 0.5f - (float)(Player.direction * 2);
-                    Player.itemLocation.Y = Player.MountedCenter.Y - (float)TextureAssets.Item[item.type].Value.Height * 0.5f;
-                    if (Player.itemAnimation == Player.itemAnimationMax / 2)
-                    {
-                        item.GetGlobalItem<ChromeGunToggle>().mode++;
-                        if (item.GetGlobalItem<ChromeGunToggle>().mode >= 4)
-                        {
-                            item.GetGlobalItem<ChromeGunToggle>().mode = 0;
-                        }
-                    }
+                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), player.Center, Vector2.Zero, ModContent.ProjectileType<ShotgunMinion>(), player.GetWeaponDamage(player.HeldItem, false), 0, Projectile.owner);
                 }
-                if (Player.HeldItem.type == ModContent.ItemType<ChromeShotgunDefault>() && Player.HeldItem.GetGlobalItem<ChromeGunToggle>().mode == 3 && Player.ownedProjectileCounts[ModContent.ProjectileType<ShotgunMinion>()] < 1)
+                if (item.GetGlobalItem<ChromeGunToggle>().mode >= 4)
                 {
-                    Projectile.NewProjectile(Player.GetSource_ItemUse(item), Player.Center, Vector2.Zero, ModContent.ProjectileType<ShotgunMinion>(), Player.HeldItem.damage, Player.HeldItem.knockBack, Player.whoAmI);
+                    item.GetGlobalItem<ChromeGunToggle>().mode = 0;
                 }
             }
         }
+        public override bool PreDraw(ref Color lightColor)
+        {
+            return false;
+        }
+        
     }
-
+    
     class ChromeGunLayer : PlayerDrawLayer
     {
         public override void SetStaticDefaults()
@@ -387,5 +413,5 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.ChromeShotgun
             }
         }
     }
-
+    
 }

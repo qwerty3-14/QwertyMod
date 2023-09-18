@@ -14,8 +14,8 @@ namespace QwertyMod.Content.Items.Consumable.BossSummon
 
         public override void SetDefaults()
         {
-            Item.width = 30;
-            Item.height = 24;
+            Item.width = 44;
+            Item.height = 30;
             Item.maxStack = 9999;
             Item.value = 10000;
             Item.rare = ItemRarityID.Orange;

@@ -1,6 +1,11 @@
 Mods: {
 	QwertyMod: {
-		Biomes.FortressBiome.DisplayName: Fortress Biome
+		Biomes: {
+			FortressBiome: {
+				DisplayName: Fortress Biome
+				TownNPCDialogueName: the Fortress Biome
+			}
+		}
 
 		Buffs: {
 			CameraIssues: {
@@ -185,7 +190,7 @@ Mods: {
 
 			ShieldMinionB: {
 				DisplayName: Shield Minion
-				Description: You got your own personal Phalax!
+				Description: You got your own personal Phalanx!
 			}
 
 			SpaceFighterB: {
@@ -216,6 +221,16 @@ Mods: {
 			ForkTag: {
 				DisplayName: Missile Procing
 				Description: Minions will cause missiles to fire.
+			}
+
+			HigherPriestMinionB: {
+				DisplayName: Higher Priest Minion B
+				Description: Mods.QwertyMod.Buffs.HigherPriestMinionB.Description
+			}
+
+			DVRB: {
+				DisplayName: Dimension Violating Railgun
+				Description: Escalation
 			}
 		}
 
@@ -451,6 +466,20 @@ Mods: {
 			Judgement.DisplayName: Judgement
 			FinalJudgement.DisplayName: Final Judgement
 			ShooterBeam.DisplayName: Shooter Beam
+			Heresy.DisplayName: Invader Elite
+			SpinSpearHitbox.DisplayName: Invader Elite
+			HigherPriestMinion.DisplayName: Higher Priest Minion
+			HigherPriestPulse.DisplayName: Higher Priest Pulse
+			SkyDisintigrator.DisplayName: Sky Disintigrator
+			SeraphimPredatorP.DisplayName: Seraphim Predator P
+			BlessedMonsoonKnifeP.DisplayName: Blessed Monsoon Knife P
+			LargeHydraBreath.DisplayName: Large Hydra Breath
+			ChromeShotgunP.DisplayName: Chrome Shotgun P
+			EtimsSwordP.DisplayName: Etims Sword P
+			ImperiousTheIVAura.DisplayName: Imperious The I V Aura
+			DVR.DisplayName: D V R
+			FightKitP.DisplayName: Fight Kit P
+			ThrowEtimsKuni.DisplayName: Throw Etims Kuni
 		}
 
 		Items: {
@@ -486,7 +515,11 @@ Mods: {
 
 			RhuthiniumArrow: {
 				DisplayName: Rhuthinium Arrow
-				Tooltip: Does more damage to enemies farther away from you
+				Tooltip:
+					'''
+					Deals more damage the further the enemy
+					caps at +50% damage at 75 tiles away
+					'''
 			}
 
 			CaeliteBullet: {
@@ -525,7 +558,11 @@ Mods: {
 
 			NanoDart: {
 				DisplayName: Nano Dart
-				Tooltip: Breaks into a cluster of homing nanites
+				Tooltip:
+					'''
+					Breaks into a cluster of homing nanites
+					Nanites deal 40% damage
+					'''
 			}
 
 			RhuthiniumDart: {
@@ -535,7 +572,11 @@ Mods: {
 
 			VenomDart: {
 				DisplayName: Venom Dart
-				Tooltip: Creates venom clouds when hitting enemies
+				Tooltip:
+					'''
+					Pierces through enemies creating a venom cloud on each hit enemy
+					Venom clouds do 50% damage and have static immunity
+					'''
 			}
 
 			AncientMachineBag: {
@@ -629,32 +670,32 @@ Mods: {
 
 			AntiAirBanner: {
 				DisplayName: Anti Air Banner
-				Tooltip: ""
+				Tooltip: Nearby players get a bonus against: Dino Anti Air
 			}
 
 			CasterBanner: {
 				DisplayName: High Preist Banner
-				Tooltip: ""
+				Tooltip: Nearby players get a bonus against: High Preist
 			}
 
 			CrawlerBanner: {
 				DisplayName: Mollusket Banner
-				Tooltip: ""
+				Tooltip: Nearby players get a bonus against: Mollusket
 			}
 
 			FortressFlierBanner: {
 				DisplayName: Fortress Harpy Banner
-				Tooltip: ""
+				Tooltip: Nearby players get a bonus against: Fortress Harpy
 			}
 
 			GuardTileBanner: {
 				DisplayName: Guard Tile Banner
-				Tooltip: ""
+				Tooltip: Nearby players get a bonus against: Guard Tile
 			}
 
 			HopperBanner: {
 				DisplayName: Enchanted Tile Banner
-				Tooltip: ""
+				Tooltip: Nearby players get a bonus against: Enchanted Tile
 			}
 
 			SpectorBanner: {
@@ -664,22 +705,22 @@ Mods: {
 
 			SwarmerBanner: {
 				DisplayName: Fortress Swarmer Banner
-				Tooltip: ""
+				Tooltip: Nearby players get a bonus against: Fortress Swarmer
 			}
 
 			TriceratankBanner: {
 				DisplayName: Triceratank Banner
-				Tooltip: ""
+				Tooltip: Nearby players get a bonus against: Triceratank
 			}
 
 			UtahBanner: {
 				DisplayName: Utah Banner
-				Tooltip: ""
+				Tooltip: Nearby players get a bonus against: Utahraptor
 			}
 
 			VelocichopperBanner: {
 				DisplayName: Velocichopper Banner
-				Tooltip: ""
+				Tooltip: Nearby players get a bonus against: Velocichopper
 			}
 
 			CaeliteBar: {
@@ -839,7 +880,7 @@ Mods: {
 
 			ReverseSand: {
 				DisplayName: Dnas
-				Tooltip: ""
+				Tooltip: It falls up!
 			}
 
 			MusicBoxBeastOfThreeHeads: {
@@ -983,6 +1024,7 @@ Mods: {
 					'''
 					Stacks of ammo will slowly grow in size
 					Growth rate is lower for higher value ammo
+					Splitting a stack into more stacks will not increase the growth rate
 					'''
 			}
 
@@ -992,7 +1034,6 @@ Mods: {
 					'''
 					Doubles magic damage
 					What normaly drains mana drains you instead!
-					Less effective with certain weapons
 					'''
 			}
 
@@ -1001,7 +1042,8 @@ Mods: {
 				Tooltip:
 					'''
 					Melee attacks ingnite enemies
-					Melee attacks do an extra 30% damage as magic damage
+					Melee attacks do an extra magic damage
+					Magic damage is 30% the weapon's base damage then modifed by magic bonuses
 					Enemies immune to fire are immune to the extra damage.
 					'''
 			}
@@ -1010,7 +1052,6 @@ Mods: {
 				DisplayName: Guard Emblem
 				Tooltip:
 					'''
-					8 defense 
 					10% increased damage 
 					Enemies are more likely to target you
 					'''
@@ -1024,7 +1065,7 @@ Mods: {
 					Projectiles that normally don't pierce will use local immunity
 					Magic attacks ignore 15 defense
 					10% reduced magic damage
-					Extra pierces will do reduced damage when hitting the same target multiple times
+					Extra pierces will do significantly reduced damage when hitting the same target multiple times
 					'''
 			}
 
@@ -1035,7 +1076,11 @@ Mods: {
 
 			EnchantedWhetstone: {
 				DisplayName: Enchanted Whetstone
-				Tooltip: Melee attacks deal an extra 20% damage as magic damage
+				Tooltip:
+					'''
+					Melee attacks do an extra magic damage
+					Magic damage is 20% the weapon's base damage then modifed by magic bonuses
+					'''
 			}
 
 			AncientGemstone: {
@@ -1512,7 +1557,7 @@ Mods: {
 
 			FortressHarpyBeak: {
 				DisplayName: Fortress Harpy Beak
-				Tooltip: Lightweight and sturdy, goes well with Caelite when making weapons
+				Tooltip: Lightweight and sturdy
 			}
 
 			HydraScale: {
@@ -1715,22 +1760,22 @@ Mods: {
 				Tooltip:
 					'''
 					Throws three javelins at once
-					Each javelin reduces the contact damage enemies deal
+					Each javelin deals 20dps and reduces its damage dealt by 1%
 					Max: 15
 					'''
 			}
 
 			Imperium: {
 				DisplayName: Imperium
-				Tooltip: Enemies will take 35% more damage from swords while this is stuck in them
+				Tooltip: Enemies will take 400dps and 35% more damage from swords while this is stuck in them
 			}
 
 			RhuthiniumJavelin: {
 				DisplayName: Rhuthinium Javelin
 				Tooltip:
 					'''
-					Each javelin stuck in the enemy causes them to take 1 extra damage
-					Max: 10
+					Each javelin stuck in the enemy causes them to take 18dps and lose 2 defense
+					Max: 7
 					'''
 			}
 
@@ -1919,7 +1964,7 @@ Mods: {
 
 			AncientNuke: {
 				DisplayName: Shape shift: Ancient Nuke
-				Tooltip: Breifly turns you into an ancient nuke that causes a massive explosion when you collide with something... don't worry you'll live
+				Tooltip: Briefly turns you into an ancient nuke that causes a massive explosion when you collide with something... don't worry you'll live
 			}
 
 			HydraBarrage: {
@@ -2082,7 +2127,7 @@ Mods: {
 			}
 
 			AshFellStaff: {
-				DisplayName: Ash  Fell Staff
+				DisplayName: Ash Fell Staff
 				Tooltip: Thi Sentry suffocates your foes with ash missiles!
 			}
 
@@ -2102,7 +2147,12 @@ Mods: {
 
 			Riptide: {
 				DisplayName: Riptide Sentry Staff
-				Tooltip: ""
+				Tooltip:
+					'''
+					Fires low damage hitscan streams at 10Hz
+					Ignores 10 enemy defense
+					Can not benifit from whip tags
+					'''
 			}
 
 			ShroomiteTurretStaff: {
@@ -2180,22 +2230,176 @@ Mods: {
 			}
 
 			ScarletBallGown: {
-				DisplayName: Scarlet Ball Gown
+				DisplayName: Scarlet Gown
 				Tooltip: ""
 			}
 
 			ScarletFan: {
 				DisplayName: Scarlet Fan
-				Tooltip: Gives you and idle animation
+				Tooltip: Gives you an idle animation
 			}
 
 			CasualSkirt: {
 				DisplayName: Casual Skirt
-				Tooltip: ""
+				Tooltip:
+					'''
+					Shoes use your default shoe color
+					Shoes use the dye from your first accesory slot
+					'''
 			}
 
 			Purse: {
 				DisplayName: Purse
+				Tooltip: ""
+			}
+
+			SilkDress: {
+				DisplayName: Silk Dress
+				Tooltip: ""
+			}
+
+			GodSealKeycard: {
+				DisplayName: God Seal Keycard
+				Tooltip: ""
+			}
+
+			HigherPriestStaff: {
+				DisplayName: Higher Priest Staff
+				Tooltip: ""
+			}
+
+			SkyDisintigratorStaff: {
+				DisplayName: Sky Disintigrator Staff
+				Tooltip: Ignores 20 enemy defense
+			}
+
+			SeraphimPredator: {
+				DisplayName: Seraphim Predator
+				Tooltip: ""
+			}
+
+			BlessedMonsoonKnife: {
+				DisplayName: Blessed Monsoon Knife
+				Tooltip: ""
+			}
+
+			PurpleBonnet: {
+				DisplayName: Lavender Bonnet
+				Tooltip: ""
+			}
+
+			PurpleDress: {
+				DisplayName: Lavender Dress
+				Tooltip: ""
+			}
+
+			ScarletHat: {
+				DisplayName: Scarlet Hat
+				Tooltip: ""
+			}
+
+			PurpleUmbrella: {
+				DisplayName: Lavender Umbrella
+				Tooltip: ""
+			}
+
+			HallowedCape: {
+				Tooltip: ""
+				DisplayName: Hallowed Cape
+			}
+
+			InvasionCaller: {
+				Tooltip: ""
+				DisplayName: Invasion Caller
+			}
+
+			PreistCloak: {
+				Tooltip: The Higher Beings will see you as one of their own and not attack you
+				DisplayName: Preist Cloak
+			}
+
+			InvaderIDCard: {
+				Tooltip: The Invaders will see you as one of their own and not attack you
+				DisplayName: Invader ID Card
+			}
+
+			BattleshipBag: {
+				DisplayName: Treasure Bag
+				Tooltip: "{$CommonItemTooltip.RightClickToOpen}"
+			}
+
+			EmeraldDress: {
+				Tooltip: ""
+				DisplayName: Emerald Dress
+			}
+
+			EmeraldCape: {
+				Tooltip: ""
+				DisplayName: Emerald Cape
+			}
+
+			VulgarDictionary: {
+				DisplayName: Vulgar Dictionary
+				Tooltip: Why are all the enemies targeting you? that's F$^!@% B*$%&S*@%!
+			}
+
+			CartographyTable: {
+				DisplayName: Cartography Table
+				Tooltip: ""
+			}
+
+			EternalFountain: {
+				DisplayName: Eternal Fountain
+				Tooltip: Continously creates water
+			}
+
+			PiercingWhetstone: {
+				Tooltip:
+					'''
+					Melee attacks do an extra magic damage
+					Magic damage is 20% the weapon's base damage then modifed by magic bonuses
+					Whetstone damage bonus ignores 12 enemy defense
+					'''
+				DisplayName: Piercing Whetstone
+			}
+
+			Autosummoner: {
+				DisplayName: Auto Summoner
+				Tooltip:
+					'''
+					While in your inventory will automaticly summon minions based on laodout
+					The minion staff placed above will be default for all loadouts
+					The minion staff  placed to the right/below/left will override the default for loadout 1/2/3
+					Switching loadouts will desummon your minions if they're assigned different staffs
+					KNOWN BUG: Occasionally in multiplayer other players will see you stuck in the summon animation, desummon your minions if this happens
+					'''
+			}
+
+			SuperquantumRifle: {
+				Tooltip:
+					'''
+					50% chance not to consume ammo
+					Don't understand quantum mechanics? The gods don't either.
+					'''
+				DisplayName: Superquantum Rifle
+			}
+
+			DVRStaff: {
+				DisplayName: Dimension Violating Railgun Staff
+				Tooltip:
+					'''
+					Requires 10 minion slots
+					Targets the healtiest enemy
+					'''
+			}
+
+			FightKit: {
+				Tooltip: ""
+				DisplayName: Fight Kit
+			}
+
+			MusicBoxAcomplices: {
+				DisplayName: Music Box Acomplices
 				Tooltip: ""
 			}
 		}
@@ -2244,6 +2448,7 @@ Mods: {
 			CenterPiece.DisplayName: Center Piece
 			InvaderNoehtnap.DisplayName: Invader Noehtnap
 			NoehtnapClone.DisplayName: Invader Noehtnap
+			InvaderElite.DisplayName: Invader Elite
 		}
 
 		Tiles: {

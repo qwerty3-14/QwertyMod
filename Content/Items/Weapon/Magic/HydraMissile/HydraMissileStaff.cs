@@ -95,7 +95,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraMissile
             Projectile.rotation = direction + (MathF.PI / 2);
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             Projectile.alpha = 255;
             Projectile.width = 100;
@@ -157,7 +157,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraMissile
             //target.immune[Projectile.owner] = 0;
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             Projectile.alpha = 255;
             Projectile.width = 50;
@@ -218,7 +218,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraMissile
         {
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             Projectile.alpha = 255;
             Projectile.width = 20;

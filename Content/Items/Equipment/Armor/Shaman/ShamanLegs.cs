@@ -26,8 +26,8 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Shaman
             Item.value = Item.sellPrice(gold: 1);
             Item.rare = ItemRarityID.Blue;
             Item.defense = 5;
-            Item.width = 20;
-            Item.height = 20;
+            Item.width = 30;
+            Item.height = 28;
         }
 
         public override void UpdateEquip(Player player)

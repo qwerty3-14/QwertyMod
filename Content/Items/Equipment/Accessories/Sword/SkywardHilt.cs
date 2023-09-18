@@ -21,7 +21,8 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Sword
             Item.value = 25000;
             Item.rare = ItemRarityID.Orange;
 
-            Item.width = Item.height = 20;
+            Item.width = 38;
+            Item.height = 24;
 
             Item.accessory = true;
         }

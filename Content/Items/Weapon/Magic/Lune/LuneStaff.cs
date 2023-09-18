@@ -26,8 +26,8 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Lune
         {
             Item.damage = 11;
             Item.mana = ModLoader.HasMod("TRAEProject") ? 100 : 16;
-            Item.width = 42;
-            Item.height = 40;
+            Item.width = 70;
+            Item.height = 70;
             Item.useTime = 30;
             Item.useAnimation = 30;
             Item.useStyle = ItemUseStyleID.Shoot;
@@ -109,7 +109,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Lune
                 }
             }
         }
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             for (int i = 0; i < 8; i++)
             {

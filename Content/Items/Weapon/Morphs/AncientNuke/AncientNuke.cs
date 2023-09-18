@@ -42,8 +42,8 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.AncientNuke
             Item.rare = ItemRarityID.Blue;
 
             Item.noUseGraphic = true;
-            Item.width = 18;
-            Item.height = 32;
+            Item.width = 30;
+            Item.height = 30;
 
             //Item.autoReuse = true;
             if (!Main.dedServ)
@@ -129,7 +129,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.AncientNuke
             }
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             if (timeLeft == 0)
             {

@@ -14,12 +14,13 @@ using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content.NPCs.Bosses.Hydra
 {
+    [AutoloadBossHead]
     internal class HydraHead : ModNPC
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Hydra Head");
             Main.npcFrameCount[NPC.type] = 6;
+            NPCID.Sets.NoMultiplayerSmoothingByType[NPC.type] = true;
         }
 
         public override void SetDefaults()
@@ -27,9 +28,9 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
             NPC.width = 72;
             NPC.height = 72;
 
-            NPC.damage = 50;
+            NPC.damage = 60;
             NPC.defense = 18;
-            NPC.boss = true;
+            //NPC.boss = true;
             NPC.HitSound = SoundID.NPCHit1;
             NPC.DeathSound = SoundID.NPCDeath1;
             NPC.value = 60f;
@@ -45,6 +46,10 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
                 Music = MusicLoader.GetMusicSlot(Mod, "Assets/Music/BeastOfThreeHeads");
             }
         }
+		public override void BossHeadRotation(ref float rotation)
+		{
+			rotation = NPC.rotation;
+		}
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
         {
             // Sets the description of this NPC that is listed in the bestiary
@@ -54,320 +59,187 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
 				new FlavorTextBestiaryInfoElement("It's a Hydra!")
             });
         }
+        
         public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
         {
-            NPC.lifeMax = 2000;
-            NPC.damage = (int)(NPC.damage * .7f);
+            NPC.lifeMax = (int)(NPC.lifeMax * 0.75f * bossAdjustment);
+            NPC.damage = (int)(NPC.damage * 0.75f);
         }
-
-        private NPC Body = null;
-        private float headSpread = 3f * MathF.PI / 4f;
-        private bool runOnce = true;
-        private float rotateTo;
-        private Vector2 flyTo;
-        private int attackTimer = 0;
-        private bool attacking = false;
-        private int projDamge;
-        private bool beamAttack;
-        private Projectile laser;
-        private int shotWarming = 60;
-        private int beamTime = 300;
-
-        public override void AI()
+		public override bool CanHitPlayer(Player target, ref int cooldownSlot)
+		{
+			return fireTimer > 0;
+		}
+        float shotSpeed = 11;
+        NPC body = null;
+        bool runOnce = true;
+        Vector2 relativePosition;
+        float relativeRotation;
+        bool aimAtPlayer = false;
+        float rotSpeed = MathF.PI / 15f;
+        int fireTimer = 0;
+        int fireType = 0;
+        
+        Vector2 NeckPos()
         {
-            if (Main.expertMode)
+            return body.Center + QwertyMethods.PolarVector(50, MathF.PI * -0.5f + body.rotation);
+        }
+		public override void AI()
+		{
+            //QwertyMethods.ServerClientCheck("" + NPC.Center);
+            if(runOnce)
             {
-                projDamge = NPC.damage / 4;
-            }
-            else
-            {
-                projDamge = NPC.damage / 2;
-            }
-            NPC.TargetClosest(true);
-            Player player = Main.player[NPC.target];
-            if (runOnce)
-            {
-                if (NPC.ai[0] == 0)
+                for(int i = 0; i < 200; i++)
                 {
-                    NPC.ai[0] = -1;
+                    if(Main.npc[i].active && Main.npc[i].type == ModContent.NPCType<Hydra>())
+                    {
+                        body = Main.npc[i];
+                    }
                 }
-
                 runOnce = false;
-                NPC.lifeMax = 2000;
-                NPC.life = NPC.lifeMax;
             }
-
-            if (NPC.ai[0] == -1)
+            if(body == null)
             {
-                for (int n = 0; n < 200; n++)
+                return;
+            }
+            if(!body.active || body.type != ModContent.NPCType<Hydra>())
+            {
+                if(Main.netMode != NetmodeID.MultiplayerClient)
                 {
-                    if (Main.npc[n].type == NPCType<Hydra>() && Main.npc[n].active)
-                    {
-                        NPC.ai[0] = n;
-                        break;
-                    }
+                    NPC.StrikeInstantKill();
                 }
             }
-
-            if (NPC.ai[0] != -1 || Main.npc[(int)NPC.ai[0]].type != NPCType<Hydra>())
+            if(fireTimer > 0)
             {
-                Body = Main.npc[(int)NPC.ai[0]];
-                int headCount = 0;
-                int whichHeadAmI = 0;
-                for (int n = 0; n < 200; n++)
+                if(fireTimer == 1)
                 {
-                    if (Main.npc[n].type == NPCType<HydraHead>() && Main.npc[n].active && Main.npc[n].ai[0] == NPC.ai[0])
+                    if(Main.netMode != NetmodeID.MultiplayerClient)
                     {
-                        if (Main.npc[n].Center.X < NPC.Center.X || (Main.npc[n].Center.X == NPC.Center.X && n < NPC.whoAmI))
+                        if(fireType == 1)
                         {
-                            whichHeadAmI++;
+                            Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center + QwertyMethods.PolarVector(58, NPC.rotation), QwertyMethods.PolarVector(shotSpeed, NPC.rotation), ModContent.ProjectileType<HydraBreath>(), 25, 0);
                         }
-                        headCount++;
-                    }
-                }
-
-                float rotationOffset = (headSpread * (((float)whichHeadAmI + 1) / ((float)headCount + 1))) - headSpread / 2f;
-                Vector2 offSet = QwertyMethods.PolarVector(400, -MathF.PI / 2 + rotationOffset);
-                offSet.X *= 1.5f;
-
-                flyTo = Body.Center + offSet;
-                NPC.velocity = (flyTo - NPC.Center) * .1f;
-
-                if (attacking && attackTimer == 0)
-                {
-                    if (beamAttack)
-                    {
-                        laser.Kill();
-                        laser = null;
-                    }
-                    if (Main.netMode != NetmodeID.MultiplayerClient)
-                    {
-                        if (!beamAttack)
+                        if(fireType == 4)
                         {
-                            Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center + QwertyMethods.PolarVector(50, NPC.rotation), QwertyMethods.PolarVector(5, NPC.rotation), ProjectileType<HydraBreath>(), projDamge, 0f, Main.myPlayer);
+                            Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center + QwertyMethods.PolarVector(58, NPC.rotation), QwertyMethods.PolarVector(shotSpeed, NPC.rotation), ModContent.ProjectileType<LargeHydraBreath>(), 30, 0);
                         }
                     }
-                    attacking = false;
-                    beamAttack = false;
                 }
-                if (attackTimer < 60)
+                if(fireType == 2 || fireType == 3)
                 {
-                    attackTimer++;
+                    relativePosition = relativePosition.RotatedBy((fireType == 2 ? 1 : -1) * (MathF.PI * 2f) / Hydra.swingHeadTime);
+                    relativeRotation = relativeRotation += (fireType == 2 ? 1 : -1) * (MathF.PI * 2f) / Hydra.swingHeadTime;
+                }
+                fireTimer--;
+            }
+            Vector2 moveTo = NeckPos() + relativePosition.RotatedBy(body.rotation);
+            //QwertyMethods.ServerClientCheck(moveTo + "");
+            NPC.velocity = (moveTo - NPC.Center) * 0.13f;
+            if(aimAtPlayer)
+            {
+                NPC.TargetClosest(false);
+                float rotTo = QwertyMethods.PredictiveAimWithOffset(NPC.Center, shotSpeed, Main.player[NPC.target].Center, Main.player[NPC.target].velocity, 58);
+                if(!float.IsNaN(rotTo))
+                {
+                    relativeRotation = rotTo;
                 }
                 else
+                {  
+                    relativeRotation = (Main.player[NPC.target].Center - NPC.Center).ToRotation();
+                }
+            }
+            NPC.rotation.SlowRotation(relativeRotation + body.rotation, rotSpeed);
+            if(Main.netMode != NetmodeID.MultiplayerClient && NPC.localAI[3] != -1)
+            {
+                switch((int)NPC.localAI[3])
                 {
-                    if (Main.rand.NextBool(20) && Main.netMode != NetmodeID.MultiplayerClient)
+                    case 0:
+                    //set orientation
+                    if(NPC.localAI[0] != -1)
                     {
-                        attacking = true;
-                        if (Main.rand.NextFloat(10) < Math.Abs(player.velocity.X) && ((NPC.Center.X > player.Center.X && player.velocity.X > 0) || (NPC.Center.X < player.Center.X && player.velocity.X < 0)))
+                        relativePosition = new Vector2(NPC.localAI[0], NPC.localAI[1]);
+                        NPC.localAI[0] = -1;
+                        NPC.localAI[1] = -1;
+                    }
+                    if(NPC.localAI[2] != -1)
+                    {
+                        if(NPC.localAI[2] == -2)
                         {
-                            beamAttack = true;
-                            attackTimer = -beamTime;
-                            rotateTo = MathF.PI / 2;
+                            aimAtPlayer = true;
                         }
                         else
                         {
-                            rotateTo = (player.Center - NPC.Center).ToRotation() + (Main.rand.NextFloat(1, -1) * MathF.PI / 8);
-                            attackTimer = -shotWarming;
+                            aimAtPlayer = false;
+                            relativeRotation = NPC.localAI[2];
                         }
-                        NPC.netUpdate = true;
+                        NPC.localAI[2] = -1;
                     }
-                }
-                if (beamAttack)
-                {
-                    if (attackTimer < -beamTime / 2)
+                    break;
+                    case 1:
+                    //set fire
+                    if(NPC.localAI[0] != -1)
                     {
-                        float dir = NPC.rotation + Main.rand.NextFloat(-1, 1) * MathF.PI / 4;
-                        Dust.NewDustPerfect(NPC.Center + QwertyMethods.PolarVector(50, NPC.rotation), DustType<HydraBeamGlow>(), QwertyMethods.PolarVector(6, dir));
+                        fireType = (int)NPC.localAI[0];
+                        NPC.localAI[0] = -1;
                     }
-                    else if (attackTimer == -beamTime / 2)
+                    if(NPC.localAI[1] != -1)
                     {
-                        laser = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center.X, NPC.Center.Y, 0f, 0f, ProjectileType<HydraBeamT>(), (int)(projDamge * 1.5f), 3f, Main.myPlayer, NPC.whoAmI, 420)];
+                        fireTimer = (int)NPC.localAI[1];
+                        NPC.localAI[1] = -1;
                     }
-                    else
-                    {
-                        NPC.velocity = Vector2.Zero;
-                    }
+                    break;
                 }
-                if (!attacking)
-                {
-                    rotateTo = (player.Center - NPC.Center).ToRotation();
-                    if (laser != null)
-                    {
-                        if (laser.active)
-                        {
-                            laser.Kill();
-                            laser = null;
-                        }
-                    }
-                }
-
-                NPC.rotation = QwertyMethods.SlowRotation(NPC.rotation, rotateTo, 4);
-                if (!Body.active || Body.type != NPCType<Hydra>())
-                {
-                    NPC.life = 0;
-                    NPC.checkDead();
-                }
-                if (Body.dontTakeDamage)
-                {
-                    attacking = false;
-                    beamAttack = false;
-                }
+                NPC.localAI[3] = -1;
+                NPC.netUpdate = true;
             }
-            else
-            {
-                NPC.life = 0;
-                NPC.checkDead();
-            }
-        }
-        public override bool PreKill()
-        {
-            if (laser != null)
-            {
-                if (laser.active)
-                {
-                    laser.Kill();
-                    laser = null;
-                }
-            }
-            if (NPC.ai[0] != -1)
-            {
-                Body = Main.npc[(int)NPC.ai[0]];
-                if (Body.life > 1)
-                {
-                    Body.life--;
-                }
-                else
-                {
-                    //Body.dontTakeDamage = true;
-                    Body.ai[3]++;
-                }
-
-                for (int h = 0; h < 2; h++)
-                {
-                    if (Main.netMode != NetmodeID.MultiplayerClient && Body.active && Body.type == NPCType<Hydra>())
-                    {
-                        NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Center.X, (int)NPC.Center.Y, NPCType<HydraHead>(), ai0: Body.whoAmI, ai1: NPC.ai[1]);
-                    }
-                }
-            }
-            return false;
-        }
+		}
         public override void FindFrame(int frameHeight)
         {
-            if (attacking)
+            int f = 0;
+            if(fireType >= 2)
             {
-                NPC.frame.Y = (int)NPC.ai[1] * 2 * frameHeight + frameHeight;
+                f += 2;
             }
-            else
+            if(fireType == 4)
             {
-                NPC.frame.Y = (int)NPC.ai[1] * 2 * frameHeight;
+                f += 2;
             }
-        }
-        public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
-        {
-            if (NPC.ai[0] != -1)
+
+            if(fireTimer > 0)
             {
-                Body = Main.npc[(int)NPC.ai[0]];
-                int headCount = 0;
-                int whichHeadAmI = 0;
-                for (int n = 0; n < 200; n++)
-                {
-                    if (Main.npc[n].type == NPCType<HydraHead>() && Main.npc[n].active && Main.npc[n].ai[0] == NPC.ai[0])
-                    {
-                        if (n < NPC.whoAmI)
-                        {
-                            whichHeadAmI++;
-                        }
-                        headCount++;
-                    }
-                }
-                if (whichHeadAmI == headCount - 1 && NPC.ai[0] != -1)
-                {
-                    Body = Main.npc[(int)NPC.ai[0]];
-                    spriteBatch.Draw(Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/Hydra/Hydra").Value, Body.position - screenPos,
-                            Body.frame, Lighting.GetColor((int)Body.Center.X / 16, (int)Body.Center.Y / 16), Body.rotation,
-                            new Vector2(0, 0), 1f, SpriteEffects.None, 0f);
-                    spriteBatch.Draw(Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/Hydra/Hydra_Glow").Value, Body.position - screenPos,
-                                Body.frame, Color.White, Body.rotation,
-                                new Vector2(0, 0), 1f, SpriteEffects.None, 0f);
-                }
-                Vector2 neckOrigin = new Vector2(Body.Center.X, Body.Center.Y - 50);
-                Vector2 center = NPC.Center;
-                Vector2 distToProj = neckOrigin - NPC.Center;
-                float projRotation = distToProj.ToRotation() - 1.57f;
-                float distance = distToProj.Length();
-                while (distance > 30f && !float.IsNaN(distance))
-                {
-                    distToProj.Normalize();                 //get unit vector
-                    distToProj *= 30f;                      //speed = 30
-                    center += distToProj;                   //update draw position
-                    distToProj = neckOrigin - center;    //update distance
-                    distance = distToProj.Length();
-
-                    //Draw chain
-                    spriteBatch.Draw(Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/Hydra/HydraNeck").Value, center - screenPos,
-                        new Rectangle(0, 0, 52, 30), Lighting.GetColor((int)center.X / 16, (int)center.Y / 16), projRotation,
-                        new Vector2(52 * 0.5f, 30 * 0.5f), 1f, SpriteEffects.None, 0f);
-                }
-                spriteBatch.Draw(Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/Hydra/HydraNeckBase").Value, neckOrigin - screenPos,
-                            new Rectangle(0, 0, 52, 30), Lighting.GetColor((int)neckOrigin.X / 16, (int)neckOrigin.Y / 16), projRotation,
-                            new Vector2(52 * 0.5f, 30 * 0.5f), 1f, SpriteEffects.None, 0f);
+                f++;
             }
-            return false;
+            NPC.frame.Y = frameHeight * f;
         }
-        public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
-        {
-            spriteBatch.Draw(TextureAssets.Npc[NPC.type].Value, NPC.Center - screenPos,
-                        NPC.frame, drawColor, NPC.rotation,
-                        new Vector2(72 * 0.5f, 72 * 0.5f), 1f, SpriteEffects.None, 0f);
-            spriteBatch.Draw(Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/Hydra/HydraHead_Glow").Value, NPC.Center - screenPos,
-                        NPC.frame, Color.White, NPC.rotation,
-                        new Vector2(72 * 0.5f, 72 * 0.5f), 1f, SpriteEffects.None, 0f);
-        }
-
-        public override void BossHeadRotation(ref float rotation)
-        {
-            rotation = NPC.rotation;
-        }
-
-        public override void OnKill()
-        {
-
-        }
-
         public override void SendExtraAI(BinaryWriter writer)
         {
-            writer.Write(attacking);
-            writer.Write(rotateTo);
-            writer.Write(beamAttack);
-            writer.Write(attackTimer);
+            writer.WriteVector2(relativePosition);
+            writer.Write(relativeRotation);
+            writer.Write(aimAtPlayer);
+            writer.Write(fireType);
+            writer.Write(fireTimer);
         }
 
         public override void ReceiveExtraAI(BinaryReader reader)
         {
-            attacking = reader.ReadBoolean();
-            rotateTo = reader.ReadSingle();
-            beamAttack = reader.ReadBoolean();
-            attackTimer = reader.ReadInt32();
+            relativePosition = reader.ReadVector2();
+            relativeRotation = reader.ReadSingle();
+            aimAtPlayer = reader.ReadBoolean();
+            fireType = reader.ReadInt32();
+            fireTimer = reader.ReadInt32();
         }
-
-        public override void BossHeadSlot(ref int index)
-        {
-            switch ((int)NPC.ai[1])
+		public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+		{
+            if(body != null)
             {
-                case 0:
-                    index = NPCHeadLoader.GetBossHeadSlot(QwertyMod.HydraHead1);
-                    break;
-
-                case 1:
-                    index = NPCHeadLoader.GetBossHeadSlot(QwertyMod.HydraHead2);
-                    break;
-
-                case 2:
-                    index = NPCHeadLoader.GetBossHeadSlot(QwertyMod.HydraHead3);
-                    break;
+                
+                Texture2D head = TextureAssets.Npc[NPC.type].Value;
+                int width = head.Width;
+                int height = head.Height / Main.npcFrameCount[NPC.type];
+                spriteBatch.Draw(head, NPC.Center - screenPos, NPC.frame, drawColor, NPC.rotation, new Vector2(width, height) * 0.5f, NPC.scale, SpriteEffects.None, 0);
+                spriteBatch.Draw(ModContent.Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/Hydra/HydraHead_Glow").Value, NPC.Center - screenPos, NPC.frame, Color.White, NPC.rotation, new Vector2(width, height) * 0.5f, NPC.scale, SpriteEffects.None, 0);
             }
-        }
+
+			return false;
+		}
     }
 }

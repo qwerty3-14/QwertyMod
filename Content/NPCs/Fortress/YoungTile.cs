@@ -11,6 +11,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
 using static Terraria.ModLoader.ModContent;
+using QwertyMod.Common.Fortress;
 
 namespace QwertyMod.Content.NPCs.Fortress
 {
@@ -32,7 +33,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             NPC.defense = 18;
             NPC.lifeMax = 30;
 
-            if (NPC.downedGolemBoss)
+            if (SkyFortress.beingInvaded)
             {
                 NPC.lifeMax = 200;
                 NPC.damage = 80;
@@ -52,7 +53,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             //banner = NPC.type;
             //bannerItem = mod.ItemType("HopperBanner");
             NPC.buffImmune[BuffID.Confused] = false;
-            NPC.GetGlobalNPC<FortressNPCGeneral>().contactDamageToInvaders = true;
+            NPC.GetGlobalNPC<FortressNPCGeneral>().contactDamageToInvaders = 3f;
         }
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
         {
@@ -153,7 +154,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             Entity player = FortressNPCGeneral.FindTarget(NPC, true);
 
             //Main.NewText(Math.Abs(player.Center.X - NPC.Center.X));
-            if (Math.Abs(player.Center.X - NPC.Center.X) < aggroDistance && Math.Abs(player.Bottom.Y - NPC.Bottom.Y) < aggroDistanceY)
+            if (player != null && Math.Abs(player.Center.X - NPC.Center.X) < aggroDistance && Math.Abs(player.Bottom.Y - NPC.Bottom.Y) < aggroDistanceY)
             {
                 if (Main.netMode != NetmodeID.MultiplayerClient)
                 {

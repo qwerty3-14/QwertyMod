@@ -37,7 +37,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Boomerang.SeraphimPredator
             Item.UseSound = SoundID.Item1;
             Item.noUseGraphic = true;
             Item.width = 18;
-            Item.height = 32;
+            Item.height = 34;
 
             Item.autoReuse = true;
             Item.shoot = ProjectileType<SeraphimPredatorP>();

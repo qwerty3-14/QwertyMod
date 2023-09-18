@@ -22,8 +22,8 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Lune
             Item.value = 20000;
             Item.rare = ItemRarityID.Blue;
 
-            Item.width = 26;
-            Item.height = 16;
+            Item.width = 24;
+            Item.height = 12;
             Item.defense = 3;
         }
         public override void AddRecipes()

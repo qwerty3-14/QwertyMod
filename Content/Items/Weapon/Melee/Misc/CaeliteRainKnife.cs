@@ -28,8 +28,8 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Misc
             Item.knockBack = 1;
             Item.value = 50000;
             Item.rare = ItemRarityID.Orange;
-            Item.width = 14;
-            Item.height = 34;
+            Item.width = 18;
+            Item.height = 32;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.shootSpeed = 12f;
             Item.useTime = 5;
@@ -101,7 +101,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Misc
                 //Main.NewText(outOfPhaseHeight);
             }
 
-            public override void Kill(int timeLeft)
+            public override void OnKill(int timeLeft)
             {
                 for (int i = 0; i < 6; i++)
                 {

@@ -116,7 +116,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
             Main.EntitySpriteDraw(RuneSprites.bigRuneTransition[(int)Projectile.ai[0]][frame], Projectile.Center - Main.screenPosition, null, new Color(c, c, c, c), Projectile.rotation, new Vector2(50, 50), Vector2.One * 2, 0, 0);
             return false;
         }
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             int dustType = 0;
 

@@ -87,7 +87,7 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
 
         public float shotSpeed = 3;
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             if (Main.netMode != NetmodeID.MultiplayerClient && timeLeft > 1)
             {
@@ -192,7 +192,7 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
             }
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             if (Main.netMode != NetmodeID.MultiplayerClient)
             {

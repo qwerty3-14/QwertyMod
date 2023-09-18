@@ -22,8 +22,8 @@ namespace QwertyMod.Content.Items.Pet
             Item.damage = 0;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.shoot = ProjectileType<LightlingP>();
-            Item.width = 16;
-            Item.height = 30;
+            Item.width = 48;
+            Item.height = 28;
             Item.UseSound = SoundID.Item2;
             Item.useAnimation = 20;
             Item.useTime = 20;
@@ -46,7 +46,7 @@ namespace QwertyMod.Content.Items.Pet
         public override void SetStaticDefaults()
         {
             Main.projFrames[Projectile.type] = 2;
-            ProjectileID.Sets.LightPet[Projectile.type] = true;;
+            ProjectileID.Sets.LightPet[Projectile.type] = true;
         }
 
         public override void SetDefaults()

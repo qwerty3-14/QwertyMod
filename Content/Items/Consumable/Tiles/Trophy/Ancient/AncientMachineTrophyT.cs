@@ -24,14 +24,6 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Trophy.Ancient
             //AddMapEntry(new Color(120, 85, 60));
         }
 
-        public override void KillMultiTile(int i, int j, int frameX, int frameY)
-        {
-            if (frameX == 0)
-            {
-                Item.NewItem(new EntitySource_TileBreak(i, j), i * 16, j * 16, 48, 48, ItemType<AncientMachineTrophy>());
-            }
-        }
-
         public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
         {
             Terraria.Tile tile = Main.tile[i, j];

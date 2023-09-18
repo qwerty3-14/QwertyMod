@@ -75,7 +75,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.DartLauncher.SkyShot
         {
             target.AddBuff(BuffType<PowerDown>(), 60 * 30);
         }
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             for (int i = 0; i < 3; i++)
             {

@@ -25,8 +25,8 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Hydra
             Item.value = 50000;
             Item.rare = ItemRarityID.Pink;
 
-            Item.width = 28;
-            Item.height = 22;
+            Item.width = 30;
+            Item.height = 26;
             Item.defense = 13;
 
         }

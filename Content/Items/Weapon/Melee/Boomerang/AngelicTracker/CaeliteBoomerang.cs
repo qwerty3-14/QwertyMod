@@ -49,14 +49,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Boomerang.AngelicTracker
 
         public override bool CanUseItem(Player player)
         {
-            for (int i = 0; i < 1000; ++i)
-            {
-                if (Main.projectile[i].active && Main.projectile[i].owner == Main.myPlayer && Main.projectile[i].type == Item.shoot)
-                {
-                    return false;
-                }
-            }
-            return true;
+            return player.ownedProjectileCounts[Item.shoot] <= 0;
         }
     }
 

@@ -53,20 +53,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.ChloroSniper
             {
                 Projectile.timeLeft = 2;
             }
-            for (int p = 0; p < 1000; p++)
-            {
-                if (Main.projectile[p].type == ProjectileType<ChlorophyteSniper>())
-                {
-                    if (p == Projectile.whoAmI)
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        identity++;
-                    }
-                }
-            }
+            identity = MinionManager.GetIdentity(Projectile);
 
             timer++;
             if (sniperCount != 0)

@@ -62,6 +62,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.SkySpiral
             //DisplayName,SetDefault("Sky bound spiral");
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             Main.projFrames[Projectile.type] = 4;
+            ProjectileID.Sets.SentryShot[Projectile.type] = true;
         }
 
         public override void SetDefaults()
@@ -73,11 +74,9 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.SkySpiral
             Projectile.friendly = false;
             Projectile.ignoreWater = true;
             Projectile.timeLeft = Projectile.SentryLifeTime;
-            Projectile.knockBack = 10f;
             Projectile.penetrate = -1;
             Projectile.tileCollide = true;
-            Projectile.sentry = true;
-            Projectile.minion = true;
+            Projectile.DamageType = DamageClass.Summon;
         }
 
         private List<NPC> targets;

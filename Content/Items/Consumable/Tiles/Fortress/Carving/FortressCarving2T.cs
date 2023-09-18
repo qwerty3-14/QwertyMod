@@ -39,11 +39,6 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Carving
             b = 0.5f;
         }
 
-        public override void KillMultiTile(int i, int j, int frameX, int frameY)
-        {
-            Item.NewItem(new EntitySource_TileBreak(i, j), i * 16, j * 16, 16, 32, ItemType<FortressCarving2>());
-        }
-
         public override bool CanExplode(int i, int j)
         {
             return false;

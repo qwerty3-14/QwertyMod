@@ -27,6 +27,8 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
         {
             Item.rare = ItemRarityID.Yellow;
             Item.value = Item.sellPrice(gold: 6);
+            Item.width = 22;
+            Item.height = 30;
         }
 
         public override void UpdateEquip(Player player)
@@ -142,7 +144,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
             {
                 for (int i = 0; i < Main.npc.Length; i++)
                 {
-                    if (Main.npc[i].active && !Main.npc[i].immortal && !Main.npc[i].dontTakeDamage && (Main.npc[i].Center - Player.Center).Length() < 400)
+                    if (Main.npc[i].active && !Main.npc[i].immortal && !Main.npc[i].dontTakeDamage && (Main.npc[i].Center - Player.Center).Length() < 400 && !Main.npc[i].friendly)
                     {
                         Main.npc[i].AddBuff(151, 30);
                         Player.soulDrain++;

@@ -52,7 +52,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
             }
             Projectile.rotation += Math.Sign(Projectile.velocity.X) * MathF.PI / 60f;
         }
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             for (int d = 0; d <= 40; d++)
             {

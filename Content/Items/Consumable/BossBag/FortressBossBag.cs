@@ -50,6 +50,7 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<DivineLightMask>(), 7, 1, 1));
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<Lightling>(), 5, 1, 1));
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<SkywardHilt>(), 5, 1, 1));
+            itemLoot.Add(ItemDropRule.Coins(100000, true));
             
             itemLoot.Add(ItemDropRule.OneFromOptionsNotScalingWithLuck(1, new int[] { ModContent.ItemType<CaeliteMagicWeapon>(), ModContent.ItemType<HolyExiler>(), ModContent.ItemType<CaeliteRainKnife>(), ModContent.ItemType<PriestStaff>()}));
         }

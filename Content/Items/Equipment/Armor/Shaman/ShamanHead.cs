@@ -26,7 +26,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Shaman
             Item.rare = ItemRarityID.Blue;
 
             Item.width = 22;
-            Item.height = 14;
+            Item.height = 16;
             Item.defense = 5;
         }
 

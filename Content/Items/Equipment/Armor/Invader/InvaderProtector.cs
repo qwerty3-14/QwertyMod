@@ -19,8 +19,8 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Invader
             Item.value = GearStats.InvaderGearValue;
             Item.rare = ItemRarityID.Yellow;
 
-            Item.width = 30;
-            Item.height = 20;
+            Item.width = 18;
+            Item.height = 14;
             Item.defense = 27;
         }
 

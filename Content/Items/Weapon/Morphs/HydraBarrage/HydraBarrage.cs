@@ -36,8 +36,8 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.HydraBarrage
             Item.value = 250000;
             Item.rare = ItemRarityID.Pink;
             Item.noUseGraphic = true;
-            Item.width = 18;
-            Item.height = 32;
+            Item.width = 20;
+            Item.height = 16;
             Item.shoot = ProjectileType<HydraBarrageBase>();
             Item.shootSpeed = 0f;
             Item.channel = true;
@@ -135,14 +135,19 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.HydraBarrage
             {
                 Projectile.velocity = Projectile.velocity.SafeNormalize(Vector2.UnitY) * 16f;
             }
-            Projectile.rotation = (QwertyMod.GetLocalCursor(player.whoAmI) - Projectile.Center).ToRotation();
+            Projectile.rotation = Projectile.ai[2];
+            if(Projectile.owner == Main.myPlayer)
+            {
+                Projectile.ai[2] = (QwertyMod.GetLocalCursor(player.whoAmI) - Projectile.Center).ToRotation();
+                Projectile.netUpdate = true;
+            }
             if (Projectile.timeLeft == 10)
             {
                 Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center + QwertyMethods.PolarVector(57 * Projectile.scale, Projectile.rotation), QwertyMethods.PolarVector(10, Projectile.rotation), ProjectileType<HydraBarrageBreath>(), Projectile.damage, Projectile.knockBack, Projectile.owner, Projectile.ai[0], 0f);
             }
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             if (Projectile.ai[1] > 0)
             {
@@ -162,9 +167,15 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.HydraBarrage
         {
             Texture2D neck = Request<Texture2D>("QwertyMod/Content/Items/Weapon/Morphs/HydraBarrage/HydraBarrageNeck").Value;
             Texture2D neckBase = Request<Texture2D>("QwertyMod/Content/Items/Weapon/Morphs/HydraBarrage/HydraBarrageBase").Value;
+            int limit = 0;
             for (float f = 0; f < (Projectile.Center - Main.player[Projectile.owner].Center).Length(); f += neck.Height * Projectile.scale)
             {
+                limit++;
                 Main.EntitySpriteDraw(f == 0 ? neckBase : neck, Main.player[Projectile.owner].Center - Main.screenPosition + QwertyMethods.PolarVector(f, (Projectile.Center - Main.player[Projectile.owner].Center).ToRotation()), null, lightColor, (Projectile.Center - Main.player[Projectile.owner].Center).ToRotation() + MathF.PI / 2, neck.Size() * .5f, Vector2.One * Projectile.scale, 0, 0);
+                if(limit > 100)
+                {
+                    break;
+                }
             }
             Texture2D texture = TextureAssets.Projectile[Projectile.type].Value;
             Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition, null, lightColor, Projectile.rotation, Vector2.One * 36f, Vector2.One * Projectile.scale, 0, 0);
@@ -191,6 +202,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.HydraBarrage
             Projectile.DamageType = DamageClass.Summon;
             Projectile.tileCollide = true;
             Projectile.timeLeft = 600;
+            Projectile.extraUpdates = 2;
         }
 
         public override void AI()

@@ -7,6 +7,8 @@ using Terraria.DataStructures;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
 using Terraria.ID;
+using Terraria.Audio;
+using QwertyMod.Common;
 
 namespace QwertyMod.Content.NPCs.Invader
 {
@@ -17,8 +19,17 @@ namespace QwertyMod.Content.NPCs.Invader
         public bool contactDamageToNatives = false;
         public static Entity FindTarget(NPC npc, bool allowFlip = false)
         {
-            npc.TargetClosest(false);
-            float maxDist = (Main.player[npc.target].Center - npc.Center).Length() - Main.player[npc.target].aggro;
+            Entity target = null;
+            float maxDist = 10000;
+            for (int i = 0; i < Main.maxPlayers; i++)
+            {
+                if (Main.player[i].active && (Main.player[i].Center - npc.Center).Length() - Main.player[i].aggro < maxDist && !Main.player[i].GetModPlayer<CommonStats>().InvaderFiendly)
+                {
+                    target = Main.player[i];
+                    npc.target = i;
+                    maxDist = (Main.player[npc.target].Center - npc.Center).Length() - Main.player[npc.target].aggro;
+                }
+            }
             NPC npcTarget = null;
             if (QwertyMethods.ClosestNPC(ref npcTarget, maxDist, npc.Center, false, -1, delegate (NPC possibleTarget) { return possibleTarget.GetGlobalNPC<FortressNPCGeneral>().fortressNPC; }))
             {
@@ -28,7 +39,7 @@ namespace QwertyMod.Content.NPCs.Invader
                 }
                 return npcTarget;
             }
-            if (Main.player[npc.target].dead)
+            if (target == null && npcTarget == null)
             {
                 return null;
             }
@@ -53,6 +64,7 @@ namespace QwertyMod.Content.NPCs.Invader
                 npc.position.Y++;
                 origin = npc.Bottom.ToTileCoordinates();
             }
+            SoundEngine.PlaySound(new SoundStyle("QwertyMod/Assets/Sounds/ZoneIn"), npc.Center);
         }
 
         public static void SpawnAnimation(NPC npc)
@@ -69,6 +81,26 @@ namespace QwertyMod.Content.NPCs.Invader
                 d.frame.Y = 0;
                 d.scale *= 2;
             }
+        }
+        public static void SpawnOut(NPC npc)
+        {
+            npc.GetGlobalNPC<InvaderNPCGeneral>().invaderNPC = false;
+            npc.life = 0;
+            npc.active = false;
+
+            int width = npc.width / 2;
+            int height = npc.height / 4;
+            int dustCount = width;
+            for (int i = 0; i < dustCount; i++)
+            {
+                float rot = MathF.PI * 2f * ((float)i / dustCount);
+                Vector2 unitVector = QwertyMethods.PolarVector(1f, rot);
+                Dust d = Dust.NewDustPerfect(npc.Bottom + new Vector2(unitVector.X * width, unitVector.Y * height), ModContent.DustType<InvaderGlow>(), Vector2.UnitY * npc.height * -0.09f);
+                d.noGravity = true;
+                d.frame.Y = 0;
+                d.scale *= 2;
+            }
+            SoundEngine.PlaySound(new SoundStyle("QwertyMod/Assets/Sounds/ZoneOut"), npc.Center);
         }
         public override bool PreAI(NPC npc)
         {
@@ -135,7 +167,9 @@ namespace QwertyMod.Content.NPCs.Invader
                         {
                             if (gNPC.fortressNPC && Collision.CheckAABBvAABBCollision(npc.position, npc.Size, Main.npc[i].position, Main.npc[i].Size))
                             {
-                                QwertyMethods.PokeNPC(Main.LocalPlayer, Main.npc[i], npc.GetSource_FromAI(), npc.damage, DamageClass.Default, 0);
+                                NPC.HitInfo hitInfo = new NPC.HitInfo();
+                                hitInfo.Damage = (int)(npc.damage);
+                                Main.npc[i].StrikeNPC(hitInfo, false, true);
                                 contactDamageCooldown = 10;
                                 break;
                             }
@@ -149,12 +183,22 @@ namespace QwertyMod.Content.NPCs.Invader
     public class InvaderProjectile : GlobalProjectile
     {
         public bool isInvaderProjectile;
+        public float EvEMultiplier = 1f;
         public override bool InstancePerEntity => true;
+        public override bool CanHitPlayer(Projectile projectile, Player target)
+        {
+            if(isInvaderProjectile && target.GetModPlayer<CommonStats>().InvaderFiendly)
+            {
+                return false;
+            }
+            return true;
+        }
         public override void SetDefaults(Projectile projectile)
         {
             if (isInvaderProjectile)
             {
                 projectile.friendly = true;
+                projectile.npcProj = true;
             }
         }
         public override bool? CanHitNPC(Projectile projectile, NPC target)
@@ -169,7 +213,7 @@ namespace QwertyMod.Content.NPCs.Invader
         {
             if (isInvaderProjectile)
             {
-                modifiers.FinalDamage *= 4;
+                modifiers.FinalDamage *= 4 * EvEMultiplier;
             }
         }
         public static Entity FindTarget(Projectile projectile, float maxRange)
@@ -177,7 +221,7 @@ namespace QwertyMod.Content.NPCs.Invader
             Entity target = null;
             for (int i = 0; i < Main.maxPlayers; i++)
             {
-                if (Main.player[i].active && (Main.player[i].Center - projectile.Center).Length() - Main.player[i].aggro < maxRange)
+                if (Main.player[i].active && (Main.player[i].Center - projectile.Center).Length() - Main.player[i].aggro < maxRange && !Main.player[i].GetModPlayer<CommonStats>().InvaderFiendly)
                 {
                     target = Main.player[i];
                     maxRange = (Main.player[i].Center - projectile.Center).Length() - Main.player[i].aggro;

@@ -64,11 +64,12 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.AshFell
             Projectile.tileCollide = true; //Tells the game whether or not it can collide with tiles/ terrain
             Projectile.sentry = true; //tells the game that this is a sentry
             Projectile.timeLeft = Projectile.SentryLifeTime; //allows for the sentry to automaticly be replaced when new sentries are summoned
+            Projectile.DamageType = DamageClass.Summon;
         }
 
         private NPC target;
         private int[] missileCounters = new int[2];
-        private int missileTime = 60;
+        private int missileTime = 120;
         private float missileLoadPosition = 5;
 
         public override void AI()
@@ -123,7 +124,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.AshFell
             Projectile.ignoreWater = true;    //Tells the game whether or not Projectile will be affected by water
             Projectile.penetrate = -1; //Tells the game how many enemies it can hit before being destroyed  -1 is infinity
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 10;
+            Projectile.localNPCHitCooldown = 20;
             Projectile.timeLeft = 600;
         }
 
@@ -197,6 +198,14 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.AshFell
                 Projectile.timeLeft = finalTime;
             }
             return false;
+        }
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            if(Projectile.timeLeft <= finalTime)
+            {
+                modifiers.FinalDamage *= 0.5f;
+                modifiers.Knockback *= 0;
+            }
         }
     }
     class AshFellLoot : ModSystem

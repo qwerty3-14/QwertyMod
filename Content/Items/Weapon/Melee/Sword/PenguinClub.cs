@@ -30,8 +30,8 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword
             Item.rare = ItemRarityID.Blue;
             Item.UseSound = SoundID.Item1;
 
-            Item.width = 48;
-            Item.height = 48;
+            Item.width = 34;
+            Item.height = 34;
 
             Item.noMelee = false;
             Item.autoReuse = true;

@@ -22,8 +22,8 @@ namespace QwertyMod.Content.Items.Equipment.Vanity.ScarletBallGown
 
         public override void SetDefaults()
         {
-            Item.width = 34;
-            Item.height = 30;
+            Item.width = 36;
+            Item.height = 20;
             Item.accessory = true;
             Item.rare = ItemRarityID.White;
             Item.vanity = true;

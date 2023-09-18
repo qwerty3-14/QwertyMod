@@ -26,8 +26,11 @@ namespace QwertyMod.Content.Items.Weapon.Whip.Fork
         {
 
             Item.DefaultToWhip(ModContent.ProjectileType<InvaderForkP>(), 111, 3, 4, 30);
+            Item.DamageType = DamageClass.SummonMeleeSpeed;
             Item.rare = ItemRarityID.Yellow;
-            Item.value = QwertyMod.InvaderGearValue;
+            Item.value = GearStats.InvaderGearValue;
+            Item.width = 38;
+            Item.height = 36;
 
             if (!Main.dedServ)
             {

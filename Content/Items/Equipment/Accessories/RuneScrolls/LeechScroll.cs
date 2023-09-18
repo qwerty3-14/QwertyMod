@@ -24,8 +24,8 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
             Item.DamageType = DamageClass.Ranged;
             Item.damage = 50;
 
-            Item.width = 54;
-            Item.height = 56;
+            Item.width = 34;
+            Item.height = 34;
 
             Item.accessory = true;
         }
@@ -62,7 +62,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
             Projectile.rotation += MathHelper.ToRadians(3);
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             for (int d = 0; d <= 100; d++)
             {

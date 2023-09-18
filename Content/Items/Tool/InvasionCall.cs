@@ -20,8 +20,8 @@ namespace QwertyMod.Content.Items.Tool
             Item.value = GearStats.InvaderGearValue;
             Item.rare = ItemRarityID.Yellow;
             Item.UseSound = SoundID.Item1;
-            Item.width = 16;
-            Item.height = 16;
+            Item.width = 32;
+            Item.height = 32;
             Item.autoReuse = true;
             Item.useTurn = true;
             if (!Main.dedServ)

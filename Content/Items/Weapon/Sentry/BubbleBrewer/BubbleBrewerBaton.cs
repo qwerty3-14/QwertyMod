@@ -62,6 +62,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.BubbleBrewer
             Projectile.height = 84;
             Projectile.friendly = true;
             Projectile.penetrate = -1;
+            Projectile.DamageType = DamageClass.Summon;
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
@@ -138,6 +139,10 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.BubbleBrewer
     }
     public class BrewerBubble : ModProjectile
     {
+        public override void SetStaticDefaults()
+        {
+            ProjectileID.Sets.SentryShot[Projectile.type] = true;
+        }
         public override void SetDefaults()
         {
             Projectile.width = 14;

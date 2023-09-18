@@ -43,7 +43,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             NPC.defense = 18;
             NPC.lifeMax = 65;
 
-            if (NPC.downedGolemBoss)
+            if (SkyFortress.beingInvaded)
             {
                 NPC.lifeMax = 600;
             }
@@ -147,14 +147,24 @@ namespace QwertyMod.Content.NPCs.Fortress
                 NPC.ai[0] = 1f;
                 Point origin = NPC.Center.ToTileCoordinates();
                 Point point;
-
-                while (!WorldUtils.Find(origin, Searches.Chain(new Searches.Down(1), new GenCondition[]
+                for (int s = 0; s < 1000; s++)
                 {
-                                            new Terraria.WorldBuilding.Conditions.IsSolid()
-                }), out point))
-                {
-                    NPC.position.Y++;
-                    origin = NPC.Center.ToTileCoordinates();
+                    if (WorldUtils.Find(origin, Searches.Chain(new Searches.Down(3), new GenCondition[]
+                    {
+                                                new Terraria.WorldBuilding.Conditions.IsSolid()
+                    }), out point))
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        NPC.position.Y++;
+                        origin = NPC.Center.ToTileCoordinates();
+                        if(s == 999)
+                        {
+                            NPC.active = false;
+                        }
+                    }
                 }
             }
             if (preSetTimer > 0)
@@ -210,7 +220,7 @@ namespace QwertyMod.Content.NPCs.Fortress
                 }
                 //NPC.TargetClosest(true);
                 Entity player = FortressNPCGeneral.FindTarget(NPC, false);
-                if (Collision.CanHitLine(shootFrom, 0, 0, player.Center, 0, 0) && (player.Center - NPC.Center).Length() < 1000)
+                if (player != null && Collision.CanHitLine(shootFrom, 0, 0, player.Center, 0, 0) && (player.Center - NPC.Center).Length() < 1000)
                 {
                     NPC.velocity.X = 0;
                     NPC.velocity.Y = 0;
@@ -220,7 +230,7 @@ namespace QwertyMod.Content.NPCs.Fortress
                     {
                         float shootSpeed = 24;
 
-                        Projectile.NewProjectile(NPC.GetSource_FromAI(), shootFrom.X, shootFrom.Y, MathF.Cos(aimDirection) * shootSpeed, MathF.Sin(aimDirection) * shootSpeed, ProjectileType<MollusketSnipe>(), NPC.downedGolemBoss ? 50 : 15, 0, 0);
+                        Projectile.NewProjectile(NPC.GetSource_FromAI(), shootFrom.X, shootFrom.Y, MathF.Cos(aimDirection) * shootSpeed, MathF.Sin(aimDirection) * shootSpeed, ProjectileType<MollusketSnipe>(), SkyFortress.beingInvaded ? 50 : 15, 0, Main.myPlayer);
                         timer = 0;
                     }
                     if (timer > 60)
@@ -332,7 +342,7 @@ namespace QwertyMod.Content.NPCs.Fortress
                 lineColor = Color.Red;
             }
             //Draw chain
-            if (drawLine)
+            if (drawLine && player != null)
             {
                 Vector2 center = shootFrom;
                 Vector2 distToProj = player.Center - center;
@@ -384,6 +394,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             Projectile.DamageType = DamageClass.Ranged;
             Projectile.extraUpdates = 3;
             Projectile.GetGlobalProjectile<FortressNPCProjectile>().isFromFortressNPC = true;
+            Projectile.GetGlobalProjectile<FortressNPCProjectile>().EvEMultiplier = 10f;
             Projectile.friendly = true;
         }
 

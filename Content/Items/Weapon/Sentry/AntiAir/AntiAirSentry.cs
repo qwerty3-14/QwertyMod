@@ -68,10 +68,10 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.AntiAir
             Projectile.friendly = false;   //Tells the game whether it is friendly to players/friendly npcs or not
             Projectile.ignoreWater = true;    //Tells the game whether or not projectile will be affected by water
             Projectile.timeLeft = Projectile.SentryLifeTime;
-            Projectile.knockBack = 10f;
             Projectile.penetrate = -1; //Tells the game how many enemies it can hit before being destroyed  -1 is infinity
             Projectile.tileCollide = true; //Tells the game whether or not it can collide with tiles/ terrain
             Projectile.sentry = true; //tells the game that this is a sentry
+            Projectile.DamageType = DamageClass.Summon;
         }
 
         public int frameType = 0;
@@ -141,7 +141,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.AntiAir
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Anti Air Rocket");
+            ProjectileID.Sets.SentryShot[Projectile.type] = true;
         }
 
         public override void SetDefaults()
@@ -201,7 +201,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.AntiAir
 
 
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             SoundEngine.PlaySound(SoundID.Item62, Projectile.position);
             for (int i = 0; i < 50; i++)

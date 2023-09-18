@@ -43,8 +43,8 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.RhuthiniumBarrage
             Item.rare = ItemRarityID.Orange;
             Item.crit = 5;
             Item.noUseGraphic = true;
-            Item.width = 18;
-            Item.height = 32;
+            Item.width = 36;
+            Item.height = 34;
 
             //Item.autoReuse = true;
             Item.shoot = ProjectileType<RhuthiniumBarrageLauncher>();
@@ -118,7 +118,12 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.RhuthiniumBarrage
             player.immune = true;
             player.immuneTime = 2;
             player.GetModPlayer<ShapeShifterPlayer>().noDraw = true;
-            Projectile.rotation = (QwertyMod.GetLocalCursor(Projectile.owner) - Projectile.Center).ToRotation();
+            Projectile.rotation = Projectile.ai[0];
+            if(Main.myPlayer == Projectile.owner)
+            {
+                Projectile.ai[0] = (Main.MouseWorld - player.Center).ToRotation();
+                Projectile.netUpdate = true;
+            }
 
             foreach (Projectile dart in Darts)
             {
@@ -126,6 +131,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.RhuthiniumBarrage
                 {
                     dart.Center = Projectile.Center + QwertyMethods.PolarVector(25, Projectile.rotation) + QwertyMethods.PolarVector(dart.ai[0], Projectile.rotation + MathF.PI / 2);
                     dart.rotation = Projectile.rotation;
+                    dart.netUpdate = true;
                 }
             }
             if (Projectile.timeLeft < Darts.Count + 30)
@@ -180,7 +186,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.RhuthiniumBarrage
             Projectile.timeLeft = 300;
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             for (int i = 0; i < 2; i++)
             {
@@ -194,15 +200,35 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.RhuthiniumBarrage
         {
             return false;
         }
-
+        bool runOnce = true;
         public override void AI()
         {
+            if(runOnce)
+            {
+                if(Main.netMode != NetmodeID.MultiplayerClient)
+                {
+                    Projectile.netUpdate = true;
+                    Projectile.ai[0] = Main.rand.Next(-14, 15);
+                }
+                runOnce = false;
+            }
+            
             if (Projectile.ai[1] == 1f)
             {
                 Projectile.friendly = true;
                 Projectile.tileCollide = true;
                 Projectile.extraUpdates = 2;
                 Projectile.velocity = QwertyMethods.PolarVector(8, Projectile.rotation);
+            }
+            else
+            {
+                Projectile.rotation = Projectile.ai[2];
+                if(Main.myPlayer == Projectile.owner)
+                {
+                    Projectile.ai[2] = (Main.MouseWorld - Main.player[Projectile.owner].Center).ToRotation();
+                    Projectile.netUpdate = true;
+                }
+                Projectile.Center = Main.player[Projectile.owner].Center + QwertyMethods.PolarVector(25, Projectile.rotation) + QwertyMethods.PolarVector(Projectile.ai[0], Projectile.rotation + MathF.PI / 2);
             }
         }
     }

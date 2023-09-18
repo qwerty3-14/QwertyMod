@@ -15,12 +15,13 @@ namespace QwertyMod.Content.Items.Equipment.Vanity.SilkDress
         {
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ArmorIDs.Body.Sets.HidesBottomSkin[Item.bodySlot] = true;
+            ArmorIDs.Legs.Sets.HidesBottomSkin[QwertyMod.SilkSkirt] = true;
         }
 
         public override void SetDefaults()
         {
-            Item.width = 34;
-            Item.height = 30;
+            Item.width = 26;
+            Item.height = 28;
             Item.rare = ItemRarityID.White;
             Item.vanity = true;
             Item.value = Item.sellPrice(silver: 10);

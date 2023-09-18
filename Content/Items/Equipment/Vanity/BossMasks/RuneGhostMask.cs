@@ -22,8 +22,8 @@ namespace QwertyMod.Content.Items.Equipment.Vanity.BossMasks
             Item.rare = ItemRarityID.Blue;
 
             Item.vanity = true;
-            Item.width = 20;
-            Item.height = 20;
+            Item.width = 28;
+            Item.height = 32;
         }
     }
 }

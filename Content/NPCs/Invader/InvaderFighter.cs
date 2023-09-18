@@ -78,7 +78,7 @@ namespace QwertyMod.Content.NPCs.Invader
                     {
                         SoundEngine.PlaySound(SoundID.Item95, NPC.Center);
                         Vector2 shootFrom = NPC.Center + QwertyMethods.PolarVector(9, NPC.rotation) + QwertyMethods.PolarVector(9 * (combatTimer % 120 == 30 ? -1 : 1), NPC.rotation + MathF.PI / 2f);
-                        Projectile.NewProjectile(NPC.GetSource_FromAI(), shootFrom, (shootFrom - NPC.Center).SafeNormalize(-Vector2.UnitY) * 8, ModContent.ProjectileType<InvaderMicroMissile>(), 30, 0, 0);
+                        Projectile.NewProjectile(NPC.GetSource_FromAI(), shootFrom, (shootFrom - NPC.Center).SafeNormalize(-Vector2.UnitY) * 8, ModContent.ProjectileType<InvaderMicroMissile>(), 30, 0, Main.myPlayer);
                     }
                 }
                 if (target != null)
@@ -114,7 +114,7 @@ namespace QwertyMod.Content.NPCs.Invader
                             {
                                 SoundEngine.PlaySound(SoundID.Item5, NPC.Center);
                                 Vector2 shootFrom = NPC.Center + QwertyMethods.PolarVector(8, NPC.rotation) + QwertyMethods.PolarVector(8 * (combatTimer % 120 == 30 ? -1 : 1), NPC.rotation + MathF.PI / 2f);
-                                Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center + QwertyMethods.PolarVector(shotOffset, NPC.rotation), QwertyMethods.PolarVector(shotSpeed, NPC.rotation), ModContent.ProjectileType<InvaderFighterBlast>(), 30, 0, 0);
+                                Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center + QwertyMethods.PolarVector(shotOffset, NPC.rotation), QwertyMethods.PolarVector(shotSpeed, NPC.rotation), ModContent.ProjectileType<InvaderFighterBlast>(), 30, 0, Main.myPlayer);
                             }
                             firedPlasma = true;
                         }
@@ -172,7 +172,7 @@ namespace QwertyMod.Content.NPCs.Invader
 
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
-            if (spawnInfo.Player.InModBiome(ModContent.GetInstance<FortressBiome>()) && NPC.downedGolemBoss)
+            if (spawnInfo.Player.InModBiome(ModContent.GetInstance<FortressBiome>()) && SkyFortress.beingInvaded)
             {
                 return 90f;
             }
@@ -195,6 +195,7 @@ namespace QwertyMod.Content.NPCs.Invader
             Projectile.friendly = true;
             Projectile.hostile = true;
             Projectile.GetGlobalProjectile<InvaderProjectile>().isInvaderProjectile = true;
+            Projectile.GetGlobalProjectile<InvaderProjectile>().EvEMultiplier = 3f;
         }
         bool exploded = false;
         void explode()
@@ -286,6 +287,7 @@ namespace QwertyMod.Content.NPCs.Invader
             Projectile.GetGlobalProjectile<InvaderProjectile>().isInvaderProjectile = true;
             Projectile.extraUpdates = 1;
             Projectile.tileCollide = false;
+            Projectile.GetGlobalProjectile<InvaderProjectile>().EvEMultiplier = 5f;
         }
         public override void AI()
         {

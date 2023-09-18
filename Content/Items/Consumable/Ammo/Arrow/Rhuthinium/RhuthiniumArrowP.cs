@@ -34,7 +34,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Rhuthinium
             }
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             for (int i = 0; i < 12; i++)
             {
@@ -48,11 +48,11 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Rhuthinium
         {
             Player player = Main.player[Projectile.owner];
             float distance = (player.Center - target.Center).Length();
-            if (distance > 1500)
+            if (distance > 1200)
             {
-                distance = 1500;
+                distance = 1200;
             }
-            modifiers.FinalDamage *= 1 + (distance / 1500f);
+            modifiers.FinalDamage *= 1 + (distance / 1200f) * 0.5f;
         }
     }
 }

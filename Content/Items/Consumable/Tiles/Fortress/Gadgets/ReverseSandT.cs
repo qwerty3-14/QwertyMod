@@ -100,7 +100,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
             //Projectile.velocity = Collision.TileCollision(Projectile.position, Projectile.velocity, Projectile.width, Projectile.height, false, false, 1);
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             int i = (int)(Projectile.position.X + (float)(Projectile.width / 2)) / 16;
             int j = (int)(Projectile.position.Y + (float)(Projectile.height / 2)) / 16;

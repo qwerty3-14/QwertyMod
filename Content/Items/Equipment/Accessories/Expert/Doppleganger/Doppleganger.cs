@@ -30,6 +30,15 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.Doppleganger
             Item.height = 22;
             Item.GetGlobalItem<DoppleItem>().isDoppleganger = true;
         }
+		public override bool OnPickup(Player player)
+		{
+            Item.prefix = 0;
+            Item.ResetPrefix();
+			return base.OnPickup(player);
+		}
+		public override void UpdateInventory(Player player)
+		{
+		}
         public override void PreReforge()
         {
             Player player = Main.LocalPlayer;
@@ -114,7 +123,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.Doppleganger
             {
                 if (!Player.armor[a].IsAir && Player.armor[a].GetGlobalItem<DoppleItem>().isDoppleganger)
                 {
-                    if (!Player.armor[a - 1].IsAir)
+                    if (!Player.armor[a - 1].IsAir && Player.armor[a - 1].type > ItemID.Count)
                     {
                         ItemLoader.UpdateAccessory(Player.armor[a - 1], Player, Player.hideVisibleAccessory[a]);
                         ItemLoader.UpdateEquip(Player.armor[a - 1], Player);

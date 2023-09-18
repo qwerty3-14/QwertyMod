@@ -15,6 +15,7 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using System.IO;
 
 namespace QwertyMod.Content.NPCs.Fortress
 {
@@ -24,6 +25,7 @@ namespace QwertyMod.Content.NPCs.Fortress
         {
             //DisplayName,SetDefault("High Preist");
             Main.npcFrameCount[NPC.type] = 9;
+            NPCID.Sets.NoMultiplayerSmoothingByType[NPC.type] = true;
         }
 
         public override void SetDefaults()
@@ -34,6 +36,11 @@ namespace QwertyMod.Content.NPCs.Fortress
             NPC.damage = 20;
             NPC.defense = 6;
             NPC.lifeMax = 100;
+
+            if (SkyFortress.beingInvaded)
+            {
+                NPC.lifeMax = 1000;
+            }
             NPC.value = 500;
             //NPC.alpha = 100;
             NPC.behindTiles = true;
@@ -76,35 +83,64 @@ namespace QwertyMod.Content.NPCs.Fortress
         private float ringSpeed = 6;
         private int ringProjectileCount;
         private bool castingFrames;
+        bool aggressive = false;
 
         public override void AI()
         {
             NPC.damage = 0;
-            NPC.chaseable = NPC.life < NPC.lifeMax;
+            NPC.chaseable = NPC.life < NPC.lifeMax || SkyFortress.beingInvaded;
             NPC.GetGlobalNPC<FortressNPCGeneral>().fortressNPC = true;
-            if (NPC.life < NPC.lifeMax)
+            if (NPC.life < NPC.lifeMax || SkyFortress.beingInvaded || aggressive)
             {
                 timer++;
+                
+                if(!aggressive && Main.netMode != NetmodeID.MultiplayerClient)
+                {
+                    aggressive = true;
+                    NPC.netUpdate = true;
+                }
             }
 
             NPC.spriteDirection = NPC.direction;
             Entity player = FortressNPCGeneral.FindTarget(NPC, true);
-            ringProjectileCount = 2 - (int)((float)NPC.life / (float)NPC.lifeMax * 2) + 4;
-            if (timer == GenerateRingTime)
+            //QwertyMethods.ServerClientCheck("" + SkyFortress.beingInvaded);
+            if(player == null && ring == null && Main.netMode != NetmodeID.MultiplayerClient)
             {
-                ring = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero, ProjectileType<RingCenter>(), 11, 0, 0, ringProjectileCount, NPC.direction)];
+                timer = 0;
+                NPC.ai[0] += 1f;
+                NPC.netUpdate = true;
+            }
+            //QwertyMethods.ServerClientCheck("" + timer);
+            //QwertyMethods.ServerClientCheck("" + (player != null ? "I see" : "no"));
+            ringProjectileCount = 2 - (int)((float)NPC.life / (float)NPC.lifeMax * 2) + 4;
+            if (timer == GenerateRingTime && Main.netMode != NetmodeID.MultiplayerClient)
+            {
+                ring = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero, ProjectileType<RingCenter>(), SkyFortress.beingInvaded ? 40 : 11, 0, Main.myPlayer, ringProjectileCount, NPC.direction)];
                 ring.ai[0] = ringProjectileCount;
                 ring.ai[1] = NPC.direction;
                 castingFrames = true;
             }
-            if (timer > GenerateRingTime && timer < GenerateRingTime + throwRingTime)
+            if (timer > GenerateRingTime && timer < GenerateRingTime + throwRingTime && Main.netMode != NetmodeID.MultiplayerClient)
             {
                 ring.Center = NPC.Center;
             }
-            if (timer == GenerateRingTime + throwRingTime)
+            if (timer == GenerateRingTime + throwRingTime && Main.netMode != NetmodeID.MultiplayerClient)
             {
+                if(player != null)
+                {
+                    ring.velocity = ((player.Center - NPC.Center).SafeNormalize(-Vector2.UnitY) * ringSpeed) * (NPC.confused ? -1 : 1);
+                    if(Main.netMode != NetmodeID.MultiplayerClient)
+                    {
+                        ring.netUpdate = true;
+                    }
+                    ring = null;
+                }
+                else
+                {
+                    ring.Kill();
+                    ring = null;
+                }
                 castingFrames = false;
-                ring.velocity = ((player.Center - NPC.Center).SafeNormalize(-Vector2.UnitY) * ringSpeed) * (NPC.confused ? -1 : 1);
                 timer = 0;
             }
             NPC.velocity.X = NPC.velocity.X * 0.93f;
@@ -141,17 +177,16 @@ namespace QwertyMod.Content.NPCs.Fortress
                     Main.dust[num84].noGravity = true;
                 }
             }
-            //NPC.ai[0] += 1f;
 
-            if (Math.Abs(NPC.position.X - Main.player[NPC.target].position.X) + Math.Abs(NPC.position.Y - Main.player[NPC.target].position.Y) > 2000f)
+            if (player != null && Math.Abs(NPC.position.X - player.position.X) + Math.Abs(NPC.position.Y - player.position.Y) > 2000f)
             {
                 NPC.ai[0] = 650f;
             }
-            if (NPC.ai[0] >= 650f && Main.netMode != NetmodeID.MultiplayerClient)
+            if (player != null && NPC.ai[0] >= 650f && Main.netMode != NetmodeID.MultiplayerClient)
             {
                 NPC.ai[0] = 1f;
-                int playerTilePositionX = (int)Main.player[NPC.target].position.X / 16;
-                int playerTilePositionY = (int)Main.player[NPC.target].position.Y / 16;
+                int playerTilePositionX = (int)player.position.X / 16;
+                int playerTilePositionY = (int)player.position.Y / 16;
                 int npcTilePositionX = (int)NPC.position.X / 16;
                 int npcTilePositionY = (int)NPC.position.Y / 16;
                 int playerTargetShift = 40;
@@ -184,6 +219,7 @@ namespace QwertyMod.Content.NPCs.Fortress
                 }
                 NPC.netUpdate = true;
             }
+            NPC.netOffset *= 0;
             if (NPC.ai[1] > 0f)
             {
                 NPC.ai[1] -= 1f;
@@ -226,6 +262,19 @@ namespace QwertyMod.Content.NPCs.Fortress
             }
             NPC.frame.Y = frameHeight * frame;
         }
+        public override void SendExtraAI(BinaryWriter writer)
+        {
+            writer.Write(castingFrames);
+            writer.Write(aggressive);
+            writer.Write(timer);
+        }
+
+        public override void ReceiveExtraAI(BinaryReader reader)
+        {
+            castingFrames = reader.ReadBoolean();
+            aggressive = reader.ReadBoolean();
+            timer = reader.ReadInt32();
+        }
     }
 
     public class RingCenter : ModProjectile
@@ -247,6 +296,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             Projectile.hostile = false;
             Projectile.tileCollide = false;
             Projectile.timeLeft = 8 * 60;
+            Projectile.npcProj = true;
         }
 
         private bool runOnce = true;
@@ -254,6 +304,11 @@ namespace QwertyMod.Content.NPCs.Fortress
 
         public override void AI()
         {
+            //QwertyMethods.ServerClientCheck("" + Projectile.Center);
+            if(Projectile.position != Projectile.oldPosition && Main.netMode != NetmodeID.MultiplayerClient)
+            {
+                Projectile.netUpdate = true;
+            }
             projectilesInRing = (int)Projectile.ai[0];
             if (runOnce)
             {
@@ -263,19 +318,28 @@ namespace QwertyMod.Content.NPCs.Fortress
 
                     if (Projectile.ai[1] == 1)
                     {
-                        Projectile p = Main.projectile[Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<RingOuter>(), Projectile.damage, Projectile.knockBack, 0, (float)i / (float)projectilesInRing * 2 * MathF.PI, Projectile.whoAmI)];
+                        Projectile p = Main.projectile[Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<RingOuter>(), Projectile.damage, Projectile.knockBack, Main.myPlayer, (float)i / (float)projectilesInRing * 2 * MathF.PI, Projectile.whoAmI)];
                         p.ai[0] = (float)i / (float)projectilesInRing * 2 * MathF.PI;
                         p.ai[1] = Projectile.whoAmI;
                     }
                     else
                     {
-                        Projectile p = Main.projectile[Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<RingOuter>(), Projectile.damage, Projectile.knockBack, 0, (float)i / (float)projectilesInRing * 2 * MathF.PI, -Projectile.whoAmI)];
+                        Projectile p = Main.projectile[Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<RingOuter>(), Projectile.damage, Projectile.knockBack, Main.myPlayer, (float)i / (float)projectilesInRing * 2 * MathF.PI, -Projectile.whoAmI)];
                         p.ai[0] = (float)i / (float)projectilesInRing * 2 * MathF.PI;
                         p.ai[1] = -Projectile.whoAmI;
                     }
                 }
                 runOnce = false;
             }
+        }
+        public override void SendExtraAI(BinaryWriter writer)
+        {
+            //writer.WritePackedVector2(Projectile.velocity);
+        }
+
+        public override void ReceiveExtraAI(BinaryReader reader)
+        {
+            //Projectile.velocity = reader.ReadPackedVector2();
         }
     }
 
@@ -295,7 +359,10 @@ namespace QwertyMod.Content.NPCs.Fortress
             Projectile.hostile = true;
             Projectile.tileCollide = false;
             Projectile.GetGlobalProjectile<FortressNPCProjectile>().isFromFortressNPC = true;
+            Projectile.GetGlobalProjectile<FortressNPCProjectile>().EvEMultiplier = 4f;
             Projectile.friendly = true;
+            Projectile.npcProj = true;
+            Projectile.penetrate = -1;
         }
 
         private bool runOnce = true;
@@ -347,7 +414,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             }
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             for (int i = 0; i < 30; i++)
             {

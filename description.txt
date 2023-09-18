@@ -1,6 +1,6 @@
 A general content mod, I add whatever I feel like adding. I try to make content in the mod feel unique.
 Currently the mod has:
--8 Bosses with plenty of drops
+-9 Bosses with plenty of drops
 -A new structure/Biome the sky fortress!
 -Rhuthinium and Lune ore
 -some other items scattered throughout
@@ -28,11 +28,132 @@ Extra thanks
 -Turquiose (for writing custom themes)
 -musicman (polar exterminator theme)
 -direwolf420 (for some bug fixes and git management tips)
+-Kweequ (for some custom sound effects)
 
 
 Changelog
-0.8.4
+1.0.0
+New content
+-Added Superquantum Rifle
+-Added Dimension violating railgun staff
+
+Bug Fixes
+-Fixed restless sun projectiles inflicting infinite iFrames
+-Fixed sentries not being able to benifit from damage bonuses
+
+Overhauls, polish, and balance changes
+-Sliding penguins can no longer damage penguin NPCs
+-Penguin generator is capped at 1 penguin pair per second, if a penguin is proced when on cooldown the damage will be added to the next penguin pair
+-Penguin generator proc chance 1/10 -> 1/15
+-Higher priest staff damage 140 -> 175
+-divine banishment use time 30 -> 22
+
+
+0.10.0
+New content
+-Added Vulgar Dictionary
+-added Auto Summoner
+-added piercing whetstone
+
+Bug Fixes
+-Fixed Ancient machine and its minions visually drifting in multiplayer
+-fixed Sky fortress causing some players' games to freeze in multiplayer (I think)
+-Ancient Machine's teleport locations are further from the player to reduce the chance of telefragging
+-Fixed high preist multiplayer desyncs
+-Fixed divine light multiplayer desyncs
+-fixed preist and higher preist minion position gaps in multiplayer when multiple players used them
+-fixed Rhuthinium barrage multiplayer desync
+-fixed Chrome shotgun mode switching multiplayer desync
+-fixed hydra barrage head rotation multiplayer desync
+-fixed SoEF, Holy exiler, divine banishment, and Possesing bow not syncing projectile modifying effects
+-fixed rhuthinium boomerang multiplayer desync
+-fixed runic wave multiplayer desync
+-fixed ancient longbow and rune longbow's arrow desync (other players would see a second arrow with no velocity spawn)
+-fixed lune archer and mech crossbow minion's arrow desync (Other players would see the bows instantly fire arrows upon the minion retrieving one)
+-fixed invader battleship beams ocasionally leavuing behind duplicates in multiplayer
+-fixed invader noehtnap not doing its death animation when killed in the cycle attack
+-fixed sould rod and Shotgun of excessuive force not syncing the players velocity in multiplayer
+-fixed the massacre's right click animations not syncing in multiplayer
+
+-fixed ancient machine not using its boss head (and by extension boss bar)
+-Fixed Trophies dropping doubles
+-Fixed fortress furniture dropping doubles
+-fixed relics dropping duobles
+-Fixed Caelite pulse traps sometimes not dropping when broken
+-Fixed caelite pulse traps and launchpads being placable in the air
+-Caelite pulse traps and launchpads have thier items sprite match thier tile sprite
+-fixed invaders an higher beings triggering the player's on hit effects when attacking each other
+-fixed riptide dealing knockback
+-Fixed preist minions despawning after 1 minute
+-Fixed Doppleganger spawning with modifers
+-fixed Vitalum headress leeching off freindly npcs
+-fixed caelite wrath inflicted by flask of caelite wrath only lasting 10-19 frames, intead of 10-19 seconds
+-the mod's banners can now be placed on unhammered platforms
+-fixed overkill and The Massacre doing magic damage, and whetstones doing classless damage
+-fixed hydra's bag only having a 20% chance to drop scales
+-fixed OLORD's walls not dealing damage
+-fixed chloro sniper staff only costing 1 chloro bar
+-fixed many item hitboxes
+-fixed swordmasters seal giving +100% weapons size instead of +25%
+-fixed hitbox on plasma cannon projectiles
+-fixed fortress bed being backwards
+-Fized mant speling erors
+
+Overhauls, polish, and balance changes
+-Hydra fight has been reworked completely
+-Staff of Job now ignores 20 defense
+-When TRAE is loaded Staff of Job's status last 1 minute but consumes mana (4 * mana reduction) on every hit
+-Lune staff functions like a TRAE sidearm when it's loaded
+-Ancient machine will reroute a teleport location if a player collides with the inital picked location
+-ash fell sentry's missle recharge rate doubled (shoots slower), missile's Aoe does half damage and no knockback
+-high preists are more combat ready when the fortress invasion happens
+-all sentires can no benifit from whip tags like vanilla 1.4.4 sentires... excpet riptide for obvious reasons
+-Rhuthinium arrows deal up to 50% more damage at 75 tile range
+-Nano dart's probes now bounce off tiles
+-Blue sphere's pierce damage falloff when hitting the same enemy 50%->75%
+-Javelins will now say how much DoT they cause when stuck in enemies
+-Rhuthinium javelins reduce enemy defense by 2 per javelin instead of adding 1 flat damage, max javelins cap 10->7;
+-hydra javelins dr per javelin reduced (total goes from 24% to 15%) but works on projectiles shot by the effected enemy
+-riptide sentry damage 4->3, but now has 10 innate armor penetration
+-When TRAE is loaded Ruthinium magic's armor set bonus has a mana restoration cap
+-Hydrent damage 100->50, damage of projectiles 40%->80% (I did not adjust the damage properly when I gave the hydrent TRAE spear AI)
+-Ancient throw damage reduced 23->20
+-gold lockboxes will give a random dungeon item from the mod
+-Chrmoe shotgun's minion no longer consumes bullets
+-Hydra barrage has more velocity
+-invader catalyst damage 50->40, but now has an Aoe
+-When TRAE is loaded invader catalyst buff last a full minute but charges 10 mana per hit
+-Plasma cannon got some animation touch ups
+-runic wave now has local immunity and more orbiting ice runes
+-new sprite for Sky Disintigrator staff (Thanks Kweequ)
+-Imperious The IV now has a sword aura
+
+
+
+
+
+
+0.9.0
+I've been working on a big update for a while, been planning to release it as 1.0.0, but since its been a while I've released part of the planned update as 0.9.0.
+Going from 0.9.0->1.0.0, expect a lot of balance changes bug fixes, reworks and other polish.
+
+HUGE THANKS to Kweequ for many of this update's sprites and sound effects!
+
+-Invader enemies have been resprited and have new sound effects
+-Added Invader Elite enemy
+
 -New Boss: Invader Battleship
+
+-retiered ancient machine from a late prehardmdoe boss to mid prehardmode
+    -The reasoning here is that Ancient machines AI is a lot simpler than divine light's
+    -health reduced, epxert: 9000->7200
+    -damage reduced, expert: 80->64
+    -Ancinet emblems can be found in sandstone and ivy chests
+    -Ancient longbow damage: 60->50
+    -Ancinent missile staff no longer has friendly fire
+    -Ancient wave damage: 31->50, knockback: 100->8
+    -Ancient minion attack speed 30->40
+    -Ancient miner pick power 100->95, use time 22->40
 
 -Titanium bullets visuals have been polished up
 -Titanium bullets' knockback is directed toward the bullet but, damage dropoff has been increased 25%->40% 
@@ -42,84 +163,14 @@ Changelog
 -Adamantite arrow now ignores knockback resistance
 -Gun Arrow now loses velocity in flight, can't hit enemies itself, and fires up to 4 bullets, but they now deal 40%.
 -Rebalanced sword accesories
-
-
-0.8.3
-Additions
--New relices for the rest of the bosses in the mod (thanks Kweequ)
-
-Bug Fixes
--fixed invader items selling for way too much
--fixed ancient longbow not conusming ammo
--fixed shield minion multiplayer desync
--fixed rune ghost not having a map icon
--fixed enchanted whetstone getting blocked by global iframes (a lot of melee weapons inflict global iframes)
--fixed shield minion and hydra head minion multiplayer desync
--fixed Imperious the IV projectiles and invader catalyst not being able to crit.
--fixed lightling being effected by dyes in the pet slot
-
-Tweaks
--Skyward hilt damage bonus 100%->30%
--Sword Enlarger size bonus 100%->70%
--Glass armor's set bonus requires moving right/left to activate its effects, now requires shadow scale/tissue samples
--Arsenal now fires 4 yoyos in a 45* spread instead of 6 in a 360* spread
--Arsenal attack rate reduced by a third but damage increased by 50% (same base dps but with fewer higher damaging hits)
--Imperious the IV projectile damage is based on the sword's damage instead of the damage of the hit
--swordquake damage 900->2700
--buffed hydrill mining speed
--reduced the hp cost of using bloody medalion significantly
--invader caster minions should be much more reliable now
--javelins now do less direct dps, but have strong DoTs, they also now have 'stuck in' effects
-
-0.8.2
--fixed flails damaging every enemy on throw
--fixed shape shifts not being able to get modifers
--fixed rune nuke's cooldown depleting while being used
--Ancient and Rune nuke will no longer build up fall damage while used
--Added master mode relics to Polar Exterminator and Divine Light (thanks Kweequ)
--Fixed some items not being researchable in journey mode
-
-0.8.1
--fixed dino tooth not actually providing armor penetration
--Actually fixed polar exterminator spawning in multiplayer (the previous 'fix' would sometimes spawn tons of polar exterminators lagging out multiplayer clients)
--OLORD now drops 1 platinum instead of 1 copper
-
-0.8.0:  The invasion of the fortress part 1
-Major additions
--Added post golem fortress enemies, they will attack the other fortress enemies
--Pre golem fortress enemies get stat buffs after golem to deal with the new invaders
--Added invader scrap and items it can craft: Invader armor, Invader fork, Invader dart, Invader shooter.
--Added some other invader drops: Gravity be gone, Overkill, and Invader Caster staff
--souls of hieght and some items they craft have been added, however they are unobtainable without cheats (wait for part II of the update)
-
-Minor additions
--reintroduced ash fell staff
--reintroduced arachnoyo
--reintroduced chrome shotgun
--reintroduced and reworked bionic armor
--reintroduced shroomite turret staff
--reintroduced charging shotgun
--reintroduced runic robe
--reintroduced and reworked ancient gemstone
-
-Bug Fixes
--Fixed Many bugs related to Discipline
--fixed lune and rhuthinium Bracelets' equip textures not working
--Fixed Sky fortress causing multiplayer crashing
--fixed polar extreminator not spawning in multiplayer
--fixed OLORD instantly despawning with some mods that mess with player buffs (thanks direwolf420)
--fixed tooltips on shapeshifts (thanks direwolf420)
--fixed the massacre not scaling off damage bonuses
-
-Tweaks
--Lune ore now generates in sky islands instead of giant moons
--Lune bar cost from 4->3 ore since less ore generates
--Biomass no longer works on coins
--Morphs now do generic damage
--Enchanted whetstone and fiery whetstone tooltips tweaked
--Swordpocalypse pierce reduced from infinite to 3
--new sprire for Skyward hilt and sword enlarger (thanks Kweequ)
-
-
+-chlorophyte sniper staff damage: 135->160
+-mech crossbow staff damage: 16->24
+-hydrospear and fire hydrent stabs work like TRAE spears
+-caelite pickasxe use time 28->22
+-fixed a bug where caelite greave's effect wasn't working correctly
+-Invader Shooter has been reworked
+-Added several vanity items
+-added commands for scanning the world for rhuthinium and generating it
+-fixed rhuthinium dart beams not drawing sometimes
 
 

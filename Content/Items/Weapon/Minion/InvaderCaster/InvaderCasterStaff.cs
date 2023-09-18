@@ -39,13 +39,11 @@ namespace QwertyMod.Content.Items.Weapon.Minion.InvaderCaster
             Item.useStyle = ItemUseStyleID.Swing;
             Item.noMelee = true;
             Item.knockBack = 3f;
-            Item.value = QwertyMod.InvaderGearValue;
+            Item.value = GearStats.InvaderGearValue;
             Item.rare = ItemRarityID.Yellow;
             Item.UseSound = SoundID.Item44;
             Item.shoot = ProjectileType<InvaderCasterMinion>();
             Item.DamageType = DamageClass.Summon;
-            Item.buffType = BuffType<InvaderCasterB>();
-            Item.buffTime = 3600;
 
             if (!Main.dedServ)
             {
@@ -55,6 +53,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.InvaderCaster
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
+            player.AddBuff(ModContent.BuffType<InvaderCasterB>(), 3600);
             player.SpawnMinionOnCursor(source, player.whoAmI, type, Item.damage, knockback);
             return false;
         }
@@ -79,7 +78,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.InvaderCaster
             Projectile.height = 32;
             Projectile.friendly = false;
             Projectile.ignoreWater = true;
-            Projectile.knockBack = 10f;
             Projectile.penetrate = -1;
             Projectile.tileCollide = true;
             Projectile.minion = true;

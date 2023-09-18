@@ -25,6 +25,7 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using System.IO;
 
 namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
 {
@@ -99,7 +100,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
         {
             NPC.TargetClosest(false);
             Player player = Main.player[NPC.target];
-            if (!player.InModBiome(GetInstance<FortressBiome>()) || !player.active)
+            if (!player.InModBiome(GetInstance<FortressBiome>()) || !player.active || player.dead)
             {
                 return true;
             }
@@ -199,6 +200,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
         int damage = 16;
         public override void AI()
         {
+            
             orbRotatior += MathF.PI / 15f;
             for (int i = 0; i < 4; i++)
             {
@@ -213,7 +215,23 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
                 {
                     NPC.timeLeft = 10;
                 }
-                ArmsVibing();
+                spawnInTime++;
+                if(spawnInTime > 300)
+                {
+                    NPC.position.Y -= 10000;
+                }
+                if (stretchTime > 300 - spawnInTime)
+                {
+                    scale.X = 0.5f + 0.5f * ((300f - (float)spawnInTime) / stretchTime);
+                    scale.Y = 2f - 1f * ((300f - (float)spawnInTime) / stretchTime);
+                    NPC.alpha = (int)(255f * ((300f - (float)spawnInTime) / stretchTime));
+                }
+                else
+                {
+                    NPC.alpha = 255;
+                    scale = Vector2.One;
+                    ArmsVibing();
+                }
 
                 return;
             }
@@ -472,6 +490,10 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
             attackCounter++;
             timer = 0;
             attackStarter = true;
+            if(Main.netMode != NetmodeID.MultiplayerClient)
+            {
+                NPC.netUpdate = true;
+            }
             if (attackCounter > 6 + (useBarrier ? 1 : 0))
             {
                 attackCounter = 0;
@@ -487,10 +509,15 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
         }
         void FlyToNewCampSpot()
         {
+            //QwertyMethods.ServerClientCheck("" + NPC.Center);
             if (attackStarter)
             {
                 FindCampSpot();
                 attackStarter = false;
+                if(Main.netMode != NetmodeID.MultiplayerClient)
+                {
+                    NPC.netUpdate = true;
+                }
             }
 
             NPC.alpha = 150;
@@ -700,6 +727,29 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
             }
             return false;
         }
+        
+        public override void SendExtraAI(BinaryWriter writer)
+        {
+            writer.Write(timer);
+            writer.Write(attackStarter);
+            writer.Write(campSpot.X);
+            writer.Write(campSpot.Y);
+            writer.Write(attackCounter);
+            //writer.Write(NPC.position.X);
+            //writer.Write(NPC.position.Y);
+        }
+
+        public override void ReceiveExtraAI(BinaryReader reader)
+        {
+            timer = reader.ReadSingle();
+            attackStarter = reader.ReadBoolean();
+            campSpot.X = reader.ReadSingle();
+            campSpot.Y = reader.ReadSingle();
+            attackCounter = reader.ReadInt32();
+            //NPC.position.X = reader.ReadSingle();
+            //NPC.position.Y = reader.ReadSingle();
+        }
+
     }
 
 

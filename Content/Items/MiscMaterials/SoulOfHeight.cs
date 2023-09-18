@@ -24,8 +24,8 @@ namespace QwertyMod.Content.Items.MiscMaterials
 
 		public override void SetDefaults() 
         {
-			Item.width = 18;
-			Item.height = 18;
+			Item.width = 22;
+			Item.height = 22;
 			Item.maxStack = 9999;
 			Item.value = 1000; // Makes the item worth 1 gold.
 			Item.rare = ItemRarityID.Orange;

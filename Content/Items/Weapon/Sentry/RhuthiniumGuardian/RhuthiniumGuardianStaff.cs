@@ -74,11 +74,11 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.RhuthiniumGuardian
             Projectile.friendly = false;   //Tells the game whether it is friendly to players/friendly npcs or not
             Projectile.ignoreWater = true;    //Tells the game whether or not projectile will be affected by water
             Main.projFrames[Projectile.type] = 1;  //this is where you add how many frames u'r projectile has to make the animation
-            Projectile.knockBack = 10f;
             Projectile.penetrate = -1; //Tells the game how many enemies it can hit before being destroyed  -1 is infinity
             Projectile.tileCollide = true; //Tells the game whether or not it can collide with tiles/ terrain
             Projectile.sentry = true; //tells the game that this is a sentry
             Projectile.timeLeft = Projectile.SentryLifeTime;
+            Projectile.DamageType = DamageClass.Summon;
         }
 
         private NPC confirmTarget;
@@ -190,7 +190,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.RhuthiniumGuardian
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Rhuthinium Shard");
+            ProjectileID.Sets.SentryShot[Projectile.type] = true;
         }
 
         public override void SetDefaults()
@@ -202,7 +202,6 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.RhuthiniumGuardian
             Projectile.friendly = true;
             Projectile.penetrate = 1;
             Projectile.DamageType = DamageClass.Summon;
-            Projectile.knockBack = 10f;
             Projectile.extraUpdates = 3;
         }
 
@@ -216,7 +215,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.RhuthiniumGuardian
             }
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             for (int i = 0; i < 12; i++)
             {

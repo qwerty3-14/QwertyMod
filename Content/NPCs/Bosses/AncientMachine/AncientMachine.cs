@@ -23,14 +23,17 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using System.IO;
 
 namespace QwertyMod.Content.NPCs.Bosses.AncientMachine
 {
+    [AutoloadBossHead]
     public class AncientMachine : ModNPC
     {
         public override void SetStaticDefaults()
         {
             //DisplayName,SetDefault("Ancient Machine");
+            NPCID.Sets.NoMultiplayerSmoothingByType[NPC.type] = true;
             Main.npcFrameCount[NPC.type] = 4;
 
             NPCID.Sets.MPAllowedEnemies[NPC.type] = true; //For allowing use of SpawnOnPlayer in multiplayer
@@ -58,7 +61,7 @@ namespace QwertyMod.Content.NPCs.Bosses.AncientMachine
             NPC.noGravity = true;
             NPC.noTileCollide = true;
             //music = mod.GetSoundSlot(SoundType.Music, "Sounds/Music/BuiltToDestroy");
-            NPC.lifeMax = 7500;
+            NPC.lifeMax = 6000;
             NPC.buffImmune[20] = true;
             if (!Main.dedServ)
             {
@@ -216,12 +219,11 @@ namespace QwertyMod.Content.NPCs.Bosses.AncientMachine
         public const int RingRadius = 300;
         public const int RingDustQty = 400;
         public int damage = 30;
-        public int switchTime = 150;
+        public int switchTime = 140;
         public int moveCount = -1;
         public int fireCount = 0;
         public int attackType = 1;
         public int AI_Timer = 0;
-        public int AI_Timer2 = 0;
         public bool runOnce = true;
         private Vector2 moveTo;
         private float orbSpeed = 12;
@@ -231,6 +233,19 @@ namespace QwertyMod.Content.NPCs.Bosses.AncientMachine
         private int missileFlashCounter;
         private int missileGlowFrame = 0;
         private float angle = MathF.PI / 6;
+        bool AttemptTeleport(ref Vector2 moveTo)
+        {
+            moveTo = moveTo + new Vector2(MathF.Cos(NPC.ai[0]) * 1050, MathF.Sin(NPC.ai[0]) * 600);
+            for(int i =0; i< Main.player.Length; i++)
+            {
+                Player curPlayer = Main.player[i];
+                if(Collision.CheckAABBvAABBCollision(Main.player[i].position, Main.player[i].Size, NPC.position, NPC.Size))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
 
         public override void AI()
         {
@@ -252,8 +267,6 @@ namespace QwertyMod.Content.NPCs.Bosses.AncientMachine
                 missileReloadCounter--;
             }
 
-            //Main.NewText(NPC.Size);
-            //Main.NewText(NPC.scale);
             if (NPC.life < NPC.lifeMax / 2 && Main.expertMode)
             {
                 angry = true;
@@ -268,19 +281,16 @@ namespace QwertyMod.Content.NPCs.Bosses.AncientMachine
                     NPC.ai[0] = Main.rand.NextFloat(-MathF.PI, MathF.PI);
                     NPC.netUpdate = true;
                 }
+                NPC.ai[2] = NPC.Center.X;
+                NPC.ai[3] = NPC.Center.Y;
                 runOnce = false;
                 moveTo = new Vector2(player.Center.X + MathF.Cos(NPC.ai[0]) * 700, player.Center.Y + MathF.Sin(NPC.ai[0]) * 400);
             }
             AI_Timer++;
-            AI_Timer2++;
 
             if (Main.expertMode)
             {
-                #region exerpt aggression
-
-                damage = 20;
-
-                #endregion exerpt aggression
+                damage = 18;
             }
 
             if (!player.active || player.dead)
@@ -297,46 +307,38 @@ namespace QwertyMod.Content.NPCs.Bosses.AncientMachine
                     return;
                 }
             }
+
             float targetAngle = new Vector2(player.Center.X - NPC.Center.X, player.Center.Y - NPC.Center.Y).ToRotation();
 
             NPC.rotation = targetAngle;
-
-            /*
-            if( AI_Timer<6)
-            {
-            Vector2 teleTo = new Vector2(player.Center.X + 400f, player.Center.Y + -400f );
-            NPC.position = (teleTo);
-            }
-            */
 
             if (AI_Timer > switchTime)
             {
                 moveCount++;
                 //Main.NewText(moveCount);
-                for (int i = 0; i < RingDustQty; i++)
-                {
-                    float theta = Main.rand.NextFloat(-MathF.PI, MathF.PI);
-
-                    Dust dust = Dust.NewDustPerfect(NPC.Center + QwertyMethods.PolarVector(RingRadius, theta), DustType<AncientGlow>(), QwertyMethods.PolarVector(-RingRadius / 10, theta));
-                    dust.noGravity = true;
-                }
                 if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     NPC.ai[0] = Main.rand.NextFloat(-MathF.PI, MathF.PI);
                     NPC.netUpdate = true;
                 }
-                moveTo = new Vector2(player.Center.X + MathF.Cos(NPC.ai[0]) * 700, player.Center.Y + MathF.Sin(NPC.ai[0]) * 400);
                 if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
+                    moveTo = player.Center;
+                    for(int i = 0; i < 100; i++)
+                    {
+                        if(AttemptTeleport(ref moveTo))
+                        {
+                            break;
+                        }
+                    }
                     NPC.ai[2] = moveTo.X;
                     NPC.ai[3] = moveTo.Y;
+                    AI_Timer = 0;
                     NPC.netUpdate = true;
+                    justTeleported = true;
                 }
-                justTeleported = true;
-                AI_Timer = 0;
-                AI_Timer2 = 0;
             }
-            if (moveCount >= 3)
+            if (moveCount >= 3 || (Main.expertMode && ((float)NPC.life / NPC.lifeMax) < 0.1f))
             {
                 #region special attacks
 
@@ -348,16 +350,6 @@ namespace QwertyMod.Content.NPCs.Bosses.AncientMachine
                     {
                         NPC.ai[1] = Main.rand.Next(3);
                         NPC.netUpdate = true;
-                        /*
-                        NPC.NewNPC((int)(player.Center.X + 565.7f), (int)NPC.Center.Y, mod.NPCType("AncientMinion"));
-                        NPC.NewNPC((int)(player.Center.X + -565.7f), (int)NPC.Center.Y, mod.NPCType("AncientMinion"));
-
-                        if (Main.expertMode)
-                        {
-                            NPC.NewNPC((int)NPC.Center.X, (int)(player.Center.Y + -565.7f), mod.NPCType("AncientMinion"));
-                            NPC.NewNPC((int)NPC.Center.X, (int)(player.Center.Y + 565.7f), mod.NPCType("AncientMinion"));
-                        }
-                        */
                     }
 
                     if (NPC.ai[1] == 0)
@@ -451,18 +443,32 @@ namespace QwertyMod.Content.NPCs.Bosses.AncientMachine
                 }
             }
             //NPC.velocity = (moveTo - NPC.Center) * .02f;
-            NPC.Center = new Vector2(NPC.ai[2], NPC.ai[3]);
-
-            if (justTeleported)
+            //QwertyMethods.ServerClientCheck("" + NPC.ai[2] + ", " + NPC.ai[3]);
+            if(AI_Timer > 1)
             {
-                SoundEngine.PlaySound(SoundID.MaxMana, NPC.Center);
-                for (int i = 0; i < RingDustQty; i++)
-                {
-                    float theta = Main.rand.NextFloat(-MathF.PI, MathF.PI);
-                    Dust dust = Dust.NewDustPerfect(NPC.Center, DustType<AncientGlow>(), QwertyMethods.PolarVector(RingRadius / 10, theta));
-                    dust.noGravity = true;
+                if(justTeleported)
+                {    
+                    for (int i = 0; i < RingDustQty; i++)
+                    {
+                        float theta = Main.rand.NextFloat(-MathF.PI, MathF.PI);
+
+                        Dust dust = Dust.NewDustPerfect(NPC.Center + QwertyMethods.PolarVector(RingRadius, theta), DustType<AncientGlow>(), QwertyMethods.PolarVector(-RingRadius / 10, theta));
+                        dust.noGravity = true;
+                    }
+                NPC.netOffset *= 0;
                 }
-                justTeleported = false;
+                NPC.Center = new Vector2(NPC.ai[2], NPC.ai[3]);
+                if (justTeleported)
+                {
+                    SoundEngine.PlaySound(SoundID.MaxMana, NPC.Center);
+                    for (int i = 0; i < RingDustQty; i++)
+                    {
+                        float theta = Main.rand.NextFloat(-MathF.PI, MathF.PI);
+                        Dust dust = Dust.NewDustPerfect(NPC.Center, DustType<AncientGlow>(), QwertyMethods.PolarVector(RingRadius / 10, theta));
+                        dust.noGravity = true;
+                    }
+                    justTeleported = false;
+                }
             }
         }
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
@@ -490,6 +496,17 @@ namespace QwertyMod.Content.NPCs.Bosses.AncientMachine
                         new Vector2(NPC.width * 0.5f, NPC.height * 0.5f), 1f, SpriteEffects.None, 0f);
 
             return false;
+        }
+        public override void SendExtraAI(BinaryWriter writer)
+        {
+            writer.Write(AI_Timer);
+            writer.Write(justTeleported);
+        }
+
+        public override void ReceiveExtraAI(BinaryReader reader)
+        {
+            AI_Timer = reader.ReadInt32();
+            justTeleported = reader.ReadBoolean();
         }
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
@@ -639,7 +656,7 @@ namespace QwertyMod.Content.NPCs.Bosses.AncientMachine
                 {
                     for (int i = 0; i < Main.maxPlayers; i++)
                     {
-                        if (Main.player[i].active && (Projectile.Center - Main.player[i].Center).Length() < closest)
+                        if (Main.player[i].active && !Main.player[i].dead && (Projectile.Center - Main.player[i].Center).Length() < closest)
                         {
                             closest = (Projectile.Center - Main.player[i].Center).Length();
                             Projectile.ai[0] = (Main.player[i].Center - Projectile.Center).ToRotation();
@@ -658,7 +675,7 @@ namespace QwertyMod.Content.NPCs.Bosses.AncientMachine
             closest = 10000;
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             Player player = Main.player[Projectile.owner];
             Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center.X, Projectile.Center.Y, 0, 0, ProjectileType<AncientBlast>(), Projectile.damage, Projectile.knockBack, player.whoAmI);

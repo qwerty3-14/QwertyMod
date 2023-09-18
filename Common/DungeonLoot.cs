@@ -9,6 +9,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using Terraria.GameContent.ItemDropRules;
 
 namespace QwertyMod.Content
 {
@@ -146,6 +147,16 @@ namespace QwertyMod.Content
                     }
                 }
                 validChests.RemoveAt(picked);
+            }
+        }
+    }
+    public class AddToLockbox : GlobalItem
+    {
+        public override void ModifyItemLoot(Item item, ItemLoot itemLoot)
+        {
+            if(item.type == ItemID.LockBox)
+            {
+                itemLoot.Add(ItemDropRule.OneFromOptionsNotScalingWithLuck(1, ItemType<AmuletOfPatience>(), ItemType<BurstMiner>(), ItemType<Hydrospear>(), ItemType<LaunchingHook>(), ItemType<Riptide>(), ItemType<Aqueous>()));
             }
         }
     }

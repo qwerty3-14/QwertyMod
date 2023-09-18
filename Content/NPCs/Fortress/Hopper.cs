@@ -42,7 +42,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             NPC.defense = 18;
             NPC.lifeMax = 160;
             NPC.value = 100;
-            if (NPC.downedGolemBoss)
+            if (SkyFortress.beingInvaded)
             {
                 NPC.lifeMax = 750;
                 NPC.damage = 80;
@@ -61,7 +61,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             BannerItem = ItemType<HopperBanner>();
 
             NPC.buffImmune[BuffID.Confused] = false;
-            NPC.GetGlobalNPC<FortressNPCGeneral>().contactDamageToInvaders = true;
+            NPC.GetGlobalNPC<FortressNPCGeneral>().contactDamageToInvaders = 3f;
         }
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
         {
@@ -176,14 +176,24 @@ namespace QwertyMod.Content.NPCs.Fortress
                     {
                         Point origin = NPC.Center.ToTileCoordinates();
                         Point point;
-
-                        while (!WorldUtils.Find(origin, Searches.Chain(new Searches.Down(3), new GenCondition[]
+                        for (int s = 0; s < 1000; s++)
                         {
-                                                    new Terraria.WorldBuilding.Conditions.IsSolid()
-                        }), out point))
-                        {
-                            NPC.position.Y++;
-                            origin = NPC.Center.ToTileCoordinates();
+                            if (WorldUtils.Find(origin, Searches.Chain(new Searches.Down(3), new GenCondition[]
+                            {
+                                                        new Terraria.WorldBuilding.Conditions.IsSolid()
+                            }), out point))
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                NPC.position.Y++;
+                                origin = NPC.Center.ToTileCoordinates();
+                                if(s == 999)
+                                {
+                                    NPC.active = false;
+                                }
+                            }
                         }
                     }
                 }
@@ -221,7 +231,7 @@ namespace QwertyMod.Content.NPCs.Fortress
                     gravity = 0f;
                     NPC.rotation = MathF.PI;
                     Entity player = FortressNPCGeneral.FindTarget(NPC, true);
-                    if (Collision.CheckAABBvLineCollision(player.position, player.Size, NPC.Center, NPC.Center + new Vector2(0, 1000)) && Collision.CanHit(NPC.Center, 0, 0, player.Center, 0, 0))
+                    if ( player != null && Collision.CheckAABBvLineCollision(player.position, player.Size, NPC.Center, NPC.Center + new Vector2(0, 1000)) && Collision.CanHit(NPC.Center, 0, 0, player.Center, 0, 0))
                     {
                         flipped = false;
                         timer = 63;
@@ -253,7 +263,7 @@ namespace QwertyMod.Content.NPCs.Fortress
                     //Main.NewText("jump: " +jumpSpeedY);
                     Entity player = FortressNPCGeneral.FindTarget(NPC, true);
                     //Main.NewText(Math.Abs(player.Center.X - NPC.Center.X));
-                    if (Math.Abs(player.Center.X - NPC.Center.X) < aggroDistance && Math.Abs(player.Bottom.Y - NPC.Bottom.Y) < aggroDistanceY)
+                    if (player != null && Math.Abs(player.Center.X - NPC.Center.X) < aggroDistance && Math.Abs(player.Bottom.Y - NPC.Bottom.Y) < aggroDistanceY)
                     {
                         jumpSpeedX = Math.Abs(player.Center.X - NPC.Center.X) / 70 * (NPC.confused ? -1 : 1);
                         timer++;

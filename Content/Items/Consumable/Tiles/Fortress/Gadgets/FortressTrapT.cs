@@ -20,6 +20,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
             Main.tileFrameImportant[Type] = true;
             Main.tileBlockLight[Type] = true;
             Main.tileSolid[Type] = true;
+            /*
 
             TileObjectData.newTile.CopyFrom(TileObjectData.Style1x1);
             TileObjectData.newTile.AnchorTop = default(AnchorData);
@@ -33,15 +34,22 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
             TileObjectData.newAlternate.Direction = TileObjectDirection.PlaceRight;
             TileObjectData.addAlternate(1);
             TileObjectData.addTile(Type);
-
+            */
             DustType = DustType<FortressDust>();
             HitSound = QwertyMod.FortressBlocks;
             MinPick = 50;
             AddMapEntry(new Color(162, 184, 185));
             MineResist = 1;
+            
             //ItemDrop = ItemType<FortressTrap>();
         }
-
+        
+        /*
+        public override void KillTile(int i, int j, ref bool fail, ref bool effectOnly, ref bool noItem)
+        {
+            Item.NewItem(new EntitySource_TileBreak(i, j), i * 16, j * 16, 48, 48, ItemType<FortressTrap>());
+        }
+        */
         public override bool CanPlace(int i, int j)
         {
             return Main.tile[i + 1, j].HasTile || Main.tile[i - 1, j].HasTile || Main.tile[i, j + 1].HasTile || Main.tile[i, j - 1].HasTile;

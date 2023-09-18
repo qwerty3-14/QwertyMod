@@ -19,8 +19,11 @@ namespace QwertyMod.Content.Items.Weapon.Whip.Discipline
         {
 
             Item.DefaultToWhip(ModContent.ProjectileType<DisciplineP>(), 67, 3, 4, 20);
+            Item.DamageType = DamageClass.SummonMeleeSpeed;
             Item.rare = ItemRarityID.Lime;
             Item.value = Item.sellPrice(0, 10, 0, 0);
+            Item.width = 26;
+            Item.height = 40;
         }
     }
     public class DisciplineP : WhipProjectile

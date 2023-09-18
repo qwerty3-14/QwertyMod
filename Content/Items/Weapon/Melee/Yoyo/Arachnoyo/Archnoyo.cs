@@ -70,6 +70,8 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.Arachnoyo
     {
         public override void SetStaticDefaults()
         {
+            ProjectileID.Sets.YoyosMaximumRange[Projectile.type] = 120f; 
+            ProjectileID.Sets.YoyosTopSpeed[Projectile.type] = 16f;
         }
 
         public override void SetDefaults()
@@ -85,8 +87,8 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.Arachnoyo
 
             yoyoCount = 8;
             time = -1f;
-            range = 120;
-            speed = 16f;
+            range = ProjectileID.Sets.YoyosMaximumRange[Projectile.type];
+            speed = ProjectileID.Sets.YoyosTopSpeed[Projectile.type];
             counterWeightId = ModContent.ProjectileType<SpiderCounterweight>();
         }
 

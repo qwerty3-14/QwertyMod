@@ -59,8 +59,11 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.Arsenal
 
     public class ArsenalP : QwertyYoyo
     {
+        
         public override void SetStaticDefaults()
         {
+            ProjectileID.Sets.YoyosMaximumRange[Projectile.type] = 160f; 
+            ProjectileID.Sets.YoyosTopSpeed[Projectile.type] = 11f;
         }
 
         public override void SetDefaults()
@@ -76,8 +79,8 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.Arsenal
             Projectile.usesLocalNPCImmunity = true;
             yoyoCount = 4;
             time = 2f;
-            range = 160;
-            speed = 11f;
+            range = ProjectileID.Sets.YoyosMaximumRange[Projectile.type] ;
+            speed = ProjectileID.Sets.YoyosTopSpeed[Projectile.type];
             spread = MathF.PI / 4;
             //counterWeightId = mod.ProjectileType("SpiderCounterweight");
         }

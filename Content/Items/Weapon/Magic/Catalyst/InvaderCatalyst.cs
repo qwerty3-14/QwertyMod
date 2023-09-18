@@ -27,11 +27,13 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Catalyst
             Item.useStyle = ItemUseStyleID.HoldUp;
             Item.DamageType = DamageClass.Magic;
             Item.noMelee = true;
-            Item.damage = 50;
+            Item.damage = 40;
             Item.mana = 100;
             Item.UseSound = SoundID.Item29;
             Item.useTime = Item.useAnimation = 30;
             Item.rare = ItemRarityID.Yellow;
+            Item.width = 18;
+            Item.height = 20;
 
 
             if (!Main.dedServ)
@@ -42,7 +44,14 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Catalyst
         }
         public override bool? UseItem(Player player)
         {
-            player.AddBuff(ModContent.BuffType<CatalystBuff>(), 4 * 60);
+            if(ModLoader.HasMod("TRAEProject"))
+            {
+                player.AddBuff(ModContent.BuffType<CatalystBuff>(), 60 * 60);
+            }
+            else
+            {
+                player.AddBuff(ModContent.BuffType<CatalystBuff>(), 4 * 60);
+            }
             player.GetModPlayer<CatalystEffect>().CatalystDamage = player.GetWeaponDamage(Item);
             return base.UseItem(player);
         }
@@ -62,16 +71,28 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Catalyst
             if(Player.HasBuff(ModContent.BuffType<CatalystBuff>()))
             {
 
+                if(ModLoader.HasMod("TRAEProject"))
+                {
+                    if(Player.CheckMana(10, true, false))
+                    {
+
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
                 SoundEngine.PlaySound(SoundID.Item91, target.Center);
                 for (int i = 0; i < 100; i++)
                 {
                     float rot = MathF.PI * 2f * ((float)i / 30f);
                     Dust.NewDustPerfect(target.Center, ModContent.DustType<InvaderGlow>(), QwertyMethods.PolarVector(5f, rot));
                 }
-                QwertyMethods.PokeNPC(Player, target, source, Player.GetModPlayer<CatalystEffect>().CatalystDamage, DamageClass.Magic, 0);
-                //Projectile.NewProjectile(player.GetSource_Buff(buffIndex), target.Center, Vector2.Zero, ModContent.ProjectileType<CatalystExplosion>(), Player.GetModPlayer<CatalystEffect>().CatalystDamage, 0, Player.whoAmI);
+                //QwertyMethods.PokeNPC(Player, target, source, Player.GetModPlayer<CatalystEffect>().CatalystDamage, DamageClass.Magic, 0);
+                Projectile.NewProjectile(source, target.Center, Vector2.Zero, ModContent.ProjectileType<CatalystExplosion>(), Player.GetModPlayer<CatalystEffect>().CatalystDamage, 0, Player.whoAmI);
             }
         }
+
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if(hit.DamageType == DamageClass.Melee)
@@ -79,6 +100,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Catalyst
                 ProcessCatalystEffect(target, Player.GetSource_ItemUse(Player.HeldItem));
             }
         }
+        /*
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
             if(proj.CountsAsClass(DamageClass.Melee))
@@ -86,6 +108,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Catalyst
                 ProcessCatalystEffect(target, Projectile.InheritSource(proj));
             }
         }
+        */
     }
     public class CatalystBuff : ModBuff
     {
@@ -113,7 +136,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Catalyst
             Projectile.height = 60;
             Projectile.friendly = true;
             Projectile.hostile = false;
-            Projectile.penetrate = 1;
+            Projectile.penetrate = -1;
             Projectile.DamageType = DamageClass.Magic;
             Projectile.tileCollide = false;
             Projectile.timeLeft = 2;

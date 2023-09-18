@@ -16,8 +16,8 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Carving
 
         public override void SetDefaults()
         {
-            Item.width = 16;
-            Item.height = 16;
+            Item.width = 48;
+            Item.height = 32;
             Item.maxStack = 9999;
             Item.value = 0;
             Item.rare = ItemRarityID.Orange;

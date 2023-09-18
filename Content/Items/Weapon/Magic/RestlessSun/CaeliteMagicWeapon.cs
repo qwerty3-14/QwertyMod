@@ -77,7 +77,6 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RestlessSun
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Restless Sun");
         }
 
         public override void SetDefaults()
@@ -91,7 +90,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RestlessSun
             Projectile.DamageType = DamageClass.Magic;
             Projectile.timeLeft = 180;
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 30;
+            Projectile.localNPCHitCooldown = 10;
             Projectile.tileCollide = true;
             Projectile.light = 1f;
         }
@@ -103,8 +102,6 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RestlessSun
             {
                 target.AddBuff(BuffType<PowerDown>(), 120);
             }
-            Projectile.localNPCImmunity[target.whoAmI] = -1;
-            //target.immune[Projectile.owner] = 0;
         }
 
         private NPC target;
@@ -132,7 +129,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RestlessSun
             Projectile.rotation += MathF.PI / 7.5f;
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             for (int i = 0; i < 6; i++)
             {

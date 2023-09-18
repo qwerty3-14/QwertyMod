@@ -45,31 +45,59 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert
     {
         public bool effect;
         public bool noSound;
+        public int buildUp;
+        public int cooldown;
 
         public override void ResetEffects()
         {
             effect = false;
         }
+        public override void PreUpdate()
+        {
+            if(cooldown > 0)
+            {
+                cooldown--;
+            }
+        }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Main.rand.NextBool(10) && effect && !target.immortal)
+            if (Main.rand.NextBool(12) && effect && !target.immortal && cooldown <= 0)
             {
-                for (int i = 0; i < 2; i++)
+                if(cooldown <= 0)
                 {
-                    Projectile penguin = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc("Accesory_PenguinGenerator"), Player.Center, new Vector2(6 - 12 * i, 0), ProjectileType<SlidingPenguinGeneric>(), damageDone, 0, Player.whoAmI)];
-                    penguin.GetGlobalProjectile<PenguinLimit>().realeasedPenguin = true;
+                    cooldown = 60;
+                    for (int i = 0; i < 2; i++)
+                    {
+                        Projectile penguin = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc("Accesory_PenguinGenerator"), Player.Center, new Vector2(6 - 12 * i, 0), ProjectileType<SlidingPenguinGeneric>(), damageDone + buildUp, 0, Player.whoAmI)];
+                        penguin.GetGlobalProjectile<PenguinLimit>().realeasedPenguin = true;
+                        buildUp = 0;
+                    }
+                }
+                else
+                {
+                    buildUp += damageDone;
                 }
             }
         }
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Main.rand.NextBool(10) && effect && !target.immortal)
+            
+            if (Main.rand.NextBool(12) && effect && !target.immortal && cooldown <= 0)
             {
-                for (int i = 0; i < 2; i++)
+                if(cooldown <= 0)
                 {
-                    Projectile penguin = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(proj), Player.Center, new Vector2(6 - 12 * i, 0), ProjectileType<SlidingPenguinGeneric>(), damageDone, 0, Player.whoAmI)];
-                    penguin.GetGlobalProjectile<PenguinLimit>().realeasedPenguin = true;
+                    cooldown = 60;
+                    for (int i = 0; i < 2; i++)
+                    {
+                        Projectile penguin = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(proj), Player.Center, new Vector2(6 - 12 * i, 0), ProjectileType<SlidingPenguinGeneric>(), damageDone + buildUp, 0, Player.whoAmI)];
+                        penguin.GetGlobalProjectile<PenguinLimit>().realeasedPenguin = true;
+                        buildUp = 0;
+                    }
+                }
+                else
+                {
+                    buildUp += damageDone;
                 }
             }
         }

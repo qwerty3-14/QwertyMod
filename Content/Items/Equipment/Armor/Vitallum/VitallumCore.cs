@@ -24,8 +24,8 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
 
         public override void SetDefaults()
         {
-            Item.width = 13;
-            Item.height = 13;
+            Item.width = 26;
+            Item.height = 22;
             Item.value = 10000;
             Item.rare = ItemRarityID.Yellow;
             Item.maxStack = 1;

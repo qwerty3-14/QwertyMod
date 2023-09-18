@@ -48,7 +48,6 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
             return false;
         }
         bool runOnce = true;
-        int shotTimer = 0;
         int[] beamIndexes = new int[2];
         
         public override void AI()

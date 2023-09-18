@@ -188,10 +188,10 @@ namespace QwertyMod.Content.Items.Weapon.Magic.AncientMissile
 
             SoundEngine.PlaySound(SoundID.Item62, Projectile.position);
 
-            for (int i = 0; i < 400; i++)
+            for (int i = 0; i < 100; i++)
             {
                 float theta = Main.rand.NextFloat(-MathF.PI, MathF.PI);
-                Dust dust = Dust.NewDustPerfect(Projectile.Center, DustType<AncientGlow>(), QwertyMethods.PolarVector(Main.rand.Next(2, 20), theta));
+                Dust dust = Dust.NewDustPerfect(Projectile.Center, DustType<AncientGlow>(), QwertyMethods.PolarVector(Main.rand.Next(7, 14), theta));
                 dust.noGravity = true;
             }
         }

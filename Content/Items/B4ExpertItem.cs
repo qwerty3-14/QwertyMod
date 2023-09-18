@@ -39,16 +39,16 @@ namespace QwertyMod.Content.Items
         {
             if (Main.myPlayer == player.whoAmI)
             {
+                //QwertyMethods.ServerClientCheck("UseItem");
                 float direction = (Main.MouseWorld - player.Center).ToRotation();
                 float distance = (Main.MouseWorld - player.Center).Length();
                 player.armorEffectDrawShadow = true;
                 player.direction = Main.MouseWorld.X > player.Center.X ? 1 : -1;
-
                 player.velocity = new Vector2(MathF.Cos(direction), MathF.Sin(direction)) * distance / 10;
-
-                int dust = Dust.NewDust(player.position, player.width, player.height, DustType<B4PDust>(), 0, 0);
-                player.noFallDmg = true;
+                NetMessage.SendData(MessageID.PlayerControls, number: player.whoAmI);
             }
+            player.noFallDmg = true;
+            int dust = Dust.NewDust(player.position, player.width, player.height, DustType<B4PDust>(), 0, 0);
 
             return true;
         }

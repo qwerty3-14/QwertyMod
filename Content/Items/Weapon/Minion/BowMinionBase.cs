@@ -4,6 +4,10 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
+using System.IO;
+using Microsoft.Xna.Framework.Graphics;
+using System.Linq;
+
 
 namespace QwertyMod.Content.Items.Weapon.Minion
 {
@@ -18,17 +22,22 @@ namespace QwertyMod.Content.Items.Weapon.Minion
         private NPC target;
         private int timer;
         private int arrow = 1;
-        Projectile loadedArrow;
+        Projectile loadedArrow = null;
         private bool giveTileCollision = false;
         float aimRotation = 0;
         float targetRotation = 0;
         bool arrowFired = true;
         int safetyIdCheck = -1;
+        int arrowIndex = -1;
 
 
         protected void BowAI()
         {
             Player player = Main.player[Projectile.owner];
+            if(arrowIndex != -1)
+            {
+                loadedArrow = Main.projectile.FirstOrDefault(x => x.identity == arrowIndex);
+            }
             int identity = 0;
             int bowCount = 0;
             bool foundIdentiy = false;
@@ -86,12 +95,21 @@ namespace QwertyMod.Content.Items.Weapon.Minion
         {
             int weaponDamage = Projectile.damage;
             float weaponKnockback = Projectile.knockBack;
-            if (Projectile.owner == Main.myPlayer && Projectile.UseAmmo(AmmoID.Arrow, ref arrow, ref shootSpeed, ref weaponDamage, ref weaponKnockback, Main.rand.NextBool(2)))
+            if (Projectile.UseAmmo(AmmoID.Arrow, ref arrow, ref shootSpeed, ref weaponDamage, ref weaponKnockback, Main.rand.NextBool(2)))
             {
                 ChangeArrow(ref arrow);
-                loadedArrow = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, QwertyMethods.PolarVector(shootSpeed, Projectile.rotation), arrow, weaponDamage, weaponKnockback, Main.myPlayer)];
+                if(Projectile.owner == Main.myPlayer)
+                {
+                    arrowIndex = Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, QwertyMethods.PolarVector(shootSpeed, Projectile.rotation), arrow, weaponDamage, weaponKnockback, Projectile.owner);
+                    arrowIndex = Main.projectile[arrowIndex].identity;
+                    safetyIdCheck = arrow;
+                    Projectile.netUpdate = true;
+                }
                 arrowFired = false;
-                safetyIdCheck = loadedArrow.type;
+            }
+            if(arrowIndex != -1)
+            {
+                loadedArrow = Main.projectile.FirstOrDefault(x => x.identity == arrowIndex);
             }
         }
         protected virtual void ChangeArrow(ref int arrowType)
@@ -100,16 +118,19 @@ namespace QwertyMod.Content.Items.Weapon.Minion
         }
         void HoldArrow()
         {
-            loadedArrow.velocity = QwertyMethods.PolarVector(0.01f, Projectile.rotation - MathF.PI / 2);
-            loadedArrow.Center = Projectile.Center + QwertyMethods.PolarVector(holdOffset - loadedArrow.velocity.Length() * (loadedArrow.extraUpdates + 1), Projectile.rotation - MathF.PI / 2);
-            loadedArrow.friendly = false;
-            loadedArrow.rotation = Projectile.rotation;
-            loadedArrow.timeLeft += loadedArrow.extraUpdates + 1;
-            loadedArrow.ai[0] = 0;
-            if (loadedArrow.tileCollide)
+            if(loadedArrow != null)
             {
-                giveTileCollision = true;
-                loadedArrow.tileCollide = false;
+                loadedArrow.velocity = QwertyMethods.PolarVector(0.01f, Projectile.rotation - MathF.PI / 2);
+                loadedArrow.Center = Projectile.Center + QwertyMethods.PolarVector(holdOffset - loadedArrow.velocity.Length() * (loadedArrow.extraUpdates + 1), Projectile.rotation - MathF.PI / 2);
+                loadedArrow.friendly = false;
+                loadedArrow.rotation = Projectile.rotation;
+                loadedArrow.timeLeft += loadedArrow.extraUpdates + 1;
+                loadedArrow.ai[0] = 0;
+                if (loadedArrow.tileCollide)
+                {
+                    giveTileCollision = true;
+                    loadedArrow.tileCollide = false;
+                }
             }
         }
         void Fire()
@@ -179,9 +200,55 @@ namespace QwertyMod.Content.Items.Weapon.Minion
                 loadedArrow.ai[0] = 0;
             }
         }
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             Fire();
         }
+        
+        public override void PostDraw(Color lightColor)
+        {
+            /*
+            if(loadedArrow != null)
+            {
+                float lineLength = (loadedArrow.Center - Projectile.Center).Length();
+                Vector2 center = Projectile.Center;
+                Vector2 distToProj = loadedArrow.Center - center;
+                float projRotation = distToProj.ToRotation() - 1.57f;
+                distToProj.Normalize();                 //get unit vector
+                distToProj *= 12f;                      //speed = 12
+                center += distToProj;                   //update draw position
+                distToProj = loadedArrow.Center - center;    //update distance
+                Color drawColor = lightColor;
+
+                Main.EntitySpriteDraw(ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Sentry/RhuthiniumGuardian/laser").Value, new Vector2(center.X - Main.screenPosition.X, center.Y - Main.screenPosition.Y),
+                    new Rectangle(0, 0, 1, (int)lineLength - 10), Color.Red, projRotation,
+                    new Vector2(0, 0), 1f, SpriteEffects.None, 0);
+            }
+            */
+        }
+        public override void SendExtraAI(BinaryWriter writer)
+        {
+            writer.Write(arrowIndex);
+            writer.Write(safetyIdCheck);
+        }
+
+        public override void ReceiveExtraAI(BinaryReader reader)
+        {
+            arrowIndex = reader.ReadInt32();
+            safetyIdCheck = reader.ReadInt32();
+        }
     }
+    /*
+    public class DebugArrow : GlobalProjectile
+    {
+        public override void AI(Projectile projectile)
+        {
+            if(projectile.ai[2] == 0 && projectile.type == ProjectileID.FrostburnArrow)
+            {
+                projectile.ai[2] = 1;
+                QwertyMethods.ServerClientCheck("whoAmI: " + projectile.whoAmI);
+            }
+        }
+    }
+    */
 }

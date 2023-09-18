@@ -22,6 +22,8 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
         {
             Item.rare = ItemRarityID.Yellow;
             Item.value = Item.sellPrice(gold: 6);
+            Item.width = 22;
+            Item.height = 18;
         }
 
         public override void UpdateEquip(Player player)

@@ -24,7 +24,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.LuneArcherMinion
             Projectile.height = 40;
             Projectile.friendly = true;
             Projectile.ignoreWater = true;
-            Projectile.knockBack = 10f;
             Projectile.penetrate = -1;
             Projectile.tileCollide = false;
             Projectile.minion = true;

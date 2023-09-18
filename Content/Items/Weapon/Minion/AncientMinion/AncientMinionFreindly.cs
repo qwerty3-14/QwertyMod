@@ -16,12 +16,10 @@ namespace QwertyMod.Content.Items.Weapon.Minion.AncientMinion
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Ancient Minion");
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             Main.projFrames[Projectile.type] = 1;
             ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
             Main.projPet[Projectile.type] = true;
-            ProjectileID.Sets.MinionShot[Projectile.type] = true;
         }
 
 
@@ -51,7 +49,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.AncientMinion
         public bool charging;
         public NPC target;
 
-        private int waitTime = 10;
+        private int waitTime = 20;
         private int chargeTime = 20;
         private Vector2 moveTo;
         private bool justTeleported;

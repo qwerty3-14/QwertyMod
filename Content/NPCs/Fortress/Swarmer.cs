@@ -37,7 +37,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             NPC.npcSlots = 0.05f;
             NPC.noTileCollide = true;
             NPC.buffImmune[BuffID.Confused] = false;
-            NPC.GetGlobalNPC<FortressNPCGeneral>().contactDamageToInvaders = true;
+            NPC.GetGlobalNPC<FortressNPCGeneral>().contactDamageToInvaders = 1f;
         }
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
         {
@@ -79,7 +79,6 @@ namespace QwertyMod.Content.NPCs.Fortress
                 NPC.life = NPC.lifeMax;
             }
 
-            NPC.TargetClosest(true);
             freindCount = 0;
             for (int n = 0; n < 200; n++)
             {
@@ -89,37 +88,41 @@ namespace QwertyMod.Content.NPCs.Fortress
                 }
             }
             Entity player = FortressNPCGeneral.FindTarget(NPC, true);
-            float towardsPlayer = (player.Center - NPC.Center).ToRotation();
-            if (freindCount >= 4)
+            if(player != null)
             {
-                NPC.velocity = QwertyMethods.PolarVector(maxSpeed, towardsPlayer);
-            }
-            else
-            {
-                totalCount = 0;
-                for (int n = 0; n < 200; n++)
+                float towardsPlayer = (player.Center - NPC.Center).ToRotation();
+                if (freindCount >= 4)
                 {
-                    if (n != NPC.whoAmI && Main.npc[n].active && Main.npc[n].type == NPCType<Swarmer>())
-                    {
-                        totalCount++;
-                    }
-                }
-                if (totalCount >= 4)
-                {
-                    for (int n = 0; n < 200; n++)
-                    {
-                        if (n != NPC.whoAmI && Main.npc[n].active && Main.npc[n].type == NPCType<Swarmer>() && (Main.npc[n].Center - NPC.Center).Length() > 150)
-                        {
-                            totalCount++;
-                            NPC.velocity += QwertyMethods.PolarVector(4, (Main.npc[n].Center - NPC.Center).ToRotation());
-                        }
-                    }
+                    NPC.velocity = QwertyMethods.PolarVector(maxSpeed, towardsPlayer);
                 }
                 else
                 {
-                    NPC.velocity = QwertyMethods.PolarVector(-maxSpeed, towardsPlayer);
+                    totalCount = 0;
+                    for (int n = 0; n < 200; n++)
+                    {
+                        if (n != NPC.whoAmI && Main.npc[n].active && Main.npc[n].type == NPCType<Swarmer>())
+                        {
+                            totalCount++;
+                        }
+                    }
+                    if (totalCount >= 4)
+                    {
+                        for (int n = 0; n < 200; n++)
+                        {
+                            if (n != NPC.whoAmI && Main.npc[n].active && Main.npc[n].type == NPCType<Swarmer>() && (Main.npc[n].Center - NPC.Center).Length() > 150)
+                            {
+                                totalCount++;
+                                NPC.velocity += QwertyMethods.PolarVector(4, (Main.npc[n].Center - NPC.Center).ToRotation());
+                            }
+                        }
+                    }
+                    else
+                    {
+                        NPC.velocity = QwertyMethods.PolarVector(-maxSpeed, towardsPlayer);
+                    }
                 }
             }
+            
 
             for (int n = 0; n < 200; n++)
             {
@@ -145,11 +148,11 @@ namespace QwertyMod.Content.NPCs.Fortress
                     float CollisionLineLength = Main.projectile[p].velocity.Length() * 60 * (1 + Main.projectile[p].extraUpdates); //this is basicly how far the selected projectile will travel in 1 second
                     float maxProjectileWidth = Main.projectile[p].Size.Length() * 5f; // fly further away from larger projectiles
                     float col = 0f;
-                    if (Main.projectile[p].friendly && Main.projectile[p].active && Collision.CheckAABBvLineCollision(NPC.position, NPC.Size, Main.projectile[p].Center + QwertyMethods.PolarVector(maxProjectileWidth / 4f, Main.projectile[p].velocity.ToRotation() + MathF.PI / 2), Main.projectile[p].Center + QwertyMethods.PolarVector(maxProjectileWidth / 4f, Main.projectile[p].velocity.ToRotation() + MathF.PI / 2) + QwertyMethods.PolarVector(CollisionLineLength, Main.projectile[p].velocity.ToRotation()), maxProjectileWidth / 2f, ref col))
+                    if (Main.projectile[p].friendly && Main.projectile[p].damage > 0 && Main.projectile[p].active && Collision.CheckAABBvLineCollision(NPC.position, NPC.Size, Main.projectile[p].Center + QwertyMethods.PolarVector(maxProjectileWidth / 4f, Main.projectile[p].velocity.ToRotation() + MathF.PI / 2), Main.projectile[p].Center + QwertyMethods.PolarVector(maxProjectileWidth / 4f, Main.projectile[p].velocity.ToRotation() + MathF.PI / 2) + QwertyMethods.PolarVector(CollisionLineLength, Main.projectile[p].velocity.ToRotation()), maxProjectileWidth / 2f, ref col))
                     {
                         NPC.velocity += QwertyMethods.PolarVector(maxSpeed, Main.projectile[p].velocity.ToRotation() + MathF.PI / 2);
                     }
-                    else if (Main.projectile[p].friendly && Main.projectile[p].active && Collision.CheckAABBvLineCollision(NPC.position, NPC.Size, Main.projectile[p].Center - QwertyMethods.PolarVector(maxProjectileWidth / 4f, Main.projectile[p].velocity.ToRotation() + MathF.PI / 2), Main.projectile[p].Center - QwertyMethods.PolarVector(maxProjectileWidth / 4f, Main.projectile[p].velocity.ToRotation() + MathF.PI / 2) + QwertyMethods.PolarVector(CollisionLineLength, Main.projectile[p].velocity.ToRotation()), maxProjectileWidth / 2f, ref col))
+                    else if (Main.projectile[p].friendly && Main.projectile[p].damage > 0 && Main.projectile[p].active && Collision.CheckAABBvLineCollision(NPC.position, NPC.Size, Main.projectile[p].Center - QwertyMethods.PolarVector(maxProjectileWidth / 4f, Main.projectile[p].velocity.ToRotation() + MathF.PI / 2), Main.projectile[p].Center - QwertyMethods.PolarVector(maxProjectileWidth / 4f, Main.projectile[p].velocity.ToRotation() + MathF.PI / 2) + QwertyMethods.PolarVector(CollisionLineLength, Main.projectile[p].velocity.ToRotation()), maxProjectileWidth / 2f, ref col))
                     {
                         NPC.velocity += QwertyMethods.PolarVector(maxSpeed, Main.projectile[p].velocity.ToRotation() - MathF.PI / 2);
                     }

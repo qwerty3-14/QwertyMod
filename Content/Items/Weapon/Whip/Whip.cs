@@ -11,7 +11,10 @@ namespace QwertyMod.Content.Items.Weapon.Whip
 {
     public abstract class WhipProjectile : ModProjectile
     {
-
+        public override void SetStaticDefaults()
+        {
+            ProjectileID.Sets.IsAWhip[Type] = true;
+        }
         public override void SetDefaults()
         {
             // This method quickly sets the whip's properties.

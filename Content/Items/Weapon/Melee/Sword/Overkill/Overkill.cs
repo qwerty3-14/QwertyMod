@@ -38,7 +38,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.Overkill
             Item.useTime = 45;
             Item.useAnimation = 45;
             Item.rare = ItemRarityID.Yellow;
-            Item.value = QwertyMod.InvaderGearValue;
+            Item.value = GearStats.InvaderGearValue;
             Item.useTurn = false;
         }
 

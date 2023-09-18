@@ -28,7 +28,8 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Combined
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.GetModPlayer<FieryWhetStoneEffect>().effect += .3f;
-            player.magmaStone = true;
+            player.GetModPlayer<FieryWhetStoneEffect>().fireOnHit = true;
+            //player.magmaStone = true;
         }
         public override void AddRecipes()
         {
@@ -57,18 +58,22 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Combined
 
     public class FieryWhetStoneEffect : ModPlayer
     {
+        public bool fireOnHit = false;
         public float effect = 0f;
+        public int AP = 0;
 
         public override void ResetEffects()
         {
+            fireOnHit = false;
             effect = 0f;
+            AP = 0;
         }
 
         public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
         {
             if (effect != 0f && !target.buffImmune[BuffID.OnFire] && proj.CountsAsClass(DamageClass.Melee))
             {
-                QwertyMethods.PokeNPC(Player, target, Projectile.InheritSource(proj), proj.GetGlobalProjectile<MagicBonusOnProj>().magicBoost * Player.GetDamage(DamageClass.Magic).Multiplicative, DamageClass.Magic);
+                QwertyMethods.PokeNPC(Player, target, Projectile.InheritSource(proj), proj.GetGlobalProjectile<MagicBonusOnProj>().magicBoost * Player.GetDamage(DamageClass.Magic).Multiplicative, DamageClass.Magic, 0, AP);
             }
         }
 
@@ -76,9 +81,25 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Combined
         {
             if (effect != 0f && !target.buffImmune[BuffID.OnFire] && modifiers.DamageType == DamageClass.Melee)
             {
-                QwertyMethods.PokeNPC(Player, target, new EntitySource_Misc(""), modifiers.FinalDamage.Multiplicative * effect * Player.GetDamage(DamageClass.Magic).Multiplicative, DamageClass.Magic);
+                QwertyMethods.PokeNPC(Player, target, new EntitySource_Misc(""), modifiers.FinalDamage.Multiplicative * effect * Player.GetDamage(DamageClass.Magic).Multiplicative, DamageClass.Magic, 0, AP);
             }
         }
+		public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+		{
+            if(fireOnHit && hit.DamageType == DamageClass.Melee)
+            {
+                target.AddBuff(BuffID.OnFire, 10 * 60);
+            }
+			base.OnHitNPC(target, hit, damageDone);
+		}
+		public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
+		{
+            if(fireOnHit && hit.DamageType == DamageClass.Melee)
+            {
+                target.AddBuff(BuffID.OnFire, 10 * 60);
+            }
+			base.OnHitNPCWithProj(proj, target, hit, damageDone);
+		}
     }
 
     public class FieryWhetstoneTooltips : GlobalItem

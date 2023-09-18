@@ -12,14 +12,15 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
     {
         public override void SetStaticDefaults()
         {
+
             Main.tileSolid[Type] = true;
             Main.tileFrameImportant[Type] = true;
-            //Main.tileNoAttach[Type] = true;
-            //Main.tileLavaDeath[Type] = true;
-
+            Main.tileNoAttach[Type] = true;
+            Main.tileTable[Type] = true;
+            Main.tileLavaDeath[Type] = true;
             TileObjectData.newTile.CopyFrom(TileObjectData.Style2x1);
-            TileObjectData.newTile.AnchorBottom = new AnchorData(AnchorType.SolidTile, 0, 0);
             TileObjectData.addTile(Type);
+            
             DustType = DustType<FortressDust>();
             HitSound = QwertyMod.FortressBlocks;
             MinPick = 1;
@@ -36,14 +37,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
 
         public override void FloorVisuals(Player player)
         {
-            //Main.NewText("Hi");
-
             player.velocity.Y = -20;
-        }
-
-        public override void KillMultiTile(int i, int j, int frameX, int frameY)
-        {
-            Item.NewItem(new EntitySource_TileBreak(i, j), i * 16, j * 16, 32, 16, ItemType<Launchpad>());
         }
     }
 }

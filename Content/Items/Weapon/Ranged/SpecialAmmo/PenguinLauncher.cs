@@ -29,8 +29,8 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.SpecialAmmo
             Item.rare = ItemRarityID.Blue;
             Item.UseSound = SoundID.Item11;
 
-            Item.width = 82;
-            Item.height = 34;
+            Item.width = 44;
+            Item.height = 18;
 
             Item.shoot = ProjectileType<SlidingPenguinRanged>();
             Item.useAmmo = ItemID.Penguin;

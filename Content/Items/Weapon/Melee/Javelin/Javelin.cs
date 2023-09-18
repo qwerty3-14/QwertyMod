@@ -6,6 +6,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using Terraria.DataStructures;
 
 namespace QwertyMod.Content.Items.Weapon.Melee.Javelin
 {
@@ -39,7 +40,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin
             return projHitbox.Intersects(targetHitbox);
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             SoundEngine.PlaySound(SoundID.Tink, Projectile.position); // Play a death sound
             Vector2 usePos = Projectile.position; // Position to use for dusts
@@ -226,13 +227,16 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin
         public override bool PreAI(NPC npc)
         {
             ruthJavs = 0;
-            hydraJavs = 0;
             imperiumJavs = 0;
             return true;
         }
+        public override void AI(NPC npc)
+        {
+            hydraJavs = 0;
+        }
         public override void ModifyHitByProjectile(NPC npc, Projectile projectile, ref NPC.HitModifiers modifiers)
         {
-            modifiers.FlatBonusDamage += ruthJavs;
+            modifiers.ArmorPenetration += ruthJavs * 2;
         }
 
         public override void ModifyHitByItem(NPC npc, Player player, Item item, ref NPC.HitModifiers modifiers)
@@ -242,7 +246,19 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin
         }
         public override void ModifyHitPlayer(NPC npc, Player target, ref Player.HurtModifiers modifiers)
         {
-            modifiers.FinalDamage *=  (1f / (1 + hydraJavs * 0.02f));
+            modifiers.FinalDamage *= (1f - hydraJavs * 0.01f);
+        }
+    }
+    public class AilProjectile : GlobalProjectile
+    {
+        public override void OnSpawn(Projectile projectile, IEntitySource source)
+        {
+            if(source is EntitySource_Parent parent && parent.Entity is NPC npc && npc.GetGlobalNPC<JavelinAilments>().hydraJavs > 0)
+            {
+                Main.NewText(npc.GetGlobalNPC<JavelinAilments>().hydraJavs);
+                projectile.damage = (int)(projectile.damage * (1f - npc.GetGlobalNPC<JavelinAilments>().hydraJavs * 0.01f));
+                projectile.originalDamage = (int)(projectile.originalDamage * (1f - npc.GetGlobalNPC<JavelinAilments>().hydraJavs * 0.01f));
+            }
         }
     }
 }

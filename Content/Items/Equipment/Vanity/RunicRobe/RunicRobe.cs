@@ -11,8 +11,6 @@ namespace QwertyMod.Content.Items.Equipment.Vanity.RunicRobe
 
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Ancient Runic Robe");
-            //Tooltip.SetDefault("remeber this?");
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 

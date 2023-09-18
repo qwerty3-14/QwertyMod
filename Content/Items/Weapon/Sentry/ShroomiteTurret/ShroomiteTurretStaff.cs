@@ -62,6 +62,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.ShroomiteTurret
             Projectile.penetrate = -1;
             Projectile.hostile = false;
             Projectile.friendly = false;
+            Projectile.DamageType = DamageClass.Summon;
         }
 
         public override bool OnTileCollide(Vector2 oldVelocity)

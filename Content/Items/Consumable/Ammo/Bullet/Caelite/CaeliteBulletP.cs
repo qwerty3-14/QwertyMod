@@ -41,7 +41,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Bullet.Caelite
             }
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             for(int i =0; i < 30; i++)
             {
@@ -56,7 +56,6 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Bullet.Caelite
                 }
                 Dust dust = Dust.NewDustPerfect(Projectile.Center, DustType<CaeliteDust>(), QwertyMethods.PolarVector(d * 1, Projectile.velocity.ToRotation() + 2 * MathF.PI * ((float)i / 30f)));
                 dust.frame.Y = 0;
-                //dust.velocity *= 2;
             }
         }
 

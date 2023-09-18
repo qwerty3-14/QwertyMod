@@ -23,7 +23,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.MechCrossbow
 
         public override void SetDefaults()
         {
-            Item.damage = 16;
+            Item.damage = 24;
             Item.mana = 20;
             Item.width = 32;
             Item.height = 32;
@@ -37,12 +37,11 @@ namespace QwertyMod.Content.Items.Weapon.Minion.MechCrossbow
             Item.UseSound = SoundID.Item44;
             Item.shoot = ProjectileType<MechCrossbowMinion>();
             Item.DamageType = DamageClass.Summon;
-            Item.buffType = BuffType<MechCrossbowB>();
-            Item.buffTime = 3600;
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
+            player.AddBuff(ModContent.BuffType<MechCrossbowB>(), 3600);
             player.SpawnMinionOnCursor(source, player.whoAmI, type, Item.damage, knockback);
             return false;
         }
@@ -76,7 +75,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.MechCrossbow
             Projectile.height = 40;
             Projectile.friendly = true;
             Projectile.ignoreWater = true;
-            Projectile.knockBack = 10f;
             Projectile.penetrate = -1;
             Projectile.tileCollide = false;
             Projectile.minion = true;
@@ -91,7 +89,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.MechCrossbow
         public override void AI()
         {
             Player player = Main.player[Projectile.owner];
-            if (player.GetModPlayer<MinionManager>().MechCrossbow)
+            if(player.GetModPlayer<MinionManager>().MechCrossbow)
             {
                 Projectile.timeLeft = 2;
             }

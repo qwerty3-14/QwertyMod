@@ -36,11 +36,10 @@ namespace QwertyMod.Content.Items.Weapon.Minion.UrQuan
             //Item.UseSound = SoundID.Item44;
             Item.shoot = ProjectileType<Dreadnought>();
             Item.DamageType = DamageClass.Summon;
-            Item.buffType = BuffType<UrQuanB>();
-            Item.buffTime = 3600;
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
+            player.AddBuff(ModContent.BuffType<UrQuanB>(), 3600);
             player.SpawnMinionOnCursor(source, player.whoAmI, type, Item.damage, knockback);
             return false;
         }

@@ -67,7 +67,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.SacredDaze
             Projectile.light = 1f;
             Projectile.extraUpdates = 2;
         }
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             for (int i = 0; i < 2; i++)
             {

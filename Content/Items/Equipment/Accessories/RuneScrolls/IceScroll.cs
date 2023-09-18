@@ -26,8 +26,8 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
             Item.DamageType = DamageClass.Melee;
             Item.damage = 300;
 
-            Item.width = 48;
-            Item.height = 60;
+            Item.width = 34;
+            Item.height = 34;
 
             Item.accessory = true;
         }
@@ -78,7 +78,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
             Projectile.rotation += MathF.PI / 30f;
             Projectile.Center = player.Center;
         }
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             for (int i = 0; i < 2; i++)
             {

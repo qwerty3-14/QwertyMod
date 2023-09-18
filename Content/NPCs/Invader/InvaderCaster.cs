@@ -102,7 +102,7 @@ namespace QwertyMod.Content.NPCs.Invader
                         if (Main.netMode != NetmodeID.MultiplayerClient)
                         {
                             SoundEngine.PlaySound(SoundID.Item157, shootFrom);
-                            Projectile.NewProjectile(NPC.GetSource_FromAI(), shootFrom, QwertyMethods.PolarVector(3, (target.Center - shootFrom).ToRotation()), ModContent.ProjectileType<InvaderZap>(), 20, 0, 0);
+                            Projectile.NewProjectile(NPC.GetSource_FromAI(), shootFrom, QwertyMethods.PolarVector(3, (target.Center - shootFrom).ToRotation()), ModContent.ProjectileType<InvaderZap>(), 20, 0, Main.myPlayer);
                         }
                     }
                     else if (shotCounter <= 0 && NPC.velocity.X == 0)
@@ -110,7 +110,7 @@ namespace QwertyMod.Content.NPCs.Invader
                         if (Main.netMode != NetmodeID.MultiplayerClient)
                         {
                             SoundEngine.PlaySound(SoundID.Item157, shootFrom);
-                            Projectile.NewProjectile(NPC.GetSource_FromAI(), shootFrom, QwertyMethods.PolarVector(5, (target.Center - shootFrom).ToRotation()), ModContent.ProjectileType<InvaderSphere>(), 20, 0, 0);
+                            Projectile.NewProjectile(NPC.GetSource_FromAI(), shootFrom, QwertyMethods.PolarVector(5, (target.Center - shootFrom).ToRotation()), ModContent.ProjectileType<InvaderSphere>(), 20, 0, Main.myPlayer);
                         }
                         shotCounter = 180;
                     }
@@ -191,7 +191,7 @@ namespace QwertyMod.Content.NPCs.Invader
 
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
-            if (spawnInfo.Player.InModBiome(ModContent.GetInstance<FortressBiome>()) && NPC.downedGolemBoss)
+            if (spawnInfo.Player.InModBiome(ModContent.GetInstance<FortressBiome>()) && SkyFortress.beingInvaded)
             {
                 return 140f;
             }
@@ -210,6 +210,7 @@ namespace QwertyMod.Content.NPCs.Invader
             Projectile.friendly = true;
             Projectile.hostile = true;
             Projectile.GetGlobalProjectile<InvaderProjectile>().isInvaderProjectile = true;
+            Projectile.GetGlobalProjectile<InvaderProjectile>().EvEMultiplier = 3f;
         }
 
         private bool decaying = false;
@@ -307,7 +308,7 @@ namespace QwertyMod.Content.NPCs.Invader
                 Entity target = InvaderProjectile.FindTarget(Projectile, 150);
                 if (target != null)
                 {
-                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, QwertyMethods.PolarVector(3, (target.Center - Projectile.Center).ToRotation()), ModContent.ProjectileType<InvaderZap>(), 20, 0, 0);
+                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, QwertyMethods.PolarVector(3, (target.Center - Projectile.Center).ToRotation()), ModContent.ProjectileType<InvaderZap>(), 20, 0, Main.myPlayer);
                 }
             }
             Projectile.frameCounter++;

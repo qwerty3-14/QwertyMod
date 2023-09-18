@@ -14,7 +14,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.GlassSpike
 
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Glass Spike");
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
             Main.projPet[Projectile.type] = true;

@@ -41,7 +41,7 @@ namespace QwertyMod.Content.NPCs.Bosses.BladeBoss
             return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), Projectile.Center + QwertyMethods.PolarVector(-18 + totalLength - bladeLength, Projectile.rotation), Projectile.Center + QwertyMethods.PolarVector(-18 + totalLength, Projectile.rotation), bladeWidth, ref CP);
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             for (int d = 0; d < 100; d++)
             {

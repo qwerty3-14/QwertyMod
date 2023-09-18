@@ -31,6 +31,7 @@ using QwertyMod.Content.Items.Equipment.Armor.Rhuthinium;
 using QwertyMod.Content.Items.Equipment.Armor.Shaman;
 using QwertyMod.Content.Items.Equipment.Armor.Vitallum;
 using QwertyMod.Content.Items.Equipment.Vanity.BossMasks;
+using QwertyMod.Content.Items.Equipment.Vanity.SilkDress;
 using QwertyMod.Content.Items.MiscMaterials;
 using QwertyMod.Content.Items.Pet;
 using QwertyMod.Content.Items.Tool.FishingRod;
@@ -86,6 +87,7 @@ using QwertyMod.Content.NPCs.Bosses.RuneGhost;
 using QwertyMod.Content.NPCs.Bosses.TundraBoss;
 using QwertyMod.Content.NPCs.DinoMilitia;
 using QwertyMod.Content.NPCs.Bosses.InvaderBattleship;
+using QwertyMod.Content.Items.Consumable.Tiles;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -98,21 +100,37 @@ using QwertyMod.Content.Items.Equipment.Vanity.RunicRobe;
 using QwertyMod.Content.Items.Equipment.Armor.Hero;
 using QwertyMod.Content.Items.Equipment.VanityAccessories.Corset;
 using QwertyMod.Content.Items.Equipment.Vanity.ScarletBallGown;
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
+using QwertyMod.Content.Items.Equipment.Vanity.PurpleDress;
+using QwertyMod.Content.Items.Weapon.Melee.Boomerang.AngelicTracker;
+using QwertyMod.Content.Items.Weapon.Melee.Boomerang.Lune;
+using QwertyMod.Content.Items.Weapon.Melee.Boomerang.Rhuthinium;
+using QwertyMod.Content.Items.Weapon.Melee.Boomerang.SeraphimPredator;
+using QwertyMod.Content.Items.Weapon.Melee.Javelin.Rhuthinium;
+using QwertyMod.Content.Items.Weapon.Melee.Spear.Hydrospear;
+using QwertyMod.Content.Items.Weapon.Melee.Sword.EtimsSword;
+using QwertyMod.Content.Items.Weapon.Melee.Sword.Overkill;
+using QwertyMod.Content.Items.Weapon.Melee.Sword.RuneBlade;
+using QwertyMod.Content.Items.Weapon.Melee.Top.Lune;
+using QwertyMod.Content.Items.Weapon.Ranged.Gun.SoEF;
+using QwertyMod.Content.Items.Weapon.Ranged.Gun.SuperquantumRifle;
+using System.Linq;
+using QwertyMod.Content.Dusts;
+
 
 namespace QwertyMod
 {
     public class QwertyMod : Mod
     {
+
+        public static Texture2D debugCross;
         public static QwertyMod Instance;
         private static Vector2[] LocalCursor = new Vector2[Main.player.Length];
 
-        public static Deck<int> AMLoot;
-        public static Deck<int> ImperiousLoot;
-        public static Deck<int> HydraLoot;
-
-        public const string HydraHead1 = "QwertyMod/Content/NPCs/Bosses/Hydra/MapHead1";
-        public const string HydraHead2 = "QwertyMod/Content/NPCs/Bosses/Hydra/MapHead2";
-        public const string HydraHead3 = "QwertyMod/Content/NPCs/Bosses/Hydra/MapHead3";
+        //public const string HydraHead1 = "QwertyMod/Content/NPCs/Bosses/Hydra/MapHead1";
+        //public const string HydraHead2 = "QwertyMod/Content/NPCs/Bosses/Hydra/MapHead2";
+        //public const string HydraHead3 = "QwertyMod/Content/NPCs/Bosses/Hydra/MapHead3";
         public static ModKeybind YetAnotherSpecialAbility;
 
         public static int hydraLegMale = 0;
@@ -142,46 +160,20 @@ namespace QwertyMod
         public static int HeroPantsFemale = 0;
         public static int CorsetMale = 0;
         public static int BallGownSkirt = 0;
+        public static int BallGownSkirtAlt = 0;
+        public static int SilkSkirt = 0;
+        public static int PurpleSkirt = 0;
+        public static int PurpleSkirtAlt = 0;
         public static SoundStyle FortressBlocks;
-        public const int InvaderGearValue = 500000;
         public override void Load()
         {
-            AMLoot = new Deck<int>();
-            AMLoot.Add(ItemType<AncientBlade>());
-            AMLoot.Add(ItemType<AncientSniper>());
-            AMLoot.Add(ItemType<AncientWave>());
-            AMLoot.Add(ItemType<AncientThrow>());
-            AMLoot.Add(ItemType<AncientMinionStaff>());
-            AMLoot.Add(ItemType<AncientMissileStaff>());
-            AMLoot.Add(ItemType<AncientLongbow>());
-            AMLoot.Add(ItemType<AncientNuke>());
-
-            ImperiousLoot = new Deck<int>();
-            ImperiousLoot.Add(ItemType<SwordStormStaff>());
-            ImperiousLoot.Add(ItemType<ImperiousTheIV>());
-            ImperiousLoot.Add(ItemType<Discipline>());
-            ImperiousLoot.Add(ItemType<SwordMinionStaff>());
-            ImperiousLoot.Add(ItemType<Arsenal>());
-            ImperiousLoot.Add(ItemType<BladedArrowShaft>());
-            ImperiousLoot.Add(ItemType<Imperium>());
-            ImperiousLoot.Add(ItemType<Swordquake>());
-
-            HydraLoot = new Deck<int>();
-            HydraLoot.Add(ItemType<HydraBarrage>());
-            HydraLoot.Add(ItemType<HydraBeam>());
-            HydraLoot.Add(ItemType<HydraCannon>());
-            HydraLoot.Add(ItemType<HydraHeadStaff>());
-            HydraLoot.Add(ItemType<HydraJavelin>());
-            HydraLoot.Add(ItemType<Hydrent>());
-            HydraLoot.Add(ItemType<Hydrill>());
-            HydraLoot.Add(ItemType<HydraMissileStaff>());
 
             Instance = this;
             YetAnotherSpecialAbility = KeybindLoader.RegisterKeybind(this, "Yet Another Special Ability Key", Keys.R);
 
-            AddBossHeadTexture(HydraHead1);
-            AddBossHeadTexture(HydraHead2);
-            AddBossHeadTexture(HydraHead3);
+            //AddBossHeadTexture(HydraHead1);
+            //AddBossHeadTexture(HydraHead2);
+            //AddBossHeadTexture(HydraHead3);
             FortressBlocks = SoundID.Tink;
             if (!Main.dedServ)
             {
@@ -216,7 +208,10 @@ namespace QwertyMod
                 CorsetMale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/VanityAccessories/Corset/Corset_WaistMale", EquipType.Waist, name: "CorsetMale");
 
                 BallGownSkirt = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Vanity/ScarletBallGown/ScarletBallGown_Legs", EquipType.Legs, GetModItem(ItemType<ScarletBallGown>()));
-
+                BallGownSkirtAlt = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Vanity/ScarletBallGown/ScarletBallGown_LegsAlt", EquipType.Legs, name: "BallGownAlt");
+                SilkSkirt = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Vanity/SilkDress/SilkDress_Legs", EquipType.Legs, GetModItem(ItemType<SilkDress>()));
+                PurpleSkirt = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Vanity/PurpleDress/PurpleDress_Legs", EquipType.Legs, GetModItem(ItemType<PurpleDress>()));
+                PurpleSkirtAlt = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Vanity/PurpleDress/PurpleDress_AltLegs", EquipType.Legs, name: "PurpleDressAlt");
                 Main.QueueMainThreadAction(() =>
                 {
                     RuneSprites.BuildRunes();
@@ -233,16 +228,44 @@ namespace QwertyMod
             {
                 Main.QueueMainThreadAction(() =>
                 {
+                    debugCross = Request<Texture2D>("QwertyMod/DebugCross", AssetRequestMode.ImmediateLoad).Value;
+
                     OnHeadDraw.RegisterHeads();
                     OnLegDraw.RegisterLegs();
                     OnBodyDraw.ReigsterBodies();
                 });
+            }
+            
+            if (ModLoader.HasMod("TRAEProject"))
+            {
+                Mod TRAE = ModLoader.GetMod("TRAEProject");
+                if(TRAE.Version.Major >= 1 || TRAE.Version.Minor >= 6)
+                {
+                    TRAE.Call("BoomerangPrefix", ModContent.ItemType<CaeliteBoomerang>());
+                    TRAE.Call("BoomerangPrefix", ModContent.ItemType<LuneBoomerang>());
+                    TRAE.Call("BoomerangPrefix", ModContent.ItemType<RhuthiniumBoomerang>());
+                    TRAE.Call("BoomerangPrefix", ModContent.ItemType<SeraphimPredator>());
+                    TRAE.Call("BoomerangPrefix", ModContent.ItemType<DinoFlail>());
+                    TRAE.Call("BoomerangPrefix", ModContent.ItemType<HydraJavelin>());
+                    TRAE.Call("BoomerangPrefix", ModContent.ItemType<Imperium>());
+                    TRAE.Call("BoomerangPrefix", ModContent.ItemType<RhuthiniumJavelin>());
+                    TRAE.Call("BoomerangPrefix", ModContent.ItemType<BlessedMonsoonKnife>());
+                    TRAE.Call("BoomerangPrefix", ModContent.ItemType<CaeliteRainKnife>());
+                    TRAE.Call("BoomerangPrefix", ModContent.ItemType<Cyclone>());
+                    TRAE.Call("BoomerangPrefix", ModContent.ItemType<LuneTop>());
+                }
+                if(TRAE.Version.Major >= 1 || TRAE.Version.Minor >= 6)
+                {
+                    TRAE.Call("RegisterSidearm", ModContent.ItemType<Content.Items.Weapon.Magic.Lune.LuneStaff>(), ModContent.ProjectileType<Content.Items.Weapon.Magic.Lune.LuneCrest>(), 20, 20, 0);
+                }
+
             }
             if (ModLoader.HasMod("BossChecklist"))
             {
                 Mod bossChecklist = ModLoader.GetMod("BossChecklist");
                 if (bossChecklist != null)
                 {
+                    
                     bossChecklist.Call("AddBoss", 5.5f, NPCType<AncientMachine>(), this, "Ancient Machine", (Func<bool>)(() => DownedBossSystem.downedAncient), ItemType<AncientEmblem>(),
                         new List<int> { ItemType<AncientMachineTrophy>(), ItemType<MusicBoxBuiltToDestroy>() },
                         new List<int> { ItemType<AncientMachineBag>(), ItemType<AncientBlade>(), ItemType<AncientThrow>(), ItemType<AncientLongbow>(), ItemType<AncientSniper>(), ItemType<AncientMissileStaff>(), ItemType<AncientWave>(), ItemType<AncientMinionStaff>(), ItemType<AncientNuke>(), ItemType<AncientMiner>(), ItemID.HealingPotion },
@@ -292,6 +315,7 @@ namespace QwertyMod
 
 
                     bossChecklist.Call("AddToBossLoot", "Terraria", "DukeFishron", new List<int> { ItemType<Cyclone>(), ItemType<Whirlpool>(), ItemType<BubbleBrewerBaton>() });
+                    
                 }
             }
         }
@@ -347,6 +371,86 @@ namespace QwertyMod
                     int playerID2 = reader.ReadInt32();
                     int npcID2 = NPC.NewNPC(NPC.GetBossSpawnSource(playerID2), (int)summonAt2.X, (int)summonAt2.Y, NPCType<Sleeping>());
                     break;
+                case ModMessageType.SummonBattleship:
+                    Vector2 summonAt3 = reader.ReadVector2();
+                    int playerID3 = reader.ReadInt32();
+                    int npcID3 = NPC.NewNPC(NPC.GetBossSpawnSource(playerID3), (int)summonAt3.X, (int)summonAt3.Y, NPCType<InvaderBattleship>());
+                    break;
+                case ModMessageType.AutoDesummon:
+                    int playerID4 = reader.ReadInt32();
+                    for(int i = 0; i < 1000; i++)
+                    {
+                        if(Main.projectile[i].active && Main.projectile[i].owner == playerID4 && Main.projectile[i].minionSlots > 0)
+                        {
+                            Main.projectile[i].Kill();
+                        }
+                    }
+                    break;
+                case ModMessageType.AmmoEnchantEtims:
+                    int projectileID = reader.ReadInt32();
+                    Main.projectile.FirstOrDefault(x => x.identity == projectileID).GetGlobalProjectile<EtimsProjectile>().effect = true;
+                    if (Main.netMode == NetmodeID.Server)
+                    {
+                        ModPacket packet = GetPacket();
+                        packet.Write((byte)ModMessageType.AmmoEnchantEtims);
+                        packet.Write(projectileID);
+                        packet.Send();
+                    }
+                    break;
+                case ModMessageType.AmmoEnchantArrowWarping:
+                    int projectileID2 = reader.ReadInt32();
+                    Main.projectile.FirstOrDefault(x => x.identity == projectileID2).GetGlobalProjectile<ArrowWarping>().warpedArrow = true;
+                    if (Main.netMode == NetmodeID.Server)
+                    {
+                        ModPacket packet = GetPacket();
+                        packet.Write((byte)ModMessageType.AmmoEnchantArrowWarping);
+                        packet.Write(projectileID2);
+                        packet.Send();
+                    }
+                    break;
+                case ModMessageType.AmmoEnchantArrowHoming:
+                    int projectileID3 = reader.ReadInt32();
+                    Main.projectile.FirstOrDefault(x => x.identity == projectileID3).GetGlobalProjectile<arrowHoming>().B4HomingArrow = true;
+                    if (Main.netMode == NetmodeID.Server)
+                    {
+                        ModPacket packet = GetPacket();
+                        packet.Write((byte)ModMessageType.AmmoEnchantArrowHoming);
+                        packet.Write(projectileID3);
+                        packet.Send();
+                    }
+                    break;
+                case ModMessageType.AmmoEnchantQuantum:
+                    int projectileID4 = reader.ReadInt32();
+                    Main.projectile.FirstOrDefault(x => x.identity == projectileID4).GetGlobalProjectile<QuantumProjectile>().isQuantum = true;
+                    Vector2 qC = reader.ReadVector2();
+                    Main.projectile.FirstOrDefault(x => x.identity == projectileID4).GetGlobalProjectile<QuantumProjectile>().quantumCenter = qC;
+                    if (Main.netMode == NetmodeID.Server)
+                    {
+                        ModPacket packet = GetPacket();
+                        packet.Write((byte)ModMessageType.AmmoEnchantQuantum);
+                        packet.Write(projectileID4);
+                        packet.WriteVector2(qC);
+                        packet.Send();
+                    }
+                    break;
+                case ModMessageType.SpawnQuantumRing:
+                    Vector2 ringCenter = reader.ReadVector2();
+                    if(Main.netMode == NetmodeID.Server)
+                    {
+                        ModPacket packet = GetPacket();
+                        packet.Write((byte)ModMessageType.SpawnQuantumRing);
+                        packet.WriteVector2(ringCenter);
+                        packet.Send();
+                    }
+                    else
+                    {
+                        for(int d = 0; d < 40; d++)
+                        {
+                            float dRot = ((float)d / 40f) * MathF.PI * 2f;
+                            Dust.NewDustPerfect(ringCenter, ModContent.DustType<DarknessDust>(), QwertyMethods.PolarVector(1, dRot));
+                        }
+                    }
+                    break;
             }
         }
     }
@@ -356,6 +460,13 @@ namespace QwertyMod
         DivineCall,
         UpdateLocalCursor,
         StartDinoEvent,
-        SpawnBear
+        SpawnBear,
+        SummonBattleship,
+        AutoDesummon,
+        AmmoEnchantEtims,
+        AmmoEnchantArrowWarping,
+        AmmoEnchantArrowHoming,
+        AmmoEnchantQuantum,
+        SpawnQuantumRing
     }
 }

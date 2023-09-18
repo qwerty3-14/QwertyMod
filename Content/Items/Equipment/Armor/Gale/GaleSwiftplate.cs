@@ -30,8 +30,8 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Gale
             Item.rare = ItemRarityID.LightRed;
             Item.defense = 2;
             //Item.vanity = true;
-            Item.width = 20;
-            Item.height = 20;
+            Item.width = 30;
+            Item.height = 22;
         }
 
         public override bool IsArmorSet(Item head, Item body, Item legs)

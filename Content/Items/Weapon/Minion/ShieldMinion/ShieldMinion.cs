@@ -43,7 +43,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.ShieldMinion
         }
 
         private Vector2 flyTo;
-        private int identity = 0;
         private int ShieldCount = 0;
         private Vector2 eyeOffset;
         private NPC target;
@@ -70,21 +69,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.ShieldMinion
                     ShieldCount++;
                 }
             }
-
-            for (int p = 0; p < 1000; p++)
-            {
-                if (Main.projectile[p].type == ProjectileType<ShieldMinion>() && Main.projectile[p].active && Main.projectile[p].owner == Projectile.owner && Main.projectile[p].ai[1] == Projectile.ai[1])
-                {
-                    if (p == Projectile.whoAmI)
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        identity++;
-                    }
-                }
-            }
             Projectile.friendly = (Projectile.ai[1] == charging);
             if (Projectile.ai[1] != charging)
             {
@@ -93,7 +77,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.ShieldMinion
                     LatestValidVelocity = player.velocity;
                 }
 
-                float myOffset = ((MathF.PI / 2) * (float)(identity + 1)) / (ShieldCount + 1) - MathF.PI / 4;
+                float myOffset = ((MathF.PI / 2) * (float)(MinionManager.GetIdentity(Projectile) + 1)) / (ShieldCount + 1) - MathF.PI / 4;
                 if(Main.myPlayer == Projectile.owner)
                 {
                     Projectile.ai[0] = (Main.MouseWorld - player.Center).ToRotation() + myOffset;
@@ -150,8 +134,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.ShieldMinion
                     }
                     break;
             }
-
-            identity = 0;
             ShieldCount = 0;
         }
 

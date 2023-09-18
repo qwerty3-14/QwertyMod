@@ -12,6 +12,7 @@ using QwertyMod.Content.Items.Equipment.Vanity.ScarletBallGown;
 using QwertyMod.Content.Items.Equipment.Vanity.PurpleDress;
 using QwertyMod.Content.Items.Equipment.VanityAccessories;
 using QwertyMod.Content.Items.Equipment.Vanity.Casual;
+using QwertyMod.Content.Items.Consumable.Tiles;
 
 namespace QwertyMod.Common
 {

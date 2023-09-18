@@ -28,8 +28,8 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Lune
         {
             Item.value = 30000;
             Item.rare = ItemRarityID.Blue;
-            Item.width = 22;
-            Item.height = 12;
+            Item.width = 26;
+            Item.height = 18;
             Item.defense = 5;
         }
 
@@ -224,7 +224,6 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Lune
             {
                 Main.spriteBatch.End();
                 Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.Default, RasterizerState.CullNone, null, Main.GameViewMatrix.ZoomMatrix);
-
                 GameShaders.Armor.GetSecondaryShader(shader, player).Apply(null);
             }
             return true;

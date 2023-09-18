@@ -20,7 +20,7 @@ namespace QwertyMod.Common.Playerlayers
         {
             return true;
         }
-        public override Position GetDefaultPosition() => new BeforeParent(PlayerDrawLayers.Torso);
+        public override Position GetDefaultPosition() => new BeforeParent(PlayerDrawLayers.ArmorLongCoat);
 
         protected override void Draw(ref PlayerDrawSet drawInfo)
         {

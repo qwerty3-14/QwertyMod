@@ -32,8 +32,8 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Gale
             Item.rare = ItemRarityID.LightRed;
             Item.defense = 1;
             //Item.vanity = true;
-            Item.width = 20;
-            Item.height = 20;
+            Item.width = 22;
+            Item.height = 18;
         }
 
         public override void UpdateEquip(Player player)

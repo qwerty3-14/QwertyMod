@@ -19,7 +19,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
 
         public override void SetDefaults()
         {
-            Item.width = 16;
+            Item.width = 32;
             Item.height = 16;
             Item.maxStack = 9999;
             Item.value = 0;

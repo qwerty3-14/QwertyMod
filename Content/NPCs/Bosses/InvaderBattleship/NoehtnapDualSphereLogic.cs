@@ -33,7 +33,7 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
             if(activeSpellCountdown > 0)
             {
                 NPC.Center = teleHere;
-                if(activeSpellCountdown == 239)
+                if(activeSpellCountdown == 230)
                 {
                     int amt = 240; 
                     SoundEngine.PlaySound(SoundID.Item88, teleHere);

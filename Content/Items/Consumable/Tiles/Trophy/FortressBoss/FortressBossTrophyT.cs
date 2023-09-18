@@ -20,13 +20,5 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Trophy.FortressBoss
             DustType = 7;
             //AddMapEntry(new Color(120, 85, 60));
         }
-
-        public override void KillMultiTile(int i, int j, int frameX, int frameY)
-        {
-            if (frameX == 0)
-            {
-                Item.NewItem(new EntitySource_TileBreak(i, j), i * 16, j * 16, 48, 48, ItemType<FortressBossTrophy>());
-            }
-        }
     }
 }

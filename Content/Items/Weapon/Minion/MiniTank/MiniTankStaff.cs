@@ -23,8 +23,8 @@ namespace QwertyMod.Content.Items.Weapon.Minion.MiniTank
         {
             Item.damage = 32;
             Item.mana = 20;
-            Item.width = 38;
-            Item.height = 38;
+            Item.width = 66;
+            Item.height = 66;
             Item.useTime = 25;
             Item.useAnimation = 25;
             Item.useStyle = ItemUseStyleID.Swing;
@@ -35,12 +35,11 @@ namespace QwertyMod.Content.Items.Weapon.Minion.MiniTank
             Item.UseSound = SoundID.Item44;
             Item.shoot = ProjectileType<MiniTank>();
             Item.DamageType = DamageClass.Summon;
-            Item.buffType = BuffType<MiniTankB>();
-            Item.buffTime = 3600;
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
+            player.AddBuff(ModContent.BuffType<MiniTankB>(), 3600);
             player.SpawnMinionOnCursor(source, player.whoAmI, type, Item.damage, knockback);
             return false;
         }

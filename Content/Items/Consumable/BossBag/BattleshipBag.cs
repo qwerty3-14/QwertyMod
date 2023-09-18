@@ -29,8 +29,8 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
         {
             Item.maxStack = 9999;
             Item.consumable = true;
-            Item.width = 60;
-            Item.height = 34;
+            Item.width = 32;
+            Item.height = 32;
             Item.rare = ItemRarityID.Cyan;
             Item.expert = true;
             //bossBagNPC = mod.NPCType("WeakPoint");

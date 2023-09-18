@@ -21,8 +21,8 @@ namespace QwertyMod.Content.Items.Weapon.Magic.PenguinWhistle
         {
             Item.damage = 20;
             Item.mana = ModLoader.HasMod("TRAEProject") ? 20 : 10;
-            Item.width = 100;
-            Item.height = 100;
+            Item.width = 28;
+            Item.height = 28;
             Item.useTime = 39;
             Item.useAnimation = 39;
             //Item.reuseDelay = 60;

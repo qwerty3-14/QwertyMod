@@ -26,8 +26,16 @@ namespace QwertyMod.Content.Items.Weapon.Magic.PenguinWhistle
             Projectile.GetGlobalProjectile<ImplaingProjectile>().CanImpale = true;
             Projectile.GetGlobalProjectile<ImplaingProjectile>().damagePerImpaler = 2;
         }
+        public override bool? CanHitNPC(NPC target)
+        {
+            if(target.type == NPCID.Penguin || target.type == NPCID.PenguinBlack || target.type == NPCID.CorruptPenguin || target.type == NPCID.CrimsonPenguin)
+            {
+                return false;
+            }
+            return null;
+        }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             NPC Penguin = Main.npc[NPC.NewNPC(Projectile.GetSource_FromThis(), (int)Projectile.Top.X, (int)Projectile.Top.Y, NPCID.Penguin)];
 

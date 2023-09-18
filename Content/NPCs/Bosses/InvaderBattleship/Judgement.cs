@@ -43,7 +43,6 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
             Projectile.light = 1f;
         }
         bool runOnce = true;
-        int timer = 0;
         public override void AI()
         {
             if(runOnce)
@@ -94,7 +93,7 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
             Projectile.tileCollide = false;
             Projectile.light = 1f;
         }
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             for(int i = 0; i < 30; i++)
             {
@@ -102,7 +101,6 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
             }
         }
         bool runOnce = true;
-        int timer = 0;
         public override void AI()
         {
             if(runOnce)

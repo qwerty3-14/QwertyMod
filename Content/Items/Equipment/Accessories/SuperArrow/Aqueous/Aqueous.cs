@@ -24,8 +24,8 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.SuperArrow.Aqueous
             Item.knockBack = .5f;
             Item.value = Item.sellPrice(silver: 54);
             Item.rare = ItemRarityID.Green;
-            Item.width = 2;
-            Item.height = 2;
+            Item.width = 14;
+            Item.height = 32;
             Item.crit = 20;
             Item.shootSpeed = 12f;
             Item.useTime = 180;

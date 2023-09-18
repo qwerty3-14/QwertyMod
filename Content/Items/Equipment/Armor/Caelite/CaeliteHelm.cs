@@ -22,9 +22,8 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Caelite
         {
             Item.value = 30000;
             Item.rare = ItemRarityID.Orange;
-
             Item.width = 22;
-
+            Item.height = 18;
             Item.defense = 7;
         }
 

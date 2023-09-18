@@ -24,9 +24,9 @@ namespace QwertyMod.Content.Items.Consumable.Potion.CaeliteFlask
     {
         public override void OnHitByItem(NPC npc, Player player, Item item, NPC.HitInfo hit, int damageDone)
         {
-            if (player.HasBuff(BuffType<CaeliteImbune>()))
+            if (player.HasBuff(BuffType<CaeliteImbune>()) && item.CountsAsClass(DamageClass.Melee))
             {
-                npc.AddBuff(BuffType<PowerDown>(), Main.rand.Next(10, 20));
+                npc.AddBuff(BuffType<PowerDown>(), Main.rand.Next(10, 20) * 60);
             }
         }
 
@@ -34,7 +34,7 @@ namespace QwertyMod.Content.Items.Consumable.Potion.CaeliteFlask
         {
             if (Main.player[projectile.owner].HasBuff(BuffType<CaeliteImbune>()) && (projectile.CountsAsClass(DamageClass.Melee) || ProjectileID.Sets.IsAWhip[projectile.type]))
             {
-                npc.AddBuff(BuffType<PowerDown>(), Main.rand.Next(10, 20));
+                npc.AddBuff(BuffType<PowerDown>(), Main.rand.Next(10, 20) * 60);
             }
         }
     }

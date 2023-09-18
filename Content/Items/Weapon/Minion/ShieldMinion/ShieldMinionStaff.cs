@@ -35,12 +35,11 @@ namespace QwertyMod.Content.Items.Weapon.Minion.ShieldMinion
             Item.UseSound = SoundID.Item44;
             Item.shoot = ProjectileType<ShieldMinion>();
             Item.DamageType = DamageClass.Summon;
-            Item.buffType = BuffType<ShieldMinionB>();
-            Item.buffTime = 3600;
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
+            player.AddBuff(ModContent.BuffType<ShieldMinionB>(), 3600);
             player.SpawnMinionOnCursor(source, player.whoAmI, type, Item.damage, knockback);
             return false;
         }

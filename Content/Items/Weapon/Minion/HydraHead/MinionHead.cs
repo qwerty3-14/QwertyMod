@@ -31,7 +31,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.HydraHead
             Projectile.friendly = false;
             Projectile.ignoreWater = true;
             Main.projFrames[Projectile.type] = 1;
-            Projectile.knockBack = 10f;
             Projectile.penetrate = -1;
             Projectile.tileCollide = false;
             Projectile.minion = true;

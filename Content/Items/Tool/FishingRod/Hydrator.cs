@@ -26,6 +26,8 @@ namespace QwertyMod.Content.Items.Tool.FishingRod
             Item.CloneDefaults(ItemID.GoldenFishingRod);  //This defines the fishing pole you want to clone
 
             Item.fishingPole = 10; //this defines the fishing pole fishing power
+            Item.width = 48;
+            Item.height = 48;
 
             Item.value = 25000;
             Item.rare = ItemRarityID.Orange;    //The color the title of your item when hovering over it ingame .

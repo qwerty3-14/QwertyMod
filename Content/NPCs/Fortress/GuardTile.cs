@@ -32,9 +32,9 @@ namespace QwertyMod.Content.NPCs.Fortress
             NPC.lifeMax = 480;
             NPC.value = 100;
 
-            if (NPC.downedGolemBoss)
+            if (SkyFortress.beingInvaded)
             {
-                NPC.lifeMax = 960;
+                NPC.lifeMax = 2000;
                 NPC.damage = 160;
             }
             //NPC.alpha = 100;
@@ -112,9 +112,13 @@ namespace QwertyMod.Content.NPCs.Fortress
         public override void AI()
         {
             NPC.GetGlobalNPC<FortressNPCGeneral>().fortressNPC = true;
-            NPC.GetGlobalNPC<FortressNPCGeneral>().contactDamageToInvaders = true;
+            NPC.GetGlobalNPC<FortressNPCGeneral>().contactDamageToInvaders = 6f;
             Entity player = FortressNPCGeneral.FindTarget(NPC, true);
             timer++;
+            if(player == null)
+            {
+                return;
+            }
             switch (direction)
             {
                 case 0:

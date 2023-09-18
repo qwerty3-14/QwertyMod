@@ -24,7 +24,6 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
     public partial class InvaderNoehtnap : ModNPC
     {
         int encirclementTimer = 0;
-        bool doingEncirclement = false;
         NPC[] clones = new NPC[5];
         Vector2 encirclementCenter;
         int timeToCloseIn = 600;
