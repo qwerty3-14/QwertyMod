@@ -1,7 +1,5 @@
 using Terraria;
 using Terraria.ModLoader;
-using QwertyMod.Common;
-using QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets;
 
 namespace QwertyMod.Content.Buffs
 {
@@ -9,8 +7,6 @@ namespace QwertyMod.Content.Buffs
     {
         public override void SetStaticDefaults()
         {
-            ////DisplayName,SetDefault("Periodic Confusion");
-            ////Description.SetDefault("Controls reverse sometimes...");
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = true;
             Main.buffNoSave[Type] = true;

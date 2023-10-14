@@ -5,7 +5,6 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 using System.IO;
-using Microsoft.Xna.Framework.Graphics;
 using System.Linq;
 
 

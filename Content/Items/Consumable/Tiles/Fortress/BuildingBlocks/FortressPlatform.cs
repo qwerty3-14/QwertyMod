@@ -1,7 +1,5 @@
-
 using Terraria.GameContent.Creative;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
 using Terraria.ID;
 
 namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.BuildingBlocks
@@ -26,12 +24,12 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.BuildingBlocks
             Item.useTime = 10;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.consumable = true;
-            Item.createTile = TileType<FortressPlatformT>();
+            Item.createTile = ModContent.TileType<FortressPlatformT>();
         }
 
         public override void AddRecipes()
         {
-            CreateRecipe(1).AddIngredient(ItemType<FortressBrick>(), 2)
+            CreateRecipe(1).AddIngredient(ModContent.ItemType<FortressBrick>(), 2)
                 .Register();
         }
     }

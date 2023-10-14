@@ -7,7 +7,7 @@ using Terraria.GameContent;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 
 namespace QwertyMod.Content.Items.Tool.FishingRod
@@ -16,8 +16,6 @@ namespace QwertyMod.Content.Items.Tool.FishingRod
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("The Hydrator");
-            //Tooltip.SetDefault("Three bobbers are better than one!");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -31,7 +29,7 @@ namespace QwertyMod.Content.Items.Tool.FishingRod
 
             Item.value = 25000;
             Item.rare = ItemRarityID.Orange;    //The color the title of your item when hovering over it ingame .
-            Item.shoot = ProjectileType<HydraBobber>();  //This defines what type of projectile this item will shot
+            Item.shoot = ModContent.ProjectileType<HydraBobber>();  //This defines what type of projectile this item will shot
             Item.shootSpeed = 9f; //this defines the the projectile speed when shot. for fishing pole also increases the fishing line length/range
         }
 
@@ -46,10 +44,6 @@ namespace QwertyMod.Content.Items.Tool.FishingRod
 
     public class HydraBobber : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("Hydra Bobber");
-        }
 
         public override void SetDefaults()
         {
@@ -66,7 +60,7 @@ namespace QwertyMod.Content.Items.Tool.FishingRod
                 int type = Main.player[Projectile.owner].inventory[Main.player[Projectile.owner].selectedItem].type;
                 float gravDir = Main.player[Projectile.owner].gravDir;
 
-                if (type == ItemType<Hydrator>())
+                if (type == ModContent.ItemType<Hydrator>())
                 {
                     pPosX += (float)(50 * Main.player[Projectile.owner].direction);
                     if (Main.player[Projectile.owner].direction < 0)

@@ -1,9 +1,7 @@
-﻿using Microsoft.Xna.Framework;
-using Terraria;
-using Terraria.DataStructures;
+﻿using Terraria;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Consumable.Tiles.Trophy.Blade
 {
@@ -18,7 +16,6 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Trophy.Blade
             TileObjectData.newTile.StyleWrapLimit = 36;
             TileObjectData.addTile(Type);
             DustType = 7;
-            //AddMapEntry(new Color(120, 85, 60));
         }
     }
 }

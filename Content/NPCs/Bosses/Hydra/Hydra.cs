@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Common;
 using QwertyMod.Content.Items.Consumable.BossBag;
 using QwertyMod.Content.Items.Consumable.Tiles.Trophy.Hydra;
+using QwertyMod.Content.Items.Equipment.Vanity.BossMasks;
 using QwertyMod.Content.Items.MiscMaterials;
 using QwertyMod.Content.Items.Tool.FishingRod;
 using QwertyMod.Content.Items.Tool.Mining;
@@ -13,18 +14,17 @@ using QwertyMod.Content.Items.Weapon.Melee.Spear.Hydrent;
 using QwertyMod.Content.Items.Weapon.Minion.HydraHead;
 using QwertyMod.Content.Items.Weapon.Morphs.HydraBarrage;
 using QwertyMod.Content.Items.Weapon.Ranged.Gun;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using Terraria;
-using Terraria.DataStructures;
+using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
-using System;
-using System.IO;
-using Terraria.Audio;
+
 
 namespace QwertyMod.Content.NPCs.Bosses.Hydra
 {
@@ -112,31 +112,36 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
             //Add the treasure bag (automatically checks for expert mode)
-            npcLoot.Add(ItemDropRule.BossBag(ItemType<HydraBag>())); //this requires you to set BossBag in SetDefaults accordingly
+            npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<HydraBag>())); //this requires you to set BossBag in SetDefaults accordingly
 
             //All our drops here are based on "not expert", meaning we use .OnSuccess() to add them into the rule, which then gets added
             LeadingConditionRule notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
 
             //Notice we use notExpertRule.OnSuccess instead of npcLoot.Add so it only applies in normal mode
-            notExpertRule.OnSuccess(ItemDropRule.OneFromOptionsNotScalingWithLuck(1, ItemType<HydraBarrage>(), ItemType<HydraBeam>(), ItemType<HydraCannon>(), ItemType<HydraHeadStaff>(), ItemType<HydraJavelin>(), ItemType<Hydrent>(), ItemType<Hydrill>(), ItemType<HydraMissileStaff>()));
+            notExpertRule.OnSuccess(ItemDropRule.OneFromOptionsNotScalingWithLuck(1, ModContent.ItemType<HydraBarrage>(), ModContent.ItemType<HydraBeam>(), ModContent.ItemType<HydraCannon>(), ModContent.ItemType<HydraHeadStaff>(), ModContent.ItemType<HydraJavelin>(), ModContent.ItemType<Hydrent>(), ModContent.ItemType<Hydrill>(), ModContent.ItemType<HydraMissileStaff>()));
             //Finally add the leading rule
             npcLoot.Add(notExpertRule);
 
             //Boss masks are spawned with 1/7 chance
             //notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
-            //notExpertRule.OnSuccess(ItemDropRule.Common(ItemType<PolarMask>(), 7));
+            //notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<PolarMask>(), 7));
             //npcLoot.Add(notExpertRule);
 
             notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
-            notExpertRule.OnSuccess(ItemDropRule.Common(ItemType<Hydrator>(), 7));
+            notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<Hydrator>(), 7));
             npcLoot.Add(notExpertRule);
 
             notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
-            notExpertRule.OnSuccess(ItemDropRule.Common(ItemType<HydraScale>(), 1, 20, 30));
+            notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<HydraScale>(), 1, 20, 30));
+            npcLoot.Add(notExpertRule);
+
+            //Boss masks are spawned with 1/7 chance
+            notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
+            notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<HydraMask>(), 7));
             npcLoot.Add(notExpertRule);
 
             //Trophies are spawned with 1/10 chance
-            npcLoot.Add(ItemDropRule.Common(ItemType<HydraTrophy>(), 10));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<HydraTrophy>(), 10));
 
             
 

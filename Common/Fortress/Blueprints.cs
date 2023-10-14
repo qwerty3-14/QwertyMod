@@ -5,7 +5,7 @@ using QwertyMod.Content.Items.Consumable.Tiles.Fortress.Furniture;
 using QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets;
 using System.Collections.Generic;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Common.Fortress
 {
@@ -24,27 +24,27 @@ namespace QwertyMod.Common.Fortress
                 //Tiles
                 new List<int[]>()
                 {
-                   new int[] {-1, TileType<FortressBrickT>(), TileType<FortressPillarT>(), TileType<FortressLampT>(), TileType<FortressChairT>(), TileType<FortressTableT>()},
-                   new int[] {-1, TileType<FortressBrickT>(), TileType<FakeFortressBrickT>(), TileType<FortressPillarT>(), TileType<FortressLampT>(), TileType<FortressChairT>(), TileType<FortressTableT>(), 135},
-                  new int[] {-1, TileType<FortressBrickT>() },
-                  new int[] {-1, TileType<FortressBrickT>(), TileType<ReverseSandT>()  },
-                  new int[] {-1, 196, TileType<FortressBrickT>() },
-                  new int[] {-1, TileType<FortressBrickT>(), TileType<FortressPlatformT>() },
-                  new int[] {-1, TileType<FakeFortressBrickT>(), TileType<FortressBrickT>() },
-                  new int[] {-1, TileType<FortressBrickT>(), TileType<FortressPillarT>(), TileType<FortressLanternT>(), 91, TileType<FortressCarving2T>(), TileType<FortressLampT>(), TileType<FortressCarving1T>() },
+                   new int[] {-1, ModContent.TileType<FortressBrickT>(), ModContent.TileType<FortressPillarT>(), ModContent.TileType<FortressLampT>(), ModContent.TileType<FortressChairT>(), ModContent.TileType<FortressTableT>()},
+                   new int[] {-1, ModContent.TileType<FortressBrickT>(), ModContent.TileType<FakeFortressBrickT>(), ModContent.TileType<FortressPillarT>(), ModContent.TileType<FortressLampT>(), ModContent.TileType<FortressChairT>(), ModContent.TileType<FortressTableT>(), 135},
+                  new int[] {-1, ModContent.TileType<FortressBrickT>() },
+                  new int[] {-1, ModContent.TileType<FortressBrickT>(), ModContent.TileType<ReverseSandT>()  },
+                  new int[] {-1, 196, ModContent.TileType<FortressBrickT>() },
+                  new int[] {-1, ModContent.TileType<FortressBrickT>(), ModContent.TileType<FortressPlatformT>() },
+                  new int[] {-1, ModContent.TileType<FakeFortressBrickT>(), ModContent.TileType<FortressBrickT>() },
+                  new int[] {-1, ModContent.TileType<FortressBrickT>(), ModContent.TileType<FortressPillarT>(), ModContent.TileType<FortressLanternT>(), 91, ModContent.TileType<FortressCarving2T>(), ModContent.TileType<FortressLampT>(), ModContent.TileType<FortressCarving1T>() },
                   new int[] {-1, 189}
                 },
                 //walls
                 new List<int[]>()
                 {
-                  new int[] {-1, 0, WallType<FortressWallT>()},
-                  new int[] {-1, 0, WallType<FortressWallT>() },
-                  new int[] {-1, 0, WallType<FortressWallT>()},
-                  new int[] {-1, 0, WallType<FortressWallT>()},
-                  new int[] {-1, 0, WallType<FortressWallT>()},
+                  new int[] {-1, 0, ModContent.WallType<FortressWallT>()},
+                  new int[] {-1, 0, ModContent.WallType<FortressWallT>() },
+                  new int[] {-1, 0, ModContent.WallType<FortressWallT>()},
+                  new int[] {-1, 0, ModContent.WallType<FortressWallT>()},
+                  new int[] {-1, 0, ModContent.WallType<FortressWallT>()},
                   new int[] {-1, 0},
                   new int[] {-1, 0},
-                  new int[] {-1, 0, WallType<FortressWallT>()},
+                  new int[] {-1, 0, ModContent.WallType<FortressWallT>()},
                   new int[] {-1, 0},
                 }
             };
@@ -52,80 +52,80 @@ namespace QwertyMod.Common.Fortress
             {
                 new List<int[]>
                 {
-                    new int[] {-1, TileType<FortressBrickT>(), TileType<DnasBrickT>(), TileType<FortressPillarT>(), TileType<FortressChandelierT>(), 189, TileType<FortressCarving2T>(), TileType<FortressPlatformT>(), TileType<FortressCandelabraT>(), TileType<LaunchPadT>() },
-                    new int[] {-1, TileType<FortressBrickT>(), TileType<ReverseSandT>() },
-                    new int[] {-1, TileType<FortressBrickT>(), TileType<FortressPillarT>(), TileType<FortressChandelierT>(),TileType<FortressCandleT>(), 13, TileType<FortressChairT>(), TileType<FortressTableT>(), TileType<FortressPlatformT>()},
-                    new int[] {-1, TileType<FortressBrickT>(), TileType<FortressPillarT>(), 82, 78, TileType<FortressPlatformT>() },
-                    new int[] {-1, TileType<FortressBrickT>(), TileType<FortressLanternT>(), TileType<FortressPillarT>(), 91, TileType<FortressClockT>(), TileType<FortressBookcaseT>(), 50,TileType<FortressCandleT>(), TileType<FortressPlatformT>(), TileType<FortressBedT>(), TileType<FortressCouchT>(), TileType<FortressCarving2T>(), TileType<FortressCarving1T>(), TileType<FortressLampT>() },
+                    new int[] {-1, ModContent.TileType<FortressBrickT>(), ModContent.TileType<DnasBrickT>(), ModContent.TileType<FortressPillarT>(), ModContent.TileType<FortressChandelierT>(), 189, ModContent.TileType<FortressCarving2T>(), ModContent.TileType<FortressPlatformT>(), ModContent.TileType<FortressCandelabraT>(), ModContent.TileType<LaunchPadT>() },
+                    new int[] {-1, ModContent.TileType<FortressBrickT>(), ModContent.TileType<ReverseSandT>() },
+                    new int[] {-1, ModContent.TileType<FortressBrickT>(), ModContent.TileType<FortressPillarT>(), ModContent.TileType<FortressChandelierT>(),ModContent.TileType<FortressCandleT>(), 13, ModContent.TileType<FortressChairT>(), ModContent.TileType<FortressTableT>(), ModContent.TileType<FortressPlatformT>()},
+                    new int[] {-1, ModContent.TileType<FortressBrickT>(), ModContent.TileType<FortressPillarT>(), 82, 78, ModContent.TileType<FortressPlatformT>() },
+                    new int[] {-1, ModContent.TileType<FortressBrickT>(), ModContent.TileType<FortressLanternT>(), ModContent.TileType<FortressPillarT>(), 91, ModContent.TileType<FortressClockT>(), ModContent.TileType<FortressBookcaseT>(), 50,ModContent.TileType<FortressCandleT>(), ModContent.TileType<FortressPlatformT>(), ModContent.TileType<FortressBedT>(), ModContent.TileType<FortressCouchT>(), ModContent.TileType<FortressCarving2T>(), ModContent.TileType<FortressCarving1T>(), ModContent.TileType<FortressLampT>() },
                     new int[] {-1, 189},
-                    new int[] {-1, TileType<FortressBrickT>(), TileType<FortressPlatformT>(), TileType<FortressPillarT>(), TileType<FortressLampT>(), 13, TileType<FortressChairT>(), TileType<FortressTableT>(), TileType<FortressLanternT>(), TileType<LaunchPadT>()}
+                    new int[] {-1, ModContent.TileType<FortressBrickT>(), ModContent.TileType<FortressPlatformT>(), ModContent.TileType<FortressPillarT>(), ModContent.TileType<FortressLampT>(), 13, ModContent.TileType<FortressChairT>(), ModContent.TileType<FortressTableT>(), ModContent.TileType<FortressLanternT>(), ModContent.TileType<LaunchPadT>()}
                 },
                 new List<int[]>
                 {
-                    new int[] {-1, 0, WallType<FortressWallT>()},
+                    new int[] {-1, 0, ModContent.WallType<FortressWallT>()},
                     new int[] {-1, 0},
-                    new int[] {-1, 0, WallType<FortressWallT>() },
-                    new int[] {-1, 0,  WallType<FortressWallT>() },
-                    new int[] {-1, 0, WallType<FortressWallT>() },
+                    new int[] {-1, 0, ModContent.WallType<FortressWallT>() },
+                    new int[] {-1, 0,  ModContent.WallType<FortressWallT>() },
+                    new int[] {-1, 0, ModContent.WallType<FortressWallT>() },
                     new int[] {-1, 0},
-                    new int[] {-1, 0,  WallType<FortressWallT>()},
+                    new int[] {-1, 0,  ModContent.WallType<FortressWallT>()},
                 }
             };
             MediumRoomTileTypes = new List<int[]>[]
             {
                 new List<int[]>
                 {
-                    new int[] {-1, TileType<FortressBrickT>(), 196, TileType<FortressPillarT>(), TileType<FortressLanternT>(), TileType<FortressCarving1T>(), TileType<FortressChairT>(), TileType<FortressTableT>(), TileType<FortressPlatformT>() },
-                    new int[] {-1, TileType<FortressBrickT>(), TileType<FakeFortressBrickT>(), TileType<FortressPillarT>(), TileType<FortressChandelierT>(), TileType<FortressClockT>(), TileType<FortressCarving3T>(), TileType<FortressBookcaseT>(), TileType<FortressLampT>(), TileType<FortressCouchT>(), 135, TileType<FortressPlatformT>(), 91, TileType<FortressLanternT>(), TileType<FortressTrapT>(), TileType<FortressCarving1T>(), TileType<FortressCarving2T>() },
-                    new int[] {-1, TileType<FortressBrickT>(), TileType<FortressPillarT>(), TileType<FortressLanternT>(), TileType<FortressCarving2T>(), 50, TileType<FortressPlatformT>(), TileType<FortressClockT>(), TileType<FortressBookcaseT>(), TileType<FortressLampT>(), TileType<FortressTableT>(), TileType<FortressChairT>(), TileType<FortressCouchT>(), TileType<FortressChandelierT>(),TileType<FortressCandleT>(), TileType<FortressCarving1T>(), TileType<FortressCarving3T>(), TileType<LaunchPadT>()},
+                    new int[] {-1, ModContent.TileType<FortressBrickT>(), 196, ModContent.TileType<FortressPillarT>(), ModContent.TileType<FortressLanternT>(), ModContent.TileType<FortressCarving1T>(), ModContent.TileType<FortressChairT>(), ModContent.TileType<FortressTableT>(), ModContent.TileType<FortressPlatformT>() },
+                    new int[] {-1, ModContent.TileType<FortressBrickT>(), ModContent.TileType<FakeFortressBrickT>(), ModContent.TileType<FortressPillarT>(), ModContent.TileType<FortressChandelierT>(), ModContent.TileType<FortressClockT>(), ModContent.TileType<FortressCarving3T>(), ModContent.TileType<FortressBookcaseT>(), ModContent.TileType<FortressLampT>(), ModContent.TileType<FortressCouchT>(), 135, ModContent.TileType<FortressPlatformT>(), 91, ModContent.TileType<FortressLanternT>(), ModContent.TileType<FortressTrapT>(), ModContent.TileType<FortressCarving1T>(), ModContent.TileType<FortressCarving2T>() },
+                    new int[] {-1, ModContent.TileType<FortressBrickT>(), ModContent.TileType<FortressPillarT>(), ModContent.TileType<FortressLanternT>(), ModContent.TileType<FortressCarving2T>(), 50, ModContent.TileType<FortressPlatformT>(), ModContent.TileType<FortressClockT>(), ModContent.TileType<FortressBookcaseT>(), ModContent.TileType<FortressLampT>(), ModContent.TileType<FortressTableT>(), ModContent.TileType<FortressChairT>(), ModContent.TileType<FortressCouchT>(), ModContent.TileType<FortressChandelierT>(),ModContent.TileType<FortressCandleT>(), ModContent.TileType<FortressCarving1T>(), ModContent.TileType<FortressCarving3T>(), ModContent.TileType<LaunchPadT>()},
                     new int[] {-1, 189, 196},
-                    new int[] {-1, TileType<FortressBrickT>(), TileType<FakeFortressBrickT>(), TileType<FortressLanternT>(), TileType<FortressChandelierT>(), 50, TileType<FortressPlatformT>(), TileType<FortressCarving2T>(),TileType<FortressCandleT>(), TileType<FortressCarving1T>(), TileType<FortressTrapT>(), TileType<FortressCarving3T>(), TileType<FortressLampT>(), TileType<FortressBedT>(), TileType<FortressPianoT>(), 135, TileType<FortressClockT>(), TileType<FortressBookcaseT>()},
+                    new int[] {-1, ModContent.TileType<FortressBrickT>(), ModContent.TileType<FakeFortressBrickT>(), ModContent.TileType<FortressLanternT>(), ModContent.TileType<FortressChandelierT>(), 50, ModContent.TileType<FortressPlatformT>(), ModContent.TileType<FortressCarving2T>(),ModContent.TileType<FortressCandleT>(), ModContent.TileType<FortressCarving1T>(), ModContent.TileType<FortressTrapT>(), ModContent.TileType<FortressCarving3T>(), ModContent.TileType<FortressLampT>(), ModContent.TileType<FortressBedT>(), ModContent.TileType<FortressPianoT>(), 135, ModContent.TileType<FortressClockT>(), ModContent.TileType<FortressBookcaseT>()},
 
-                    new int[] {-1, TileType<FortressBrickT>(), TileType<ChiselledFortressBrickT>(), TileType<FortressTrapT>(), TileType<FortressPillarT>(), TileType<FortressChandelierT>(), TileType<FortressCarving3T>(), 50,TileType<FortressCandleT>(), TileType<FortressPlatformT>(), TileType<FortressLampT>(), TileType<FortressCouchT>(), TileType<FortressPianoT>(), TileType<FakeFortressBrickT>(), TileType<FortressLanternT>(), TileType<FortressCarving1T>(), TileType<FortressBookcaseT>(), TileType<FortressChairT>(), TileType<FortressTableT>(), TileType<FortressSinkT>(), 135},
-                    new int[] {-1, TileType<FortressBrickT>(), TileType<FortressPillarT>(), TileType<FortressPlatformT>(), TileType<FortressLanternT>(), 91, TileType<FortressClockT>(), TileType<FortressBookcaseT>(), TileType<FortressCandelabraT>(), TileType<FortressCouchT>(), TileType<FortressTableT>(), TileType<FortressChairT>(), TileType<FortressTrapT>(), TileType<FortressCarving3T>(), 135, TileType<FakeFortressBrickT>()},
+                    new int[] {-1, ModContent.TileType<FortressBrickT>(), ModContent.TileType<ChiselledFortressBrickT>(), ModContent.TileType<FortressTrapT>(), ModContent.TileType<FortressPillarT>(), ModContent.TileType<FortressChandelierT>(), ModContent.TileType<FortressCarving3T>(), 50,ModContent.TileType<FortressCandleT>(), ModContent.TileType<FortressPlatformT>(), ModContent.TileType<FortressLampT>(), ModContent.TileType<FortressCouchT>(), ModContent.TileType<FortressPianoT>(), ModContent.TileType<FakeFortressBrickT>(), ModContent.TileType<FortressLanternT>(), ModContent.TileType<FortressCarving1T>(), ModContent.TileType<FortressBookcaseT>(), ModContent.TileType<FortressChairT>(), ModContent.TileType<FortressTableT>(), ModContent.TileType<FortressSinkT>(), 135},
+                    new int[] {-1, ModContent.TileType<FortressBrickT>(), ModContent.TileType<FortressPillarT>(), ModContent.TileType<FortressPlatformT>(), ModContent.TileType<FortressLanternT>(), 91, ModContent.TileType<FortressClockT>(), ModContent.TileType<FortressBookcaseT>(), ModContent.TileType<FortressCandelabraT>(), ModContent.TileType<FortressCouchT>(), ModContent.TileType<FortressTableT>(), ModContent.TileType<FortressChairT>(), ModContent.TileType<FortressTrapT>(), ModContent.TileType<FortressCarving3T>(), 135, ModContent.TileType<FakeFortressBrickT>()},
                 },
                 new List<int[]>
                 {
-                    new int[] {-1, 0, WallType<FortressWallT>()},
-                    new int[] {-1, 0, WallType<FortressWallT>()},
-                    new int[] {-1, 0, WallType<FortressWallT>()},
+                    new int[] {-1, 0, ModContent.WallType<FortressWallT>()},
+                    new int[] {-1, 0, ModContent.WallType<FortressWallT>()},
+                    new int[] {-1, 0, ModContent.WallType<FortressWallT>()},
                     new int[] {-1, 0, 73},
-                    new int[] {-1, 0, WallType<FortressWallT>()},
-                     new int[] {-1, 0, WallType<FortressWallT>()},
-                      new int[] {-1, 0, WallType<FortressWallT>()},
+                    new int[] {-1, 0, ModContent.WallType<FortressWallT>()},
+                     new int[] {-1, 0, ModContent.WallType<FortressWallT>()},
+                      new int[] {-1, 0, ModContent.WallType<FortressWallT>()},
                 }
             };
             LargeRoomTileTypes = new List<int[]>[]
             {
                 new List<int[]>
                 {
-                    new int[] {-1, TileType<FortressBrickT>(), TileType<FortressChandelierT>(), 239, TileType<CaeliteBarT>(), TileType<FortressPillarT>(), TileType<FortressCarving3T>(), TileType<FortressCouchT>(), TileType<FortressBedT>(), TileType<FortressTrapT>(),  135, TileType<FortressPlatformT>(), 189, TileType<FortressClockT>(), TileType<FortressCarving1T>(), TileType<FortressPianoT>(), TileType<FortressCouchT>(), TileType<FakeFortressBrickT>(), TileType<FortressCarving2T>(),TileType<FortressCandleT>(), TileType<FortressChairT>(), TileType<FortressTableT>() },
-                    new int[] {-1, TileType<FortressBrickT>(), TileType<FakeFortressBrickT>(), TileType<FortressTrapT>(), TileType<FortressClockT>(), TileType<FortressLanternT>(), 91, TileType<FortressChandelierT>(), TileType<FortressCarving2T>(), TileType<FortressCarving1T>(), TileType<FortressCarving3T>(), TileType<FortressLampT>(), TileType<CaeliteBarT>(), TileType<FortressPianoT>(), 135, 16, TileType<FortressPlatformT>(), TileType<FortressPillarT>(), TileType<FortressBookcaseT>(), 50, TileType<FortressChairT>(), TileType<FortressTableT>(),TileType<FortressCandleT>(), TileType<LaunchPadT>()},
-                    new int[] {-1, 189, TileType<FortressBrickT>(), TileType<CaeliteBarT>(), 239},
-                    new int[] {-1, TileType<FortressBrickT>(), TileType<FortressChandelierT>(), 91, TileType<FortressLanternT>(), TileType<FortressPillarT>(), TileType<FortressTrapT>(), TileType<CaeliteBarT>(), 50, TileType<FortressPlatformT>(), TileType<FortressBookcaseT>(), 135, TileType<FortressLampT>(), TileType<FortressCarving3T>(),TileType<FortressCandleT>(), TileType<LaunchPadT>()},
-                    new int[] {-1, TileType<FortressPlatformT>(), TileType<FortressBrickT>(), TileType<FortressPillarT>(), TileType<FortressLanternT>(), TileType<FortressBookcaseT>(), TileType<FortressTrapT>(), TileType<FortressCarving1T>(), TileType<FortressLampT>(), TileType<FortressCarving3T>(), 135, TileType<FortressCarving2T>(), TileType<ChiselledFortressBrickT>(), TileType<CaeliteBarT>(), 91, TileType<LaunchPadT>(),TileType<FortressCandleT>(), TileType<FortressCouchT>(), TileType<FortressCouchT>()}
+                    new int[] {-1, ModContent.TileType<FortressBrickT>(), ModContent.TileType<FortressChandelierT>(), 239, ModContent.TileType<CaeliteBarT>(), ModContent.TileType<FortressPillarT>(), ModContent.TileType<FortressCarving3T>(), ModContent.TileType<FortressCouchT>(), ModContent.TileType<FortressBedT>(), ModContent.TileType<FortressTrapT>(),  135, ModContent.TileType<FortressPlatformT>(), 189, ModContent.TileType<FortressClockT>(), ModContent.TileType<FortressCarving1T>(), ModContent.TileType<FortressPianoT>(), ModContent.TileType<FortressCouchT>(), ModContent.TileType<FakeFortressBrickT>(), ModContent.TileType<FortressCarving2T>(),ModContent.TileType<FortressCandleT>(), ModContent.TileType<FortressChairT>(), ModContent.TileType<FortressTableT>() },
+                    new int[] {-1, ModContent.TileType<FortressBrickT>(), ModContent.TileType<FakeFortressBrickT>(), ModContent.TileType<FortressTrapT>(), ModContent.TileType<FortressClockT>(), ModContent.TileType<FortressLanternT>(), 91, ModContent.TileType<FortressChandelierT>(), ModContent.TileType<FortressCarving2T>(), ModContent.TileType<FortressCarving1T>(), ModContent.TileType<FortressCarving3T>(), ModContent.TileType<FortressLampT>(), ModContent.TileType<CaeliteBarT>(), ModContent.TileType<FortressPianoT>(), 135, 16, ModContent.TileType<FortressPlatformT>(), ModContent.TileType<FortressPillarT>(), ModContent.TileType<FortressBookcaseT>(), 50, ModContent.TileType<FortressChairT>(), ModContent.TileType<FortressTableT>(),ModContent.TileType<FortressCandleT>(), ModContent.TileType<LaunchPadT>()},
+                    new int[] {-1, 189, ModContent.TileType<FortressBrickT>(), ModContent.TileType<CaeliteBarT>(), 239},
+                    new int[] {-1, ModContent.TileType<FortressBrickT>(), ModContent.TileType<FortressChandelierT>(), 91, ModContent.TileType<FortressLanternT>(), ModContent.TileType<FortressPillarT>(), ModContent.TileType<FortressTrapT>(), ModContent.TileType<CaeliteBarT>(), 50, ModContent.TileType<FortressPlatformT>(), ModContent.TileType<FortressBookcaseT>(), 135, ModContent.TileType<FortressLampT>(), ModContent.TileType<FortressCarving3T>(),ModContent.TileType<FortressCandleT>(), ModContent.TileType<LaunchPadT>()},
+                    new int[] {-1, ModContent.TileType<FortressPlatformT>(), ModContent.TileType<FortressBrickT>(), ModContent.TileType<FortressPillarT>(), ModContent.TileType<FortressLanternT>(), ModContent.TileType<FortressBookcaseT>(), ModContent.TileType<FortressTrapT>(), ModContent.TileType<FortressCarving1T>(), ModContent.TileType<FortressLampT>(), ModContent.TileType<FortressCarving3T>(), 135, ModContent.TileType<FortressCarving2T>(), ModContent.TileType<ChiselledFortressBrickT>(), ModContent.TileType<CaeliteBarT>(), 91, ModContent.TileType<LaunchPadT>(),ModContent.TileType<FortressCandleT>(), ModContent.TileType<FortressCouchT>(), ModContent.TileType<FortressCouchT>()}
                 },
                 new List<int[]>
                 {
-                    new int[] {-1, 0, WallType<FortressWallT>(), 73},
-                    new int[] {-1, 0, WallType<FortressWallT>() },
-                    new int[] {-1, 0, 73,  WallType<FortressWallT>() },
-                    new int[] {-1, 0, WallType<FortressWallT>() },
-                    new int[] {-1, 0, WallType<FortressWallT>() }
+                    new int[] {-1, 0, ModContent.WallType<FortressWallT>(), 73},
+                    new int[] {-1, 0, ModContent.WallType<FortressWallT>() },
+                    new int[] {-1, 0, 73,  ModContent.WallType<FortressWallT>() },
+                    new int[] {-1, 0, ModContent.WallType<FortressWallT>() },
+                    new int[] {-1, 0, ModContent.WallType<FortressWallT>() }
                 }
             };
             AltarRoomTileTypes = new List<int[]>[]
             {
                 new List<int[]>
                 {
-                    new int[] {-1, TileType<FortressBrickT>(), TileType<FakeFortressBrickT>(), 196, TileType<FortressPillarT>(), TileType<FortressBookcaseT>(), TileType<FortressBenchT>(), TileType<FortressAltar>(), 135, TileType<DnasBrickT>(), TileType<LaunchPadT>()}
+                    new int[] {-1, ModContent.TileType<FortressBrickT>(), ModContent.TileType<FakeFortressBrickT>(), 196, ModContent.TileType<FortressPillarT>(), ModContent.TileType<FortressBookcaseT>(), ModContent.TileType<FortressBenchT>(), ModContent.TileType<FortressAltar>(), 135, ModContent.TileType<DnasBrickT>(), ModContent.TileType<LaunchPadT>()}
                     ,
-                    new int[] {-1, TileType<FortressBrickT>(), TileType<FortressLampT>(), TileType<FortressPillarT>(), TileType<FortressCarving3T>(), TileType<FortressLanternT>(), 91,TileType<FortressCandleT>(), 50, TileType<FortressCarving2T>(), TileType<FortressPlatformT>(), TileType<FortressCarving1T>(), TileType<FortressChandelierT>(), TileType<FortressAltar>(), TileType<FortressClockT>(), TileType<FortressCandelabraT>(), TileType<FortressTrapT>(), TileType<FortressTableT>(), TileType<FortressChairT>(), TileType<FortressCouchT>(), 135, TileType<FortressBookcaseT>(), TileType<FortressCouchT>(), TileType<FortressPianoT>(), TileType<LaunchPadT>()}
+                    new int[] {-1, ModContent.TileType<FortressBrickT>(), ModContent.TileType<FortressLampT>(), ModContent.TileType<FortressPillarT>(), ModContent.TileType<FortressCarving3T>(), ModContent.TileType<FortressLanternT>(), 91,ModContent.TileType<FortressCandleT>(), 50, ModContent.TileType<FortressCarving2T>(), ModContent.TileType<FortressPlatformT>(), ModContent.TileType<FortressCarving1T>(), ModContent.TileType<FortressChandelierT>(), ModContent.TileType<FortressAltar>(), ModContent.TileType<FortressClockT>(), ModContent.TileType<FortressCandelabraT>(), ModContent.TileType<FortressTrapT>(), ModContent.TileType<FortressTableT>(), ModContent.TileType<FortressChairT>(), ModContent.TileType<FortressCouchT>(), 135, ModContent.TileType<FortressBookcaseT>(), ModContent.TileType<FortressCouchT>(), ModContent.TileType<FortressPianoT>(), ModContent.TileType<LaunchPadT>()}
                 },
                 new List<int[]>
                 {
-                   new int[] {-1, 0, WallType<FortressWallT>() },
-                   new int[] {-1, 0, WallType<FortressWallT>() }
+                   new int[] {-1, 0, ModContent.WallType<FortressWallT>() },
+                   new int[] {-1, 0, ModContent.WallType<FortressWallT>() }
                 }
             };
         }

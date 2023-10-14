@@ -1,12 +1,11 @@
 using Microsoft.Xna.Framework;
 using QwertyMod.Content.Dusts;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.Enums;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Furniture
 {
@@ -30,7 +29,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Furniture
             TileObjectData.addTile(Type);
             AddToArray(ref TileID.Sets.RoomNeeds.CountsAsChair);
             AddMapEntry(new Color(162, 184, 185));
-            DustType = DustType<FortressDust>();
+            DustType = ModContent.DustType<FortressDust>();
             HitSound = QwertyMod.FortressBlocks;
             AdjTiles = new int[] { TileID.Chairs };
         }

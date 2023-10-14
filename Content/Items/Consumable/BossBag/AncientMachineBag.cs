@@ -1,15 +1,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Common.PlayerLayers;
-using QwertyMod.Content.Items.Tool.Mining.Ancient;
-using QwertyMod.Content.NPCs.Bosses.AncientMachine;
-using Terraria;
-using Terraria.DataStructures;
-using Terraria.GameContent.Creative;
-using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
 using QwertyMod.Content.Items.Equipment.Accessories.Expert.AncientGemstone;
-using Terraria.ID;
-using Terraria.GameContent.ItemDropRules;
+using QwertyMod.Content.Items.Tool.Mining.Ancient;
 using QwertyMod.Content.Items.Weapon.Magic.AncientMissile;
 using QwertyMod.Content.Items.Weapon.Magic.AncientWave;
 using QwertyMod.Content.Items.Weapon.Melee.Sword.AncientBlade;
@@ -18,6 +10,12 @@ using QwertyMod.Content.Items.Weapon.Minion.AncientMinion;
 using QwertyMod.Content.Items.Weapon.Morphs.AncientNuke;
 using QwertyMod.Content.Items.Weapon.Ranged.Bow.Ancient;
 using QwertyMod.Content.Items.Weapon.Ranged.Gun.Ancient;
+using Terraria;
+using Terraria.GameContent.Creative;
+using Terraria.GameContent.ItemDropRules;
+using Terraria.ModLoader;
+using Terraria.ID;
+using QwertyMod.Content.Items.Equipment.Vanity.BossMasks;
 
 namespace QwertyMod.Content.Items.Consumable.BossBag
 {
@@ -42,7 +40,7 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
 
             if (!Main.dedServ)
             {
-                Item.GetGlobalItem<ItemUseGlow>().glowTexture = Request<Texture2D>("QwertyMod/Content/Items/Consumable/BossBag/AncientMachineBag_Glow").Value;
+                Item.GetGlobalItem<ItemUseGlow>().glowTexture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Consumable/BossBag/AncientMachineBag_Glow").Value;
             }
         }
 
@@ -52,10 +50,11 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
         }
         public override void ModifyItemLoot(ItemLoot itemLoot)
         {
-            itemLoot.Add(ItemDropRule.FewFromOptionsNotScalingWithLuck(3, 1, ItemType<AncientBlade>(), ItemType<AncientSniper>(), ItemType<AncientWave>(), ItemType<AncientThrow>(), ItemType<AncientMinionStaff>(), ItemType<AncientMissileStaff>(), ItemType<AncientLongbow>(), ItemType<AncientNuke>()));
+            itemLoot.Add(ItemDropRule.FewFromOptionsNotScalingWithLuck(3, 1, ModContent.ItemType<AncientBlade>(), ModContent.ItemType<AncientSniper>(), ModContent.ItemType<AncientWave>(), ModContent.ItemType<AncientThrow>(), ModContent.ItemType<AncientMinionStaff>(), ModContent.ItemType<AncientMissileStaff>(), ModContent.ItemType<AncientLongbow>(), ModContent.ItemType<AncientNuke>()));
 
-            itemLoot.Add(ItemDropRule.Common(ItemType<AncientMiner>(), 5));
-            itemLoot.Add(ItemDropRule.Common(ItemType<AncientGemstone>(), 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<AncientMiner>(), 5));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<AncientGemstone>(), 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<AncientMachineMask>(), 7, 1, 1));
             itemLoot.Add(ItemDropRule.Coins(80000, true));
         }
     }

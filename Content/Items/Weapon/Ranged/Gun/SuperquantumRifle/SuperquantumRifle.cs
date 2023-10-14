@@ -1,16 +1,14 @@
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Content.Dusts;
-using QwertyMod.Content.Items.MiscMaterials;
-using QwertyMod.Content.NPCs.Fortress;
+using QwertyMod.Common.PlayerLayers;
 using System;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
-using QwertyMod.Common.PlayerLayers;
-using Microsoft.Xna.Framework.Graphics;
+
 
 namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.SuperquantumRifle
 {
@@ -41,7 +39,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.SuperquantumRifle
             Item.noMelee = true;
             if (!Main.dedServ)
             {
-                Item.GetGlobalItem<ItemUseGlow>().glowTexture = Request<Texture2D>("QwertyMod/Content/Items/Weapon/Ranged/Gun/SuperquantumRifle/SuperquantumRifle_Glow").Value;
+                Item.GetGlobalItem<ItemUseGlow>().glowTexture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Ranged/Gun/SuperquantumRifle/SuperquantumRifle_Glow").Value;
             }
         }
         public override bool CanConsumeAmmo(Item ammo, Player player)

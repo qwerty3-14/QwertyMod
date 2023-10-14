@@ -8,8 +8,7 @@ using Terraria.GameContent.Creative;
 using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ID.ArmorIDs;
-using static Terraria.ModLoader.ModContent;
+
 
 
 namespace QwertyMod.Content.Items.Equipment.Armor.Glass
@@ -20,7 +19,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Glass
         public override void SetStaticDefaults()
         {
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
-            Head.Sets.DrawHatHair[Item.headSlot] = true;
+            ArmorIDs.Head.Sets.DrawHatHair[Item.headSlot] = true;
         }
 
         public override void SetDefaults()
@@ -38,7 +37,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Glass
         }
         public override bool IsArmorSet(Item head, Item body, Item legs)
         {
-            return body.type == ItemType<GlassAbsorber>() && legs.type == ItemType<GlassLimbguards>();
+            return body.type == ModContent.ItemType<GlassAbsorber>() && legs.type == ModContent.ItemType<GlassLimbguards>();
         }
 
         public override void UpdateArmorSet(Player player)
@@ -98,7 +97,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Glass
                 Vector2 prismCenter = Player.Center + new Vector2(MathF.Sin(PrismTrigonometryCounterOfAwsomenessWowThisIsAVeryLongVariableName) * 40f, 0);
                 if (QwertyMethods.ClosestNPC(ref target, 4000, prismCenter) && prismDazzleCounter <= 0)
                 {
-                    Projectile.NewProjectile(new EntitySource_Misc("SetBonus_Prism"), prismCenter, QwertyMethods.PolarVector(1, (target.Center - prismCenter).ToRotation()), ProjectileType<PrismDazzle>(), (int)(12f * Player.GetDamage(DamageClass.Magic).Multiplicative), 0f, Player.whoAmI);
+                    Projectile.NewProjectile(new EntitySource_Misc("SetBonus_Prism"), prismCenter, QwertyMethods.PolarVector(1, (target.Center - prismCenter).ToRotation()), ModContent.ProjectileType<PrismDazzle>(), (int)(12f * Player.GetDamage(DamageClass.Magic).Multiplicative), 0f, Player.whoAmI);
                     prismDazzleCounter = 90;
                 }
             }
@@ -108,7 +107,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Glass
         {
             if (proj.CountsAsClass(DamageClass.Ranged) && setBonus && Player.velocity.X > 0)
             {
-                target.AddBuff(BuffType<ArcanelyTuned>(), 360);
+                target.AddBuff(ModContent.BuffType<ArcanelyTuned>(), 360);
             }
         }
     }
@@ -135,7 +134,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Glass
             }
             Player drawPlayer = drawInfo.drawPlayer;
             Mod mod = ModLoader.GetMod("QwertyMod");
-            Texture2D texture = Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Glass/GlassPrism").Value;
+            Texture2D texture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Glass/GlassPrism").Value;
             Color color12 = drawPlayer.GetImmuneAlphaPure(Lighting.GetColor((int)((double)drawInfo.Position.X + (double)drawPlayer.width * 0.5) / 16, (int)((double)drawInfo.Position.Y + (double)drawPlayer.height * 0.5) / 16, Microsoft.Xna.Framework.Color.White), 0f);
 
             if (drawPlayer.TryGetModPlayer<HelmEffects>(out HelmEffects helm) &&  helm.helmEffect)
@@ -172,7 +171,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Glass
         {
             if (Main.rand.NextBool(8))
             {
-                Dust d = Main.dust[Dust.NewDust(Projectile.Center, 0, 0, DustType<GlassSmoke>())];
+                Dust d = Main.dust[Dust.NewDust(Projectile.Center, 0, 0, ModContent.DustType<GlassSmoke>())];
                 d.velocity *= .1f;
                 d.noGravity = true;
                 d.position = Projectile.Center;
@@ -191,7 +190,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Glass
         {
             if (!target.boss && Main.rand.NextBool(20))
             {
-                target.AddBuff(BuffType<Stunned>(), 120);
+                target.AddBuff(ModContent.BuffType<Stunned>(), 120);
             }
             Projectile.localNPCImmunity[target.whoAmI] = -1;
             target.immune[Projectile.owner] = 0;
@@ -214,7 +213,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Glass
                 {
                     NPC possibleTarget = Main.npc[k];
                     float distance = (possibleTarget.Center - projectile.Center).Length();
-                    if (distance < maxDistance && possibleTarget.HasBuff(BuffType<ArcanelyTuned>()) && possibleTarget.active && !possibleTarget.dontTakeDamage && !possibleTarget.friendly && possibleTarget.lifeMax > 5 && (Collision.CanHit(projectile.Center, 0, 0, possibleTarget.Center, 0, 0) || !projectile.tileCollide))
+                    if (distance < maxDistance && possibleTarget.HasBuff(ModContent.BuffType<ArcanelyTuned>()) && possibleTarget.active && !possibleTarget.dontTakeDamage && !possibleTarget.friendly && possibleTarget.lifeMax > 5 && (Collision.CanHit(projectile.Center, 0, 0, possibleTarget.Center, 0, 0) || !projectile.tileCollide))
                     {
                         target = Main.npc[k];
                         foundTarget = true;

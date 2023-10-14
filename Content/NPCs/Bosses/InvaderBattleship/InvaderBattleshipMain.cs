@@ -1,28 +1,31 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Common;
+using QwertyMod.Common.Fortress;
+using QwertyMod.Content.Buffs;
+using QwertyMod.Content.Items.Consumable.BossBag;
+using QwertyMod.Content.Items.Consumable.Tiles.Trophy.Invader;
+using QwertyMod.Content.Items.Equipment.Vanity.BossMasks;
+using QwertyMod.Content.Items.MiscMaterials;
+using QwertyMod.Content.Items.Weapon.Melee.Misc.FightKit;
+using QwertyMod.Content.Items.Weapon.Minion.DVR;
+using QwertyMod.Content.Items.Weapon.Ranged.Gun.SuperquantumRifle;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using Terraria;
-using Terraria.DataStructures;
+using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
-using Terraria.Audio;
-using QwertyMod.Content.Buffs;
-using QwertyMod.Content.Dusts;
-using QwertyMod.Common.Fortress;
-using QwertyMod.Content.Items.Equipment.Accessories.Expert;
-using QwertyMod.Content.Items.Consumable.BossBag;
-using QwertyMod.Content.Items.MiscMaterials;
+
 
 
 namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
 {
+    //[AutoloadBossHead]
     public partial class InvaderBattleship : ModNPC
     {
 
@@ -32,7 +35,7 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
 
             NPCID.Sets.MPAllowedEnemies[NPC.type] = true; //For allowing use of SpawnOnPlayer in multiplayer
 
-            NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers(0)
+            NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers()
             {
                 CustomTexturePath = "QwertyMod/Content/NPCs/Bosses/InvaderBattleship/InvaderBattleship_Bestiary",
                 PortraitScale = 0.6f,
@@ -63,7 +66,6 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
         public override void SetDefaults()
         {
             NPC.lifeMax = 70000;
-            //NPC.lifeMax = 100;
             NPC.width = 262;
             NPC.height = 92;
             NPC.value = 100000;
@@ -86,7 +88,7 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
         {
             NPC.TargetClosest(false);
             Player player = Main.player[NPC.target];
-            if (!player.InModBiome(GetInstance<FortressBiome>()) || !player.active)
+            if (!player.InModBiome(ModContent.GetInstance<FortressBiome>()) || !player.active)
             {
                 return true;
             }
@@ -147,14 +149,14 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
                 {
                     offset = new Vector2(Main.rand.NextFloat(-4, 4), Main.rand.NextFloat(-4, 4));
                 }
-                Texture2D beamEmmitters = Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/InvaderBattleship/BattleshipBeamEmmitters").Value;
+                Texture2D beamEmmitters = ModContent.Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/InvaderBattleship/BattleshipBeamEmmitters").Value;
                 int height = beamEmmitters.Height / 2;
                 float emmiterX =  NPC.position.X + (NPC.direction == 1 ? centerEyeX : (NPC.width - centerEyeX));
                 spriteBatch.Draw(beamEmmitters, offset + new Vector2(emmiterX, NPC.position.Y + 4f + (1f - beamEmitterOutAmount) * height) - screenPos, new Rectangle(0, 0, beamEmmitters.Width, height), drawColor, NPC.rotation, new Vector2(beamEmmitters.Width / 2, height), Vector2.One, NPC.direction == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0);
                 spriteBatch.Draw(beamEmmitters, offset + new Vector2(emmiterX, NPC.Bottom.Y - (1f - beamEmitterOutAmount) * height) - screenPos, new Rectangle(0, height, beamEmmitters.Width, height), drawColor, NPC.rotation, new Vector2(beamEmmitters.Width / 2, 0), Vector2.One, NPC.direction == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0);
 
                 Vector2 distressOffset = new Vector2((NPC.direction == 1 ? 71 : NPC.width - 71), 8);
-                Texture2D distress = Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/InvaderBattleship/InvaderBattleship_Distress").Value;
+                Texture2D distress = ModContent.Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/InvaderBattleship/InvaderBattleship_Distress").Value;
                 spriteBatch.Draw(distress, offset + NPC.position + distressOffset - screenPos, new Rectangle(0, distressFrame * 40, 22, 40), drawColor, NPC.direction == 1 ? distressRotation : (MathF.PI - distressRotation) + MathF.PI, new Vector2(11, 35), 1f, SpriteEffects.None, 0);
                 if(launcher != null)
                 {
@@ -163,7 +165,7 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
 
                 NoehtnapSpells.DrawBody(spriteBatch, offset + NPC.position + new Vector2(NPC.direction == 1 ? centerEyeX : NPC.width - centerEyeX, 52) - screenPos, drawColor, pupilDirection, pupilStareOutAmount, true);
 
-                Texture2D garage = Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/InvaderBattleship/InvaderBattleship_GarageDoor").Value;
+                Texture2D garage = ModContent.Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/InvaderBattleship/InvaderBattleship_GarageDoor").Value;
                 int garageTop = 30;
                 int garageCenter = centerEyeX;
                 int garageHeight = garage.Height;
@@ -173,11 +175,11 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
 
                 Texture2D texture = TextureAssets.Npc[NPC.type].Value;
                 spriteBatch.Draw(texture, offset + NPC.Center - screenPos, null, drawColor, NPC.rotation, NPC.Size * 0.5f, Vector2.One, NPC.direction == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0);
-                Texture2D textureGlow = Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/InvaderBattleship/InvaderBattleship_Glow").Value;
+                Texture2D textureGlow = ModContent.Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/InvaderBattleship/InvaderBattleship_Glow").Value;
                 spriteBatch.Draw(textureGlow, offset + NPC.Center - screenPos, null, Color.White, NPC.rotation, NPC.Size * 0.5f, Vector2.One, NPC.direction == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0);
                 if(doTransition)
                 {
-                    Texture2D cracks = Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/InvaderBattleship/InvaderBattleship_Cracks").Value;
+                    Texture2D cracks = ModContent.Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/InvaderBattleship/InvaderBattleship_Cracks").Value;
                     float prog = (float)strafeTimer / 180f;
                     if(prog > 1f)
                     {
@@ -236,20 +238,25 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
             //Add the treasure bag (automatically checks for expert mode)
-            npcLoot.Add(ItemDropRule.BossBag(ItemType<BattleshipBag>())); //this requires you to set BossBag in SetDefaults accordingly
+            npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<BattleshipBag>())); //this requires you to set BossBag in SetDefaults accordingly
 
             LeadingConditionRule notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
 
-            //notExpertRule.OnSuccess(ItemDropRule.OneFromOptionsNotScalingWithLuck(1, ItemType<CaeliteMagicWeapon>(), ItemType<HolyExiler>(), ItemType<CaeliteRainKnife>(), ItemType<PriestStaff>()));
+            notExpertRule.OnSuccess(ItemDropRule.OneFromOptionsNotScalingWithLuck(1, ModContent.ItemType<SuperquantumRifle>(), ModContent.ItemType<DVRStaff>(), ModContent.ItemType<FightKit>()));
             //Finally add the leading rule
             //npcLoot.Add(notExpertRule);
 
             notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
-            notExpertRule.OnSuccess(ItemDropRule.Common(ItemType<InvaderPlating>(), 1, 80, 140));
+            notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<InvaderPlating>(), 1, 80, 140));
+            npcLoot.Add(notExpertRule);
+
+            //Boss masks are spawned with 1/7 chance
+            notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
+            notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<InvaderMask>(), 7));
             npcLoot.Add(notExpertRule);
 
             //Trophies are spawned with 1/10 chance
-           // npcLoot.Add(ItemDropRule.Common(ItemType<FortressBossTrophy>(), 10));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<InvaderBossTrophy>(), 10));
 
 
 			// ItemDropRule.MasterModeCommonDrop for the relic

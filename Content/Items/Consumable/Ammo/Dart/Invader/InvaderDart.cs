@@ -1,16 +1,15 @@
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using QwertyMod.Common.PlayerLayers;
+using QwertyMod.Content.Dusts;
+using QwertyMod.Content.Items.MiscMaterials;
+using System;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
-using QwertyMod.Content.Items.MiscMaterials;
-using System;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Terraria.GameContent;
-using Terraria.DataStructures;
-using QwertyMod.Common.PlayerLayers;
-using QwertyMod.Content.Dusts;
+
 
 namespace QwertyMod.Content.Items.Consumable.Ammo.Dart.Invader
 {
@@ -28,7 +27,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Dart.Invader
             Item.height = 20;
             Item.DamageType = DamageClass.Ranged;
             Item.ammo = AmmoID.Dart;
-            Item.shoot = ProjectileType<InvaderDartP>();
+            Item.shoot = ModContent.ProjectileType<InvaderDartP>();
             Item.shootSpeed = 3;
             Item.knockBack = 1;
             Item.rare = ItemRarityID.Orange;
@@ -36,7 +35,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Dart.Invader
             Item.maxStack = 9999;
             if (!Main.dedServ)
             {
-                Item.GetGlobalItem<ItemUseGlow>().glowTexture = Request<Texture2D>("QwertyMod/Content/Items/Consumable/Ammo/Dart/Invader/InvaderDart_Glow").Value;
+                Item.GetGlobalItem<ItemUseGlow>().glowTexture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Consumable/Ammo/Dart/Invader/InvaderDart_Glow").Value;
             }
         }
         public override void AddRecipes()
@@ -64,7 +63,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Dart.Invader
         {
             for (int r = 0; r < 1; r++)
             {
-                Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ProjectileType<DartSphere>(), Projectile.damage, 0, Projectile.owner);
+                Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<DartSphere>(), Projectile.damage, 0, Projectile.owner);
             }
         }
 
@@ -74,7 +73,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Dart.Invader
             Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition,
                         new Rectangle(0, Projectile.frame * texture.Height, texture.Width, texture.Height), lightColor, Projectile.rotation,
                         Projectile.Size * 0.5f, 1f, SpriteEffects.None, 0);
-            Main.EntitySpriteDraw(Request<Texture2D>("QwertyMod/Content/Items/Consumable/Ammo/Dart/Invader/InvaderDart_Glow").Value, Projectile.Center - Main.screenPosition,
+            Main.EntitySpriteDraw(ModContent.Request<Texture2D>("QwertyMod/Content/Items/Consumable/Ammo/Dart/Invader/InvaderDart_Glow").Value, Projectile.Center - Main.screenPosition,
                         new Rectangle(0, Projectile.frame * texture.Height, texture.Width, texture.Height), Color.White, Projectile.rotation,
                         Projectile.Size * 0.5f, 1f, SpriteEffects.None, 0);
             return false;

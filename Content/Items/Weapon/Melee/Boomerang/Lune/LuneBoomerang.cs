@@ -6,7 +6,6 @@ using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content.Items.Weapon.Melee.Boomerang.Lune
 {
@@ -14,8 +13,6 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Boomerang.Lune
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Lune Boomerang");
-            //Tooltip.SetDefault("Unlimited, pierces enemies" + "\nInflicts Lune curse making enemies more vulnerable to critical hits");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -24,10 +21,8 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Boomerang.Lune
             Item.damage = 19;
             Item.DamageType = DamageClass.MeleeNoSpeed;
             Item.noMelee = true;
-
             Item.useTime = 20;
             Item.useAnimation = 20;
-
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 0;
             Item.value = 20000;
@@ -36,40 +31,23 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Boomerang.Lune
             Item.noUseGraphic = true;
             Item.width = 34;
             Item.height = 34;
-
-            Item.shoot = ProjectileType<LuneBoomerangP>();
+            Item.shoot = ModContent.ProjectileType<LuneBoomerangP>();
             Item.shootSpeed = 10f;
             Item.channel = true;
         }
 
         public override void AddRecipes()
         {
-            CreateRecipe(1).AddIngredient(ItemType<LuneBar>(), 12)
+            CreateRecipe(1).AddIngredient(ModContent.ItemType<LuneBar>(), 12)
                 .AddTile(TileID.Anvils)
                 .Register();
         }
-
-        /*
-        public override bool CanUseItem(Player player)
-		{
-			for (int i = 0; i < 1000; ++i)
-			{
-				if (Main.projectile[i].active && Main.projectile[i].owner == Main.myPlayer && Main.projectile[i].type == Item.shoot)
-				{
-					return false;
-				}
-			}
-			return true;
-		}*/
-
     }
 
     public class LuneBoomerangP : ModProjectile
     {
         public override void SetDefaults()
         {
-            //Projectile.aiStyle = ProjectileID.WoodenBoomerang;
-            //aiType = 52;
             Projectile.friendly = true;
             Projectile.penetrate = -1;
             Projectile.width = 18;
@@ -77,11 +55,6 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Boomerang.Lune
             Projectile.DamageType = DamageClass.Melee;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 12;
-        }
-
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("Lune Boomerang");
         }
 
         private float speed;
@@ -101,7 +74,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Boomerang.Lune
                 maxSpeed = speed;
                 runOnce = false;
             }
-            Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<LuneDust>());
+            Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<LuneDust>());
             Projectile.rotation += MathHelper.ToRadians(maxSpeed * spinDirection);
             if (returnToPlayer)
             {
@@ -131,7 +104,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Boomerang.Lune
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.AddBuff(BuffType<LuneCurse>(), 60);
+            target.AddBuff(ModContent.BuffType<LuneCurse>(), 60);
         }
 
         public override bool OnTileCollide(Vector2 oldVelocity)

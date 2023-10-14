@@ -4,7 +4,7 @@ using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Minion.TileMinion
 {
@@ -12,8 +12,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.TileMinion
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Tile Staff");
-            //Tooltip.SetDefault("Moving diagonally? What's that?");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
@@ -29,7 +27,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.TileMinion
             Item.useStyle = ItemUseStyleID.Swing;
             Item.noMelee = true;
             Item.rare = ItemRarityID.LightRed;
-            Item.shoot = ProjectileType<TileMinion>();
+            Item.shoot = ModContent.ProjectileType<TileMinion>();
             Item.DamageType = DamageClass.Summon;
             Item.knockBack = 2.5f;
             Item.value = Item.sellPrice(gold: 3);

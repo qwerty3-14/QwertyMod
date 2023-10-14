@@ -8,8 +8,6 @@ namespace QwertyMod.Content.Buffs
     {
         public override void SetStaticDefaults()
         {
-            ////DisplayName,SetDefault("Dino Pox");
-            ////Description.SetDefault("Deadly enough to kill a dinosaur");
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = true;
             Main.buffNoSave[Type] = true;

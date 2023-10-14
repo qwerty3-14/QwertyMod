@@ -6,7 +6,7 @@ using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Tool.Mining.Caelite
 {
@@ -14,8 +14,6 @@ namespace QwertyMod.Content.Items.Tool.Mining.Caelite
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Caelite Pickaxe");
-            //Tooltip.SetDefault("Mines a 3x3 area");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -43,15 +41,15 @@ namespace QwertyMod.Content.Items.Tool.Mining.Caelite
 
         public override void AddRecipes()
         {
-            CreateRecipe().AddIngredient(ItemType<CaeliteBar>(), 16)
-                .AddIngredient(ItemType<CaeliteCore>(), 8)
+            CreateRecipe().AddIngredient(ModContent.ItemType<CaeliteBar>(), 16)
+                .AddIngredient(ModContent.ItemType<CaeliteCore>(), 8)
                 .AddTile(TileID.Anvils)
                 .Register();
         }
 
         public override void MeleeEffects(Player player, Rectangle hitbox)
         {
-            Dust.NewDust(new Vector2(hitbox.X, hitbox.Y), hitbox.Width, hitbox.Height, DustType<CaeliteDust>());
+            Dust.NewDust(new Vector2(hitbox.X, hitbox.Y), hitbox.Width, hitbox.Height, ModContent.DustType<CaeliteDust>());
             Lighting.AddLight(hitbox.Center.ToVector2(), new Vector3(.6f, .6f, .6f));
         }
     }

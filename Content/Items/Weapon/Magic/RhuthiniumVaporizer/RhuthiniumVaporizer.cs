@@ -9,7 +9,7 @@ using Terraria.GameContent;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Magic.RhuthiniumVaporizer
 {
@@ -17,7 +17,6 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RhuthiniumVaporizer
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Rhuthinium Vaporizer");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -30,7 +29,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RhuthiniumVaporizer
             Item.useTime = 10;
             Item.useAnimation = 10;
             Item.shootSpeed = 1f;
-            Item.shoot = ProjectileType<RhuthiniumVaporizerP>();
+            Item.shoot = ModContent.ProjectileType<RhuthiniumVaporizerP>();
             Item.DamageType = DamageClass.Magic;
             Item.channel = true;
             Item.autoReuse = true;
@@ -45,7 +44,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RhuthiniumVaporizer
 
         public override void AddRecipes()
         {
-            CreateRecipe(1).AddIngredient(ItemType<RhuthiniumBar>(), 8)
+            CreateRecipe(1).AddIngredient(ModContent.ItemType<RhuthiniumBar>(), 8)
                 .AddTile(TileID.Anvils)
                 .Register();
         }
@@ -79,10 +78,6 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RhuthiniumVaporizer
 
     public class RhuthiniumVaporizerP : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("Rhuthinium Vaporizer");
-        }
 
         public override void SetDefaults()
         {
@@ -149,7 +144,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RhuthiniumVaporizer
             }
             if (Main.rand.Next(200) < beamLength)
             {
-                Dust d = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(Main.rand.Next(beamLength), Projectile.rotation), DustType<RhuthiniumDust>());
+                Dust d = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(Main.rand.Next(beamLength), Projectile.rotation), ModContent.DustType<RhuthiniumDust>());
                 d.velocity *= 2;
                 d.noGravity = true;
                 d.frame.Y = 0;
@@ -158,7 +153,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RhuthiniumVaporizer
             {
                 for (int i = 0; i < 2; i++)
                 {
-                    Dust d = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(beamLength, Projectile.rotation), DustType<RhuthiniumDust>());
+                    Dust d = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(beamLength, Projectile.rotation), ModContent.DustType<RhuthiniumDust>());
                     d.velocity *= 2;
                     d.noGravity = true;
                     d.frame.Y = 0;
@@ -203,12 +198,12 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RhuthiniumVaporizer
             }
             Player drawPlayer = drawInfo.drawPlayer;
             Color lightColor = drawPlayer.GetImmuneAlphaPure(Lighting.GetColor((int)((double)drawInfo.Position.X + (double)drawPlayer.width * 0.5) / 16, (int)((double)drawInfo.Position.Y + (double)drawPlayer.height * 0.5) / 16, Microsoft.Xna.Framework.Color.White), 0f);
-            if (!drawPlayer.HeldItem.IsAir && drawPlayer.HeldItem.type == ItemType<RhuthiniumVaporizer>() && drawPlayer.itemAnimation > 0)
+            if (!drawPlayer.HeldItem.IsAir && drawPlayer.HeldItem.type == ModContent.ItemType<RhuthiniumVaporizer>() && drawPlayer.itemAnimation > 0)
             {
                 Projectile Projectile = null;
                 for (int i = 0; i < 1000; i++)
                 {
-                    if (Main.projectile[i].active && Main.projectile[i].type == ProjectileType<RhuthiniumVaporizerP>() && Main.projectile[i].owner == drawPlayer.whoAmI)
+                    if (Main.projectile[i].active && Main.projectile[i].type == ModContent.ProjectileType<RhuthiniumVaporizerP>() && Main.projectile[i].owner == drawPlayer.whoAmI)
                     {
                         Projectile = Main.projectile[i];
                         break;
@@ -216,7 +211,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RhuthiniumVaporizer
                 }
                 if (Projectile != null)
                 {
-                    Texture2D gun = TextureAssets.Item[ItemType<RhuthiniumVaporizer>()].Value;
+                    Texture2D gun = TextureAssets.Item[ModContent.ItemType<RhuthiniumVaporizer>()].Value;
                     DrawData d = new DrawData(gun, Projectile.Center - Main.screenPosition + (Main.player[Projectile.owner].direction == 1 ? Vector2.Zero : QwertyMethods.PolarVector(-10, Projectile.rotation + MathF.PI / 2)), null, lightColor, Projectile.rotation, new Vector2(54, 6), Vector2.One, (Main.player[Projectile.owner].direction == 1 ? SpriteEffects.None : SpriteEffects.FlipVertically), 0);
                     drawInfo.DrawDataCache.Add(d);
                     Texture2D texture = TextureAssets.Projectile[Projectile.type].Value;

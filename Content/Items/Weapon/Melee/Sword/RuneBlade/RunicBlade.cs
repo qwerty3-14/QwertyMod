@@ -8,7 +8,7 @@ using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Melee.Sword.RuneBlade
 {
@@ -16,8 +16,6 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.RuneBlade
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Rune Blade");
-            //Tooltip.SetDefault("Launches a spread Mini Ice Runes");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -38,11 +36,11 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.RuneBlade
             Item.height = 70;
 
             Item.autoReuse = true;
-            Item.shoot = ProjectileType<MiniIceRune>();
+            Item.shoot = ModContent.ProjectileType<MiniIceRune>();
             Item.shootSpeed = 9;
             if (!Main.dedServ)
             {
-                Item.GetGlobalItem<ItemUseGlow>().glowTexture = Request<Texture2D>("QwertyMod/Content/Items/Weapon/Melee/Sword/RuneBlade/RunicBlade_Glow").Value;
+                Item.GetGlobalItem<ItemUseGlow>().glowTexture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Melee/Sword/RuneBlade/RunicBlade_Glow").Value;
             }
         }
 
@@ -50,8 +48,8 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.RuneBlade
 
         public override void AddRecipes()
         {
-            CreateRecipe(1).AddIngredient(ItemType<CraftingRune>(), 15)
-                .AddIngredient(ItemType<AncientBlade.AncientBlade>())
+            CreateRecipe(1).AddIngredient(ModContent.ItemType<CraftingRune>(), 15)
+                .AddIngredient(ModContent.ItemType<AncientBlade.AncientBlade>())
                 .AddTile(TileID.Anvils)
                 .Register();
         }
@@ -99,7 +97,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.RuneBlade
             dustTimer++;
             if (dustTimer > 5)
             {
-                int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<IceRuneDeath>(), 0, 0, 0, default(Color), .2f);
+                int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<IceRuneDeath>(), 0, 0, 0, default(Color), .2f);
                 dustTimer = 0;
             }
         }
@@ -108,7 +106,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.RuneBlade
         {
             for (int d = 0; d <= 10; d++)
             {
-                Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<IceRuneDeath>());
+                Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<IceRuneDeath>());
             }
         }
 

@@ -1,9 +1,8 @@
 using QwertyMod.Content.Dusts;
 using Terraria;
 using Terraria.GameContent.Creative;
-using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace QwertyMod.Content.Items.MiscMaterials
 {
@@ -42,7 +41,7 @@ namespace QwertyMod.Content.Items.MiscMaterials
             {
                 Item.velocity.Y = 0f;
             }
-            Dust dust = Main.dust[Dust.NewDust(Item.position, Item.width, Item.height, DustType<CaeliteDust>())];
+            Dust dust = Main.dust[Dust.NewDust(Item.position, Item.width, Item.height, ModContent.DustType<CaeliteDust>())];
             dust.scale = .5f;
             Lighting.AddLight(Item.Center, 1f, 1f, 1f);
         }

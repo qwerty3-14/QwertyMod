@@ -1,6 +1,6 @@
-using Terraria.ModLoader;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace QwertyMod.Content.Items.MiscMaterials
 {

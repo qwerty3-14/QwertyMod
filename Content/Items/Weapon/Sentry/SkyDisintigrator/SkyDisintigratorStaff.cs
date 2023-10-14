@@ -1,16 +1,14 @@
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Content.Dusts;
-using QwertyMod.Content.Items.Consumable.Tiles.Bars;
-using System.Collections.Generic;
+using QwertyMod.Content.Items.MiscMaterials;
+using System;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using QwertyMod.Content.Items.MiscMaterials;
+
 
 namespace QwertyMod.Content.Items.Weapon.Sentry.SkyDisintigrator
 {
@@ -18,8 +16,6 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.SkyDisintigrator
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Sky Spiral Staff");
-            //Tooltip.SetDefault("Higher beings will punish all enemies near this sentry!");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
@@ -39,15 +35,15 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.SkyDisintigrator
             Item.value = GearStats.TrueCaeliteWeaponValue;
             Item.rare = ItemRarityID.Orange;
             Item.UseSound = SoundID.Item44;
-            Item.shoot = ProjectileType<SkyDisintigrator>();
+            Item.shoot = ModContent.ProjectileType<SkyDisintigrator>();
             Item.DamageType = DamageClass.Summon;
             Item.sentry = true;
         }
         
         public override void AddRecipes()
         {
-            CreateRecipe().AddIngredient(ItemType<SkySpiral.CaeliteSentryStaff>())
-            .AddIngredient(ItemType<SoulOfHeight>(), 10)
+            CreateRecipe().AddIngredient(ModContent.ItemType<SkySpiral.CaeliteSentryStaff>())
+            .AddIngredient(ModContent.ItemType<SoulOfHeight>(), 10)
                 .AddTile(TileID.MythrilAnvil)
                 .Register();
         }
@@ -65,7 +61,6 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.SkyDisintigrator
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Sky bound spiral");
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             Main.projFrames[Projectile.type] = 4;
             ProjectileID.Sets.DrawScreenCheckFluff[Projectile.type] = 5000;
@@ -90,10 +85,6 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.SkyDisintigrator
         NPC target = null;
         int chargeTime = 60;
         int attackCooldown = 10;
-        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
-        {
-            modifiers.ArmorPenetration += 20;
-        }
 
         public override void AI()
         {
@@ -122,7 +113,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.SkyDisintigrator
                     target = null;
                 }
             }
-            Dust dust2 = Main.dust[Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<CaeliteDust>())];
+            Dust dust2 = Main.dust[Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<CaeliteDust>())];
             Projectile.frameCounter++;
             if (Projectile.frameCounter > 10)
             {
@@ -163,7 +154,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.SkyDisintigrator
                     float projRotation = distToProj.ToRotation();
                     
 
-                    Main.EntitySpriteDraw(Request<Texture2D>("QwertyMod/Content/Items/Weapon/Sentry/RhuthiniumGuardian/laser").Value, Projectile.Center - Main.screenPosition,
+                    Main.EntitySpriteDraw(ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Sentry/RhuthiniumGuardian/laser").Value, Projectile.Center - Main.screenPosition,
                         null, Color.Yellow, projRotation,
                         new Vector2(0, 0.5f), new Vector2(distToProj.Length() * 0.5f, 0.5f), SpriteEffects.None, 0);
                 }

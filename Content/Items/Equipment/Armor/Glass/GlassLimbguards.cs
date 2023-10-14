@@ -2,7 +2,6 @@ using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ID.ArmorIDs;
 
 namespace QwertyMod.Content.Items.Equipment.Armor.Glass
 {
@@ -12,14 +11,13 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Glass
         public override void SetStaticDefaults()
         {
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
-            Legs.Sets.HidesBottomSkin[Item.legSlot] = true;
+            ArmorIDs.Legs.Sets.HidesBottomSkin[Item.legSlot] = true;
         }
 
         public override void SetDefaults()
         {
             Item.value = 10000;
             Item.rare = ItemRarityID.Blue;
-
             Item.width = 26;
             Item.height = 18;
             Item.defense = 4;

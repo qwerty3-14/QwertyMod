@@ -2,9 +2,8 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
-using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
 using Terraria.GameContent.Creative;
+using Terraria.ModLoader;
 using Terraria.ID;
 
 namespace QwertyMod.Content.Items.Weapon.Melee.Top.Cyclone
@@ -13,8 +12,6 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Top.Cyclone
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Cyclone");
-            //Tooltip.SetDefault("<3");
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
         public override void SetDefaults()
@@ -30,7 +27,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Top.Cyclone
             Item.shootSpeed = 3f;
             Item.useTime = 45;
             Item.useAnimation = 45;
-            Item.shoot = ProjectileType<CycloneP>();
+            Item.shoot = ModContent.ProjectileType<CycloneP>();
             Item.noUseGraphic = true;
             Item.noMelee = true;
             Item.autoReuse = true;
@@ -40,7 +37,6 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Top.Cyclone
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Cyclone");
             Main.projFrames[Projectile.type] = 2;
         }
 
@@ -91,7 +87,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Top.Cyclone
         {
             if (hitGround && Projectile.friendly)
             {
-                Texture2D texture = Request<Texture2D>("QwertyMod/Content/Items/Weapon/Melee/Top/Cyclone/CycloneSpout").Value;
+                Texture2D texture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Melee/Top/Cyclone/CycloneSpout").Value;
                 int height = texture.Height / 6;
                 float spoutRadius = 10f;
                 for (int i = 0; i < segments; i++)

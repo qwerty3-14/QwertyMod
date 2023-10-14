@@ -4,7 +4,7 @@ using System;
 using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 using Terraria.ID;
 
 namespace QwertyMod.Content.Items
@@ -13,9 +13,6 @@ namespace QwertyMod.Content.Items
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Soul Rod");
-            //Tooltip.SetDefault("Moves you toward your cursor when used");
-            Item.staff[Item.type] = true; //this makes the useStyle animate as a staff instead of as a gun
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -48,7 +45,7 @@ namespace QwertyMod.Content.Items
                 NetMessage.SendData(MessageID.PlayerControls, number: player.whoAmI);
             }
             player.noFallDmg = true;
-            int dust = Dust.NewDust(player.position, player.width, player.height, DustType<B4PDust>(), 0, 0);
+            int dust = Dust.NewDust(player.position, player.width, player.height, ModContent.DustType<B4PDust>(), 0, 0);
 
             return true;
         }

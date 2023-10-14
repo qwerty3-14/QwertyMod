@@ -2,19 +2,14 @@ using Microsoft.Xna.Framework;
 using QwertyMod.Content.Dusts;
 using System;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 using Terraria.ID;
 
 namespace QwertyMod.Content.NPCs.Bosses.OLORD
 {
     public class TurretShot : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("Pew Pew");
-        }
 
         public override void SetDefaults()
         {
@@ -25,14 +20,7 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
             Projectile.penetrate = -1;
             Projectile.timeLeft = 720;
             Projectile.tileCollide = false;
-            //Projectile.hide = true; // Prevents projectile from being drawn normally. Use in conjunction with DrawBehind.
         }
-
-        /*
-        public override void DrawBehind(int index, List<int> drawCacheProjsBehindNPCsAndTiles, List<int> drawCacheProjsBehindNPCs, List<int> drawCacheProjsBehindProjectiles, List<int> drawCacheProjsOverWiresUI)
-        {
-            drawCacheProjsOverWiresUI.Add(index);
-        }*/
 
         public override bool PreAI()
         {
@@ -44,7 +32,7 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
             Projectile.rotation += MathF.PI / 30;
             for (int i = 0; i < 1; i++)
             {
-                int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<B4PDust>());
+                int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<B4PDust>());
             }
         }
     }
@@ -81,7 +69,7 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
             Projectile.rotation += MathF.PI / 30;
             for (int i = 0; i < 1; i++)
             {
-                int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<B4PDust>());
+                int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<B4PDust>());
             }
         }
 
@@ -91,8 +79,8 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
         {
             if (Main.netMode != NetmodeID.MultiplayerClient && timeLeft > 1)
             {
-                QwertyMethods.ProjectileSpread(Projectile.GetSource_FromThis(), Projectile.Center, 4, shotSpeed, ProjectileType<TurretShot>(), Projectile.damage, Projectile.knockBack, Main.myPlayer);
-                QwertyMethods.ProjectileSpread(Projectile.GetSource_FromThis(), Projectile.Center, 4, shotSpeed * 1.5f, ProjectileType<TurretShot>(), Projectile.damage, Projectile.knockBack, Main.myPlayer, rotation: MathF.PI / 4);
+                QwertyMethods.ProjectileSpread(Projectile.GetSource_FromThis(), Projectile.Center, 4, shotSpeed, ModContent.ProjectileType<TurretShot>(), Projectile.damage, Projectile.knockBack, Main.myPlayer);
+                QwertyMethods.ProjectileSpread(Projectile.GetSource_FromThis(), Projectile.Center, 4, shotSpeed * 1.5f, ModContent.ProjectileType<TurretShot>(), Projectile.damage, Projectile.knockBack, Main.myPlayer, rotation: MathF.PI / 4);
             }
         }
     }
@@ -146,7 +134,7 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
             Projectile.rotation += MathF.PI / 30;
             for (int i = 0; i < 1; i++)
             {
-                int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<B4PDust>());
+                int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<B4PDust>());
             }
             closest = 10000;
         }
@@ -154,11 +142,6 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
 
     public class MagicMineLayer : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("Magic Mine");
-        }
-
         public override void SetDefaults()
         {
             Projectile.width = 14;
@@ -196,7 +179,7 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
         {
             if (Main.netMode != NetmodeID.MultiplayerClient)
             {
-                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center.X, Projectile.Center.Y, 0, 0, ProjectileType<MagicMine>(), Projectile.damage, 0, Main.myPlayer);
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center.X, Projectile.Center.Y, 0, 0, ModContent.ProjectileType<MagicMine>(), Projectile.damage, 0, Main.myPlayer);
             }
         }
     }
@@ -205,7 +188,6 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Magic Mine");
             Main.projFrames[Projectile.type] = 5;
         }
 

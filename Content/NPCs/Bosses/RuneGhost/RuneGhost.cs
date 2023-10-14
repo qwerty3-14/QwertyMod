@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Common;
 using QwertyMod.Common.RuneBuilder;
 using QwertyMod.Content.Items.Consumable.BossBag;
+using QwertyMod.Content.Items.Consumable.Tiles.Trophy.RuneGhost;
 using QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls;
 using QwertyMod.Content.Items.Equipment.Vanity.BossMasks;
 using QwertyMod.Content.Items.Equipment.Vanity.RunicRobe;
@@ -11,13 +12,12 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
 {
@@ -26,7 +26,6 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Rune Ghost");
             Main.npcFrameCount[NPC.type] = 8;
         }
 
@@ -186,7 +185,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
                         {
                             for (int i = 0; i < phase + 1; i++)
                             {
-                                Projectile rune = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Top + QwertyMethods.PolarVector(-120, MathF.PI * ((float)(i + 1) / (phase + 2))), Vector2.Zero, ProjectileType<BigRune>(), Main.expertMode ? 30 : 40, 0, Main.myPlayer)];
+                                Projectile rune = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Top + QwertyMethods.PolarVector(-120, MathF.PI * ((float)(i + 1) / (phase + 2))), Vector2.Zero, ModContent.ProjectileType<BigRune>(), Main.expertMode ? 30 : 40, 0, Main.myPlayer)];
 
                                 int newRune = lastRune == 5 ? Main.rand.Next(4) : Main.rand.Next(3);
                                 if (newRune >= lastRune)
@@ -259,35 +258,38 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
             //Add the treasure bag (automatically checks for expert mode)
-            npcLoot.Add(ItemDropRule.BossBag(ItemType<RuneGhostBag>())); //this requires you to set BossBag in SetDefaults accordingly
+            npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<RuneGhostBag>())); //this requires you to set BossBag in SetDefaults accordingly
 
             //All our drops here are based on "not expert", meaning we use .OnSuccess() to add them into the rule, which then gets added
             LeadingConditionRule notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
 
             // Notice we use notExpertRule.OnSuccess instead of npcLoot.Add so it only applies in normal mode
-            notExpertRule.OnSuccess(ItemDropRule.Common(ItemType<CraftingRune>(), 1, 25, 36));
+            notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<CraftingRune>(), 1, 25, 36));
             //Finally add the leading rule
             npcLoot.Add(notExpertRule);
 
             //Notice we use notExpertRule.OnSuccess instead of npcLoot.Add so it only applies in normal mode
-            notExpertRule.OnSuccess(ItemDropRule.OneFromOptionsNotScalingWithLuck(1, ItemType<AggroScroll>(), ItemType<PursuitScroll>(), ItemType<IceScroll>(), ItemType<LeechScroll>()));
+            notExpertRule.OnSuccess(ItemDropRule.OneFromOptionsNotScalingWithLuck(1, ModContent.ItemType<AggroScroll>(), ModContent.ItemType<PursuitScroll>(), ModContent.ItemType<IceScroll>(), ModContent.ItemType<LeechScroll>()));
             //Finally add the leading rule
             npcLoot.Add(notExpertRule);
 
 
             //Boss masks are spawned with 1/7 chance
             notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
-            notExpertRule.OnSuccess(ItemDropRule.Common(ItemType<RuneGhostMask>(), 7));
+            notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<RuneGhostMask>(), 7));
             npcLoot.Add(notExpertRule);
 
             notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
-            notExpertRule.OnSuccess(ItemDropRule.Common(ItemType<RunicRobe>(), 7));
+            notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<RunicRobe>(), 7));
             npcLoot.Add(notExpertRule);
 
             
 
 			// ItemDropRule.MasterModeCommonDrop for the relic
 			npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<Items.Consumable.Tiles.Relics.RuneGhostRelic>()));
+
+            //Trophies are spawned with 1/10 chance
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<RuneGhostTrophy>(), 10));
 
             base.ModifyNPCLoot(npcLoot);
         }

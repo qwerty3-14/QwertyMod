@@ -4,8 +4,9 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Equipment.Accessories.Combined
 {
@@ -33,7 +34,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Combined
         }
         public override void AddRecipes()
         {
-            CreateRecipe().AddIngredient(ItemType<EnchantedWhetstone>(), 1)
+            CreateRecipe().AddIngredient(ModContent.ItemType<EnchantedWhetstone>(), 1)
                 .AddIngredient(ItemID.MagmaStone, 1)
                 .AddTile(TileID.TinkerersWorkbench)
                 .Register();
@@ -104,13 +105,13 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Combined
 
     public class FieryWhetstoneTooltips : GlobalItem
     {
-        public override void ModifyTooltips(Terraria.Item item, List<TooltipLine> tooltips)
+        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
             Player player = Main.LocalPlayer;
             if (player.GetModPlayer<FieryWhetStoneEffect>().effect > 0f && item.CountsAsClass(DamageClass.Melee))
             {
                 int TLIndex = tooltips.FindIndex(TooltipLine => TooltipLine.Name.Equals("CritChance"));
-                TooltipLine line = new TooltipLine(Mod, "MagicBoost", (int)(item.damage * player.GetModPlayer<FieryWhetStoneEffect>().effect * player.GetDamage(DamageClass.Magic).Multiplicative) + " magic damage");
+                TooltipLine line = new TooltipLine(Mod, "MagicBoost", (int)(item.damage * player.GetModPlayer<FieryWhetStoneEffect>().effect * player.GetDamage(DamageClass.Magic).Multiplicative) + Language.GetTextValue(Mod.GetLocalizationKey("CustomTooltipWhetDamage")));
                 {
                     line.OverrideColor = Color.OrangeRed;
                 }
@@ -119,7 +120,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Combined
                     tooltips.Insert(TLIndex + 1, line);
                 }
 
-                line = new TooltipLine(Mod, "MagicBoostCrit", (player.GetCritChance(DamageClass.Magic) + 4) + "% critical strike chance");
+                line = new TooltipLine(Mod, "MagicBoostCrit", player.GetCritChance(DamageClass.Magic) + 4 + Language.GetTextValue(Mod.GetLocalizationKey("CustomTooltipWhetCrit")));
                 {
                     line.OverrideColor = Color.OrangeRed;
                 }

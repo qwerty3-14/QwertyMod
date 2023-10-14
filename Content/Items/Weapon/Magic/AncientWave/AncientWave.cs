@@ -6,7 +6,7 @@ using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 
 namespace QwertyMod.Content.Items.Weapon.Magic.AncientWave
@@ -15,8 +15,6 @@ namespace QwertyMod.Content.Items.Weapon.Magic.AncientWave
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Ancient Wave");
-            //Tooltip.SetDefault("Blows enemies away");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -38,10 +36,10 @@ namespace QwertyMod.Content.Items.Weapon.Magic.AncientWave
             Item.height = 30;
             if (!Main.dedServ)
             {
-                Item.GetGlobalItem<ItemUseGlow>().glowTexture = Request<Texture2D>("QwertyMod/Content/Items/Weapon/Magic/AncientWave/AncientWave_Glow").Value;
+                Item.GetGlobalItem<ItemUseGlow>().glowTexture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Magic/AncientWave/AncientWave_Glow").Value;
             }
             Item.mana = ModLoader.HasMod("TRAEProject") ? 32 : 12;
-            Item.shoot = ProjectileType<AncientWaveP>();
+            Item.shoot = ModContent.ProjectileType<AncientWaveP>();
             Item.shootSpeed = 9;
             Item.noMelee = true;
         }
@@ -51,12 +49,6 @@ namespace QwertyMod.Content.Items.Weapon.Magic.AncientWave
 
     public class AncientWaveP : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("Ancient Wave");
-        }
-
-
         public override void SetDefaults()
         {
             Projectile.aiStyle = 1;
@@ -77,7 +69,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.AncientWave
             dustTimer++;
             if (dustTimer > 5)
             {
-                int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<AncientGlow>(), 0, 0, 0, default(Color), .2f);
+                int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<AncientGlow>(), 0, 0, 0, default(Color), .2f);
                 dustTimer = 0;
             }
         }

@@ -1,9 +1,10 @@
+using Microsoft.Xna.Framework.Graphics;
+using QwertyMod.Common.PlayerLayers;
 using QwertyMod.Content.Items.MiscMaterials;
 using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content.Items.Equipment.Armor.Hydra
 {
@@ -22,6 +23,10 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Hydra
             Item.width = 22;
             Item.height = 18;
             Item.defense = 14;
+            if (!Main.dedServ)
+            {
+                Item.GetGlobalItem<ItemUseGlow>().glowTexture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Hydra/HydraLeggings_Glow").Value;
+            }
         }
 
         public override void UpdateEquip(Player player)
@@ -39,7 +44,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Hydra
 
         public override void AddRecipes()
         {
-            CreateRecipe(1).AddIngredient(ItemType<HydraScale>(), 18)
+            CreateRecipe(1).AddIngredient(ModContent.ItemType<HydraScale>(), 18)
                 .AddTile(TileID.Anvils)
                 .Register();
         }

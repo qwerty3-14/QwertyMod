@@ -9,7 +9,7 @@ using Terraria.GameContent;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 
 namespace QwertyMod.Content.Items.Weapon.Magic.HydraBeam
@@ -18,8 +18,6 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraBeam
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Hydra Beam");
-            //Tooltip.SetDefault("Creates a beam of destructive energy from the sky");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -39,7 +37,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraBeam
             Item.height = 30;
             Item.channel = true;
             Item.mana = ModLoader.HasMod("TRAEProject") ? 60 : 10;
-            Item.shoot = ProjectileType<BeamHead>();
+            Item.shoot = ModContent.ProjectileType<BeamHead>();
             Item.shootSpeed = 9;
             Item.noMelee = true;
         }
@@ -91,7 +89,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraBeam
             {
                 Projectile.position = new Vector2(player.Center.X, player.Center.Y - 900); ;
                 runOnce = false;
-                Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ProjectileType<HeadBeam>(), Projectile.damage, Projectile.knockBack, Projectile.owner, Projectile.whoAmI, 0f);
+                Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<HeadBeam>(), Projectile.damage, Projectile.knockBack, Projectile.owner, Projectile.whoAmI, 0f);
             }
 
             if (Main.LocalPlayer == player)
@@ -146,11 +144,6 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraBeam
             modifiers.HitDirectionOverride = shooter.velocity.X > 0 ? 1 : -1;
         }
 
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("Hydra Beam");
-        }
-
         public override void SetDefaults()
         {
             Projectile.width = 10;
@@ -178,7 +171,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraBeam
 
             Vector2 mousePos = Main.MouseWorld;
             Player player = Main.player[Projectile.owner];
-            if (!shooter.active || shooter.type != ProjectileType<BeamHead>())
+            if (!shooter.active || shooter.type != ModContent.ProjectileType<BeamHead>())
             {
                 Projectile.Kill();
             }

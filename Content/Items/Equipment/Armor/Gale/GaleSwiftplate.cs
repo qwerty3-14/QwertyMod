@@ -10,7 +10,6 @@ using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content.Items.Equipment.Armor.Gale
 {
@@ -19,8 +18,6 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Gale
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Gale Swiftplate");
-            //Tooltip.SetDefault("+10% chance to dodge an attack" + "\n+10% critical strike chance" + "\nAllows you to cling to walls" + "\nDamage increased by 20% while clinging to walls");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -36,7 +33,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Gale
 
         public override bool IsArmorSet(Item head, Item body, Item legs)
         {
-            return head.type == ItemType<GaleSwiftHelm>() && legs.type == ItemType<GaleSwiftRobes>();
+            return head.type == ModContent.ItemType<GaleSwiftHelm>() && legs.type == ModContent.ItemType<GaleSwiftRobes>();
         }
 
         public override void UpdateArmorSet(Player player)
@@ -57,8 +54,8 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Gale
         }
         public override void AddRecipes()
         {
-            CreateRecipe(1).AddIngredient(ItemType<CaeliteBar>(), 10)
-                .AddIngredient(ItemType<FortressHarpyBeak>(), 10)
+            CreateRecipe(1).AddIngredient(ModContent.ItemType<CaeliteBar>(), 10)
+                .AddIngredient(ModContent.ItemType<FortressHarpyBeak>(), 10)
                 .AddTile(TileID.Anvils)
                 .Register();
         }
@@ -66,10 +63,6 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Gale
 
     public class GaleKnife : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("Gale Knife");
-        }
 
         public override void SetDefaults()
         {
@@ -167,7 +160,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Gale
                                 Position.X += MathF.Sin(orb[b, Player.whoAmI].Y) * 50;
                                 Position.Y += MathF.Sin(orb[b, Player.whoAmI].Y) * 50 * MathF.Sin(counter);
                                 float speed = 10;
-                                Projectile.NewProjectile(new EntitySource_Misc("SetBonus_Gale"), Position, (Main.MouseWorld - Position).SafeNormalize(-Vector2.UnitY) * speed, ProjectileType<GaleKnife>(), (int)(75f * Player.GetDamage(DamageClass.Generic).Multiplicative), 3f, Player.whoAmI);
+                                Projectile.NewProjectile(new EntitySource_Misc("SetBonus_Gale"), Position, (Main.MouseWorld - Position).SafeNormalize(-Vector2.UnitY) * speed, ModContent.ProjectileType<GaleKnife>(), (int)(75f * Player.GetDamage(DamageClass.Generic).Multiplicative), 3f, Player.whoAmI);
                                 orb[b, Player.whoAmI].X = 0;
                             }
                         }
@@ -257,7 +250,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Gale
             if(!drawPlayer.TryGetModPlayer<GaleSetBonus>(out GaleSetBonus modPlayer)){ return; }
             Mod mod = ModLoader.GetMod("QwertyMod");
 
-            Texture2D texture = Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Gale/GaleOrb").Value;
+            Texture2D texture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Gale/GaleOrb").Value;
 
             for (int b = 0; b < 10; b++)
             {
@@ -300,7 +293,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Gale
             if(!drawPlayer.TryGetModPlayer<GaleSetBonus>(out GaleSetBonus modPlayer)){ return; }
             Mod mod = ModLoader.GetMod("QwertyMod");
 
-            Texture2D texture = Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Gale/GaleOrb").Value;
+            Texture2D texture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Gale/GaleOrb").Value;
 
             for (int b = 0; b < 10; b++)
             {

@@ -4,14 +4,13 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 namespace QwertyMod.Content.Items.Weapon.Minion.MiniTank
 {
     public class MiniTankCannonBallFreindly : ModProjectile
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Tank!!");
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             ProjectileID.Sets.MinionShot[Projectile.type] = true;
         }
@@ -64,13 +63,13 @@ namespace QwertyMod.Content.Items.Weapon.Minion.MiniTank
         {
             Projectile.localNPCImmunity[target.whoAmI] = -1;
             target.immune[Projectile.owner] = 0;
-            Projectile e = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ProjectileType<MiniTankBlast>(), Projectile.damage, Projectile.knockBack, Projectile.owner)];
+            Projectile e = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<MiniTankBlast>(), Projectile.damage, Projectile.knockBack, Projectile.owner)];
             e.localNPCImmunity[target.whoAmI] = -1;
         }
 
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            Projectile e = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ProjectileType<MiniTankBlast>(), Projectile.damage, Projectile.knockBack, Projectile.owner)];
+            Projectile e = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<MiniTankBlast>(), Projectile.damage, Projectile.knockBack, Projectile.owner)];
             return true;
         }
 
@@ -102,7 +101,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.MiniTank
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Tank!!");
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             ProjectileID.Sets.MinionShot[Projectile.type] = true;
         }

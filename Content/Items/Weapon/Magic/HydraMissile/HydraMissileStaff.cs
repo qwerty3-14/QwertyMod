@@ -6,7 +6,7 @@ using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 
 namespace QwertyMod.Content.Items.Weapon.Magic.HydraMissile
@@ -15,8 +15,6 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraMissile
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Hydra Missile Rod");
-            //Tooltip.SetDefault("Fires a Hydra head that explodes and splits into more hydra heads which explodes and splits into more hydra heads!");
             Item.staff[Item.type] = true; //this makes the useStyle animate as a staff instead of as a gun
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
@@ -36,7 +34,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraMissile
             Item.rare = ItemRarityID.Pink;
             Item.UseSound = SoundID.Item43;
             Item.autoReuse = true;
-            Item.shoot = ProjectileType<HydraMissileBig>();
+            Item.shoot = ModContent.ProjectileType<HydraMissileBig>();
             Item.DamageType = DamageClass.Magic;
             Item.shootSpeed = 8;
         }
@@ -91,7 +89,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraMissile
                 direction = QwertyMethods.SlowRotation(direction, (target.Center - Projectile.Center).ToRotation(), 3f);
             }
             Projectile.velocity = new Vector2(MathF.Cos(direction) * speed, MathF.Sin(direction) * speed);
-            Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<HydraBeamGlow>());
+            Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<HydraBeamGlow>());
             Projectile.rotation = direction + (MathF.PI / 2);
         }
 
@@ -104,13 +102,13 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraMissile
             Projectile.position.Y = Projectile.position.Y - (float)(Projectile.height / 2);
             for (int d = 0; d < 400; d++)
             {
-                Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<HydraBeamGlow>());
+                Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<HydraBeamGlow>());
             }
             //Main.PlaySound(SoundID.Item62, Projectile.position);
             for (int g = 0; g < 2; g++)
             {
                 float launchDirection = Main.rand.NextFloat() * MathF.PI * 2;
-                Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, new Vector2(MathF.Cos(launchDirection) * speed, MathF.Sin(launchDirection) * speed), ProjectileType<HydraMissileMedium>(), (int)(Projectile.damage * .6f), Projectile.knockBack * .6f, Projectile.owner);
+                Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, new Vector2(MathF.Cos(launchDirection) * speed, MathF.Sin(launchDirection) * speed), ModContent.ProjectileType<HydraMissileMedium>(), (int)(Projectile.damage * .6f), Projectile.knockBack * .6f, Projectile.owner);
             }
         }
     }
@@ -147,7 +145,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraMissile
                 direction = QwertyMethods.SlowRotation(direction, (target.Center - Projectile.Center).ToRotation(), 3f);
             }
             Projectile.velocity = new Vector2(MathF.Cos(direction) * speed, MathF.Sin(direction) * speed);
-            Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<HydraBeamGlow>());
+            Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<HydraBeamGlow>());
             Projectile.rotation = direction + (MathF.PI / 2);
         }
 
@@ -166,13 +164,13 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraMissile
             Projectile.position.Y = Projectile.position.Y - (float)(Projectile.height / 2);
             for (int d = 0; d < 200; d++)
             {
-                Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<HydraBeamGlow>());
+                Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<HydraBeamGlow>());
             }
             //Main.PlaySound(SoundID.Item62, Projectile.position);
             for (int g = 0; g < 2; g++)
             {
                 float launchDirection = Main.rand.NextFloat() * MathF.PI * 2;
-                Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, new Vector2(MathF.Cos(launchDirection) * speed, MathF.Sin(launchDirection) * speed), ProjectileType<HydraMissileSmall>(), (int)(Projectile.damage * .6f), Projectile.knockBack * .6f, Projectile.owner);
+                Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, new Vector2(MathF.Cos(launchDirection) * speed, MathF.Sin(launchDirection) * speed), ModContent.ProjectileType<HydraMissileSmall>(), (int)(Projectile.damage * .6f), Projectile.knockBack * .6f, Projectile.owner);
             }
         }
     }
@@ -210,7 +208,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraMissile
                 direction = QwertyMethods.SlowRotation(direction, (target.Center - Projectile.Center).ToRotation(), 3f);
             }
             Projectile.velocity = new Vector2(MathF.Cos(direction) * speed, MathF.Sin(direction) * speed);
-            Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<HydraBeamGlow>());
+            Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<HydraBeamGlow>());
             Projectile.rotation = direction + (MathF.PI / 2);
         }
 
@@ -227,7 +225,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraMissile
             Projectile.position.Y = Projectile.position.Y - (float)(Projectile.height / 2);
             for (int d = 0; d < 100; d++)
             {
-                Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<HydraBeamGlow>());
+                Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<HydraBeamGlow>());
             }
         }
     }

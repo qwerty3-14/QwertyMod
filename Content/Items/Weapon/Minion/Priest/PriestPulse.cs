@@ -3,7 +3,7 @@ using QwertyMod.Content.Dusts;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Minion.Priest
 {
@@ -11,7 +11,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.Priest
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Preist Pulse");
             Main.projFrames[Projectile.type] = 2;
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             ProjectileID.Sets.MinionShot[Projectile.type] = true;
@@ -37,14 +36,14 @@ namespace QwertyMod.Content.Items.Weapon.Minion.Priest
         {
             if (Main.rand.NextBool(10))
             {
-                target.AddBuff(BuffType<PowerDown>(), 120);
+                target.AddBuff(ModContent.BuffType<PowerDown>(), 120);
             }
         }
         public override void OnKill(int timeLeft)
         {
             for (int i = 0; i < 2; i++)
             {
-                Dust dust = Main.dust[Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<CaeliteDust>())];
+                Dust dust = Main.dust[Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<CaeliteDust>())];
                 dust.velocity *= 3f;
             }
         }

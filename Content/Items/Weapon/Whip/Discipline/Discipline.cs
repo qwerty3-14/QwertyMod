@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Whip.Discipline
 {
@@ -11,8 +11,6 @@ namespace QwertyMod.Content.Items.Weapon.Whip.Discipline
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Discipline");
-            //Tooltip.SetDefault("Your minions will gain speed when attacking struck enemies");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
         public override void SetDefaults()
@@ -30,7 +28,6 @@ namespace QwertyMod.Content.Items.Weapon.Whip.Discipline
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Discipline");
             ProjectileID.Sets.IsAWhip[Type] = true;
         }
         public override void WhipDefaults()
@@ -40,15 +37,13 @@ namespace QwertyMod.Content.Items.Weapon.Whip.Discipline
 
             originalColor = new Color(128, 39, 83);
             fallOff = 0.15f;
-            tag = BuffType<DisciplineTag>();
+            tag = ModContent.BuffType<DisciplineTag>();
         }
     }
     public class DisciplineTag : ModBuff
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Disciplined");
-            //Description.SetDefault("Minions will attack faster");
             Main.debuff[Type] = true;
         }
     }

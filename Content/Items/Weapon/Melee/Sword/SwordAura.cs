@@ -1,11 +1,10 @@
 using Microsoft.Xna.Framework;
-using System;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
-using Terraria.GameContent;
-using static Terraria.Main;
-using Terraria.ModLoader;
+using System;
 using Terraria;
+using Terraria.GameContent;
+using Terraria.ModLoader;
 
 namespace QwertyMod.Content.Items.Weapon.Melee.Sword
 {
@@ -99,7 +98,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword
         }
         public static void DrawProj_BladeAura(Projectile proj, Color[] colorArray)
         {
-            Vector2 vector = proj.Center - screenPosition;
+            Vector2 vector = proj.Center - Main.screenPosition;
             Asset<Texture2D> texture = TextureAssets.Projectile[proj.type];
             Rectangle rectangle = texture.Frame(1, 4);
             Vector2 origin = rectangle.Size() / 2f;
@@ -119,13 +118,13 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword
             Color color5 = whiteOverlay * lightingMultiplier * 0.5f;
             color5.G = (byte)((float)(int)color5.G * lightingMultiplier);
             color5.B = (byte)((float)(int)color5.R * (0.25f + lightingMultiplier * 0.75f));
-            spriteBatch.Draw(texture.Value, vector, rectangle, blue * lightingMultiplier * remappedProgress, proj.rotation + proj.ai[0] * (MathF.PI / 4f) * -1f * (1f - progress), origin, num * 0.95f, effects, 0f);
-            spriteBatch.Draw(texture.Value, vector, rectangle, color5 * 0.15f, proj.rotation + proj.ai[0] * 0.01f, origin, num, effects, 0f);
-            spriteBatch.Draw(texture.Value, vector, rectangle, green * lightingMultiplier * remappedProgress * 0.3f, proj.rotation, origin, num, effects, 0f);
-            spriteBatch.Draw(texture.Value, vector, rectangle, lime * lightingMultiplier * remappedProgress * 0.5f, proj.rotation, origin, num * num4, effects, 0f);
-            spriteBatch.Draw(texture.Value, vector, texture.Frame(1, 4, 0, 3), Color.White * 0.6f * remappedProgress, proj.rotation + proj.ai[0] * 0.01f, origin, num, effects, 0f);
-            spriteBatch.Draw(texture.Value, vector, texture.Frame(1, 4, 0, 3), Color.White * 0.5f * remappedProgress, proj.rotation + proj.ai[0] * -0.05f, origin, num * 0.8f, effects, 0f);
-            spriteBatch.Draw(texture.Value, vector, texture.Frame(1, 4, 0, 3), Color.White * 0.4f * remappedProgress, proj.rotation + proj.ai[0] * -0.1f, origin, num * 0.6f, effects, 0f);
+            Main.spriteBatch.Draw(texture.Value, vector, rectangle, blue * lightingMultiplier * remappedProgress, proj.rotation + proj.ai[0] * (MathF.PI / 4f) * -1f * (1f - progress), origin, num * 0.95f, effects, 0f);
+            Main.spriteBatch.Draw(texture.Value, vector, rectangle, color5 * 0.15f, proj.rotation + proj.ai[0] * 0.01f, origin, num, effects, 0f);
+            Main.spriteBatch.Draw(texture.Value, vector, rectangle, green * lightingMultiplier * remappedProgress * 0.3f, proj.rotation, origin, num, effects, 0f);
+            Main.spriteBatch.Draw(texture.Value, vector, rectangle, lime * lightingMultiplier * remappedProgress * 0.5f, proj.rotation, origin, num * num4, effects, 0f);
+            Main.spriteBatch.Draw(texture.Value, vector, texture.Frame(1, 4, 0, 3), Color.White * 0.6f * remappedProgress, proj.rotation + proj.ai[0] * 0.01f, origin, num, effects, 0f);
+            Main.spriteBatch.Draw(texture.Value, vector, texture.Frame(1, 4, 0, 3), Color.White * 0.5f * remappedProgress, proj.rotation + proj.ai[0] * -0.05f, origin, num * 0.8f, effects, 0f);
+            Main.spriteBatch.Draw(texture.Value, vector, texture.Frame(1, 4, 0, 3), Color.White * 0.4f * remappedProgress, proj.rotation + proj.ai[0] * -0.1f, origin, num * 0.6f, effects, 0f);
             for (float num6 = 0f; num6 < 12f; num6 += 1f)
             {
                 float num7 = proj.rotation + proj.ai[0] * (num6 - 2f) * (MathF.PI * -2f) * 0.025f + Utils.Remap(progress, 0f, 1f, 0f, MathF.PI / 4f) * proj.ai[0];

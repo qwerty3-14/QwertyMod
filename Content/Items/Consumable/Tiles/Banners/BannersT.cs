@@ -1,14 +1,12 @@
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using QwertyMod.Content.NPCs.DinoMilitia;
 using QwertyMod.Content.NPCs.Fortress;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.Enums;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
-using static Terraria.ModLoader.ModContent;
-using QwertyMod.Content.NPCs.DinoMilitia;
-using Terraria.GameContent.Drawing;
+
 
 namespace QwertyMod.Content.Items.Consumable.Tiles.Banners
 {
@@ -58,47 +56,47 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Banners
                 switch (style)
                 {
                     case 0:
-                        type = NPCType<Hopper>();
+                        type = ModContent.NPCType<Hopper>();
                         break;
 
                     case 1:
-                        type = NPCType<Crawler>();
+                        type = ModContent.NPCType<Crawler>();
                         break;
 
                     case 2:
-                        type = NPCType<GuardTile>();
+                        type = ModContent.NPCType<GuardTile>();
                         break;
 
                     case 3:
-                        type = NPCType<FortressFlier>();
+                        type = ModContent.NPCType<FortressFlier>();
                         break;
 
                     case 4:
-                        type = NPCType<Caster>();
+                        type = ModContent.NPCType<Caster>();
                         break;
                     /*
                 case 5:
-                    type = NPCType<Spector>();
+                    type = ModContent.NPCType<Spector>();
                     break;
                     */
                 case 6:
-                    type = NPCType<Triceratank>();
+                    type = ModContent.NPCType<Triceratank>();
                     break;
 
                 case 7:
-                    type = NPCType<Utah>();
+                    type = ModContent.NPCType<Utah>();
                     break;
 
                 case 8:
-                    type = NPCType<Velocichopper>();
+                    type = ModContent.NPCType<Velocichopper>();
                     break;
 
                 case 9:
-                    type = NPCType<AntiAir>();
+                    type = ModContent.NPCType<AntiAir>();
                     break;
 
                     case 10:
-                        type = NPCType<Swarmer>();
+                        type = ModContent.NPCType<Swarmer>();
                         break;
 
                     default:

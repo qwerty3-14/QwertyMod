@@ -1,10 +1,10 @@
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Terraria;
-using Terraria.ModLoader;
+using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
-using Terraria.DataStructures;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
+using Terraria.ModLoader;
 
 namespace QwertyMod.Content.Items.Equipment.Vanity.SuitSkirt
 {

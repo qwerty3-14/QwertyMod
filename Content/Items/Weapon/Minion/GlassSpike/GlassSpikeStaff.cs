@@ -4,15 +4,13 @@ using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 namespace QwertyMod.Content.Items.Weapon.Minion.GlassSpike
 {
     class GlassSpikeStaff : ModItem
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Glass Spike Staff");
-            //Tooltip.SetDefault("Summon spikes that rest on the ground, damaging enemies that step on them \nWill reposition if you walk away");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
@@ -34,7 +32,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.GlassSpike
             Item.rare = ItemRarityID.Blue;
             Item.UseSound = SoundID.Item44;
             Item.autoReuse = true;
-            Item.shoot = ProjectileType<GlassSpike>();
+            Item.shoot = ModContent.ProjectileType<GlassSpike>();
             Item.DamageType = DamageClass.Summon;
         }
 

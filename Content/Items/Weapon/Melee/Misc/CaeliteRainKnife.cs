@@ -6,7 +6,6 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
 using Terraria.ID;
 
 
@@ -16,8 +15,6 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Misc
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Divine Hail Knife");
-            //Tooltip.SetDefault("Higher beings will throw these from the sky!");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -34,7 +31,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Misc
             Item.shootSpeed = 12f;
             Item.useTime = 5;
             Item.useAnimation = 15;
-            Item.shoot = ProjectileType<CaeliteRainKnifeP>();
+            Item.shoot = ModContent.ProjectileType<CaeliteRainKnifeP>();
             Item.noUseGraphic = true;
             Item.noMelee = true;
             Item.autoReuse = true;
@@ -77,7 +74,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Misc
             {
                 if (Main.rand.NextBool(10))
                 {
-                    target.AddBuff(BuffType<PowerDown>(), 120);
+                    target.AddBuff(ModContent.BuffType<PowerDown>(), 120);
                 }
             }
 
@@ -85,7 +82,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Misc
             {
                 if (Main.rand.NextBool(10))
                 {
-                    Dust dust = Dust.NewDustPerfect(Projectile.Center, DustType<CaeliteDust>(), Vector2.Zero);
+                    Dust dust = Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<CaeliteDust>(), Vector2.Zero);
                     dust.frame.Y = 0;
                 }
                 if (runOnce)
@@ -105,7 +102,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Misc
             {
                 for (int i = 0; i < 6; i++)
                 {
-                    Dust dust = Main.dust[Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<CaeliteDust>())];
+                    Dust dust = Main.dust[Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<CaeliteDust>())];
                 }
             }
         }

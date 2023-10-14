@@ -10,8 +10,6 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Dino Tooth");
-            //Tooltip.SetDefault("Increases armor penetration by 18");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 

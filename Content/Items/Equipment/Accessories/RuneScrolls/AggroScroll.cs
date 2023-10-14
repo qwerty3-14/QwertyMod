@@ -3,10 +3,8 @@ using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Common.RuneBuilder;
 using System;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
 using Terraria.ID;
 
 namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
@@ -15,8 +13,6 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Aggro Scroll");
-            //Tooltip.SetDefault("An aggro rune occasionally fires");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -77,7 +73,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
             }
             if (timer % 120 == 90 && Main.netMode != NetmodeID.MultiplayerClient)
             {
-                Projectile.NewProjectile(Projectile.GetSource_FromThis(), player.Center, QwertyMethods.PolarVector(1, Projectile.rotation), ProjectileType<AggroStrikeFriendly>(), Projectile.damage, 0, Projectile.owner);
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), player.Center, QwertyMethods.PolarVector(1, Projectile.rotation), ModContent.ProjectileType<AggroStrikeFriendly>(), Projectile.damage, 0, Projectile.owner);
             }
             if (timer % 120 == 119)
             {
@@ -108,7 +104,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
         {
             if (timer % 120 > 30 && timer % 120 < 90)
             {
-                Texture2D texture = Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/RuneGhost/AggroLaser").Value;
+                Texture2D texture = ModContent.Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/RuneGhost/AggroLaser").Value;
                 Main.EntitySpriteDraw(texture, Main.player[Projectile.owner].Center - Main.screenPosition, null, Color.White, Projectile.rotation, Vector2.UnitY, new Vector2(1500, 1), 0, 0);
             }
         }

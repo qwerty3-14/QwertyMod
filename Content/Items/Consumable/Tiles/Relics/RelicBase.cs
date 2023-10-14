@@ -1,14 +1,14 @@
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
-using Microsoft.Xna.Framework.Graphics;
 using Terraria.Enums;
-using System;
 using ReLogic.Content;
-using Terraria.Localization;
+using System;
 
 namespace QwertyMod.Content.Items.Consumable.Tiles.Relics
 {

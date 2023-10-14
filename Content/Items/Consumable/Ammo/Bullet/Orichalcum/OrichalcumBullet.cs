@@ -2,7 +2,7 @@
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Consumable.Ammo.Bullet.Orichalcum
 {
@@ -26,7 +26,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Bullet.Orichalcum
             Item.shootSpeed = 2;
 
             Item.consumable = true;
-            Item.shoot = ProjectileType<OrichalcumBulletP>();
+            Item.shoot = ModContent.ProjectileType<OrichalcumBulletP>();
             Item.ammo = 97;
             Item.maxStack = 9999;
         }

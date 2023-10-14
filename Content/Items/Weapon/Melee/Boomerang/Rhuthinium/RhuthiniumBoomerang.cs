@@ -6,7 +6,7 @@ using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Melee.Boomerang.Rhuthinium
 {
@@ -14,8 +14,6 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Boomerang.Rhuthinium
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Rhuthinium Boomerang");
-            //Tooltip.SetDefault("Hold down the throw button to make it fly further" + "\nRight click to make the boomerang stationary");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -25,7 +23,6 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Boomerang.Rhuthinium
             Item.damage = 26;
             Item.DamageType = DamageClass.MeleeNoSpeed;
             Item.noMelee = true;
-
             Item.useTime = 14;
             Item.useAnimation = 14;
             Item.useStyle = ItemUseStyleID.Shoot;
@@ -38,18 +35,16 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Boomerang.Rhuthinium
             Item.height = 32;
             Item.crit = 5;
             Item.autoReuse = true;
-            Item.shoot = ProjectileType<RhuthiniumBoomerangP>();
+            Item.shoot = ModContent.ProjectileType<RhuthiniumBoomerangP>();
             Item.shootSpeed = 10;
             Item.channel = true;
         }
         public override void AddRecipes()
         {
-            CreateRecipe(1).AddIngredient(ItemType<RhuthiniumBar>(), 8)
+            CreateRecipe(1).AddIngredient(ModContent.ItemType<RhuthiniumBar>(), 8)
                 .AddTile(TileID.Anvils)
                 .Register();
         }
-
-
         public override bool CanUseItem(Player player)
         {
             return player.ownedProjectileCounts[Item.shoot] <= 0;
@@ -60,20 +55,12 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Boomerang.Rhuthinium
     {
         public override void SetDefaults()
         {
-            //Projectile.aiStyle = ProjectileID.WoodenBoomerang;
-            //aiType = 52;
             Projectile.friendly = true;
             Projectile.penetrate = -1;
             Projectile.width = 28;
             Projectile.height = 32;
             Projectile.DamageType = DamageClass.Melee;
         }
-
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("RhuthiniumBoomerang");
-        }
-
         public int timer;
         public bool runOnce = true;
         public int spinDirection;
@@ -83,7 +70,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Boomerang.Rhuthinium
         {
             if (Main.rand.NextBool(10))
             {
-                Dust d = Main.dust[Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<RhuthiniumDust>())];
+                Dust d = Main.dust[Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<RhuthiniumDust>())];
                 d.frame.Y = Main.rand.NextBool(2) ? 0 : 10;
                 d.noGravity = true;
             }

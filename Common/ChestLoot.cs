@@ -1,7 +1,7 @@
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 using System.Linq;
 using QwertyMod.Content.Items.Consumable.BossSummon;
 

@@ -3,7 +3,6 @@ using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content.Items.Equipment.Accessories.Sword
 {
@@ -11,8 +10,6 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Sword
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Swordmasters Seal");
-            //Tooltip.SetDefault("Greatly enhances swordplay performance!" + "\nMakes your sword much larger" + "\nHitting things with your sword while airborne does more damage" + "\nStriking with a sword increases critical chance");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -33,9 +30,9 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Sword
         }
         public override void AddRecipes()
         {
-            CreateRecipe().AddIngredient(ItemType<SwordsmanBadge>())
-                .AddIngredient(ItemType<SkywardHilt>())
-                .AddIngredient(ItemType<SwordEnlarger>())
+            CreateRecipe().AddIngredient(ModContent.ItemType<SwordsmanBadge>())
+                .AddIngredient(ModContent.ItemType<SkywardHilt>())
+                .AddIngredient(ModContent.ItemType<SwordEnlarger>())
                 .AddTile(TileID.TinkerersWorkbench)
                 .Register();
         }

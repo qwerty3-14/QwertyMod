@@ -2,7 +2,7 @@
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Mythril
 {
@@ -26,7 +26,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Mythril
             Item.shootSpeed = 15;
 
             Item.consumable = true;
-            Item.shoot = ProjectileType<MythrilArrowP>();
+            Item.shoot = ModContent.ProjectileType<MythrilArrowP>();
             Item.ammo = 40;
             Item.maxStack = 9999;
         }

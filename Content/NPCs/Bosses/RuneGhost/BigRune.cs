@@ -3,9 +3,8 @@ using QwertyMod.Common.RuneBuilder;
 using QwertyMod.Content.Dusts;
 using System;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 using Terraria.ID;
 
 namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
@@ -44,7 +43,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
                             {
                                 for (int i = 0; i < 8; i++)
                                 {
-                                    Projectile p = Main.projectile[Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<AggroRune>(), (int)(Projectile.damage * 1.3f), 0, Main.myPlayer)];
+                                    Projectile p = Main.projectile[Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<AggroRune>(), (int)(Projectile.damage * 1.3f), 0, Main.myPlayer)];
                                     p.rotation = (i / 8f) * MathF.PI * 2;
                                 }
                             }
@@ -68,7 +67,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
                                 if (closestPlayer != null)
                                 {
                                     float r = Main.rand.NextFloat(-MathF.PI, MathF.PI);
-                                    Projectile p = Main.projectile[Projectile.NewProjectile(Projectile.GetSource_FromThis(), closestPlayer.Center + QwertyMethods.PolarVector(160f, r), Vector2.Zero, ProjectileType<LeechRune>(), (int)(Projectile.damage), 0, Main.myPlayer)];
+                                    Projectile p = Main.projectile[Projectile.NewProjectile(Projectile.GetSource_FromThis(), closestPlayer.Center + QwertyMethods.PolarVector(160f, r), Vector2.Zero, ModContent.ProjectileType<LeechRune>(), (int)(Projectile.damage), 0, Main.myPlayer)];
                                 }
                             }
                         }
@@ -79,7 +78,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
                             madeRunes = true;
                             if (Main.netMode != NetmodeID.Server)
                             {
-                                Projectile p = Main.projectile[Projectile.NewProjectile(Projectile.GetSource_FromThis(), Main.LocalPlayer.Center, Vector2.Zero, ProjectileType<IceRune>(), (int)(Projectile.damage * 1.6f), 0, Main.myPlayer)];
+                                Projectile p = Main.projectile[Projectile.NewProjectile(Projectile.GetSource_FromThis(), Main.LocalPlayer.Center, Vector2.Zero, ModContent.ProjectileType<IceRune>(), (int)(Projectile.damage * 1.6f), 0, Main.myPlayer)];
                                 p.rotation = Main.rand.NextFloat(-MathF.PI, MathF.PI);
                             }
                             Projectile.Kill();
@@ -93,7 +92,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
                             {
                                 for (int i = 0; i < 4; i++)
                                 {
-                                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, QwertyMethods.PolarVector(20f, (i / 4f) * MathF.PI * 2f), ProjectileType<PursuitRune>(), (int)(Projectile.damage * 1f), 0, Main.myPlayer);
+                                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, QwertyMethods.PolarVector(20f, (i / 4f) * MathF.PI * 2f), ModContent.ProjectileType<PursuitRune>(), (int)(Projectile.damage * 1f), 0, Main.myPlayer);
                                 }
                             }
                             Projectile.Kill();
@@ -123,16 +122,16 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
             switch ((int)Projectile.ai[0])
             {
                 case 0:
-                    dustType = DustType<AggroRuneLash>();
+                    dustType = ModContent.DustType<AggroRuneLash>();
                     break;
                 case 1:
-                    dustType = DustType<LeechRuneDeath>();
+                    dustType = ModContent.DustType<LeechRuneDeath>();
                     break;
                 case 2:
-                    dustType = DustType<IceRuneDeath>();
+                    dustType = ModContent.DustType<IceRuneDeath>();
                     break;
                 case 3:
-                    dustType = DustType<PursuitRuneDeath>();
+                    dustType = ModContent.DustType<PursuitRuneDeath>();
                     break;
             }
             for (int d = 0; d < 300; d++)

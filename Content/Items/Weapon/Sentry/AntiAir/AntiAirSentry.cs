@@ -7,7 +7,7 @@ using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Sentry.AntiAir
 {
@@ -15,8 +15,6 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.AntiAir
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Anti Air Sentry Wrench");
-            //Tooltip.SetDefault("Summons a stationary anti air sentry");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
@@ -37,7 +35,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.AntiAir
             Item.rare = ItemRarityID.Orange;
             Item.UseSound = SoundID.Item44;
             Item.autoReuse = true;
-            Item.shoot = ProjectileType<AntiAirSentry>();
+            Item.shoot = ModContent.ProjectileType<AntiAirSentry>();
             Item.DamageType = DamageClass.Summon;
             Item.sentry = true;
         }
@@ -54,7 +52,6 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.AntiAir
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Anti Air Sentry");
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             Main.projFrames[Projectile.type] = 3;
         }
@@ -101,7 +98,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.AntiAir
             {
                 playAttackFrame = true;
                 if (Main.netMode != NetmodeID.MultiplayerClient)
-                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center.X + (16 * secondShot), Projectile.Center.Y - 30, 0, -5f, ProjectileType<SentryAntiAir>(), Projectile.damage, Projectile.knockBack, Main.myPlayer, validTarget.Center.Y, rocketDirection);
+                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center.X + (16 * secondShot), Projectile.Center.Y - 30, 0, -5f, ModContent.ProjectileType<SentryAntiAir>(), Projectile.damage, Projectile.knockBack, Main.myPlayer, validTarget.Center.Y, rocketDirection);
 
                 secondShot *= -1;
 

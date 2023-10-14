@@ -1,21 +1,12 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using QwertyMod.Common;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using Terraria;
-using Terraria.DataStructures;
-using Terraria.GameContent;
-using Terraria.GameContent.Bestiary;
-using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 using Terraria.Audio;
-using QwertyMod.Content.Buffs;
-using QwertyMod.Content.Dusts;
-using QwertyMod.Common.Fortress;
 using QwertyMod.Content.NPCs.Invader;
 
 
@@ -83,7 +74,7 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
         }
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
-            Texture2D fragment = Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/InvaderBattleship/BattleshipDebris_Engine").Value;
+            Texture2D fragment = ModContent.Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/InvaderBattleship/BattleshipDebris_Engine").Value;
             spriteBatch.Draw(fragment, NPC.Center - screenPos, null, drawColor, NPC.rotation, fragment.Size() * 0.5f, Vector2.One, NPC.direction == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0);
 
             return false;

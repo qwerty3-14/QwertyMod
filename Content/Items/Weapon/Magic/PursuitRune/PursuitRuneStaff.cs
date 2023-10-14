@@ -7,11 +7,10 @@ using QwertyMod.Content.Items.MiscMaterials;
 using System;
 using Terraria;
 using Terraria.Audio;
-using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Magic.PursuitRune
 {
@@ -19,8 +18,6 @@ namespace QwertyMod.Content.Items.Weapon.Magic.PursuitRune
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Pursuit Rune Staff");
-            //Tooltip.SetDefault("Fires explosive Pursuit Runes!");
             Item.staff[Item.type] = true; //this makes the useStyle animate as a staff instead of as a gun
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
@@ -42,10 +39,10 @@ namespace QwertyMod.Content.Items.Weapon.Magic.PursuitRune
             Item.height = 72;
             if (!Main.dedServ)
             {
-                Item.GetGlobalItem<ItemUseGlow>().glowTexture = Request<Texture2D>("QwertyMod/Content/Items/Weapon/Magic/PursuitRune/PursuitRuneStaff_Glow").Value;
+                Item.GetGlobalItem<ItemUseGlow>().glowTexture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Magic/PursuitRune/PursuitRuneStaff_Glow").Value;
             }
             Item.mana = ModLoader.HasMod("TRAEProject") ? 14 : 7;
-            Item.shoot = ProjectileType<PursuitRuneMissile>();
+            Item.shoot = ModContent.ProjectileType<PursuitRuneMissile>();
             Item.shootSpeed = 9;
             Item.noMelee = true;
             //Item.GetGlobalItem<ItemUseGlow>().glowTexture = mod.GetTexture("Items/AncientItems/AncientWave_Glow");
@@ -61,8 +58,8 @@ namespace QwertyMod.Content.Items.Weapon.Magic.PursuitRune
 
         public override void AddRecipes()
         {
-            CreateRecipe(1).AddIngredient(ItemType<CraftingRune>(), 15)
-                .AddIngredient(ItemType<AncientMissile.AncientMissileStaff>(), 1)
+            CreateRecipe(1).AddIngredient(ModContent.ItemType<CraftingRune>(), 15)
+                .AddIngredient(ModContent.ItemType<AncientMissile.AncientMissileStaff>(), 1)
                 .AddTile(TileID.Anvils)
                 .Register();
         }
@@ -129,22 +126,18 @@ namespace QwertyMod.Content.Items.Weapon.Magic.PursuitRune
         {
             Projectile.localNPCImmunity[target.whoAmI] = -1;
             target.immune[Projectile.owner] = 0;
-            Projectile e = Main.projectile[Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center.X, Projectile.Center.Y, 0, 0, ProjectileType<PursuitRuneBlast>(), Projectile.damage, Projectile.knockBack, Projectile.owner, 1f)];
+            Projectile e = Main.projectile[Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center.X, Projectile.Center.Y, 0, 0, ModContent.ProjectileType<PursuitRuneBlast>(), Projectile.damage, Projectile.knockBack, Projectile.owner, 1f)];
             e.localNPCImmunity[target.whoAmI] = -1;
         }
 
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center.X, Projectile.Center.Y, 0, 0, ProjectileType<PursuitRuneBlast>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center.X, Projectile.Center.Y, 0, 0, ModContent.ProjectileType<PursuitRuneBlast>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
             return true;
         }
     }
     public class PursuitRuneBlast : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("Rune Blast");
-        }
 
         public override void SetDefaults()
         {
@@ -171,7 +164,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.PursuitRune
             for (int i = 0; i < 600; i++)
             {
                 float theta = Main.rand.NextFloat(-MathF.PI, MathF.PI);
-                Dust dust = Dust.NewDustPerfect(Projectile.Center, DustType<PursuitRuneDeath>(), QwertyMethods.PolarVector(Main.rand.Next(2, 30), theta));
+                Dust dust = Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<PursuitRuneDeath>(), QwertyMethods.PolarVector(Main.rand.Next(2, 30), theta));
                 dust.noGravity = true;
             }
         }

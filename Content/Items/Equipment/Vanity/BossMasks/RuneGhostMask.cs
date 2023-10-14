@@ -1,7 +1,6 @@
-using Terraria.ModLoader;
-using static Terraria.ID.ArmorIDs;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace QwertyMod.Content.Items.Equipment.Vanity.BossMasks
 {
@@ -10,9 +9,7 @@ namespace QwertyMod.Content.Items.Equipment.Vanity.BossMasks
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Rune Ghost Mask");
-            //Tooltip.SetDefault("");
-            Head.Sets.DrawHead[Item.headSlot] = false;
+            ArmorIDs.Head.Sets.DrawHead[Item.headSlot] = false;
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 

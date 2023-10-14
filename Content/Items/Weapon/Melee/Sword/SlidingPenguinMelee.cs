@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -10,11 +9,6 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword
 {
     class SlidingPenguinMelee : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("Sliding Penguin");
-        }
-
         public override void SetDefaults()
         {
             Projectile.aiStyle = 1;

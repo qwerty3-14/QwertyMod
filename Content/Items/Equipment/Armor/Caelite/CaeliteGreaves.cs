@@ -4,8 +4,7 @@ using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ID.ArmorIDs;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Equipment.Armor.Caelite
 {
@@ -15,10 +14,8 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Caelite
 
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Caelite Reinforcmentss");
-            //Tooltip.SetDefault("Melee and magic attacks hasten the cooldown for healing potions");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
-            Legs.Sets.HidesBottomSkin[Item.legSlot] = true;
+            ArmorIDs.Legs.Sets.HidesBottomSkin[Item.legSlot] = true;
         }
 
         public override void SetDefaults()
@@ -32,8 +29,8 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Caelite
         }
         public override void AddRecipes()
         {
-            CreateRecipe(1).AddIngredient(ItemType<CaeliteBar>(), 12)
-                .AddIngredient(ItemType<CaeliteCore>(), 6)
+            CreateRecipe(1).AddIngredient(ModContent.ItemType<CaeliteBar>(), 12)
+                .AddIngredient(ModContent.ItemType<CaeliteCore>(), 6)
                 .AddTile(TileID.Anvils)
                 .Register();
         }

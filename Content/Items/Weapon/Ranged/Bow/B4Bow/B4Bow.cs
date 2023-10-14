@@ -11,8 +11,6 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.B4Bow
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Possesing Bow");
-            //Tooltip.SetDefault("Arrows fired from this will chase your enemies!");
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
         public override void SetDefaults()

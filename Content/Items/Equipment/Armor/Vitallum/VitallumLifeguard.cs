@@ -1,10 +1,9 @@
-﻿using Terraria;
+﻿using System;
+using Terraria;
 using Terraria.DataStructures;
+using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
-using Terraria.GameContent.Creative;
-using System;
 
 namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
 {
@@ -34,7 +33,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
         {
             CreateRecipe(1).AddIngredient(ItemID.ChlorophyteBar, 24)
                 .AddIngredient(ItemID.LifeCrystal, 8)
-                .AddIngredient(ItemType<VitallumCoreCharged>(), 1)
+                .AddIngredient(ModContent.ItemType<VitallumCoreCharged>(), 1)
                 .AddTile(TileID.MythrilAnvil)
                 .Register();
         }
@@ -42,7 +41,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
         [Obsolete]
         public override void OnCraft(Recipe recipe)
         {
-            Main.LocalPlayer.QuickSpawnItem(new EntitySource_Misc("Recipe"), ItemType<VitallumCoreUncharged>(), 1);
+            Main.LocalPlayer.QuickSpawnItem(new EntitySource_Misc("Recipe"), ModContent.ItemType<VitallumCoreUncharged>(), 1);
         }
     }
 

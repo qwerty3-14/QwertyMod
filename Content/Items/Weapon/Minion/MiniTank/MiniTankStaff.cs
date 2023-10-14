@@ -4,7 +4,7 @@ using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Minion.MiniTank
 {
@@ -12,8 +12,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.MiniTank
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Mini Tank Staff");
-            //Tooltip.SetDefault("Summons a Mini Tank!");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
@@ -33,7 +31,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.MiniTank
             Item.value = 200000;
             Item.rare = ItemRarityID.Orange;
             Item.UseSound = SoundID.Item44;
-            Item.shoot = ProjectileType<MiniTank>();
+            Item.shoot = ModContent.ProjectileType<MiniTank>();
             Item.DamageType = DamageClass.Summon;
         }
 

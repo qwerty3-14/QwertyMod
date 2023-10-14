@@ -1,7 +1,6 @@
 ﻿using QwertyMod.Content.NPCs.Invader;
 using System;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.ModLoader;
 using QwertyMod.Common;
 

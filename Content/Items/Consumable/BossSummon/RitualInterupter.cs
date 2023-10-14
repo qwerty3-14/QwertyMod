@@ -1,5 +1,4 @@
-﻿
-using QwertyMod.Content.Items.Consumable.Tiles.Bars;
+﻿using QwertyMod.Content.Items.Consumable.Tiles.Bars;
 using QwertyMod.Content.Items.MiscMaterials;
 using QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss;
 using Terraria;
@@ -7,7 +6,7 @@ using Terraria.Audio;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Consumable.BossSummon
 {
@@ -35,7 +34,7 @@ namespace QwertyMod.Content.Items.Consumable.BossSummon
 
         public override bool CanUseItem(Player player)
         {
-            return !NPC.AnyNPCs(NPCType<CloakedDarkBoss>());
+            return !NPC.AnyNPCs(ModContent.NPCType<CloakedDarkBoss>());
         }
 
         public override bool? UseItem(Player player)
@@ -43,7 +42,7 @@ namespace QwertyMod.Content.Items.Consumable.BossSummon
             if (player.whoAmI == Main.myPlayer)
             {
                 SoundEngine.PlaySound(SoundID.Roar, player.Center);
-                QwertyMethods.NPCSpawnOnPlayer(player, NPCType<CloakedDarkBoss>());
+                QwertyMethods.NPCSpawnOnPlayer(player, ModContent.NPCType<CloakedDarkBoss>());
                 return true;
             }
 
@@ -52,8 +51,8 @@ namespace QwertyMod.Content.Items.Consumable.BossSummon
 
         public override void AddRecipes()
         {
-            CreateRecipe(1).AddIngredient(ItemType<LuneBar>(), 2)
-                .AddIngredient(ItemType<CaeliteCore>(), 2)
+            CreateRecipe(1).AddIngredient(ModContent.ItemType<LuneBar>(), 2)
+                .AddIngredient(ModContent.ItemType<CaeliteCore>(), 2)
                 .AddTile(TileID.Anvils)
                 .Register();
         }

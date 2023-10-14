@@ -1,11 +1,9 @@
 using Microsoft.Xna.Framework;
 using QwertyMod.Content.Dusts;
 using Terraria;
-using Terraria.DataStructures;
-using Terraria.Enums;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
-using static Terraria.ModLoader.ModContent;
+
 namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
 {
     public class LaunchPadT : ModTile
@@ -21,7 +19,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
             TileObjectData.newTile.CopyFrom(TileObjectData.Style2x1);
             TileObjectData.addTile(Type);
             
-            DustType = DustType<FortressDust>();
+            DustType = ModContent.DustType<FortressDust>();
             HitSound = QwertyMod.FortressBlocks;
             MinPick = 1;
 

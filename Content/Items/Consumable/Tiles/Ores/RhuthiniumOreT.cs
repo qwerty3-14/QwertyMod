@@ -3,7 +3,7 @@ using QwertyMod.Content.Dusts;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Consumable.Tiles.Ores
 {
@@ -15,14 +15,14 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Ores
             Main.tileMergeDirt[Type] = true;
             Main.tileSpelunker[Type] = true;
 
-            DustType = DustType<RhuthiniumDust>();
+            DustType = ModContent.DustType<RhuthiniumDust>();
             HitSound = SoundID.Tink;
 
             //ModTranslation name = CreateMapEntryName();
             //name.SetDefault("Rhuthinium Ore");
             AddMapEntry(new Color(39, 129, 129));
 
-            //ItemDrop = ItemType<RhuthiniumOre>();
+            //ItemDrop = ModContent.ItemType<RhuthiniumOre>();
 
             MinPick = 1;
         }

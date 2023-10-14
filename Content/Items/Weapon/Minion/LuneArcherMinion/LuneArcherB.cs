@@ -1,7 +1,7 @@
 ﻿using QwertyMod.Common;
 using Terraria;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 
 namespace QwertyMod.Content.Items.Weapon.Minion.LuneArcherMinion
@@ -10,8 +10,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.LuneArcherMinion
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Lune Archer");
-            //Description.SetDefault("Will shoot your enemies in the knee!");
             Main.buffNoSave[Type] = true;
             Main.buffNoTimeDisplay[Type] = true;
         }
@@ -19,7 +17,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.LuneArcherMinion
         public override void Update(Player player, ref int buffIndex)
         {
             MinionManager modPlayer = player.GetModPlayer<MinionManager>();
-            if (player.ownedProjectileCounts[ProjectileType<LuneArcher>()] > 0)
+            if (player.ownedProjectileCounts[ ModContent.ProjectileType<LuneArcher>()] > 0)
             {
                 modPlayer.LuneArcher = true;
             }

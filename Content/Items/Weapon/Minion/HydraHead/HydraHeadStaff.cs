@@ -4,7 +4,7 @@ using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Minion.HydraHead
 {
@@ -12,8 +12,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.HydraHead
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Hydra Head Staff");
-            //Tooltip.SetDefault("Summons a hydra head to shoot towards your cursor");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
@@ -34,7 +32,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.HydraHead
             Item.rare = ItemRarityID.Pink;
             Item.UseSound = SoundID.Item44;
             Item.autoReuse = true;
-            Item.shoot = ProjectileType<MinionHead>();
+            Item.shoot = ModContent.ProjectileType<MinionHead>();
             Item.DamageType = DamageClass.Summon;
         }
 

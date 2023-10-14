@@ -4,7 +4,7 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Carving
 {
@@ -26,7 +26,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Carving
             Main.tileFrameImportant[Type] = true;
             Main.tileLavaDeath[Type] = true;
 
-            DustType = DustType<FortressDust>();
+            DustType = ModContent.DustType<FortressDust>();
             HitSound = QwertyMod.FortressBlocks;
             AddMapEntry(new Color(162, 184, 185));
         }

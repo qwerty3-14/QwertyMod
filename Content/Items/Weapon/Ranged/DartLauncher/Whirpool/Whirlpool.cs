@@ -12,8 +12,6 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.DartLauncher.Whirpool
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Whirlpool");
-            //Tooltip.SetDefault("Uses darts as ammo");
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 

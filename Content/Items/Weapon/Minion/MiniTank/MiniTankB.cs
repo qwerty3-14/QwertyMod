@@ -1,7 +1,7 @@
 ﻿using QwertyMod.Common;
 using Terraria;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Minion.MiniTank
 {
@@ -9,8 +9,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.MiniTank
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Mini Tank");
-            //Description.SetDefault("Build an army... trust nobody!");
             Main.buffNoSave[Type] = true;
             Main.buffNoTimeDisplay[Type] = true;
         }
@@ -18,7 +16,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.MiniTank
         public override void Update(Player player, ref int buffIndex)
         {
             MinionManager modPlayer = player.GetModPlayer<MinionManager>();
-            if (player.ownedProjectileCounts[ProjectileType<MiniTank>()] > 0)
+            if (player.ownedProjectileCounts[ ModContent.ProjectileType<MiniTank>()] > 0)
             {
                 modPlayer.miniTank = true;
             }

@@ -5,7 +5,7 @@ using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.Ancient
 {
@@ -13,8 +13,6 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.Ancient
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Ancient Sniper");
-            //Tooltip.SetDefault("Harness the ancient power of sniping" + "\nRight click to zoom");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -33,7 +31,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.Ancient
             Item.UseSound = SoundID.Item11;
             if (!Main.dedServ)
             {
-                Item.GetGlobalItem<ItemUseGlow>().glowTexture = Request<Texture2D>("QwertyMod/Content/Items/Weapon/Ranged/Gun/Ancient/AncientSniper_Glow").Value;
+                Item.GetGlobalItem<ItemUseGlow>().glowTexture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Ranged/Gun/Ancient/AncientSniper_Glow").Value;
             }
             Item.GetGlobalItem<ItemUseGlow>().glowOffsetX = -26;
             Item.GetGlobalItem<ItemUseGlow>().glowOffsetY = -2;
@@ -44,7 +42,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.Ancient
             Item.useAmmo = AmmoID.Bullet;
             Item.shootSpeed = 36;
             Item.noMelee = true;
-            //Item.GetGlobalItem<ItemUseGlow>().glowTexture = Request<Texture2D>("Items/AncientItems/AncientSniper_Glow");
+            //Item.GetGlobalItem<ItemUseGlow>().glowTexture = ModContent.Request<Texture2D>("Items/AncientItems/AncientSniper_Glow");
         }
 
 

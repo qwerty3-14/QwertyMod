@@ -6,7 +6,7 @@ using Terraria.Chat;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod
 {
@@ -416,22 +416,22 @@ namespace QwertyMod
 
         public static Projectile PokeNPC(Player player, NPC npc, IEntitySource source, float damage, DamageClass damageClass, float knockback = 0f, int AP = 0)
         {
-            int id = ProjectileType<Poke>();
+            int id = ModContent.ProjectileType<Poke>();
             if(damageClass == DamageClass.Melee)
             {
-                id = ProjectileType<PokeMelee>();
+                id = ModContent.ProjectileType<PokeMelee>();
             }
             if(damageClass == DamageClass.Ranged)
             {
-                id = ProjectileType<PokeRanged>();
+                id = ModContent.ProjectileType<PokeRanged>();
             }
             if(damageClass == DamageClass.Magic)
             {
-                id = ProjectileType<PokeMagic>();
+                id = ModContent.ProjectileType<PokeMagic>();
             }
             if(damageClass == DamageClass.Summon)
             {
-                id = ProjectileType<PokeSummon>();
+                id = ModContent.ProjectileType<PokeSummon>();
             }
             Projectile p = Main.projectile[Projectile.NewProjectile(source, npc.Center, Vector2.Zero, id, (int)damage, knockback, player.whoAmI, ai1: AP)];
             p.ai[0] = npc.whoAmI;
@@ -441,7 +441,7 @@ namespace QwertyMod
         }
         public static Projectile PokeNPCMinion(Player player, NPC npc, IEntitySource source, float damage, float knockback = 0f)
         {
-            Projectile p = Main.projectile[Projectile.NewProjectile(source, npc.Center, Vector2.Zero, ProjectileType<MinionPoke>(), (int)damage, knockback, player.whoAmI)];
+            Projectile p = Main.projectile[Projectile.NewProjectile(source, npc.Center, Vector2.Zero, ModContent.ProjectileType<MinionPoke>(), (int)damage, knockback, player.whoAmI)];
             p.ai[0] = npc.whoAmI;
             return p;
         }

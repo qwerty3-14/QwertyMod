@@ -6,7 +6,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Minion.MiniTank
 {
@@ -14,7 +14,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.MiniTank
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Mini Tank");
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
             Main.projPet[Projectile.type] = true;
@@ -57,7 +56,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.MiniTank
             {
                 Projectile.timeLeft = 2;
             }
-            tankCount = player.ownedProjectileCounts[ProjectileType<MiniTank>()];
+            tankCount = player.ownedProjectileCounts[ ModContent.ProjectileType<MiniTank>()];
             if (returnToPlayer)
             {
                 Projectile.velocity = (player.Top - Projectile.Center) * .1f;
@@ -107,7 +106,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.MiniTank
                     if (shootCounter >= 60)
                     {
                         shootCounter = 0;
-                        Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Top + QwertyMethods.PolarVector(30, gunRotation), QwertyMethods.PolarVector(14, gunRotation), ProjectileType<MiniTankCannonBallFreindly>(), Projectile.damage, Projectile.knockBack, player.whoAmI);
+                        Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Top + QwertyMethods.PolarVector(30, gunRotation), QwertyMethods.PolarVector(14, gunRotation), ModContent.ProjectileType<MiniTankCannonBallFreindly>(), Projectile.damage, Projectile.knockBack, player.whoAmI);
                     }
                 }
                 else
@@ -151,7 +150,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.MiniTank
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            Texture2D texture = Request<Texture2D>("QwertyMod/Content/Items/Weapon/Minion/MiniTank/MiniTankGun").Value;
+            Texture2D texture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Minion/MiniTank/MiniTankGun").Value;
             Main.EntitySpriteDraw(texture, Projectile.Top - Main.screenPosition,
                         new Rectangle(0, 0, 40, 20), lightColor, gunRotation,
                         new Vector2(10, 10), 1f, SpriteEffects.None, 0);

@@ -1,12 +1,9 @@
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
-using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Pet
 {
@@ -21,7 +18,7 @@ namespace QwertyMod.Content.Items.Pet
         {
             Item.damage = 0;
             Item.useStyle = ItemUseStyleID.Swing;
-            Item.shoot = ProjectileType<LightlingP>();
+            Item.shoot = ModContent.ProjectileType<LightlingP>();
             Item.width = 48;
             Item.height = 28;
             Item.UseSound = SoundID.Item2;
@@ -30,7 +27,7 @@ namespace QwertyMod.Content.Items.Pet
             Item.rare = ItemRarityID.Yellow;
             Item.noMelee = true;
             Item.value = Item.sellPrice(0, 5, 50, 0);
-            Item.buffType = BuffType<LightlingBuff>();
+            Item.buffType = ModContent.BuffType<LightlingBuff>();
         }
         public override void UseStyle(Player player, Rectangle heldItemFrame)
         {
@@ -111,8 +108,6 @@ namespace QwertyMod.Content.Items.Pet
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Lightling");
-            //Description.SetDefault("Emits light");
             Main.buffNoTimeDisplay[Type] = true;
             Main.lightPet[Type] = true;
         }
@@ -121,10 +116,10 @@ namespace QwertyMod.Content.Items.Pet
         {
             player.GetModPlayer<LightlingOwnership>().Lightling = true;
             player.buffTime[buffIndex] = 18000;
-            bool petProjectileNotSpawned = player.ownedProjectileCounts[ProjectileType<LightlingP>()] <= 0;
+            bool petProjectileNotSpawned = player.ownedProjectileCounts[ModContent.ProjectileType<LightlingP>()] <= 0;
             if (petProjectileNotSpawned && player.whoAmI == Main.myPlayer)
             {
-                Projectile.NewProjectile(player.GetSource_Buff(buffIndex), player.Center.X, player.Center.Y, 0f, 0f, ProjectileType<LightlingP>(), 0, 0f, player.whoAmI, 0f, 0f);
+                Projectile.NewProjectile(player.GetSource_Buff(buffIndex), player.Center.X, player.Center.Y, 0f, 0f, ModContent.ProjectileType<LightlingP>(), 0, 0f, player.whoAmI, 0f, 0f);
             }
         }
     }

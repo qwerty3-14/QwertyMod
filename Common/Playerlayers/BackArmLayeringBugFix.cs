@@ -1,11 +1,9 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Content;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 using Terraria.GameContent;
 
 namespace QwertyMod.Common.Playerlayers

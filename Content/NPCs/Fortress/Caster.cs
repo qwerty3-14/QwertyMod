@@ -9,12 +9,11 @@ using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
-using Terraria.DataStructures;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 using System.IO;
 
 namespace QwertyMod.Content.NPCs.Fortress
@@ -23,7 +22,6 @@ namespace QwertyMod.Content.NPCs.Fortress
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("High Preist");
             Main.npcFrameCount[NPC.type] = 9;
             NPCID.Sets.NoMultiplayerSmoothingByType[NPC.type] = true;
         }
@@ -50,7 +48,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             NPC.noGravity = true;
             NPC.buffImmune[BuffID.Confused] = false;
             Banner = NPC.type;
-            BannerItem = ItemType<CasterBanner>();
+            BannerItem = ModContent.ItemType<CasterBanner>();
         }
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
         {
@@ -63,13 +61,13 @@ namespace QwertyMod.Content.NPCs.Fortress
         }
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
-            npcLoot.Add(ItemDropRule.Common(ItemType<FortressBossSummon>(), 1));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<FortressBossSummon>(), 1));
 
         }
 
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
-            if (spawnInfo.Player.InModBiome(GetInstance<FortressBiome>()) && !NPC.AnyNPCs(NPCType<Caster>()) && !NPC.AnyNPCs(NPCType<FortressBoss>()))
+            if (spawnInfo.Player.InModBiome(ModContent.GetInstance<FortressBiome>()) && !NPC.AnyNPCs(ModContent.NPCType<Caster>()) && !NPC.AnyNPCs(ModContent.NPCType<FortressBoss>()))
             {
                 return 10f;
             }
@@ -115,7 +113,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             ringProjectileCount = 2 - (int)((float)NPC.life / (float)NPC.lifeMax * 2) + 4;
             if (timer == GenerateRingTime && Main.netMode != NetmodeID.MultiplayerClient)
             {
-                ring = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero, ProjectileType<RingCenter>(), SkyFortress.beingInvaded ? 40 : 11, 0, Main.myPlayer, ringProjectileCount, NPC.direction)];
+                ring = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<RingCenter>(), SkyFortress.beingInvaded ? 40 : 11, 0, Main.myPlayer, ringProjectileCount, NPC.direction)];
                 ring.ai[0] = ringProjectileCount;
                 ring.ai[1] = NPC.direction;
                 castingFrames = true;
@@ -159,7 +157,7 @@ namespace QwertyMod.Content.NPCs.Fortress
                 SoundEngine.PlaySound(SoundID.Item8, NPC.position);
                 for (int num67 = 0; num67 < 50; num67++)
                 {
-                    int num75 = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustType<CaeliteDust>(), 0f, 0f, 100, default(Color), 2.5f);
+                    int num75 = Dust.NewDust(NPC.position, NPC.width, NPC.height, ModContent.DustType<CaeliteDust>(), 0f, 0f, 100, default(Color), 2.5f);
                     Main.dust[num75].velocity *= 3f;
                     Main.dust[num75].noGravity = true;
                 }
@@ -172,7 +170,7 @@ namespace QwertyMod.Content.NPCs.Fortress
                 SoundEngine.PlaySound(SoundID.Item8, NPC.position);
                 for (int num76 = 0; num76 < 50; num76++)
                 {
-                    int num84 = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustType<CaeliteDust>(), 0f, 0f, 100, default(Color), 2.5f);
+                    int num84 = Dust.NewDust(NPC.position, NPC.width, NPC.height, ModContent.DustType<CaeliteDust>(), 0f, 0f, 100, default(Color), 2.5f);
                     Main.dust[num84].velocity *= 3f;
                     Main.dust[num84].noGravity = true;
                 }
@@ -318,13 +316,13 @@ namespace QwertyMod.Content.NPCs.Fortress
 
                     if (Projectile.ai[1] == 1)
                     {
-                        Projectile p = Main.projectile[Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<RingOuter>(), Projectile.damage, Projectile.knockBack, Main.myPlayer, (float)i / (float)projectilesInRing * 2 * MathF.PI, Projectile.whoAmI)];
+                        Projectile p = Main.projectile[Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<RingOuter>(), Projectile.damage, Projectile.knockBack, Main.myPlayer, (float)i / (float)projectilesInRing * 2 * MathF.PI, Projectile.whoAmI)];
                         p.ai[0] = (float)i / (float)projectilesInRing * 2 * MathF.PI;
                         p.ai[1] = Projectile.whoAmI;
                     }
                     else
                     {
-                        Projectile p = Main.projectile[Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<RingOuter>(), Projectile.damage, Projectile.knockBack, Main.myPlayer, (float)i / (float)projectilesInRing * 2 * MathF.PI, -Projectile.whoAmI)];
+                        Projectile p = Main.projectile[Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<RingOuter>(), Projectile.damage, Projectile.knockBack, Main.myPlayer, (float)i / (float)projectilesInRing * 2 * MathF.PI, -Projectile.whoAmI)];
                         p.ai[0] = (float)i / (float)projectilesInRing * 2 * MathF.PI;
                         p.ai[1] = -Projectile.whoAmI;
                     }
@@ -347,7 +345,6 @@ namespace QwertyMod.Content.NPCs.Fortress
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Caelite Sphere");
             Main.projFrames[Projectile.type] = 4;
         }
 
@@ -374,7 +371,7 @@ namespace QwertyMod.Content.NPCs.Fortress
 
         public override void AI()
         {
-            Dust dust = Main.dust[Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<CaeliteDust>())];
+            Dust dust = Main.dust[Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<CaeliteDust>())];
             dust.scale = .5f;
             if (runOnce)
             {
@@ -398,7 +395,7 @@ namespace QwertyMod.Content.NPCs.Fortress
                     clearCheck.Kill();
                 }
             }
-            if (!parent.active || parent.type != ProjectileType<RingCenter>())
+            if (!parent.active || parent.type != ModContent.ProjectileType<RingCenter>())
             {
                 Projectile.Kill();
             }
@@ -418,7 +415,7 @@ namespace QwertyMod.Content.NPCs.Fortress
         {
             for (int i = 0; i < 30; i++)
             {
-                Dust dust = Main.dust[Dust.NewDust(Projectile.Center, 0, 0, DustType<CaeliteDust>())];
+                Dust dust = Main.dust[Dust.NewDust(Projectile.Center, 0, 0, ModContent.DustType<CaeliteDust>())];
                 dust.velocity *= 3;
             }
         }
@@ -427,7 +424,7 @@ namespace QwertyMod.Content.NPCs.Fortress
         {
             if (Main.rand.NextBool(3))
             {
-                target.AddBuff(BuffType<PowerDown>(), 600);
+                target.AddBuff(ModContent.BuffType<PowerDown>(), 600);
             }
         }
     }

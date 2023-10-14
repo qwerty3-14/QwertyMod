@@ -7,7 +7,7 @@ using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.HolyExiler
 {
@@ -104,7 +104,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.HolyExiler
                             Vector2 teleTo = new Vector2(target.Center.X + MathF.Cos(projectile.ai[0]) * teleportDistance, target.Center.Y + MathF.Sin(projectile.ai[0]) * teleportDistance);
                             if (Collision.CanHit(new Vector2(teleTo.X - projectile.width / 2, teleTo.Y - projectile.height / 2), projectile.width, projectile.height, target.position, target.width, target.height))// checks if there are no tiles between player and potential teleport spot
                             {
-                                portal1 = Main.projectile[Projectile.NewProjectile(projectile.GetSource_FromThis(), teleTo, Vector2.Zero, ProjectileType<ArrowPortal>(), projectile.damage, projectile.knockBack, projectile.owner, projectile.type, 12f)];
+                                portal1 = Main.projectile[Projectile.NewProjectile(projectile.GetSource_FromThis(), teleTo, Vector2.Zero, ModContent.ProjectileType<ArrowPortal>(), projectile.damage, projectile.knockBack, projectile.owner, projectile.type, 12f)];
                                 portal1.rotation = (target.Center - teleTo).ToRotation();
                                 portal1.timeLeft = (i + 1) * 15;
                                 break; //end for loop
@@ -142,7 +142,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.HolyExiler
         {
             if (Projectile.timeLeft < activeTime)
             {
-                Dust dust = Main.dust[Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<CaeliteDust>())];
+                Dust dust = Main.dust[Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<CaeliteDust>())];
                 dust.scale = .5f;
                 if (Projectile.timeLeft < activeTime / 5)
                 {

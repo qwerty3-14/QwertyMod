@@ -2,15 +2,13 @@ using Microsoft.Xna.Framework;
 using QwertyMod.Content.Items.MiscMaterials;
 using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Common.PlayerLayers;
+using System;
 using Terraria;
+using Terraria.DataStructures;
+using Terraria.GameContent;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
-using Terraria.DataStructures;
-using System;
-using Terraria.GameContent;
-using System.Collections.Generic;
 
 namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.Shooter
 {
@@ -36,7 +34,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.Shooter
             Item.UseSound = SoundID.Item11;
             if (!Main.dedServ)
             {
-                Item.GetGlobalItem<ItemUseGlow>().glowTexture = Request<Texture2D>("QwertyMod/Content/Items/Weapon/Ranged/Gun/Shooter/InvaderShooter_Glow").Value;
+                Item.GetGlobalItem<ItemUseGlow>().glowTexture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Ranged/Gun/Shooter/InvaderShooter_Glow").Value;
             }
             Item.width = 56;
             Item.height = 32;
@@ -51,7 +49,6 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.Shooter
             velocity.Normalize();
             position = player.MountedCenter + velocity * 30 + velocity.RotatedBy(-MathF.PI / 2f) * player.direction * 4;
             velocity *= 4f;
-            //type = ModContent.ProjectileType<ShooterBeam>();
             Projectile projectile = Main.projectile[Projectile.NewProjectile(source, position, velocity, ModContent.ProjectileType<ShooterBeam>(), damage, knockback, player.whoAmI, type, vel)];
             
             return false;

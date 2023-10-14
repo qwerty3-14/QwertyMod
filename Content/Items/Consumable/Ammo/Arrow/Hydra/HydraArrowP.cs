@@ -1,9 +1,8 @@
 ﻿using QwertyMod.Content.Dusts;
 using System;
 using Terraria;
-using Terraria.GameContent.Creative;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Hydra
 {
     public class HydraArrowP : ModProjectile
@@ -24,7 +23,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Hydra
 
         public override void AI()
         {
-            Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<HydraBeamGlow>());
+            Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<HydraBeamGlow>());
             if (Projectile.owner == Main.myPlayer && Projectile.ai[1] == 0 && Projectile.timeLeft == 298)
             {
                 Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, QwertyMethods.PolarVector(Projectile.velocity.Length(), Projectile.velocity.ToRotation() + MathF.PI / 8), Type, (int)((float)Projectile.damage * .5f), Projectile.knockBack * .5f, Projectile.owner, 1, 1);

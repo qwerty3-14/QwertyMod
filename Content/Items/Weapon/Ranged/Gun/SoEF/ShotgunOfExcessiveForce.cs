@@ -8,7 +8,7 @@ using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.SoEF
 {
@@ -70,7 +70,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.SoEF
         }
         public override void AddRecipes()
         {
-            CreateRecipe(1).AddIngredient(ItemType<Etims>(), 12)
+            CreateRecipe(1).AddIngredient(ModContent.ItemType<Etims>(), 12)
                 .AddTile(TileID.Anvils)
                 .Register();
         }
@@ -86,7 +86,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.SoEF
             {
                 if (projectile.timeLeft > 10)
                 {
-                    Dust.NewDustPerfect(projectile.Center, DustType<BloodforceDust>(), Vector2.Zero);
+                    Dust.NewDustPerfect(projectile.Center, ModContent.DustType<BloodforceDust>(), Vector2.Zero);
                 }
             }
         }
@@ -99,7 +99,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.SoEF
                 {
                     for (int i = 0; i < modifiers.FinalDamage.Multiplicative / 3; i++)
                     {
-                        Dust d = Dust.NewDustPerfect(projectile.Center, DustType<BloodforceDust>());
+                        Dust d = Dust.NewDustPerfect(projectile.Center, ModContent.DustType<BloodforceDust>());
                         d.velocity *= 5f;
                     }
                     modifiers.FinalDamage *= 2;

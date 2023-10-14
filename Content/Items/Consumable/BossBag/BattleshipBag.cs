@@ -1,18 +1,14 @@
-using QwertyMod.Content.Items.Tool.Mining.TheDevourer;
-using QwertyMod.Content.Items.Weapon.Magic.BlackHole;
-using QwertyMod.Content.Items.Weapon.Magic.Plasma;
-using QwertyMod.Content.Items.Weapon.Minion.UrQuan;
-using QwertyMod.Content.Items.Weapon.Ranged.Bow.B4Bow;
-using QwertyMod.Content.NPCs.Bosses.OLORD;
-using Terraria;
-using Terraria.DataStructures;
-using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
-using Terraria.GameContent.Creative;
-using Terraria.ID;
-using Terraria.GameContent.ItemDropRules;
 using QwertyMod.Content.Items.MiscMaterials;
 using QwertyMod.Content.Items.Equipment.Accessories.Expert;
+using Terraria;
+using Terraria.ModLoader;
+using Terraria.GameContent.Creative;
+using Terraria.GameContent.ItemDropRules;
+using Terraria.ID;
+using QwertyMod.Content.Items.Weapon.Ranged.Gun.SuperquantumRifle;
+using QwertyMod.Content.Items.Weapon.Minion.DVR;
+using QwertyMod.Content.Items.Weapon.Melee.Misc.FightKit;
+using QwertyMod.Content.Items.Equipment.Vanity.BossMasks;
 
 namespace QwertyMod.Content.Items.Consumable.BossBag
 {
@@ -33,7 +29,6 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
             Item.height = 32;
             Item.rare = ItemRarityID.Cyan;
             Item.expert = true;
-            //bossBagNPC = mod.NPCType("WeakPoint");
         }
 
         public override bool CanRightClick()
@@ -45,7 +40,8 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
             itemLoot.Add(ItemDropRule.Coins(1000000, true));
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<InvaderPlating>(), 1, 100, 200));
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<InvaderIDCard>(), 1, 1, 1));
-            //itemLoot.Add(ItemDropRule.FewFromOptions(1, 1, ItemType<BlackHoleStaff>(), ItemType<ExplosivePierce>(), ItemType<DreadnoughtStaff>(), ItemType<B4Bow>()));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<InvaderMask>(), 7, 1, 1));
+            itemLoot.Add(ItemDropRule.OneFromOptionsNotScalingWithLuck(1, ModContent.ItemType<SuperquantumRifle>(), ModContent.ItemType<DVRStaff>(), ModContent.ItemType<FightKit>()));
         }
     }
 }

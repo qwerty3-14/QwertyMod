@@ -11,12 +11,11 @@ using System.Collections.Generic;
 using System.IO;
 using Terraria;
 using Terraria.Audio;
-using Terraria.DataStructures;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
 {
@@ -24,7 +23,6 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Polar Exterminator");
             Main.npcFrameCount[NPC.type] = 5;
             NPCID.Sets.BossBestiaryPriority.Add(Type);
         }
@@ -75,19 +73,19 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
             //Add the treasure bag (automatically checks for expert mode)
-            npcLoot.Add(ItemDropRule.BossBag(ItemType<TundraBossBag>())); //this requires you to set BossBag in SetDefaults accordingly
+            npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<TundraBossBag>())); //this requires you to set BossBag in SetDefaults accordingly
 
             //All our drops here are based on "not expert", meaning we use .OnSuccess() to add them into the rule, which then gets added
             LeadingConditionRule notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
 
             //Notice we use notExpertRule.OnSuccess instead of npcLoot.Add so it only applies in normal mode
-            notExpertRule.OnSuccess(ItemDropRule.OneFromOptionsNotScalingWithLuck(1, ItemType<PenguinClub>(), ItemType<PenguinLauncher>(), ItemType<PenguinWhistle>()));
+            notExpertRule.OnSuccess(ItemDropRule.OneFromOptionsNotScalingWithLuck(1, ModContent.ItemType<PenguinClub>(), ModContent.ItemType<PenguinLauncher>(), ModContent.ItemType<PenguinWhistle>()));
             //Finally add the leading rule
             npcLoot.Add(notExpertRule);
 
             //Boss masks are spawned with 1/7 chance
             notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
-            notExpertRule.OnSuccess(ItemDropRule.Common(ItemType<PolarMask>(), 7));
+            notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<PolarMask>(), 7));
             npcLoot.Add(notExpertRule);
 
             notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
@@ -95,7 +93,7 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
             npcLoot.Add(notExpertRule);
 
             //Trophies are spawned with 1/10 chance
-            npcLoot.Add(ItemDropRule.Common(ItemType<PolarTrophy>(), 10));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<PolarTrophy>(), 10));
 
 			// ItemDropRule.MasterModeCommonDrop for the relic
 			npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<Items.Consumable.Tiles.Relics.PolarBearRelic>()));
@@ -187,7 +185,7 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
                             attackCounter++;
                             if (Main.netMode != NetmodeID.MultiplayerClient)
                             {
-                                NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Center.X + 30 * NPC.direction, (int)NPC.Center.Y + 14, NPCType<SlidingPenguin>(), ai0: NPC.direction, ai1: (player.Bottom.Y < NPC.Center.Y + 14) ? 1 : 0);
+                                NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Center.X + 30 * NPC.direction, (int)NPC.Center.Y + 14, ModContent.NPCType<SlidingPenguin>(), ai0: NPC.direction, ai1: (player.Bottom.Y < NPC.Center.Y + 14) ? 1 : 0);
                             }
                             SoundEngine.PlaySound(SoundID.Item11, NPC.position);
                             for (int i = 0; i < 8; i++)
@@ -206,7 +204,7 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
                             {
                                 if (Main.netMode != NetmodeID.MultiplayerClient)
                                 {
-                                    NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Center.X + 34 * NPC.direction, (int)NPC.Center.Y, NPCType<FlyingPenguin>(), 0, i);
+                                    NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Center.X + 34 * NPC.direction, (int)NPC.Center.Y, ModContent.NPCType<FlyingPenguin>(), 0, i);
                                 }
                                 SoundEngine.PlaySound(SoundID.Item11, NPC.position);
                             }
@@ -272,7 +270,7 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
                             int denUpperHeight = 40;
                             int ceilingHeight = (int)(MathF.Sin(((float)(x + (denLength / 2)) / (float)denLength) * MathF.PI) * (float)denUpperHeight);
                             Vector2 spawnPos = FrozenDen.BearSpawn + new Vector2(x * 16, ceilingHeight * -16);
-                            NPC.NewNPC(NPC.GetSource_FromAI(), (int)spawnPos.X, (int)spawnPos.Y, NPCType<AgentPenguin>());
+                            NPC.NewNPC(NPC.GetSource_FromAI(), (int)spawnPos.X, (int)spawnPos.Y, ModContent.NPCType<AgentPenguin>());
 
                         }
                         agentCooldown = 600;

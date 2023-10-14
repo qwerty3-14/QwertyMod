@@ -1,22 +1,14 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using QwertyMod.Common;
+using QwertyMod.Content.Buffs;
+using QwertyMod.Content.NPCs.Invader;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using Terraria;
-using Terraria.DataStructures;
-using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
-using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
-using Terraria.Audio;
-using QwertyMod.Content.Buffs;
-using QwertyMod.Content.Dusts;
-using QwertyMod.Common.Fortress;
-using QwertyMod.Content.NPCs.Invader;
 
 
 namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
@@ -398,8 +390,8 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
         }
         void DrawSplit(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor, int splitModifer)
         {
-            Texture2D leftSide = Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/InvaderBattleship/InvaderNoehtnap_LeftHalf").Value;
-            Texture2D rightSide = Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/InvaderBattleship/InvaderNoehtnap_RightHalf").Value;
+            Texture2D leftSide = ModContent.Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/InvaderBattleship/InvaderNoehtnap_LeftHalf").Value;
+            Texture2D rightSide = ModContent.Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/InvaderBattleship/InvaderNoehtnap_RightHalf").Value;
             int splitVert = (int)MathF.Min(10, splitModifer);
             int spiltHori = 0;
             if(splitModifer > timeToSplit && splitModifer <= 99)
@@ -423,13 +415,13 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
         {
             if(NPC.ai[1] == 3)
             {
-                Texture2D texture = Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/InvaderBattleship/InvaderNoehtnap").Value;
+                Texture2D texture = ModContent.Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/InvaderBattleship/InvaderNoehtnap").Value;
                 spriteBatch.Draw(texture, NPC.Center - screenPos,
                     new Rectangle(0, 0, texture.Width, texture.Height / 5), drawColor, 0,
                     new Vector2(texture.Width, texture.Height / 5) * 0.5f, NoehtnapSpells.scale, SpriteEffects.None, 0f);
 
                 Vector2 pupilOffset = NoehtnapSpells.PupilPosition(pupilDirection, pupilStareOutAmount);
-                Texture2D Pupil = Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/CloakedDarkBoss/Pupil").Value;
+                Texture2D Pupil = ModContent.Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/CloakedDarkBoss/Pupil").Value;
                 spriteBatch.Draw(Pupil, NPC.Center - screenPos + pupilOffset,
                         Pupil.Frame(), drawColor, 0,
                         Pupil.Size() * .5f, NoehtnapSpells.scale, SpriteEffects.None, 0f);
@@ -442,7 +434,7 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
                 if(splitTimer > 80)
                 {
 
-                    Texture2D cloak = Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/InvaderBattleship/InvaderNoehtnap_MiniCloak").Value;
+                    Texture2D cloak = ModContent.Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/InvaderBattleship/InvaderNoehtnap_MiniCloak").Value;
                     int voidModifier = (int)MathF.Min(60, splitTimer - 80) * 2;
                     float scale = voidModifier / 120f;
                     spriteBatch.Draw(cloak, NPC.Center - screenPos,
@@ -471,8 +463,8 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
             {
                 if(armBeamAttackCounter > -1)
                 {
-                    Texture2D armTip = Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/InvaderBattleship/BeamArm").Value;
-                    Texture2D armSeg = Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/InvaderBattleship/BeamArm_Segment").Value;
+                    Texture2D armTip = ModContent.Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/InvaderBattleship/BeamArm").Value;
+                    Texture2D armSeg = ModContent.Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/InvaderBattleship/BeamArm_Segment").Value;
                     for(int i = 0; i < 4; i++)
                     {
                         float rot = (armPos[i] - NPC.Center).ToRotation();

@@ -18,13 +18,12 @@ using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
-using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 using System.IO;
 
 namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
@@ -34,9 +33,8 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("The Divine Light");
             Main.npcFrameCount[NPC.type] = 4;
-            NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers(0)
+            NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers()
             {
                 CustomTexturePath = "QwertyMod/Content/NPCs/Bosses/FortressBoss/FortressBoss_Bestiary",
                 PortraitScale = 0.6f,
@@ -100,7 +98,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
         {
             NPC.TargetClosest(false);
             Player player = Main.player[NPC.target];
-            if (!player.InModBiome(GetInstance<FortressBiome>()) || !player.active || player.dead)
+            if (!player.InModBiome(ModContent.GetInstance<FortressBiome>()) || !player.active || player.dead)
             {
                 return true;
             }
@@ -110,35 +108,37 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
             //Add the treasure bag (automatically checks for expert mode)
-            npcLoot.Add(ItemDropRule.BossBag(ItemType<FortressBossBag>())); //this requires you to set BossBag in SetDefaults accordingly
+            npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<FortressBossBag>())); //this requires you to set BossBag in SetDefaults accordingly
 
             //All our drops here are based on "not expert", meaning we use .OnSuccess() to add them into the rule, which then gets added
             LeadingConditionRule notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
 
             //Notice we use notExpertRule.OnSuccess instead of npcLoot.Add so it only applies in normal mode
-            notExpertRule.OnSuccess(ItemDropRule.OneFromOptionsNotScalingWithLuck(1, ItemType<CaeliteMagicWeapon>(), ItemType<HolyExiler>(), ItemType<CaeliteRainKnife>(), ItemType<PriestStaff>()));
+            notExpertRule.OnSuccess(ItemDropRule.OneFromOptionsNotScalingWithLuck(1, ModContent.ItemType<CaeliteMagicWeapon>(), ModContent.ItemType<HolyExiler>(), ModContent.ItemType<CaeliteRainKnife>(), ModContent.ItemType<PriestStaff>()));
             //Finally add the leading rule
             npcLoot.Add(notExpertRule);
 
             //Boss masks are spawned with 1/7 chance
             notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
-            notExpertRule.OnSuccess(ItemDropRule.Common(ItemType<DivineLightMask>(), 7));
+            notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<DivineLightMask>(), 7));
             npcLoot.Add(notExpertRule);
 
             notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
-            notExpertRule.OnSuccess(ItemDropRule.Common(ItemType<CaeliteBar>(), 1, 12, 20));
+            notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<CaeliteBar>(), 1, 12, 20));
             npcLoot.Add(notExpertRule);
 
             notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
-            notExpertRule.OnSuccess(ItemDropRule.Common(ItemType<CaeliteCore>(), 1, 6, 10));
+            notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<CaeliteCore>(), 1, 6, 10));
             npcLoot.Add(notExpertRule);
 
             notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
-            notExpertRule.OnSuccess(ItemDropRule.Common(ItemType<SkywardHilt>(), 6));
+            notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<SkywardHilt>(), 6));
             npcLoot.Add(notExpertRule);
+
+            
 
             //Trophies are spawned with 1/10 chance
-            npcLoot.Add(ItemDropRule.Common(ItemType<FortressBossTrophy>(), 10));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<FortressBossTrophy>(), 10));
 
 
 			// ItemDropRule.MasterModeCommonDrop for the relic
@@ -209,7 +209,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
 
             NPC.TargetClosest(false);
             Player player = Main.player[NPC.target];
-            if (!player.active || player.dead || !player.InModBiome(GetInstance<FortressBiome>()))
+            if (!player.active || player.dead || !player.InModBiome(ModContent.GetInstance<FortressBiome>()))
             {
                 if (NPC.timeLeft > 10)
                 {
@@ -283,7 +283,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
                             player = Main.player[NPC.target];
                             if (Main.netMode != NetmodeID.MultiplayerClient)
                             {
-                                Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, QwertyMethods.PolarVector(8f, (player.Center - NPC.Center).ToRotation()), ProjectileType<CaeliteSaw>(), damage, 0);
+                                Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, QwertyMethods.PolarVector(8f, (player.Center - NPC.Center).ToRotation()), ModContent.ProjectileType<CaeliteSaw>(), damage, 0);
                             }
                         }
                     }
@@ -325,7 +325,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
         {
             for (int i = 0; i < 200; i++)
             {
-                if (Main.projectile[i].type == ProjectileType<Deflect>())
+                if (Main.projectile[i].type == ModContent.ProjectileType<Deflect>())
                 {
                     Main.projectile[i].Kill();
                 }
@@ -338,7 +338,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
                 {
                     Vector2 endPos = NPC.Center + QwertyMethods.PolarVector(130, (player.Center - NPC.Center).ToRotation() + ((float)i / 11f) * MathF.PI - MathF.PI / 2f);
                     Vector2 startPos = NPC.position + spellPositions[i / 3];
-                    Projectile projectile = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromAI(), startPos, Vector2.Zero, ProjectileType<Deflect>(), damage, 0, 255, endPos.X, endPos.Y)];
+                    Projectile projectile = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromAI(), startPos, Vector2.Zero, ModContent.ProjectileType<Deflect>(), damage, 0, 255, endPos.X, endPos.Y)];
                     projectile.ai[0] = endPos.X;
                     projectile.ai[1] = endPos.Y;
                     projectile.timeLeft = (60 * 30) + (i % 3) * 30 + 60;
@@ -388,7 +388,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
                 SoundEngine.PlaySound(SoundID.Item43, position);
                 if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
-                    Projectile.NewProjectile(NPC.GetSource_FromAI(), position, QwertyMethods.PolarVector(vel, angle), ProjectileType<DivineBolt>(), damage, 0);
+                    Projectile.NewProjectile(NPC.GetSource_FromAI(), position, QwertyMethods.PolarVector(vel, angle), ModContent.ProjectileType<DivineBolt>(), damage, 0);
                 }
             }
         }
@@ -436,7 +436,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
             Player player = Main.player[NPC.target];
             if (Main.netMode != NetmodeID.MultiplayerClient)
             {
-                QwertyMethods.ProjectileSpread(NPC.GetSource_FromAI(), position, 3, 6f, ProjectileType<BarrierSpread>(), damage, 0, 255, NPC.whoAmI, rotation: (player.Center - position).ToRotation(), spread: MathF.PI / 6);
+                QwertyMethods.ProjectileSpread(NPC.GetSource_FromAI(), position, 3, 6f, ModContent.ProjectileType<BarrierSpread>(), damage, 0, 255, NPC.whoAmI, rotation: (player.Center - position).ToRotation(), spread: MathF.PI / 6);
             }
         }
         void PlanAttackOrder()
@@ -616,7 +616,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
             {
                 if (drawSpell[i])
                 {
-                    Dust dust = Main.dust[Dust.NewDust(NPC.position + spellPositions[i] - Vector2.One * 16, 32, 32, DustType<CaeliteDust>())];
+                    Dust dust = Main.dust[Dust.NewDust(NPC.position + spellPositions[i] - Vector2.One * 16, 32, 32, ModContent.DustType<CaeliteDust>())];
                     dust.frame.Y = 0;
                     dust.scale = 0.4f;
                 }
@@ -717,11 +717,11 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
                         path += "BottomRightArm";
                         break;
                 }
-                texture = Request<Texture2D>(path).Value;
+                texture = ModContent.Request<Texture2D>(path).Value;
                 spriteBatch.Draw(texture, NPC.Center - screenPos, new Rectangle(0, armFrames[i] * 128, 156, 128), drawColor, NPC.rotation, new Vector2(156 * 0.5f, 128 * 0.5f), scale, 0, 0);
                 if (drawSpell[i])
                 {
-                    texture = Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/FortressBoss/SpellOrb").Value;
+                    texture = ModContent.Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/FortressBoss/SpellOrb").Value;
                     spriteBatch.Draw(texture, NPC.position + spellPositions[i] - screenPos, null, drawColor, orbRotatior, texture.Size() * .5f, scale, 0, 0);
                 }
             }

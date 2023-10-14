@@ -7,7 +7,7 @@ using Terraria.GameContent;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.Doppleganger
 {
@@ -15,8 +15,6 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.Doppleganger
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Doppleganger");
-            //Tooltip.SetDefault("Pretends to be the accesory placed above it.\nThe gods forbid equiping the same accesory twice!\nTampering with such an unusual artifact is not advised.");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -111,7 +109,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.Doppleganger
         {
             for (int a = 4; a < 10; a++)
             {
-                if (!Player.armor[a].IsAir && Player.armor[a].type == ItemType<Doppleganger>() && !Player.armor[a - 1].IsAir)
+                if (!Player.armor[a].IsAir && Player.armor[a].type == ModContent.ItemType<Doppleganger>() && !Player.armor[a - 1].IsAir)
                 {
                     Player.armor[a].type = Player.armor[a - 1].type;
                 }
@@ -139,7 +137,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.Doppleganger
             {
                 if (!Player.armor[a].IsAir && Player.armor[a].GetGlobalItem<DoppleItem>().isDoppleganger)
                 {
-                    Player.armor[a].type = ItemType<Doppleganger>();
+                    Player.armor[a].type = ModContent.ItemType<Doppleganger>();
                 }
             }
         }

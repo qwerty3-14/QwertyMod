@@ -18,7 +18,6 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Glass
         {
             Item.value = 10000;
             Item.rare = ItemRarityID.Blue;
-
             Item.width = 26;
             Item.height = 18;
             Item.defense = 5;

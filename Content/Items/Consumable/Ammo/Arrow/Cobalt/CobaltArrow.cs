@@ -2,7 +2,7 @@
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Cobalt
 {
@@ -26,7 +26,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Cobalt
             Item.shootSpeed = 40;
 
             Item.consumable = true;
-            Item.shoot = ProjectileType<CobaltArrowP>();
+            Item.shoot = ModContent.ProjectileType<CobaltArrowP>();
             Item.ammo = 40;
             Item.maxStack = 9999;
         }

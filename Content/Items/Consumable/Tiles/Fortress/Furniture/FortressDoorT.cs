@@ -7,7 +7,6 @@ using Terraria.GameContent.ObjectInteractions;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
-using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Furniture
 {
@@ -42,7 +41,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Furniture
             TileObjectData.addTile(Type);
             AddToArray(ref TileID.Sets.RoomNeeds.CountsAsDoor);
             AddMapEntry(new Color(162, 184, 185));
-            DustType = DustType<FortressDust>();
+            DustType = ModContent.DustType<FortressDust>();
             HitSound = QwertyMod.FortressBlocks;
             AdjTiles = new int[] { TileID.ClosedDoor };
 			TileID.Sets.OpenDoorID[Type] = ModContent.TileType<FortressDoorOpen>();
@@ -62,7 +61,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Furniture
             Player player = Main.LocalPlayer;
             player.noThrow = 2;
             player.cursorItemIconEnabled = true;
-            player.cursorItemIconID = ItemType<FortressDoor>();
+            player.cursorItemIconID = ModContent.ItemType<FortressDoor>();
         }
     }
 
@@ -119,7 +118,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Furniture
             //ModTranslation name = CreateMapEntryName();
             //name.SetDefault("Fortress Door");
             //AddMapEntry(new Color(162, 184, 185), name);
-            DustType = DustType<FortressDust>();
+            DustType = ModContent.DustType<FortressDust>();
             // disableSmartCursor = true;
             AdjTiles = new int[] { TileID.OpenDoor };
 			TileID.Sets.CloseDoorID[Type] = ModContent.TileType<FortressDoorClosed>();
@@ -137,7 +136,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Furniture
 
         public override void KillMultiTile(int i, int j, int frameX, int frameY)
         {
-            Item.NewItem(new EntitySource_TileBreak(i, j), i * 16, j * 16, 32, 48, ItemType<FortressDoor>());
+            Item.NewItem(new EntitySource_TileBreak(i, j), i * 16, j * 16, 32, 48, ModContent.ItemType<FortressDoor>());
         }
 
         public override void MouseOver(int i, int j)
@@ -145,7 +144,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Furniture
             Player player = Main.LocalPlayer;
             player.noThrow = 2;
             player.cursorItemIconEnabled = true;
-            player.cursorItemIconID = ItemType<FortressDoor>();
+            player.cursorItemIconID = ModContent.ItemType<FortressDoor>();
         }
     }
 }

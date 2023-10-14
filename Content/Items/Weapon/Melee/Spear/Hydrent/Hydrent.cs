@@ -1,11 +1,9 @@
-﻿using Microsoft.Xna.Framework;
-using QwertyMod.Content.Dusts;
+﻿using QwertyMod.Content.Dusts;
 using System;
 using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content.Items.Weapon.Melee.Spear.Hydrent
 {
@@ -13,8 +11,6 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Spear.Hydrent
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Fire Hydrent");
-            //Tooltip.SetDefault("Shoots hydra breath");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.Spears[Item.type] = true;
         }
@@ -38,7 +34,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Spear.Hydrent
             Item.noUseGraphic = true; // Important, it's kind of wired if people see two spears at one time. This prevents the melee animation of this Item.
             Item.channel = true;
             Item.UseSound = SoundID.Item1;
-            Item.shoot = ProjectileType<HydrentP>();
+            Item.shoot = ModContent.ProjectileType<HydrentP>();
         }
 
         public override bool CanUseItem(Player player)
@@ -72,7 +68,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Spear.Hydrent
                     Projectile.NewProjectile(Projectile.GetSource_FromThis(),
                      Projectile.Center + QwertyMethods.PolarVector(-7f + (7f * ((streamCounter / 6) % 3)), aimDirection - (MathF.PI / 2)), 
                      QwertyMethods.PolarVector(16f, aimDirection), 
-                     ProjectileType<HydrentBreath>(), 
+                     ModContent.ProjectileType<HydrentBreath>(), 
                      (int)(Projectile.damage * .8f), 
                      Projectile.knockBack, 
                      Projectile.owner);
@@ -106,7 +102,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Spear.Hydrent
 
         public virtual void CreateDust()
         {
-            int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<HydraBreathGlow>());
+            int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<HydraBreathGlow>());
         }
     }
 }

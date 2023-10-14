@@ -5,7 +5,7 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Minion.SpaceFighter
 {
@@ -13,7 +13,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.SpaceFighter
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Space Fighter");
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true; //This is necessary for right-click targeting
         }
 
@@ -66,7 +65,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.SpaceFighter
                     if (shotCounter >= 30)
                     {
                         shotCounter = 0;
-                        Projectile l = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, QwertyMethods.PolarVector(12f, Projectile.rotation), ProjectileType<FighterLaser>(), Projectile.damage, Projectile.knockBack, Projectile.owner)];
+                        Projectile l = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, QwertyMethods.PolarVector(12f, Projectile.rotation), ModContent.ProjectileType<FighterLaser>(), Projectile.damage, Projectile.knockBack, Projectile.owner)];
                         SoundEngine.PlaySound(SoundID.Item12, Projectile.position);
                     }
                 }

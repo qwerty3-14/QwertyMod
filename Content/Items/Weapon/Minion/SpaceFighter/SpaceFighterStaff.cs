@@ -4,7 +4,7 @@ using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Minion.SpaceFighter
 {
@@ -12,8 +12,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.SpaceFighter
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Space Fighter Staff");
-            //Tooltip.SetDefault("");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
@@ -33,7 +31,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.SpaceFighter
             Item.value = Item.sellPrice(silver: 40);
             Item.rare = ItemRarityID.Blue;
             Item.UseSound = SoundID.Item44;
-            Item.shoot = ProjectileType<SpaceFighter>();
+            Item.shoot = ModContent.ProjectileType<SpaceFighter>();
             Item.DamageType = DamageClass.Summon;
         }
 

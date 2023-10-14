@@ -8,7 +8,7 @@ using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Magic.Lune
 {
@@ -16,8 +16,6 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Lune
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Lune Staff");
-            //Tooltip.SetDefault("Fires a Lune crest to zap enemies" + "\nInflicts Lune curse making enemies more vulnerable to critical hits");
             Item.staff[Item.type] = true; //this makes the useStyle animate as a staff instead of as a gun
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
@@ -36,14 +34,14 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Lune
             Item.value = 20000;
             Item.rare = ItemRarityID.Blue;
             Item.UseSound = SoundID.Item43;
-            Item.shoot = ProjectileType<LuneCrest>();
+            Item.shoot = ModContent.ProjectileType<LuneCrest>();
             Item.DamageType = DamageClass.Magic;
             Item.shootSpeed = 9;
         }
 
         public override void AddRecipes()
         {
-            CreateRecipe(1).AddIngredient(ItemType<LuneBar>(), 12)
+            CreateRecipe(1).AddIngredient(ModContent.ItemType<LuneBar>(), 12)
                 .AddTile(TileID.Anvils)
                 .Register();
         }
@@ -103,8 +101,8 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Lune
                     QwertyMethods.PokeNPC(Main.player[Projectile.owner], target, Projectile.GetSource_FromThis(), Projectile.damage, DamageClass.Magic, Projectile.knockBack);
                     for (int d = 0; d < (target.Center - Projectile.Center).Length(); d += 4)
                     {
-                        Dust.NewDust(Projectile.Center + QwertyMethods.PolarVector(d, (target.Center - Projectile.Center).ToRotation()), 0, 0, DustType<LuneDust>());
-                        target.AddBuff(BuffType<LuneCurse>(), 120);
+                        Dust.NewDust(Projectile.Center + QwertyMethods.PolarVector(d, (target.Center - Projectile.Center).ToRotation()), 0, 0, ModContent.DustType<LuneDust>());
+                        target.AddBuff(ModContent.BuffType<LuneCurse>(), 120);
                     }
                 }
             }
@@ -113,7 +111,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Lune
         {
             for (int i = 0; i < 8; i++)
             {
-                Dust dust = Main.dust[Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<LuneDust>())];
+                Dust dust = Main.dust[Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<LuneDust>())];
                 dust.velocity *= 3f;
             }
         }

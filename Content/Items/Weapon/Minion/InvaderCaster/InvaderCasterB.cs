@@ -8,8 +8,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.InvaderCaster
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Invader Caster");
-            //Description.SetDefault("The Invader Caster will fight for you!");
             Main.buffNoSave[Type] = true;
             Main.buffNoTimeDisplay[Type] = true;
         }

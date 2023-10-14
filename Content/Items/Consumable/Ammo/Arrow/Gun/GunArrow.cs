@@ -2,7 +2,7 @@
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Gun
 {
@@ -26,7 +26,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Gun
             Item.shootSpeed = 6;
             Item.useAmmo = AmmoID.Bullet;
             Item.consumable = true;
-            Item.shoot = ProjectileType<GunArrowP>();
+            Item.shoot = ModContent.ProjectileType<GunArrowP>();
             Item.ammo = 40;
             Item.maxStack = 9999;
         }

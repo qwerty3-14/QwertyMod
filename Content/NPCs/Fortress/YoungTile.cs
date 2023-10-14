@@ -10,7 +10,7 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
-using static Terraria.ModLoader.ModContent;
+
 using QwertyMod.Common.Fortress;
 
 namespace QwertyMod.Content.NPCs.Fortress
@@ -19,7 +19,6 @@ namespace QwertyMod.Content.NPCs.Fortress
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Young Tile");
             Main.npcFrameCount[NPC.type] = 4;
         }
 
@@ -70,7 +69,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             {
                 for (int i = 0; i < 10; i++)
                 {
-                    int dustType = DustType<FortressDust>();
+                    int dustType = ModContent.DustType<FortressDust>();
                     int dustIndex = Dust.NewDust(NPC.position, NPC.width, NPC.height, dustType);
                     Dust dust = Main.dust[dustIndex];
                     dust.velocity.X = dust.velocity.X + Main.rand.Next(-50, 51) * 0.01f;
@@ -80,7 +79,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             }
             for (int i = 0; i < 1; i++)
             {
-                int dustType = DustType<FortressDust>();
+                int dustType = ModContent.DustType<FortressDust>();
                 int dustIndex = Dust.NewDust(NPC.position, NPC.width, NPC.height, dustType);
                 Dust dust = Main.dust[dustIndex];
                 dust.velocity.X = dust.velocity.X + Main.rand.Next(-50, 51) * 0.01f;
@@ -90,7 +89,7 @@ namespace QwertyMod.Content.NPCs.Fortress
         }
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
-            npcLoot.Add(ItemDropRule.Common(ItemType<FortressBrick>(), 2));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<FortressBrick>(), 2));
         }
 
         private int frame;

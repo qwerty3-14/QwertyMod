@@ -5,7 +5,6 @@ using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
 {
@@ -20,7 +19,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
             Main.tileBrick[Type] = true;
             Main.tileBlendAll[Type] = true;
 
-            DustType = DustType<FortressDust>();
+            DustType = ModContent.DustType<FortressDust>();
             HitSound = QwertyMod.FortressBlocks;
             MinPick = 50;
             AddMapEntry(new Color(162, 184, 185));
@@ -33,7 +32,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
             noItem = true;
             if (Main.netMode != NetmodeID.MultiplayerClient && !fail)
             {
-                NPC youngTile = Main.npc[NPC.NewNPC(Wiring.GetNPCSource(i, j), i * 16 + 8, j * 16, NPCType<YoungTile>(), ai3: 1)];
+                NPC youngTile = Main.npc[NPC.NewNPC(Wiring.GetNPCSource(i, j), i * 16 + 8, j * 16, ModContent.NPCType<YoungTile>(), ai3: 1)];
                 youngTile.velocity = QwertyMethods.PolarVector(2, (float)Main.rand.NextFloat(-MathF.PI, MathF.PI));
             }
         }

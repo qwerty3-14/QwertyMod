@@ -4,7 +4,7 @@ using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Minion.Longsword
 {
@@ -13,8 +13,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.Longsword
 
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("The Longsword Staff");
-            //Tooltip.SetDefault("Who needs a horde of minions when you have a giant longsword?");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
@@ -32,7 +30,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.Longsword
             Item.shootSpeed = 24f;
             Item.width = Item.height = 44;
             Item.useStyle = ItemUseStyleID.Swing;
-            Item.shoot = ProjectileType<SwordMinion>();
+            Item.shoot = ModContent.ProjectileType<SwordMinion>();
             Item.UseSound = SoundID.Item44;
             Item.noMelee = true;
             Item.autoReuse = true;
@@ -61,7 +59,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.Longsword
                     return false;
                 }
             }
-            player.AddBuff(BuffType<SwordMinionBuff>(), 3600); //Idk why but the item.buffType didn't work for this
+            player.AddBuff(ModContent.BuffType<SwordMinionBuff>(), 3600); //Idk why but the item.buffType didn't work for this
             player.SpawnMinionOnCursor(source, player.whoAmI, type, Item.damage, knockback);
             return false;
         }

@@ -4,11 +4,10 @@ using QwertyMod.Common;
 using System;
 using Terraria;
 using Terraria.Audio;
-using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Minion.ChloroSniper
 {
@@ -16,7 +15,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.ChloroSniper
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Chlorophyte Sniper");
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true; //This is necessary for right-click targeting
         }
 
@@ -48,7 +46,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.ChloroSniper
         public override void AI()
         {
             Player player = Main.player[Projectile.owner];
-            sniperCount = player.ownedProjectileCounts[ProjectileType<ChlorophyteSniper>()];
+            sniperCount = player.ownedProjectileCounts[ModContent.ProjectileType<ChlorophyteSniper>()];
             if (player.GetModPlayer<MinionManager>().chlorophyteSniper)
             {
                 Projectile.timeLeft = 2;
@@ -79,7 +77,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.ChloroSniper
                 if (QwertyMethods.ClosestNPC(ref target, 100000, Projectile.Center, false, player.MinionAttackTargetNPC) && timer > 240)
                 {
                     SoundEngine.PlaySound(SoundID.Item92, Projectile.Center);
-                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center + Vector2.UnitY * hoverOffset, QwertyMethods.PolarVector(10, (target.Center - Projectile.Center).ToRotation()), ProjectileType<ChlorophyteSnipe>(), Projectile.damage, Projectile.knockBack, player.whoAmI);
+                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center + Vector2.UnitY * hoverOffset, QwertyMethods.PolarVector(10, (target.Center - Projectile.Center).ToRotation()), ModContent.ProjectileType<ChlorophyteSnipe>(), Projectile.damage, Projectile.knockBack, player.whoAmI);
                     Projectile.velocity += QwertyMethods.PolarVector(-6, (target.Center - Projectile.Center).ToRotation());
                     timer = 0;
                 }

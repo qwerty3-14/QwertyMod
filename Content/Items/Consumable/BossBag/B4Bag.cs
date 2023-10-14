@@ -3,14 +3,12 @@ using QwertyMod.Content.Items.Weapon.Magic.BlackHole;
 using QwertyMod.Content.Items.Weapon.Magic.Plasma;
 using QwertyMod.Content.Items.Weapon.Minion.UrQuan;
 using QwertyMod.Content.Items.Weapon.Ranged.Bow.B4Bow;
-using QwertyMod.Content.NPCs.Bosses.OLORD;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
 using Terraria.GameContent.Creative;
-using Terraria.ID;
 using Terraria.GameContent.ItemDropRules;
+using Terraria.ID;
+using QwertyMod.Content.Items.Equipment.Vanity.BossMasks;
 
 namespace QwertyMod.Content.Items.Consumable.BossBag
 {
@@ -44,8 +42,9 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
             
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<TheDevourer>(), 5));
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<B4ExpertItem>(), 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<OLORDMask>(), 7, 1, 1));
             itemLoot.Add(ItemDropRule.Coins(1000000, true));
-            itemLoot.Add(ItemDropRule.FewFromOptions(1, 1, ItemType<BlackHoleStaff>(), ItemType<ExplosivePierce>(), ItemType<DreadnoughtStaff>(), ItemType<B4Bow>()));
+            itemLoot.Add(ItemDropRule.FewFromOptions(1, 1, ModContent.ItemType<BlackHoleStaff>(), ModContent.ItemType<ExplosivePierce>(), ModContent.ItemType<DreadnoughtStaff>(), ModContent.ItemType<B4Bow>()));
         }
     }
 }

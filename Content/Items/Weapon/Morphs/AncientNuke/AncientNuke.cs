@@ -9,7 +9,7 @@ using Terraria.Audio;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Morphs.AncientNuke
 {
@@ -17,8 +17,6 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.AncientNuke
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Shape shift: Ancient Nuke");
-            //Tooltip.SetDefault("Breifly turns you into an ancient nuke that causes a massive explosion when you collide with something... don't worry you'll live");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -48,9 +46,9 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.AncientNuke
             //Item.autoReuse = true;
             if (!Main.dedServ)
             {
-                Item.GetGlobalItem<ItemUseGlow>().glowTexture = Request<Texture2D>("QwertyMod/Content/Items/Weapon/Morphs/AncientNuke/AncientNuke_Glow").Value;
+                Item.GetGlobalItem<ItemUseGlow>().glowTexture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Morphs/AncientNuke/AncientNuke_Glow").Value;
             }
-            Item.shoot = ProjectileType<AncientNukeMorph>();
+            Item.shoot = ModContent.ProjectileType<AncientNukeMorph>();
             Item.shootSpeed = 0f;
             Item.channel = true;
         }
@@ -74,7 +72,6 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.AncientNuke
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Ancient Nuke");
             Main.projFrames[Projectile.type] = 1;
         }
 
@@ -107,8 +104,8 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.AncientNuke
             player.itemTime = 2;
             player.fallStart = (int)player.Bottom.Y;
             player.GetModPlayer<ShapeShifterPlayer>().noDraw = true;
-            player.AddBuff(BuffType<HealingHalt>(), 10);
-            player.AddBuff(BuffType<MorphCooldown>(), (int)((27 * player.GetModPlayer<ShapeShifterPlayer>().coolDownDuration) * 60f));
+            player.AddBuff(ModContent.BuffType<HealingHalt>(), 10);
+            player.AddBuff(ModContent.BuffType<MorphCooldown>(), (int)((27 * player.GetModPlayer<ShapeShifterPlayer>().coolDownDuration) * 60f));
             //Projectile.timeLeft = 2;
             //player.mount = null;
             //player.noItems = true;
@@ -125,7 +122,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.AncientNuke
             dustYoffset = 20;
             for (int i = 0; i < 2; i++)
             {
-                Dust dust = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(dustYoffset, Projectile.rotation + MathF.PI / 2) + QwertyMethods.PolarVector(Main.rand.Next(-9, 9), Projectile.rotation), DustType<AncientGlow>());
+                Dust dust = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(dustYoffset, Projectile.rotation + MathF.PI / 2) + QwertyMethods.PolarVector(Main.rand.Next(-9, 9), Projectile.rotation), ModContent.DustType<AncientGlow>());
             }
         }
 
@@ -133,7 +130,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.AncientNuke
         {
             if (timeLeft == 0)
             {
-                Projectile e = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ProjectileType<AncientFallout>(), Projectile.damage, Projectile.knockBack, Projectile.owner)];
+                Projectile e = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<AncientFallout>(), Projectile.damage, Projectile.knockBack, Projectile.owner)];
             }
         }
 
@@ -141,22 +138,22 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.AncientNuke
         {
             Projectile.localNPCImmunity[target.whoAmI] = -1;
             target.immune[Projectile.owner] = 0;
-            Projectile e = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ProjectileType<AncientFallout>(), Projectile.damage, Projectile.knockBack, Projectile.owner)];
+            Projectile e = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<AncientFallout>(), Projectile.damage, Projectile.knockBack, Projectile.owner)];
             e.localNPCImmunity[target.whoAmI] = -1;
         }
 
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            Projectile e = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ProjectileType<AncientFallout>(), Projectile.damage, Projectile.knockBack, Projectile.owner)];
+            Projectile e = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<AncientFallout>(), Projectile.damage, Projectile.knockBack, Projectile.owner)];
             return true;
         }
 
         public override bool PreDraw(ref Color drawColor)
         {
-            Main.EntitySpriteDraw(Request<Texture2D>("QwertyMod/Content/Items/Weapon/Morphs/AncientNuke/AncientNukeMorph").Value, new Vector2(Projectile.Center.X - Main.screenPosition.X, Projectile.Center.Y - Main.screenPosition.Y),
+            Main.EntitySpriteDraw(ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Morphs/AncientNuke/AncientNukeMorph").Value, new Vector2(Projectile.Center.X - Main.screenPosition.X, Projectile.Center.Y - Main.screenPosition.Y),
                         new Rectangle(0, 0, 38, 56), drawColor, Projectile.rotation,
                         new Vector2(46 * 0.5f, 56 * 0.5f), 1f, SpriteEffects.None, 0);
-            Main.EntitySpriteDraw(Request<Texture2D>("QwertyMod/Content/Items/Weapon/Morphs/AncientNuke/AncientNukeMorph_Glow").Value, new Vector2(Projectile.Center.X - Main.screenPosition.X, Projectile.Center.Y - Main.screenPosition.Y),
+            Main.EntitySpriteDraw(ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Morphs/AncientNuke/AncientNukeMorph_Glow").Value, new Vector2(Projectile.Center.X - Main.screenPosition.X, Projectile.Center.Y - Main.screenPosition.Y),
                         new Rectangle(0, 0, 38, 56), Color.White, Projectile.rotation,
                         new Vector2(46 * 0.5f, 56 * 0.5f), 1f, SpriteEffects.None, 0);
             return false;
@@ -165,10 +162,6 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.AncientNuke
 
     public class AncientFallout : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("Ancient Fallout");
-        }
 
         public override void SetDefaults()
         {
@@ -194,7 +187,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.AncientNuke
             for (int i = 0; i < 1600; i++)
             {
                 float theta = Main.rand.NextFloat(-MathF.PI, MathF.PI);
-                Dust dust = Dust.NewDustPerfect(Projectile.Center, DustType<AncientGlow>(), QwertyMethods.PolarVector(Main.rand.Next(2, 120), theta));
+                Dust dust = Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<AncientGlow>(), QwertyMethods.PolarVector(Main.rand.Next(2, 120), theta));
                 dust.noGravity = true;
             }
         }

@@ -7,8 +7,6 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Rhuthinium Focus");
-            //Description.SetDefault("10% increased ranged damage");
             Main.debuff[Type] = false;
             Main.pvpBuff[Type] = false;
             Main.buffNoSave[Type] = true;

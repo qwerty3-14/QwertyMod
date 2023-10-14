@@ -6,7 +6,6 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
 {
@@ -14,8 +13,6 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Caelite Pulse Trap");
-            //Tooltip.SetDefault("Shoots 2 pulses");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 10;
         }
 
@@ -27,7 +24,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
             Item.maxStack = 9999;
             Item.value = 0;
             Item.rare = ItemRarityID.Orange;
-            Item.createTile = TileType<FortressTrapT>();
+            Item.createTile = ModContent.TileType<FortressTrapT>();
             Item.useTurn = true;
             Item.autoReuse = true;
             Item.useAnimation = 15;
@@ -57,9 +54,9 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
 
         public override void AddRecipes()
         {
-            CreateRecipe(2).AddIngredient(ItemType<FortressBrick>(), 2)
-                .AddIngredient(ItemType<CaeliteBar>(), 1)
-                .AddIngredient(ItemType<CaeliteCore>(), 1)
+            CreateRecipe(2).AddIngredient(ModContent.ItemType<FortressBrick>(), 2)
+                .AddIngredient(ModContent.ItemType<CaeliteBar>(), 1)
+                .AddIngredient(ModContent.ItemType<CaeliteCore>(), 1)
                 .AddTile(TileID.WorkBenches)
                 .Register();
         }

@@ -1,7 +1,7 @@
 ﻿using QwertyMod.Common;
 using Terraria;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Minion.Priest
 {
@@ -16,7 +16,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.Priest
         public override void Update(Player player, ref int buffIndex)
         {
             MinionManager modPlayer = player.GetModPlayer<MinionManager>();
-            if (player.ownedProjectileCounts[ProjectileType<PriestMinion>()] > 0)
+            if (player.ownedProjectileCounts[ ModContent.ProjectileType<PriestMinion>()] > 0)
             {
                 modPlayer.PriestMinion = true;
             }

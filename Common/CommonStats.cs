@@ -1,15 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
-using Mono.Cecil.Cil;
-using MonoMod.Cil;
-using System;
-using Terraria;
-using Terraria.DataStructures;
-using Terraria.Graphics.Shaders;
-using Terraria.ModLoader;
 using QwertyMod.Content.Items.Weapon.Whip.Fork;
-using Terraria.ID;
-using QwertyMod.Content.NPCs.Invader;
 using QwertyMod.Content.NPCs.Fortress;
+using QwertyMod.Content.NPCs.Invader;
+using Terraria;
+using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace QwertyMod.Common
 {

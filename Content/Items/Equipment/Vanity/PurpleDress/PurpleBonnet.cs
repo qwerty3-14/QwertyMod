@@ -1,8 +1,7 @@
+using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ModLoader;
-using static Terraria.ID.ArmorIDs;
 using Terraria.ID;
-using Terraria;
 
 namespace QwertyMod.Content.Items.Equipment.Vanity.PurpleDress
 {
@@ -12,7 +11,7 @@ namespace QwertyMod.Content.Items.Equipment.Vanity.PurpleDress
         public override void SetStaticDefaults()
         {
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
-            Head.Sets.DrawHatHair[Item.headSlot] = true;
+            ArmorIDs.Head.Sets.DrawHatHair[Item.headSlot] = true;
         }
 
         public override void SetDefaults()

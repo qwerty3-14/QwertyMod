@@ -12,7 +12,7 @@ using Terraria.GameInput;
 using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Equipment.Armor.Lune
 {
@@ -35,7 +35,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Lune
 
         public override void AddRecipes()
         {
-            CreateRecipe(1).AddIngredient(ItemType<LuneBar>(), 12)
+            CreateRecipe(1).AddIngredient(ModContent.ItemType<LuneBar>(), 12)
                 .AddTile(TileID.Anvils)
                 .Register();
         }
@@ -58,7 +58,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Lune
 
         public override bool IsArmorSet(Item head, Item body, Item legs)
         {
-            return head.type == ItemType<LuneHat>() && legs.type == ItemType<LuneLeggings>();
+            return head.type == ModContent.ItemType<LuneHat>() && legs.type == ModContent.ItemType<LuneLeggings>();
         }
 
         public override void ArmorSetShadows(Player player)
@@ -68,7 +68,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Lune
             {
                 float radius = Main.rand.NextFloat(200);
                 float theta = Main.rand.NextFloat(-MathF.PI, MathF.PI);
-                Dust dust = Dust.NewDustPerfect(player.Center + QwertyMethods.PolarVector(radius, theta), DustType<LuneDust>());
+                Dust dust = Dust.NewDustPerfect(player.Center + QwertyMethods.PolarVector(radius, theta), ModContent.DustType<LuneDust>());
                 dust.shader = GameShaders.Armor.GetSecondaryShader(player.ArmorSetDye(), player);
             }
             player.armorEffectDrawShadow = true;
@@ -141,13 +141,13 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Lune
             {
                 if (setBonus)
                 {
-                    if (Player.HasBuff(BuffType<MoonCooldown>()))
+                    if (Player.HasBuff(ModContent.BuffType<MoonCooldown>()))
                     {
                     }
                     else
                     {
-                        Projectile.NewProjectile(new EntitySource_Misc("SetBouns_Lune"), Main.MouseWorld, new Vector2(0, 0), ProjectileType<MoonTarget>(), 0, 0, Player.whoAmI, 0, 0);
-                        Player.AddBuff(BuffType<MoonCooldown>(), 3 * 60);
+                        Projectile.NewProjectile(new EntitySource_Misc("SetBouns_Lune"), Main.MouseWorld, new Vector2(0, 0), ModContent.ProjectileType<MoonTarget>(), 0, 0, Player.whoAmI, 0, 0);
+                        Player.AddBuff(ModContent.BuffType<MoonCooldown>(), 3 * 60);
                         justSummonedMoon = true;
                     }
                 }
@@ -193,7 +193,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Lune
             {
                 Projectile.Kill();
             }
-            Dust dust = Main.dust[Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<LuneDust>())];
+            Dust dust = Main.dust[Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<LuneDust>())];
 
             dust.shader = GameShaders.Armor.GetSecondaryShader(player.ArmorSetDye(), player);
             for (int i = 0; i < 200; i++)
@@ -247,7 +247,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Lune
                     //Projectile.velocity *= 2;
                     runOnce = false;
                 }
-                Dust dust = Main.dust[Dust.NewDust(projectile.position, projectile.width, projectile.height, DustType<LuneDust>())];
+                Dust dust = Main.dust[Dust.NewDust(projectile.position, projectile.width, projectile.height, ModContent.DustType<LuneDust>())];
                 Player player = Main.player[projectile.owner];
                 dust.shader = GameShaders.Armor.GetSecondaryShader(player.ArmorSetDye(), player);
             }
@@ -257,7 +257,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Lune
         {
             if (boosted)
             {
-                target.AddBuff(BuffType<LuneCurse>(), 60 * 3);
+                target.AddBuff(ModContent.BuffType<LuneCurse>(), 60 * 3);
             }
         }
     }

@@ -1,4 +1,3 @@
-
 using QwertyMod.Content.Items.Consumable.Tiles.Bars;
 using QwertyMod.Content.NPCs.Bosses.BladeBoss;
 using Terraria;
@@ -6,7 +5,7 @@ using Terraria.Audio;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Consumable.BossSummon
 {
@@ -34,7 +33,7 @@ namespace QwertyMod.Content.Items.Consumable.BossSummon
 
         public override bool CanUseItem(Player player)
         {
-            return !NPC.AnyNPCs(NPCType<Imperious>());
+            return !NPC.AnyNPCs(ModContent.NPCType<Imperious>());
         }
 
         public override bool? UseItem(Player player)
@@ -42,7 +41,7 @@ namespace QwertyMod.Content.Items.Consumable.BossSummon
             if (player.whoAmI == Main.myPlayer)
             {
                 SoundEngine.PlaySound(SoundID.Roar, player.Center);
-                QwertyMethods.NPCSpawnOnPlayer(player, NPCType<Imperious>());
+                QwertyMethods.NPCSpawnOnPlayer(player, ModContent.NPCType<Imperious>());
                 return true;
             }
 
@@ -51,7 +50,7 @@ namespace QwertyMod.Content.Items.Consumable.BossSummon
 
         public override void AddRecipes()
         {
-            CreateRecipe().AddIngredient(ItemType<RhuthiniumBar>(), 8)
+            CreateRecipe().AddIngredient(ModContent.ItemType<RhuthiniumBar>(), 8)
                 .AddIngredient(ItemID.HallowedBar, 6)
                 .AddTile(TileID.MythrilAnvil)
                 .Register();

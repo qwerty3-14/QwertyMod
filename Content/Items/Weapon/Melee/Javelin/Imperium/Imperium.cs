@@ -7,7 +7,7 @@ using Terraria.GameContent;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Melee.Javelin.Imperium
 {
@@ -16,7 +16,6 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin.Imperium
         public override void SetStaticDefaults()
         {
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
-            //Tooltip.SetDefault("Enemies will take 35% more damage from swords while this is stuck in them");
         }
         public override void SetDefaults()
         {
@@ -38,16 +37,12 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin.Imperium
 
             Item.autoReuse = true;
             Item.UseSound = SoundID.Item1;
-            Item.shoot = ProjectileType<ImperiumP>();
+            Item.shoot = ModContent.ProjectileType<ImperiumP>();
         }
     }
 
     public class ImperiumP : Javelin
     {
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("Imperium");
-        }
 
         public override void SetDefaults()
         {
@@ -60,7 +55,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin.Imperium
             Projectile.GetGlobalProjectile<ImplaingProjectile>().CanImpale = true;
             Projectile.GetGlobalProjectile<ImplaingProjectile>().damagePerImpaler = 400;
             maxStickingJavelins = 1;
-            dropItem = ItemType<Imperium>();
+            dropItem = ModContent.ItemType<Imperium>();
             rotationOffset = MathF.PI / 4;
             maxTicks = 60f;
         }

@@ -5,7 +5,7 @@ using Terraria;
 using Terraria.GameContent.Bestiary;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.NPCs.DinoMilitia
 {
@@ -13,7 +13,6 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Mosquitto");
             Main.npcFrameCount[NPC.type] = 4;
         }
 
@@ -47,7 +46,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
 
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            target.AddBuff(BuffType<DinoPox>(), 480);
+            target.AddBuff(ModContent.BuffType<DinoPox>(), 480);
             if (Main.expertMode)
             {
                 target.AddBuff(33, 480);

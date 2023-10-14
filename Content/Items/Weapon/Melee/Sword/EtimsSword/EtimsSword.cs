@@ -1,8 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using QwertyMod.Content.Items.Equipment.Accessories.Sword;
 using QwertyMod.Content.Items.MiscMaterials;
-using QwertyMod.Content.Items.Weapon.Ranged.Gun.SoEF;
 using System;
 using Terraria;
 using Terraria.DataStructures;
@@ -11,7 +9,7 @@ using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Melee.Sword.EtimsSword
 {
@@ -19,12 +17,8 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.EtimsSword
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("The Massacre");
-            //Tooltip.SetDefault("Right click on the ground for an uppercut" + "\nRight click in the air to slam down!" + "\nKilling an enemy grants immunity to hostile projectiles for a short time.");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
-
-
         public override void SetDefaults()
         {
             Item.useStyle = 101; //custom use style
@@ -49,7 +43,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.EtimsSword
 
         public override void AddRecipes()
         {
-            CreateRecipe(1).AddIngredient(ItemType<Etims>(), 12)
+            CreateRecipe(1).AddIngredient(ModContent.ItemType<Etims>(), 12)
                 .AddTile(TileID.Anvils)
                 .Register();
         }
@@ -254,7 +248,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.EtimsSword
             }
             if (damageDone > target.life && !target.SpawnedFromStatue)
             {
-                Main.player[Projectile.owner].AddBuff(BuffType<AntiProjectile>(), 360);
+                Main.player[Projectile.owner].AddBuff(ModContent.BuffType<AntiProjectile>(), 360);
             }
 
         }
@@ -268,7 +262,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.EtimsSword
     {
         public override bool CanBeHitByProjectile(Projectile proj)
         {
-            if (Player.HasBuff(BuffType<AntiProjectile>()))
+            if (Player.HasBuff(ModContent.BuffType<AntiProjectile>()))
             {
                 return false;
             }
@@ -294,7 +288,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.EtimsSword
             }
             Player drawPlayer = drawInfo.drawPlayer;
             Color color12 = drawPlayer.GetImmuneAlphaPure(Lighting.GetColor((int)((double)drawInfo.Position.X + (double)drawPlayer.width * 0.5) / 16, (int)((double)drawInfo.Position.Y + (double)drawPlayer.height * 0.5) / 16, Microsoft.Xna.Framework.Color.White), 0f);
-            if (!drawPlayer.HeldItem.IsAir && drawPlayer.HeldItem.type == ItemType<EtimsSword>() && drawPlayer.itemAnimation > 0)
+            if (!drawPlayer.HeldItem.IsAir && drawPlayer.HeldItem.type == ModContent.ItemType<EtimsSword>() && drawPlayer.itemAnimation > 0)
             {
                 Item item = drawPlayer.HeldItem;
                 Texture2D texture = TextureAssets.Item[item.type].Value;

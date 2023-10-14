@@ -1,7 +1,6 @@
+using QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets;
 using Terraria;
 using Terraria.ModLoader;
-using QwertyMod.Common;
-using QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets;
 
 namespace QwertyMod.Content.Buffs
 {

@@ -5,7 +5,7 @@ using Terraria.Audio;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Consumable.BossSummon
 {
@@ -32,7 +32,7 @@ namespace QwertyMod.Content.Items.Consumable.BossSummon
 
         public override bool CanUseItem(Player player)
         {
-            return !NPC.AnyNPCs(NPCType<OLORDv2>());
+            return !NPC.AnyNPCs(ModContent.NPCType<OLORDv2>());
         }
 
         public override bool? UseItem(Player player)
@@ -40,7 +40,7 @@ namespace QwertyMod.Content.Items.Consumable.BossSummon
             if (player.whoAmI == Main.myPlayer)
             {
                 SoundEngine.PlaySound(SoundID.Roar, player.Center);
-                QwertyMethods.NPCSpawnOnPlayer(player, NPCType<OLORDv2>());
+                QwertyMethods.NPCSpawnOnPlayer(player, ModContent.NPCType<OLORDv2>());
                 return true;
             }
 
@@ -48,7 +48,7 @@ namespace QwertyMod.Content.Items.Consumable.BossSummon
         }
         public override void AddRecipes()
         {
-            CreateRecipe(1).AddIngredient(ItemType<CraftingRune>(), 4)
+            CreateRecipe(1).AddIngredient(ModContent.ItemType<CraftingRune>(), 4)
                 .AddIngredient(ItemID.MartianConduitPlating, 15)
                 .AddTile(TileID.Anvils)
                 .Register();

@@ -5,7 +5,7 @@ using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.Arsenal
 {
@@ -13,8 +13,6 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.Arsenal
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Arsenal");
-            //Tooltip.SetDefault("Creates lingering blades!");
             ItemID.Sets.Yoyo[Item.type] = true;
             ItemID.Sets.GamepadExtraRange[Item.type] = 15;
             ItemID.Sets.GamepadSmartQuickReach[Item.type] = true;
@@ -40,7 +38,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.Arsenal
             Item.autoReuse = true;
             Item.UseSound = SoundID.Item1;
 
-            Item.shoot = ProjectileType<ArsenalP>();
+            Item.shoot = ModContent.ProjectileType<ArsenalP>();
         }
 
         private Projectile yoyo;
@@ -96,7 +94,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.Arsenal
             Projectile.frameCounter++;
             if (Projectile.frameCounter % 30 == 0)
             {
-                Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, QwertyMethods.PolarVector(4f + Main.rand.NextFloat(2f), MathF.PI * 2f * Main.rand.NextFloat()), ProjectileType<ArsenalSword>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, QwertyMethods.PolarVector(4f + Main.rand.NextFloat(2f), MathF.PI * 2f * Main.rand.NextFloat()), ModContent.ProjectileType<ArsenalSword>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
             }
         }
     }

@@ -3,7 +3,6 @@ using QwertyMod.Content.Dusts;
 using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
 using Terraria.ID;
 
 namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
@@ -12,8 +11,6 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Leech Scroll");
-            //Tooltip.SetDefault("Ranged attacks may summon leech runes that can heal you");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -66,7 +63,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
         {
             for (int d = 0; d <= 100; d++)
             {
-                Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<LeechRuneDeath>());
+                Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<LeechRuneDeath>());
             }
         }
 

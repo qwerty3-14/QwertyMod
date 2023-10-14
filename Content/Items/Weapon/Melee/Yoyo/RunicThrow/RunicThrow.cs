@@ -6,7 +6,7 @@ using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.RunicThrow
 {
@@ -14,10 +14,6 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.RunicThrow
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Runic Throw");
-            //Tooltip.SetDefault("Ridiculously long string" + "\nRight click to zoom");
-
-            // These are all related to gamepad controls and don't seem to affect anything else
             ItemID.Sets.Yoyo[Item.type] = true;
             ItemID.Sets.GamepadExtraRange[Item.type] = 15;
             ItemID.Sets.GamepadSmartQuickReach[Item.type] = true;
@@ -44,9 +40,9 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.RunicThrow
             Item.UseSound = SoundID.Item1;
             if (!Main.dedServ)
             {
-                Item.GetGlobalItem<ItemUseGlow>().glowTexture = Request<Texture2D>("QwertyMod/Content/Items/Weapon/Melee/Yoyo/RunicThrow/RunicThrow_Glow").Value;
+                Item.GetGlobalItem<ItemUseGlow>().glowTexture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Melee/Yoyo/RunicThrow/RunicThrow_Glow").Value;
             }
-            Item.shoot = ProjectileType<RunicThrowP>();
+            Item.shoot = ModContent.ProjectileType<RunicThrowP>();
         }
 
         public override void HoldItem(Player player)
@@ -55,8 +51,8 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.RunicThrow
         }
         public override void AddRecipes()
         {
-            CreateRecipe(1).AddIngredient(ItemType<CraftingRune>(), 15)
-                .AddIngredient(ItemType<AncientThrow.AncientThrow>())
+            CreateRecipe(1).AddIngredient(ModContent.ItemType<CraftingRune>(), 15)
+                .AddIngredient(ModContent.ItemType<AncientThrow.AncientThrow>())
                 .AddTile(TileID.Anvils)
                 .Register();
         }
@@ -101,7 +97,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.RunicThrow
 
         public override void PostDraw(Color lightColor)
         {
-            Main.EntitySpriteDraw(Request<Texture2D>("QwertyMod/Content/Items/Weapon/Melee/Yoyo/RunicThrow/RunicThrowP_Glow").Value, new Vector2(Projectile.Center.X - Main.screenPosition.X, Projectile.Center.Y - Main.screenPosition.Y),
+            Main.EntitySpriteDraw(ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Melee/Yoyo/RunicThrow/RunicThrowP_Glow").Value, new Vector2(Projectile.Center.X - Main.screenPosition.X, Projectile.Center.Y - Main.screenPosition.Y),
                         new Rectangle(0, Projectile.frame * Projectile.height, Projectile.width, Projectile.height), Color.White, Projectile.rotation,
                         new Vector2(Projectile.width * 0.5f, Projectile.height * 0.5f), 1f, SpriteEffects.None, 0);
         }

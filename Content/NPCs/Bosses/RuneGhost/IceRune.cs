@@ -5,7 +5,7 @@ using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
 {
@@ -55,7 +55,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
                 Vector2 pos = Projectile.Center + QwertyMethods.PolarVector(dist, Projectile.rotation + i * MathF.PI / 2f) + new Vector2(-18, -18);
                 for (int d = 0; d <= 40; d++)
                 {
-                    Dust.NewDust(pos, 36, 36, DustType<IceRuneDeath>());
+                    Dust.NewDust(pos, 36, 36, ModContent.DustType<IceRuneDeath>());
                 }
             }
 

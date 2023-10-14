@@ -1,10 +1,9 @@
-using Microsoft.Xna.Framework;
 using QwertyMod.Content.Dusts;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Consumable.Tiles.Bars
 {
@@ -21,11 +20,11 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Bars
             TileObjectData.newTile.LavaDeath = false;
             TileObjectData.addTile(Type);
 
-            DustType = DustType<LuneDust>();
+            DustType = ModContent.DustType<LuneDust>();
             HitSound = SoundID.Tink;
             MinPick = 1;
             //AddMapEntry(new Color(102, 143, 204));
-            //ItemDrop = ItemType<LuneBar>();
+            //ItemDrop = ModContent.ItemType<LuneBar>();
         }
 
         public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)

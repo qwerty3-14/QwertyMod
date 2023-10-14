@@ -2,14 +2,11 @@
 using QwertyMod.Content.Items.Equipment.Vanity.BossMasks;
 using QwertyMod.Content.Items.Weapon.Magic.PenguinWhistle;
 using QwertyMod.Content.Items.Weapon.Melee.Sword;
-using QwertyMod.Content.Items.Weapon.Ranged.SpecialAmmo;
-using QwertyMod.Content.NPCs.Bosses.TundraBoss;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 using Terraria.GameContent.ItemDropRules;
 
 namespace QwertyMod.Content.Items.Consumable.BossBag
@@ -46,7 +43,7 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<PolarMask>(), 7));
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<PenguinGenerator>(), 1));
             itemLoot.Add(ItemDropRule.Coins(40000, true));
-            itemLoot.Add(ItemDropRule.FewFromOptions(1, 1, ItemType<PenguinClub>(), ItemType<PenguinClub>(), ItemType<PenguinWhistle>()));
+            itemLoot.Add(ItemDropRule.FewFromOptions(1, 1, ModContent.ItemType<PenguinClub>(), ModContent.ItemType<PenguinClub>(), ModContent.ItemType<PenguinWhistle>()));
         }
         
     }

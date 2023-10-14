@@ -6,7 +6,7 @@ using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
 {
@@ -14,8 +14,6 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Ice Scroll");
-            //Tooltip.SetDefault("Summons two ice runes to orbit you");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -85,7 +83,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
                 Vector2 pos = Projectile.Center + QwertyMethods.PolarVector(dist, Projectile.rotation + i * MathF.PI) + new Vector2(-18, -18);
                 for (int d = 0; d <= 40; d++)
                 {
-                    Dust.NewDust(pos, 36, 36, DustType<IceRuneDeath>());
+                    Dust.NewDust(pos, 36, 36, ModContent.DustType<IceRuneDeath>());
                 }
             }
 

@@ -6,7 +6,7 @@ using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Magic.ExtinctionGun
 {
@@ -14,8 +14,6 @@ namespace QwertyMod.Content.Items.Weapon.Magic.ExtinctionGun
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("The Tyrant's Extinction Gun");
-            //Tooltip.SetDefault("Left click shoots climate change!" + "\nRight click shoots disease!");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -33,10 +31,9 @@ namespace QwertyMod.Content.Items.Weapon.Magic.ExtinctionGun
             Item.useTime = 10;
             Item.useAnimation = 10;
             Item.mana = ModLoader.HasMod("TRAEProject") ? 6 : 5;
-            Item.shoot = ProjectileType<SnowFlakeF>();
+            Item.shoot = ModContent.ProjectileType<SnowFlakeF>();
             Item.noUseGraphic = false;
             Item.noMelee = true;
-            //Item.UseSound = 16
             Item.autoReuse = true;
         }
 
@@ -54,11 +51,11 @@ namespace QwertyMod.Content.Items.Weapon.Magic.ExtinctionGun
         {
             if (player.altFunctionUse == 2)
             {
-                type = ProjectileType<MosquittoF>();
+                type = ModContent.ProjectileType<MosquittoF>();
             }
             else
             {
-                type = ProjectileType<SnowFlakeF>();
+                type = ModContent.ProjectileType<SnowFlakeF>();
             }
         }
 
@@ -84,7 +81,6 @@ namespace QwertyMod.Content.Items.Weapon.Magic.ExtinctionGun
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Mosquitto");
             Main.projFrames[Projectile.type] = 4;
         }
 
@@ -100,21 +96,16 @@ namespace QwertyMod.Content.Items.Weapon.Magic.ExtinctionGun
             Projectile.timeLeft = 600;
             Projectile.extraUpdates = 3;
             AIType = ProjectileID.Bee;
-            //animationType = ProjectileID.Bee;
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.AddBuff(BuffType<DinoPox>(), 480);
+            target.AddBuff(ModContent.BuffType<DinoPox>(), 480);
         }
     }
 
     public class SnowFlakeF : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("Snow Flake");
-        }
 
         public override void SetDefaults()
         {

@@ -1,10 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Melee.Sword
 {
@@ -12,8 +11,6 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Penguin Club");
-            //Tooltip.SetDefault("Launches penguins upon hitting an enemy");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -39,7 +36,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword
 
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            Projectile penguin = Main.projectile[Projectile.NewProjectile(player.GetSource_ItemUse(Item), player.Center, (target.Center - player.Center).SafeNormalize(-Vector2.UnitY) * 6, ProjectileType<SlidingPenguinMelee>(), Item.damage, hit.Knockback, player.whoAmI, ai1: 1)];
+            Projectile penguin = Main.projectile[Projectile.NewProjectile(player.GetSource_ItemUse(Item), player.Center, (target.Center - player.Center).SafeNormalize(-Vector2.UnitY) * 6, ModContent.ProjectileType<SlidingPenguinMelee>(), Item.damage, hit.Knockback, player.whoAmI, ai1: 1)];
         }
     }
 }

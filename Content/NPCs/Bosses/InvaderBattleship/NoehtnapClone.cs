@@ -1,22 +1,10 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using QwertyMod.Common;
-using System;
-using System.Collections.Generic;
 using System.IO;
 using Terraria;
-using Terraria.DataStructures;
-using Terraria.GameContent;
-using Terraria.GameContent.Bestiary;
-using Terraria.GameContent.ItemDropRules;
-using Terraria.ID;
-using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
 using Terraria.Audio;
-using QwertyMod.Content.Buffs;
-using QwertyMod.Content.Dusts;
-using QwertyMod.Common.Fortress;
-using QwertyMod.Content.NPCs.Invader;
+using Terraria.ModLoader;
+
 
 
 namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship

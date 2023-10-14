@@ -5,7 +5,7 @@ using Terraria.Audio;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Ranged.Gun
 {
@@ -13,8 +13,6 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Hydra Cannon");
-            //Tooltip.SetDefault("Killing enemies releases a powerful wave of destruction");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -64,7 +62,6 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Doom Breath");
             Main.projFrames[Projectile.type] = 2;
         }
 
@@ -105,7 +102,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun
 
         public virtual void CreateDust()
         {
-            int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<HydraBreathGlow>());
+            int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<HydraBreathGlow>());
         }
     }
     public class HydraCannonPlayer : ModPlayer
@@ -117,11 +114,11 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun
         }
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (hydraCannon && !target.immortal && target.life <= 0 && proj.CountsAsClass(DamageClass.Ranged) && proj.type != ProjectileType<DoomBreath>() && !target.SpawnedFromStatue)
+            if (hydraCannon && !target.immortal && target.life <= 0 && proj.CountsAsClass(DamageClass.Ranged) && proj.type != ModContent.ProjectileType<DoomBreath>() && !target.SpawnedFromStatue)
             {
                 SoundEngine.PlaySound(SoundID.Roar, Player.position);
 
-                Projectile.NewProjectile(Projectile.InheritSource(proj), Player.Center, (target.Center - Player.Center).SafeNormalize(Vector2.UnitY) * 24f, ProjectileType<DoomBreath>(), damageDone* 5, hit.Knockback * 3, Player.whoAmI);
+                Projectile.NewProjectile(Projectile.InheritSource(proj), Player.Center, (target.Center - Player.Center).SafeNormalize(Vector2.UnitY) * 24f, ModContent.ProjectileType<DoomBreath>(), damageDone* 5, hit.Knockback * 3, Player.whoAmI);
 
                 Main.rand.NextFloat(Player.width);
             }

@@ -6,7 +6,7 @@ using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Equipment.Armor.Caelite
 {
@@ -15,8 +15,6 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Caelite
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Caelite Armor");
-            //Tooltip.SetDefault("Magic attacks against airborn enemies do 20% more damage" + "\nMelee attacks against grounded enemies do 20% more damage");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -32,8 +30,8 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Caelite
 
         public override void AddRecipes()
         {
-            CreateRecipe(1).AddIngredient(ItemType<CaeliteBar>(), 16)
-                .AddIngredient(ItemType<CaeliteCore>(), 8)
+            CreateRecipe(1).AddIngredient(ModContent.ItemType<CaeliteBar>(), 16)
+                .AddIngredient(ModContent.ItemType<CaeliteCore>(), 8)
                 .AddTile(TileID.Anvils)
                 .Register();
         }
@@ -50,7 +48,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Caelite
 
         public override bool IsArmorSet(Item head, Item body, Item legs)
         {
-            return head.type == ItemType<CaeliteHelm>() && legs.type == ItemType<CaeliteGreaves>();
+            return head.type == ModContent.ItemType<CaeliteHelm>() && legs.type == ModContent.ItemType<CaeliteGreaves>();
         }
 
         public override void ArmorSetShadows(Player player)

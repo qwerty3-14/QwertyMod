@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Rhuthinium
 {
     public class RhuthiniumArrow : ModItem
@@ -15,7 +15,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Rhuthinium
         public override void SetDefaults()
         {
             Item.shootSpeed = 3f;
-            Item.shoot = ProjectileType<RhuthiniumArrowP>();
+            Item.shoot = ModContent.ProjectileType<RhuthiniumArrowP>();
             Item.damage = 12;
             Item.width = 14;
             Item.height = 32;
@@ -29,7 +29,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Rhuthinium
         }
         public override void AddRecipes()
         {
-            CreateRecipe(100).AddIngredient(ItemType<RhuthiniumBar>())
+            CreateRecipe(100).AddIngredient(ModContent.ItemType<RhuthiniumBar>())
                 .AddTile(TileID.Anvils)
                 .Register();
         }

@@ -1,9 +1,7 @@
-using QwertyMod.Content.Items.Consumable.Tiles.Bars;
 using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content.Items.Equipment.Armor.Hero
 {
@@ -13,7 +11,6 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Hero
         public override void SetStaticDefaults()
         {
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
-
         }
 
         public override void SetDefaults()

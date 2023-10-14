@@ -7,7 +7,7 @@ using Terraria.Audio;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 
 namespace QwertyMod.Content.Items.Consumable.BossSummon
@@ -34,13 +34,13 @@ namespace QwertyMod.Content.Items.Consumable.BossSummon
             Item.consumable = true;
             if (!Main.dedServ)
             {
-                Item.GetGlobalItem<ItemUseGlow>().glowTexture = Request<Texture2D>("QwertyMod/Content/Items/Consumable/BossSummon/AncientEmblem_Glow").Value;
+                Item.GetGlobalItem<ItemUseGlow>().glowTexture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Consumable/BossSummon/AncientEmblem_Glow").Value;
             }
         }
 
         public override bool CanUseItem(Player player)
         {
-            return !NPC.AnyNPCs(NPCType<AncientMachine>());
+            return !NPC.AnyNPCs(ModContent.NPCType<AncientMachine>());
         }
 
         public override bool? UseItem(Player player)
@@ -48,7 +48,7 @@ namespace QwertyMod.Content.Items.Consumable.BossSummon
             if (player.whoAmI == Main.myPlayer)
             {
                 SoundEngine.PlaySound(SoundID.Roar, player.Center);
-                QwertyMethods.NPCSpawnOnPlayer(player, NPCType<AncientMachine>());
+                QwertyMethods.NPCSpawnOnPlayer(player, ModContent.NPCType<AncientMachine>());
                 return true;
             }
 
@@ -57,7 +57,7 @@ namespace QwertyMod.Content.Items.Consumable.BossSummon
 
         public override void AddRecipes()
         {
-            CreateRecipe().AddIngredient(ItemType<RhuthiniumBar>(), 10)
+            CreateRecipe().AddIngredient(ModContent.ItemType<RhuthiniumBar>(), 10)
                 .AddTile(TileID.Anvils)
                 .Register();
         }

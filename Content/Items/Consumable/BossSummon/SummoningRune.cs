@@ -5,7 +5,7 @@ using Terraria.GameContent.Creative;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Consumable.BossSummon
 {
@@ -34,10 +34,9 @@ namespace QwertyMod.Content.Items.Consumable.BossSummon
 
         public override bool? UseItem(Player player)
         {
-            //This is different behavior compared to most boss summons: it can always be summoned regardless of AnyNPCs
             if (Main.netMode != NetmodeID.MultiplayerClient)
             {
-                NPC.SpawnOnPlayer(player.whoAmI, NPCType<RuneGhost>());
+                NPC.SpawnOnPlayer(player.whoAmI, ModContent.NPCType<RuneGhost>());
             }
 
             if (Main.netMode != NetmodeID.Server)
@@ -54,7 +53,7 @@ namespace QwertyMod.Content.Items.Consumable.BossSummon
         {
             if (npc.type == NPCID.DungeonSpirit)
             {
-                npcLoot.Add(ItemDropRule.Common(ItemType<SummoningRune>(), 4));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<SummoningRune>(), 4));
             }
         }
     }

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Common.Playerlayers
 {
@@ -221,24 +221,24 @@ namespace QwertyMod.Common.Playerlayers
         {
             var immediate = AssetRequestMode.ImmediateLoad;
             Mod mod = ModLoader.GetMod("QwertyMod");
-            OnLegDraw leg = new OnLegDraw(Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Hydra/HydraLeggings_Legs_Glow", immediate).Value, Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Hydra/HydraLeggings_FemaleLegs_Glow", immediate).Value);
+            OnLegDraw leg = new OnLegDraw(ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Hydra/HydraLeggings_Legs_Glow", immediate).Value, ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Hydra/HydraLeggings_FemaleLegs_Glow", immediate).Value);
             LegDictionary.Add(QwertyMod.hydraLegMale, leg);
             LegDictionary.Add(QwertyMod.hydraLegFemale, leg);
-            leg = new OnLegDraw(Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Glass/GlassLimbguards_Legs_Glass", immediate).Value, Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Glass/GlassLimbguards_Legs_Glass", immediate).Value, false, 3);
+            leg = new OnLegDraw(ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Glass/GlassLimbguards_Legs_Glass", immediate).Value, ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Glass/GlassLimbguards_Legs_Glass", immediate).Value, false, 3);
             LegDictionary.Add(EquipLoader.GetEquipSlot(mod, "GlassLimbguards", EquipType.Legs), leg);
-            leg = new OnLegDraw(Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Vitallum/VitallumJeans_Legs_Vein", immediate).Value, Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Vitallum/VitallumJeans_FemaleLegs_Vein", immediate).Value, false, 3);
+            leg = new OnLegDraw(ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Vitallum/VitallumJeans_Legs_Vein", immediate).Value, ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Vitallum/VitallumJeans_FemaleLegs_Vein", immediate).Value, false, 3);
             LegDictionary.Add(QwertyMod.VitLegMale, leg);
             LegDictionary.Add(QwertyMod.VitLegFemale, leg);
-            leg = new OnLegDraw(Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Bionic/BionicLimbs_Legs_Glow", immediate).Value, Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Bionic/BionicLimbs_FemaleLegs_Glow", immediate).Value);
+            leg = new OnLegDraw(ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Bionic/BionicLimbs_Legs_Glow", immediate).Value, ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Bionic/BionicLimbs_FemaleLegs_Glow", immediate).Value);
             LegDictionary.Add(QwertyMod.BionicLegMale, leg);
             LegDictionary.Add(QwertyMod.BionicLegFemale, leg);
-            //leg = new OnLegDraw(Request<Texture2D>("QwertyMod/Content/Items/Equipment/Vanity/Casual/CasualSkirt_Skirt", immediate).Value, Request<Texture2D>("QwertyMod/Content/Items/Equipment/Vanity/Casual/CasualSkirt_Skirt", immediate).Value, false, useDefaultColor: 2);
+            //leg = new OnLegDraw(ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/Vanity/Casual/CasualSkirt_Skirt", immediate).Value, ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/Vanity/Casual/CasualSkirt_Skirt", immediate).Value, false, useDefaultColor: 2);
             //LegDictionary.Add(EquipLoader.GetEquipSlot(QwertyMod.Instance, "CasualSkirt", EquipType.Legs), leg);
-            leg = new OnLegDraw(Request<Texture2D>("QwertyMod/Content/Items/Equipment/Vanity/Casual/CasualSkirt_Shoes", immediate).Value, Request<Texture2D>("QwertyMod/Content/Items/Equipment/Vanity/Casual/CasualSkirt_Shoes", immediate).Value, false, 3, 3);
+            leg = new OnLegDraw(ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/Vanity/Casual/CasualSkirt_Shoes", immediate).Value, ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/Vanity/Casual/CasualSkirt_Shoes", immediate).Value, false, 3, 3);
             LegDictionary.Add(EquipLoader.GetEquipSlot(QwertyMod.Instance, "CasualSkirt", EquipType.Legs), leg);
 
-            leg = new OnLegDraw(Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Invader/InvaderLanders_Legs_Glow", immediate).Value,
-            Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Invader/InvaderLanders_FemaleLegs_Glow", immediate).Value);
+            leg = new OnLegDraw(ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Invader/InvaderLanders_Legs_Glow", immediate).Value,
+            ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Invader/InvaderLanders_FemaleLegs_Glow", immediate).Value);
             LegDictionary.Add(QwertyMod.invaderLanderMale, leg);
             LegDictionary.Add(QwertyMod.invaderLanderFemale, leg);
         }

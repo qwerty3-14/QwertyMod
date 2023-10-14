@@ -5,7 +5,6 @@ using Terraria.DataStructures;
 using Terraria.Enums;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
-using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Furniture
 {
@@ -25,7 +24,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Furniture
             TileObjectData.newTile.AnchorBottom = new AnchorData(AnchorType.SolidTile | AnchorType.SolidWithTop | AnchorType.SolidSide, TileObjectData.newTile.Width, 0);
             TileObjectData.addTile(Type);
             AddMapEntry(new Color(162, 184, 185));
-            DustType = DustType<FortressDust>();
+            DustType = ModContent.DustType<FortressDust>();
             HitSound = QwertyMod.FortressBlocks;
         }
 

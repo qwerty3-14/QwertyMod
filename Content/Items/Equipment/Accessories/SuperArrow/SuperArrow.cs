@@ -1,8 +1,7 @@
 ﻿using System;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Equipment.Accessories.SuperArrow
 {
@@ -25,7 +24,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.SuperArrow
                     {
                         shootTime[i]--;
                     }
-                    if ((Player.armor[i].type == ItemType<Aqueous.Aqueous>() || Player.armor[i].type == ItemType<BladedArrow.BladedArrow>()) && Player.armor[i].stack > 0 && Main.LocalPlayer == Player)
+                    if ((Player.armor[i].type == ModContent.ItemType<Aqueous.Aqueous>() || Player.armor[i].type == ModContent.ItemType<BladedArrow.BladedArrow>()) && Player.armor[i].stack > 0 && Main.LocalPlayer == Player)
                     {
                         if (shootTime[i] == 0 && Player.itemTimeMax != 0 && Player.itemTime == Player.itemTimeMax)
                         {

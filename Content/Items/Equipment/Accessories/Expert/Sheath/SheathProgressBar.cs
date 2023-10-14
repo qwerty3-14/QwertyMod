@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.Sheath
 {
@@ -27,7 +27,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.Sheath
                 if(!drawPlayer.TryGetModPlayer<ImperiousEffect>(out ImperiousEffect modPlayer)){ return; }
                 if(!modPlayer.effect){ return; }
 
-                Texture2D texture = Request<Texture2D>("QwertyMod/Content/Items/Equipment/Accessories/Expert/Sheath/SheathProgress").Value;
+                Texture2D texture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/Accessories/Expert/Sheath/SheathProgress").Value;
 
                 int drawX = (int)(drawPlayer.position.X - Main.screenPosition.X);
                 int drawY = (int)(drawPlayer.position.Y - Main.screenPosition.Y);
@@ -40,7 +40,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.Sheath
                 drawInfo.DrawDataCache.Add(data);
 
 
-                texture = Request<Texture2D>("QwertyMod/Content/Items/Equipment/Accessories/Expert/Sheath/SheathBlip").Value;
+                texture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/Accessories/Expert/Sheath/SheathBlip").Value;
 
                 Position = drawInfo.Position;
                 origin = new Vector2((texture.Width - 2) / 2, texture.Height / 4);

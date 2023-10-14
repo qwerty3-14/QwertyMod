@@ -1,9 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.GameContent.Creative;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
-using Terraria.ID;
 
 namespace QwertyMod.Content.Items.Equipment.Accessories.Sword
 {
@@ -11,8 +11,6 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Sword
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Skyward Hilt");
-            //Tooltip.SetDefault("Swords deal more damage while airborne");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 

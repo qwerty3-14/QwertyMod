@@ -1,28 +1,17 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using QwertyMod.Common;
-using QwertyMod.Content.Items.Consumable.BossBag;
-using QwertyMod.Content.Items.MiscMaterials;
-using System;
 using System.Collections.Generic;
-using System.IO;
 using Terraria;
-using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent;
-using Terraria.GameContent.Bestiary;
-using Terraria.GameContent.ItemDropRules;
-using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 namespace QwertyMod.Content.Buffs
 {
     public class Darkness : ModBuff
     {
         public override void SetStaticDefaults()
         {
-            ////DisplayName,SetDefault("Darkness");
-            ////Description.SetDefault("You knew this was coming...");
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = true;
             Main.buffNoSave[Type] = true;

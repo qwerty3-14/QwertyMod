@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Consumable.Potion.CaeliteFlask
 {
@@ -25,7 +25,7 @@ namespace QwertyMod.Content.Items.Consumable.Potion.CaeliteFlask
             Item.consumable = true;
             Item.width = 22;
             Item.height = 34;
-            Item.buffType = BuffType<CaeliteImbune>();
+            Item.buffType = ModContent.BuffType<CaeliteImbune>();
             Item.buffTime = 72000;
             Item.value = Item.sellPrice(0, 0, 5, 0);
             Item.rare = ItemRarityID.LightRed;
@@ -38,7 +38,7 @@ namespace QwertyMod.Content.Items.Consumable.Potion.CaeliteFlask
 
         public override void AddRecipes()
         {
-            CreateRecipe().AddIngredient(ItemType<CaeliteBar>(), 1)
+            CreateRecipe().AddIngredient(ModContent.ItemType<CaeliteBar>(), 1)
                 .AddTile(TileID.ImbuingStation)
                 .Register();
         }

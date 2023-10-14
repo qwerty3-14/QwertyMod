@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Equipment.Accessories
 {
@@ -92,7 +92,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
                             }
                             if (Main.chest[c].item[i].type == ItemID.None)
                             {
-                                Main.chest[c].item[i].SetDefaults(ItemType<Biomass>(), false);
+                                Main.chest[c].item[i].SetDefaults(ModContent.ItemType<Biomass>(), false);
                                 break;
                             }
                         }

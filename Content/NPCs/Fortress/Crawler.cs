@@ -8,14 +8,13 @@ using QwertyMod.Content.Items.Consumable.Tiles.Banners;
 using System;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.NPCs.Fortress
 {
@@ -23,9 +22,8 @@ namespace QwertyMod.Content.NPCs.Fortress
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Mollusket");
             Main.npcFrameCount[NPC.type] = 1;
-            NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers(0)
+            NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers()
             {
                 CustomTexturePath = "QwertyMod/Content/NPCs/Fortress/Crawler_Bestiary",
                 PortraitScale = 1f,
@@ -58,9 +56,9 @@ namespace QwertyMod.Content.NPCs.Fortress
             NPC.direction = 1;
             //NPC.dontTakeDamage = true;
             //NPC.scale = 1.2f;
-            NPC.buffImmune[BuffType<PowerDown>()] = true;
+            NPC.buffImmune[ModContent.BuffType<PowerDown>()] = true;
             Banner = NPC.type;
-            BannerItem = ItemType<CrawlerBanner>();
+            BannerItem = ModContent.ItemType<CrawlerBanner>();
             NPC.noTileCollide = true;
             //NPC.scale = 1.2f;
         }
@@ -79,7 +77,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             {
                 for (int i = 0; i < 40; i++)
                 {
-                    int dustType = DustType<FortressDust>(); ;
+                    int dustType = ModContent.DustType<FortressDust>(); ;
                     int dustIndex = Dust.NewDust(NPC.position, NPC.width, NPC.height, dustType);
                     Dust dust = Main.dust[dustIndex];
                     dust.velocity.X = dust.velocity.X + Main.rand.Next(-50, 51) * 0.01f;
@@ -89,7 +87,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             }
             for (int i = 0; i < 4; i++)
             {
-                int dustType = DustType<FortressDust>(); ;
+                int dustType = ModContent.DustType<FortressDust>(); ;
                 int dustIndex = Dust.NewDust(NPC.position, NPC.width, NPC.height, dustType);
                 Dust dust = Main.dust[dustIndex];
                 dust.velocity.X = dust.velocity.X + Main.rand.Next(-50, 51) * 0.01f;
@@ -100,7 +98,7 @@ namespace QwertyMod.Content.NPCs.Fortress
 
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
-            if (spawnInfo.Player.InModBiome(GetInstance<FortressBiome>()))
+            if (spawnInfo.Player.InModBiome(ModContent.GetInstance<FortressBiome>()))
             {
                 return 60f;
             }
@@ -109,7 +107,7 @@ namespace QwertyMod.Content.NPCs.Fortress
 
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
-            npcLoot.Add(ItemDropRule.Common(ItemType<CaeliteBullet>(), 1, 2, 4));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<CaeliteBullet>(), 1, 2, 4));
         }
 
         public override bool CanHitPlayer(Player target, ref int cooldownSlot)
@@ -173,7 +171,7 @@ namespace QwertyMod.Content.NPCs.Fortress
                 NPC.dontTakeDamage = true;
                 NPC.velocity = Vector2.Zero;
                 float d = Main.rand.NextFloat() * MathF.PI * 2;
-                Dust dusty = Dust.NewDustPerfect(NPC.position + new Vector2(Main.rand.Next(NPC.width), Main.rand.Next(NPC.height)) + QwertyMethods.PolarVector(30f, d + MathF.PI), DustType<FortressDust>(), QwertyMethods.PolarVector(3f, d), Scale: .5f);
+                Dust dusty = Dust.NewDustPerfect(NPC.position + new Vector2(Main.rand.Next(NPC.width), Main.rand.Next(NPC.height)) + QwertyMethods.PolarVector(30f, d + MathF.PI), ModContent.DustType<FortressDust>(), QwertyMethods.PolarVector(3f, d), Scale: .5f);
                 dusty.noGravity = true;
             }
             else
@@ -230,7 +228,7 @@ namespace QwertyMod.Content.NPCs.Fortress
                     {
                         float shootSpeed = 24;
 
-                        Projectile.NewProjectile(NPC.GetSource_FromAI(), shootFrom.X, shootFrom.Y, MathF.Cos(aimDirection) * shootSpeed, MathF.Sin(aimDirection) * shootSpeed, ProjectileType<MollusketSnipe>(), SkyFortress.beingInvaded ? 50 : 15, 0, Main.myPlayer);
+                        Projectile.NewProjectile(NPC.GetSource_FromAI(), shootFrom.X, shootFrom.Y, MathF.Cos(aimDirection) * shootSpeed, MathF.Sin(aimDirection) * shootSpeed, ModContent.ProjectileType<MollusketSnipe>(), SkyFortress.beingInvaded ? 50 : 15, 0, Main.myPlayer);
                         timer = 0;
                     }
                     if (timer > 60)
@@ -354,13 +352,13 @@ namespace QwertyMod.Content.NPCs.Fortress
                 distance = distToProj.Length();
                 //Color drawColor = lightColor;
 
-                spriteBatch.Draw(Request<Texture2D>("QwertyMod/Content/NPCs/Fortress/laser").Value, new Vector2(center.X - screenPos.X, center.Y - screenPos.Y),
+                spriteBatch.Draw(ModContent.Request<Texture2D>("QwertyMod/Content/NPCs/Fortress/laser").Value, new Vector2(center.X - screenPos.X, center.Y - screenPos.Y),
                     new Rectangle(0, 0, 1, (int)distance - 10), lineColor, projRotation,
                     new Vector2(0, 0), 1f, SpriteEffects.None, 0f);
             }
 
             drawLine = false;
-            spriteBatch.Draw(Request<Texture2D>("QwertyMod/Content/NPCs/Fortress/Crawler_Turret").Value, new Vector2(shootFrom.X - screenPos.X, shootFrom.Y - screenPos.Y + 2f),
+            spriteBatch.Draw(ModContent.Request<Texture2D>("QwertyMod/Content/NPCs/Fortress/Crawler_Turret").Value, new Vector2(shootFrom.X - screenPos.X, shootFrom.Y - screenPos.Y + 2f),
                         new Rectangle(0, 0, 28, 14), drawColor, aimDirection,
                         new Vector2(5, 9), 1f, 0, 0f);
         }
@@ -373,11 +371,6 @@ namespace QwertyMod.Content.NPCs.Fortress
 
     public class MollusketSnipe : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("Mollusket Snipe");
-        }
-
         public override void SetDefaults()
         {
             Projectile.width = 4;
@@ -407,14 +400,14 @@ namespace QwertyMod.Content.NPCs.Fortress
         {
             for (int d = 0; d < 1; d++)
             {
-                Dust dust = Dust.NewDustPerfect(Projectile.Center, DustType<CaeliteDust>(), Vector2.Zero);
+                Dust dust = Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<CaeliteDust>(), Vector2.Zero);
                 dust.frame.Y = 0;
             }
         }
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(BuffType<PowerDown>(), 480);
+            target.AddBuff(ModContent.BuffType<PowerDown>(), 480);
         }
     }
 }

@@ -5,8 +5,9 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Sentry.Riptide
 {
@@ -15,8 +16,6 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.Riptide
 
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Riptide Sentry Staff");
-            //Tooltip.SetDefault("");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
@@ -36,7 +35,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.Riptide
             Item.value = Item.sellPrice(silver: 54);
             Item.rare = ItemRarityID.Green;
             Item.UseSound = SoundID.Item44;
-            Item.shoot = ProjectileType<RiptideP>();
+            Item.shoot = ModContent.ProjectileType<RiptideP>();
             Item.DamageType = DamageClass.Summon;
             Item.sentry = true;
         }
@@ -53,7 +52,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.Riptide
             {
                 if (line.Mod == "Terraria" && line.Name == "Knockback") //this checks if it's the line we're interested in
                 {
-                    line.Text = "Absolutely no knockback";//change tooltip
+                    line.Text = Language.GetTextValue(Mod.GetLocalizationKey("CustomTooltipAbsNKB"));//change tooltip
                 }
             }
         }
@@ -64,7 +63,6 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.Riptide
 
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Riptide");
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             Main.projFrames[Projectile.type] = 3;
         }
@@ -116,7 +114,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.Riptide
                     Vector2 shootFrom = Projectile.Center + QwertyMethods.PolarVector(12, Projectile.rotation) + QwertyMethods.PolarVector(si * 4, Projectile.rotation + MathF.PI / 2);
                     //if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
-                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), shootFrom, QwertyMethods.PolarVector(1, Projectile.rotation), ProjectileType<RiptideStream>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), shootFrom, QwertyMethods.PolarVector(1, Projectile.rotation), ModContent.ProjectileType<RiptideStream>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
                     }
                 }
             }
@@ -130,10 +128,6 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.Riptide
 
     public class RiptideStream : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            //ProjectileID.Sets.SentryShot[Projectile.type] = true;
-        }
         public override void SetDefaults()
         {
             Projectile.width = 4;

@@ -2,7 +2,6 @@ using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.GameContent.Bestiary;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -11,11 +10,6 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
 {
     public class SlidingPenguin : ModNPC
     {
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("Sliding Penguin");
-            //Main.npcFrameCount[NPC.type] = 4;
-        }
 
         public override void SetDefaults()
         {

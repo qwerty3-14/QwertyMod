@@ -3,12 +3,11 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.GameContent.Bestiary;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
 {
@@ -16,7 +15,6 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Agent Penguin");
             Main.npcFrameCount[NPC.type] = 2;
         }
 
@@ -103,7 +101,7 @@ namespace QwertyMod.Content.NPCs.Bosses.TundraBoss
                 Vector2 diff = start - NPC.Center;
                 for (int i = 0; i < diff.Length(); i += 8)
                 {
-                    Texture2D rope = Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/TundraBoss/Rope").Value;
+                    Texture2D rope = ModContent.Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/TundraBoss/Rope").Value;
                     spriteBatch.Draw(rope, NPC.Center + QwertyMethods.PolarVector(i, diff.ToRotation()) - screenPos, null, drawColor, diff.ToRotation() + MathF.PI / 2, new Vector2(3, 0), 1f, 0, 0);
                 }
             }

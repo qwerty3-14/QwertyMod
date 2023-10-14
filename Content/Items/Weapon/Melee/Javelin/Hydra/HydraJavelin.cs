@@ -7,7 +7,7 @@ using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Melee.Javelin.Hydra
 {
@@ -15,8 +15,6 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin.Hydra
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Hydra Javelin");
-            //Tooltip.SetDefault("Throws three javelins at once\nEach javelin reduces the contact damage enemies deal\nMax: 15");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -40,7 +38,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin.Hydra
 
             Item.UseSound = SoundID.Item1;
 
-            Item.shoot = ProjectileType<HydraJavelinP>();
+            Item.shoot = ModContent.ProjectileType<HydraJavelinP>();
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
@@ -56,10 +54,6 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin.Hydra
 
     public class HydraJavelinP : Javelin
     {
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("Hydra Javelin");
-        }
 
         public override void SetDefaults()
         {
@@ -72,12 +66,12 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin.Hydra
             Projectile.GetGlobalProjectile<ImplaingProjectile>().CanImpale = true;
             Projectile.GetGlobalProjectile<ImplaingProjectile>().damagePerImpaler = 20;
             maxStickingJavelins = 15;
-            dropItem = ItemType<HydraJavelin>();
+            dropItem = ModContent.ItemType<HydraJavelin>();
         }
 
         public override void ExtraAI()
         {
-            Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<HydraBeamGlow>());
+            Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<HydraBeamGlow>());
         }
         public override void StuckEffects(NPC victim)
         {

@@ -1,14 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
 using Terraria.DataStructures;
-using System;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria.ID;
+using Terraria.Localization;
+using Terraria.ModLoader;
 using Terraria.Utilities;
 
 namespace QwertyMod.Content.Items.Weapon.Morphs
@@ -26,7 +21,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs
         {
             if (morphCooldown != -1 && !item.IsAir)
             {
-                if (player.HasBuff(BuffType<MorphCooldown>()))
+                if (player.HasBuff(ModContent.BuffType<MorphCooldown>()))
                 {
                     if(player.GetModPlayer<ShapeShifterPlayer>().ruthlessMorhphing > 0)
                     {
@@ -49,7 +44,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs
         {
             if (morphCooldown != -1 && !item.IsAir)
             {
-                player.AddBuff(BuffType<MorphCooldown>(), (int)((morphCooldown * PrefixorphCooldownModifier * player.GetModPlayer<ShapeShifterPlayer>().coolDownDuration) * 60f));
+                player.AddBuff(ModContent.BuffType<MorphCooldown>(), (int)((morphCooldown * PrefixorphCooldownModifier * player.GetModPlayer<ShapeShifterPlayer>().coolDownDuration) * 60f));
             }
         }
 
@@ -58,7 +53,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs
             if (morphCooldown != -1)
             {
                 int KBIndex = tooltips.FindIndex(TooltipLine => TooltipLine.Name.Equals("Knockback"));
-                TooltipLine line = new TooltipLine(Mod, "MorphCool", (morphCooldown * PrefixorphCooldownModifier * Main.LocalPlayer.GetModPlayer<ShapeShifterPlayer>().coolDownDuration) + " second cooldown");
+                TooltipLine line = new TooltipLine(Mod, "MorphCool", (morphCooldown * PrefixorphCooldownModifier * Main.LocalPlayer.GetModPlayer<ShapeShifterPlayer>().coolDownDuration) + Language.GetTextValue(Mod.GetLocalizationKey("CustomTooltipMorphCooldown")));
                 {
                     line.OverrideColor = Color.Orange;
                     int insertIndex = (int)MathHelper.Min(tooltips.Count, KBIndex + 3);

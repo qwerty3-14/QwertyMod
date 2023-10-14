@@ -1,7 +1,7 @@
 ﻿using QwertyMod.Content.NPCs.Bosses.BladeBoss;
 using Terraria;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Common
 {
@@ -23,11 +23,11 @@ namespace QwertyMod.Common
 
         public override void ModifyScreenPosition()
         {
-            if (NPC.AnyNPCs(NPCType<Imperious>()))
+            if (NPC.AnyNPCs(ModContent.NPCType<Imperious>()))
             {
                 for (int i = 0; i < Main.npc.Length; i++)
                 {
-                    if (Main.npc[i].type == NPCType<Imperious>())
+                    if (Main.npc[i].type == ModContent.NPCType<Imperious>())
                     {
                         if (Main.npc[i].ai[0] == 1 && Main.npc[i].ai[1] > 0)
                         {

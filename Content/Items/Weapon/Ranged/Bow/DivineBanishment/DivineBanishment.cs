@@ -1,15 +1,13 @@
 using Microsoft.Xna.Framework;
-using QwertyMod.Content.Dusts;
+using QwertyMod.Content.Items.MiscMaterials;
+using QwertyMod.Content.Items.Weapon.Ranged.Bow.HolyExiler;
 using System;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
-using QwertyMod.Content.Items.Weapon.Ranged.Bow.HolyExiler;
-using QwertyMod.Content.Items.MiscMaterials;
+
 
 namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.DivineBanishment
 {
@@ -72,8 +70,8 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.DivineBanishment
 
         public override void AddRecipes()
         {
-            CreateRecipe().AddIngredient(ItemType<HolyExiler.HolyExiler>())
-            .AddIngredient(ItemType<SoulOfHeight>(), 10)
+            CreateRecipe().AddIngredient(ModContent.ItemType<HolyExiler.HolyExiler>())
+            .AddIngredient(ModContent.ItemType<SoulOfHeight>(), 10)
                 .AddTile(TileID.MythrilAnvil)
                 .Register();
         }

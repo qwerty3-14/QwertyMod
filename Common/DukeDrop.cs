@@ -2,11 +2,10 @@
 using QwertyMod.Content.Items.Weapon.Ranged.DartLauncher.Whirpool;
 using QwertyMod.Content.Items.Weapon.Sentry.BubbleBrewer;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 using System;
 
 namespace QwertyMod.Common
@@ -21,7 +20,7 @@ namespace QwertyMod.Common
                 LeadingConditionRule notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
 
                 //Notice we use notExpertRule.OnSuccess instead of npcLoot.Add so it only applies in normal mode
-                notExpertRule.OnSuccess(ItemDropRule.OneFromOptionsNotScalingWithLuck(1, ItemType<BubbleBrewerBaton>(), ItemType<Cyclone>(), ItemType<Whirlpool>()));
+                notExpertRule.OnSuccess(ItemDropRule.OneFromOptionsNotScalingWithLuck(1, ModContent.ItemType<BubbleBrewerBaton>(), ModContent.ItemType<Cyclone>(), ModContent.ItemType<Whirlpool>()));
                 //Finally add the leading rule
                 npcLoot.Add(notExpertRule);
             }
@@ -34,7 +33,7 @@ namespace QwertyMod.Common
         {
             if(item.type == ItemID.FishronBossBag)
             {
-                itemLoot.Add(ItemDropRule.OneFromOptionsNotScalingWithLuck(1, ItemType<BubbleBrewerBaton>(), ItemType<Cyclone>(), ItemType<Whirlpool>()));
+                itemLoot.Add(ItemDropRule.OneFromOptionsNotScalingWithLuck(1, ModContent.ItemType<BubbleBrewerBaton>(), ModContent.ItemType<Cyclone>(), ModContent.ItemType<Whirlpool>()));
             }
         }
         

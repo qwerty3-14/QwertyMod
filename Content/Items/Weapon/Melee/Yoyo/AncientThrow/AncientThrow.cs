@@ -6,7 +6,7 @@ using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.AncientThrow
 {
@@ -14,10 +14,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.AncientThrow
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Ancient Throw");
-            //Tooltip.SetDefault("Its string has been stretched for thousands of years" + "\nRight click to zoom");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
-            // These are all related to gamepad controls and don't seem to affect anything else
             ItemID.Sets.Yoyo[Item.type] = true;
             ItemID.Sets.GamepadExtraRange[Item.type] = 15;
             ItemID.Sets.GamepadSmartQuickReach[Item.type] = true;
@@ -44,9 +41,9 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.AncientThrow
             Item.UseSound = SoundID.Item1;
             if (!Main.dedServ)
             {
-                Item.GetGlobalItem<ItemUseGlow>().glowTexture = Request<Texture2D>("QwertyMod/Content/Items/Weapon/Melee/Yoyo/AncientThrow/AncientThrow_Glow").Value;
+                Item.GetGlobalItem<ItemUseGlow>().glowTexture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Melee/Yoyo/AncientThrow/AncientThrow_Glow").Value;
             }
-            Item.shoot = ProjectileType<AncientThrowP>();
+            Item.shoot = ModContent.ProjectileType<AncientThrowP>();
         }
 
         public override void HoldItem(Player player)
@@ -100,14 +97,14 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.AncientThrow
             dustTimer++;
             if (dustTimer > 5)
             {
-                int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<AncientGlow>(), 0, 0, 0, default(Color), .2f);
+                int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<AncientGlow>(), 0, 0, 0, default(Color), .2f);
                 dustTimer = 0;
             }
         }
 
         public override void PostDraw(Color lightColor)
         {
-            Main.EntitySpriteDraw(Request<Texture2D>("QwertyMod/Content/Items/Weapon/Melee/Yoyo/AncientThrow/AncientThrowP_Glow").Value, new Vector2(Projectile.Center.X - Main.screenPosition.X, Projectile.Center.Y - Main.screenPosition.Y),
+            Main.EntitySpriteDraw(ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Melee/Yoyo/AncientThrow/AncientThrowP_Glow").Value, new Vector2(Projectile.Center.X - Main.screenPosition.X, Projectile.Center.Y - Main.screenPosition.Y),
                         new Rectangle(0, Projectile.frame * Projectile.height, Projectile.width, Projectile.height), Color.White, Projectile.rotation,
                         new Vector2(Projectile.width * 0.5f, Projectile.height * 0.5f), 1f, SpriteEffects.None, 0);
         }

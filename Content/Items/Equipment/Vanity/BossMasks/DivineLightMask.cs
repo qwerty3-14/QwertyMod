@@ -1,7 +1,6 @@
 using Terraria.GameContent.Creative;
-using Terraria.ModLoader;
-using static Terraria.ID.ArmorIDs;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace QwertyMod.Content.Items.Equipment.Vanity.BossMasks
 {
@@ -10,17 +9,14 @@ namespace QwertyMod.Content.Items.Equipment.Vanity.BossMasks
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Divine Light Mask");
-            //Tooltip.SetDefault("");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
-            Head.Sets.DrawHead[Item.headSlot] = false;
+            ArmorIDs.Head.Sets.DrawHead[Item.headSlot] = false;
         }
 
         public override void SetDefaults()
         {
             Item.value = 0;
             Item.rare = ItemRarityID.Blue;
-
             Item.vanity = true;
             Item.width = 18;
             Item.height = 18;

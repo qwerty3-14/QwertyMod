@@ -7,7 +7,7 @@ using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.NPCs.DinoMilitia
 {
@@ -15,7 +15,6 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Utahraptor");
             Main.npcFrameCount[NPC.type] = 4;
         }
 
@@ -39,7 +38,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
                 Music = MusicLoader.GetMusicSlot(Mod, "Assets/Music/OldDinosNewGuns");
             }
             Banner = NPC.type;
-            BannerItem = ItemType<UtahBanner>();
+            BannerItem = ModContent.ItemType<UtahBanner>();
         }
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
         {
@@ -75,7 +74,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
         {
             for (int i = 0; i < 10; i++)
             {
-                int dustType = DustType<DinoSkin>();
+                int dustType = ModContent.DustType<DinoSkin>();
                 int dustIndex = Dust.NewDust(NPC.position, NPC.width, NPC.height, dustType);
                 Dust dust = Main.dust[dustIndex];
                 dust.velocity.X = dust.velocity.X + Main.rand.Next(-50, 51) * 0.01f;
@@ -118,7 +117,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
         }
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
-            npcLoot.Add(ItemDropRule.Common(ItemType<DinoTooth>(), 100, 1, 1));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<DinoTooth>(), 100, 1, 1));
         }
     }
 }

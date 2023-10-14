@@ -5,11 +5,10 @@ using QwertyMod.Content.Dusts;
 using QwertyMod.Content.Items.MiscMaterials;
 using System;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Magic.RuneWave
 {
@@ -17,8 +16,6 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RuneWave
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Runic Wave");
-            //Tooltip.SetDefault("Cast a wave that draws ice runes in flight");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -39,17 +36,17 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RuneWave
             Item.height = 30;
             if (!Main.dedServ)
             {
-                Item.GetGlobalItem<ItemUseGlow>().glowTexture = Request<Texture2D>("QwertyMod/Content/Items/Weapon/Magic/RuneWave/RunicWave_Glow").Value;
+                Item.GetGlobalItem<ItemUseGlow>().glowTexture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Magic/RuneWave/RunicWave_Glow").Value;
             }
             Item.mana = ModLoader.HasMod("TRAEProject") ? 32 : 12;
-            Item.shoot = ProjectileType<RunicWaveP>();
+            Item.shoot = ModContent.ProjectileType<RunicWaveP>();
             Item.shootSpeed = 9;
             Item.noMelee = true;
         }
         public override void AddRecipes()
         {
-            CreateRecipe(1).AddIngredient(ItemType<CraftingRune>(), 15)
-                .AddIngredient(ItemType<AncientWave.AncientWave>())
+            CreateRecipe(1).AddIngredient(ModContent.ItemType<CraftingRune>(), 15)
+                .AddIngredient(ModContent.ItemType<AncientWave.AncientWave>())
                 .AddTile(TileID.Anvils)
                 .Register();
         }
@@ -59,7 +56,6 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RuneWave
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Runic Wave");
             Main.projFrames[Projectile.type] = 1;
         }
 
@@ -95,7 +91,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RuneWave
 
             if (dustTimer > 5)
             {
-                int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<IceRuneDeath>(), 0, 0, 0, default(Color), .2f);
+                int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<IceRuneDeath>(), 0, 0, 0, default(Color), .2f);
                 dustTimer = 0;
             }
 

@@ -2,7 +2,6 @@ using QwertyMod.Content.Items.Consumable.Tiles.Fortress.BuildingBlocks;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
 {
@@ -10,8 +9,6 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Dnas Painted Fortress Brick");
-            //Tooltip.SetDefault("The underside of the brick is painted with Dnas you know what will happen if you bonk your head on it...");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 100;
         }
 
@@ -23,7 +20,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
             Item.maxStack = 9999;
             Item.value = 0;
             Item.rare = ItemRarityID.Orange;
-            Item.createTile = TileType<DnasBrickT>();
+            Item.createTile = ModContent.TileType<DnasBrickT>();
             Item.useTurn = true;
             Item.autoReuse = true;
             Item.useAnimation = 15;
@@ -34,8 +31,8 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
 
         public override void AddRecipes()
         {
-            CreateRecipe().AddIngredient(ItemType<FortressBrick>(), 1)
-                .AddIngredient(ItemType<ReverseSand>(), 1)
+            CreateRecipe().AddIngredient(ModContent.ItemType<FortressBrick>(), 1)
+                .AddIngredient(ModContent.ItemType<ReverseSand>(), 1)
                 .AddTile(TileID.WorkBenches)
                 .Register();
         }

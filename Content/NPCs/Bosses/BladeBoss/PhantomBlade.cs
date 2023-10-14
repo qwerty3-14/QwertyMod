@@ -10,11 +10,6 @@ namespace QwertyMod.Content.NPCs.Bosses.BladeBoss
     public class PhantomBlade : ModProjectile
     {
 
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("Phantom Blade");
-        }
-
         public override void SetDefaults()
         {
             Projectile.width = Projectile.height = 10;

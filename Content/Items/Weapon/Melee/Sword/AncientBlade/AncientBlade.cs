@@ -9,7 +9,7 @@ using Terraria.GameContent;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Melee.Sword.AncientBlade
 {
@@ -17,8 +17,6 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.AncientBlade
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Ancient Blade");
-            //Tooltip.SetDefault("Launches a spread of orbs");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -41,11 +39,11 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.AncientBlade
 
             if (!Main.dedServ)
             {
-                Item.GetGlobalItem<ItemUseGlow>().glowTexture = Request<Texture2D>("QwertyMod/Content/Items/Weapon/Melee/Sword/AncientBlade/AncientBlade_Glow").Value;
+                Item.GetGlobalItem<ItemUseGlow>().glowTexture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Melee/Sword/AncientBlade/AncientBlade_Glow").Value;
             }
 
             Item.autoReuse = true;
-            Item.shoot = ProjectileType<AncientOrb>();
+            Item.shoot = ModContent.ProjectileType<AncientOrb>();
             Item.shootSpeed = 9;
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
@@ -106,7 +104,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.AncientBlade
             for (int d = 0; d < Projectile.alpha / 30; d++)
             {
                 float theta = Main.rand.NextFloat(-MathF.PI, MathF.PI);
-                Dust dust = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(25, theta), DustType<AncientGlow>(), QwertyMethods.PolarVector(-6, theta) + Projectile.velocity);
+                Dust dust = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(25, theta), ModContent.DustType<AncientGlow>(), QwertyMethods.PolarVector(-6, theta) + Projectile.velocity);
                 dust.scale = .5f;
                 dust.alpha = 255;
             }
@@ -127,7 +125,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.AncientBlade
             dustTimer++;
             if (dustTimer > 5)
             {
-                int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<AncientGlow>(), 0, 0, 0, default(Color), .2f);
+                int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<AncientGlow>(), 0, 0, 0, default(Color), .2f);
                 dustTimer = 0;
             }
         }

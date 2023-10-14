@@ -1,20 +1,14 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using QwertyMod.Common;
+using QwertyMod.Content.Buffs;
+using QwertyMod.Content.Dusts;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
-using Terraria.GameContent;
-using Terraria.GameContent.Bestiary;
-using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
-using QwertyMod.Content.Dusts;
-using Terraria.Audio;
-using QwertyMod.Content.Buffs;
+
 
 
 namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
@@ -34,14 +28,14 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
         {
             if(!passenger)
             {
-                Texture2D front = Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/InvaderBattleship/InvaderNoehtnap_Back").Value;
+                Texture2D front = ModContent.Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/InvaderBattleship/InvaderNoehtnap_Back").Value;
                 spriteBatch.Draw(front, drawHere,
                     null, drawColor, 0,
                     front.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
             }
             if(passenger)
             {
-                Texture2D texture = Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/InvaderBattleship/PassengerNoehtnap").Value;
+                Texture2D texture = ModContent.Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/InvaderBattleship/PassengerNoehtnap").Value;
                 spriteBatch.Draw(texture, drawHere,
                     null, drawColor, 0,
                     texture.Size() * 0.5f, scale, SpriteEffects.None, 0f);
@@ -49,30 +43,30 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
             }
             else
             {
-                Texture2D texture = Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/InvaderBattleship/InvaderNoehtnap").Value;
+                Texture2D texture = ModContent.Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/InvaderBattleship/InvaderNoehtnap").Value;
                 spriteBatch.Draw(texture, drawHere,
                     new Rectangle(0, 0, texture.Width, texture.Height / 5), drawColor, 0,
                     new Vector2(texture.Width, texture.Height / 5) * 0.5f, scale, SpriteEffects.None, 0f);
             }
             Vector2 pupilOffset = PupilPosition(pupilDirection, pupilStareOutAmount);
-            Texture2D Pupil = Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/CloakedDarkBoss/Pupil").Value;
+            Texture2D Pupil = ModContent.Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/CloakedDarkBoss/Pupil").Value;
             spriteBatch.Draw(Pupil, drawHere + pupilOffset,
                     Pupil.Frame(), drawColor, 0,
                     Pupil.Size() * .5f, scale, SpriteEffects.None, 0f);
             
-            Texture2D Monocol = Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/InvaderBattleship/NoehtnapMonocol").Value;
+            Texture2D Monocol = ModContent.Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/InvaderBattleship/NoehtnapMonocol").Value;
             Rectangle monocolFrame = new Rectangle(Monocol.Width / 2 - 47 - (int)pupilOffset.X, 0, 94, 32);
             spriteBatch.Draw(Monocol, drawHere + pupilOffset,
                     monocolFrame, drawColor, 0,
                     new Vector2(47 + (int)pupilOffset.X, Monocol.Height / 2),  1f, SpriteEffects.None, 0f);
             if(!passenger)
             {
-                Texture2D front = Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/InvaderBattleship/InvaderNoehtnap_Front").Value;
+                Texture2D front = ModContent.Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/InvaderBattleship/InvaderNoehtnap_Front").Value;
                 spriteBatch.Draw(front, drawHere,
                     null, drawColor, 0,
                     front.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
             }
-            Texture2D MonocolGlow = Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/InvaderBattleship/NoehtnapMonocol_Glow").Value;
+            Texture2D MonocolGlow = ModContent.Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/InvaderBattleship/NoehtnapMonocol_Glow").Value;
             spriteBatch.Draw(MonocolGlow, drawHere + pupilOffset,
                     monocolFrame, Color.White, 0,
                     new Vector2(47 + (int)pupilOffset.X, Monocol.Height / 2),  1f, SpriteEffects.None, 0f);

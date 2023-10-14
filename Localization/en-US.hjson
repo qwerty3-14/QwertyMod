@@ -1,5 +1,29 @@
 Mods: {
 	QwertyMod: {
+		RhuthiniumGeneration: Rhuthimis has blessed your world with Rhuthinium!
+		WorldgenLuneOre: Placing ore in space!
+		WorldgenSkyFortress: Fortifying the sky!
+		CommandDescriptionRhuthiniumScan: Scans the world for Rhuthinium
+		CommandDescriptionRhuthiniumGen: Adds Rhuthinium ore to generate in your world
+		CommandDescriptionDungeonLoot: Adds dungeon loot
+		CommandDescriptionLuneGen: Adds Lune ore to sky islands
+		CommandDescriptionCreateFrozenDen: Create's a den in the underground tundra and places the polar exterminator in it
+		CommandDescriptionFortressGen: Clears a large area in the sky and builds the sky fortress in it
+		RhuthiniumScanFailure: No Rhutinium found, something went wrong
+		RhuthiniumScanNoSkeletron: No Rhutinium found, as expected since you haven't killed skeletron
+		RhuthiniumScanSuccess: " Rhuthnium found in this world, keep looking!"
+		FortressInvasion: The sky fortress is being invaded!
+		CustomTooltipBindKey: Please go to conrols and bind the 'Yet another special ability key'
+		CustomTooltipSheathStart: After dealing 10,000 damage you can summon Imperious to fight for you breifly with the '
+		CustomTooltipSheathEnd: "' key"
+		CustomTooltipWhetDamage: " magic damage"
+		CustomTooltipWhetCrit: % critical strike chance
+		CustomTooltipBloodCostStart: "Uses "
+		CustomTooltipBloodCostEnd: " life!"
+		CustomTooltipCKB: Custom knockback
+		CustomTooltipAbsNKB: Absolutely no knockback
+		CustomTooltipMorphCooldown: " second cooldown"
+
 		Biomes: {
 			FortressBiome: {
 				DisplayName: Fortress Biome
@@ -224,13 +248,18 @@ Mods: {
 			}
 
 			HigherPriestMinionB: {
-				DisplayName: Higher Priest Minion B
-				Description: Mods.QwertyMod.Buffs.HigherPriestMinionB.Description
+				DisplayName: Higher Priest Minion
+				Description: Higher beings fight for you!
 			}
 
 			DVRB: {
 				DisplayName: Dimension Violating Railgun
-				Description: Escalation
+				Description: The foolish gods think they're safe in thier pocket realms
+			}
+
+			Hitstun: {
+				Description: Mods.QwertyMod.Buffs.Hitstun.Description
+				DisplayName: Hitstun
 			}
 		}
 
@@ -269,14 +298,14 @@ Mods: {
 			PrismDazzle.DisplayName: Prism Dazzle
 			MoonTarget.DisplayName: Moon Target
 			RhuthimisWraith.DisplayName: RhuthimisWraith
-			LaunchingHookP.DisplayName: ${ProjectileName.GemHookAmethyst}
+			LaunchingHookP.DisplayName: Launching Hook
 			LightlingP.DisplayName: Lightling
 			HydraBobber.DisplayName: Hydra Bobber
 			HydrillP.DisplayName: Hydrill
 			AncientBlastFriendly.DisplayName: Ancient Blast
 			AncientMissileP.DisplayName: Ancient Missile
 			AncientWaveP.DisplayName: Ancient Wave
-			BlackHolePlayer.DisplayName: BlackHole
+			BlackHolePlayer.DisplayName: Black Hole
 			CatalystExplosion.DisplayName: explosion
 			EnlightenedConfusionP.DisplayName: Sacred Daze
 			MosquittoF.DisplayName: Mosquitto
@@ -317,12 +346,12 @@ Mods: {
 			SlidingPenguinMelee.DisplayName: Sliding Penguin
 			CycloneP.DisplayName: Cyclone
 			LuneTopP.DisplayName: Lune Top
-			AncientThrowP.DisplayName: Ancient Throw P
-			ArachnoyoP.DisplayName: Arachnoyo P
+			AncientThrowP.DisplayName: Ancient Throw
+			ArachnoyoP.DisplayName: Arachnoyo
 			SpiderCounterweight.DisplayName: Spider Counterweight
-			ArsenalP.DisplayName: Arsenal P
+			ArsenalP.DisplayName: Arsenal
 			ArsenalSword.DisplayName: Arsenal Sword
-			RunicThrowP.DisplayName: Runic Throw P
+			RunicThrowP.DisplayName: Runic Throw
 			AncientMinionFreindly.DisplayName: Ancient Minion
 			ChlorophyteSnipe.DisplayName: Chlorophyte Snipe
 			ChlorophyteSniper.DisplayName: Chlorophyte Sniper
@@ -361,19 +390,19 @@ Mods: {
 			SwordlagmitePlayer.DisplayName: Swordlagmite
 			SwordquakeP.DisplayName: Swordquake
 			AncientArrow.DisplayName: Ancient Arrow
-			AncientLongbowP.DisplayName: Ancient Longbow P
+			AncientLongbowP.DisplayName: Ancient Longbow
 			ArrowPortal.DisplayName: Arrow Portal
 			RuneArrow.DisplayName: Rune Arrow
-			RuneLongbowP.DisplayName: Rune Longbow P
+			RuneLongbowP.DisplayName: Rune Longbow
 			CaeliteDart.DisplayName: Caelite Dart
 			ShotgunMinion.DisplayName: Shotgun Minion
-			DinoVulcanP.DisplayName: Dino Vulcan P
+			DinoVulcanP.DisplayName: Dino Vulcan
 			Shell.DisplayName: Shell
 			DoomBreath.DisplayName: Doom Breath
 			Trickshot.DisplayName: Trickshot
 			SlidingPenguinRanged.DisplayName: Sliding Penguin
 			AqueousP.DisplayName: Aqueous
-			BladedArrowP.DisplayName: Bladed Arrow P
+			BladedArrowP.DisplayName: Bladed Arrow
 			AntiAirSentry.DisplayName: Anti Air Sentry
 			SentryAntiAir.DisplayName: Anti Air Rocket
 			AshFell.DisplayName: Ash fell
@@ -421,7 +450,7 @@ Mods: {
 			SideLaser.DisplayName: O.L.O.R.D.'s wall
 			SuperLaser2.DisplayName: Super Laser
 			TurretGrav.DisplayName: Pew Pew
-			TurretLaser2.DisplayName: Turret Laser2
+			TurretLaser2.DisplayName: Turret Laser
 			TurretShot.DisplayName: Pew Pew
 			AggroRune.DisplayName: Aggro Rune
 			AggroStrike.DisplayName: Aggro Strike
@@ -455,11 +484,11 @@ Mods: {
 			PokeSummon.DisplayName: Poke Summon
 			FlybyBeam.DisplayName: Invader Battleship Beam
 			InvaderExhaust.DisplayName: Invader Exhaust
-			BattleshipDebris_BackWithGun.DisplayName: Battleship Debris_ Back With Gun
-			BattleshipDebris_Engine.DisplayName: Battleship Debris_ Engine
-			BattleshipDebris_Launcher.DisplayName: Battleship Debris_ Launcher
-			BattleshipDebris_Center.DisplayName: Battleship Debris_ Center
-			BattleshipDebris_FrontWithGun.DisplayName: Battleship Debris_ Front With Gun
+			BattleshipDebris_BackWithGun.DisplayName: Battleship Debris
+			BattleshipDebris_Engine.DisplayName: Battleship Debris
+			BattleshipDebris_Launcher.DisplayName: Battleship Debris
+			BattleshipDebris_Center.DisplayName: Battleship Debris
+			BattleshipDebris_FrontWithGun.DisplayName: Battleship Debris
 			ThrowShield.DisplayName: Throw Shield
 			EtimsSphere.DisplayName: Etims Sphere
 			RailSphere.DisplayName: Rail Sphere
@@ -471,15 +500,15 @@ Mods: {
 			HigherPriestMinion.DisplayName: Higher Priest Minion
 			HigherPriestPulse.DisplayName: Higher Priest Pulse
 			SkyDisintigrator.DisplayName: Sky Disintigrator
-			SeraphimPredatorP.DisplayName: Seraphim Predator P
-			BlessedMonsoonKnifeP.DisplayName: Blessed Monsoon Knife P
+			SeraphimPredatorP.DisplayName: Seraphim Predator
+			BlessedMonsoonKnifeP.DisplayName: Blessed Monsoon Knife
 			LargeHydraBreath.DisplayName: Large Hydra Breath
-			ChromeShotgunP.DisplayName: Chrome Shotgun P
-			EtimsSwordP.DisplayName: Etims Sword P
-			ImperiousTheIVAura.DisplayName: Imperious The I V Aura
+			ChromeShotgunP.DisplayName: Chrome Shotgun
+			EtimsSwordP.DisplayName: Etims Sword
+			ImperiousTheIVAura.DisplayName: Imperious The IV Aura
 			DVR.DisplayName: D V R
-			FightKitP.DisplayName: Fight Kit P
-			ThrowEtimsKuni.DisplayName: Throw Etims Kuni
+			FightKitP.DisplayName: Fight Kit Kuni
+			ThrowEtimsKuni.DisplayName: Etims Kuni
 		}
 
 		Items: {
@@ -2128,7 +2157,7 @@ Mods: {
 
 			AshFellStaff: {
 				DisplayName: Ash Fell Staff
-				Tooltip: Thi Sentry suffocates your foes with ash missiles!
+				Tooltip: This Sentry suffocates your foes with ash missiles!
 			}
 
 			BubbleBrewerBaton: {
@@ -2206,11 +2235,11 @@ Mods: {
 
 			FaceMask: {
 				DisplayName: Face Mask
-				Tooltip: ""
+				Tooltip: Vanity Accesory
 			}
 
 			Shrug: {
-				DisplayName: Silver Shrug
+				DisplayName: Shrug
 				Tooltip: Vanity Accesory
 			}
 
@@ -2270,7 +2299,7 @@ Mods: {
 
 			SkyDisintigratorStaff: {
 				DisplayName: Sky Disintigrator Staff
-				Tooltip: Ignores 20 enemy defense
+				Tooltip: ""
 			}
 
 			SeraphimPredator: {
@@ -2394,32 +2423,159 @@ Mods: {
 			}
 
 			FightKit: {
-				Tooltip: ""
 				DisplayName: Fight Kit
+				Tooltip:
+					'''
+					Has a variety of different attacks based on right click/right click and directions pressed
+					Enemies when hit will briefly have their contact damage turned off
+					Improves mobility signifcantly, I'd recommend not using mobility items with this at first
+					'''
 			}
 
 			MusicBoxAcomplices: {
 				DisplayName: Music Box Acomplices
 				Tooltip: ""
 			}
+
+			RuneGhostTrophy: {
+				Tooltip: ""
+				DisplayName: Rune Ghost Trophy
+			}
+
+			OLORDTrophy: {
+				Tooltip: ""
+				DisplayName: O.L.O.R.D. Trophy
+			}
+
+			NoehtnapTrophy: {
+				Tooltip: ""
+				DisplayName: Noehtnap Trophy
+			}
+
+			InvaderBossTrophy: {
+				Tooltip: ""
+				DisplayName: Invader Boss Trophy
+			}
+
+			AncientMachineMask: {
+				DisplayName: Ancient Machine Mask
+				Tooltip: ""
+			}
+
+			ImperiousMask: {
+				DisplayName: Imperious Mask
+				Tooltip: ""
+			}
+
+			InvaderMask: {
+				DisplayName: Invader Battleship Mask
+				Tooltip: ""
+			}
+
+			NoehtnapMask: {
+				DisplayName: Noehtnap Mask
+				Tooltip: ""
+			}
+
+			OLORDMask: {
+				DisplayName: O.L.O.R.D. Mask
+				Tooltip: ""
+			}
+
+			HydraMask: {
+				DisplayName: Hydra Mask
+				Tooltip: ""
+			}
 		}
 
 		NPCs: {
-			AncientMachine.DisplayName: Ancient Machine
+			PolarBear: {
+				DisplayName: {
+					DisplayName: Polar Exterminator
+					$parentVal: Polar Exterminator
+				}
+
+				BossChecklistIntegration.SpawnInfo: Visit the tundra's igloo
+			}
+
+			AncientMachine: {
+				DisplayName: {
+					DisplayName: Ancient Machine
+					$parentVal: Ancient Machine
+				}
+
+				BossChecklistIntegration.SpawnInfo: Look into the [i:QwertyMod/AncientEmblem]
+			}
+
+			FortressBoss: {
+				DisplayName: {
+					DisplayName: The Divine Light
+					$parentVal: The Divine Light
+				}
+
+				BossChecklistIntegration.SpawnInfo: Use a [i:QwertyMod/FortressBossSummon] at the altar in the sky fortress
+			}
+
+			CloakedDarkBoss: {
+				DisplayName: {
+					DisplayName: Noehtnap
+					$parentVal: Noehtnap
+				}
+
+				BossChecklistIntegration.SpawnInfo: Just use the [i:QwertyMod/RitualInterupter] mortal!
+			}
+
+			Hydra: {
+				DisplayName: {
+					DisplayName: The Hydra
+					$parentVal: The Hydra
+				}
+
+				BossChecklistIntegration.SpawnInfo: Tempt with [i:QwertyMod/HydraSummon]
+			}
+
+			Imperious: {
+				DisplayName: {
+					DisplayName: Imperious
+					$parentVal: Imperious
+				}
+
+				BossChecklistIntegration.SpawnInfo: Use the [i:QwertyMod/BladeBossSummon], and accept its challenge
+			}
+
+			RuneGhost: {
+				DisplayName: {
+					DisplayName: Rune Ghost
+					$parentVal: Rune Ghost
+				}
+
+				BossChecklistIntegration.SpawnInfo: Use a [i:QwertyMod/SummoningRune] to challenge its power. [i:QwertyMod/SummoningRune] drops from the dungeon's spirits
+			}
+
+			InvaderBattleship: {
+				DisplayName: {
+					DisplayName: Invader Battleship
+					$parentVal: Invader Battleship
+				}
+
+				BossChecklistIntegration.SpawnInfo: Revist the Sky fortress after Plantera is slain
+			}
+
+			OLORDv2: {
+				DisplayName: {
+					DisplayName: Oversized Laser-emitting Obliteration Radiation-emitting Destroyer
+					$parentVal: Oversized Laser-emitting Obliteration Radiation-emitting Destroyer
+				}
+
+				BossChecklistIntegration.SpawnInfo: Use a [i:QwertyMod/B4Summon]
+			}
+
 			AncientMinion.DisplayName: Ancient Minion
 			BladeHitbox.DisplayName: Imperious
-			Imperious.DisplayName: Imperious
-			CloakedDarkBoss.DisplayName: Noehtnap
-			FortressBoss.DisplayName: The Divine Light
-			Hydra.DisplayName: Hydra
 			HydraHead.DisplayName: Hydra Head
 			BattleshipStrikeDrone.DisplayName: Strike Drone
-			InvaderBattleship.DisplayName: Invader Battleship
-			OLORDv2.DisplayName: Oversized Laser-emitting Obliteration Radiation-emitting Destroyer
-			RuneGhost.DisplayName: Rune Ghost
 			AgentPenguin.DisplayName: Agent Penguin
 			FlyingPenguin.DisplayName: Flying Penguin
-			PolarBear.DisplayName: Polar Exterminator
 			Sleeping.DisplayName: ZZZZZ...
 			SlidingPenguin.DisplayName: Sliding Penguin
 			AntiAir.DisplayName: Anti Air
@@ -2439,7 +2595,6 @@ Mods: {
 			InvaderBehemoth.DisplayName: Invader Behemoth
 			InvaderCaster.DisplayName: Invader Caster
 			InvaderFighter.DisplayName: Invader Fighter
-			InvaderBattleship2.DisplayName: Invader Battleship2
 			FrontGunPiece.DisplayName: Front Gun Piece
 			BackGunPiece.DisplayName: Back Gun Piece
 			MissileLauncherPiece.DisplayName: Missile Launcher Piece

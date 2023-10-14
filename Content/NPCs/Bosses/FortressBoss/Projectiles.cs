@@ -5,7 +5,7 @@ using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
 {
@@ -13,14 +13,12 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Barrier Spread");
             Main.projFrames[Projectile.type] = 2;
         }
 
         public override void SetDefaults()
         {
             Projectile.aiStyle = -1;
-            //aiType = ProjectileID.Bullet;
             Projectile.width = 40;
             Projectile.height = 40;
             Projectile.friendly = false;
@@ -35,7 +33,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
         public override void AI()
         {
             Projectile.rotation = Projectile.velocity.ToRotation();
-            Dust dust2 = Main.dust[Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<CaeliteDust>())];
+            Dust dust2 = Main.dust[Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<CaeliteDust>())];
             dust2.scale = .5f;
             if (Projectile.frameCounter % 10 == 0)
             {
@@ -72,8 +70,6 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Static Barrier");
-
             Main.projFrames[Projectile.type] = 4;
         }
 
@@ -112,15 +108,9 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
 
     public class CaeliteSaw : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("Caelite Saw");
-        }
-
         public override void SetDefaults()
         {
             Projectile.aiStyle = -1;
-            //aiType = ProjectileID.Bullet;
             Projectile.width = 20;
             Projectile.height = 20;
             Projectile.friendly = false;
@@ -141,7 +131,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
         {
             for (int i = 0; i < 10; i++)
             {
-                Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, NPCType<FortressBoss>());
+                Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.NPCType<FortressBoss>());
             }
         }
 
@@ -162,14 +152,13 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(BuffType<PowerDown>(), 300);
+            target.AddBuff(ModContent.BuffType<PowerDown>(), 300);
         }
     }
     public class DivineBolt : ModProjectile
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Divine Bolt");
             Main.projFrames[Type] = 4;
         }
         public override void SetDefaults()
@@ -205,7 +194,7 @@ namespace QwertyMod.Content.NPCs.Bosses.FortressBoss
         }
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(BuffType<PowerDown>(), 300);
+            target.AddBuff(ModContent.BuffType<PowerDown>(), 300);
         }
     }
 }

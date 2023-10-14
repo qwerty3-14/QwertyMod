@@ -1,13 +1,12 @@
-using Terraria.GameContent.Creative;
-using Terraria.ModLoader;
-using static Terraria.ID.ArmorIDs;
-using Terraria.ID;
-using Terraria;
-using Terraria.DataStructures;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using Terraria;
+using Terraria.DataStructures;
+using Terraria.GameContent.Creative;
 using Terraria.GameContent.Golf;
+using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace QwertyMod.Content.Items.Equipment.Vanity.PurpleDress
 {

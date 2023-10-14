@@ -5,7 +5,7 @@ using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
 {
@@ -35,7 +35,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
                 Projectile.extraUpdates++;
                 for (int d = 0; d <= 40; d++)
                 {
-                    Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<PursuitRuneDeath>());
+                    Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<PursuitRuneDeath>());
                 }
             }
             if (Main.netMode != NetmodeID.MultiplayerClient)
@@ -73,7 +73,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
         {
             for (int d = 0; d <= 40; d++)
             {
-                Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<PursuitRuneDeath>());
+                Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<PursuitRuneDeath>());
             }
         }
         public override void OnHitPlayer(Player target, Player.HurtInfo info)

@@ -1,8 +1,7 @@
+using Microsoft.Xna.Framework;
+using System;
 using Terraria;
 using Terraria.ModLoader;
-using QwertyMod.Common;
-using System;
-using Microsoft.Xna.Framework;
 
 namespace QwertyMod.Content.Buffs
 {
@@ -10,8 +9,6 @@ namespace QwertyMod.Content.Buffs
     {
         public override void SetStaticDefaults()
         {
-            ////DisplayName,SetDefault("Camera Issues");
-            ////Description.SetDefault("I'm not sorry...");
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = true;
             Main.buffNoSave[Type] = true;

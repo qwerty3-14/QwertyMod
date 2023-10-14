@@ -7,7 +7,7 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Minion.LeechRune
 {
@@ -15,7 +15,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.LeechRune
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Leech Rune");
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
             Main.projPet[Projectile.type] = true;
@@ -86,7 +85,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.LeechRune
                     {
                         float theta = Main.rand.NextFloat(-MathF.PI, MathF.PI);
 
-                        Dust dust = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(minionRingRadius, theta), DustType<LeechRuneDeath>(), QwertyMethods.PolarVector(-minionRingRadius / 10, theta));
+                        Dust dust = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(minionRingRadius, theta), ModContent.DustType<LeechRuneDeath>(), QwertyMethods.PolarVector(-minionRingRadius / 10, theta));
                         dust.noGravity = true;
                     }
                     if (Main.netMode != NetmodeID.Server)
@@ -115,7 +114,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.LeechRune
                         for (int i = 0; i < minionRingDustQty; i++)
                         {
                             float theta = Main.rand.NextFloat(-MathF.PI, MathF.PI);
-                            Dust dust = Dust.NewDustPerfect(Projectile.Center, DustType<LeechRuneDeath>(), QwertyMethods.PolarVector(minionRingRadius / 10, theta));
+                            Dust dust = Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<LeechRuneDeath>(), QwertyMethods.PolarVector(minionRingRadius / 10, theta));
                             dust.noGravity = true;
                         }
                     }
@@ -142,7 +141,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.LeechRune
                     for (int i = 0; i < minionRingDustQty; i++)
                     {
                         float theta = Main.rand.NextFloat(-MathF.PI, MathF.PI);
-                        Dust dust = Dust.NewDustPerfect(Projectile.Center, DustType<LeechRuneDeath>(), QwertyMethods.PolarVector(minionRingRadius / 10, theta));
+                        Dust dust = Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<LeechRuneDeath>(), QwertyMethods.PolarVector(minionRingRadius / 10, theta));
                         dust.noGravity = true;
                     }
                 }
@@ -157,7 +156,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.LeechRune
                     {
                         float theta = Main.rand.NextFloat(-MathF.PI, MathF.PI);
 
-                        Dust dust = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(minionRingRadius, theta), DustType<LeechRuneDeath>(), QwertyMethods.PolarVector(-minionRingRadius / 10, theta));
+                        Dust dust = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(minionRingRadius, theta), ModContent.DustType<LeechRuneDeath>(), QwertyMethods.PolarVector(-minionRingRadius / 10, theta));
                         dust.noGravity = true;
                     }
                     noTargetTimer = 0;

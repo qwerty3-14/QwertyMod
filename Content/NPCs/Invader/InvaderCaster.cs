@@ -2,19 +2,18 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Common.Fortress;
 using QwertyMod.Content.Buffs;
+using QwertyMod.Content.Items.MiscMaterials;
+using QwertyMod.Content.Items.Weapon.Minion.InvaderCaster;
 using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
-using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
+using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
-using Terraria.GameContent.ItemDropRules;
-using QwertyMod.Content.Items.MiscMaterials;
-using QwertyMod.Content.Items.Weapon.Minion.InvaderCaster;
+
 
 namespace QwertyMod.Content.NPCs.Invader
 {
@@ -168,7 +167,7 @@ namespace QwertyMod.Content.NPCs.Invader
 
 			pulseCounter++;
 
-            spriteBatch.Draw(Request<Texture2D>("QwertyMod/Content/NPCs/Invader/InvaderCaster_Glow").Value, NPC.Center - screenPos,
+            spriteBatch.Draw(ModContent.Request<Texture2D>("QwertyMod/Content/NPCs/Invader/InvaderCaster_Glow").Value, NPC.Center - screenPos,
             new Rectangle(0, ((pulseCounter % 40) / 10) * texture.Height / 4, texture.Width, texture.Height / 4), Color.White, NPC.rotation,
             new Vector2(NPC.width * 0.5f, NPC.height * 0.5f), 1f, NPC.spriteDirection != 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0f);
 
@@ -185,8 +184,8 @@ namespace QwertyMod.Content.NPCs.Invader
         }
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
-            npcLoot.Add(ItemDropRule.Common(ItemType<InvaderPlating>(), 1, 2, 4));
-            npcLoot.Add(ItemDropRule.Common(ItemType<InvaderCasterStaff>(), 20, 1, 1));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<InvaderPlating>(), 1, 2, 4));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<InvaderCasterStaff>(), 20, 1, 1));
         }
 
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
@@ -290,7 +289,6 @@ namespace QwertyMod.Content.NPCs.Invader
 
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Sphere");
             Main.projFrames[Projectile.type] = 5;
         }
         public override void SetDefaults()

@@ -1,11 +1,8 @@
-using Microsoft.Xna.Framework;
-using System.Collections.Generic;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Equipment.Accessories.Combined
 {
@@ -33,8 +30,8 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Combined
         }
         public override void AddRecipes()
         {
-            CreateRecipe().AddIngredient(ItemType<EnchantedWhetstone>(), 1)
-                .AddIngredient(ItemType<ArcaneArmorBreaker>(), 1)
+            CreateRecipe().AddIngredient(ModContent.ItemType<EnchantedWhetstone>(), 1)
+                .AddIngredient(ModContent.ItemType<ArcaneArmorBreaker>(), 1)
                 .AddTile(TileID.TinkerersWorkbench)
                 .Register();
         }

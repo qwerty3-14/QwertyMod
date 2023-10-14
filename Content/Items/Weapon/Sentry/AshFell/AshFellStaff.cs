@@ -7,7 +7,7 @@ using Terraria.GameContent;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Sentry.AshFell
 {
@@ -15,8 +15,6 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.AshFell
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Ash  Fell Staff");
-            //Tooltip.SetDefault("Thi Sentry suffocates your foes with ash missiles!");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
@@ -50,7 +48,6 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.AshFell
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Ash fell");
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
         }
         public override void SetDefaults()
@@ -101,7 +98,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.AshFell
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            Texture2D missile = Request<Texture2D>("QwertyMod/Content/Items/Weapon/Sentry/AshFell/AshMissile").Value;
+            Texture2D missile = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Sentry/AshFell/AshMissile").Value;
             for (int i = 0; i < missileCounters.Length; i++)
             {
                 Main.EntitySpriteDraw(missile,

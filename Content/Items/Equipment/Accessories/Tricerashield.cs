@@ -6,7 +6,7 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 using Terraria.ID;
 
 namespace QwertyMod.Content.Items.Equipment.Accessories
@@ -16,8 +16,6 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Tricerashield");
-            //Tooltip.SetDefault("Allows you to dash into an enemy" + "\nProvides immunity to knockback");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -77,7 +75,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
                 int shader8 = 0;
                 for (int i = 0; i < 20; i++)
                 {
-                    if (drawPlayer.armor[i].type == ItemType<Tricerashield>())
+                    if (drawPlayer.armor[i].type == ModContent.ItemType<Tricerashield>())
                     {
                         shader8 = (int)drawPlayer.dye[i % 10].dye;
                     }
@@ -97,12 +95,12 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
                     color33 *= 0.45f - num92 * 0.15f;
                     for (float num93 = 0f; num93 < 4f; num93 += 1f)
                     {
-                        value = new DrawData(Request<Texture2D>("QwertyMod/Content/Items/Equipment/Accessories/Tricerashield_Shield").Value, new Vector2((float)((int)(Position.X - Main.screenPosition.X - (float)(BigShieldFrame.Width / 2) + (float)(drawPlayer.width / 2))), (float)((int)(Position.Y - Main.screenPosition.Y + (float)drawPlayer.height - (float)BigShieldFrame.Height + 4f))) + drawPlayer.bodyPosition + new Vector2((float)(BigShieldFrame.Width / 2), (float)(BigShieldFrame.Height / 2)) + zero + new Vector2(x2, 0f).RotatedBy((double)(num93 / 4f * 6.28318548f), default(Vector2)), BigShieldFrame, color33, drawPlayer.bodyRotation, origin, 1f, drawInfo.playerEffect, 0);
+                        value = new DrawData(ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/Accessories/Tricerashield_Shield").Value, new Vector2((float)((int)(Position.X - Main.screenPosition.X - (float)(BigShieldFrame.Width / 2) + (float)(drawPlayer.width / 2))), (float)((int)(Position.Y - Main.screenPosition.Y + (float)drawPlayer.height - (float)BigShieldFrame.Height + 4f))) + drawPlayer.bodyPosition + new Vector2((float)(BigShieldFrame.Width / 2), (float)(BigShieldFrame.Height / 2)) + zero + new Vector2(x2, 0f).RotatedBy((double)(num93 / 4f * 6.28318548f), default(Vector2)), BigShieldFrame, color33, drawPlayer.bodyRotation, origin, 1f, drawInfo.playerEffect, 0);
                         value.shader = shader8;
                         drawInfo.DrawDataCache.Add(value);
                     }
                 }
-                value = new DrawData(Request<Texture2D>("QwertyMod/Content/Items/Equipment/Accessories/Tricerashield_Shield").Value, new Vector2((float)((int)(Position.X - Main.screenPosition.X - (float)(BigShieldFrame.Width / 2) + (float)(drawPlayer.width / 2))), (float)((int)(Position.Y - Main.screenPosition.Y + (float)drawPlayer.height - (float)BigShieldFrame.Height + 4f))) + drawPlayer.bodyPosition + new Vector2((float)(BigShieldFrame.Width / 2), (float)(BigShieldFrame.Height / 2)) + zero, BigShieldFrame, color12, drawPlayer.bodyRotation, origin, 1f, drawInfo.playerEffect, 0);
+                value = new DrawData(ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/Accessories/Tricerashield_Shield").Value, new Vector2((float)((int)(Position.X - Main.screenPosition.X - (float)(BigShieldFrame.Width / 2) + (float)(drawPlayer.width / 2))), (float)((int)(Position.Y - Main.screenPosition.Y + (float)drawPlayer.height - (float)BigShieldFrame.Height + 4f))) + drawPlayer.bodyPosition + new Vector2((float)(BigShieldFrame.Width / 2), (float)(BigShieldFrame.Height / 2)) + zero, BigShieldFrame, color12, drawPlayer.bodyRotation, origin, 1f, drawInfo.playerEffect, 0);
                 value.shader = shader8;
                 drawInfo.DrawDataCache.Add(value);
                 if (drawPlayer.shieldRaised)
@@ -111,7 +109,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
                     float num94 = MathF.Sin(((float)Main.time * 3.14159274f));
                     color34.A = (byte)((float)color34.A * (0.5f + 0.5f * num94));
                     color34 *= 0.5f + 0.5f * num94;
-                    value = new DrawData(Request<Texture2D>("QwertyMod/Content/Items/Equipment/Accessories/Tricerashield_Shield").Value, new Vector2((float)((int)(Position.X - Main.screenPosition.X - (float)(BigShieldFrame.Width / 2) + (float)(drawPlayer.width / 2))), (float)((int)(Position.Y - Main.screenPosition.Y + (float)drawPlayer.height - (float)BigShieldFrame.Height + 4f))) + drawPlayer.bodyPosition + new Vector2((float)(BigShieldFrame.Width / 2), (float)(BigShieldFrame.Height / 2)) + zero, BigShieldFrame, color34, drawPlayer.bodyRotation, origin, 1f, drawInfo.playerEffect, 0);
+                    value = new DrawData(ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/Accessories/Tricerashield_Shield").Value, new Vector2((float)((int)(Position.X - Main.screenPosition.X - (float)(BigShieldFrame.Width / 2) + (float)(drawPlayer.width / 2))), (float)((int)(Position.Y - Main.screenPosition.Y + (float)drawPlayer.height - (float)BigShieldFrame.Height + 4f))) + drawPlayer.bodyPosition + new Vector2((float)(BigShieldFrame.Width / 2), (float)(BigShieldFrame.Height / 2)) + zero, BigShieldFrame, color34, drawPlayer.bodyRotation, origin, 1f, drawInfo.playerEffect, 0);
                     value.shader = shader8;
                 }
                 if (drawPlayer.shieldRaised && drawPlayer.shieldParryTimeLeft > 0)
@@ -127,7 +125,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
                     num97 += num96;
                     color35.A = (byte)((float)color35.A * (1f - num95));
                     color35 *= 1f - num95;
-                    value = new DrawData(Request<Texture2D>("QwertyMod/Content/Items/Equipment/Accessories/Tricerashield_Shield").Value, vector9, BigShieldFrame, color35, drawPlayer.bodyRotation, origin, num97, drawInfo.playerEffect, 0);
+                    value = new DrawData(ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/Accessories/Tricerashield_Shield").Value, vector9, BigShieldFrame, color35, drawPlayer.bodyRotation, origin, num97, drawInfo.playerEffect, 0);
                     value.shader = shader8;
                     drawInfo.DrawDataCache.Add(value);
                 }

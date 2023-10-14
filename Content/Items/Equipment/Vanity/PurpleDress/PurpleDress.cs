@@ -1,10 +1,8 @@
+using System;
 using Terraria;
-using Terraria.ModLoader;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
-using System;
-using System.Collections.Generic;
-using Microsoft.Xna.Framework;
+using Terraria.ModLoader;
 
 namespace QwertyMod.Content.Items.Equipment.Vanity.PurpleDress
 {
@@ -15,7 +13,6 @@ namespace QwertyMod.Content.Items.Equipment.Vanity.PurpleDress
         public override void SetStaticDefaults()
         {
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
-            //ArmorIDs.Body.Sets.HidesBottomSkin[Item.bodySlot] = true;
         }
 
         public override void SetDefaults()

@@ -15,8 +15,6 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.ChromeShotgun
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Chrome Shotgun");
-            //Tooltip.SetDefault("Right click to switch between 4 modes");
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
         }

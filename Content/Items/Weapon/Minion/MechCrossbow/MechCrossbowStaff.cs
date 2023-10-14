@@ -6,7 +6,7 @@ using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Minion.MechCrossbow
 {
@@ -14,8 +14,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.MechCrossbow
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Mech Crossbow Staff");
-            //Tooltip.SetDefault("Summons a mechanised crossbow to shoot arrows from your inventory at enemies\nWooden arrows are converted into tagging bolts");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
@@ -35,7 +33,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.MechCrossbow
             Item.value = 35000;
             Item.rare = ItemRarityID.Pink;
             Item.UseSound = SoundID.Item44;
-            Item.shoot = ProjectileType<MechCrossbowMinion>();
+            Item.shoot = ModContent.ProjectileType<MechCrossbowMinion>();
             Item.DamageType = DamageClass.Summon;
         }
 
@@ -48,7 +46,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.MechCrossbow
 
         public override void AddRecipes()
         {
-            CreateRecipe().AddIngredient(ItemType<LuneArcherMinion.LuneArcherStaff>())
+            CreateRecipe().AddIngredient(ModContent.ItemType<LuneArcherMinion.LuneArcherStaff>())
                 .AddIngredient(ItemID.SoulofFright, 20)
                 .AddIngredient(ItemID.HallowedBar, 12)
                 .AddTile(TileID.MythrilAnvil)
@@ -59,7 +57,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.MechCrossbow
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Mech Crossbow");
             Main.projFrames[Projectile.type] = 1;
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
@@ -99,7 +96,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.MechCrossbow
         {
             if (arrowType == ProjectileID.WoodenArrowFriendly)
             {
-                arrowType = ProjectileType<TaggingBolt>();
+                arrowType = ModContent.ProjectileType<TaggingBolt>();
             }
         }
     }
@@ -107,7 +104,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.MechCrossbow
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Tagging Bolt");
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             ProjectileID.Sets.MinionShot[Projectile.type] = true;
         }

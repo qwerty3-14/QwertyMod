@@ -7,8 +7,6 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Rhuthinium Magic");
-            //Description.SetDefault("10% increased magic damage");
             Main.debuff[Type] = false;
             Main.pvpBuff[Type] = false;
             Main.buffNoSave[Type] = true;

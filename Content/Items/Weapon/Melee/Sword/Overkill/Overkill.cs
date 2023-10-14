@@ -1,7 +1,5 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using QwertyMod.Content.Items.Equipment.Accessories.Sword;
-using QwertyMod.Content.Items.MiscMaterials;
 using QwertyMod.Content.Items.Weapon.Ranged.Gun.SoEF;
 using System;
 using Terraria;
@@ -10,8 +8,7 @@ using Terraria.GameContent;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.WorldBuilding;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Melee.Sword.Overkill
 {
@@ -19,8 +16,6 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.Overkill
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Overkill");
-            //Tooltip.SetDefault("just need to get airborne....");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -128,7 +123,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.Overkill
             }
             Player drawPlayer = drawInfo.drawPlayer;
             Color color12 = drawPlayer.GetImmuneAlphaPure(Lighting.GetColor((int)((double)drawInfo.Position.X + (double)drawPlayer.width * 0.5) / 16, (int)((double)drawInfo.Position.Y + (double)drawPlayer.height * 0.5) / 16, Microsoft.Xna.Framework.Color.White), 0f);
-            if (!drawPlayer.HeldItem.IsAir && drawPlayer.HeldItem.type == ItemType<Overkill>() && drawPlayer.itemAnimation > 0)
+            if (!drawPlayer.HeldItem.IsAir && drawPlayer.HeldItem.type == ModContent.ItemType<Overkill>() && drawPlayer.itemAnimation > 0)
             {
                 Item item = drawPlayer.HeldItem;
                 Texture2D texture = TextureAssets.Item[item.type].Value;

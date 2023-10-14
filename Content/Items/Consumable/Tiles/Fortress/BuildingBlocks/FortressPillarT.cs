@@ -6,7 +6,6 @@ using Terraria.Enums;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
-using static Terraria.ModLoader.ModContent;
 namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.BuildingBlocks
 {
     public class FortressPillarT : ModTile
@@ -24,8 +23,8 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.BuildingBlocks
             TileObjectData.addTile(Type);
             AddMapEntry(new Color(162, 184, 185));
             HitSound = QwertyMod.FortressBlocks;
-            DustType = DustType<FortressDust>();
-            //ItemDrop = ItemType<FortressPillar>();
+            DustType = ModContent.DustType<FortressDust>();
+            //ItemDrop = ModContent.ItemType<FortressPillar>();
         }
 
         public override void KillTile(int i, int j, ref bool fail, ref bool effectOnly, ref bool noItem)
@@ -39,9 +38,9 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.BuildingBlocks
 
         public override void AnimateIndividualTile(int type, int i, int j, ref int frameXOffset, ref int frameYOffset)
         {
-            if (Main.tile[i, j + 1].TileType == TileType<FortressPillarT>())
+            if (Main.tile[i, j + 1].TileType == ModContent.TileType<FortressPillarT>())
             {
-                if (Main.tile[i, j - 1].TileType == TileType<FortressPillarT>())
+                if (Main.tile[i, j - 1].TileType == ModContent.TileType<FortressPillarT>())
                 {
                     Main.tile[i, j].TileFrameY = 36;
                     Main.tile[i, j].TileFrameX = 0;
@@ -56,7 +55,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.BuildingBlocks
                     }
                 }
             }
-            else if (Main.tile[i, j - 1].TileType == TileType<FortressPillarT>())
+            else if (Main.tile[i, j - 1].TileType == ModContent.TileType<FortressPillarT>())
             {
                 Main.tile[i, j].TileFrameY = 54;
                 Main.tile[i, j].TileFrameX = 0;

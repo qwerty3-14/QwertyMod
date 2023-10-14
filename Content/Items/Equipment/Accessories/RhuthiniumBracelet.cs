@@ -3,7 +3,6 @@ using QwertyMod.Content.Items.Consumable.Tiles.Bars;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
 using Terraria.GameContent.Creative;
 
 namespace QwertyMod.Content.Items.Equipment.Accessories
@@ -13,8 +12,6 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Rhuthinium Bracelet");
-            //Tooltip.SetDefault("Increases grappling hook pull speed");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -34,7 +31,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
         }
         public override void AddRecipes()
         {
-            CreateRecipe(1).AddIngredient(ItemType<RhuthiniumBar>(), 4)
+            CreateRecipe(1).AddIngredient(ModContent.ItemType<RhuthiniumBar>(), 4)
                 .AddTile(TileID.Anvils)
                 .Register();
         }

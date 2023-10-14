@@ -6,7 +6,7 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Minion.UrQuan
 {
@@ -14,7 +14,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.UrQuan
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Ur-Quan Dreadnought");
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             Main.projFrames[Projectile.type] = 1;
             ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
@@ -70,8 +69,8 @@ namespace QwertyMod.Content.Items.Weapon.Minion.UrQuan
                 {
                     fighterCounter = 60;
                     SoundEngine.PlaySound(new SoundStyle("QwertyMod/Assets/Sounds/UrQuan-Launch"), Projectile.Center);
-                    fighters.Add(Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center + QwertyMethods.PolarVector(-40, Projectile.rotation) + QwertyMethods.PolarVector(10, Projectile.rotation + MathF.PI / 2), QwertyMethods.PolarVector(4, Projectile.rotation + 3 * MathF.PI / 4), ProjectileType<Fighter>(), (int)(Projectile.damage / 6f), 0, Projectile.owner, Projectile.whoAmI)]);
-                    fighters.Add(Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center + QwertyMethods.PolarVector(-40, Projectile.rotation) + QwertyMethods.PolarVector(10, Projectile.rotation - MathF.PI / 2), QwertyMethods.PolarVector(4, Projectile.rotation - 3 * MathF.PI / 4), ProjectileType<Fighter>(), (int)(Projectile.damage / 6f), 0, Projectile.owner, Projectile.whoAmI)]);
+                    fighters.Add(Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center + QwertyMethods.PolarVector(-40, Projectile.rotation) + QwertyMethods.PolarVector(10, Projectile.rotation + MathF.PI / 2), QwertyMethods.PolarVector(4, Projectile.rotation + 3 * MathF.PI / 4), ModContent.ProjectileType<Fighter>(), (int)(Projectile.damage / 6f), 0, Projectile.owner, Projectile.whoAmI)]);
+                    fighters.Add(Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center + QwertyMethods.PolarVector(-40, Projectile.rotation) + QwertyMethods.PolarVector(10, Projectile.rotation - MathF.PI / 2), QwertyMethods.PolarVector(4, Projectile.rotation - 3 * MathF.PI / 4), ModContent.ProjectileType<Fighter>(), (int)(Projectile.damage / 6f), 0, Projectile.owner, Projectile.whoAmI)]);
                 }
                 if ((target.Center - Projectile.Center).Length() < 300)
                 {
@@ -79,7 +78,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.UrQuan
                     {
                         shotCounter = 0;
                         SoundEngine.PlaySound(new SoundStyle("QwertyMod/Assets/Sounds/UrQuan-Fusion"), Projectile.Center);
-                        Projectile l = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center + QwertyMethods.PolarVector(40f, Projectile.rotation), QwertyMethods.PolarVector(12f, Projectile.rotation), ProjectileType<Fusion>(), Projectile.damage, Projectile.knockBack, Projectile.owner)];
+                        Projectile l = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center + QwertyMethods.PolarVector(40f, Projectile.rotation), QwertyMethods.PolarVector(12f, Projectile.rotation), ModContent.ProjectileType<Fusion>(), Projectile.damage, Projectile.knockBack, Projectile.owner)];
                     }
                 }
                 else
@@ -114,7 +113,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.UrQuan
             }
             for (int i = 0; i < fighters.Count; i++)
             {
-                if (!fighters[i].active || fighters[i].type != ProjectileType<Fighter>())
+                if (!fighters[i].active || fighters[i].type != ModContent.ProjectileType<Fighter>())
                 {
                     fighters.RemoveAt(i);
                 }

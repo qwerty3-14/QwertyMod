@@ -1,12 +1,12 @@
+using Microsoft.Xna.Framework.Graphics;
+using QwertyMod.Common.PlayerLayers;
 using QwertyMod.Content.Items.MiscMaterials;
 using QwertyMod.Content.Items.Weapon.Minion.Longsword;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ID.ArmorIDs;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Equipment.Armor.Hydra
 {
@@ -16,7 +16,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Hydra
         public override void SetStaticDefaults()
         {
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
-            Head.Sets.DrawHatHair[Item.headSlot] = true;
+            ArmorIDs.Head.Sets.DrawHatHair[Item.headSlot] = true;
         }
 
 
@@ -24,11 +24,13 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Hydra
         {
             Item.value = 50000;
             Item.rare = ItemRarityID.Pink;
-
             Item.width = 30;
             Item.height = 26;
             Item.defense = 13;
-
+            if (!Main.dedServ)
+            {
+                Item.GetGlobalItem<ItemUseGlow>().glowTexture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Hydra/HydraHelmet_Glow").Value;
+            }
         }
 
         public override void UpdateEquip(Player player)
@@ -40,7 +42,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Hydra
 
         public override bool IsArmorSet(Item head, Item body, Item legs)
         {
-            return body.type == ItemType<HydraScalemail>() && legs.type == ItemType<HydraLeggings>();
+            return body.type == ModContent.ItemType<HydraScalemail>() && legs.type == ModContent.ItemType<HydraLeggings>();
         }
 
         public override void UpdateArmorSet(Player player)
@@ -70,7 +72,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Hydra
         }
         public override void AddRecipes()
         {
-            CreateRecipe(1).AddIngredient(ItemType<HydraScale>(), 12)
+            CreateRecipe(1).AddIngredient(ModContent.ItemType<HydraScale>(), 12)
                 .AddTile(TileID.Anvils)
                 .Register();
         }
@@ -94,7 +96,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Hydra
                         Projectile projectile = Main.projectile[p];
                         if (projectile.owner == Player.whoAmI && projectile.active && projectile.minionSlots > 0 && (projectile.type < ProjectileID.StardustDragon1 || projectile.type > ProjectileID.StardustDragon4))
                         {
-                            if (projectile.type == ProjectileType<SwordMinion>() && spareSlots >= 1f)
+                            if (projectile.type == ModContent.ProjectileType<SwordMinion>() && spareSlots >= 1f)
                             {
                                 projectile.minionSlots += (int)spareSlots;
                                 break;

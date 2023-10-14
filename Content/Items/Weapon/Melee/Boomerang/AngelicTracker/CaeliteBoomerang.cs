@@ -5,7 +5,6 @@ using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content.Items.Weapon.Melee.Boomerang.AngelicTracker
 {
@@ -13,8 +12,6 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Boomerang.AngelicTracker
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Angelic Tracker");
-            //Tooltip.SetDefault("Higher beings will guide your boomerang!");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -23,7 +20,6 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Boomerang.AngelicTracker
             Item.damage = 38;
             Item.DamageType = DamageClass.MeleeNoSpeed;
             Item.noMelee = true;
-
             Item.useTime = 34;
             Item.useAnimation = 34;
             Item.useStyle = ItemUseStyleID.Shoot;
@@ -34,15 +30,14 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Boomerang.AngelicTracker
             Item.noUseGraphic = true;
             Item.width = 18;
             Item.height = 32;
-
             Item.autoReuse = true;
-            Item.shoot = ProjectileType<CaeliteBoomerangP>();
+            Item.shoot = ModContent.ProjectileType<CaeliteBoomerangP>();
             Item.shootSpeed = 15;
             Item.channel = true;
         }
         public override void AddRecipes()
         {
-            CreateRecipe().AddIngredient(ItemType<CaeliteBar>(), 12)
+            CreateRecipe().AddIngredient(ModContent.ItemType<CaeliteBar>(), 12)
                 .AddTile(TileID.Anvils)
                 .Register();
         }
@@ -57,19 +52,12 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Boomerang.AngelicTracker
     {
         public override void SetDefaults()
         {
-            //Projectile.aiStyle = ProjectileID.WoodenBoomerang;
-            //aiType = 52;
             Projectile.friendly = true;
             Projectile.penetrate = -1;
             Projectile.width = 18;
             Projectile.height = 32;
             Projectile.DamageType = DamageClass.Melee;
             Projectile.usesLocalNPCImmunity = true;
-        }
-
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("Caelite Boomerang");
         }
 
         private float speed;
@@ -133,7 +121,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Boomerang.AngelicTracker
         {
             if (Main.rand.NextBool(10))
             {
-                target.AddBuff(BuffType<PowerDown>(), 120);
+                target.AddBuff(ModContent.BuffType<PowerDown>(), 120);
             }
             Projectile.localNPCImmunity[target.whoAmI] = -1;
             target.immune[Projectile.owner] = 0;

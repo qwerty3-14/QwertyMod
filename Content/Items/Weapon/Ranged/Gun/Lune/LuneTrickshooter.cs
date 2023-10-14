@@ -5,7 +5,7 @@ using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.Lune
 {
@@ -13,8 +13,6 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.Lune
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Lune Trickshooter");
-            //Tooltip.SetDefault("Musket balls are converted to Lune trick shots!" + "\nTrick shots can bounce off walls 3 times and gain significant damage if they do so");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -49,7 +47,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.Lune
         {
             if (type == ProjectileID.Bullet)
             {
-                type = ProjectileType<Trickshot>();
+                type = ModContent.ProjectileType<Trickshot>();
             }
             Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
             return false;
@@ -57,7 +55,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.Lune
 
         public override void AddRecipes()
         {
-            CreateRecipe(1).AddIngredient(ItemType<LuneBar>(), 12)
+            CreateRecipe(1).AddIngredient(ModContent.ItemType<LuneBar>(), 12)
                 .AddTile(TileID.Anvils)
                 .Register();
         }

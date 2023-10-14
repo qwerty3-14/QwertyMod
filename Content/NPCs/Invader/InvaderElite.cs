@@ -1,24 +1,21 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using QwertyMod.Common;
 using QwertyMod.Common.Fortress;
-using QwertyMod.Content.Buffs;
 using QwertyMod.Content.Dusts;
+using QwertyMod.Content.Items.Consumable.BossSummon;
+using QwertyMod.Content.Items.MiscMaterials;
+using QwertyMod.Content.Items.Weapon.Ranged.Gun.SoEF;
 using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
-using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
+using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
-using QwertyMod.Content.Items.MiscMaterials;
-using QwertyMod.Content.Items.Equipment.Accessories;
-using Terraria.GameContent.ItemDropRules;
-using QwertyMod.Common;
-using QwertyMod.Content.Items.Weapon.Ranged.Gun.SoEF;
-using QwertyMod.Content.Items.Consumable.BossSummon;
+
 
 namespace QwertyMod.Content.NPCs.Invader
 {
@@ -314,8 +311,8 @@ namespace QwertyMod.Content.NPCs.Invader
         }
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
-            npcLoot.Add(ItemDropRule.Common(ItemType<InvaderPlating>(), 1, 5, 9));
-            npcLoot.Add(ItemDropRule.Common(ItemType<GodSealKeycard>(), 1, 1, 1));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<InvaderPlating>(), 1, 5, 9));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<GodSealKeycard>(), 1, 1, 1));
         }
 
 
@@ -368,7 +365,7 @@ namespace QwertyMod.Content.NPCs.Invader
             if(!thrownSpear)
             {
                 HeresyOffset(out Vector2 holdOffset, out float rotation);
-            spriteBatch.Draw(Request<Texture2D>("QwertyMod/Content/NPCs/Invader/Heresy").Value, NPC.Center + holdOffset - screenPos,
+            spriteBatch.Draw(ModContent.Request<Texture2D>("QwertyMod/Content/NPCs/Invader/Heresy").Value, NPC.Center + holdOffset - screenPos,
             null, drawColor, NPC.rotation + rotation,
             new Vector2(44, 10), 1f, SpriteEffects.None, 0f);
             }
@@ -378,7 +375,7 @@ namespace QwertyMod.Content.NPCs.Invader
             spriteBatch.Draw(TextureAssets.Npc[NPC.type].Value, NPC.Center - screenPos,
             NPC.frame, drawColor, NPC.rotation,
             origin, 1f, NPC.direction != 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0f);
-            spriteBatch.Draw(Request<Texture2D>("QwertyMod/Content/NPCs/Invader/InvaderElite_Glow").Value, NPC.Center - screenPos,
+            spriteBatch.Draw(ModContent.Request<Texture2D>("QwertyMod/Content/NPCs/Invader/InvaderElite_Glow").Value, NPC.Center - screenPos,
             NPC.frame, Color.White, NPC.rotation,
             origin, 1f, NPC.direction != 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0f);
 

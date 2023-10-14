@@ -7,7 +7,7 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Minion.Priest
 {
@@ -15,7 +15,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.Priest
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Priest Minion");
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             Main.projFrames[Projectile.type] = 6;
         }
@@ -59,7 +58,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.Priest
                         SoundEngine.PlaySound(SoundID.Item8, Projectile.position);
                         for (int num67 = 0; num67 < 15; num67++)
                         {
-                            int num75 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<CaeliteDust>(), 0f, 0f, 100, default(Color), 2.5f);
+                            int num75 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<CaeliteDust>(), 0f, 0f, 100, default(Color), 2.5f);
                             Main.dust[num75].velocity *= 3f;
                             Main.dust[num75].noGravity = true;
                         }
@@ -72,7 +71,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.Priest
                         SoundEngine.PlaySound(SoundID.Item8, Projectile.position);
                         for (int num76 = 0; num76 < 15; num76++)
                         {
-                            int num84 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<CaeliteDust>(), 0f, 0f, 100, default(Color), 2.5f);
+                            int num84 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<CaeliteDust>(), 0f, 0f, 100, default(Color), 2.5f);
                             Main.dust[num84].velocity *= 3f;
                             Main.dust[num84].noGravity = true;
                         }
@@ -112,7 +111,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.Priest
                             if (aimAt != null && !float.IsNaN(((float)aimAt)))
                             {
 
-                                Projectile.NewProjectile(Projectile.InheritSource(Projectile), shotPos, QwertyMethods.PolarVector(shootSpeed, (float)aimAt), ProjectileType<PriestPulse>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                                Projectile.NewProjectile(Projectile.InheritSource(Projectile), shotPos, QwertyMethods.PolarVector(shootSpeed, (float)aimAt), ModContent.ProjectileType<PriestPulse>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
                             }
                         }
                     }
@@ -127,7 +126,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.Priest
                         SoundEngine.PlaySound(SoundID.Item8, Projectile.position);
                         for (int num67 = 0; num67 < 15; num67++)
                         {
-                            int num75 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<CaeliteDust>(), 0f, 0f, 100, default(Color), 2.5f);
+                            int num75 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<CaeliteDust>(), 0f, 0f, 100, default(Color), 2.5f);
                             Main.dust[num75].velocity *= 3f;
                             Main.dust[num75].noGravity = true;
                         }
@@ -138,7 +137,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.Priest
                         SoundEngine.PlaySound(SoundID.Item8, Projectile.position);
                         for (int num67 = 0; num67 < 15; num67++)
                         {
-                            int num75 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<CaeliteDust>(), 0f, 0f, 100, default(Color), 2.5f);
+                            int num75 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<CaeliteDust>(), 0f, 0f, 100, default(Color), 2.5f);
                             Main.dust[num75].velocity *= 3f;
                             Main.dust[num75].noGravity = true;
                         }
@@ -172,7 +171,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.Priest
         {
             if (Projectile.frame == 2 || Projectile.frame == 3)
             {
-                Texture2D texture = Request<Texture2D>("QwertyMod/Content/Items/Weapon/Minion/Priest/PriestPulse").Value;
+                Texture2D texture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Minion/Priest/PriestPulse").Value;
                 Main.EntitySpriteDraw(texture, Projectile.Center + new Vector2(Projectile.spriteDirection * 5, -12) - Main.screenPosition, new Rectangle(0, (Projectile.frame - 2) * 14, 14, 14), Color.White, 0f, Vector2.One * 7, Vector2.One, 0, 0);
             }
 

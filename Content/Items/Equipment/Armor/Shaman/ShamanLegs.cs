@@ -10,8 +10,6 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Shaman
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Shaman Pants");
-            //Tooltip.SetDefault("+1 max sentries");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 

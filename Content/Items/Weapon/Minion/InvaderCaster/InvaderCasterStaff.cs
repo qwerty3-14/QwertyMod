@@ -1,19 +1,17 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Common;
+using QwertyMod.Common.PlayerLayers;
+using QwertyMod.Content.Dusts;
 using System;
 using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
+using Terraria.GameContent;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
 using Terraria.WorldBuilding;
-using QwertyMod.Content.Dusts;
-using Terraria.Audio;
-using Terraria.GameContent;
-using QwertyMod.Content.Items.MiscMaterials;
-using QwertyMod.Common.PlayerLayers;
 
 namespace QwertyMod.Content.Items.Weapon.Minion.InvaderCaster
 {
@@ -21,8 +19,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.InvaderCaster
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Invader Caster Staff");
-            //Tooltip.SetDefault("Summons an invader caster to fight for you.");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
@@ -42,7 +38,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.InvaderCaster
             Item.value = GearStats.InvaderGearValue;
             Item.rare = ItemRarityID.Yellow;
             Item.UseSound = SoundID.Item44;
-            Item.shoot = ProjectileType<InvaderCasterMinion>();
+            Item.shoot = ModContent.ProjectileType<InvaderCasterMinion>();
             Item.DamageType = DamageClass.Summon;
 
             if (!Main.dedServ)
@@ -62,7 +58,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.InvaderCaster
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Invader Caster");
             Main.projFrames[Projectile.type] = 4;
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
@@ -495,7 +490,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.InvaderCaster
                         new Vector2(texture.Width * 0.5f, (float)Projectile.height * 0.5f), 1f, SpriteEffects.None, 0);
 			
 			pulseCounter++;
-            Main.EntitySpriteDraw(Request<Texture2D>("QwertyMod/Content/Items/Weapon/Minion/InvaderCaster/InvaderCasterMinion_Glow").Value, new Vector2(Projectile.Center.X - Main.screenPosition.X, Projectile.Center.Y - Main.screenPosition.Y),
+            Main.EntitySpriteDraw(ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Minion/InvaderCaster/InvaderCasterMinion_Glow").Value, new Vector2(Projectile.Center.X - Main.screenPosition.X, Projectile.Center.Y - Main.screenPosition.Y),
                         new Rectangle(0, ((pulseCounter % 40) / 10) * texture.Height / 4, texture.Width, texture.Height / 4), Color.White, Projectile.rotation,
                         new Vector2(texture.Width * 0.5f, (float)Projectile.height * 0.5f), 1f, SpriteEffects.None, 0);
             return false;
@@ -505,7 +500,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.InvaderCaster
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Sphere");
             Main.projFrames[Projectile.type] = 5;
         }
         public override void SetDefaults()
@@ -549,7 +543,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.InvaderCaster
         
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Zap");
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             ProjectileID.Sets.MinionShot[Projectile.type] = true;
         }

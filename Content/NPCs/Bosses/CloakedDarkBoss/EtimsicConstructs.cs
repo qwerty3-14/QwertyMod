@@ -6,17 +6,12 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
 {
     public class EtimsicCannon : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("Heaven Raider Cannon");
-        }
-
         public override void SetDefaults()
         {
             Projectile.width = Projectile.height = 34;
@@ -60,7 +55,7 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
         {
             if (shootTimer > 180)
             {
-                DrawLaser(Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/CloakedDarkBoss/CannonBeam").Value, Color.White);
+                DrawLaser(ModContent.Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/CloakedDarkBoss/CannonBeam").Value, Color.White);
             }
         }
 
@@ -75,7 +70,6 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Etimsic Barrier");
             Main.projFrames[Projectile.type] = 2;
         }
 
@@ -124,18 +118,8 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
         {
             if (shootTimer > 30)
             {
-                DrawLaser(Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/CloakedDarkBoss/WallBeam").Value, Color.White);
+                DrawLaser(ModContent.Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/CloakedDarkBoss/WallBeam").Value, Color.White);
             }
-            /*
-            else if (shootTimer > 20)
-            {
-                DrawLaser(spriteBatch, mod.GetTexture("NPCs/CloakedDarkBoss/WarningLaser"), (shootTimer % 10 > 5 ? Color.White : Color.Red));
-            }
-            else if (shootTimer > 0)
-            {
-                DrawLaser(spriteBatch, mod.GetTexture("NPCs/CloakedDarkBoss/WarningLaser"), (shootTimer % 20 > 10 ? Color.White : Color.Red));
-            }
-            */
         }
 
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
@@ -147,12 +131,6 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
 
     public class EtimsicRay : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("Etimsic Ray");
-        }
-
-
         public override void SetDefaults()
         {
             Projectile.aiStyle = 1;

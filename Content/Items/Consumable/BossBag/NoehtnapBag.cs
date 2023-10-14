@@ -1,14 +1,10 @@
-﻿
-using QwertyMod.Content.Items.Equipment.Accessories.Expert.Doppleganger;
+﻿using QwertyMod.Content.Items.Equipment.Accessories.Expert.Doppleganger;
 using QwertyMod.Content.Items.MiscMaterials;
-using QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
-using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
-using Terraria.ID;
 using Terraria.GameContent.ItemDropRules;
+using Terraria.ModLoader;
+using Terraria.ID;
 
 namespace QwertyMod.Content.Items.Consumable.BossBag
 {
@@ -40,8 +36,9 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
         }
         public override void ModifyItemLoot(ItemLoot itemLoot)
         {
-            itemLoot.Add(ItemDropRule.Common(ItemType<Etims>(), 1, 20, 36));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<Etims>(), 1, 20, 36));
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<Doppleganger>(), 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<NoehtnapBag>(), 7, 1, 1));
             itemLoot.Add(ItemDropRule.Coins(80000, true));
             
         }

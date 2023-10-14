@@ -5,7 +5,7 @@ using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Magic.Swordpocalypse
 {
@@ -14,8 +14,6 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Swordpocalypse
 
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Swordpocalypse");
-            //Tooltip.SetDefault("Unleashes a barrage of swords!");
             Item.staff[Item.type] = true; //this makes the useStyle animate as a staff instead of as a gun
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
@@ -35,7 +33,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Swordpocalypse
             Item.rare = ItemRarityID.Lime;
             Item.UseSound = SoundID.Item43;
             Item.autoReuse = true;
-            Item.shoot = ProjectileType<SwordDrop>();
+            Item.shoot = ModContent.ProjectileType<SwordDrop>();
             Item.DamageType = DamageClass.Magic;
             Item.shootSpeed = 12;
         }
@@ -65,11 +63,6 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Swordpocalypse
 
     public class SwordDrop : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("Sworddrop");
-        }
-
         public override void SetDefaults()
         {
             Projectile.width = 22;

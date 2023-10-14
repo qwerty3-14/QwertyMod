@@ -3,7 +3,6 @@ using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-using static Terraria.ModLoader.ModContent;
 namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Furniture
 {
     public class FortressPiano : ModItem
@@ -25,12 +24,12 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Furniture
             Item.useStyle = ItemUseStyleID.Swing;
             Item.consumable = true;
             Item.value = 250;
-            Item.createTile = TileType<FortressPianoT>();
+            Item.createTile = ModContent.TileType<FortressPianoT>();
         }
 
         public override void AddRecipes()
         {
-            CreateRecipe().AddIngredient(ItemType<FortressBrick>(), 15)
+            CreateRecipe().AddIngredient(ModContent.ItemType<FortressBrick>(), 15)
                 .AddIngredient(ItemID.Bone, 4)
                 .AddIngredient(ItemID.Book, 1)
                 .AddTile(TileID.Sawmill)

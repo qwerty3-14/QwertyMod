@@ -4,6 +4,7 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace QwertyMod.Content.Items.Equipment.Accessories
@@ -12,8 +13,6 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Enchanted Whetstone");
-            //Tooltip.SetDefault("Melee attacks deal an extra 20% damage as magic damage");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -91,7 +90,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
             if (player.GetModPlayer<WhetStoneEffect>().effect > 0f && item.CountsAsClass(DamageClass.Melee))
             {
                 int TLIndex = tooltips.FindIndex(TooltipLine => TooltipLine.Name.Equals("CritChance"));
-                TooltipLine line = new TooltipLine(Mod, "MagicBoost", (int)(item.damage * player.GetModPlayer<WhetStoneEffect>().effect * player.GetDamage(DamageClass.Magic).Multiplicative) + " magic damage");
+                TooltipLine line = new TooltipLine(Mod, "MagicBoost", (int)(item.damage * player.GetModPlayer<WhetStoneEffect>().effect * player.GetDamage(DamageClass.Magic).Multiplicative) + Language.GetTextValue(Mod.GetLocalizationKey("CustomTooltipWhetDamage")));
                 {
                     line.OverrideColor = Color.SkyBlue;
                 }
@@ -100,7 +99,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
                     tooltips.Insert(TLIndex + 1, line);
                 }
 
-                line = new TooltipLine(Mod, "MagicBoostCrit", (player.GetCritChance(DamageClass.Magic) + 4) + "% critical strike chance");
+                line = new TooltipLine(Mod, "MagicBoostCrit", (player.GetCritChance(DamageClass.Magic) + 4) + Language.GetTextValue(Mod.GetLocalizationKey("CustomTooltipWhetCrit")));
                 {
                     line.OverrideColor = Color.SkyBlue;
                 }

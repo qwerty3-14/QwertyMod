@@ -4,8 +4,7 @@ using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ID.ArmorIDs;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
 {
@@ -14,10 +13,8 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Rhuthinium Cap");
-            //Tooltip.SetDefault("10% increased ranged critical chance\n10% chance not to consume ammo");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
-            Head.Sets.DrawHatHair[Item.headSlot] = true;
+            ArmorIDs.Head.Sets.DrawHatHair[Item.headSlot] = true;
         }
 
         public override void SetDefaults()
@@ -39,7 +36,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
 
         public override bool IsArmorSet(Item head, Item body, Item legs)
         {
-            return body.type == ItemType<RhuthiniumChestplate>() && legs.type == ItemType<RhuthiniumGreaves>();
+            return body.type == ModContent.ItemType<RhuthiniumChestplate>() && legs.type == ModContent.ItemType<RhuthiniumGreaves>();
         }
 
         public override void UpdateArmorSet(Player player)
@@ -50,7 +47,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
 
         public override void AddRecipes()
         {
-            CreateRecipe(1).AddIngredient(ItemType<RhuthiniumBar>(), 12)
+            CreateRecipe(1).AddIngredient(ModContent.ItemType<RhuthiniumBar>(), 12)
                 .AddTile(TileID.Anvils)
                 .Register();
         }

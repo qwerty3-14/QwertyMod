@@ -7,7 +7,7 @@ using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Magic.RhuthiniumScepter
 {
@@ -15,7 +15,6 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RhuthiniumScepter
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Rhuthinium Scepter");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -33,7 +32,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RhuthiniumScepter
             Item.mana = ModLoader.HasMod("TRAEProject") ? 24 : 16;
             Item.autoReuse = true;
             Item.shootSpeed = 8f;
-            Item.shoot = ProjectileType<RhuthiniumBolt>();
+            Item.shoot = ModContent.ProjectileType<RhuthiniumBolt>();
             Item.UseSound = SoundID.Item39;
             Item.knockBack = 1.2f;
             Item.DamageType = DamageClass.Magic;
@@ -43,7 +42,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RhuthiniumScepter
 
         public override void AddRecipes()
         {
-            CreateRecipe(1).AddIngredient(ItemType<RhuthiniumBar>(), 8)
+            CreateRecipe(1).AddIngredient(ModContent.ItemType<RhuthiniumBar>(), 8)
                 .AddTile(TileID.Anvils)
                 .Register();
         }
@@ -81,10 +80,6 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RhuthiniumScepter
 
     public class RhuthiniumBolt : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("Rhuthinium Bolt");
-        }
 
         public override void SetDefaults()
         {
@@ -107,7 +102,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RhuthiniumScepter
             }
             if (true)
             {
-                Dust d = Dust.NewDustPerfect(Projectile.Center, DustType<RhuthiniumDust>(), Vector2.Zero);
+                Dust d = Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<RhuthiniumDust>(), Vector2.Zero);
                 d.frame.Y = (int)(Projectile.ai[0] * 10);
                 d.noGravity = true;
                 d.velocity = Vector2.Zero;

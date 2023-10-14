@@ -10,7 +10,7 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using Terraria.WorldBuilding;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Common
 {
@@ -53,10 +53,10 @@ namespace QwertyMod.Common
                         WorldGen.genRand.Next((int)Main.rockLayer, Main.maxTilesY - 200), // Y Coord of the tile
                         (double)WorldGen.genRand.Next(18, 28), // Strength (High = more)
                         WorldGen.genRand.Next(5, 6), // Steps
-                        (ushort)TileType<RhuthiniumOreT>() // The tile type that will be spawned
+                        (ushort)ModContent.TileType<RhuthiniumOreT>() // The tile type that will be spawned
                        );
                 }
-                string key = "Rhuthimis has blessed your world with Rhuthinium!";
+                string key = Language.GetTextValue(Mod.GetLocalizationKey("RhuthiniumGeneration"));
                 Color messageColor = Color.Cyan;
                 if (Main.netMode == NetmodeID.Server) // Server
                 {
@@ -72,7 +72,7 @@ namespace QwertyMod.Common
 
         public override void ModifyWorldGenTasks(List<GenPass> tasks, ref double totalWeight)
         {
-            tasks.Add(new PassLegacy("Placing ore in space!", delegate (GenerationProgress progress, GameConfiguration configuration)
+            tasks.Add(new PassLegacy(Language.GetTextValue(Mod.GetLocalizationKey("WorldgenLuneOre")), delegate (GenerationProgress progress, GameConfiguration configuration)
            {
                PlaceOreInIslands();
            }));
@@ -88,96 +88,11 @@ namespace QwertyMod.Common
                         int amt = WorldGen.genRand.Next(2, 5);
                         for (int k = 0; k < amt; k++)
                         {
-                            WorldGen.PlaceTile(i, j + 1 + k, TileType<LuneOreT>(), true, true);
+                            WorldGen.PlaceTile(i, j + 1 + k, ModContent.TileType<LuneOreT>(), true, true);
                         }
                     }
                 }
             }
-        }
-        public static void PlaceMoons()
-        {
-            int amount = 7;
-            if (Main.maxTilesX > 6000)
-            {
-                amount += 4;
-            }
-            if (Main.maxTilesX > 8000)
-            {
-                amount += 2;
-            }
-            double maxLeft = 0.1;
-            double maxRight = 0.9;
-            if (Main.dungeonX < Main.maxTilesX * .5f)
-            {
-                maxLeft = 0.3;
-            }
-            else
-            {
-                maxRight = 0.7;
-            }
-            int count = 0;
-            for (int i = 0; i < 100 && count < amount; i++)
-            {
-                int x = WorldGen.genRand.Next((int)(maxLeft * Main.maxTilesX), (int)(maxRight * Main.maxTilesX));
-                int y = WorldGen.genRand.Next(40, 90);
-                if (PlaceMoon(x, y))
-                {
-                    count++;
-                }
-            }
-        }
-        static bool PlaceMoon(int x, int y)
-        {
-            int size = WorldGen.genRand.Next(30, 51);
-            for (int i = 0; i < size; i++)
-            {
-                for (int j = 0; j < size; j++)
-                {
-                    if (Main.tile[x + i, y + j].HasTile)
-                    {
-                        return false;
-                    }
-                }
-            }
-            float offset = WorldGen.genRand.Next(10, 21) * (WorldGen.genRand.NextBool() ? 1 : -1);
-            //Main.NewText("Offset: " + offset);
-            float radius = size / 2f;
-            //Main.NewText("Radius: " + radius);
-            Vector2 center = new Vector2(x + radius, y + radius);
-            Vector2 offsetPos = center + (offset * Vector2.UnitX);
-            //Main.NewText("Center: " + center);
-            //Main.NewText("Offset Position: " + offsetPos);
-            float offsetRadius = radius - WorldGen.genRand.NextFloat(8);
-            //Main.NewText("Offset Radius: " + offsetRadius);
-            for (int i = 0; i < size; i++)
-            {
-                for (int j = 0; j < size; j++)
-                {
-                    Vector2 pos = new Vector2(x + i, y + j);
-                    if ((center - pos).Length() < radius && (offsetPos - pos).Length() > offsetRadius)
-                    {
-                        WorldGen.PlaceTile(i + x, j + y, TileType<LuneOreT>());
-                    }
-                }
-            }
-            return true;
-        }
-    }
-    internal class Moons : ModCommand
-    {
-        public override CommandType Type
-        {
-            get { return CommandType.Chat; }
-        }
-
-        public override string Command
-        {
-            get { return "moons"; }
-        }
-
-        public override void Action(CommandCaller caller, string input, string[] args)
-        {
-            OreGeneration.PlaceMoons();
         }
     }
     internal class LuneOre : ModCommand
@@ -190,6 +105,10 @@ namespace QwertyMod.Common
         public override string Command
         {
             get { return "luneOre"; }
+        }
+        public override string Description
+        {
+            get { return Language.GetTextValue(Mod.GetLocalizationKey("CommandDescriptionLuneGen")); }
         }
 
         public override void Action(CommandCaller caller, string input, string[] args)
@@ -209,6 +128,10 @@ namespace QwertyMod.Common
         {
             get { return "createRhuthinium"; }
         }
+        public override string Description
+        {
+            get { return Language.GetTextValue(Mod.GetLocalizationKey("CommandDescriptionRhuthiniumGen")); }
+        }
         public override void Action(CommandCaller caller, string input, string[] args)
         {
             for (int i = 0; i < (int)((double)(Main.maxTilesX * Main.maxTilesY) * 6E-06); i++)
@@ -218,10 +141,10 @@ namespace QwertyMod.Common
                     WorldGen.genRand.Next((int)Main.rockLayer, Main.maxTilesY - 200), // Y Coord of the tile
                     (double)WorldGen.genRand.Next(18, 28), // Strength (High = more)
                     WorldGen.genRand.Next(5, 6), // Steps
-                    (ushort)TileType<RhuthiniumOreT>() // The tile type that will be spawned
+                    (ushort)ModContent.TileType<RhuthiniumOreT>() // The tile type that will be spawned
                     );
             }
-            string key = "Rhuthimis has blessed your world with Rhuthinium!";
+            string key = Language.GetTextValue(Mod.GetLocalizationKey("RhuthiniumGeneration"));
             Color messageColor = Color.Cyan;
             if (Main.netMode == NetmodeID.Server) // Server
             {
@@ -244,6 +167,10 @@ namespace QwertyMod.Common
         {
             get { return "scanRhuthinium"; }
         }
+        public override string Description
+        {
+            get { return Language.GetTextValue(Mod.GetLocalizationKey("CommandDescriptionRhuthiniumScan")); }
+        }
 
         public override void Action(CommandCaller caller, string input, string[] args)
         {
@@ -262,15 +189,15 @@ namespace QwertyMod.Common
             {
                 if(NPC.downedBoss3)
                 {
-                    Main.NewText("No Rhutinium found, something went wrong");
+                    Main.NewText(Language.GetTextValue(Mod.GetLocalizationKey("RhuthiniumScanFailure")));
                 }
                 else
                 {
-                    Main.NewText("No Rhutinium found, as expected since you haven't killed skeletron");
+                    Main.NewText(Language.GetTextValue(Mod.GetLocalizationKey("RhuthiniumScanNoSkeletron")));
                 }
                 return;
             }
-            Main.NewText(count + " Rhuthnium found in this world, keep looking!");
+            Main.NewText(count + Language.GetTextValue(Mod.GetLocalizationKey("RhuthiniumScanSuccess")));
         }
     }
 }

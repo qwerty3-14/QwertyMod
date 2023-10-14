@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -10,10 +9,6 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert
 {
     class SlidingPenguinGeneric : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("Sliding Penguin");
-        }
 
         public override void SetDefaults()
         {

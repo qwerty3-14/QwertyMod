@@ -6,10 +6,10 @@ using QwertyMod.Content.Items.Equipment.Accessories.SuperArrow.Aqueous;
 using QwertyMod.Content.Items.Weapon.Sentry.Riptide;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
 using Terraria.GameContent.ItemDropRules;
+using Terraria.ID;
+using Terraria.Localization;
+using Terraria.ModLoader;
 
 namespace QwertyMod.Content
 {
@@ -27,7 +27,7 @@ namespace QwertyMod.Content
 
         public override string Description
         {
-            get { return "Adds dungeon loot"; }
+            get { return Language.GetTextValue(Mod.GetLocalizationKey("CommandDescriptionDungeonLoot")); }
         }
 
         public override void Action(CommandCaller caller, string input, string[] args)
@@ -64,7 +64,7 @@ namespace QwertyMod.Content
                 {
                     if (Main.chest[validChests[picked]].item[i].IsAir)
                     {
-                        Main.chest[validChests[picked]].item[i].SetDefaults(ItemType<Aqueous>(), false);
+                        Main.chest[validChests[picked]].item[i].SetDefaults(ModContent.ItemType<Aqueous>(), false);
                         break;
                     }
                 }
@@ -81,27 +81,27 @@ namespace QwertyMod.Content
                     {
                         if (Main.chest[validChests[picked]].item[i].IsAir)
                         {
-                            int id = ItemType<AmuletOfPatience>();
+                            int id = ModContent.ItemType<AmuletOfPatience>();
                             switch (w)
                             {
                                 case 0:
-                                    id = ItemType<AmuletOfPatience>();
+                                    id = ModContent.ItemType<AmuletOfPatience>();
                                     break;
 
                                 case 1:
-                                    id = ItemType<BurstMiner>();
+                                    id = ModContent.ItemType<BurstMiner>();
                                     break;
 
                                 case 2:
-                                    id = ItemType<Hydrospear>();
+                                    id = ModContent.ItemType<Hydrospear>();
                                     break;
 
                                 case 3:
-                                    id = ItemType<LaunchingHook>();
+                                    id = ModContent.ItemType<LaunchingHook>();
                                     break;
 
                                 case 4:
-                                    id = ItemType<Riptide>();
+                                    id = ModContent.ItemType<Riptide>();
                                     break;
                             }
                             Main.chest[validChests[picked]].item[i].SetDefaults(id, false);
@@ -119,27 +119,27 @@ namespace QwertyMod.Content
                 {
                     if (Main.chest[validChests[picked]].item[i].IsAir)
                     {
-                        int id = ItemType<AmuletOfPatience>();
+                        int id = ModContent.ItemType<AmuletOfPatience>();
                         switch (Main.rand.Next(5))
                         {
                             case 0:
-                                id = ItemType<AmuletOfPatience>();
+                                id = ModContent.ItemType<AmuletOfPatience>();
                                 break;
 
                             case 1:
-                                id = ItemType<BurstMiner>();
+                                id = ModContent.ItemType<BurstMiner>();
                                 break;
 
                             case 2:
-                                id = ItemType<Hydrospear>();
+                                id = ModContent.ItemType<Hydrospear>();
                                 break;
 
                             case 3:
-                                id = ItemType<LaunchingHook>();
+                                id = ModContent.ItemType<LaunchingHook>();
                                 break;
 
                             case 4:
-                                id = ItemType<Riptide>();
+                                id = ModContent.ItemType<Riptide>();
                                 break;
                         }
                         Main.chest[validChests[picked]].item[i].SetDefaults(id, false);
@@ -156,7 +156,7 @@ namespace QwertyMod.Content
         {
             if(item.type == ItemID.LockBox)
             {
-                itemLoot.Add(ItemDropRule.OneFromOptionsNotScalingWithLuck(1, ItemType<AmuletOfPatience>(), ItemType<BurstMiner>(), ItemType<Hydrospear>(), ItemType<LaunchingHook>(), ItemType<Riptide>(), ItemType<Aqueous>()));
+                itemLoot.Add(ItemDropRule.OneFromOptionsNotScalingWithLuck(1, ModContent.ItemType<AmuletOfPatience>(), ModContent.ItemType<BurstMiner>(), ModContent.ItemType<Hydrospear>(), ModContent.ItemType<LaunchingHook>(), ModContent.ItemType<Riptide>(), ModContent.ItemType<Aqueous>()));
             }
         }
     }

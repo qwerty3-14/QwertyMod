@@ -1,15 +1,13 @@
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Content.Buffs;
-using QwertyMod.Content.Items.Consumable.Tiles.Bars;
+using QwertyMod.Content.Items.MiscMaterials;
+using System;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
-using System;
-using Terraria.GameContent;
-using Microsoft.Xna.Framework.Graphics;
-using QwertyMod.Content.Items.MiscMaterials;
 
 namespace QwertyMod.Content.Items.Weapon.Melee.Boomerang.SeraphimPredator
 {
@@ -17,8 +15,6 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Boomerang.SeraphimPredator
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Angelic Tracker");
-            //Tooltip.SetDefault("Higher beings will guide your boomerang!");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -40,15 +36,15 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Boomerang.SeraphimPredator
             Item.height = 34;
 
             Item.autoReuse = true;
-            Item.shoot = ProjectileType<SeraphimPredatorP>();
+            Item.shoot = ModContent.ProjectileType<SeraphimPredatorP>();
             Item.shootSpeed = 15;
             Item.channel = true;
         }
         
         public override void AddRecipes()
         {
-            CreateRecipe().AddIngredient(ItemType<AngelicTracker.CaeliteBoomerang>())
-            .AddIngredient(ItemType<SoulOfHeight>(), 10)
+            CreateRecipe().AddIngredient(ModContent.ItemType<AngelicTracker.CaeliteBoomerang>())
+            .AddIngredient(ModContent.ItemType<SoulOfHeight>(), 10)
                 .AddTile(TileID.MythrilAnvil)
                 .Register();
         }
@@ -152,7 +148,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Boomerang.SeraphimPredator
         {
             if (Main.rand.NextBool(10))
             {
-                target.AddBuff(BuffType<PowerDown>(), 120);
+                target.AddBuff(ModContent.BuffType<PowerDown>(), 120);
             }
             Projectile.localNPCImmunity[target.whoAmI] = -1;
             target.immune[Projectile.owner] = 0;

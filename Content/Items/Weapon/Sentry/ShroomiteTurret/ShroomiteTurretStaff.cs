@@ -2,10 +2,10 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
+using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.DataStructures;
-using Terraria.GameContent.Creative;
 
 namespace QwertyMod.Content.Items.Weapon.Sentry.ShroomiteTurret
 {
@@ -13,8 +13,6 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.ShroomiteTurret
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Shroomite Turret Staff");
-            //Tooltip.SetDefault("Fire bullets from your inventory.\n50% chance not to consume ammo.");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;

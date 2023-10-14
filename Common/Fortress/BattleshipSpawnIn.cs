@@ -1,19 +1,15 @@
-using System;
-using System.Collections.Generic;
-using Terraria;
-using Terraria.GameContent.Generation;
-using Terraria.IO;
-using Terraria.ModLoader;
-using Terraria.WorldBuilding;
-using System.IO;
-using Terraria.ID;
-using QwertyMod.Content.NPCs.Bosses.InvaderBattleship;
 using Microsoft.Xna.Framework;
-using Terraria.Audio;
-using QwertyMod.Content.NPCs.Invader;
-using QwertyMod.Content.NPCs.Fortress;
-using Terraria.DataStructures;
 using Microsoft.Xna.Framework.Graphics;
+using QwertyMod.Content.NPCs.Bosses.InvaderBattleship;
+using QwertyMod.Content.NPCs.Fortress;
+using QwertyMod.Content.NPCs.Invader;
+using System;
+using System.IO;
+using Terraria;
+using Terraria.Audio;
+using Terraria.DataStructures;
+using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace QwertyMod.Common.Fortress
 {
@@ -32,7 +28,6 @@ namespace QwertyMod.Common.Fortress
                 if(spawnTimer == alarmTime + spawnTime)
                 {
                     RemoveEnemies();
-                    Main.NewText("Alarm Sound");
                 }
                 if(spawnTimer == spawnTime)
                 {

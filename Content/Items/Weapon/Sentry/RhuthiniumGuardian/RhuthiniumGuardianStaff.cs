@@ -9,7 +9,7 @@ using Terraria.GameContent;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Sentry.RhuthiniumGuardian
 {
@@ -17,8 +17,6 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.RhuthiniumGuardian
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Rhuthinium Guardian Staff");
-            //Tooltip.SetDefault("Summons an extremely slow guardian to shoot at your enemies");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
@@ -39,14 +37,14 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.RhuthiniumGuardian
             Item.value = 25000;
             Item.rare = ItemRarityID.Orange;
             Item.UseSound = SoundID.Item44;
-            Item.shoot = ProjectileType<RhuthiniumGuardian>();
+            Item.shoot = ModContent.ProjectileType<RhuthiniumGuardian>();
             Item.DamageType = DamageClass.Summon;
             Item.sentry = true;
         }
 
         public override void AddRecipes()
         {
-            CreateRecipe().AddIngredient(ItemType<RhuthiniumBar>(), 8)
+            CreateRecipe().AddIngredient(ModContent.ItemType<RhuthiniumBar>(), 8)
                 .AddTile(TileID.Anvils)
                 .Register();
         }
@@ -62,7 +60,6 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.RhuthiniumGuardian
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Rhuthinium Guardian");
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true; //This is necessary for right-click targeting
         }
 
@@ -114,7 +111,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.RhuthiniumGuardian
                 if (timer >= 600)
                 {
                     if (Main.netMode != NetmodeID.MultiplayerClient)
-                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, QwertyMethods.PolarVector(shardVelocity, Aim), ProjectileType<RhuthiniumShard>(), Projectile.damage, Projectile.knockBack, Main.myPlayer, 0f, 0f);
+                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, QwertyMethods.PolarVector(shardVelocity, Aim), ModContent.ProjectileType<RhuthiniumShard>(), Projectile.damage, Projectile.knockBack, Main.myPlayer, 0f, 0f);
                     timer = 0;
                 }
             }
@@ -136,7 +133,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.RhuthiniumGuardian
 
         public override bool PreDraw(ref Color lightColor)
         {
-            Main.EntitySpriteDraw(Request<Texture2D>("QwertyMod/Content/Items/Weapon/Sentry/RhuthiniumGuardian/RhuthiniumGuardianLower").Value, new Vector2(Projectile.Center.X - Main.screenPosition.X, Projectile.Center.Y - Main.screenPosition.Y),
+            Main.EntitySpriteDraw(ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Sentry/RhuthiniumGuardian/RhuthiniumGuardianLower").Value, new Vector2(Projectile.Center.X - Main.screenPosition.X, Projectile.Center.Y - Main.screenPosition.Y),
                     new Rectangle(0, Projectile.frame * Projectile.height, Projectile.width, Projectile.height), lightColor, -Projectile.rotation,
                     new Vector2(Projectile.width * 0.5f, Projectile.height * 0.5f), 1f, SpriteEffects.None, 0);
 
@@ -173,7 +170,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.RhuthiniumGuardian
                 distToProj = confirmTarget.Center - center;    //update distance
                 Color drawColor = lightColor;
 
-                Main.EntitySpriteDraw(Request<Texture2D>("QwertyMod/Content/Items/Weapon/Sentry/RhuthiniumGuardian/laser").Value, new Vector2(center.X - Main.screenPosition.X, center.Y - Main.screenPosition.Y),
+                Main.EntitySpriteDraw(ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Sentry/RhuthiniumGuardian/laser").Value, new Vector2(center.X - Main.screenPosition.X, center.Y - Main.screenPosition.Y),
                     new Rectangle(0, 0, 1, (int)lineLength - 10), lineColor, projRotation,
                     new Vector2(0, 0), 1f, SpriteEffects.None, 0);
             }
@@ -209,7 +206,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.RhuthiniumGuardian
         {
             if (Main.rand.NextBool(10))
             {
-                Dust d = Main.dust[Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<RhuthiniumDust>())];
+                Dust d = Main.dust[Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<RhuthiniumDust>())];
                 d.frame.Y = Main.rand.NextBool(2) ? 0 : 10;
                 d.noGravity = true;
             }
@@ -219,7 +216,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.RhuthiniumGuardian
         {
             for (int i = 0; i < 12; i++)
             {
-                Dust d = Dust.NewDustPerfect(Projectile.Center, DustType<RhuthiniumDust>());
+                Dust d = Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<RhuthiniumDust>());
                 d.frame.Y = Main.rand.NextBool(2) ? 0 : 10;
                 d.noGravity = true;
             }

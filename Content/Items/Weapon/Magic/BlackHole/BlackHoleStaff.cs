@@ -4,11 +4,11 @@ using QwertyMod.Content.NPCs.Bosses.OLORD;
 using System;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.GameContent.Creative;
 
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Magic.BlackHole
 {
@@ -16,11 +16,8 @@ namespace QwertyMod.Content.Items.Weapon.Magic.BlackHole
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Black Hole Staff");
-            //Tooltip.SetDefault("Summons a black hole to suck up your enemies!" + "\nThe higher the black hole's damage the stronger the pull strength");
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             Item.staff[Item.type] = true;
-            //Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(30, 29));
         }
         public override void SetDefaults()
         {
@@ -37,7 +34,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.BlackHole
             Item.rare = ItemRarityID.Red;
             Item.UseSound = SoundID.Item44;
             Item.autoReuse = false;
-            Item.shoot = ProjectileType<BlackHolePlayer>();
+            Item.shoot = ModContent.ProjectileType<BlackHolePlayer>();
             Item.DamageType = DamageClass.Magic;
             Item.channel = true;
         }
@@ -66,7 +63,6 @@ namespace QwertyMod.Content.Items.Weapon.Magic.BlackHole
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("BlackHole");
             Main.projFrames[Projectile.type] = 1;
         }
 
@@ -134,7 +130,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.BlackHole
             for (int d = 0; d < (int)(80 * Projectile.scale); d++)
             {
                 float theta = Main.rand.NextFloat(-MathF.PI, MathF.PI);
-                Dust dust = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(Main.rand.NextFloat(10 * Projectile.scale, 200 * Projectile.scale), theta), DustType<BlackHoleMatter>(), QwertyMethods.PolarVector(6 * Projectile.scale, theta + MathF.PI / 2));
+                Dust dust = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(Main.rand.NextFloat(10 * Projectile.scale, 200 * Projectile.scale), theta), ModContent.DustType<BlackHoleMatter>(), QwertyMethods.PolarVector(6 * Projectile.scale, theta + MathF.PI / 2));
                 dust.scale = 1f;
             }
 
@@ -148,7 +144,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.BlackHole
                     vertSpeed = MathF.Sin(direction) * pullSpeed * 5;
                     dust.velocity += new Vector2(horiSpeed, vertSpeed);
                 }
-                if (dust.type == DustType<BlackHoleMatter>())
+                if (dust.type == ModContent.DustType<BlackHoleMatter>())
                 {
                     direction = (Projectile.Center - dust.position).ToRotation();
                     dust.velocity += QwertyMethods.PolarVector(.8f, direction);
@@ -173,7 +169,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.BlackHole
                     mass.velocity += new Vector2(horiSpeed, vertSpeed);
                     for (int g = 0; g < 1; g++)
                     {
-                        int dust = Dust.NewDust(mass.position, mass.width, mass.height, DustType<B4PDust>(), horiSpeed * dustSpeed, vertSpeed * dustSpeed);
+                        int dust = Dust.NewDust(mass.position, mass.width, mass.height, ModContent.DustType<B4PDust>(), horiSpeed * dustSpeed, vertSpeed * dustSpeed);
                     }
                 }
             }
@@ -228,14 +224,14 @@ namespace QwertyMod.Content.Items.Weapon.Magic.BlackHole
                     item.velocity += new Vector2(horiSpeed, vertSpeed);
                     for (int g = 0; g < 1; g++)
                     {
-                        int dust = Dust.NewDust(item.position, item.width, item.height, DustType<B4PDust>(), horiSpeed * dustSpeed, vertSpeed * dustSpeed);
+                        int dust = Dust.NewDust(item.position, item.width, item.height, ModContent.DustType<B4PDust>(), horiSpeed * dustSpeed, vertSpeed * dustSpeed);
                     }
                 }
             }
             for (int i = 0; i < 1000; i++)
             {
                 proj = Main.projectile[i];
-                if (proj.active && proj.type != ProjectileType<BlackHolePlayer>() && proj.type != ProjectileType<SideLaser>())
+                if (proj.active && proj.type != ModContent.ProjectileType<BlackHolePlayer>() && proj.type != ModContent.ProjectileType<SideLaser>())
                 {
                     direction = (Projectile.Center - proj.Center).ToRotation();
                     horiSpeed = MathF.Cos(direction) * pullSpeed;
@@ -243,7 +239,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.BlackHole
                     proj.velocity += new Vector2(horiSpeed, vertSpeed);
                     for (int g = 0; g < 1; g++)
                     {
-                        int dust = Dust.NewDust(proj.position, proj.width, proj.height, DustType<B4PDust>(), horiSpeed * dustSpeed, vertSpeed * dustSpeed);
+                        int dust = Dust.NewDust(proj.position, proj.width, proj.height, ModContent.DustType<B4PDust>(), horiSpeed * dustSpeed, vertSpeed * dustSpeed);
                     }
                 }
             }

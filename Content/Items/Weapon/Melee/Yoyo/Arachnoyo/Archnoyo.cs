@@ -15,8 +15,6 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Yoyo.Arachnoyo
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Aracnoyo");
-            //Tooltip.SetDefault("Throws 8 yoyos at once!");
             ItemID.Sets.Yoyo[Item.type] = true;
             ItemID.Sets.GamepadExtraRange[Item.type] = 15;
             ItemID.Sets.GamepadSmartQuickReach[Item.type] = true;

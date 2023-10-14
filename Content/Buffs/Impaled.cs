@@ -7,15 +7,11 @@ namespace QwertyMod.Content.Buffs
     {
         public override void SetStaticDefaults()
         {
-            ////DisplayName,SetDefault("Impaled");
-            ////Description.SetDefault("Ouch!");
             Main.debuff[Type] = true;
-
         }
 
         public override void Update(NPC npc, ref int buffIndex)
         {
-            //int num = npc.lifeRegenExpectedLossPerSecond;
             if (npc.lifeRegen > 0)
             {
                 npc.lifeRegen = 0;
@@ -40,6 +36,5 @@ namespace QwertyMod.Content.Buffs
         public override bool InstancePerEntity => true;
         public bool CanImpale = false;
         public int damagePerImpaler = 0;
-        // public int maxImpalers = 0;
     }
 }

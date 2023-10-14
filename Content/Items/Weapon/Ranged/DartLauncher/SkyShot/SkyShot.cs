@@ -8,7 +8,7 @@ using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Ranged.DartLauncher.SkyShot
 {
@@ -16,8 +16,6 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.DartLauncher.SkyShot
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Sky Shot");
-            //Tooltip.SetDefault("Uses darts as ammo\nHigher beings have loaded an additional dart.");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -45,7 +43,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.DartLauncher.SkyShot
         {
             float r = (velocity).ToRotation() - MathF.PI / 2f;
             Projectile.NewProjectile(source, position + QwertyMethods.PolarVector(4f * player.direction, r), velocity, type, damage, knockback, player.whoAmI);
-            Projectile.NewProjectile(source, position + QwertyMethods.PolarVector(12f * player.direction, r), velocity, ProjectileType<CaeliteDart>(), damage, knockback, player.whoAmI);
+            Projectile.NewProjectile(source, position + QwertyMethods.PolarVector(12f * player.direction, r), velocity, ModContent.ProjectileType<CaeliteDart>(), damage, knockback, player.whoAmI);
             return false;
         }
         public override Vector2? HoldoutOffset()
@@ -54,7 +52,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.DartLauncher.SkyShot
         }
         public override void AddRecipes()
         {
-            CreateRecipe().AddIngredient(ItemType<CaeliteBar>(), 12)
+            CreateRecipe().AddIngredient(ModContent.ItemType<CaeliteBar>(), 12)
                 .AddTile(TileID.Anvils)
                 .Register();
         }
@@ -73,13 +71,13 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.DartLauncher.SkyShot
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.AddBuff(BuffType<PowerDown>(), 60 * 30);
+            target.AddBuff(ModContent.BuffType<PowerDown>(), 60 * 30);
         }
         public override void OnKill(int timeLeft)
         {
             for (int i = 0; i < 3; i++)
             {
-                Dust.NewDustPerfect(Projectile.Center, DustType<CaeliteDust>(), QwertyMethods.PolarVector(Main.rand.NextFloat() * 4f, Main.rand.NextFloat(-MathF.PI, MathF.PI)));
+                Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<CaeliteDust>(), QwertyMethods.PolarVector(Main.rand.NextFloat() * 4f, Main.rand.NextFloat(-MathF.PI, MathF.PI)));
             }
         }
         public override void AI()

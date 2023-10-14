@@ -1,8 +1,8 @@
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.GameContent.Creative;
-using static Terraria.ModLoader.ModContent;
 using Terraria.ID;
+
 namespace QwertyMod.Content.Items.Consumable.Tiles.Banners
 {
     public class AntiAirBanner : ModItem
@@ -25,7 +25,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Banners
             Item.consumable = true;
             Item.rare = ItemRarityID.Blue;
             Item.value = Item.buyPrice(0, 0, 10, 0);
-            Item.createTile = TileType<BannersT>();
+            Item.createTile = ModContent.TileType<BannersT>();
             Item.placeStyle = 9;
         }
     }

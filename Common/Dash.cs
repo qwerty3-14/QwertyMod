@@ -7,7 +7,7 @@ using Terraria.DataStructures;
 using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Common
 {
@@ -70,7 +70,7 @@ namespace QwertyMod.Common
                         {
                             NPC nPC = Main.npc[i];
                             Rectangle rect = nPC.getRect();
-                            if (rectangle.Intersects(rect) && (nPC.noTileCollide || Player.CanHit(nPC) && nPC.type != NPCType<Hydra>()))
+                            if (rectangle.Intersects(rect) && (nPC.noTileCollide || Player.CanHit(nPC) && nPC.type != ModContent.NPCType<Hydra>()))
                             {
                                 float num = customDashRam * Player.GetDamage(DamageClass.Melee).Multiplicative;
                                 float num2 = 9f;
@@ -296,7 +296,7 @@ namespace QwertyMod.Common
                 }
                 Color drawColor = new Color(c, c, c, c);
                 float rotation = drawPlayer.GetModPlayer<CommonStats>().genericCounter * MathF.PI / 60f;
-                Texture2D texture = Request<Texture2D>("QwertyMod/Common/SignalRune").Value;
+                Texture2D texture = ModContent.Request<Texture2D>("QwertyMod/Common/SignalRune").Value;
                 DrawData d = new DrawData(texture, drawInfo.Position + drawPlayer.Size * 0.5f - Main.screenPosition, null, drawColor, rotation, texture.Size() * 0.5f, 1f, drawInfo.playerEffect, 0);
                 drawInfo.DrawDataCache.Add(d);
 

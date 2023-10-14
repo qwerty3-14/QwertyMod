@@ -1,8 +1,9 @@
-﻿using QwertyMod.Content.Items.Weapon.Morphs;
+﻿using Microsoft.Xna.Framework.Graphics;
+using QwertyMod.Common.PlayerLayers;
+using QwertyMod.Content.Items.Weapon.Morphs;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ID.ArmorIDs;
 using Terraria.GameContent.Creative;
 
 namespace QwertyMod.Content.Items.Equipment.Armor.Bionic
@@ -12,12 +13,9 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Bionic
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Bionic Eye");
-            //Tooltip.SetDefault("30% reduced cooldown on morphs\n10% increased critical strike chance\nGrants enhanced vision");
-            Head.Sets.DrawFullHair[Item.headSlot] = true;
+            ArmorIDs.Head.Sets.DrawFullHair[Item.headSlot] = true;
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
-
         public override void SetDefaults()
         {
             Item.rare = ItemRarityID.Pink;
@@ -25,8 +23,11 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Bionic
             Item.defense = 7;
             Item.width = 16;
             Item.height = 18;
+            if (!Main.dedServ)
+            {
+                Item.GetGlobalItem<ItemUseGlow>().glowTexture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Bionic/BionicEye_Glow").Value;
+            }
         }
-
         public override void UpdateEquip(Player player)
         {
             player.GetModPlayer<ShapeShifterPlayer>().coolDownDuration *= 0.7f;

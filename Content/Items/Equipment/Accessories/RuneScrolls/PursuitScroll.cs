@@ -2,11 +2,9 @@
 using QwertyMod.Content.Dusts;
 using System;
 using Terraria;
-using Terraria.DataStructures;
+using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
-using Terraria.GameContent.Creative;
 
 namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
 {
@@ -14,10 +12,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Pursuit Scroll");
-            //Tooltip.SetDefault("Minions ocasionaly shoot pursuit runes");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
-
         }
 
         public override void SetDefaults()
@@ -26,10 +21,8 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
             Item.rare = ItemRarityID.Cyan;
             Item.DamageType = DamageClass.Summon;
             Item.damage = 40;
-
             Item.width = 34;
             Item.height = 34;
-
             Item.accessory = true;
         }
 
@@ -48,7 +41,6 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
         public override void SetDefaults()
         {
             Projectile.aiStyle = -1;
-
             Projectile.width = 20;
             Projectile.height = 10;
             Projectile.friendly = true;
@@ -92,7 +84,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
         {
             for (int d = 0; d <= 100; d++)
             {
-                Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<PursuitRuneDeath>());
+                Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<PursuitRuneDeath>());
             }
         }
     }
@@ -114,7 +106,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
                 {
                     if (QwertyMethods.ClosestNPC(ref target, 1000, projectile.Center, false, player.MinionAttackTargetNPC))
                     {
-                        Projectile.NewProjectile(projectile.GetSource_FromThis(), projectile.Center, (target.Center - projectile.Center).SafeNormalize(Vector2.UnitY) * runeSpeed, ProjectileType<PursuitRuneFreindly>(), (int)(40f * player.GetDamage(DamageClass.Summon).Multiplicative), projectile.knockBack, projectile.owner);
+                        Projectile.NewProjectile(projectile.GetSource_FromThis(), projectile.Center, (target.Center - projectile.Center).SafeNormalize(Vector2.UnitY) * runeSpeed, ModContent.ProjectileType<PursuitRuneFreindly>(), (int)(40f * player.GetDamage(DamageClass.Summon).Multiplicative), projectile.knockBack, projectile.owner);
                         runeCounter = 0;
                     }
 

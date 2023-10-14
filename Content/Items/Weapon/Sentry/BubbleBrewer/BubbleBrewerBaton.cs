@@ -7,7 +7,7 @@ using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Sentry.BubbleBrewer
 {
@@ -15,8 +15,6 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.BubbleBrewer
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Bubble Brewer Baton");
-            //Tooltip.SetDefault("Summons a bubble brewer\nWorks well as a last line of defense");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
@@ -34,7 +32,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.BubbleBrewer
             Item.shootSpeed = 0;
             Item.useTime = 25;
             Item.useAnimation = 25;
-            Item.shoot = ProjectileType<BubbleBrewer>();
+            Item.shoot = ModContent.ProjectileType<BubbleBrewer>();
             Item.noUseGraphic = false;
             Item.noMelee = true;
             Item.UseSound = SoundID.Item1;
@@ -113,7 +111,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.BubbleBrewer
                         SoundEngine.PlaySound(SoundID.ForceRoarPitched, Projectile.Center);
                     }
                     Projectile.frameCounter = 30;
-                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position + bubbleShooterLocation, (target.Center - (Projectile.position + bubbleShooterLocation)).SafeNormalize(Vector2.UnitY) * 12f, ProjectileType<BrewerBubble>(), Projectile.damage, Projectile.knockBack, Projectile.owner, -10f);
+                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position + bubbleShooterLocation, (target.Center - (Projectile.position + bubbleShooterLocation)).SafeNormalize(Vector2.UnitY) * 12f, ModContent.ProjectileType<BrewerBubble>(), Projectile.damage, Projectile.knockBack, Projectile.owner, -10f);
                     waterLevel--;
                 }
             }
@@ -129,7 +127,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.BubbleBrewer
         }
         public override void PostDraw(Color lightColor)
         {
-            Texture2D texture = Request<Texture2D>("QwertyMod/Content/Items/Weapon/Sentry/BubbleBrewer/BubbleBrewerGauge").Value;
+            Texture2D texture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Sentry/BubbleBrewer/BubbleBrewerGauge").Value;
             for (int i = 0; i < waterLevel; i++)
             {
                 Main.EntitySpriteDraw(texture, Projectile.position + new Vector2(24, 36) - Vector2.UnitY * i - Main.screenPosition, null, lightColor, 0, new Vector2(0, 1), 1, 0, 0);

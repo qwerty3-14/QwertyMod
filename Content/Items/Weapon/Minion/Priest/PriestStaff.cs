@@ -4,7 +4,7 @@ using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Minion.Priest
 {
@@ -12,8 +12,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.Priest
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Priest Staff");
-            //Tooltip.SetDefault("Do I even need to explain how higher beings are involved with this?");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
@@ -32,7 +30,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.Priest
             Item.value = 25000;
             Item.rare = ItemRarityID.Orange;
             Item.UseSound = SoundID.Item44;
-            Item.shoot = ProjectileType<PriestMinion>();
+            Item.shoot = ModContent.ProjectileType<PriestMinion>();
             Item.DamageType = DamageClass.Summon;
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)

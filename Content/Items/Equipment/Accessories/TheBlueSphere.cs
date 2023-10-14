@@ -4,7 +4,7 @@ using Terraria.GameContent.Creative;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Equipment.Accessories
 {
@@ -12,8 +12,6 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("The Blue Sphere");
-            //Tooltip.SetDefault("Magic attacks pierce 2 extra enemies\n Projectiles that normally don't pierce will use local immunity\n10% reduced magic damage\nExtra pierces will do reduced damage when hitting the same target multiple times");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -89,7 +87,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
         {
             if (npc.type == NPCID.DarkCaster)
             {
-                npcLoot.Add(ItemDropRule.Common(ItemType<TheBlueSphere>(), 50, 1, 1));
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<TheBlueSphere>(), 50, 1, 1));
             }
             base.ModifyNPCLoot(npc, npcLoot);
         }

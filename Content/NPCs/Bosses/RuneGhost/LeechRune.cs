@@ -3,9 +3,9 @@ using QwertyMod.Common.RuneBuilder;
 using QwertyMod.Content.Dusts;
 using System;
 using Terraria;
-using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
 using Terraria.ID;
+using Terraria.ModLoader;
+
 
 namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
 {
@@ -56,7 +56,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
         {
             for (int d = 0; d <= 40; d++)
             {
-                Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<LeechRuneDeath>());
+                Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<LeechRuneDeath>());
             }
         }
         public NPC runeGhost;
@@ -65,7 +65,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
         {
             foreach (NPC npcSearch in Main.npc)
             {
-                if (npcSearch.type == NPCType<RuneGhost>())
+                if (npcSearch.type == ModContent.NPCType<RuneGhost>())
                 {
                     runeGhost = npcSearch;
                     break;

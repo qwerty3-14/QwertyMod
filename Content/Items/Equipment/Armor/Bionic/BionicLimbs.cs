@@ -1,8 +1,9 @@
-﻿using QwertyMod.Content.Items.Weapon.Morphs;
+﻿using Microsoft.Xna.Framework.Graphics;
+using QwertyMod.Common.PlayerLayers;
+using QwertyMod.Content.Items.Weapon.Morphs;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ID.ArmorIDs;
 using Terraria.GameContent.Creative;
 
 namespace QwertyMod.Content.Items.Equipment.Armor.Bionic
@@ -12,7 +13,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Bionic
     {
         public override void SetStaticDefaults()
         {
-            Legs.Sets.HidesBottomSkin[Item.legSlot] = true;
+            ArmorIDs.Legs.Sets.HidesBottomSkin[Item.legSlot] = true;
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -23,6 +24,10 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Bionic
             Item.defense = 7;
             Item.width = 22;
             Item.height = 18;
+            if (!Main.dedServ)
+            {
+                Item.GetGlobalItem<ItemUseGlow>().glowTexture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Bionic/BionicLimbs_Glow").Value;
+            }
         }
 
         public override void UpdateEquip(Player player)

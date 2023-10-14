@@ -1,15 +1,15 @@
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using QwertyMod.Common.PlayerLayers;
 using QwertyMod.Content.Dusts;
+using QwertyMod.Content.Items.MiscMaterials;
 using System;
 using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
+using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.Audio;
-using QwertyMod.Common.PlayerLayers;
-using Microsoft.Xna.Framework.Graphics;
-using QwertyMod.Content.Items.MiscMaterials;
-using Terraria.GameContent.Creative;
 
 namespace QwertyMod.Content.Items.Weapon.Magic.Catalyst
 {
@@ -17,8 +17,6 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Catalyst
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Invader Catalyst");
-            //Tooltip.SetDefault("Melee attacks will cause magic explosions for a short time");
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
         public override void SetDefaults()
@@ -100,22 +98,11 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Catalyst
                 ProcessCatalystEffect(target, Player.GetSource_ItemUse(Player.HeldItem));
             }
         }
-        /*
-        public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            if(proj.CountsAsClass(DamageClass.Melee))
-            {
-                ProcessCatalystEffect(target, Projectile.InheritSource(proj));
-            }
-        }
-        */
     }
     public class CatalystBuff : ModBuff
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Catalyst");
-            //Description.SetDefault("Why are you reading this GO KILL");
             Main.debuff[Type] = false;
             Main.pvpBuff[Type] = false;
             Main.buffNoSave[Type] = true;
@@ -123,11 +110,6 @@ namespace QwertyMod.Content.Items.Weapon.Magic.Catalyst
     }
     public class CatalystExplosion : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("explosion");
-        }
-
         public override void SetDefaults()
         {
             Projectile.aiStyle = 1;

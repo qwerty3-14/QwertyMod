@@ -1,16 +1,14 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Terraria;
-using Terraria.GameContent.Creative;
-using Terraria.DataStructures;
-using Terraria.GameContent;
-using Terraria.ID;
-using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
-using System;
+using QwertyMod.Common.PlayerLayers;
 using QwertyMod.Content.Dusts;
 using QwertyMod.Content.Items.MiscMaterials;
-using QwertyMod.Common.PlayerLayers;
+using System;
+using Terraria;
+using Terraria.GameContent;
+using Terraria.GameContent.Creative;
+using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace QwertyMod.Content.Items.Weapon.Whip.Fork
 {
@@ -18,8 +16,6 @@ namespace QwertyMod.Content.Items.Weapon.Whip.Fork
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Invader Fork");
-            //Tooltip.SetDefault("Your minions will spawn missiles on hit that do deal 50% of the minion's damage.");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
         public override void SetDefaults()
@@ -48,7 +44,6 @@ namespace QwertyMod.Content.Items.Weapon.Whip.Fork
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Invader Fork");
             ProjectileID.Sets.IsAWhip[Type] = true;
         }
         public override void WhipDefaults()
@@ -58,24 +53,18 @@ namespace QwertyMod.Content.Items.Weapon.Whip.Fork
 
             originalColor = new Color(98, 119, 140);
             fallOff = 0.25f;
-            tag = BuffType<ForkTag>();
+            tag = ModContent.BuffType<ForkTag>();
         }
     }
     public class ForkTag : ModBuff
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Missile Procing");
-            //Description.SetDefault("Minions will cause missiles to fire.");
             Main.debuff[Type] = true;
         }
     }
     public class TagMissile : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("Tag Missile");
-        }
         public override void SetDefaults()
         {
             Projectile.width = Projectile.height = 6;
@@ -155,7 +144,7 @@ namespace QwertyMod.Content.Items.Weapon.Whip.Fork
             Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition,
                         new Rectangle(0, Projectile.frame * texture.Height, texture.Width, texture.Height), lightColor, Projectile.rotation,
                         Projectile.Size * 0.5f, 1f, SpriteEffects.None, 0);
-            Main.EntitySpriteDraw(Request<Texture2D>("QwertyMod/Content/NPCs/Invader/InvaderMicroMissile_Glow").Value, Projectile.Center - Main.screenPosition,
+            Main.EntitySpriteDraw(ModContent.Request<Texture2D>("QwertyMod/Content/NPCs/Invader/InvaderMicroMissile_Glow").Value, Projectile.Center - Main.screenPosition,
                         new Rectangle(0, Projectile.frame * texture.Height, texture.Width, texture.Height), Color.White, Projectile.rotation,
                         Projectile.Size * 0.5f, 1f, SpriteEffects.None, 0);
             return false;

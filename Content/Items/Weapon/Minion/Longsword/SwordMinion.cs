@@ -14,7 +14,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.Longsword
 
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Longsword");
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             Main.projFrames[Projectile.type] = 1;
             ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;

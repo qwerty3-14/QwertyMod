@@ -6,13 +6,12 @@ using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
-using Terraria.DataStructures;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.NPCs.DinoMilitia
 {
@@ -20,7 +19,6 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Anti Air");
             Main.npcFrameCount[NPC.type] = 5;
         }
 
@@ -47,7 +45,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
             }
             NPC.lifeMax = 1800;
             Banner = NPC.type;
-            BannerItem = ItemType<AntiAirBanner>();
+            BannerItem = ModContent.ItemType<AntiAirBanner>();
         }
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
         {
@@ -125,7 +123,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
                     {
                         if (Main.netMode != NetmodeID.MultiplayerClient)
                         {
-                            Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center.X - (17f * NPC.direction), NPC.Center.Y - 40f, 0f, -10f, ProjectileType<AntiAirRocket>(), damage, 3f, Main.myPlayer);
+                            Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center.X - (17f * NPC.direction), NPC.Center.Y - 40f, 0f, -10f, ModContent.ProjectileType<AntiAirRocket>(), damage, 3f, Main.myPlayer);
                         }
                         //Projectile.NewProjectile(NPC.Center.X-(17f*NPC.direction), NPC.Center.Y-40f, 0f, 0f, 102, damage, 3f, Main.myPlayer);
                         secondShot = false;
@@ -135,7 +133,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
                     {
                         if (Main.netMode != NetmodeID.MultiplayerClient)
                         {
-                            Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center.X + (23f * NPC.direction), NPC.Center.Y - 40f, 0f, -10f, ProjectileType<AntiAirRocket>(), damage, 3f, Main.myPlayer);
+                            Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center.X + (23f * NPC.direction), NPC.Center.Y - 40f, 0f, -10f, ModContent.ProjectileType<AntiAirRocket>(), damage, 3f, Main.myPlayer);
                         }
                         //Projectile.NewProjectile(NPC.Center.X+(23f*NPC.direction), NPC.Center.Y-40f, 0f, 0f, 102, damage, 3f, Main.myPlayer);
                         secondShot = true;
@@ -161,8 +159,8 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
         }
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
-            npcLoot.Add(ItemDropRule.Common(ItemType<DinoTooth>(), 100, 1, 1));
-            npcLoot.Add(ItemDropRule.Common(ItemType<AntiAirWrench>(), 6, 1, 1));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<DinoTooth>(), 100, 1, 1));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<AntiAirWrench>(), 6, 1, 1));
         }
 
         public int moveFrame = 0;
@@ -220,11 +218,6 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
 
     public class AntiAirRocket : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("Anti Air Rocket");
-        }
-
         public override void SetDefaults()
         {
             Projectile.aiStyle = 1;

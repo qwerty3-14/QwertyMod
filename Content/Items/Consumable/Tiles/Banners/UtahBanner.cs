@@ -1,15 +1,14 @@
 using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
 using Terraria.ID;
+
 namespace QwertyMod.Content.Items.Consumable.Tiles.Banners
 {
     public class UtahBanner : ModItem
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Utah Banner");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -26,7 +25,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Banners
             Item.consumable = true;
             Item.rare = ItemRarityID.Blue;
             Item.value = Item.buyPrice(0, 0, 10, 0);
-            Item.createTile = TileType<BannersT>();
+            Item.createTile = ModContent.TileType<BannersT>();
             Item.placeStyle = 7;
         }
     }

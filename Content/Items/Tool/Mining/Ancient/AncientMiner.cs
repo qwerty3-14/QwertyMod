@@ -4,7 +4,7 @@ using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Tool.Mining.Ancient
 {
@@ -12,8 +12,6 @@ namespace QwertyMod.Content.Items.Tool.Mining.Ancient
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Ancient Miner");
-            //Tooltip.SetDefault("Mines a 3x3 area");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -22,7 +20,6 @@ namespace QwertyMod.Content.Items.Tool.Mining.Ancient
         {
             Item.damage = 29;
             Item.DamageType = DamageClass.Melee;
-
             Item.useTime = 40;
             Item.useAnimation = 30;
             Item.useStyle = ItemUseStyleID.Swing;
@@ -39,7 +36,7 @@ namespace QwertyMod.Content.Items.Tool.Mining.Ancient
             Item.GetGlobalItem<AoePick>().miningRadius = 1;
             if (!Main.dedServ)
             {
-                Item.GetGlobalItem<ItemUseGlow>().glowTexture = Request<Texture2D>("QwertyMod/Content/Items/Tool/Mining/Ancient/AncientMiner_Glow").Value;
+                Item.GetGlobalItem<ItemUseGlow>().glowTexture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Tool/Mining/Ancient/AncientMiner_Glow").Value;
             }
         }
 

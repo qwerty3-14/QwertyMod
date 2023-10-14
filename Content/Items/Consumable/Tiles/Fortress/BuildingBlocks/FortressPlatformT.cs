@@ -1,10 +1,9 @@
-using Microsoft.Xna.Framework;
 using QwertyMod.Content.Dusts;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.BuildingBlocks
 {
@@ -32,8 +31,8 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.BuildingBlocks
             TileObjectData.addTile(Type);
             AddToArray(ref TileID.Sets.RoomNeeds.CountsAsDoor);
             //AddMapEntry(new Color(162, 184, 185));
-            DustType = DustType<FortressDust>();
-            //ItemDrop = ItemType<FortressPlatform>();
+            DustType = ModContent.DustType<FortressDust>();
+            //ItemDrop = ModContent.ItemType<FortressPlatform>();
             //disableSmartCursor = true;
             AdjTiles = new int[] { TileID.Platforms };
         }

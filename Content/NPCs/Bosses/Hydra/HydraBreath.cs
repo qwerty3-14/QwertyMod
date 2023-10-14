@@ -6,7 +6,7 @@ using Terraria;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.NPCs.Bosses.Hydra
 {
@@ -14,7 +14,6 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Hydra Breath");
             Main.projFrames[Projectile.type] = 1;
         }
 
@@ -41,8 +40,8 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
 
             pseudoProjectileVelocities[0] = Projectile.velocity + QwertyMethods.PolarVector(MathF.Cos(trigCounter) * amplitude, Projectile.rotation);
             pseudoProjectileVelocities[1] = Projectile.velocity + QwertyMethods.PolarVector(MathF.Cos(trigCounter + MathF.PI) * amplitude, Projectile.rotation);
-            Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(MathF.Sin(trigCounter) * amplitude, Projectile.rotation), DustType<HydraBreathGlow>(), Vector2.Zero);
-            Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(MathF.Sin(trigCounter) * amplitude, Projectile.rotation - MathF.PI), DustType<HydraBreathGlow>(), Vector2.Zero);
+            Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(MathF.Sin(trigCounter) * amplitude, Projectile.rotation), ModContent.DustType<HydraBreathGlow>(), Vector2.Zero);
+            Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(MathF.Sin(trigCounter) * amplitude, Projectile.rotation - MathF.PI), ModContent.DustType<HydraBreathGlow>(), Vector2.Zero);
         }
 
         public override bool PreDraw(ref Color lightColor)

@@ -1,9 +1,6 @@
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
+using QwertyMod.Content.Items.Weapon.Morphs;
 using Terraria;
 using Terraria.ModLoader;
-using QwertyMod.Content.Items.Weapon.Morphs;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 

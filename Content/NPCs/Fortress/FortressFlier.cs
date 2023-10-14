@@ -6,13 +6,12 @@ using QwertyMod.Content.Items.MiscMaterials;
 using System;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.NPCs.Fortress
 {
@@ -20,7 +19,6 @@ namespace QwertyMod.Content.NPCs.Fortress
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Fortress Harpy");
             Main.npcFrameCount[NPC.type] = 4;//number of frames, frames will be cut from your nps's png evenly vertically
         }
 
@@ -43,7 +41,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             NPC.knockBackResist = 0f; //knockback reducion 0 means it takes no knockback
             NPC.noGravity = true; // recommended for flying enemies
             Banner = NPC.type;
-            BannerItem = ItemType<FortressFlierBanner>();
+            BannerItem = ModContent.ItemType<FortressFlierBanner>();
         }
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
         {
@@ -56,7 +54,7 @@ namespace QwertyMod.Content.NPCs.Fortress
         }
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
-            if (spawnInfo.Player.InModBiome(GetInstance<FortressBiome>()) && Main.hardMode)
+            if (spawnInfo.Player.InModBiome(ModContent.GetInstance<FortressBiome>()) && Main.hardMode)
             {
                 return 80f;
             }
@@ -67,7 +65,7 @@ namespace QwertyMod.Content.NPCs.Fortress
         }
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
-            npcLoot.Add(ItemDropRule.Common(ItemType<FortressHarpyBeak>(), 1));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<FortressHarpyBeak>(), 1));
         }
 
         //here I set variables that the AI uses
@@ -119,7 +117,7 @@ namespace QwertyMod.Content.NPCs.Fortress
                             float shootDirection = (player.Center - NPC.Center).ToRotation(); // find the direction the player is in
                             for (int p = -1; p < 2; p++) //this will repeat 3 times for 3 projectiles
                             {
-                                Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, QwertyMethods.PolarVector(6, shootDirection + (MathF.PI / 8 * p)), ProjectileType<FortressHarpyProjectile>(), damage, 0, Main.myPlayer); // shoots a projectile
+                                Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, QwertyMethods.PolarVector(6, shootDirection + (MathF.PI / 8 * p)), ModContent.ProjectileType<FortressHarpyProjectile>(), damage, 0, Main.myPlayer); // shoots a projectile
                             }
                             attackTimer = 0; // resets attackTimer needer for the once per second effect
                         }
@@ -201,10 +199,6 @@ namespace QwertyMod.Content.NPCs.Fortress
 
     public class FortressHarpyProjectile : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("Fortress Harpy Projectile");
-        }
 
         public override void SetDefaults()
         {

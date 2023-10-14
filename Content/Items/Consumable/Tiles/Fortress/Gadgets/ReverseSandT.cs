@@ -3,7 +3,6 @@ using QwertyMod.Content.Dusts;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
 {
@@ -16,13 +15,13 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
             Main.tileSolid[Type] = true;
             Main.tileBlockLight[Type] = true;
 
-            DustType = DustType<DnasDust>();
+            DustType = ModContent.DustType<DnasDust>();
 
             //ModTranslation name = CreateMapEntryName();
             //name.SetDefault("Dnas");
             AddMapEntry(Color.Blue);
 
-            //ItemDrop = ItemType<ReverseSand>();
+            //ItemDrop = ModContent.ItemType<ReverseSand>();
         }
 
         public override void RandomUpdate(int i, int j)
@@ -30,7 +29,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
             if (!Main.tile[i, j - 1].HasTile)
             {
                 WorldGen.KillTile(i, j, noItem: true);
-                Projectile.NewProjectile(new EntitySource_TileBreak(i, j), new Vector2(i, j) * 16 + new Vector2(8, 8), Vector2.Zero, ProjectileType<ReverseSandBall>(), 50, 0f, Main.myPlayer);
+                Projectile.NewProjectile(new EntitySource_TileBreak(i, j), new Vector2(i, j) * 16 + new Vector2(8, 8), Vector2.Zero, ModContent.ProjectileType<ReverseSandBall>(), 50, 0f, Main.myPlayer);
             }
         }
 
@@ -39,7 +38,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
             if (!Main.tile[i, j - 1].HasTile)
             {
                 WorldGen.KillTile(i, j, noItem: true);
-                Projectile.NewProjectile(new EntitySource_TileBreak(i, j), new Vector2(i, j) * 16 + new Vector2(8, 8), Vector2.Zero, ProjectileType<ReverseSandBall>(), 50, 0f, Main.myPlayer);
+                Projectile.NewProjectile(new EntitySource_TileBreak(i, j), new Vector2(i, j) * 16 + new Vector2(8, 8), Vector2.Zero, ModContent.ProjectileType<ReverseSandBall>(), 50, 0f, Main.myPlayer);
             }
         }
 
@@ -49,7 +48,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
             if (!Main.tile[i, j - 1].HasTile)
             {
                 WorldGen.KillTile(i, j, noItem: true);
-                Projectile.NewProjectile(new EntitySource_TileBreak(i, j), entityCoord, Vector2.Zero, ProjectileType<ReverseSandBall>(), 50, 0f, Main.myPlayer);
+                Projectile.NewProjectile(new EntitySource_TileBreak(i, j), entityCoord, Vector2.Zero, ModContent.ProjectileType<ReverseSandBall>(), 50, 0f, Main.myPlayer);
             }
 
             //if(Main.LocalPlayer.Top.Y- entityCoord.Y <16 && Main.LocalPlayer.Top.Y - entityCoord.Y >0 && Math.Abs(Main.LocalPlayer.Top.X-entityCoord.X)<16)
@@ -81,7 +80,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
             Projectile.height = 14;
             if (Main.rand.NextBool(2))
             {
-                int num129 = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustType<DnasDust>(), 0f, Projectile.velocity.Y / 2f, 0, default(Color), 1f);
+                int num129 = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, ModContent.DustType<DnasDust>(), 0f, Projectile.velocity.Y / 2f, 0, default(Color), 1f);
                 Dust dust = Main.dust[num129];
                 dust.velocity.X = dust.velocity.X * 0.4f;
             }
@@ -107,7 +106,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
             int tileToPlace = 0;
 
 
-            tileToPlace = TileType<ReverseSandT>();
+            tileToPlace = ModContent.TileType<ReverseSandT>();
             if (!Main.tile[i, j].HasTile && tileToPlace >= 0)
             {
                 WorldGen.PlaceTile(i, j, tileToPlace, false, true, -1, 0);
@@ -124,8 +123,8 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
             int yUpper = (int)(Player.Top.Y) / 16 - 1;
             if (xPos < Main.tile.Width && yPos < Main.tile.Height && yUpper < Main.tile.Height && xPos > 0 && yPos > 0 && yUpper > 0) //hopefully this prevents index outside bounds of array error
             {
-                if (Main.tile[xPos, yUpper].TileType == TileType<ReverseSandT>() || Main.tile[xPos, yPos].TileType == TileType<ReverseSandT>() ||
-                Main.tile[xPos, yUpper].TileType == TileType<DnasBrickT>() || Main.tile[xPos, yPos].TileType == TileType<DnasBrickT>())
+                if (Main.tile[xPos, yUpper].TileType == ModContent.TileType<ReverseSandT>() || Main.tile[xPos, yPos].TileType == ModContent.TileType<ReverseSandT>() ||
+                Main.tile[xPos, yUpper].TileType == ModContent.TileType<DnasBrickT>() || Main.tile[xPos, yPos].TileType == ModContent.TileType<DnasBrickT>())
                 {
                     //player.gravDir = -1f;
                     //player.gravControl2 = true;

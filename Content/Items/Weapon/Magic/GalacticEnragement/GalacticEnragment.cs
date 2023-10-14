@@ -1,15 +1,12 @@
+
 using Microsoft.Xna.Framework;
-using QwertyMod.Content.Buffs;
-using QwertyMod.Content.Dusts;
-using System;
+using QwertyMod.Content.Items.MiscMaterials;
+using QwertyMod.Content.Items.Weapon.Magic.RestlessSun;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
-using QwertyMod.Content.Items.Weapon.Magic.RestlessSun;
-using QwertyMod.Content.Items.MiscMaterials;
 
 
 namespace QwertyMod.Content.Items.Weapon.Magic.GalacticEnragement
@@ -35,7 +32,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.GalacticEnragement
             Item.useTime = 5;
             Item.useAnimation = 5;
             Item.mana = ModLoader.HasMod("TRAEProject") ? 7 : 5;
-            Item.shoot = ProjectileType<CaeliteMagicProjectile>();
+            Item.shoot = ModContent.ProjectileType<CaeliteMagicProjectile>();
             Item.noUseGraphic = false;
             Item.noMelee = true;
             Item.UseSound = SoundID.Item21;
@@ -62,8 +59,8 @@ namespace QwertyMod.Content.Items.Weapon.Magic.GalacticEnragement
 
         public override void AddRecipes()
         {
-            CreateRecipe().AddIngredient(ItemType<CaeliteMagicWeapon>())
-            .AddIngredient(ItemType<SoulOfHeight>(), 10)
+            CreateRecipe().AddIngredient(ModContent.ItemType<CaeliteMagicWeapon>())
+            .AddIngredient(ModContent.ItemType<SoulOfHeight>(), 10)
                 .AddTile(TileID.MythrilAnvil)
                 .Register();
         }

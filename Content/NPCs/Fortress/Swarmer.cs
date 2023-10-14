@@ -5,11 +5,10 @@ using QwertyMod.Content.Items.Consumable.Tiles.Banners;
 using System;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.GameContent.Bestiary;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.NPCs.Fortress
 {
@@ -17,7 +16,6 @@ namespace QwertyMod.Content.NPCs.Fortress
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Fortress Swarmer");
             Main.npcFrameCount[NPC.type] = 2;//number of frames, frames will be cut from your nps's png evenly vertically
         }
 
@@ -82,7 +80,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             freindCount = 0;
             for (int n = 0; n < 200; n++)
             {
-                if (n != NPC.whoAmI && Main.npc[n].active && Main.npc[n].type == NPCType<Swarmer>() && (Main.npc[n].Center - NPC.Center).Length() < 200)
+                if (n != NPC.whoAmI && Main.npc[n].active && Main.npc[n].type == ModContent.NPCType<Swarmer>() && (Main.npc[n].Center - NPC.Center).Length() < 200)
                 {
                     freindCount++;
                 }
@@ -100,7 +98,7 @@ namespace QwertyMod.Content.NPCs.Fortress
                     totalCount = 0;
                     for (int n = 0; n < 200; n++)
                     {
-                        if (n != NPC.whoAmI && Main.npc[n].active && Main.npc[n].type == NPCType<Swarmer>())
+                        if (n != NPC.whoAmI && Main.npc[n].active && Main.npc[n].type == ModContent.NPCType<Swarmer>())
                         {
                             totalCount++;
                         }
@@ -109,7 +107,7 @@ namespace QwertyMod.Content.NPCs.Fortress
                     {
                         for (int n = 0; n < 200; n++)
                         {
-                            if (n != NPC.whoAmI && Main.npc[n].active && Main.npc[n].type == NPCType<Swarmer>() && (Main.npc[n].Center - NPC.Center).Length() > 150)
+                            if (n != NPC.whoAmI && Main.npc[n].active && Main.npc[n].type == ModContent.NPCType<Swarmer>() && (Main.npc[n].Center - NPC.Center).Length() > 150)
                             {
                                 totalCount++;
                                 NPC.velocity += QwertyMethods.PolarVector(4, (Main.npc[n].Center - NPC.Center).ToRotation());
@@ -126,7 +124,7 @@ namespace QwertyMod.Content.NPCs.Fortress
 
             for (int n = 0; n < 200; n++)
             {
-                if (n != NPC.whoAmI && Main.npc[n].active && Main.npc[n].type == NPCType<Swarmer>() && (Main.npc[n].Center - NPC.Center).Length() < maxFriendRepelDistance)
+                if (n != NPC.whoAmI && Main.npc[n].active && Main.npc[n].type == ModContent.NPCType<Swarmer>() && (Main.npc[n].Center - NPC.Center).Length() < maxFriendRepelDistance)
                 {
                     NPC.velocity += QwertyMethods.PolarVector(-4 * (1 - (Main.npc[n].Center - NPC.Center).Length() / maxFriendRepelDistance), (Main.npc[n].Center - NPC.Center).ToRotation());
                 }
@@ -195,7 +193,6 @@ namespace QwertyMod.Content.NPCs.Fortress
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Swarm");
             Main.npcFrameCount[NPC.type] = 2;//number of frames, frames will be cut from your nps's png evenly vertically
         }
 
@@ -216,7 +213,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             NPC.noTileCollide = true;
             NPC.timeLeft = 2;
             Banner = NPC.type;
-            BannerItem = ItemType<SwarmerBanner>();
+            BannerItem = ModContent.ItemType<SwarmerBanner>();
         }
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
         {
@@ -224,7 +221,7 @@ namespace QwertyMod.Content.NPCs.Fortress
         }
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
-            if (spawnInfo.Player.InModBiome(GetInstance<FortressBiome>()) && spawnInfo.Player.HeldItem.fishingPole <= 0)
+            if (spawnInfo.Player.InModBiome(ModContent.GetInstance<FortressBiome>()) && spawnInfo.Player.HeldItem.fishingPole <= 0)
             {
                 return 5f;
             }
@@ -244,7 +241,7 @@ namespace QwertyMod.Content.NPCs.Fortress
                 }
                 for (int s = 0; s < swarmSize; s++)
                 {
-                    NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Center.X, (int)NPC.Center.Y, NPCType<Swarmer>());
+                    NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Center.X, (int)NPC.Center.Y, ModContent.NPCType<Swarmer>());
                 }
             }
             NPC.active = false;

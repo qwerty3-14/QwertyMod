@@ -5,15 +5,13 @@ using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.RuneSniper
 {
     public class RunicSniper : ModItem
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Runic Sniper");
-            //Tooltip.SetDefault("x2 damage to enemies far away from you" + "\nRight click to zoom");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -42,8 +40,8 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.RuneSniper
 
         public override void AddRecipes()
         {
-            CreateRecipe(1).AddIngredient(ItemType<CraftingRune>(), 15)
-                .AddIngredient(ItemType<AncientSniper>())
+            CreateRecipe(1).AddIngredient(ModContent.ItemType<CraftingRune>(), 15)
+                .AddIngredient(ModContent.ItemType<AncientSniper>())
                 .AddTile(TileID.Anvils)
                 .Register();
         }
@@ -62,7 +60,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.RuneSniper
     {
         public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
         {
-            if (proj.CountsAsClass(DamageClass.Ranged) && Player.inventory[Player.selectedItem].type == ItemType<RunicSniper>())
+            if (proj.CountsAsClass(DamageClass.Ranged) && Player.inventory[Player.selectedItem].type == ModContent.ItemType<RunicSniper>())
             {
                 if ((target.Center - Player.Center).Length() > 700)
                     modifiers.FinalDamage *= 2;

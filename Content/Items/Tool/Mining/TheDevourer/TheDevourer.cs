@@ -8,8 +8,6 @@ namespace QwertyMod.Content.Items.Tool.Mining.TheDevourer
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("The Devourer");
-            //Tooltip.SetDefault("Mines a 9x9 area!");
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
         public override void SetDefaults()

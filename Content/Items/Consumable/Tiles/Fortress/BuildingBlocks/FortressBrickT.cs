@@ -3,7 +3,6 @@ using QwertyMod.Content.Dusts;
 using Terraria;
 using Terraria.ModLoader;
 
-using static Terraria.ModLoader.ModContent;
 namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.BuildingBlocks
 {
     public class FortressBrickT : ModTile
@@ -17,12 +16,12 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.BuildingBlocks
             Main.tileBrick[Type] = true;
             Main.tileBlendAll[Type] = false;
 
-            DustType = DustType<FortressDust>();
+            DustType = ModContent.DustType<FortressDust>();
             HitSound = QwertyMod.FortressBlocks;
             MinPick = 50;
             AddMapEntry(new Color(162, 184, 185));
             MineResist = 1;
-            //ItemDrop = ItemType<FortressBrick>();
+            //ItemDrop = ModContent.ItemType<FortressBrick>();
         }
 
         public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)

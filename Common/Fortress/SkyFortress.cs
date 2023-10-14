@@ -1,20 +1,18 @@
+using Microsoft.Xna.Framework;
 using QwertyMod.Content.Items.Consumable.Tiles.Fortress.BuildingBlocks;
 using QwertyMod.Content.NPCs.Bosses.FortressBoss;
 using QwertyMod.Content.NPCs.Bosses.InvaderBattleship;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Terraria;
 using Terraria.GameContent.Generation;
-using Terraria.IO;
-using Terraria.ModLoader;
-using Terraria.WorldBuilding;
-using static Terraria.ModLoader.ModContent;
-using Terraria.ModLoader.IO;
-using System.IO;
-using Microsoft.Xna.Framework;
-using Terraria.Net;
-using Terraria.Localization;
 using Terraria.ID;
+using Terraria.IO;
+using Terraria.Localization;
+using Terraria.ModLoader;
+using Terraria.ModLoader.IO;
+using Terraria.WorldBuilding;
 
 namespace QwertyMod.Common.Fortress
 {
@@ -35,10 +33,10 @@ namespace QwertyMod.Common.Fortress
         {
             int defaultSpawnRate = 600;
             int defaultmaxSpawn = 5;
-            if (player.InModBiome(GetInstance<FortressBiome>()))
+            if (player.InModBiome(ModContent.GetInstance<FortressBiome>()))
             {
 
-                if (NPC.AnyNPCs(NPCType<FortressBoss>()) || NPC.AnyNPCs(NPCType<InvaderBattleship>()) || BattleshipSpawnIn.spawnTimer > -1)
+                if (NPC.AnyNPCs(ModContent.NPCType<FortressBoss>()) || NPC.AnyNPCs(ModContent.NPCType<InvaderBattleship>()) || BattleshipSpawnIn.spawnTimer > -1)
                 {
                     spawnRate = 0;
                     maxSpawns = 0;
@@ -90,7 +88,7 @@ namespace QwertyMod.Common.Fortress
 
         public override void EditSpawnPool(IDictionary<int, float> pool, NPCSpawnInfo spawnInfo)
         {
-            if (spawnInfo.Player.InModBiome(GetInstance<FortressBiome>()))
+            if (spawnInfo.Player.InModBiome(ModContent.GetInstance<FortressBiome>()))
             {
                 pool[0] = 0f;
             }
@@ -157,7 +155,7 @@ namespace QwertyMod.Common.Fortress
                 beingInvaded = true;
                 initalInvasion = true;
                 
-                string key = "The sky fortress is being invaded!";
+                string key = Language.GetTextValue(Mod.GetLocalizationKey("FortressInvasion"));
                 Color messageColor = Color.Green;
                 if (Main.netMode == NetmodeID.Server) // Server
                 {
@@ -172,11 +170,11 @@ namespace QwertyMod.Common.Fortress
 
         public override void TileCountsAvailable(ReadOnlySpan<int> tileCounts)
         {
-            fortressBrick = tileCounts[TileType<FortressBrickT>()];
+            fortressBrick = tileCounts[ModContent.TileType<FortressBrickT>()];
         }
         public override void ModifyWorldGenTasks(List<GenPass> tasks, ref double totalWeight)
         {
-            tasks.Add(new PassLegacy("Fortifying the sky!", delegate (GenerationProgress progress, GameConfiguration configuration)
+            tasks.Add(new PassLegacy(Language.GetTextValue(Mod.GetLocalizationKey("WorldgenSkyFortress")), delegate (GenerationProgress progress, GameConfiguration configuration)
             {
                 FortressBuilder.BuildFortress();
             }));

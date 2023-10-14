@@ -5,7 +5,7 @@ using System.IO;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Minion.HydraHead
 {
@@ -13,7 +13,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.HydraHead
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Hydra Head");
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
             Main.projPet[Projectile.type] = true;
@@ -72,13 +71,13 @@ namespace QwertyMod.Content.Items.Weapon.Minion.HydraHead
             if (varTime == 30 && Projectile.owner == Main.myPlayer && cooldown > 0)
             {
 
-                Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, QwertyMethods.PolarVector(10, Projectile.rotation), ProjectileType<MinionBreath>(), Projectile.damage, Projectile.knockBack, Projectile.owner, 0f, 0f);
+                Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, QwertyMethods.PolarVector(10, Projectile.rotation), ModContent.ProjectileType<MinionBreath>(), Projectile.damage, Projectile.knockBack, Projectile.owner, 0f, 0f);
             }
             if (varTime >= 60)
             {
                 if (Projectile.owner == Main.myPlayer && cooldown > 0)
                 {
-                    Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, QwertyMethods.PolarVector(10, Projectile.rotation), ProjectileType<MinionBreath>(), Projectile.damage, Projectile.knockBack, Projectile.owner, 0f, 0f);
+                    Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, QwertyMethods.PolarVector(10, Projectile.rotation), ModContent.ProjectileType<MinionBreath>(), Projectile.damage, Projectile.knockBack, Projectile.owner, 0f, 0f);
                 }
                 varTime = 0;
                 if (Main.netMode != NetmodeID.Server && Main.myPlayer == Projectile.owner)
@@ -126,7 +125,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.HydraHead
                         Color drawColor = lightColor;
 
                         //Draw chain
-                        Main.EntitySpriteDraw(Request<Texture2D>("QwertyMod/Content/Items/Weapon/Minion/HydraHead/HydraHookChain").Value, new Vector2(center.X - Main.screenPosition.X, center.Y - Main.screenPosition.Y),
+                        Main.EntitySpriteDraw(ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Minion/HydraHead/HydraHookChain").Value, new Vector2(center.X - Main.screenPosition.X, center.Y - Main.screenPosition.Y),
                             new Rectangle(0, 0, 14, 8), drawColor, projRotation,
                             new Vector2(14 * 0.5f, 8 * 0.5f), 1f, SpriteEffects.None, 0);
                     }
@@ -137,7 +136,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.HydraHead
 
         public override void PostDraw(Color lightColor)
         {
-            Main.EntitySpriteDraw(Request<Texture2D>("QwertyMod/Content/Items/Weapon/Minion/HydraHead/MinionHead_Glow").Value, new Vector2(Projectile.Center.X - Main.screenPosition.X, Projectile.Center.Y - Main.screenPosition.Y),
+            Main.EntitySpriteDraw(ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Minion/HydraHead/MinionHead_Glow").Value, new Vector2(Projectile.Center.X - Main.screenPosition.X, Projectile.Center.Y - Main.screenPosition.Y),
                         new Rectangle(0, 0, Projectile.width, Projectile.height), Color.White, Projectile.rotation,
                         new Vector2(Projectile.width * 0.5f, Projectile.height * 0.5f), 1f, SpriteEffects.None, 0);
         }

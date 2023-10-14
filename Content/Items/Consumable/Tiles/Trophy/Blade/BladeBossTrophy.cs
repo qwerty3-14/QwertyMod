@@ -1,6 +1,5 @@
 ﻿using Terraria.GameContent.Creative;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
 using Terraria.ID;
 
 namespace QwertyMod.Content.Items.Consumable.Tiles.Trophy.Blade
@@ -9,7 +8,6 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Trophy.Blade
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Imperious Trophy");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -25,7 +23,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Trophy.Blade
             Item.useStyle = ItemUseStyleID.Swing;
             Item.consumable = true;
             Item.value = 50000;
-            Item.createTile = TileType<BladeBossTrophyT>();
+            Item.createTile = ModContent.TileType<BladeBossTrophyT>();
             Item.placeStyle = 0;
         }
     }

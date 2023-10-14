@@ -4,7 +4,7 @@ using QwertyMod.Content.Buffs;
 using System;
 using Terraria;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Common
 {
@@ -15,7 +15,7 @@ namespace QwertyMod.Common
         public override bool PreAI(NPC npc)
         {
             age++;
-            if (npc.HasBuff(BuffType<Stunned>()))
+            if (npc.HasBuff(ModContent.BuffType<Stunned>()))
             {
                 npc.velocity = Vector2.Zero;
                 return false;
@@ -25,7 +25,7 @@ namespace QwertyMod.Common
         public override void ModifyHitByProjectile(NPC npc, Projectile projectile, ref NPC.HitModifiers modifiers)
         {
             
-            if (npc.HasBuff(BuffType<LuneCurse>()))
+            if (npc.HasBuff(ModContent.BuffType<LuneCurse>()))
             {
                 modifiers.CritDamage += 0.4f;
             }
@@ -33,7 +33,7 @@ namespace QwertyMod.Common
 
         public override void ModifyHitByItem(NPC npc, Player player, Item item, ref NPC.HitModifiers modifiers)
         {
-            if (npc.HasBuff(BuffType<LuneCurse>()))
+            if (npc.HasBuff(ModContent.BuffType<LuneCurse>()))
             {
                 modifiers.CritDamage += 0.4f;
             }
@@ -41,7 +41,7 @@ namespace QwertyMod.Common
         private float stunCounter = 0;
         public override void PostDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
-            if (npc.HasBuff(BuffType<Stunned>()))
+            if (npc.HasBuff(ModContent.BuffType<Stunned>()))
             {
                 //float area = npc.width * npc.height;
                 float widthForScale = npc.width;
@@ -57,7 +57,7 @@ namespace QwertyMod.Common
                 float stunnedHorizontalMovement = (npc.width / 2) * 1.5f;
                 float heightofStunned = (npc.height / 2) * 1.2f;
                 stunCounter += MathF.PI / 60;
-                Texture2D texture = Request<Texture2D>("QwertyMod/Common/Stun").Value;
+                Texture2D texture = ModContent.Request<Texture2D>("QwertyMod/Common/Stun").Value;
                 //Main.NewText(MathF.Sin(stunCounter));
                 if (MathF.Cos(stunCounter) > 0)
                 {

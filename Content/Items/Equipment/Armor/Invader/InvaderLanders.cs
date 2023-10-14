@@ -1,10 +1,12 @@
-using Terraria;
-using Terraria.GameContent.Creative;
-using Terraria.ModLoader;
-using Terraria.GameInput;
+using Microsoft.Xna.Framework.Graphics;
+using QwertyMod.Common.PlayerLayers;
 using Microsoft.Xna.Framework;
 using QwertyMod.Content.Items.MiscMaterials;
+using Terraria;
+using Terraria.GameContent.Creative;
+using Terraria.GameInput;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace QwertyMod.Content.Items.Equipment.Armor.Invader
 {
@@ -23,6 +25,10 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Invader
             Item.width = 18;
             Item.height = 12;
             Item.defense = 15;
+            if (!Main.dedServ)
+            {
+                Item.GetGlobalItem<ItemUseGlow>().glowTexture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Invader/InvaderLanders_Glow").Value;
+            }
         }
         public override void UpdateEquip(Player player)
         {

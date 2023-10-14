@@ -1,12 +1,9 @@
-using System;
+using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
-using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
-using Microsoft.Xna.Framework;
-using Terraria.DataStructures;
 using Terraria.ObjectData;
 
 namespace QwertyMod.Content.Items.Equipment.Accessories
@@ -119,7 +116,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
         }
 		public override void KillTile(int i, int j, ref bool fail, ref bool effectOnly, ref bool noItem)
 		{
-            Item.NewItem(new EntitySource_TileBreak(i, j), i * 16, j * 16, 48, 48, ItemType<VulgarDictionary>());
+            Item.NewItem(new EntitySource_TileBreak(i, j), i * 16, j * 16, 48, 48, ModContent.ItemType<VulgarDictionary>());
 			base.KillTile(i, j, ref fail, ref effectOnly, ref noItem);
 		}
     }

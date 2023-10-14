@@ -9,7 +9,7 @@ using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 using System.IO;
 
 namespace QwertyMod.Content.NPCs.Bosses.AncientMachine
@@ -18,7 +18,6 @@ namespace QwertyMod.Content.NPCs.Bosses.AncientMachine
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Ancient Minion");
             Main.npcFrameCount[NPC.type] = 1;
             NPCID.Sets.NoMultiplayerSmoothingByType[NPC.type] = true;
         }
@@ -143,7 +142,7 @@ namespace QwertyMod.Content.NPCs.Bosses.AncientMachine
                     {
                         float theta = Main.rand.NextFloat(-MathF.PI, MathF.PI);
 
-                        Dust dust = Dust.NewDustPerfect(NPC.Center + QwertyMethods.PolarVector(minionRingRadius, theta), DustType<AncientGlow>(), QwertyMethods.PolarVector(-minionRingRadius / 10, theta));
+                        Dust dust = Dust.NewDustPerfect(NPC.Center + QwertyMethods.PolarVector(minionRingRadius, theta), ModContent.DustType<AncientGlow>(), QwertyMethods.PolarVector(-minionRingRadius / 10, theta));
                         dust.noGravity = true;
                     }
                     NPC.netOffset *= 0;
@@ -155,7 +154,7 @@ namespace QwertyMod.Content.NPCs.Bosses.AncientMachine
                     for (int i = 0; i < minionRingDustQty; i++)
                     {
                         float theta = Main.rand.NextFloat(-MathF.PI, MathF.PI);
-                        Dust dust = Dust.NewDustPerfect(NPC.Center, DustType<AncientGlow>(), QwertyMethods.PolarVector(minionRingRadius / 10, theta));
+                        Dust dust = Dust.NewDustPerfect(NPC.Center, ModContent.DustType<AncientGlow>(), QwertyMethods.PolarVector(minionRingRadius / 10, theta));
                         dust.noGravity = true;
                     }
                     justTeleported = false;
@@ -171,7 +170,7 @@ namespace QwertyMod.Content.NPCs.Bosses.AncientMachine
             spriteBatch.Draw(TextureAssets.Npc[NPC.type].Value, NPC.Center - screenPos,
                         NPC.frame, drawColor, NPC.rotation,
                         new Vector2(NPC.width * 0.5f, NPC.height * 0.5f), 1f, SpriteEffects.None, 0f);
-            spriteBatch.Draw(Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/AncientMachine/AncientMinion_Glow").Value, new Vector2(NPC.Center.X - screenPos.X, NPC.Center.Y - screenPos.Y),
+            spriteBatch.Draw(ModContent.Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/AncientMachine/AncientMinion_Glow").Value, new Vector2(NPC.Center.X - screenPos.X, NPC.Center.Y - screenPos.Y),
                         NPC.frame, Color.White, NPC.rotation,
                         new Vector2(NPC.width * 0.5f, NPC.height * 0.5f), 1f, SpriteEffects.None, 0f);
             return false;

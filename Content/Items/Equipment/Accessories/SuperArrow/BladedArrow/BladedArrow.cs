@@ -3,18 +3,15 @@ using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content.Items.Equipment.Accessories.SuperArrow.BladedArrow
 {
     public class BladedArrow : ModItem
     {
-
         public override void SetStaticDefaults()
         {
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
-
         public override void SetDefaults()
         {
             Item.damage = 500;
@@ -27,21 +24,18 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.SuperArrow.BladedArrow
             Item.crit = 25;
             Item.shootSpeed = 12f;
             Item.useTime = 180;
-            Item.shoot = ProjectileType<BladedArrowP>();
+            Item.shoot = ModContent.ProjectileType<BladedArrowP>();
             Item.maxStack = 1;
             Item.accessory = true;
         }
-
         public override void AddRecipes()
         {
-            CreateRecipe().AddIngredient(ItemType<Aqueous.Aqueous>())
-                .AddIngredient(ItemType<BladedArrowShaft>())
+            CreateRecipe().AddIngredient(ModContent.ItemType<Aqueous.Aqueous>())
+                .AddIngredient(ModContent.ItemType<BladedArrowShaft>())
                 .AddTile(TileID.MythrilAnvil)
                 .Register();
         }
     }
-
-
     public class BladedArrowP : ModProjectile
     {
         public override void SetDefaults()

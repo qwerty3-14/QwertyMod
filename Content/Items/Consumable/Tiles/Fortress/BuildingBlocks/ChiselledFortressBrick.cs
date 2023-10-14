@@ -1,8 +1,6 @@
-
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.BuildingBlocks
 {
@@ -10,8 +8,6 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.BuildingBlocks
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Chiseled Fortress Brick");
-            //Tooltip.SetDefault("");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 100;
         }
 
@@ -23,7 +19,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.BuildingBlocks
             Item.maxStack = 9999;
             Item.value = 0;
             Item.rare = ItemRarityID.Orange;
-            Item.createTile = TileType<ChiselledFortressBrickT>();
+            Item.createTile = ModContent.TileType<ChiselledFortressBrickT>();
             Item.useTurn = true;
             Item.autoReuse = true;
             Item.useAnimation = 15;
@@ -34,7 +30,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.BuildingBlocks
 
         public override void AddRecipes()
         {
-            CreateRecipe().AddIngredient(ItemType<FortressBrick>(), 1)
+            CreateRecipe().AddIngredient(ModContent.ItemType<FortressBrick>(), 1)
                 .AddTile(TileID.WorkBenches)
                 .Register();
         }

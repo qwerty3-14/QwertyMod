@@ -1,13 +1,11 @@
-using Terraria;
-using Terraria.ModLoader;
-using Terraria.GameContent.Creative;
-using Terraria.ID;
-using Terraria.DataStructures;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Collections.Generic;
+using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameContent;
-using QwertyMod.Content.Items.Equipment.Vanity.ScarletBallGown;
+using Terraria.GameContent.Creative;
+using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace QwertyMod.Content.Items.Equipment.VanityAccessories.Corset
 {

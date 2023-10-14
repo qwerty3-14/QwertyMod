@@ -8,7 +8,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.LuneArcherMinion
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Lune Archer");
             Main.projFrames[Projectile.type] = 1;
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;

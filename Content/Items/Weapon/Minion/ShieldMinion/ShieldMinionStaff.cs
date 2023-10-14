@@ -5,14 +5,13 @@ using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 namespace QwertyMod.Content.Items.Weapon.Minion.ShieldMinion
 {
     public class ShieldMinionStaff : ModItem
     {
         public override void SetStaticDefaults()
         {
-            //Tooltip.SetDefault("Slams intruders that get too close to you! +\nBurst damage minion");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
@@ -33,7 +32,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.ShieldMinion
             Item.rare = ItemRarityID.Orange;
             Item.value = 120000;
             Item.UseSound = SoundID.Item44;
-            Item.shoot = ProjectileType<ShieldMinion>();
+            Item.shoot = ModContent.ProjectileType<ShieldMinion>();
             Item.DamageType = DamageClass.Summon;
         }
 
@@ -46,7 +45,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.ShieldMinion
 
         public override void AddRecipes()
         {
-            CreateRecipe(1).AddIngredient(ItemType<Etims>(), 12)
+            CreateRecipe(1).AddIngredient(ModContent.ItemType<Etims>(), 12)
                 .AddTile(TileID.Anvils)
                 .Register();
         }

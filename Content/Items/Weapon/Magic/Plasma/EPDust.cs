@@ -1,8 +1,6 @@
 using Terraria;
 using Terraria.ModLoader;
 
-
-
 namespace QwertyMod.Content.Items.Weapon.Magic.Plasma
 {
     public class EPDust : ModDust

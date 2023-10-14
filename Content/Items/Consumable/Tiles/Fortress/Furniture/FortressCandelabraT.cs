@@ -2,11 +2,10 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Content.Dusts;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Furniture
 {
@@ -22,7 +21,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Furniture
             TileObjectData.newTile.DrawYOffset = 2;
             TileObjectData.addTile(Type);
             AddMapEntry(new Color(162, 184, 185));
-            DustType = DustType<FortressDust>();
+            DustType = ModContent.DustType<FortressDust>();
             HitSound = QwertyMod.FortressBlocks;
             AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
             AdjTiles = new int[] { TileID.Candelabras };
@@ -91,7 +90,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Furniture
             {
                 float x = (float)Utils.RandomInt(ref randSeed, -10, 11) * 0.15f;
                 float y = (float)Utils.RandomInt(ref randSeed, -10, 1) * 0.35f;
-                spriteBatch.Draw(Request<Texture2D>("QwertyMod/Content/Items/Consumable/Tiles/Fortress/Furniture/FortressCandelabra_Flame").Value, 
+                spriteBatch.Draw(ModContent.Request<Texture2D>("QwertyMod/Content/Items/Consumable/Tiles/Fortress/Furniture/FortressCandelabra_Flame").Value, 
                 new Vector2((float)(i * 16 - (int)Main.screenPosition.X + offsetX) - (width - 16f) / 2f + x, 
                 (float)(j * 16 - (int)Main.screenPosition.Y + offsetY) + y) 
                 + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);

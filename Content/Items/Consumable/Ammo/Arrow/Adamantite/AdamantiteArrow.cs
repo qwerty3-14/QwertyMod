@@ -2,7 +2,7 @@
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Adamantite
 {
@@ -26,7 +26,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Adamantite
             Item.shootSpeed = 40f;
 
             Item.consumable = true;
-            Item.shoot = ProjectileType<AdamantiteArrowP>();
+            Item.shoot = ModContent.ProjectileType<AdamantiteArrowP>();
             Item.ammo = 40;
             Item.maxStack = 9999;
         }

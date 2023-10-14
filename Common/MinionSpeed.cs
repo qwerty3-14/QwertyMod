@@ -3,7 +3,7 @@ using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Common
 {
@@ -50,7 +50,7 @@ namespace QwertyMod.Common
         public int discipline = 0;
         public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (target.HasBuff(BuffType<DisciplineTag>()))
+            if (target.HasBuff(ModContent.BuffType<DisciplineTag>()))
             {
 
                 if (projectile.minion || ProjectileID.Sets.MinionShot[projectile.type])
@@ -60,7 +60,7 @@ namespace QwertyMod.Common
                         if (Main.projectile[p].active && Main.projectile[p].minion && projectile.owner == Main.projectile[p].owner)
                         {
                             SpeedBuff(Main.projectile[p]);
-                            target.RequestBuffRemoval(BuffType<DisciplineTag>());
+                            target.RequestBuffRemoval(ModContent.BuffType<DisciplineTag>());
                         }
                     }
                 }

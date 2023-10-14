@@ -1,6 +1,5 @@
 using Terraria.GameContent.Creative;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
 using Terraria.ID;
 
 namespace QwertyMod.Content.Items.Consumable.Tiles.Trophy.FortressBoss
@@ -19,14 +18,12 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Trophy.FortressBoss
             Item.useStyle = ItemUseStyleID.Swing;
             Item.consumable = true;
             Item.value = 50000;
-            Item.createTile = TileType<FortressBossTrophyT>();
+            Item.createTile = ModContent.TileType<FortressBossTrophyT>();
             Item.placeStyle = 0;
         }
 
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Divine Light Trophy");
-            //Tooltip.SetDefault("");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
     }

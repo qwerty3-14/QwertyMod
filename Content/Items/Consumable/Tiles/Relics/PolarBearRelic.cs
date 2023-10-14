@@ -17,8 +17,6 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Relics
 	{
 		public override void SetStaticDefaults() 
 		{
-			//DisplayName,SetDefault("Polar Exterminator Relic");
-
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
 		}
 

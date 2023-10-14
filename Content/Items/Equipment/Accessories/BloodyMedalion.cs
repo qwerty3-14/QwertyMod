@@ -5,8 +5,9 @@ using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Equipment.Accessories
 {
@@ -134,7 +135,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
                         {
                             lifeCost = 0;
                         }
-                        line.Text = "Uses " + lifeCost + " life!";//change tooltip
+                        line.Text = Language.GetTextValue(Mod.GetLocalizationKey("CustomTooltipBloodCostStart")) + lifeCost + Language.GetTextValue(Mod.GetLocalizationKey("CustomTooltipBloodCostEnd"));//change tooltip
                         line.OverrideColor = Color.Crimson;
                     }
                 }
@@ -147,7 +148,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
         public override void ModifyGlobalLoot(GlobalLoot globalLoot)
         {
             LeadingConditionRule bloodMoon = new LeadingConditionRule(new Conditions.IsBloodMoonAndNotFromStatue());
-            bloodMoon.OnSuccess(ItemDropRule.Common(ItemType<BloodyMedalion>(), 200));
+            bloodMoon.OnSuccess(ItemDropRule.Common(ModContent.ItemType<BloodyMedalion>(), 200));
             globalLoot.Add(bloodMoon);
         }
     }

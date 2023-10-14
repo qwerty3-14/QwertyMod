@@ -5,7 +5,7 @@ using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Equipment.Hook
 {
@@ -21,7 +21,7 @@ namespace QwertyMod.Content.Items.Equipment.Hook
         {
             Item.CloneDefaults(ItemID.AmethystHook);
             Item.shootSpeed = 18f; // how quickly the hook is shot.
-            Item.shoot = ProjectileType<LaunchingHookP>();
+            Item.shoot = ModContent.ProjectileType<LaunchingHookP>();
             Item.value = 50000;
             Item.rare = ItemRarityID.Pink;
             Item.width = 26;
@@ -32,18 +32,12 @@ namespace QwertyMod.Content.Items.Equipment.Hook
     internal class LaunchingHookP : ModProjectile
     {
 
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("${ProjectileName.GemHookAmethyst}");
-        }
-
         public override void SetDefaults()
         {
             Projectile.CloneDefaults(ProjectileID.GemHookAmethyst);
             Projectile.width = 18;
             Projectile.height = 20;
         }
-
         // Use this hook for hooks that can have multiple hooks mid-flight: Dual Hook, Web Slinger, Fish Hook, Static Hook, Lunar Hook
         public override bool? CanUseGrapple(Player player)
         {
@@ -98,7 +92,7 @@ namespace QwertyMod.Content.Items.Equipment.Hook
             Player player = Main.player[Projectile.owner];
             float directionToHook = (Projectile.Center - player.Center).ToRotation();
             float distanceToHook = (Projectile.Center - player.Center).Length();
-            Texture2D texture = Request<Texture2D>("QwertyMod/Content/Items/Equipment/Hook/LHChain").Value;
+            Texture2D texture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/Hook/LHChain").Value;
             for (int d = 0; d < distanceToHook; d += texture.Height)
             {
                 Main.EntitySpriteDraw(texture, player.Center + QwertyMethods.PolarVector(d, directionToHook) - Main.screenPosition,

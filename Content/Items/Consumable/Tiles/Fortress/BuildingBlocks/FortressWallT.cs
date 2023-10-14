@@ -2,7 +2,7 @@ using Microsoft.Xna.Framework;
 using QwertyMod.Content.Dusts;
 using Terraria;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.BuildingBlocks
 {
@@ -11,8 +11,8 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.BuildingBlocks
         public override void SetStaticDefaults()
         {
             Main.wallHouse[Type] = true;
-            DustType = DustType<FortressDust>();
-            //ItemDrop = ItemType<FortressWall>();
+            DustType = ModContent.DustType<FortressDust>();
+            //ItemDrop = ModContent.ItemType<FortressWall>();
             AddMapEntry(new Color(76, 80, 92));
         }
 

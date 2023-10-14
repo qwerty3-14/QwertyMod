@@ -1,8 +1,7 @@
 using Terraria;
-using Terraria.DataStructures;
+using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.GameContent.Creative;
 
 namespace QwertyMod.Content.Items.Consumable.Tiles.Relics
 {
@@ -10,8 +9,6 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Relics
 	{
 		public override void SetStaticDefaults() 
 		{
-			//DisplayName,SetDefault("OLORD Relic");
-
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
 		}
 

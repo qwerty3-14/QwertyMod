@@ -4,7 +4,7 @@ using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 
 namespace QwertyMod.Content.Items.Tool.Mining
@@ -13,7 +13,6 @@ namespace QwertyMod.Content.Items.Tool.Mining
     {
         public override void SetStaticDefaults()
         {
-            //Tooltip.SetDefault("Mines a 3x3 area");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -36,7 +35,7 @@ namespace QwertyMod.Content.Items.Tool.Mining
             Item.rare = ItemRarityID.Pink;
             Item.UseSound = SoundID.Item23;
             Item.autoReuse = true;
-            Item.shoot = ProjectileType<HydrillP>();
+            Item.shoot = ModContent.ProjectileType<HydrillP>();
             Item.shootSpeed = 40f;
             Item.tileBoost = -2;
             Item.GetGlobalItem<AoePick>().miningRadius = 1;
@@ -60,7 +59,7 @@ namespace QwertyMod.Content.Items.Tool.Mining
 
         public override void AI()
         {
-            int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<HydraBeamGlow>(), Projectile.velocity.X * 0.2f, Projectile.velocity.Y * 0.2f, 100, default(Color), 1.9f);
+            int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<HydraBeamGlow>(), Projectile.velocity.X * 0.2f, Projectile.velocity.Y * 0.2f, 100, default(Color), 1.9f);
             Main.dust[dust].noGravity = true;
         }
     }

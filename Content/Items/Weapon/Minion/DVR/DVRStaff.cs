@@ -1,19 +1,11 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using QwertyMod.Common;
-using System;
+using QwertyMod.Common.PlayerLayers;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
-using Terraria.WorldBuilding;
-using QwertyMod.Content.Dusts;
-using Terraria.Audio;
-using Terraria.GameContent;
-using QwertyMod.Content.Items.MiscMaterials;
-using QwertyMod.Common.PlayerLayers;
 
 namespace QwertyMod.Content.Items.Weapon.Minion.DVR
 {
@@ -21,8 +13,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.DVR
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Invader Caster Staff");
-            //Tooltip.SetDefault("Summons an invader caster to fight for you.");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
@@ -46,7 +36,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.DVR
             Item.DamageType = DamageClass.Summon;
             if (!Main.dedServ)
             {
-                Item.GetGlobalItem<ItemUseGlow>().glowTexture = Request<Texture2D>("QwertyMod/Content/Items/Weapon/Minion/DVR/DVRStaff_Glow").Value;
+                Item.GetGlobalItem<ItemUseGlow>().glowTexture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Minion/DVR/DVRStaff_Glow").Value;
             }
         }
 

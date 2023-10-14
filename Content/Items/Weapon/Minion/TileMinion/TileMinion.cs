@@ -13,7 +13,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.TileMinion
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Tile Minion");
             Main.projFrames[Projectile.type] = 3;
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true; //This is necessary for right-click targeting
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 2;

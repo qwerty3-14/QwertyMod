@@ -5,8 +5,6 @@ using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
-using Terraria.GameContent;
 
 namespace QwertyMod.Content.Items.Weapon.Melee.Sword.ImperiousTheIV
 {
@@ -54,11 +52,6 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.ImperiousTheIV
 
     public class ImperiousTheV : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("Imperious The V");
-        }
-
         public override void SetDefaults()
         {
             Projectile.width = 22;
@@ -111,7 +104,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Sword.ImperiousTheIV
 
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            Projectile.NewProjectile(Projectile.GetSource_FromThis(), target.Center, Vector2.Zero, ProjectileType<ImperiousTheV>(), Main.player[Projectile.owner].GetWeaponDamage(Main.player[Projectile.owner].HeldItem), 0.1f, Main.player[Projectile.owner].whoAmI, target.whoAmI);
+            Projectile.NewProjectile(Projectile.GetSource_FromThis(), target.Center, Vector2.Zero, ModContent.ProjectileType<ImperiousTheV>(), Main.player[Projectile.owner].GetWeaponDamage(Main.player[Projectile.owner].HeldItem), 0.1f, Main.player[Projectile.owner].whoAmI, target.whoAmI);
         }
 
     }

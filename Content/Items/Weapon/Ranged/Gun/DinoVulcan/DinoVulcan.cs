@@ -6,7 +6,7 @@ using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.DinoVulcan
 {
@@ -14,7 +14,6 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.DinoVulcan
     {
         public override void SetStaticDefaults()
         {
-            //Tooltip.SetDefault("Builds up in speed while used" + "\n66% chance not to consume ammo");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -29,7 +28,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.DinoVulcan
             Item.height = 18;
             Item.damage = 20;
 
-            Item.shoot = ProjectileType<DinoVulcanP>();
+            Item.shoot = ModContent.ProjectileType<DinoVulcanP>();
             Item.rare = ItemRarityID.LightPurple;
             Item.value = Item.sellPrice(0, 10, 0, 0);
             Item.noMelee = true;
@@ -50,7 +49,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.DinoVulcan
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            type = ProjectileType<DinoVulcanP>();
+            type = ModContent.ProjectileType<DinoVulcanP>();
             position = player.Center;
             for (int l = 0; l < Main.projectile.Length; l++)
             {                                                                  //this make so you can only spawn one of this projectile at the time,
@@ -205,7 +204,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.DinoVulcan
                     if (player.whoAmI == Main.myPlayer)
                     {
                         Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center.X, Projectile.Center.Y, MathF.Cos(VarA) * speed, MathF.Sin(VarA) * speed, Ammo, weaponDamage, weaponKnockback, Main.myPlayer);
-                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center.X, Projectile.Center.Y, MathF.Cos(SVarA) * SspeedA * -player.direction, MathF.Sin(SVarA) * SspeedA, ProjectileType<Shell>(), 0, 0, Main.myPlayer);
+                        Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center.X, Projectile.Center.Y, MathF.Cos(SVarA) * SspeedA * -player.direction, MathF.Sin(SVarA) * SspeedA, ModContent.ProjectileType<Shell>(), 0, 0, Main.myPlayer);
 
                     }
 
@@ -226,11 +225,6 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.DinoVulcan
 
     public class Shell : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("Shell");
-        }
-
         public override void SetDefaults()
         {
             Projectile.width = 6; //Set the hitbox width

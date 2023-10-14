@@ -4,7 +4,7 @@ using QwertyMod.Content.Items.MiscMaterials;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 using Terraria.GameContent.Creative;
 
 
@@ -14,8 +14,6 @@ namespace QwertyMod.Content.Items.Tool.Mining.Rune
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Rune Miner");
-            //Tooltip.SetDefault("Mines a 5x5 area");
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -41,14 +39,14 @@ namespace QwertyMod.Content.Items.Tool.Mining.Rune
             Item.GetGlobalItem<AoePick>().miningRadius = 2;
             if (!Main.dedServ)
             {
-                Item.GetGlobalItem<ItemUseGlow>().glowTexture = Request<Texture2D>("QwertyMod/Content/Items/Tool/Mining/Rune/RuneMiner_Glow").Value;
+                Item.GetGlobalItem<ItemUseGlow>().glowTexture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Tool/Mining/Rune/RuneMiner_Glow").Value;
             }
         }
 
         public override void AddRecipes()
         {
-            CreateRecipe(1).AddIngredient(ItemType<CraftingRune>(), 15)
-                .AddIngredient(ItemType<Ancient.AncientMiner>(), 1)
+            CreateRecipe(1).AddIngredient(ModContent.ItemType<CraftingRune>(), 15)
+                .AddIngredient(ModContent.ItemType<Ancient.AncientMiner>(), 1)
                 .AddTile(TileID.Anvils)
                 .Register();
         }

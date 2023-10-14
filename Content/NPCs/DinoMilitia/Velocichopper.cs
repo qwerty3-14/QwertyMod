@@ -6,12 +6,11 @@ using System.Collections.Generic;
 using System.IO;
 using Terraria;
 using Terraria.Audio;
-using Terraria.DataStructures;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.NPCs.DinoMilitia
 {
@@ -19,9 +18,8 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Velocichopper");
             Main.npcFrameCount[NPC.type] = 4;
-            NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers(0)
+            NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers()
             {
                 PortraitScale = 0.6f,
                 PortraitPositionYOverride = 0f,
@@ -53,7 +51,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
                 Music = MusicLoader.GetMusicSlot(Mod, "Assets/Music/OldDinosNewGuns");
             }
             Banner = NPC.type;
-            BannerItem = ItemType<VelocichopperBanner>();
+            BannerItem = ModContent.ItemType<VelocichopperBanner>();
         }
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
         {
@@ -67,7 +65,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
         }
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
-            if (DinoEvent.EventActive && !NPC.AnyNPCs(NPCType<Velocichopper>()) && !NPC.AnyNPCs(NPCType<TheGreatTyrannosaurus>()))
+            if (DinoEvent.EventActive && !NPC.AnyNPCs(ModContent.NPCType<Velocichopper>()) && !NPC.AnyNPCs(ModContent.NPCType<TheGreatTyrannosaurus>()))
             {
                 return 7f;
             }
@@ -115,7 +113,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
                 }
                 if (bombTimer > bombReload && Main.netMode != NetmodeID.MultiplayerClient)
                 {
-                    Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center.X, NPC.Center.Y, 0, 0, ProjectileType<DinoBomb>(), damage, 3f, Main.myPlayer);
+                    Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center.X, NPC.Center.Y, 0, 0, ModContent.ProjectileType<DinoBomb>(), damage, 3f, Main.myPlayer);
                     bombTimer = 0;
                 }
             }
@@ -212,18 +210,14 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
         }
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
-            npcLoot.Add(ItemDropRule.Common(ItemType<DinoTooth>(), 100, 1, 1));
-            npcLoot.Add(ItemDropRule.Common(ItemType<DinoVulcan>(), 6, 1, 1));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<DinoTooth>(), 100, 1, 1));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<DinoVulcan>(), 6, 1, 1));
         }
 
     }
 
     public class DinoBomb : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("DinoBomb");
-        }
 
         public override void SetDefaults()
         {
@@ -252,7 +246,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
             Projectile.height = 150;
             Projectile.position.X = Projectile.position.X - (float)(Projectile.width / 2);
             Projectile.position.Y = Projectile.position.Y - (float)(Projectile.height / 2);
-            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, new Vector2(0, 0), ProjectileType<DinoBombExplosion>(), Projectile.damage, Projectile.knockBack, player.whoAmI);
+            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, new Vector2(0, 0), ModContent.ProjectileType<DinoBombExplosion>(), Projectile.damage, Projectile.knockBack, player.whoAmI);
             SoundEngine.PlaySound(SoundID.Item62, Projectile.position);
             for (int i = 0; i < 100; i++)
             {
@@ -273,10 +267,6 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
 
     public class DinoBombExplosion : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("Dino Bomb Explosion");
-        }
 
         public override void SetDefaults()
         {

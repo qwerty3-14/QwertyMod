@@ -7,7 +7,7 @@ using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Melee.Flail.Ankylosaurus
 {
@@ -15,8 +15,6 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Flail.Ankylosaurus
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Ankylosaurus Tail");
-            //Tooltip.SetDefault("Critical hits stun enemies");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -38,7 +36,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Flail.Ankylosaurus
             Item.UseSound = SoundID.Item1;
             Item.autoReuse = false;
             Item.channel = true;
-            Item.shoot = ProjectileType<AnkylosaurusTail>();
+            Item.shoot = ModContent.ProjectileType<AnkylosaurusTail>();
             Item.shootSpeed = 15f;
         }
         public override void ModifyTooltips(List<TooltipLine> tooltips)
@@ -64,7 +62,6 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Flail.Ankylosaurus
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Ankylosaurus Tail");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 5;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 0;
         }
@@ -99,7 +96,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Flail.Ankylosaurus
         {
             if (!target.boss && hit.Crit)
             {
-                target.AddBuff(BuffType<Stunned>(), 240);
+                target.AddBuff(ModContent.BuffType<Stunned>(), 240);
             }
         }
 
@@ -124,7 +121,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Flail.Ankylosaurus
                     Color drawColor = lightColor;
 
                     //Draw chain
-                    Main.EntitySpriteDraw(Request<Texture2D>("QwertyMod/Content/Items/Weapon/Melee/Flail/Ankylosaurus/DinoFlailChain").Value, new Vector2(center.X - Main.screenPosition.X, center.Y - Main.screenPosition.Y),
+                    Main.EntitySpriteDraw(ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Melee/Flail/Ankylosaurus/DinoFlailChain").Value, new Vector2(center.X - Main.screenPosition.X, center.Y - Main.screenPosition.Y),
                         new Rectangle(0, 0, 18, 12), drawColor, projRotation,
                         new Vector2(18 * 0.5f, 12 * 0.5f), 1f, SpriteEffects.None, 0);
                 }

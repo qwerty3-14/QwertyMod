@@ -4,12 +4,11 @@ using QwertyMod.Content.Dusts;
 using QwertyMod.Content.Items.Consumable.Tiles.Bars;
 using System;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Morphs.RhuthiniumBarrage
 {
@@ -17,8 +16,6 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.RhuthiniumBarrage
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Shape shift: Rhuthinium Barrage");
-            //Tooltip.SetDefault("Launches a HUGE barrage of darts dealing massive damage!");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -47,14 +44,14 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.RhuthiniumBarrage
             Item.height = 34;
 
             //Item.autoReuse = true;
-            Item.shoot = ProjectileType<RhuthiniumBarrageLauncher>();
+            Item.shoot = ModContent.ProjectileType<RhuthiniumBarrageLauncher>();
             Item.shootSpeed = 0f;
             Item.channel = true;
             Item.DamageType = DamageClass.Generic;
         }
         public override void AddRecipes()
         {
-            CreateRecipe(1).AddIngredient(ItemType<RhuthiniumBar>(), 8)
+            CreateRecipe(1).AddIngredient(ModContent.ItemType<RhuthiniumBar>(), 8)
                 .AddTile(TileID.Anvils)
                 .Register();
         }
@@ -77,7 +74,6 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.RhuthiniumBarrage
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Rhuthinium Barrage Launcher");
             Main.projFrames[Projectile.type] = 1;
         }
 
@@ -105,7 +101,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.RhuthiniumBarrage
             {
                 for (int d = 0; d < 60; d++)
                 {
-                    Darts.Add(Main.projectile[Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ProjectileType<RhuthiniumBarrageDart>(), Projectile.damage, Projectile.knockBack, Projectile.owner, Main.rand.Next(-14, 15), 0f)]);
+                    Darts.Add(Main.projectile[Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<RhuthiniumBarrageDart>(), Projectile.damage, Projectile.knockBack, Projectile.owner, Main.rand.Next(-14, 15), 0f)]);
                 }
                 runOnce = false;
             }
@@ -127,7 +123,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.RhuthiniumBarrage
 
             foreach (Projectile dart in Darts)
             {
-                if (dart.ai[1] == 0 && dart.type == ProjectileType<RhuthiniumBarrageDart>())
+                if (dart.ai[1] == 0 && dart.type == ModContent.ProjectileType<RhuthiniumBarrageDart>())
                 {
                     dart.Center = Projectile.Center + QwertyMethods.PolarVector(25, Projectile.rotation) + QwertyMethods.PolarVector(dart.ai[0], Projectile.rotation + MathF.PI / 2);
                     dart.rotation = Projectile.rotation;
@@ -146,10 +142,10 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.RhuthiniumBarrage
 
         public override bool PreDraw(ref Color lightColor)
         {
-            Texture2D drawDart = Request<Texture2D>("QwertyMod/Content/Items/Weapon/Morphs/RhuthiniumBarrage/RhuthiniumBarrageDart").Value;
+            Texture2D drawDart = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Morphs/RhuthiniumBarrage/RhuthiniumBarrageDart").Value;
             foreach (Projectile dart in Darts)
             {
-                if (dart != null && dart.active && dart.type == ProjectileType<RhuthiniumBarrageDart>())
+                if (dart != null && dart.active && dart.type == ModContent.ProjectileType<RhuthiniumBarrageDart>())
                 {
                     Main.EntitySpriteDraw(drawDart, dart.Center - Main.screenPosition,
                        drawDart.Frame(), Lighting.GetColor((int)dart.Center.X / 16, (int)dart.Center.Y / 16), dart.rotation,
@@ -168,7 +164,6 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.RhuthiniumBarrage
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Rhuthinium Barrage");
             Main.projFrames[Projectile.type] = 1;
         }
 
@@ -190,7 +185,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.RhuthiniumBarrage
         {
             for (int i = 0; i < 2; i++)
             {
-                Dust d = Dust.NewDustPerfect(Projectile.Center, DustType<RhuthiniumDust>());
+                Dust d = Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<RhuthiniumDust>());
                 d.frame.Y = Main.rand.NextBool(2) ? 0 : 10;
                 d.noGravity = true;
             }

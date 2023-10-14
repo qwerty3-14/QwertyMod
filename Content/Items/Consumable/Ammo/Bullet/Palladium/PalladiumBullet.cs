@@ -2,7 +2,7 @@
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Consumable.Ammo.Bullet.Palladium
 {
@@ -26,7 +26,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Bullet.Palladium
             Item.shootSpeed = 2;
 
             Item.consumable = true;
-            Item.shoot = ProjectileType<PalladiumBulletP>();
+            Item.shoot = ModContent.ProjectileType<PalladiumBulletP>();
             Item.ammo = 97;
             Item.maxStack = 9999;
         }

@@ -1,20 +1,11 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using QwertyMod.Common;
+using QwertyMod.Content.Dusts;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using Terraria;
-using Terraria.DataStructures;
-using Terraria.GameContent;
-using Terraria.GameContent.Bestiary;
-using Terraria.GameContent.ItemDropRules;
+using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
-using Terraria.Audio;
-using QwertyMod.Content.Buffs;
-using QwertyMod.Content.Dusts;
 
 
 namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
@@ -104,7 +95,7 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
             {
                 if(timer > 0)
                 {
-                    Texture2D beamWarning = Request<Texture2D>("QwertyMod/Content/NPCs/Invader/InvaderZap").Value;
+                    Texture2D beamWarning = ModContent.Request<Texture2D>("QwertyMod/Content/NPCs/Invader/InvaderZap").Value;
                     float rot = (target.Center - Projectile.Center).ToRotation();
                     float length = (target.Center - Projectile.Center).Length();
                     Main.EntitySpriteDraw(beamWarning, Projectile.Center - Main.screenPosition, null, Color.White, rot, Vector2.UnitY * 1, new Vector2(length / 2f, 1), SpriteEffects.None, 0);

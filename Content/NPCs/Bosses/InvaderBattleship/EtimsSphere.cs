@@ -1,20 +1,11 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using QwertyMod.Common;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using Terraria;
-using Terraria.DataStructures;
-using Terraria.GameContent;
-using Terraria.GameContent.Bestiary;
-using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
 using Terraria.Audio;
-using QwertyMod.Content.Buffs;
-using QwertyMod.Content.Dusts;
 
 
 namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
@@ -71,7 +62,6 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            //blash();
             return false;
         }
         public override void AI()
@@ -80,7 +70,6 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
             {
                 runOnce = false;
                 rotDir = Projectile.velocity.ToRotation();
-                //blash();
             }
             if(Projectile.timeLeft < 60)
             {
@@ -122,7 +111,7 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
         {
             if(blashTime > 0)
             {
-                Texture2D blash = Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/InvaderBattleship/EtimsBlash").Value;
+                Texture2D blash = ModContent.Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/InvaderBattleship/EtimsBlash").Value;
                 Main.EntitySpriteDraw(blash, Projectile.Center - Main.screenPosition,
                         null, Color.White, Projectile.rotation,
                         blash.Size() * 0.5f, (blashRadius * 2f) / blash.Width, SpriteEffects.None, 0);

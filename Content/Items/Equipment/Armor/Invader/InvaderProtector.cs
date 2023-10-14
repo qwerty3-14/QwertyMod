@@ -1,7 +1,9 @@
+using Microsoft.Xna.Framework.Graphics;
+using QwertyMod.Common.PlayerLayers;
+using QwertyMod.Content.Items.MiscMaterials;
 using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ModLoader;
-using QwertyMod.Content.Items.MiscMaterials;
 using Terraria.ID;
 
 namespace QwertyMod.Content.Items.Equipment.Armor.Invader
@@ -13,7 +15,6 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Invader
         {
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
-
         public override void SetDefaults()
         {
             Item.value = GearStats.InvaderGearValue;
@@ -22,8 +23,11 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Invader
             Item.width = 18;
             Item.height = 14;
             Item.defense = 27;
+            if (!Main.dedServ)
+            {
+                Item.GetGlobalItem<ItemUseGlow>().glowTexture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Invader/InvaderProtector_Glow").Value;
+            }
         }
-
         public override void UpdateEquip(Player player)
         {
             player.GetDamage(DamageClass.Generic) += 0.12f;

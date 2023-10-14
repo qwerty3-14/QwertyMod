@@ -7,12 +7,11 @@ using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
-using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 using QwertyMod.Content.Items.MiscMaterials;
 using QwertyMod.Content.Items.Equipment.Accessories;
 using Terraria.GameContent.ItemDropRules;
@@ -149,7 +148,7 @@ namespace QwertyMod.Content.NPCs.Invader
             spriteBatch.Draw(TextureAssets.Npc[NPC.type].Value, NPC.Center - screenPos,
             NPC.frame, drawColor, NPC.rotation,
             Vector2.One * 20, 1f, SpriteEffects.None, 0f);
-            spriteBatch.Draw(Request<Texture2D>("QwertyMod/Content/NPCs/Invader/InvaderFighter_Glow").Value, NPC.Center - screenPos,
+            spriteBatch.Draw(ModContent.Request<Texture2D>("QwertyMod/Content/NPCs/Invader/InvaderFighter_Glow").Value, NPC.Center - screenPos,
             NPC.frame, Color.White, NPC.rotation,
             Vector2.One * 20, 1f, SpriteEffects.None, 0f);
             return false;
@@ -165,8 +164,8 @@ namespace QwertyMod.Content.NPCs.Invader
         }
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
-            npcLoot.Add(ItemDropRule.Common(ItemType<InvaderPlating>(), 1, 3, 5));
-            npcLoot.Add(ItemDropRule.Common(ItemType<GravityBeGone>(), 20, 1, 1));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<InvaderPlating>(), 1, 3, 5));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<GravityBeGone>(), 20, 1, 1));
         }
 
 
@@ -181,10 +180,6 @@ namespace QwertyMod.Content.NPCs.Invader
     }
     public class InvaderMicroMissile : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("Invader Fighter");
-        }
         public override void SetDefaults()
         {
             Projectile.width = Projectile.height = 6;
@@ -263,7 +258,7 @@ namespace QwertyMod.Content.NPCs.Invader
             Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition,
                         new Rectangle(0, Projectile.frame * texture.Height, texture.Width, texture.Height), lightColor, Projectile.rotation,
                         Projectile.Size * 0.5f, 1f, SpriteEffects.None, 0);
-            Main.EntitySpriteDraw(Request<Texture2D>("QwertyMod/Content/NPCs/Invader/InvaderMicroMissile_Glow").Value, Projectile.Center - Main.screenPosition,
+            Main.EntitySpriteDraw(ModContent.Request<Texture2D>("QwertyMod/Content/NPCs/Invader/InvaderMicroMissile_Glow").Value, Projectile.Center - Main.screenPosition,
                         new Rectangle(0, Projectile.frame * texture.Height, texture.Width, texture.Height), Color.White, Projectile.rotation,
                         Projectile.Size * 0.5f, 1f, SpriteEffects.None, 0);
             return false;

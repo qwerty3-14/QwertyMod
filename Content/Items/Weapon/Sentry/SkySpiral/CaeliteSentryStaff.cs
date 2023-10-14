@@ -7,7 +7,7 @@ using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Sentry.SkySpiral
 {
@@ -15,8 +15,6 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.SkySpiral
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Sky Spiral Staff");
-            //Tooltip.SetDefault("Higher beings will punish all enemies near this sentry!");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
@@ -36,13 +34,13 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.SkySpiral
             Item.value = 25000;
             Item.rare = ItemRarityID.Orange;
             Item.UseSound = SoundID.Item44;
-            Item.shoot = ProjectileType<CaeliteSentry>();
+            Item.shoot = ModContent.ProjectileType<CaeliteSentry>();
             Item.DamageType = DamageClass.Summon;
             Item.sentry = true;
         }
         public override void AddRecipes()
         {
-            CreateRecipe().AddIngredient(ItemType<CaeliteBar>(), 12)
+            CreateRecipe().AddIngredient(ModContent.ItemType<CaeliteBar>(), 12)
                 .AddTile(TileID.Anvils)
                 .Register();
         }
@@ -59,7 +57,6 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.SkySpiral
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Sky bound spiral");
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             Main.projFrames[Projectile.type] = 4;
             ProjectileID.Sets.SentryShot[Projectile.type] = true;
@@ -101,13 +98,13 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.SkySpiral
                         float distance = (targets[n].Center - Projectile.Center).Length();
                         for (int d = 0; d < distance; d += 4)
                         {
-                            Dust dust = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(d, (targets[n].Center - Projectile.Center).ToRotation()), DustType<CaeliteDust>());
+                            Dust dust = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(d, (targets[n].Center - Projectile.Center).ToRotation()), ModContent.DustType<CaeliteDust>());
                             dust.frame.Y = 0;
                         }
                     }
                 }
             }
-            Dust dust2 = Main.dust[Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<CaeliteDust>())];
+            Dust dust2 = Main.dust[Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<CaeliteDust>())];
             dust2.scale = .5f;
             Projectile.frameCounter++;
             if (Projectile.frameCounter > 10)

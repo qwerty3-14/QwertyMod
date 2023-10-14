@@ -6,7 +6,7 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Minion.UrQuan
 {
@@ -14,7 +14,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.UrQuan
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Fighter");
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             Main.projFrames[Projectile.type] = 1;
             ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
@@ -106,7 +105,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.UrQuan
         {
             if (counter > 25)
             {
-                Main.EntitySpriteDraw(Request<Texture2D>("QwertyMod/Content/Items/Weapon/Minion/UrQuan/FighterShot").Value, Projectile.Center - Main.screenPosition, null, lightColor, Projectile.rotation, new Vector2(1, 39), new Vector2(1, 1), 0, 0);
+                Main.EntitySpriteDraw(ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Minion/UrQuan/FighterShot").Value, Projectile.Center - Main.screenPosition, null, lightColor, Projectile.rotation, new Vector2(1, 39), new Vector2(1, 1), 0, 0);
             }
             return true;
         }

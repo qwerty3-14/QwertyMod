@@ -13,8 +13,6 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.Charging
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Charging Shotgun");
-            //Tooltip.SetDefault("Right click to add an extra bullet to your next fire");
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 

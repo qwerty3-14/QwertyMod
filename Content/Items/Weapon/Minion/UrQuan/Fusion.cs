@@ -9,7 +9,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.UrQuan
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Fusion Blast");
             Main.projFrames[Projectile.type] = 1;
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             ProjectileID.Sets.MinionShot[Projectile.type] = true;

@@ -1,9 +1,8 @@
-using Microsoft.Xna.Framework;
 using QwertyMod.Content.Dusts;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Consumable.Tiles.Ores
 {
@@ -16,14 +15,14 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Ores
             Main.tileSpelunker[Type] = true;
             Main.tileBlockLight[Type] = true;
 
-            DustType = DustType<LuneDust>();
+            DustType = ModContent.DustType<LuneDust>();
             HitSound = SoundID.Tink;
 
             //ModTranslation name = CreateMapEntryName();
             //name.SetDefault("Lune Ore");
             //AddMapEntry(new Color(102, 143, 204), name);
 
-            //ItemDrop = ItemType<LuneOre>();
+            //ItemDrop = ModContent.ItemType<LuneOre>();
 
             MinPick = 65;
         }

@@ -5,12 +5,10 @@ using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.GameContent.Creative;
 using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ID.ArmorIDs;
-using static Terraria.ModLoader.ModContent;
-using Terraria.GameContent.Creative;
 
 namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
 {
@@ -19,7 +17,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
     {
         public override void SetStaticDefaults()
         {
-            Head.Sets.DrawHatHair[Item.headSlot] = true;
+            ArmorIDs.Head.Sets.DrawHatHair[Item.headSlot] = true;
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -42,13 +40,13 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
         {
             CreateRecipe(1).AddIngredient(ItemID.ChlorophyteBar, 12)
                 .AddIngredient(ItemID.LifeCrystal, 4)
-                .AddIngredient(ItemType<VitallumCoreCharged>(), 1)
+                .AddIngredient(ModContent.ItemType<VitallumCoreCharged>(), 1)
                 .AddTile(TileID.MythrilAnvil)
                 .Register();
         }
         public override bool IsArmorSet(Item head, Item body, Item legs)
         {
-            return body.type == ItemType<VitallumLifeguard>() && legs.type == ItemType<VitallumJeans>();
+            return body.type == ModContent.ItemType<VitallumLifeguard>() && legs.type == ModContent.ItemType<VitallumJeans>();
         }
 
         public override void UpdateArmorSet(Player player)
@@ -64,7 +62,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
         [Obsolete]
         public override void OnCraft(Recipe recipe)
         {
-            Main.LocalPlayer.QuickSpawnItem(new EntitySource_Misc("Recipe"), ItemType<VitallumCoreUncharged>(), 1);
+            Main.LocalPlayer.QuickSpawnItem(new EntitySource_Misc("Recipe"), ModContent.ItemType<VitallumCoreUncharged>(), 1);
         }
     }
 
@@ -200,12 +198,12 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
             for (int e = 0; e < modPlayer.heartCount; e++)
             {
                 Vector2 heartPos = drawPlayer.Center + QwertyMethods.PolarVector(modPlayer.heartRadius, modPlayer.trigCounter + (MathF.PI * 2 * e) / (float)modPlayer.heartCount) - Main.screenPosition;
-                Texture2D heartTexture = Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Vitallum/VitallumCoreUncharged").Value;
+                Texture2D heartTexture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Vitallum/VitallumCoreUncharged").Value;
                 DrawData data = new DrawData(heartTexture, heartPos, null, Color.White, 0, heartTexture.Size() * .5f, 1f, 0, 0);
                 data.shader = drawInfo.cBody;
                 drawInfo.DrawDataCache.Add(data);
 
-                Texture2D veinTexture = Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Vitallum/VitallumHeartVein").Value;
+                Texture2D veinTexture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Vitallum/VitallumHeartVein").Value;
                 data = new DrawData(veinTexture, heartPos, new Rectangle(0, 22 * horizontalFrame, 26, 22), Color.White, 0, heartTexture.Size() * .5f, 1f, 0, 0);
                 data.shader = drawPlayer.dye[3].dye;
                 drawInfo.DrawDataCache.Add(data);

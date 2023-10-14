@@ -1,14 +1,11 @@
 using Microsoft.Xna.Framework;
-using QwertyMod.Content.Buffs;
-using QwertyMod.Content.Dusts;
-using QwertyMod.Content.Items.Consumable.Tiles.Bars;
 using System;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 using QwertyMod.Content.Items.MiscMaterials;
 
 
@@ -18,8 +15,6 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.DartLauncher.SuperSkyShot
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Super Sky Shot");
-            //Tooltip.SetDefault("Uses darts as ammo\nHigher beings have loaded many extra darts");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -47,13 +42,13 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.DartLauncher.SuperSkyShot
         {
             float r = (velocity).ToRotation() - MathF.PI / 2f;
             Projectile.NewProjectile(source, position + QwertyMethods.PolarVector(4f * player.direction, r), velocity, type, damage, knockback, player.whoAmI);
-            Projectile.NewProjectile(source, position + QwertyMethods.PolarVector(6f * player.direction, r), velocity * 1.5f, ProjectileType<SkyShot.CaeliteDart>(), damage, knockback, player.whoAmI);
+            Projectile.NewProjectile(source, position + QwertyMethods.PolarVector(6f * player.direction, r), velocity * 1.5f, ModContent.ProjectileType<SkyShot.CaeliteDart>(), damage, knockback, player.whoAmI);
             Projectile.NewProjectile(source, position + QwertyMethods.PolarVector(8f * player.direction, r), velocity, type, damage, knockback, player.whoAmI);
-            Projectile.NewProjectile(source, position + QwertyMethods.PolarVector(10f * player.direction, r), velocity * 1.5f, ProjectileType<SkyShot.CaeliteDart>(), damage, knockback, player.whoAmI);
+            Projectile.NewProjectile(source, position + QwertyMethods.PolarVector(10f * player.direction, r), velocity * 1.5f, ModContent.ProjectileType<SkyShot.CaeliteDart>(), damage, knockback, player.whoAmI);
             Projectile.NewProjectile(source, position + QwertyMethods.PolarVector(12f * player.direction, r), velocity, type, damage, knockback, player.whoAmI);
-            Projectile.NewProjectile(source, position + QwertyMethods.PolarVector(14f * player.direction, r), velocity * 1.5f, ProjectileType<SkyShot.CaeliteDart>(), damage, knockback, player.whoAmI);
+            Projectile.NewProjectile(source, position + QwertyMethods.PolarVector(14f * player.direction, r), velocity * 1.5f, ModContent.ProjectileType<SkyShot.CaeliteDart>(), damage, knockback, player.whoAmI);
             Projectile.NewProjectile(source, position + QwertyMethods.PolarVector(16f * player.direction, r), velocity, type, damage, knockback, player.whoAmI);
-            Projectile.NewProjectile(source, position + QwertyMethods.PolarVector(18f * player.direction, r), velocity * 1.5f, ProjectileType<SkyShot.CaeliteDart>(), damage, knockback, player.whoAmI);
+            Projectile.NewProjectile(source, position + QwertyMethods.PolarVector(18f * player.direction, r), velocity * 1.5f, ModContent.ProjectileType<SkyShot.CaeliteDart>(), damage, knockback, player.whoAmI);
             return false;
         }
         public override Vector2? HoldoutOffset()
@@ -62,8 +57,8 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.DartLauncher.SuperSkyShot
         }
         public override void AddRecipes()
         {
-            CreateRecipe().AddIngredient(ItemType<SkyShot.SkyShot>())
-            .AddIngredient(ItemType<SoulOfHeight>(), 10)
+            CreateRecipe().AddIngredient(ModContent.ItemType<SkyShot.SkyShot>())
+            .AddIngredient(ModContent.ItemType<SoulOfHeight>(), 10)
                 .AddTile(TileID.MythrilAnvil)
                 .Register();
         }

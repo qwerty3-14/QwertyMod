@@ -4,8 +4,7 @@ using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ID.ArmorIDs;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Equipment.Armor.Caelite
 {
@@ -15,7 +14,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Caelite
         public override void SetStaticDefaults()
         {
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
-            Head.Sets.DrawHead[Item.headSlot] = false;
+            ArmorIDs.Head.Sets.DrawHead[Item.headSlot] = false;
         }
 
         public override void SetDefaults()
@@ -34,8 +33,8 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Caelite
 
         public override void AddRecipes()
         {
-            CreateRecipe(1).AddIngredient(ItemType<CaeliteBar>(), 8)
-                .AddIngredient(ItemType<CaeliteCore>(), 4)
+            CreateRecipe(1).AddIngredient(ModContent.ItemType<CaeliteBar>(), 8)
+                .AddIngredient(ModContent.ItemType<CaeliteCore>(), 4)
                 .AddTile(TileID.Anvils)
                 .Register();
         }

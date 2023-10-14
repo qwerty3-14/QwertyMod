@@ -4,10 +4,9 @@ using QwertyMod.Common.RuneBuilder;
 using System;
 using System.IO;
 using Terraria;
-using Terraria.DataStructures;
-using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
 using Terraria.ID;
+using Terraria.ModLoader;
+
 
 namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
 {
@@ -46,7 +45,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
             }
             if (timer % 120 == 90 && Main.netMode != NetmodeID.MultiplayerClient)
             {
-                Projectile.NewProjectile(Projectile.GetSource_FromThis(), middle, QwertyMethods.PolarVector(1, Projectile.rotation), ProjectileType<AggroStrike>(), Projectile.damage, 0);
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), middle, QwertyMethods.PolarVector(1, Projectile.rotation), ModContent.ProjectileType<AggroStrike>(), Projectile.damage, 0);
             }
             if (timer % 120 == 119)
             {
@@ -78,7 +77,7 @@ namespace QwertyMod.Content.NPCs.Bosses.RuneGhost
         {
             if (timer % 120 > 30 && timer % 120 < 90)
             {
-                Texture2D texture = Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/RuneGhost/AggroLaser").Value;
+                Texture2D texture = ModContent.Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/RuneGhost/AggroLaser").Value;
                 Main.EntitySpriteDraw(texture, middle - Main.screenPosition, null, Color.White, Projectile.rotation, Vector2.UnitY, new Vector2(1500, 1), 0, 0);
             }
         }

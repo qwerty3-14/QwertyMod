@@ -1,16 +1,13 @@
+using Microsoft.Xna.Framework;
 using QwertyMod.Content.Buffs;
 using QwertyMod.Content.Dusts;
-using QwertyMod.Content.Items.Consumable.Tiles.Bars;
 using QwertyMod.Content.Items.MiscMaterials;
+using System;
 using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Terraria.GameContent;
-using System;
+
 
 namespace QwertyMod.Content.Items.Weapon.Magic.EnlightenedConfusion
 {
@@ -35,7 +32,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.EnlightenedConfusion
             Item.useTime = 20;
             Item.useAnimation = 20;
             Item.mana = ModLoader.HasMod("TRAEProject") ? 30 : 15;
-            Item.shoot = ProjectileType<EnlightenedConfusionP>();
+            Item.shoot = ModContent.ProjectileType<EnlightenedConfusionP>();
             Item.noUseGraphic = false;
             Item.noMelee = true;
             Item.UseSound = SoundID.Item91;
@@ -43,8 +40,8 @@ namespace QwertyMod.Content.Items.Weapon.Magic.EnlightenedConfusion
         }
         public override void AddRecipes()
         {
-            CreateRecipe().AddIngredient(ItemType<SacredDaze.SacredDaze>())
-            .AddIngredient(ItemType<SoulOfHeight>(), 10)
+            CreateRecipe().AddIngredient(ModContent.ItemType<SacredDaze.SacredDaze>())
+            .AddIngredient(ModContent.ItemType<SoulOfHeight>(), 10)
                 .AddTile(TileID.MythrilAnvil)
                 .Register();
         }
@@ -52,10 +49,6 @@ namespace QwertyMod.Content.Items.Weapon.Magic.EnlightenedConfusion
     }
     public class EnlightenedConfusionP : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("Sacred Daze");
-        }
 
         public override void SetDefaults()
         {
@@ -88,7 +81,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.EnlightenedConfusion
                 for (int i = 0; i < 60; i++)
                 {
                     float rot = MathF.PI * 2f * ((float)i / 30f);
-                    Dust.NewDustPerfect(Projectile.Center, DustType<CaeliteDust>(), QwertyMethods.PolarVector(6f, rot));
+                    Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<CaeliteDust>(), QwertyMethods.PolarVector(6f, rot));
                 }
             }
         }
@@ -106,11 +99,11 @@ namespace QwertyMod.Content.Items.Weapon.Magic.EnlightenedConfusion
             explode();
             if (!target.boss)
             {
-                target.AddBuff(BuffType<Stunned>(), 60);
+                target.AddBuff(ModContent.BuffType<Stunned>(), 60);
             }
             if (Main.rand.NextBool(2))
             {
-                target.AddBuff(BuffType<PowerDown>(), 120);
+                target.AddBuff(ModContent.BuffType<PowerDown>(), 120);
             }
             if (Main.rand.NextBool(2))
             {

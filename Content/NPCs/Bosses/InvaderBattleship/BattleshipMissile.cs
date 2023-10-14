@@ -1,30 +1,17 @@
-
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using QwertyMod.Common;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using Terraria;
-using Terraria.DataStructures;
-using Terraria.GameContent;
-using Terraria.GameContent.Bestiary;
-using Terraria.GameContent.ItemDropRules;
-using Terraria.ID;
-using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
 using QwertyMod.Content.Buffs;
 using QwertyMod.Content.Dusts;
-using QwertyMod.Content.NPCs.Invader;
+using System;
+using Terraria;
+using Terraria.GameContent;
+using Terraria.ModLoader;
+
 
 namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
 {
     public class BattleshipMissile : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("Invader Battleship");
-        }
         public override void SetDefaults()
         {
             Projectile.width = Projectile.height = 14;
@@ -132,7 +119,7 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
                         new Rectangle(0, Projectile.frame * texture.Height, texture.Width, texture.Height), lightColor, Projectile.rotation,
                         new Vector2(39, 7), 1f, SpriteEffects.None, 0);
                         /*
-            Main.EntitySpriteDraw(Request<Texture2D>("QwertyMod/Content/NPCs/Invader/InvaderMicroMissile_Glow").Value, Projectile.Center - Main.screenPosition,
+            Main.EntitySpriteDraw(ModContent.Request<Texture2D>("QwertyMod/Content/NPCs/Invader/InvaderMicroMissile_Glow").Value, Projectile.Center - Main.screenPosition,
                         new Rectangle(0, Projectile.frame * texture.Height, texture.Width, texture.Height), Color.White, Projectile.rotation,
                         Projectile.Size * 0.5f, 1f, SpriteEffects.None, 0);
                         */

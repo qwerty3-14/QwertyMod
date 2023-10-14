@@ -1,16 +1,15 @@
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Content.Buffs;
 using QwertyMod.Content.Dusts;
+using QwertyMod.Content.Items.MiscMaterials;
 using System;
 using Terraria;
 using Terraria.DataStructures;
-using Terraria.GameContent.Creative;
-using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
-using Terraria.ID;
 using Terraria.GameContent;
-using Microsoft.Xna.Framework.Graphics;
-using QwertyMod.Content.Items.MiscMaterials;
+using Terraria.GameContent.Creative;
+using Terraria.ID;
+using Terraria.ModLoader;
 
 
 namespace QwertyMod.Content.Items.Weapon.Melee.Misc
@@ -19,8 +18,6 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Misc
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Divine Hail Knife");
-            //Tooltip.SetDefault("Higher beings will throw these from the sky!");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -37,7 +34,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Misc
             Item.shootSpeed = 12f;
             Item.useTime = 4;
             Item.useAnimation = 8;
-            Item.shoot = ProjectileType<BlessedMonsoonKnifeP>();
+            Item.shoot = ModContent.ProjectileType<BlessedMonsoonKnifeP>();
             Item.noUseGraphic = true;
             Item.noMelee = true;
             Item.autoReuse = true;
@@ -61,8 +58,8 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Misc
         
         public override void AddRecipes()
         {
-            CreateRecipe().AddIngredient(ItemType<CaeliteRainKnife>())
-            .AddIngredient(ItemType<SoulOfHeight>(), 10)
+            CreateRecipe().AddIngredient(ModContent.ItemType<CaeliteRainKnife>())
+            .AddIngredient(ModContent.ItemType<SoulOfHeight>(), 10)
                 .AddTile(TileID.MythrilAnvil)
                 .Register();
         }
@@ -95,7 +92,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Misc
         {
             if (Main.rand.NextBool(10))
             {
-                target.AddBuff(BuffType<PowerDown>(), 120);
+                target.AddBuff(ModContent.BuffType<PowerDown>(), 120);
             }
         }
 
@@ -103,7 +100,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Misc
         {
             if (Main.rand.NextBool(10))
             {
-                Dust dust = Dust.NewDustPerfect(Projectile.Center, DustType<CaeliteDust>(), Vector2.Zero);
+                Dust dust = Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<CaeliteDust>(), Vector2.Zero);
                 dust.frame.Y = 0;
             }
             if (runOnce)
@@ -123,7 +120,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Misc
         {
             for (int i = 0; i < 6; i++)
             {
-                Dust dust = Main.dust[Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<CaeliteDust>())];
+                Dust dust = Main.dust[Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<CaeliteDust>())];
             }
         }
         public override bool PreDraw(ref Color lightColor)

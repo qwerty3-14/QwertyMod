@@ -1,18 +1,16 @@
 ﻿using QwertyMod.Content.Items.Equipment.Accessories;
 using QwertyMod.Content.Items.Equipment.Accessories.Sword;
+using QwertyMod.Content.Items.Equipment.Armor.Hero;
+using QwertyMod.Content.Items.Equipment.Vanity.Casual;
+using QwertyMod.Content.Items.Equipment.Vanity.CocktailDress;
+using QwertyMod.Content.Items.Equipment.Vanity.PurpleDress;
+using QwertyMod.Content.Items.Equipment.Vanity.ScarletBallGown;
+using QwertyMod.Content.Items.Equipment.VanityAccessories;
 using QwertyMod.Content.Items.Weapon.Minion.MiniTank;
+using QwertyMod.Content.Items.Weapon.Ranged.Gun.Charging;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
-using QwertyMod.Content.Items.Weapon.Ranged.Gun.Charging;
-using QwertyMod.Content.Items.Equipment.Armor.Hero;
-using QwertyMod.Content.Items.Equipment.Vanity.CocktailDress;
-using QwertyMod.Content.Items.Equipment.Vanity.ScarletBallGown;
-using QwertyMod.Content.Items.Equipment.Vanity.PurpleDress;
-using QwertyMod.Content.Items.Equipment.VanityAccessories;
-using QwertyMod.Content.Items.Equipment.Vanity.Casual;
-using QwertyMod.Content.Items.Consumable.Tiles;
 
 namespace QwertyMod.Common
 {
@@ -40,50 +38,50 @@ namespace QwertyMod.Common
         {
             if (Main.rand.NextBool(3))
             {
-                shop[nextSlot] = ItemType<SwordEnlarger>();
+                shop[nextSlot] = ModContent.ItemType<SwordEnlarger>();
                 nextSlot++;
             }
             switch(Main.rand.Next(8))
             {
                 case 0:
-                    shop[nextSlot] = ItemType<HeroPlate>();
+                    shop[nextSlot] = ModContent.ItemType<HeroPlate>();
                     nextSlot++;
-                    shop[nextSlot] = ItemType<HeroPants>();
+                    shop[nextSlot] = ModContent.ItemType<HeroPants>();
                     nextSlot++;
-                    shop[nextSlot] = ItemType<HeroShield>();
+                    shop[nextSlot] = ModContent.ItemType<HeroShield>();
                     nextSlot++;
                 break;
                 case 1:
                     if(WorldGen.crimson)
                     {
-                        shop[nextSlot] = ItemType<PurpleBonnet>();
+                        shop[nextSlot] = ModContent.ItemType<PurpleBonnet>();
                         nextSlot++;
-                        shop[nextSlot] = ItemType<PurpleDress>();
+                        shop[nextSlot] = ModContent.ItemType<PurpleDress>();
                         nextSlot++;
-                        shop[nextSlot] = ItemType<PurpleUmbrella>();
+                        shop[nextSlot] = ModContent.ItemType<PurpleUmbrella>();
                         nextSlot++;
                     }
                     else
                     {
-                        shop[nextSlot] = ItemType<ScarletHat>();
+                        shop[nextSlot] = ModContent.ItemType<ScarletHat>();
                         nextSlot++;
-                        shop[nextSlot] = ItemType<ScarletBallGown>();
+                        shop[nextSlot] = ModContent.ItemType<ScarletBallGown>();
                         nextSlot++;
-                        shop[nextSlot] = ItemType<ScarletFan>();
+                        shop[nextSlot] = ModContent.ItemType<ScarletFan>();
                         nextSlot++;
                     }
                     
                 break;
                 case 2:
-                    shop[nextSlot] = ItemType<Shrug>();
+                    shop[nextSlot] = ModContent.ItemType<Shrug>();
                     nextSlot++;
                 break;
                 case 3:
-                    shop[nextSlot] = ItemType<Jacket>();
+                    shop[nextSlot] = ModContent.ItemType<Jacket>();
                     nextSlot++;
                 break;
                 case 4:
-                    shop[nextSlot] = ItemType<Purse>();
+                    shop[nextSlot] = ModContent.ItemType<Purse>();
                     nextSlot++;
                 break;
             }

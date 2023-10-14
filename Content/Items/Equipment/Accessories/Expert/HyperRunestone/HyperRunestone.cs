@@ -10,8 +10,6 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.HyperRunestone
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Hyper Runestone");
-            //Tooltip.SetDefault("Makes other dashes more powerful or can be used to grant a dash on its own" + "\nMakes you invincible when dashing" + "\nThis effect needs four seconds to recharge");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 

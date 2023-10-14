@@ -4,7 +4,7 @@ using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
 {
@@ -13,8 +13,6 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Rhuthinium Greaves");
-            //Tooltip.SetDefault("Lets you dash");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -22,7 +20,6 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
         {
             Item.value = 50000;
             Item.rare = ItemRarityID.Orange;
-
             Item.width = 22;
             Item.height = 18;
             Item.defense = 3;
@@ -40,7 +37,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
         }
         public override void AddRecipes()
         {
-            CreateRecipe(1).AddIngredient(ItemType<RhuthiniumBar>(), 14)
+            CreateRecipe(1).AddIngredient(ModContent.ItemType<RhuthiniumBar>(), 14)
                 .AddTile(TileID.Anvils)
                 .Register();
         }

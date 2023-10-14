@@ -4,7 +4,7 @@ using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Melee.Top.Lune
 {
@@ -12,8 +12,6 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Top.Lune
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Lune Top");
-            //Tooltip.SetDefault("Inflicts Lune curse making enemies more vulnerable to critical hits");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -30,14 +28,14 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Top.Lune
             Item.shootSpeed = 4.5f;
             Item.useTime = 32;
             Item.useAnimation = 32;
-            Item.shoot = ProjectileType<LuneTopP>();
+            Item.shoot = ModContent.ProjectileType<LuneTopP>();
             Item.noUseGraphic = true;
             Item.noMelee = true;
         }
 
         public override void AddRecipes()
         {
-            CreateRecipe(1).AddIngredient(ItemType<LuneBar>(), 12)
+            CreateRecipe(1).AddIngredient(ModContent.ItemType<LuneBar>(), 12)
                 .AddTile(TileID.Anvils)
                 .Register();
         }
@@ -45,11 +43,6 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Top.Lune
 
     public class LuneTopP : Top
     {
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("Lune Top");
-        }
-
         public override void SetDefaults()
         {
             Projectile.aiStyle = 1;
@@ -66,7 +59,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Top.Lune
         }
         public override void TopHit(NPC target)
         {
-            target.AddBuff(BuffType<LuneCurse>(), 180);
+            target.AddBuff(ModContent.BuffType<LuneCurse>(), 180);
         }
     }
 }

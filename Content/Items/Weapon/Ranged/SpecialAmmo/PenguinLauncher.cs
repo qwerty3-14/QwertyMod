@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Ranged.SpecialAmmo
 {
@@ -11,8 +11,6 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.SpecialAmmo
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Penguin Launcher");
-            //Tooltip.SetDefault("Uses penguins as ammo");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -32,7 +30,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.SpecialAmmo
             Item.width = 44;
             Item.height = 18;
 
-            Item.shoot = ProjectileType<SlidingPenguinRanged>();
+            Item.shoot = ModContent.ProjectileType<SlidingPenguinRanged>();
             Item.useAmmo = ItemID.Penguin;
             Item.shootSpeed = 6;
             Item.noMelee = true;
@@ -52,7 +50,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.SpecialAmmo
             if (item.type == ItemID.Penguin)
             {
                 item.ammo = ItemID.Penguin;
-                item.shoot = ProjectileType<SlidingPenguinRanged>();
+                item.shoot = ModContent.ProjectileType<SlidingPenguinRanged>();
             }
         }
     }

@@ -7,7 +7,7 @@ using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 
 namespace QwertyMod.Content.Items.Weapon.Magic.RestlessSun
@@ -16,8 +16,6 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RestlessSun
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Restless Sun");
-            //Tooltip.SetDefault("Blessed by higher beings this weapon excels in large open areas!");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -35,7 +33,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RestlessSun
             Item.useTime = 34;
             Item.useAnimation = 34;
             Item.mana = ModLoader.HasMod("TRAEProject") ? 36 : 11;
-            Item.shoot = ProjectileType<CaeliteMagicProjectile>();
+            Item.shoot = ModContent.ProjectileType<CaeliteMagicProjectile>();
             Item.noUseGraphic = false;
             Item.noMelee = true;
             Item.UseSound = SoundID.Item21;
@@ -100,7 +98,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RestlessSun
         {
             if (Main.rand.NextBool(10))
             {
-                target.AddBuff(BuffType<PowerDown>(), 120);
+                target.AddBuff(ModContent.BuffType<PowerDown>(), 120);
             }
         }
 
@@ -125,7 +123,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RestlessSun
             }
             Projectile.velocity = new Vector2(MathF.Cos(direction) * speed, MathF.Sin(direction) * speed);
             maxDistance = 10000f;
-            Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<CaeliteDust>());
+            Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<CaeliteDust>());
             Projectile.rotation += MathF.PI / 7.5f;
         }
 
@@ -133,7 +131,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.RestlessSun
         {
             for (int i = 0; i < 6; i++)
             {
-                Dust dust = Main.dust[Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<CaeliteDust>())];
+                Dust dust = Main.dust[Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<CaeliteDust>())];
             }
         }
     }

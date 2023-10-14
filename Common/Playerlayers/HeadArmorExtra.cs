@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Common.Playerlayers
 {
@@ -113,20 +113,29 @@ namespace QwertyMod.Common.Playerlayers
         {
             var immediate = AssetRequestMode.ImmediateLoad;
             Mod mod = ModLoader.GetMod("QwertyMod");
-            OnHeadDraw head = new OnHeadDraw(Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Hydra/HydraHelmet_Glow", immediate).Value);
+            OnHeadDraw head = new OnHeadDraw(ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Hydra/HydraHelmet_Head_Glow", immediate).Value);
             HeadDictionary.Add(EquipLoader.GetEquipSlot(mod, "HydraHelmet", EquipType.Head), head);
-            head = new OnHeadDraw(Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Glass/GlassHelm_Head_Glass", immediate).Value, false, 3);
+            head = new OnHeadDraw(ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Glass/GlassHelm_Head_Glass", immediate).Value, false, 3);
             HeadDictionary.Add(EquipLoader.GetEquipSlot(mod, "GlassHelm", EquipType.Head), head);
-            head = new OnHeadDraw(Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Vitallum/VitallumHeadress_Head_Vein", immediate).Value, false, 3, 4);
+            head = new OnHeadDraw(ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Vitallum/VitallumHeadress_Head_Vein", immediate).Value, false, 3, 4);
             HeadDictionary.Add(EquipLoader.GetEquipSlot(mod, "VitallumHeadress", EquipType.Head), head);
 
-            //head = new OnHeadDraw(Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Bionic/BionicEye_Head_Lower", immediate).Value, lowered: true);
+            //head = new OnHeadDraw(ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Bionic/BionicEye_Head_Lower", immediate).Value, lowered: true);
             //HeadDictionary.Add(EquipLoader.GetEquipSlot(mod, "BionicEye", EquipType.Head), head);
-            head = new OnHeadDraw(Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Bionic/BionicEye_Head_Glow", immediate).Value, lowered: true);
+            head = new OnHeadDraw(ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Bionic/BionicEye_Head_Glow", immediate).Value, lowered: true);
             HeadDictionary.Add(EquipLoader.GetEquipSlot(mod, "BionicEye", EquipType.Head), head);
 
-            head = new OnHeadDraw(Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Invader/InvaderPercepticals_Head_Glow", immediate).Value, lowered: true);
+            head = new OnHeadDraw(ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Invader/InvaderPercepticals_Head_Glow", immediate).Value, lowered: true);
             HeadDictionary.Add(EquipLoader.GetEquipSlot(mod, "InvaderPercepticals", EquipType.Head), head);
+
+            head = new OnHeadDraw(ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/Vanity/BossMasks/AncientMachineMask_Head_Glow", immediate).Value, lowered: true);
+            HeadDictionary.Add(EquipLoader.GetEquipSlot(mod, "AncientMachineMask", EquipType.Head), head);
+
+            head = new OnHeadDraw(ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/Vanity/BossMasks/InvaderMask_Head_Glow", immediate).Value, lowered: true);
+            HeadDictionary.Add(EquipLoader.GetEquipSlot(mod, "InvaderMask", EquipType.Head), head);
+
+            head = new OnHeadDraw(ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/Vanity/BossMasks/HydraMask_Head_Glow", immediate).Value, lowered: true);
+            HeadDictionary.Add(EquipLoader.GetEquipSlot(mod, "HydraMask", EquipType.Head), head);
 
 
         }

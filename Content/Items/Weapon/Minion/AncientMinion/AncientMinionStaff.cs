@@ -6,7 +6,7 @@ using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Minion.AncientMinion
 {
@@ -14,8 +14,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.AncientMinion
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Ancient Minion Staff");
-            //Tooltip.SetDefault("Summons an ancient minion to fight for you!");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
@@ -37,12 +35,12 @@ namespace QwertyMod.Content.Items.Weapon.Minion.AncientMinion
             Item.rare = ItemRarityID.Orange;
             Item.UseSound = SoundID.Item8;
             Item.autoReuse = true;
-            Item.shoot = ProjectileType<AncientMinionFreindly>();
+            Item.shoot = ModContent.ProjectileType<AncientMinionFreindly>();
             Item.DamageType = DamageClass.Summon;
 
             if (!Main.dedServ)
             {
-                Item.GetGlobalItem<ItemUseGlow>().glowTexture = Request<Texture2D>("QwertyMod/Content/Items/Weapon/Minion/AncientMinion/AncientMinionStaff_Glow").Value;
+                Item.GetGlobalItem<ItemUseGlow>().glowTexture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Minion/AncientMinion/AncientMinionStaff_Glow").Value;
             }
 
         }

@@ -1,12 +1,10 @@
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Content.Dusts;
 using System;
 using Terraria;
-using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.NPCs.Bosses.Hydra
 {
@@ -14,7 +12,6 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Doom Breath");
             Main.projFrames[Projectile.type] = 2;
         }
 
@@ -60,7 +57,7 @@ namespace QwertyMod.Content.NPCs.Bosses.Hydra
 
         public virtual void CreateDust()
         {
-            int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<HydraBreathGlow>());
+            int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<HydraBreathGlow>());
         }
     }
 }

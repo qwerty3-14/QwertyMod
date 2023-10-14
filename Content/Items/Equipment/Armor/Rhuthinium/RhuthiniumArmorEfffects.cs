@@ -4,9 +4,8 @@ using System;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent;
-using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
 {
@@ -31,7 +30,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
             {
                 summonCounter = 0;
                 float rot = Main.rand.NextFloat() * 2f * MathF.PI;
-                Projectile.NewProjectile(new EntitySource_Misc("SetBonus_Rhuthinium"), position + QwertyMethods.PolarVector(240, rot), QwertyMethods.PolarVector(4f, rot + MathF.PI), ProjectileType<RhuthimisWraith>(), (int)(30 * Player.GetDamage(DamageClass.Summon).Multiplicative), (int)(5f + Player.GetKnockback(DamageClass.Summon).Multiplicative), Player.whoAmI);
+                Projectile.NewProjectile(new EntitySource_Misc("SetBonus_Rhuthinium"), position + QwertyMethods.PolarVector(240, rot), QwertyMethods.PolarVector(4f, rot + MathF.PI), ModContent.ProjectileType<RhuthimisWraith>(), (int)(30 * Player.GetDamage(DamageClass.Summon).Multiplicative), (int)(5f + Player.GetKnockback(DamageClass.Summon).Multiplicative), Player.whoAmI);
             }
         }
 
@@ -39,7 +38,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
         {
             if (hit.DamageType == DamageClass.Melee && meleeSet && target.life < damageDone)
             {
-                Player.AddBuff(BuffType<RhuthiniumMight>(), 300);
+                Player.AddBuff(ModContent.BuffType<RhuthiniumMight>(), 300);
             }
             RhuthimisWraith(target.Center);
         }
@@ -48,7 +47,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
         {
             if (proj.CountsAsClass(DamageClass.Melee) && meleeSet && target.life < damageDone)
             {
-                Player.AddBuff(BuffType<RhuthiniumMight>(), 300);
+                Player.AddBuff(ModContent.BuffType<RhuthiniumMight>(), 300);
             }
             if (proj.CountsAsClass(DamageClass.Magic) && magicSet && hit.Crit)
             {
@@ -61,7 +60,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
                         manaLimiter -= damageDone * 6;
                     }
                 }
-                Player.AddBuff(BuffType<RhuthiniumMagic>(), 300);
+                Player.AddBuff(ModContent.BuffType<RhuthiniumMagic>(), 300);
                 for (int num71 = 0; num71 < 5; num71++)
                 {
                     int num72 = Dust.NewDust(Player.position, Player.width, Player.height, DustID.ManaRegeneration, 0f, 0f, 255, default(Color), (float)Main.rand.Next(20, 26) * 0.1f);
@@ -87,13 +86,13 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
             rangedCounter++;
             if (rangedCounter > 300 && rangedSet)
             {
-                Player.AddBuff(BuffType<RhuthiniumFocus>(), 2);
+                Player.AddBuff(ModContent.BuffType<RhuthiniumFocus>(), 2);
             }
         }
 
         public override void PostUpdateEquips()
         {
-            if (Player.HasBuff(BuffType<RhuthiniumMight>()))
+            if (Player.HasBuff(ModContent.BuffType<RhuthiniumMight>()))
             {
                 Player.accRunSpeed *= 1.2f;
             }
@@ -102,10 +101,6 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
 
     public class RhuthimisWraith : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("RhuthimisWraith");
-        }
 
         public override void SetDefaults()
         {

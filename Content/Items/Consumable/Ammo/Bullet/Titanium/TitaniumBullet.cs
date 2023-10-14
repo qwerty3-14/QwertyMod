@@ -2,7 +2,7 @@
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 namespace QwertyMod.Content.Items.Consumable.Ammo.Bullet.Titanium
 {
     public class TitaniumBullet : ModItem
@@ -25,7 +25,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Bullet.Titanium
             Item.shootSpeed = 1;
 
             Item.consumable = true;
-            Item.shoot = ProjectileType<TitaniumBulletP>();
+            Item.shoot = ModContent.ProjectileType<TitaniumBulletP>();
             Item.ammo = 97;
             Item.maxStack = 9999;
         }

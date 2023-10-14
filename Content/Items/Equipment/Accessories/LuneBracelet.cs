@@ -4,7 +4,6 @@ using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content.Items.Equipment.Accessories
 {
@@ -13,8 +12,6 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Lune Bracelet");
-            //Tooltip.SetDefault("Lets you do a weak dash and empowers other dashes slightly");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -36,7 +33,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
         }
         public override void AddRecipes()
         {
-            CreateRecipe(1).AddIngredient(ItemType<LuneBar>(), 4)
+            CreateRecipe(1).AddIngredient(ModContent.ItemType<LuneBar>(), 4)
                 .AddTile(TileID.Anvils)
                 .Register();
         }

@@ -1,11 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content.Items.Weapon.Melee.Spear.Hydrospear
 {
@@ -13,8 +11,6 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Spear.Hydrospear
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Hydrospear");
-            //Tooltip.SetDefault("");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.Spears[Item.type] = true;
         }
@@ -39,7 +35,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Spear.Hydrospear
             //Item.autoReuse = true; // Most spears don't autoReuse, but it's possible when used in conjunction with CanUseItem()
             Item.channel = true;
             Item.UseSound = SoundID.Item1;
-            Item.shoot = ProjectileType<HydrospearP>();
+            Item.shoot = ModContent.ProjectileType<HydrospearP>();
         }
 
         public override bool CanUseItem(Player player)
@@ -82,7 +78,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Spear.Hydrospear
                 streamCounter++;
                 if (streamCounter % 16 == 0)
                 {
-                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center + QwertyMethods.PolarVector(-12, aimDirection), QwertyMethods.PolarVector(1, aimDirection), ProjectileType<HydrospearStream>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center + QwertyMethods.PolarVector(-12, aimDirection), QwertyMethods.PolarVector(1, aimDirection), ModContent.ProjectileType<HydrospearStream>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
                 }
             }
         }

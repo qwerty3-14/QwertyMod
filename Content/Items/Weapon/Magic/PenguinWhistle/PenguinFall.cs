@@ -1,17 +1,15 @@
 ﻿using Microsoft.Xna.Framework;
 using QwertyMod.Content.Buffs;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 namespace QwertyMod.Content.Items.Weapon.Magic.PenguinWhistle
 {
     public class PenguinFall : ModProjectile
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Penguin Fall");
             Main.projFrames[Projectile.type] = 2;
         }
 
@@ -98,7 +96,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.PenguinWhistle
                 (target.Center - Projectile.Center) *
                 0.75f; // Change velocity based on delta center of targets (difference between entity centers)
             Projectile.netUpdate = true; // netUpdate this javelin
-            target.AddBuff(BuffType<Impaled>(), 900); // Adds the Impaled debuff
+            target.AddBuff(ModContent.BuffType<Impaled>(), 900); // Adds the Impaled debuff
             Projectile.penetrate = -1;
             Projectile.damage = 0; // Makes sure the sticking javelins do not deal damage anymore
 

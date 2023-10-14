@@ -4,7 +4,7 @@ using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 
 namespace QwertyMod.Content.Items.Weapon.Minion.UrQuan
@@ -13,8 +13,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.UrQuan
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Rod of Command");
-            //Tooltip.SetDefault("Used by Ur-Quan lords to issue commands");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
@@ -34,7 +32,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.UrQuan
             Item.value = 750000;
             Item.rare = ItemRarityID.LightRed;
             //Item.UseSound = SoundID.Item44;
-            Item.shoot = ProjectileType<Dreadnought>();
+            Item.shoot = ModContent.ProjectileType<Dreadnought>();
             Item.DamageType = DamageClass.Summon;
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)

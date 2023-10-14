@@ -1,14 +1,13 @@
 using Microsoft.Xna.Framework;
+using QwertyMod.Common;
 using QwertyMod.Content.Dusts;
 using QwertyMod.Content.NPCs.Fortress;
 using System;
 using Terraria;
-using Terraria.DataStructures;
+using Terraria.Audio;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
 using Terraria.ID;
-using Terraria.Audio;
-using QwertyMod.Common;
 
 namespace QwertyMod.Content.NPCs.Invader
 {

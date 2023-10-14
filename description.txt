@@ -33,9 +33,17 @@ Extra thanks
 
 Changelog
 1.0.0
+I've been working on this mod since Fall of 2018, I want to move on with other projectiles
+I will continue to keep the mod up to date with tmodloader and fix occasional bugs but have no plans of adding more content in the future
+I will still be open to community contributions such as resprites and mod translations
+
 New content
--Added Superquantum Rifle
--Added Dimension violating railgun staff
+-Added 3 new weapons, these drop directly from Invader Battleship
+-Invader battleship now has its own battle theme (Thanks Kweequ)
+-Music box for the invader battleship's theme (Thanks Kweequ)
+-Added Trophies for Noehtnap, Rune Ghost, Invader Battleship, and OLORD (Thanks Kweequ)
+-Added Boss masks for Ancient Machine, Noehtnap, Imperious, Invader Battleship, and OLORD (Thanks Kweequ)
+
 
 Bug Fixes
 -Fixed restless sun projectiles inflicting infinite iFrames
@@ -47,6 +55,9 @@ Overhauls, polish, and balance changes
 -Penguin generator proc chance 1/10 -> 1/15
 -Higher priest staff damage 140 -> 175
 -divine banishment use time 30 -> 22
+-Imperious' swings have acceleration
+-Imperious will wait half a second after the phantom ring attack before starting to swing
+-Added descriptions to mod commands that didn't have them
 
 
 0.10.0

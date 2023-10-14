@@ -5,7 +5,7 @@ using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Equipment.Armor.Gale
 {
@@ -15,8 +15,6 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Gale
 
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Gale Swift Robes");
-            //Tooltip.SetDefault("+9% chance to dodge an attack" + "\n+8% critical strike chance");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -31,7 +29,6 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Gale
             Item.value = Item.sellPrice(0, 0, 75, 0);
             Item.rare = ItemRarityID.LightRed;
             Item.defense = 1;
-            //Item.vanity = true;
             Item.width = 22;
             Item.height = 18;
         }
@@ -43,8 +40,8 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Gale
         }
         public override void AddRecipes()
         {
-            CreateRecipe(1).AddIngredient(ItemType<CaeliteBar>(), 8)
-                .AddIngredient(ItemType<FortressHarpyBeak>(), 8)
+            CreateRecipe(1).AddIngredient(ModContent.ItemType<CaeliteBar>(), 8)
+                .AddIngredient(ModContent.ItemType<FortressHarpyBeak>(), 8)
                 .AddTile(TileID.Anvils)
                 .Register();
         }

@@ -10,7 +10,7 @@ using Terraria.GameContent;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Magic.AncientMissile
 {
@@ -18,8 +18,6 @@ namespace QwertyMod.Content.Items.Weapon.Magic.AncientMissile
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Ancient Missile Staff");
-            //Tooltip.SetDefault("Fires explosive Ancient Missiles!");
             Item.staff[Item.type] = true; //this makes the useStyle animate as a staff instead of as a gun
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
@@ -42,13 +40,13 @@ namespace QwertyMod.Content.Items.Weapon.Magic.AncientMissile
             Item.height = 72;
             if (!Main.dedServ)
             {
-                Item.GetGlobalItem<ItemUseGlow>().glowTexture = Request<Texture2D>("QwertyMod/Content/Items/Weapon/Magic/AncientMissile/AncientMissileStaff_Glow").Value;
+                Item.GetGlobalItem<ItemUseGlow>().glowTexture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Magic/AncientMissile/AncientMissileStaff_Glow").Value;
             }
             Item.mana = ModLoader.HasMod("TRAEProject") ? 14 : 7;
-            Item.shoot = ProjectileType<AncientMissileP>();
+            Item.shoot = ModContent.ProjectileType<AncientMissileP>();
             Item.shootSpeed = 9;
             Item.noMelee = true;
-            //Item.GetGlobalItem<ItemUseGlow>().glowTexture = Request<Texture2D>("Items/AncientItems/AncientWave_Glow");
+            //Item.GetGlobalItem<ItemUseGlow>().glowTexture = ModContent.Request<Texture2D>("Items/AncientItems/AncientWave_Glow");
         }
 
         public override void UseAnimation(Player player)
@@ -75,8 +73,6 @@ namespace QwertyMod.Content.Items.Weapon.Magic.AncientMissile
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Ancient Missile");
-
             Main.projFrames[Projectile.type] = 2;
         }
 
@@ -127,20 +123,20 @@ namespace QwertyMod.Content.Items.Weapon.Magic.AncientMissile
                     }
                 }
             }
-            Dust dust = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(26, Projectile.rotation + MathF.PI / 2) + QwertyMethods.PolarVector(Main.rand.Next(-6, 6), Projectile.rotation), DustType<AncientGlow>());
+            Dust dust = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(26, Projectile.rotation + MathF.PI / 2) + QwertyMethods.PolarVector(Main.rand.Next(-6, 6), Projectile.rotation), ModContent.DustType<AncientGlow>());
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.localNPCImmunity[target.whoAmI] = -1;
             target.immune[Projectile.owner] = 0;
-            Projectile e = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ProjectileType<AncientBlastFriendly>(), Projectile.damage, Projectile.knockBack, Projectile.owner, 1f)];
+            Projectile e = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<AncientBlastFriendly>(), Projectile.damage, Projectile.knockBack, Projectile.owner, 1f)];
             e.localNPCImmunity[target.whoAmI] = -1;
         }
 
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ProjectileType<AncientBlastFriendly>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+            Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<AncientBlastFriendly>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
             return true;
         }
 
@@ -150,7 +146,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.AncientMissile
             Main.EntitySpriteDraw(texture, new Vector2(Projectile.Center.X - Main.screenPosition.X, Projectile.Center.Y - Main.screenPosition.Y),
                         new Rectangle(0, Projectile.frame * texture.Height / 2, texture.Width, texture.Height / 2), drawColor, Projectile.rotation,
                         new Vector2(Projectile.width * 0.5f, Projectile.height * 0.5f), 1f, SpriteEffects.None, 0);
-            Main.EntitySpriteDraw(Request<Texture2D>("QwertyMod/Content/Items/Weapon/Magic/AncientMissile/AncientMissileP_Glow").Value, new Vector2(Projectile.Center.X - Main.screenPosition.X, Projectile.Center.Y - Main.screenPosition.Y),
+            Main.EntitySpriteDraw(ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Magic/AncientMissile/AncientMissileP_Glow").Value, new Vector2(Projectile.Center.X - Main.screenPosition.X, Projectile.Center.Y - Main.screenPosition.Y),
                         new Rectangle(0, Projectile.frame * texture.Height / 2, texture.Width, texture.Height / 2), Color.White, Projectile.rotation,
                         new Vector2(Projectile.width * 0.5f, Projectile.height * 0.5f), 1f, SpriteEffects.None, 0);
             return false;
@@ -159,10 +155,6 @@ namespace QwertyMod.Content.Items.Weapon.Magic.AncientMissile
 
     public class AncientBlastFriendly : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("Ancient Blast");
-        }
 
         public override void SetDefaults()
         {
@@ -191,7 +183,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.AncientMissile
             for (int i = 0; i < 100; i++)
             {
                 float theta = Main.rand.NextFloat(-MathF.PI, MathF.PI);
-                Dust dust = Dust.NewDustPerfect(Projectile.Center, DustType<AncientGlow>(), QwertyMethods.PolarVector(Main.rand.Next(7, 14), theta));
+                Dust dust = Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<AncientGlow>(), QwertyMethods.PolarVector(Main.rand.Next(7, 14), theta));
                 dust.noGravity = true;
             }
         }

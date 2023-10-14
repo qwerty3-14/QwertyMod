@@ -8,7 +8,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.SpaceFighter
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Fighter Laser");
             Main.projFrames[Projectile.type] = 1;
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             ProjectileID.Sets.MinionShot[Projectile.type] = true;

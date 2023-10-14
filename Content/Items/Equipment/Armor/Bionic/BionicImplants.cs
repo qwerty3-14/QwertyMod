@@ -1,13 +1,15 @@
-﻿using QwertyMod.Content.Buffs;
+﻿using Microsoft.Xna.Framework.Graphics;
+using QwertyMod.Common.PlayerLayers;
+using QwertyMod.Content.Buffs;
 using QwertyMod.Content.Items.Weapon.Morphs;
 using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
+using Terraria.GameContent.Creative;
 using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.GameContent.Creative;
 
 namespace QwertyMod.Content.Items.Equipment.Armor.Bionic
 {
@@ -16,8 +18,6 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Bionic
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Bionic Implants");
-            //Tooltip.SetDefault("30% reduced cooldown on morphs\nYour offhand is replaced with a laser cannon!");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -28,6 +28,10 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Bionic
             Item.defense = 7;
             Item.width = 14;
             Item.height = 20;
+            if (!Main.dedServ)
+            {
+                Item.GetGlobalItem<ItemUseGlow>().glowTexture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Bionic/BionicImplants_Glow").Value;
+            }
         }
         public override void UpdateEquip(Player player)
         {

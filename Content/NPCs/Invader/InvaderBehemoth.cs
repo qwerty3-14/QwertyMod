@@ -3,21 +3,19 @@ using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Common.Fortress;
 using QwertyMod.Content.Buffs;
 using QwertyMod.Content.Dusts;
+using QwertyMod.Content.Items.MiscMaterials;
+using QwertyMod.Content.Items.Weapon.Melee.Sword.Overkill;
 using QwertyMod.Content.Items.Weapon.Ranged.Gun.SoEF;
 using System;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.DataStructures;
+using Terraria.Audio;
 using Terraria.GameContent;
+using Terraria.GameContent.ItemDropRules;
 using Terraria.GameContent.Bestiary;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
-using Terraria.GameContent.ItemDropRules;
-using QwertyMod.Content.Items.MiscMaterials;
-using QwertyMod.Content.Items.Weapon.Melee.Sword.Overkill;
-using Terraria.Audio;
-using QwertyMod.Common;
+
 
 namespace QwertyMod.Content.NPCs.Invader
 {
@@ -222,7 +220,7 @@ namespace QwertyMod.Content.NPCs.Invader
             spriteBatch.Draw(TextureAssets.Npc[NPC.type].Value, NPC.Center - screenPos + Vector2.UnitY * 4,
             NPC.frame, drawColor, NPC.rotation,
             new Vector2((NPC.spriteDirection != 1 ? (TextureAssets.Npc[NPC.type].Value.Width - 63) : 63), (150 - 124) + (124 / 2)), 1f, NPC.spriteDirection != 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0f);
-            spriteBatch.Draw(Request<Texture2D>("QwertyMod/Content/NPCs/Invader/InvaderBehemoth_Glow").Value, NPC.Center - screenPos,
+            spriteBatch.Draw(ModContent.Request<Texture2D>("QwertyMod/Content/NPCs/Invader/InvaderBehemoth_Glow").Value, NPC.Center - screenPos,
             NPC.frame, Color.White, NPC.rotation,
             new Vector2((NPC.spriteDirection != 1 ? (TextureAssets.Npc[NPC.type].Value.Width - 63) : 63), (150 - 124) + (124 / 2)), 1f, NPC.spriteDirection != 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0f);
             if (beamChargeup >= 60 && beamChargeup < 120)
@@ -237,7 +235,7 @@ namespace QwertyMod.Content.NPCs.Invader
                         break;
                     }
                 }
-                Texture2D beamWarning = Request<Texture2D>("QwertyMod/Content/NPCs/Invader/InvaderZap").Value;
+                Texture2D beamWarning = ModContent.Request<Texture2D>("QwertyMod/Content/NPCs/Invader/InvaderZap").Value;
                 spriteBatch.Draw(beamWarning, shootFrom - Main.screenPosition, null, Color.White, rot, Vector2.UnitY * 1, new Vector2(length / 2f, 1), SpriteEffects.None, 0);
             }
             return false;
@@ -253,8 +251,8 @@ namespace QwertyMod.Content.NPCs.Invader
         }
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
-            npcLoot.Add(ItemDropRule.Common(ItemType<InvaderPlating>(), 1, 10, 20));
-            npcLoot.Add(ItemDropRule.Common(ItemType<Overkill>(), 6, 1, 1));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<InvaderPlating>(), 1, 10, 20));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Overkill>(), 6, 1, 1));
         }
 
         public override float SpawnChance(NPCSpawnInfo spawnInfo)

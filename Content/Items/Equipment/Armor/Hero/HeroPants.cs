@@ -1,9 +1,8 @@
-using QwertyMod.Content.Items.Consumable.Tiles.Bars;
 using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Equipment.Armor.Hero
 {
@@ -13,9 +12,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Hero
         public override void SetStaticDefaults()
         {
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
-
         }
-
         public override void SetDefaults()
         {
             Item.value = Item.buyPrice(gold: 20);
@@ -24,12 +21,10 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Hero
             Item.height = 12;
             Item.defense = 6;
         }
-
         public override void UpdateEquip(Player player)
         {
             player.moveSpeed += 0.2f;
         }
-
         public override void SetMatch(bool male, ref int equipSlot, ref bool robes)
         {
             if (male) equipSlot = QwertyMod.HeroPantsMale;

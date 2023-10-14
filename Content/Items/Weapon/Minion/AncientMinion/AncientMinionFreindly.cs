@@ -8,7 +8,7 @@ using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Minion.AncientMinion
 {
@@ -91,7 +91,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.AncientMinion
                     {
                         float theta = Main.rand.NextFloat(-MathF.PI, MathF.PI);
 
-                        Dust dust = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(minionRingRadius, theta), DustType<AncientGlow>(), QwertyMethods.PolarVector(-minionRingRadius / 10, theta));
+                        Dust dust = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(minionRingRadius, theta), ModContent.DustType<AncientGlow>(), QwertyMethods.PolarVector(-minionRingRadius / 10, theta));
                         dust.noGravity = true;
                     }
                     if (Main.netMode != NetmodeID.MultiplayerClient)
@@ -121,7 +121,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.AncientMinion
                         for (int i = 0; i < minionRingDustQty; i++)
                         {
                             float theta = Main.rand.NextFloat(-MathF.PI, MathF.PI);
-                            Dust dust = Dust.NewDustPerfect(Projectile.Center, DustType<AncientGlow>(), QwertyMethods.PolarVector(minionRingRadius / 10, theta));
+                            Dust dust = Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<AncientGlow>(), QwertyMethods.PolarVector(minionRingRadius / 10, theta));
                             dust.noGravity = true;
                         }
                     }
@@ -148,7 +148,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.AncientMinion
                     for (int i = 0; i < minionRingDustQty; i++)
                     {
                         float theta = Main.rand.NextFloat(-MathF.PI, MathF.PI);
-                        Dust dust = Dust.NewDustPerfect(Projectile.Center, DustType<AncientGlow>(), QwertyMethods.PolarVector(minionRingRadius / 10, theta));
+                        Dust dust = Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<AncientGlow>(), QwertyMethods.PolarVector(minionRingRadius / 10, theta));
                         dust.noGravity = true;
                     }
                 }
@@ -163,7 +163,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.AncientMinion
                     {
                         float theta = Main.rand.NextFloat(-MathF.PI, MathF.PI);
 
-                        Dust dust = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(minionRingRadius, theta), DustType<AncientGlow>(), QwertyMethods.PolarVector(-minionRingRadius / 10, theta));
+                        Dust dust = Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(minionRingRadius, theta), ModContent.DustType<AncientGlow>(), QwertyMethods.PolarVector(-minionRingRadius / 10, theta));
                         dust.noGravity = true;
                     }
                     noTargetTimer = 0;
@@ -190,7 +190,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.AncientMinion
             Main.EntitySpriteDraw(texture, new Vector2(Projectile.Center.X - Main.screenPosition.X, Projectile.Center.Y - Main.screenPosition.Y),
                         new Rectangle(0, Projectile.frame * texture.Height, texture.Width, texture.Height), lightColor, Projectile.rotation,
                         new Vector2(texture.Width * 0.5f, texture.Height * 0.5f), 1f, SpriteEffects.None, 0);
-            Main.EntitySpriteDraw(Request<Texture2D>("QwertyMod/Content/Items/Weapon/Minion/AncientMinion/AncientMinionFreindly_Glow").Value, new Vector2(Projectile.Center.X - Main.screenPosition.X, Projectile.Center.Y - Main.screenPosition.Y),
+            Main.EntitySpriteDraw(ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Minion/AncientMinion/AncientMinionFreindly_Glow").Value, new Vector2(Projectile.Center.X - Main.screenPosition.X, Projectile.Center.Y - Main.screenPosition.Y),
                         new Rectangle(0, Projectile.frame * texture.Height, texture.Width, texture.Height), Color.White, Projectile.rotation,
                         new Vector2(texture.Width * 0.5f, texture.Height * 0.5f), 1f, SpriteEffects.None, 0);
             return false;

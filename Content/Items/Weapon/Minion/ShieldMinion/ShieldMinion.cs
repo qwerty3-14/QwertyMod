@@ -8,7 +8,7 @@ using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Minion.ShieldMinion
 {
@@ -16,7 +16,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.ShieldMinion
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Shield Minion");
             Main.projFrames[Projectile.type] = 2;
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
@@ -64,7 +63,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.ShieldMinion
             }
             for (int p = 0; p < 1000; p++)
             {
-                if (Main.projectile[p].type == ProjectileType<ShieldMinion>() && Main.projectile[p].active && Main.projectile[p].owner == Projectile.owner && Main.projectile[p].ai[1] == Projectile.ai[1])
+                if (Main.projectile[p].type == ModContent.ProjectileType<ShieldMinion>() && Main.projectile[p].active && Main.projectile[p].owner == Projectile.owner && Main.projectile[p].ai[1] == Projectile.ai[1])
                 {
                     ShieldCount++;
                 }
@@ -143,7 +142,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.ShieldMinion
             target.immune[Projectile.owner] = 0;
             if (Main.rand.NextBool(10) && !target.boss)
             {
-                target.AddBuff(BuffType<Stunned>(), 120);
+                target.AddBuff(ModContent.BuffType<Stunned>(), 120);
             }
         }
 
@@ -153,7 +152,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.ShieldMinion
             {
                 for (int i = 0; i < modifiers.FinalDamage.Multiplicative / 3; i++)
                 {
-                    Dust d = Dust.NewDustPerfect(Projectile.Center, DustType<BloodforceDust>());
+                    Dust d = Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<BloodforceDust>());
                     d.velocity *= 5f;
                 }
                 modifiers.FinalDamage *= 2;
@@ -164,7 +163,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.ShieldMinion
         {
             if (Projectile.frame == 0)
             {
-                Texture2D eye = Request<Texture2D>("QwertyMod/Content/Items/Weapon/Minion/ShieldMinion/ShieldMinionEye").Value;
+                Texture2D eye = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Minion/ShieldMinion/ShieldMinionEye").Value;
                 Main.EntitySpriteDraw(eye, (Projectile.position + new Vector2(14, 13)) + eyeOffset - Main.screenPosition,
                            eye.Frame(), lightColor, Projectile.rotation,
                            eye.Size() * .5f, 1f, SpriteEffects.None, 0);

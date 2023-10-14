@@ -1,6 +1,5 @@
 using Terraria.GameContent.Creative;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
 using Terraria.ID;
 
 namespace QwertyMod.Content.Items.Consumable.Tiles.Trophy.Hydra
@@ -19,14 +18,12 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Trophy.Hydra
             Item.useStyle = ItemUseStyleID.Swing;
             Item.consumable = true;
             Item.value = 50000;
-            Item.createTile = TileType<HydraTrophyT>();
+            Item.createTile = ModContent.TileType<HydraTrophyT>();
             Item.placeStyle = 0;
         }
 
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Hydra Trophy");
-            //Tooltip.SetDefault("");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
     }

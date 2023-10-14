@@ -10,17 +10,14 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
     [AutoloadEquip(EquipType.Neck)]
     public class AmuletOfPatience : ModItem
     {
-
         public override void SetStaticDefaults()
         {
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
-
         public override void SetDefaults()
         {
             Item.value = Item.sellPrice(silver: 54);
             Item.rare = ItemRarityID.Green;
-
             Item.width = 14;
             Item.height = 18;
             Item.accessory = true;
@@ -43,12 +40,10 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
     {
         public bool effect = false;
         public int patienceCount;
-
         public override void ResetEffects()
         {
             effect = false;
         }
-
         public override void PreUpdate()
         {
             if (effect && patienceCount < 180)
@@ -56,7 +51,6 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
                 patienceCount++;
             }
         }
-
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
             if (patienceCount > 60)
@@ -65,6 +59,5 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
             }
             patienceCount = 0;
         }
-        
     }
 }

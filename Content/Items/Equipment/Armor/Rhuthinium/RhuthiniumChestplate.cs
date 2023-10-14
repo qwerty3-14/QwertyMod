@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
 {
@@ -12,17 +12,13 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Rhuthinium Chestplate");
-            //Tooltip.SetDefault("8% increased damage");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
-
         }
 
         public override void SetDefaults()
         {
             Item.value = 50000;
             Item.rare = ItemRarityID.Orange;
-
             Item.width = 26;
             Item.height = 18;
             Item.defense = 4;
@@ -35,7 +31,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
 
         public override void AddRecipes()
         {
-            CreateRecipe(1).AddIngredient(ItemType<RhuthiniumBar>(), 18)
+            CreateRecipe(1).AddIngredient(ModContent.ItemType<RhuthiniumBar>(), 18)
                 .AddTile(TileID.Anvils)
                 .Register();
         }

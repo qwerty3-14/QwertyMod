@@ -3,12 +3,11 @@ using QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls;
 using QwertyMod.Content.Items.Equipment.Vanity.BossMasks;
 using QwertyMod.Content.Items.Equipment.Vanity.RunicRobe;
 using QwertyMod.Content.Items.MiscMaterials;
-using QwertyMod.Content.NPCs.Bosses.RuneGhost;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 using Terraria.ID;
 using Terraria.GameContent.ItemDropRules;
 
@@ -18,7 +17,7 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
     {
         public override void SetStaticDefaults()
         {
-            Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(10, 36));
+            //Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(10, 36));
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 3;
             ItemID.Sets.BossBag[Type] = true; // This set is one that every boss bag should have, it, for example, lets our boss bag drop dev armor..
 			ItemID.Sets.PreHardmodeLikeBossBag[Type] = true; // ..But this set ensures that dev armor will only be dropped on special world seeds, since that's the behavior of pre-hardmode boss bags.
@@ -49,7 +48,7 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<HyperRunestone>(), 1));
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<CraftingRune>(), 1, 30, 40));
             itemLoot.Add(ItemDropRule.Coins(350000, true));
-            itemLoot.Add(ItemDropRule.FewFromOptions(1, 1, ItemType<IceScroll>(), ItemType<PursuitScroll>(), ItemType<LeechScroll>(), ItemType<AggroScroll>()));
+            itemLoot.Add(ItemDropRule.FewFromOptions(1, 1, ModContent.ItemType<IceScroll>(), ModContent.ItemType<PursuitScroll>(), ModContent.ItemType<LeechScroll>(), ModContent.ItemType<AggroScroll>()));
         }
     }
 }

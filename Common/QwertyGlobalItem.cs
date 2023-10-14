@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using QwertyMod.Content.Items.Equipment.Accessories;
+using System.Collections.Generic;
 using Terraria;
+using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
-using QwertyMod.Content.Items.Equipment.Accessories;
-using Terraria.GameContent.ItemDropRules;
 
 namespace QwertyMod.Common
 {

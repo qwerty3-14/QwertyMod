@@ -1,5 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using Terraria;
+﻿using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
@@ -12,7 +11,6 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.MusicBoxes
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Music Box (The Conjurer)");
 
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
 

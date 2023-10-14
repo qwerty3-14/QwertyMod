@@ -1,12 +1,11 @@
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ModLoader;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
-using System;
-using Terraria.DataStructures;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Terraria.GameContent;
 
 namespace QwertyMod.Content.Items.Equipment.Vanity.ScarletBallGown
 {

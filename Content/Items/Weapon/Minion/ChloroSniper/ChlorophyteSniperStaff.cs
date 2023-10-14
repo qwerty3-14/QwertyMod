@@ -4,8 +4,6 @@ using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
-using QwertyMod.Common;
 
 namespace QwertyMod.Content.Items.Weapon.Minion.ChloroSniper
 {
@@ -13,8 +11,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.ChloroSniper
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Chlorophyte Sniper Staff");
-            //Tooltip.SetDefault("Summons a Chlorophyte Sniper to execute your foes! +\nBurst damage minion");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true; // This lets the player target anywhere on the whole screen while using a controller
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
@@ -34,7 +30,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.ChloroSniper
             Item.value = Item.sellPrice(0, 4, 52, 0);
             Item.rare = ItemRarityID.LightRed;
             Item.UseSound = SoundID.Item44;
-            Item.shoot = ProjectileType<ChlorophyteSniper>();
+            Item.shoot = ModContent.ProjectileType<ChlorophyteSniper>();
             Item.DamageType = DamageClass.Summon;
         }
 

@@ -5,6 +5,8 @@ using QwertyMod.Common.RuneBuilder;
 using QwertyMod.Content.Items.MiscMaterials;
 using QwertyMod.Content.Items.Weapon.Ranged.Bow.Ancient;
 using System;
+using System.IO;
+using System.Linq;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -12,9 +14,7 @@ using Terraria.GameContent;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
-using System.IO;
-using System.Linq;
+
 
 namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.RuneLongbow
 {
@@ -36,7 +36,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.RuneLongbow
             Item.width = 34;
             Item.height = 50;
             Item.damage = 250;
-            Item.shoot = ProjectileType<RuneLongbowP>();
+            Item.shoot = ModContent.ProjectileType<RuneLongbowP>();
             Item.value = 500000;
             Item.rare = ItemRarityID.Cyan;
             Item.noMelee = true;
@@ -48,7 +48,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.RuneLongbow
             Item.autoReuse = true;
             if (!Main.dedServ)
             {
-                Item.GetGlobalItem<ItemUseGlow>().glowTexture = Request<Texture2D>("QwertyMod/Content/Items/Weapon/Ranged/Bow/RuneLongbow/RuneLongbow_Glow").Value;
+                Item.GetGlobalItem<ItemUseGlow>().glowTexture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Ranged/Bow/RuneLongbow/RuneLongbow_Glow").Value;
             }
         }
 
@@ -63,7 +63,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.RuneLongbow
                     return false;
                 }
             }
-            Projectile.NewProjectile(source, position, velocity, ProjectileType<RuneLongbowP>(), damage, knockback, player.whoAmI);
+            Projectile.NewProjectile(source, position, velocity, ModContent.ProjectileType<RuneLongbowP>(), damage, knockback, player.whoAmI);
             return false;
         }
 
@@ -74,8 +74,8 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.RuneLongbow
 
         public override void AddRecipes()
         {
-            CreateRecipe(1).AddIngredient(ItemType<CraftingRune>(), 15)
-                .AddIngredient(ItemType<AncientLongbow>(), 1)
+            CreateRecipe(1).AddIngredient(ModContent.ItemType<CraftingRune>(), 15)
+                .AddIngredient(ModContent.ItemType<AncientLongbow>(), 1)
                 .AddTile(TileID.Anvils)
                 .Register();
         }
@@ -203,7 +203,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.RuneLongbow
 
                     if (Ammo == ProjectileID.WoodenArrowFriendly)
                     {
-                        Ammo = ProjectileType<RuneArrow>();
+                        Ammo = ModContent.ProjectileType<RuneArrow>();
                     }
                     if (Projectile.owner == Main.myPlayer)
                     {
@@ -272,7 +272,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.RuneLongbow
             Main.EntitySpriteDraw(TextureAssets.Projectile[Projectile.type].Value, new Vector2(Projectile.Center.X - Main.screenPosition.X, Projectile.Center.Y - Main.screenPosition.Y),
                         new Rectangle(0, 0, 50, 34), drawColor, Projectile.rotation,
                         new Vector2(Projectile.width * 0.5f, Projectile.height * 0.5f), 1f, SpriteEffects.None, 0);
-            Main.EntitySpriteDraw(Request<Texture2D>("QwertyMod/Content/Items/Weapon/Ranged/Bow/RuneLongbow/RuneLongbowP_Glow").Value, new Vector2(Projectile.Center.X - Main.screenPosition.X, Projectile.Center.Y - Main.screenPosition.Y),
+            Main.EntitySpriteDraw(ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Ranged/Bow/RuneLongbow/RuneLongbowP_Glow").Value, new Vector2(Projectile.Center.X - Main.screenPosition.X, Projectile.Center.Y - Main.screenPosition.Y),
                         new Rectangle(0, 0, 50, 34), Color.White, Projectile.rotation,
                         new Vector2(Projectile.width * 0.5f, Projectile.height * 0.5f), 1f, SpriteEffects.None, 0);
             return false;

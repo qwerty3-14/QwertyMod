@@ -2,13 +2,13 @@
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+
 namespace QwertyMod.Content.Items.Weapon.Minion.ChloroSniper
 {
     public class ChlorophyteSnipe : ModProjectile
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Chlorophyte Snipe");
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             ProjectileID.Sets.MinionShot[Projectile.type] = true;
         }

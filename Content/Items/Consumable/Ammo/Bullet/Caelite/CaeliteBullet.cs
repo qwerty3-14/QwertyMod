@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 namespace QwertyMod.Content.Items.Consumable.Ammo.Bullet.Caelite
 {
     public class CaeliteBullet : ModItem
@@ -26,14 +26,14 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Bullet.Caelite
             Item.shootSpeed = 16;
 
             Item.consumable = true;
-            Item.shoot = ProjectileType<CaeliteBulletP>();
+            Item.shoot = ModContent.ProjectileType<CaeliteBulletP>();
             Item.ammo = 97;
             Item.maxStack = 9999;
         }
 
         public override void AddRecipes()
         {
-            CreateRecipe(100).AddIngredient(ItemType<CaeliteBar>(), 1)
+            CreateRecipe(100).AddIngredient(ModContent.ItemType<CaeliteBar>(), 1)
                 .AddTile(TileID.Anvils)
                 .Register();
         }

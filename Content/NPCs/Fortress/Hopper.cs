@@ -7,13 +7,12 @@ using QwertyMod.Content.Items.Consumable.Tiles.Fortress.BuildingBlocks;
 using System;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.NPCs.Fortress
 {
@@ -21,9 +20,8 @@ namespace QwertyMod.Content.NPCs.Fortress
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Enchanted Tile");
             Main.npcFrameCount[NPC.type] = 4;
-            NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers(0)
+            NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers()
             {
                 CustomTexturePath = "QwertyMod/Content/NPCs/Fortress/Hopper_Bestiary",
                 PortraitScale = 1f,
@@ -58,7 +56,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             NPC.buffImmune[20] = true;
             NPC.buffImmune[24] = true;
             Banner = NPC.type;
-            BannerItem = ItemType<HopperBanner>();
+            BannerItem = ModContent.ItemType<HopperBanner>();
 
             NPC.buffImmune[BuffID.Confused] = false;
             NPC.GetGlobalNPC<FortressNPCGeneral>().contactDamageToInvaders = 3f;
@@ -78,7 +76,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             {
                 for (int i = 0; i < 40; i++)
                 {
-                    int dustType = DustType<FortressDust>();
+                    int dustType = ModContent.DustType<FortressDust>();
                     int dustIndex = Dust.NewDust(NPC.position, NPC.width, NPC.height, dustType);
                     Dust dust = Main.dust[dustIndex];
                     dust.velocity.X = dust.velocity.X + Main.rand.Next(-50, 51) * 0.01f;
@@ -88,7 +86,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             }
             for (int i = 0; i < 4; i++)
             {
-                int dustType = DustType<FortressDust>();
+                int dustType = ModContent.DustType<FortressDust>();
                 int dustIndex = Dust.NewDust(NPC.position, NPC.width, NPC.height, dustType);
                 Dust dust = Main.dust[dustIndex];
                 dust.velocity.X = dust.velocity.X + Main.rand.Next(-50, 51) * 0.01f;
@@ -107,13 +105,13 @@ namespace QwertyMod.Content.NPCs.Fortress
         }
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
-            npcLoot.Add(ItemDropRule.Common(ItemType<FortressBrick>(), 1, 2, 4));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<FortressBrick>(), 1, 2, 4));
         }
 
 
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
-            if (spawnInfo.Player.InModBiome(GetInstance<FortressBiome>()))
+            if (spawnInfo.Player.InModBiome(ModContent.GetInstance<FortressBiome>()))
             {
                 return 140f;
             }
@@ -205,14 +203,14 @@ namespace QwertyMod.Content.NPCs.Fortress
                 NPC.dontTakeDamage = true;
                 NPC.velocity = Vector2.Zero;
                 float d = Main.rand.NextFloat() * MathF.PI * 2;
-                Dust dusty = Dust.NewDustPerfect(NPC.position + new Vector2(Main.rand.Next(NPC.width), Main.rand.Next(NPC.height)) + QwertyMethods.PolarVector(30f, d + MathF.PI), DustType<FortressDust>(), QwertyMethods.PolarVector(3f, d), Scale: .5f);
+                Dust dusty = Dust.NewDustPerfect(NPC.position + new Vector2(Main.rand.Next(NPC.width), Main.rand.Next(NPC.height)) + QwertyMethods.PolarVector(30f, d + MathF.PI), ModContent.DustType<FortressDust>(), QwertyMethods.PolarVector(3f, d), Scale: .5f);
                 dusty.noGravity = true;
                 if (preSetTimer == 0 && spawnChildren)
                 {
                     int children = Main.rand.Next(3);
                     for (int i = 0; i < children; i++)
                     {
-                        NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Center.X + Main.rand.Next(-40, 41), (int)NPC.Center.Y, NPCType<YoungTile>());
+                        NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Center.X + Main.rand.Next(-40, 41), (int)NPC.Center.Y, ModContent.NPCType<YoungTile>());
                     }
                 }
             }

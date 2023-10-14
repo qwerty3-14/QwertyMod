@@ -1,8 +1,6 @@
 ﻿using QwertyMod.Common;
 using Terraria;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
-
 
 namespace QwertyMod.Content.Items.Weapon.Minion.LeechRune
 {
@@ -10,8 +8,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.LeechRune
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Leech Rune");
-            //Description.SetDefault("The Leech rune will fight for you!");
             Main.buffNoSave[Type] = true;
             Main.buffNoTimeDisplay[Type] = true;
         }
@@ -19,7 +15,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.LeechRune
         public override void Update(Player player, ref int buffIndex)
         {
             MinionManager modPlayer = player.GetModPlayer<MinionManager>();
-            if (player.ownedProjectileCounts[ProjectileType<RunicMinionFreindly>()] > 0)
+            if (player.ownedProjectileCounts[ ModContent.ProjectileType<RunicMinionFreindly>()] > 0)
             {
                 modPlayer.RuneMinion = true;
             }

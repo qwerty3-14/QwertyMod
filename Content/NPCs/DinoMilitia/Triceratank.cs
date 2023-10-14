@@ -5,12 +5,11 @@ using QwertyMod.Content.Items.Equipment.Accessories;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
-using Terraria.DataStructures;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.NPCs.DinoMilitia
 {
@@ -18,9 +17,8 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Triceratank");
             Main.npcFrameCount[NPC.type] = 6;
-            NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers(0)
+            NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers()
             {
                 PortraitScale = 0.6f,
                 PortraitPositionYOverride = 0f,
@@ -48,7 +46,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
             }
             AIType = 28;
             Banner = NPC.type;
-            BannerItem = ItemType<TriceratankBanner>();
+            BannerItem = ModContent.ItemType<TriceratankBanner>();
 
             //animationType = 3;
             NPC.buffImmune[BuffID.Confused] = false;
@@ -87,7 +85,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
         {
             for (int i = 0; i < 10; i++)
             {
-                int dustType = DustType<DinoSkin2>();
+                int dustType = ModContent.DustType<DinoSkin2>();
                 int dustIndex = Dust.NewDust(NPC.position, NPC.width, NPC.height, dustType);
                 Dust dust = Main.dust[dustIndex];
                 dust.velocity.X = dust.velocity.X + Main.rand.Next(-50, 51) * 0.01f;
@@ -112,7 +110,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
                 //Projectile.NewProjectile(NPC.Center.X+(78f*NPC.direction), NPC.Center.Y-34f, 1f*NPC.direction, 0, 102, damage, 3f, Main.myPlayer);
                 if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
-                    Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center.X + (78f * NPC.direction), NPC.Center.Y - 34f, 10f * NPC.direction, 0, ProjectileType<TankCannonBall>(), damage, 3f, Main.myPlayer);
+                    Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center.X + (78f * NPC.direction), NPC.Center.Y - 34f, 10f * NPC.direction, 0, ModContent.ProjectileType<TankCannonBall>(), damage, 3f, Main.myPlayer);
                 }
 
                 AI_Timer = 0;
@@ -155,18 +153,14 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
         }
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
-            npcLoot.Add(ItemDropRule.Common(ItemType<DinoTooth>(), 100, 1, 1));
-            npcLoot.Add(ItemDropRule.Common(ItemType<Tricerashield>(), 6, 1, 1));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<DinoTooth>(), 100, 1, 1));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Tricerashield>(), 6, 1, 1));
         }
 
     }
 
     public class TankCannonBall : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("Triceratank's cannon");
-        }
 
         public override void SetDefaults()
         {
@@ -213,7 +207,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
             Projectile.height = 75;
             Projectile.position.X = Projectile.position.X - (float)(Projectile.width / 2);
             Projectile.position.Y = Projectile.position.Y - (float)(Projectile.height / 2);
-            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, new Vector2(0, 0), ProjectileType<TankCannonBallExplosion>(), Projectile.damage, Projectile.knockBack, player.whoAmI);
+            Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, new Vector2(0, 0), ModContent.ProjectileType<TankCannonBallExplosion>(), Projectile.damage, Projectile.knockBack, player.whoAmI);
             SoundEngine.PlaySound(SoundID.Item62, Projectile.position);
             for (int i = 0; i < 50; i++)
             {
@@ -234,10 +228,6 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
 
     public class TankCannonBallExplosion : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("Tank Cannon Ball Explosion");
-        }
 
         public override void SetDefaults()
         {

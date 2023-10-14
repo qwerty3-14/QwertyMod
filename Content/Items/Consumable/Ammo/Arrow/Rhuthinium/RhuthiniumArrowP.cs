@@ -3,7 +3,7 @@ using QwertyMod.Content.Dusts;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Rhuthinium
 {
@@ -28,7 +28,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Rhuthinium
         {
             if (Projectile.timeLeft < 3598)
             {
-                Dust d = Dust.NewDustPerfect(Projectile.Center, DustType<RhuthiniumDust>(), Vector2.Zero);
+                Dust d = Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<RhuthiniumDust>(), Vector2.Zero);
                 d.frame.Y = Main.rand.NextBool(2) ? 0 : 10;
                 d.noGravity = true;
             }
@@ -38,7 +38,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Rhuthinium
         {
             for (int i = 0; i < 12; i++)
             {
-                Dust d = Dust.NewDustPerfect(Projectile.Center, DustType<RhuthiniumDust>());
+                Dust d = Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<RhuthiniumDust>());
                 d.velocity *= 2;
                 d.noGravity = true;
             }

@@ -4,8 +4,7 @@ using Terraria.GameContent.Creative;
 using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ID.ArmorIDs;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Equipment.Armor.Shaman
 {
@@ -14,10 +13,8 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Shaman
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Shaman Skull");
-            //Tooltip.SetDefault("6% increased minion damage and melee critical strike chance");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
-            Head.Sets.DrawHatHair[Item.headSlot] = true;
+            ArmorIDs.Head.Sets.DrawHatHair[Item.headSlot] = true;
         }
 
         public override void SetDefaults()
@@ -39,7 +36,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Shaman
 
         public override bool IsArmorSet(Item head, Item body, Item legs)
         {
-            return body.type == ItemType<ShamanBody>() && legs.type == ItemType<ShamanLegs>();
+            return body.type == ModContent.ItemType<ShamanBody>() && legs.type == ModContent.ItemType<ShamanLegs>();
         }
         public override void AddRecipes()
         {
@@ -85,10 +82,10 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Shaman
         {
             if (QwertyMod.YetAnotherSpecialAbility.JustPressed) //hotkey is pressed
             {
-                if (setBonus && !Player.HasBuff(BuffType<SpiritCallCooldown>()))
+                if (setBonus && !Player.HasBuff(ModContent.BuffType<SpiritCallCooldown>()))
                 {
                     hasteTime = 600;
-                    Player.AddBuff(BuffType<SpiritCallCooldown>(), 60 * 60);
+                    Player.AddBuff(ModContent.BuffType<SpiritCallCooldown>(), 60 * 60);
                 }
             }
         }

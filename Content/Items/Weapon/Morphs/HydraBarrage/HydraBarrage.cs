@@ -7,7 +7,7 @@ using Terraria.GameContent;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Morphs.HydraBarrage
 {
@@ -15,11 +15,8 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.HydraBarrage
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Shape shift: Hydra Barrage");
-            //Tooltip.SetDefault("Launches a barrage of hydra breath");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
-
 
         public override void SetDefaults()
         {
@@ -38,7 +35,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.HydraBarrage
             Item.noUseGraphic = true;
             Item.width = 20;
             Item.height = 16;
-            Item.shoot = ProjectileType<HydraBarrageBase>();
+            Item.shoot = ModContent.ProjectileType<HydraBarrageBase>();
             Item.shootSpeed = 0f;
             Item.channel = true;
         }
@@ -61,7 +58,6 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.HydraBarrage
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("HydraBarrage Barrage Base");
             Main.projFrames[Projectile.type] = 1;
         }
 
@@ -87,7 +83,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.HydraBarrage
             {
                 for (int i = 0; i < 3; i++)
                 {
-                    Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ProjectileType<HydraBarrageHead>(), Projectile.damage, Projectile.knockBack, Projectile.owner, 1f, 2);
+                    Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<HydraBarrageHead>(), Projectile.damage, Projectile.knockBack, Projectile.owner, 1f, 2);
                 }
                 runOnce = false;
             }
@@ -143,7 +139,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.HydraBarrage
             }
             if (Projectile.timeLeft == 10)
             {
-                Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center + QwertyMethods.PolarVector(57 * Projectile.scale, Projectile.rotation), QwertyMethods.PolarVector(10, Projectile.rotation), ProjectileType<HydraBarrageBreath>(), Projectile.damage, Projectile.knockBack, Projectile.owner, Projectile.ai[0], 0f);
+                Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center + QwertyMethods.PolarVector(57 * Projectile.scale, Projectile.rotation), QwertyMethods.PolarVector(10, Projectile.rotation), ModContent.ProjectileType<HydraBarrageBreath>(), Projectile.damage, Projectile.knockBack, Projectile.owner, Projectile.ai[0], 0f);
             }
         }
 
@@ -153,7 +149,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.HydraBarrage
             {
                 for (int i = 0; i < 2; i++)
                 {
-                    Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ProjectileType<HydraBarrageHead>(), (int)(Projectile.damage * .8f), Projectile.knockBack * .8f, Projectile.owner, Projectile.ai[0] * .8f, Projectile.ai[1] - 1);
+                    Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<HydraBarrageHead>(), (int)(Projectile.damage * .8f), Projectile.knockBack * .8f, Projectile.owner, Projectile.ai[0] * .8f, Projectile.ai[1] - 1);
                 }
             }
         }
@@ -165,8 +161,8 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.HydraBarrage
 
         public override bool PreDraw(ref Color lightColor)
         {
-            Texture2D neck = Request<Texture2D>("QwertyMod/Content/Items/Weapon/Morphs/HydraBarrage/HydraBarrageNeck").Value;
-            Texture2D neckBase = Request<Texture2D>("QwertyMod/Content/Items/Weapon/Morphs/HydraBarrage/HydraBarrageBase").Value;
+            Texture2D neck = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Morphs/HydraBarrage/HydraBarrageNeck").Value;
+            Texture2D neckBase = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Morphs/HydraBarrage/HydraBarrageBase").Value;
             int limit = 0;
             for (float f = 0; f < (Projectile.Center - Main.player[Projectile.owner].Center).Length(); f += neck.Height * Projectile.scale)
             {
@@ -185,10 +181,6 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.HydraBarrage
 
     public class HydraBarrageBreath : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("Barrage Breath");
-        }
 
         public override void SetDefaults()
         {
@@ -213,7 +205,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.HydraBarrage
 
         public virtual void CreateDust()
         {
-            int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<HydraBreathGlow>());
+            int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<HydraBreathGlow>());
         }
     }
 }

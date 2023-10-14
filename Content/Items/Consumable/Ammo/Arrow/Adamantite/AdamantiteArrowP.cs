@@ -1,9 +1,8 @@
-﻿using Terraria;
+﻿using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.Audio;
-using Terraria.ModLoader;
 using Terraria.ID;
-using Microsoft.Xna.Framework;
-using System;
+using Terraria.ModLoader;
 
 namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Adamantite
 {

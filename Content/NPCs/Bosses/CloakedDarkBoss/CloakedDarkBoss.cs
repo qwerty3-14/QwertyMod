@@ -2,27 +2,28 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Common;
 using QwertyMod.Content.Items.Consumable.BossBag;
+using QwertyMod.Content.Items.Consumable.Tiles.Trophy.Noehtnap;
+using QwertyMod.Content.Items.Equipment.Vanity.BossMasks;
 using QwertyMod.Content.Items.MiscMaterials;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using Terraria;
 using Terraria.Audio;
-using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
 {
+    [AutoloadBossHead]
     public class CloakedDarkBoss : ModNPC
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Noehtnap");
             Main.npcFrameCount[NPC.type] = 5;
 
             NPCID.Sets.MPAllowedEnemies[NPC.type] = true; //For allowing use of SpawnOnPlayer in multiplayer
@@ -182,9 +183,9 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
             {
                 canDespawn = false;
 
-                if ((cloak == null || cloak.type != ProjectileType<Cloak>() || !cloak.active) && Main.netMode != NetmodeID.MultiplayerClient)
+                if ((cloak == null || cloak.type != ModContent.ProjectileType<Cloak>() || !cloak.active) && Main.netMode != NetmodeID.MultiplayerClient)
                 {
-                    cloak = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero, ProjectileType<Cloak>(), 0, 0, Main.myPlayer, NPC.whoAmI)];
+                    cloak = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<Cloak>(), 0, 0, Main.myPlayer, NPC.whoAmI)];
                 }
 
                 if (playerviewRadius > 80)
@@ -243,7 +244,7 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
                                         break;
 
                                     case 1:
-                                        Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero, ProjectileType<Warning>(), 0, 0f, Main.myPlayer, 0, 0);
+                                        Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<Warning>(), 0, 0f, Main.myPlayer, 0, 0);
                                         if (!Main.dedServ)
                                         {
                                             SoundEngine.PlaySound(SoundID.MaxMana, NPC.Center);
@@ -268,8 +269,8 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
                         }
                         else if (timer % 15 == 0 && Main.netMode != NetmodeID.MultiplayerClient)
                         {
-                            Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero, ProjectileType<EtimsicCannon>(), Main.expertMode ? 18 : 24, 0f, Main.myPlayer, (player.Center - NPC.Center).ToRotation());
-                            Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero, ProjectileType<Warning>(), 0, 0f, Main.myPlayer, 1, (player.Center - NPC.Center).ToRotation());
+                            Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<EtimsicCannon>(), Main.expertMode ? 18 : 24, 0f, Main.myPlayer, (player.Center - NPC.Center).ToRotation());
+                            Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<Warning>(), 0, 0f, Main.myPlayer, 1, (player.Center - NPC.Center).ToRotation());
                             if (!Main.dedServ)
                             {
                                 SoundEngine.PlaySound(SoundID.MaxMana, NPC.Center);
@@ -283,8 +284,8 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
                         {
                             if (Main.netMode != NetmodeID.MultiplayerClient)
                             {
-                                myWall = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero, ProjectileType<EtimsicWall>(), Main.expertMode ? 24 : 36, 0f, Main.myPlayer, (player.Center - NPC.Center).ToRotation() + MathF.PI / 2)];
-                                Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero, ProjectileType<Warning>(), 0, 0f, Main.myPlayer, 2, (player.Center - NPC.Center).ToRotation() + MathF.PI / 2);
+                                myWall = Main.projectile[Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<EtimsicWall>(), Main.expertMode ? 24 : 36, 0f, Main.myPlayer, (player.Center - NPC.Center).ToRotation() + MathF.PI / 2)];
+                                Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<Warning>(), 0, 0f, Main.myPlayer, 2, (player.Center - NPC.Center).ToRotation() + MathF.PI / 2);
                             }
 
                             if (!Main.dedServ)
@@ -318,7 +319,7 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
                                 NPC.velocity = Vector2.Zero;
                                 if (Main.netMode != NetmodeID.MultiplayerClient)
                                 {
-                                    Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center + new Vector2(MathF.Cos(pupilDirection) * greaterPupilRadius * pupilStareOutAmount, MathF.Sin(pupilDirection) * lesserPupilRadius) * NPC.scale, QwertyMethods.PolarVector(10, pupilDirection), ProjectileType<EtimsicRay>(), Main.expertMode ? 18 : 24, 0f, Main.myPlayer);
+                                    Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center + new Vector2(MathF.Cos(pupilDirection) * greaterPupilRadius * pupilStareOutAmount, MathF.Sin(pupilDirection) * lesserPupilRadius) * NPC.scale, QwertyMethods.PolarVector(10, pupilDirection), ModContent.ProjectileType<EtimsicRay>(), Main.expertMode ? 18 : 24, 0f, Main.myPlayer);
                                 }
                                 if (!Main.dedServ)
                                 {
@@ -399,11 +400,11 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
             spriteBatch.Draw(texture, NPC.Center - screenPos,
                        NPC.frame, drawColor, NPC.rotation,
                        new Vector2(NPC.width * 0.5f, NPC.height * 0.5f), NPC.scale, SpriteEffects.None, 0f);
-            Texture2D Pupil = Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/CloakedDarkBoss/Pupil").Value;
+            Texture2D Pupil = ModContent.Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/CloakedDarkBoss/Pupil").Value;
             spriteBatch.Draw(Pupil, NPC.Center - screenPos + new Vector2(MathF.Cos(pupilDirection) * greaterPupilRadius * pupilStareOutAmount, MathF.Sin(pupilDirection) * lesserPupilRadius) * NPC.scale,
                        Pupil.Frame(), drawColor, NPC.rotation,
                        Pupil.Size() * .5f, NPC.scale, SpriteEffects.None, 0f);
-            Texture2D Eyelid = Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/CloakedDarkBoss/Eyelid").Value;
+            Texture2D Eyelid = ModContent.Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/CloakedDarkBoss/Eyelid").Value;
             spriteBatch.Draw(Eyelid, NPC.Center - screenPos,
                        NPC.frame, drawColor, NPC.rotation,
                        new Vector2(NPC.width * 0.5f, NPC.height * 0.5f), NPC.scale, SpriteEffects.None, 0f);
@@ -412,21 +413,28 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
             //Add the treasure bag (automatically checks for expert mode)
-            npcLoot.Add(ItemDropRule.BossBag(ItemType<NoehtnapBag>())); //this requires you to set BossBag in SetDefaults accordingly
+            npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<NoehtnapBag>())); //this requires you to set BossBag in SetDefaults accordingly
 
             //All our drops here are based on "not expert", meaning we use .OnSuccess() to add them into the rule, which then gets added
             LeadingConditionRule notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
 
             notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
-            notExpertRule.OnSuccess(ItemDropRule.Common(ItemType<Etims>(), 1, 12, 24));
+            notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<Etims>(), 1, 12, 24));
             npcLoot.Add(notExpertRule);
 
             //Trophies are spawned with 1/10 chance
-            //npcLoot.Add(ItemDropRule.Common(ItemType<HydraTrophy>(), 10));
-            
+            //npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<HydraTrophy>(), 10));
+
+            //Boss masks are spawned with 1/7 chance
+            notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
+            notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<NoehtnapMask>(), 7));
+            npcLoot.Add(notExpertRule);            
 
 			// ItemDropRule.MasterModeCommonDrop for the relic
 			npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<Items.Consumable.Tiles.Relics.NoehtnapRelic>()));
+
+            //Trophies are spawned with 1/10 chance
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<NoehtnapTrophy>(), 10));
 
             base.ModifyNPCLoot(npcLoot);
         }
@@ -560,7 +568,7 @@ namespace QwertyMod.Content.NPCs.Bosses.CloakedDarkBoss
             }
             for (int i = 0; i < Main.projectile.Length; i++)
             {
-                if (Main.projectile[i].active && (Main.projectile[i].type == ProjectileType<EtimsicCannon>() || Main.projectile[i].type == ProjectileType<EtimsicWall>()) && Main.projectile[i].ai[1] == 1)
+                if (Main.projectile[i].active && (Main.projectile[i].type == ModContent.ProjectileType<EtimsicCannon>() || Main.projectile[i].type == ModContent.ProjectileType<EtimsicWall>()) && Main.projectile[i].ai[1] == 1)
                 {
                     lightSpots.Add(new Vector3((Main.projectile[i].Center.X - Main.screenPosition.X) / scale, (Main.projectile[i].Center.Y - Main.screenPosition.Y) / scale, 40));
                 }

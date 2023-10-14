@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace QwertyMod.Common.Fortress
@@ -15,6 +16,10 @@ namespace QwertyMod.Common.Fortress
         public override string Command
         {
             get { return "buildFortress"; }
+        }
+        public override string Description
+        {
+            get { return Language.GetTextValue(Mod.GetLocalizationKey("CommandDescriptionFortressGen")); }
         }
 
         public override void Action(CommandCaller caller, string input, string[] args)

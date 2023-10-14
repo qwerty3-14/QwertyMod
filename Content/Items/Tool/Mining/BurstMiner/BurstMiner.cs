@@ -10,8 +10,6 @@ namespace QwertyMod.Content.Items.Tool.Mining.BurstMiner
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Stream Miner");
-            //Tooltip.SetDefault("");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 

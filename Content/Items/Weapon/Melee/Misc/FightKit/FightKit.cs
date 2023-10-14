@@ -1,19 +1,20 @@
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using QwertyMod.Common;
 using QwertyMod.Content.Buffs;
 using QwertyMod.Content.Dusts;
-using System;
-using Terraria;
-using Terraria.DataStructures;
-using Terraria.GameContent.Creative;
-using Terraria.ModLoader;
-using Terraria.ID;
-using Terraria.GameContent;
-using Microsoft.Xna.Framework.Graphics;
-using QwertyMod.Content.Items.MiscMaterials;
-using System.IO;
-using Terraria.Audio;
-using QwertyMod.Common;
 using QwertyMod.Content.Items.Weapon.Melee.Sword.EtimsSword;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using Terraria;
+using Terraria.Audio;
+using Terraria.DataStructures;
+using Terraria.GameContent;
+using Terraria.GameContent.Creative;
+using Terraria.ID;
+using Terraria.Localization;
+using Terraria.ModLoader;
 
 
 namespace QwertyMod.Content.Items.Weapon.Melee.Misc.FightKit
@@ -67,7 +68,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Misc.FightKit
         {
             Item.damage = 400;
             Item.DamageType = DamageClass.MeleeNoSpeed;
-            Item.knockBack = 1;
+            Item.knockBack = 0;
             Item.value = GearStats.TrueCaeliteWeaponValue;
             Item.rare = ItemRarityID.Orange;
             Item.width = 18;
@@ -80,6 +81,16 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Misc.FightKit
             Item.noUseGraphic = true;
             Item.noMelee = true;
             Item.autoReuse = true;
+        }
+        public override void ModifyTooltips(List<TooltipLine> tooltips)
+        {
+            foreach (TooltipLine line in tooltips)
+            {
+                if (line.Mod == "Terraria" && line.Name == "Knockback") //this checks if it's the line we're interested in
+                {
+                    line.Text = Language.GetTextValue(Mod.GetLocalizationKey("CustomTooltipCKB"));//change tooltip
+                }
+            }
         }
 
         public override bool CanUseItem(Player player)
@@ -671,7 +682,8 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Misc.FightKit
             FightMode FightPlayer = player.GetModPlayer<FightMode>();
             if(etimsActive)
             {
-                if(Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), FightPlayer.EtimsKuniPos + QwertyMethods.PolarVector(15, FightPlayer.EtimsKuniRot), FightPlayer.EtimsKuniPos + QwertyMethods.PolarVector(41, FightPlayer.EtimsKuniRot), 6, ref useless))
+                Vector2 start = FightPlayer.EtimsKuniPos + QwertyMethods.PolarVector(15, FightPlayer.EtimsKuniRot);
+                if(Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), start, FightPlayer.EtimsKuniPos + QwertyMethods.PolarVector(41, FightPlayer.EtimsKuniRot), 6, ref useless) || targetHitbox.Contains((int)start.X, (int)start.Y))
                 {
                     return true;
                 }
@@ -687,7 +699,8 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Misc.FightKit
                 {
                     length = FightMode.HighExtendLegth;;
                 }
-                if(Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), FightPlayer.InvaKuniPos + QwertyMethods.PolarVector(15, FightPlayer.InvaKuniRot), FightPlayer.InvaKuniPos + QwertyMethods.PolarVector(length, FightPlayer.InvaKuniRot), 6, ref useless))
+                Vector2 start = FightPlayer.InvaKuniPos + QwertyMethods.PolarVector(15, FightPlayer.InvaKuniRot);
+                if(Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), start, FightPlayer.InvaKuniPos + QwertyMethods.PolarVector(length, FightPlayer.InvaKuniRot), 6, ref useless) || targetHitbox.Contains((int)start.X, (int)start.Y))
                 {
                     return true;
                 }
@@ -715,50 +728,92 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Misc.FightKit
                 Main.player[Projectile.owner].velocity.Y = -Player.jumpSpeed;
                 Main.player[Projectile.owner].RefreshExtraJumps();
             }
+            int hitStunTime = attackTime * 2;
+            target.AddBuff(ModContent.BuffType<Hitstun>(), hitStunTime);
+
+            float kB = 1f;
+            Vector2 knockBackDir = Vector2.UnitX * Main.player[Projectile.owner].direction;
+            knockBackDir.Y += -0.5f;
+            knockBackDir.Normalize();
+            float knockBackResist = target.knockBackResist;
+            switch(atk)
+            {
+                case KitAttacks.Jab:
+                case KitAttacks.Jab2:
+                case KitAttacks.Jab3:
+                kB = 0.1f;
+                break;
+                case KitAttacks.FTilt:
+                kB = 2f;
+                break;
+                case KitAttacks.DTilt:
+                kB = 5f;
+                break;
+                case KitAttacks.UTilt:
+                knockBackDir = -Vector2.UnitY;
+                kB = 4f;
+                break;
+                case KitAttacks.Nair:
+                kB = 1f;
+                break;
+                case KitAttacks.Dair:
+                knockBackDir = Vector2.UnitY;
+                kB = 2f;
+                break;
+                case KitAttacks.Fair:
+                knockBackDir = Vector2.UnitX * Main.player[Projectile.owner].direction;
+                kB = 1.5f;
+                break;
+                case KitAttacks.UpAir:
+                knockBackDir = -Vector2.UnitY;
+                kB = 1.5f;
+                break;
+            }
+            kB *= 10;
+            if (knockBackResist > 0f) 
+            {
+					float modifiedKnockback = kB * (0.9f + 0.2f * knockBackResist);
+					if (target.onFire2)
+						modifiedKnockback *= 1.1f;
+
+					if (hit.Crit)
+						modifiedKnockback *= 1.4f;
+                    
+                    target.velocity = knockBackDir * modifiedKnockback;
+					
+			}
 		}
 		public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
-            float effectiveKB = target.knockBackResist;
-            if(effectiveKB > 0)
-            {
-                effectiveKB = 1f + 0.1f * (effectiveKB - 0.5f) / 0.5f;
-            }
-            modifiers.Knockback *= 0;
             switch(atk)
             {
                 case KitAttacks.Jab:
                     modifiers.FinalDamage *= 1.5f;
-                    modifiers.Knockback += effectiveKB * 1f;
                 break;
                 case KitAttacks.Jab2:
                     modifiers.FinalDamage *= 2f;
-                    modifiers.Knockback += effectiveKB * 0.5f;
                 break;
                 case KitAttacks.Jab3:
-                    modifiers.Knockback += effectiveKB * 0.5f;
                 break;
                 case KitAttacks.FTilt:
                     modifiers.FinalDamage *= 3f;
-                    modifiers.Knockback += effectiveKB * 3f;
                 break;
                 case KitAttacks.DTilt:
                     modifiers.FinalDamage *= 4f;
-                    modifiers.Knockback += effectiveKB * 6f;
                 break;
                 case KitAttacks.UTilt:
                     modifiers.FinalDamage *= 5f;
-                    modifiers.Knockback += effectiveKB * 5f;
                 break;
                 case KitAttacks.Nair:
-                    modifiers.Knockback += effectiveKB * 1f;
                 break;
                 case KitAttacks.Dair:
                     modifiers.FinalDamage *= 2f;
-                    modifiers.Knockback += effectiveKB * 1f;
                 break;
                 case KitAttacks.Fair:
                     modifiers.FinalDamage *= 2f;
-                    modifiers.Knockback += effectiveKB * 2f;
+                break;
+                case KitAttacks.UpAir:
+                    modifiers.FinalDamage *= 3f;
                 break;
             }
         }
@@ -871,7 +926,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Misc.FightKit
                 Player.noFallDmg = true;
                 if(ModLoader.HasMod("TRAEProject"))
                 {
-                    Player.moveSpeed *= 2;
+                    Player.moveSpeed *= 1.5f;
                     if(!Player.controlDown)
                     {
                         Player.jumpSpeedBoost += (0.5f * 5) * 1.28f;
@@ -879,7 +934,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Misc.FightKit
                 }
                 else
                 {
-                    Player.moveSpeed *= 2f * 1.33f;
+                    Player.moveSpeed *= 1.5f * 1.33f;
                     if(!Player.controlDown)
                     {
                         Player.jumpSpeedBoost += 2.4f;
@@ -900,6 +955,10 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Misc.FightKit
 		public override void OnHurt(Player.HurtInfo info)
 		{
 			base.OnHurt(info);
+            if(Player.HeldItem.type == ModContent.ItemType<FightKit>())
+            {
+                Player.AddBuff(ModContent.BuffType<Hitstun>(), 60);
+            }
 		}
         public override bool FreeDodge(Player.HurtInfo info)
         {
@@ -970,24 +1029,26 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Misc.FightKit
                 return;
             }
             Player drawPlayer = drawInfo.drawPlayer;
-            FightMode fightPlayer = drawPlayer.GetModPlayer<FightMode>();
-            Color color12 = drawPlayer.GetImmuneAlphaPure(Lighting.GetColor((int)((double)drawInfo.Position.X + (double)drawPlayer.width * 0.5) / 16, (int)((double)drawInfo.Position.Y + (double)drawPlayer.height * 0.5) / 16, Microsoft.Xna.Framework.Color.White), 0f);
-            if (!drawPlayer.HeldItem.IsAir && drawPlayer.HeldItem.type == ModContent.ItemType<FightKit>())
+            if(drawPlayer.TryGetModPlayer(out FightMode fightPlayer))
             {
-                Item item = drawPlayer.HeldItem;
-                Texture2D texture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Melee/Misc/FightKit/FightKit").Value;
-                if(fightPlayer.InvaKuniExtend > 0)
+                Color color12 = drawPlayer.GetImmuneAlphaPure(Lighting.GetColor((int)((double)drawInfo.Position.X + (double)drawPlayer.width * 0.5) / 16, (int)((double)drawInfo.Position.Y + (double)drawPlayer.height * 0.5) / 16, Microsoft.Xna.Framework.Color.White), 0f);
+                if (!drawPlayer.HeldItem.IsAir && drawPlayer.HeldItem.type == ModContent.ItemType<FightKit>())
                 {
-                    texture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Melee/Misc/FightKit/ExtendedInvaKuni").Value;
-                    DrawData value = new DrawData(texture, fightPlayer.InvaKuniPos - Main.screenPosition, new Rectangle(0, fightPlayer.InvaKuniExtend == 2 ? FightMode.KuniSpriteWidth : 0, FightMode.HighExtendLegth, FightMode.KuniSpriteWidth), color12, fightPlayer.InvaKuniRot, new Vector2(FightMode.KuniHoldAt, FightMode.KuniSpriteWidth / 2), item.scale, SpriteEffects.None, 0);
-                    drawInfo.DrawDataCache.Add(value);
+                    Item item = drawPlayer.HeldItem;
+                    Texture2D texture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Melee/Misc/FightKit/FightKit").Value;
+                    if(fightPlayer.InvaKuniExtend > 0)
+                    {
+                        texture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Melee/Misc/FightKit/ExtendedInvaKuni").Value;
+                        DrawData value = new DrawData(texture, fightPlayer.InvaKuniPos - Main.screenPosition, new Rectangle(0, fightPlayer.InvaKuniExtend == 2 ? FightMode.KuniSpriteWidth : 0, FightMode.HighExtendLegth, FightMode.KuniSpriteWidth), color12, fightPlayer.InvaKuniRot, new Vector2(FightMode.KuniHoldAt, FightMode.KuniSpriteWidth / 2), item.scale, SpriteEffects.None, 0);
+                        drawInfo.DrawDataCache.Add(value);
+                    }
+                    else
+                    {
+                        DrawData value = new DrawData(texture, fightPlayer.InvaKuniPos - Main.screenPosition, new Rectangle(0, 0, FightMode.KuniTotalLength, FightMode.KuniSpriteWidth), color12, fightPlayer.InvaKuniRot, new Vector2(FightMode.KuniHoldAt, FightMode.KuniSpriteWidth / 2), item.scale, SpriteEffects.None, 0);
+                        drawInfo.DrawDataCache.Add(value);
+                    }
+                    
                 }
-                else
-                {
-                    DrawData value = new DrawData(texture, fightPlayer.InvaKuniPos - Main.screenPosition, new Rectangle(0, 0, FightMode.KuniTotalLength, FightMode.KuniSpriteWidth), color12, fightPlayer.InvaKuniRot, new Vector2(FightMode.KuniHoldAt, FightMode.KuniSpriteWidth / 2), item.scale, SpriteEffects.None, 0);
-                    drawInfo.DrawDataCache.Add(value);
-                }
-                
             }
         }
     }
@@ -1009,14 +1070,16 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Misc.FightKit
                 return;
             }
             Player drawPlayer = drawInfo.drawPlayer;
-            FightMode fightPlayer = drawPlayer.GetModPlayer<FightMode>();
-            Color color12 = drawPlayer.GetImmuneAlphaPure(Lighting.GetColor((int)((double)drawInfo.Position.X + (double)drawPlayer.width * 0.5) / 16, (int)((double)drawInfo.Position.Y + (double)drawPlayer.height * 0.5) / 16, Microsoft.Xna.Framework.Color.White), 0f);
-            if (!drawPlayer.HeldItem.IsAir && drawPlayer.HeldItem.type == ModContent.ItemType<FightKit>())
+            if(drawPlayer.TryGetModPlayer(out FightMode fightPlayer))
             {
-                Item item = drawPlayer.HeldItem;
-                Texture2D texture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Melee/Misc/FightKit/FightKit").Value;
-                DrawData value = new DrawData(texture, fightPlayer.EtimsKuniPos - Main.screenPosition, new Rectangle(0, FightMode.KuniSpriteWidth, FightMode.KuniTotalLength, FightMode.KuniSpriteWidth), color12, fightPlayer.EtimsKuniRot, new Vector2(FightMode.KuniHoldAt, FightMode.KuniSpriteWidth / 2), item.scale * fightPlayer.EtimsKuniScale, SpriteEffects.None, 0);
-                drawInfo.DrawDataCache.Add(value);
+                Color color12 = drawPlayer.GetImmuneAlphaPure(Lighting.GetColor((int)((double)drawInfo.Position.X + (double)drawPlayer.width * 0.5) / 16, (int)((double)drawInfo.Position.Y + (double)drawPlayer.height * 0.5) / 16, Microsoft.Xna.Framework.Color.White), 0f);
+                if (!drawPlayer.HeldItem.IsAir && drawPlayer.HeldItem.type == ModContent.ItemType<FightKit>())
+                {
+                    Item item = drawPlayer.HeldItem;
+                    Texture2D texture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Melee/Misc/FightKit/FightKit").Value;
+                    DrawData value = new DrawData(texture, fightPlayer.EtimsKuniPos - Main.screenPosition, new Rectangle(0, FightMode.KuniSpriteWidth, FightMode.KuniTotalLength, FightMode.KuniSpriteWidth), color12, fightPlayer.EtimsKuniRot, new Vector2(FightMode.KuniHoldAt, FightMode.KuniSpriteWidth / 2), item.scale * fightPlayer.EtimsKuniScale, SpriteEffects.None, 0);
+                    drawInfo.DrawDataCache.Add(value);
+                }
             }
         }
     }

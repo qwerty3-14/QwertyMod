@@ -1,11 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using QwertyMod.Content.Buffs;
 using QwertyMod.Content.Dusts;
+using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
-using System;
 
 namespace QwertyMod.Content.Items.Consumable.Ammo.Bullet.Caelite
 {
@@ -36,7 +35,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Bullet.Caelite
         {
             for (int d = 0; d < 1; d++)
             {
-                Dust dust = Dust.NewDustPerfect(Projectile.Center, DustType<CaeliteDust>(), Vector2.Zero);
+                Dust dust = Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<CaeliteDust>(), Vector2.Zero);
                 dust.frame.Y = 0;
             }
         }
@@ -54,19 +53,19 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Bullet.Caelite
                 {
                     d = 1;
                 }
-                Dust dust = Dust.NewDustPerfect(Projectile.Center, DustType<CaeliteDust>(), QwertyMethods.PolarVector(d * 1, Projectile.velocity.ToRotation() + 2 * MathF.PI * ((float)i / 30f)));
+                Dust dust = Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<CaeliteDust>(), QwertyMethods.PolarVector(d * 1, Projectile.velocity.ToRotation() + 2 * MathF.PI * ((float)i / 30f)));
                 dust.frame.Y = 0;
             }
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.AddBuff(BuffType<PowerDown>(), 300);
+            target.AddBuff(ModContent.BuffType<PowerDown>(), 300);
         }
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(BuffType<PowerDown>(), 300);
+            target.AddBuff(ModContent.BuffType<PowerDown>(), 300);
         }
     }
 }

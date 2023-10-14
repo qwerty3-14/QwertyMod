@@ -1,7 +1,7 @@
 using QwertyMod.Content.Dusts;
 using Terraria;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 using Terraria.DataStructures;
 
 namespace QwertyMod.Content.Buffs
@@ -10,12 +10,9 @@ namespace QwertyMod.Content.Buffs
     {
         public override void SetStaticDefaults()
         {
-            ////DisplayName,SetDefault("Caelite Wrath");
-            ////Description.SetDefault("You deal 20% less damage!");
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = true;
             Main.buffNoSave[Type] = true;
-            //longerExpertDebuff = true;
         }
 
         private int timer;
@@ -27,7 +24,7 @@ namespace QwertyMod.Content.Buffs
             {
                 for (int d = 0; d < 30; d++)
                 {
-                    Dust dust = Main.dust[Dust.NewDust(npc.position, npc.width, npc.height, DustType<CaeliteDust>())];
+                    Dust dust = Main.dust[Dust.NewDust(npc.position, npc.width, npc.height, ModContent.DustType<CaeliteDust>())];
                     dust.velocity *= 3;
                 }
                 timer = 0;
@@ -41,7 +38,7 @@ namespace QwertyMod.Content.Buffs
             {
                 for (int d = 0; d < 30; d++)
                 {
-                    Dust dust = Main.dust[Dust.NewDust(player.position, player.width, player.height, DustType<CaeliteDust>())];
+                    Dust dust = Main.dust[Dust.NewDust(player.position, player.width, player.height, ModContent.DustType<CaeliteDust>())];
                     dust.velocity *= 3;
                 }
                 timer = 0;
@@ -53,7 +50,7 @@ namespace QwertyMod.Content.Buffs
     {
         public override void ModifyHitByProjectile(NPC npc, Projectile projectile, ref NPC.HitModifiers modifiers)
         {
-            if (Main.player[projectile.owner].HasBuff(BuffType<PowerDown>()))
+            if (Main.player[projectile.owner].HasBuff(ModContent.BuffType<PowerDown>()))
             {
                 modifiers.FinalDamage *= 0.8f;
             }
@@ -61,7 +58,7 @@ namespace QwertyMod.Content.Buffs
 
         public override void ModifyHitByItem(NPC npc, Player player, Item item, ref NPC.HitModifiers modifiers)
         {
-            if (player.HasBuff(BuffType<PowerDown>()))
+            if (player.HasBuff(ModContent.BuffType<PowerDown>()))
             {
                 modifiers.FinalDamage *= 0.8f;
             }
@@ -69,7 +66,7 @@ namespace QwertyMod.Content.Buffs
 
         public override void ModifyHitPlayer(NPC npc, Player target, ref Player.HurtModifiers modifiers)
         {
-            if (npc.HasBuff(BuffType<PowerDown>()))
+            if (npc.HasBuff(ModContent.BuffType<PowerDown>()))
             {
                 modifiers.FinalDamage *= 0.8f;
             }

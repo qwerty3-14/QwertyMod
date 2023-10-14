@@ -10,7 +10,7 @@ using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
-using static Terraria.ModLoader.ModContent;
+
 
 
 namespace QwertyMod.Content.Items.Weapon.Morphs.Swordquake
@@ -19,8 +19,6 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.Swordquake
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Shape Shift: Swordquake");
-            //Tooltip.SetDefault("Turn into a sword that causes a deadly swordquake upon striking the ground!");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -48,7 +46,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.Swordquake
             Item.height = 38;
 
             //Item.autoReuse = true;
-            Item.shoot = ProjectileType<SwordquakeP>();
+            Item.shoot = ModContent.ProjectileType<SwordquakeP>();
             Item.shootSpeed = 1f;
             Item.channel = true;
         }
@@ -56,10 +54,6 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.Swordquake
 
     public class SwordquakeP : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("Swordquake");
-        }
 
         public override void SetDefaults()
         {
@@ -117,7 +111,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.Swordquake
                             start += Vector2.UnitY;
                         }
                         start += Vector2.UnitY * 20;
-                        Projectile.NewProjectile(Projectile.InheritSource(Projectile), start, Vector2.Zero, ProjectileType<SwordlagmitePlayer>(), Projectile.damage, Projectile.knockBack, Projectile.owner, player.direction, 40);
+                        Projectile.NewProjectile(Projectile.InheritSource(Projectile), start, Vector2.Zero, ModContent.ProjectileType<SwordlagmitePlayer>(), Projectile.damage, Projectile.knockBack, Projectile.owner, player.direction, 40);
                     }
                 }
             }
@@ -141,7 +135,6 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.Swordquake
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Swordlagmite");
             ProjectileID.Sets.DontAttachHideToAlpha[Projectile.type] = true; // projectiles with hide but without this will draw in the lighting values of the owner player.
         }
 
@@ -206,7 +199,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs.Swordquake
                         start += Vector2.UnitY;
                     }
                     start += Vector2.UnitY * 20;
-                    next = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), start, Vector2.Zero, ProjectileType<SwordlagmitePlayer>(), Projectile.damage, Projectile.knockBack, Projectile.owner, Projectile.ai[0], Projectile.ai[1] - 1)];
+                    next = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(Projectile), start, Vector2.Zero, ModContent.ProjectileType<SwordlagmitePlayer>(), Projectile.damage, Projectile.knockBack, Projectile.owner, Projectile.ai[0], Projectile.ai[1] - 1)];
                 }
             }
             if (Projectile.timeLeft == 1)

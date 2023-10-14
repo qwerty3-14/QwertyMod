@@ -1,10 +1,9 @@
-
-using Terraria.GameContent.Creative;
-using Terraria.ModLoader;
+using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Common.PlayerLayers;
 using Terraria;
-using Microsoft.Xna.Framework.Graphics;
+using Terraria.GameContent.Creative;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace QwertyMod.Content.Items.MiscMaterials
 {

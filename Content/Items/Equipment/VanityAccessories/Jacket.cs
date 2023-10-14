@@ -1,7 +1,7 @@
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.GameContent.Creative;
-using Terraria.ID;
 
 namespace QwertyMod.Content.Items.Equipment.VanityAccessories
 {

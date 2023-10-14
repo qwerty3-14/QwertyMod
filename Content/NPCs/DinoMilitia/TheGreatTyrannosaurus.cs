@@ -6,12 +6,11 @@ using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
-using Terraria.DataStructures;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.NPCs.DinoMilitia
 {
@@ -20,9 +19,8 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("The Great Tyrannosaurus");
             Main.npcFrameCount[NPC.type] = 4;
-            NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers(0)
+            NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers()
             {
                 CustomTexturePath = "QwertyMod/Content/NPCs/DinoMilitia/TheGreatTyrannosaurus_Bestiary",
                 PortraitScale = 0.6f,
@@ -73,7 +71,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
         }
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
-            if (DinoEvent.EventActive && !NPC.AnyNPCs(NPCType<Velocichopper>()) && !NPC.AnyNPCs(NPCType<TheGreatTyrannosaurus>()))
+            if (DinoEvent.EventActive && !NPC.AnyNPCs(ModContent.NPCType<Velocichopper>()) && !NPC.AnyNPCs(ModContent.NPCType<TheGreatTyrannosaurus>()))
             {
                 if (DinoEvent.DinoKillCount >= 140)
                 {
@@ -201,15 +199,15 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
                         switch (attack)
                         {
                             case 0:
-                                Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.position + gunOffset + QwertyMethods.PolarVector(56, gunRot), QwertyMethods.PolarVector(10f, gunRot + spread), ProjectileType<SnowFlake>(), damage, 3f, Main.myPlayer);
+                                Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.position + gunOffset + QwertyMethods.PolarVector(56, gunRot), QwertyMethods.PolarVector(10f, gunRot + spread), ModContent.ProjectileType<SnowFlake>(), damage, 3f, Main.myPlayer);
                                 break;
 
                             case 1:
-                                NPC.NewNPC(NPC.GetSource_FromAI(), (int)(NPC.position + gunOffset + QwertyMethods.PolarVector(56, gunRot)).X, (int)(NPC.position + gunOffset + QwertyMethods.PolarVector(56, gunRot)).Y, NPCType<Mosquitto>(), 0, spread, NPC.direction);
+                                NPC.NewNPC(NPC.GetSource_FromAI(), (int)(NPC.position + gunOffset + QwertyMethods.PolarVector(56, gunRot)).X, (int)(NPC.position + gunOffset + QwertyMethods.PolarVector(56, gunRot)).Y, ModContent.NPCType<Mosquitto>(), 0, spread, NPC.direction);
                                 break;
 
                             case 2:
-                                Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center + new Vector2(-24 * NPC.direction, -74f), Vector2.UnitY * -40f, ProjectileType<MeteorLaunch>(), damage, 3f, Main.myPlayer);
+                                Projectile.NewProjectile(NPC.GetSource_FromAI(), NPC.Center + new Vector2(-24 * NPC.direction, -74f), Vector2.UnitY * -40f, ModContent.ProjectileType<MeteorLaunch>(), damage, 3f, Main.myPlayer);
 
                                 break;
                         }
@@ -237,7 +235,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
                         if (Main.netMode != NetmodeID.MultiplayerClient)
                         {
                             int Xvar = Main.rand.Next(-750, 750);
-                            Projectile.NewProjectile(NPC.GetSource_FromAI(), player.Center.X + Xvar * 1.0f, player.Center.Y - 800f, 0f, 10f, ProjectileType<MeteorFall>(), damage, 3f, Main.myPlayer);
+                            Projectile.NewProjectile(NPC.GetSource_FromAI(), player.Center.X + Xvar * 1.0f, player.Center.Y - 800f, 0f, 10f, ModContent.ProjectileType<MeteorFall>(), damage, 3f, Main.myPlayer);
                         }
                         meteorTime = 0;
                     }
@@ -246,8 +244,8 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
         }
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
-            npcLoot.Add(ItemDropRule.Common(ItemType<DinoFlail>(), 4, 1, 1));
-            npcLoot.Add(ItemDropRule.Common(ItemType<TheTyrantsExtinctionGun>(), 4, 1, 1));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<DinoFlail>(), 4, 1, 1));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<TheTyrantsExtinctionGun>(), 4, 1, 1));
 
             
 
@@ -308,7 +306,7 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
         {
             int frameHeight = 28;
             bool flip = NPC.spriteDirection == 1;
-            Texture2D gun = Request<Texture2D>("QwertyMod/Content/NPCs/DinoMilitia/TheTyrantsExtinctionGun").Value;
+            Texture2D gun = ModContent.Request<Texture2D>("QwertyMod/Content/NPCs/DinoMilitia/TheTyrantsExtinctionGun").Value;
             spriteBatch.Draw(gun, NPC.position + gunOffset - screenPos,
                        new Rectangle(0, frameHeight * gunFrame, 80, frameHeight), drawColor, gunRot + MathF.PI,
                        new Vector2(70, 14), NPC.scale, flip ? SpriteEffects.FlipVertically : SpriteEffects.None, 0f);
@@ -317,10 +315,6 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
 
     public class SnowFlake : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("SnowFlake");
-        }
 
         public override void SetDefaults()
         {
@@ -356,10 +350,6 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
 
     public class MeteorLaunch : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("Meteor");
-        }
 
         public override void SetDefaults()
         {
@@ -403,10 +393,6 @@ namespace QwertyMod.Content.NPCs.DinoMilitia
 
     public class MeteorFall : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("Meteor");
-        }
 
         public override void SetDefaults()
         {

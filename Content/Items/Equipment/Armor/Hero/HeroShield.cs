@@ -1,18 +1,14 @@
-using QwertyMod.Common;
-using QwertyMod.Content.Items.Consumable.Tiles.Bars;
-using Terraria;
-using Terraria.GameContent.Creative;
-using Terraria.ID;
-using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
-using Terraria.GameInput;
-using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
+using Terraria;
 using Terraria.GameContent;
-using Terraria.DataStructures;
+using Terraria.GameContent.Creative;
+using Terraria.GameInput;
 using Terraria.Graphics.Shaders;
+using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace QwertyMod.Content.Items.Equipment.Armor.Hero
 {
@@ -344,7 +340,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Hero
             }
             if(Projectile.timeLeft < endAnimation - 1)
             {
-                Texture2D texture = Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Hero/ThrowShieldStretch").Value;
+                Texture2D texture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/Armor/Hero/ThrowShieldStretch").Value;
                 float dist = (player.MountedCenter + GetCompositeOffset_FrontArm(player) - Projectile.Center).Length();
                 float rot = (Projectile.Center - player.Center).ToRotation();
                 if(Projectile.timeLeft < endAnimation / 2)

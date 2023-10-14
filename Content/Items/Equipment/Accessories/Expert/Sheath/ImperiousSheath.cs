@@ -5,9 +5,9 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.GameInput;
-using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
 using Terraria.ID;
+using Terraria.Localization;
+using Terraria.ModLoader;
 
 namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.Sheath
 {
@@ -16,9 +16,6 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.Sheath
 
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Imperious's Sheath");
-
-            //Tooltip.SetDefault("After dealing 10,000 damage you can summon Imperious to fight for you breifly with the " + "'" + "Special Ability" + "' key" + "\nCan be changed in controls");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -48,10 +45,10 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.Sheath
         //this changes the tooltip based on what the hotkey is configured to
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
-            String s = "Please go to conrols and bind the 'Yet another special ability key'";
+            String s = Language.GetTextValue(Mod.GetLocalizationKey("CustomTooltipBindKey"));
             foreach (String key in QwertyMod.YetAnotherSpecialAbility.GetAssignedKeys()) //get's the string of the hotkey's name
             {
-                s = "After dealing 10,000 damage you can summon Imperious to fight for you breifly with the " + "'" + key + "' key";
+                s = Language.GetTextValue(Mod.GetLocalizationKey("CustomTooltipSheathStart")) + key + Language.GetTextValue(Mod.GetLocalizationKey("CustomTooltipSheathEnd"));
             }
             foreach (TooltipLine line in tooltips) //runs through all tooltip lines
             {
@@ -76,7 +73,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.Sheath
 
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone) //runs when an npc is hit by the player's projectile
         {
-            if (proj.owner == Player.whoAmI && effect && !target.immortal && proj.type != ProjectileType<ImperiousP>()) //check if vallid npc and effect is active
+            if (proj.owner == Player.whoAmI && effect && !target.immortal && proj.type != ModContent.ProjectileType<ImperiousP>()) //check if vallid npc and effect is active
             {
                 damageTally += damageDone; //count up
             }
@@ -104,7 +101,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.Sheath
             {
                 if (effect && damageTally >= damageTallyMax)
                 {
-                    Projectile.NewProjectile(new EntitySource_Misc("Accesory_ImperiousSheath"), Player.Center, Vector2.Zero, ProjectileType<ImperiousP>(), (int)(500f * Player.GetDamage(DamageClass.Summon).Multiplicative), 8f * Player.GetKnockback(DamageClass.Summon).Multiplicative, Player.whoAmI); //summons Imperious to fight!
+                    Projectile.NewProjectile(new EntitySource_Misc("Accesory_ImperiousSheath"), Player.Center, Vector2.Zero, ModContent.ProjectileType<ImperiousP>(), (int)(500f * Player.GetDamage(DamageClass.Summon).Multiplicative), 8f * Player.GetKnockback(DamageClass.Summon).Multiplicative, Player.whoAmI); //summons Imperious to fight!
                     damageTally = 0; //resets the tally
 
                 }

@@ -1,9 +1,8 @@
 using Terraria;
-using Terraria.ModLoader;
+using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
-using System;
-using Terraria.DataStructures;
+using Terraria.ModLoader;
 
 namespace QwertyMod.Content.Items.Equipment.Vanity.SilkDress
 {

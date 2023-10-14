@@ -4,11 +4,8 @@ using QwertyMod.Content.Buffs;
 using QwertyMod.Content.Dusts;
 using Terraria;
 using Terraria.DataStructures;
-using Terraria.Enums;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.ObjectData;
-using static Terraria.ModLoader.ModContent;
 
 namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
 {
@@ -35,19 +32,19 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
             TileObjectData.addAlternate(1);
             TileObjectData.addTile(Type);
             */
-            DustType = DustType<FortressDust>();
+            DustType = ModContent.DustType<FortressDust>();
             HitSound = QwertyMod.FortressBlocks;
             MinPick = 50;
             AddMapEntry(new Color(162, 184, 185));
             MineResist = 1;
             
-            //ItemDrop = ItemType<FortressTrap>();
+            //ItemDrop = ModContent.ItemType<FortressTrap>();
         }
         
         /*
         public override void KillTile(int i, int j, ref bool fail, ref bool effectOnly, ref bool noItem)
         {
-            Item.NewItem(new EntitySource_TileBreak(i, j), i * 16, j * 16, 48, 48, ItemType<FortressTrap>());
+            Item.NewItem(new EntitySource_TileBreak(i, j), i * 16, j * 16, 48, 48, ModContent.ItemType<FortressTrap>());
         }
         */
         public override bool CanPlace(int i, int j)
@@ -143,8 +140,8 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
                 {
                     velocity = new Vector2(0, .001f);
                 }
-                Projectile.NewProjectile(Wiring.GetProjectileSource(i, j), new Vector2(i, j) * 16 + new Vector2(8, 8) + velocity.SafeNormalize(-Vector2.UnitY) * 16, velocity, ProjectileType<FortressTrapP>(), 18, .5f, Main.myPlayer, 0f);
-                Projectile.NewProjectile(Wiring.GetProjectileSource(i, j), new Vector2(i, j) * 16 + new Vector2(8, 8) + velocity.SafeNormalize(-Vector2.UnitY) * 16, velocity, ProjectileType<FortressTrapP>(), 18, .5f, Main.myPlayer, 20f);
+                Projectile.NewProjectile(Wiring.GetProjectileSource(i, j), new Vector2(i, j) * 16 + new Vector2(8, 8) + velocity.SafeNormalize(-Vector2.UnitY) * 16, velocity, ModContent.ProjectileType<FortressTrapP>(), 18, .5f, Main.myPlayer, 0f);
+                Projectile.NewProjectile(Wiring.GetProjectileSource(i, j), new Vector2(i, j) * 16 + new Vector2(8, 8) + velocity.SafeNormalize(-Vector2.UnitY) * 16, velocity, ModContent.ProjectileType<FortressTrapP>(), 18, .5f, Main.myPlayer, 20f);
             }
         }
     }
@@ -153,14 +150,12 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Caleite Pulse");
             Main.projFrames[Projectile.type] = 2;
         }
 
         public override void SetDefaults()
         {
             Projectile.aiStyle = -1;
-            //aiType = ProjectileID.Bullet;
             Projectile.width = 10;
             Projectile.height = 10;
             Projectile.friendly = true;
@@ -184,7 +179,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
             {
                 if (Main.rand.NextBool(2))
                 {
-                    Dust dust2 = Main.dust[Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustType<CaeliteDust>())];
+                    Dust dust2 = Main.dust[Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<CaeliteDust>())];
                     dust2.scale = .5f;
                 }
                 Projectile.rotation = Projectile.velocity.ToRotation();
@@ -208,12 +203,12 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.Fortress.Gadgets
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.AddBuff(BuffType<PowerDown>(), 1200);
+            target.AddBuff(ModContent.BuffType<PowerDown>(), 1200);
         }
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(BuffType<PowerDown>(), 1200);
+            target.AddBuff(ModContent.BuffType<PowerDown>(), 1200);
         }
     }
 }

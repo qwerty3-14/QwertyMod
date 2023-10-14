@@ -2,6 +2,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Common.PlayerLayers;
 using System;
+using System.IO;
+using System.Linq;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -9,9 +11,6 @@ using Terraria.GameContent;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
-using System.IO;
-using System.Linq;
 
 namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.Ancient
 {
@@ -33,7 +32,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.Ancient
             Item.width = 34;
             Item.height = 50;
             Item.damage = 50;
-            Item.shoot = ProjectileType<AncientLongbowP>();
+            Item.shoot = ModContent.ProjectileType<AncientLongbowP>();
             Item.value = 150000;
             Item.rare = ItemRarityID.Orange;
             Item.noMelee = true;
@@ -46,13 +45,13 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.Ancient
 
             if (!Main.dedServ)
             {
-                Item.GetGlobalItem<ItemUseGlow>().glowTexture = Request<Texture2D>("QwertyMod/Content/Items/Weapon/Ranged/Bow/Ancient/AncientLongbow_Glow").Value;
+                Item.GetGlobalItem<ItemUseGlow>().glowTexture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Ranged/Bow/Ancient/AncientLongbow_Glow").Value;
             }
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            Projectile.NewProjectile(source, position, velocity, ProjectileType<AncientLongbowP>(), damage, knockback, player.whoAmI);
+            Projectile.NewProjectile(source, position, velocity, ModContent.ProjectileType<AncientLongbowP>(), damage, knockback, player.whoAmI);
             return false;
         }
 
@@ -187,7 +186,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.Ancient
 
                     if (Ammo == ProjectileID.WoodenArrowFriendly)
                     {
-                        Ammo = ProjectileType<AncientArrow>();
+                        Ammo = ModContent.ProjectileType<AncientArrow>();
                     }
                     if (Projectile.owner == Main.myPlayer)
                     {
@@ -226,7 +225,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.Ancient
                     for (int d = 0; d < 3; d++)
                     {
                         float theta = Main.rand.NextFloat(-MathF.PI, MathF.PI);
-                        Dust dust = Dust.NewDustPerfect(arrow.Center + QwertyMethods.PolarVector(40, theta), DustType<AncientGlow>(), QwertyMethods.PolarVector(-8, theta));
+                        Dust dust = Dust.NewDustPerfect(arrow.Center + QwertyMethods.PolarVector(40, theta), ModContent.DustType<AncientGlow>(), QwertyMethods.PolarVector(-8, theta));
                         dust.scale = .5f;
                         dust.alpha = 255;
                     }
@@ -261,10 +260,10 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.Ancient
 
         public override bool PreDraw(ref Color drawColor)
         {
-            Main.EntitySpriteDraw(Request<Texture2D>("QwertyMod/Content/Items/Weapon/Ranged/Bow/Ancient/AncientLongbowP").Value, new Vector2(Projectile.Center.X - Main.screenPosition.X, Projectile.Center.Y - Main.screenPosition.Y),
+            Main.EntitySpriteDraw(ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Ranged/Bow/Ancient/AncientLongbowP").Value, new Vector2(Projectile.Center.X - Main.screenPosition.X, Projectile.Center.Y - Main.screenPosition.Y),
                         new Rectangle(0, 0, 50, 34), drawColor, Projectile.rotation,
                         new Vector2(Projectile.width * 0.5f, Projectile.height * 0.5f), 1f, SpriteEffects.None, 0);
-            Main.EntitySpriteDraw(Request<Texture2D>("QwertyMod/Content/Items/Weapon/Ranged/Bow/Ancient/AncientLongbowP_Glow").Value, new Vector2(Projectile.Center.X - Main.screenPosition.X, Projectile.Center.Y - Main.screenPosition.Y),
+            Main.EntitySpriteDraw(ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Ranged/Bow/Ancient/AncientLongbowP_Glow").Value, new Vector2(Projectile.Center.X - Main.screenPosition.X, Projectile.Center.Y - Main.screenPosition.Y),
                         new Rectangle(0, 0, 50, 34), Color.White, Projectile.rotation,
                         new Vector2(Projectile.width * 0.5f, Projectile.height * 0.5f), 1f, SpriteEffects.None, 0);
             return false;
@@ -282,12 +281,6 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.Ancient
 
     public class AncientArrow : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("Ancient Arrow");
-        }
-
-
         public override void SetDefaults()
         {
             Projectile.aiStyle = 1;
@@ -312,14 +305,14 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Bow.Ancient
             Main.EntitySpriteDraw(TextureAssets.Projectile[Projectile.type].Value, new Vector2(Projectile.Center.X - Main.screenPosition.X, Projectile.Center.Y - Main.screenPosition.Y),
                         new Rectangle(0, 0, 18, 36), drawColor, Projectile.rotation,
                         new Vector2(Projectile.width * 0.5f, Projectile.height * 0.5f), 1f, SpriteEffects.None, 0);
-            Main.EntitySpriteDraw(Request<Texture2D>("QwertyMod/Content/Items/Weapon/Ranged/Bow/Ancient/AncientArrow_Glow").Value, new Vector2(Projectile.Center.X - Main.screenPosition.X, Projectile.Center.Y - Main.screenPosition.Y),
+            Main.EntitySpriteDraw(ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Ranged/Bow/Ancient/AncientArrow_Glow").Value, new Vector2(Projectile.Center.X - Main.screenPosition.X, Projectile.Center.Y - Main.screenPosition.Y),
                         new Rectangle(0, 0, 18, 36), Color.White, Projectile.rotation,
                         new Vector2(Projectile.width * 0.5f, Projectile.height * 0.5f), 1f, SpriteEffects.None, 0);
         }
 
         private void drawOrbital(Color drawColor, Vector2 Loc)
         {
-            Main.EntitySpriteDraw(Request<Texture2D>("QwertyMod/Content/Items/Weapon/Ranged/Bow/Ancient/AncientArrow_Orbital").Value, Loc - Main.screenPosition,
+            Main.EntitySpriteDraw(ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Ranged/Bow/Ancient/AncientArrow_Orbital").Value, Loc - Main.screenPosition,
                         new Rectangle(0, 0, 6, 10), drawColor, Projectile.rotation,
                         new Vector2(3, 5), 1f, SpriteEffects.None, 0);
         }

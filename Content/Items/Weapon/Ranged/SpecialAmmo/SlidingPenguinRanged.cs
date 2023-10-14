@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -10,15 +9,9 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.SpecialAmmo
 {
     class SlidingPenguinRanged : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("Sliding Penguin");
-        }
-
         public override void SetDefaults()
         {
             Projectile.aiStyle = 1;
-            //aiType = ProjectileID.Bullet;
             Projectile.width = 18;
             Projectile.height = 18;
             Projectile.friendly = true;

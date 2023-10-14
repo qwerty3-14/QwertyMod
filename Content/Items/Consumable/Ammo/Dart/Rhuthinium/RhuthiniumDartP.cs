@@ -5,7 +5,7 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Consumable.Ammo.Dart.Rhuthinium
 {
@@ -61,7 +61,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Dart.Rhuthinium
                     SoundEngine.PlaySound(SoundID.Item12, Projectile.Center);
                     Projectile.Center = player.Center + flyOffset;
                     Projectile.velocity = Vector2.Zero;
-                    Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center + QwertyMethods.PolarVector(10, Projectile.rotation - MathF.PI / 2), QwertyMethods.PolarVector(4, Projectile.rotation - MathF.PI / 2), ProjectileType<DartBeam>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                    Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center + QwertyMethods.PolarVector(10, Projectile.rotation - MathF.PI / 2), QwertyMethods.PolarVector(4, Projectile.rotation - MathF.PI / 2), ModContent.ProjectileType<DartBeam>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
                     SetFlyOffset();
                     Projectile.penetrate--;
                 }
@@ -72,7 +72,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Dart.Rhuthinium
         {
             for (int i = 0; i < 12; i++)
             {
-                Dust d = Dust.NewDustPerfect(Projectile.Center, DustType<RhuthiniumDust>());
+                Dust d = Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<RhuthiniumDust>());
                 d.velocity *= 2;
                 d.noGravity = true;
             }

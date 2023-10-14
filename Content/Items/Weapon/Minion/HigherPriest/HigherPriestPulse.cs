@@ -3,7 +3,7 @@ using QwertyMod.Content.Dusts;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 using System;
 using Microsoft.Xna.Framework;
 
@@ -13,7 +13,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.HigherPriest
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Preist Pulse");
             Main.projFrames[Projectile.type] = 2;
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             ProjectileID.Sets.MinionShot[Projectile.type] = true;
@@ -64,7 +63,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.HigherPriest
             explode();
             if (Main.rand.NextBool(10))
             {
-                target.AddBuff(BuffType<PowerDown>(), 120);
+                target.AddBuff(ModContent.BuffType<PowerDown>(), 120);
             }
         }
         public override void OnKill(int timeLeft)
@@ -77,7 +76,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.HigherPriest
                 {
                     d = spokeLengths - d;
                 }
-                Dust dust = Dust.NewDustPerfect(Projectile.Center, DustType<CaeliteDust>(), QwertyMethods.PolarVector(d * 1, Projectile.velocity.ToRotation() + 2 * MathF.PI * ((float)i / (float)(spokeLengths * 5))));
+                Dust dust = Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<CaeliteDust>(), QwertyMethods.PolarVector(d * 1, Projectile.velocity.ToRotation() + 2 * MathF.PI * ((float)i / (float)(spokeLengths * 5))));
                 dust.frame.Y = 0;
                 //dust.velocity *= 2;
             }

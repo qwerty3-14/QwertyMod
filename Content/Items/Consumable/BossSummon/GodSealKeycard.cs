@@ -19,9 +19,7 @@ namespace QwertyMod.Content.Items.Consumable.BossSummon
             Item.maxStack = 9999;
             Item.value = 10000;
             Item.rare = ItemRarityID.Orange;
-
             Item.useTurn = true;
-
             Item.useAnimation = 45;
             Item.useTime = 45;
             Item.useStyle = ItemUseStyleID.Swing;

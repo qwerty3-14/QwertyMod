@@ -1,11 +1,9 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Content;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 using QwertyMod.Content.Items.Equipment.VanityAccessories;
 
 namespace QwertyMod.Common.Playerlayers
@@ -51,10 +49,10 @@ namespace QwertyMod.Common.Playerlayers
             {
                 Color color12 = drawInfo.colorArmorBody;
 
-                Texture2D texture = Request<Texture2D>("QwertyMod/Content/Items/Equipment/VanityAccessories/Shrug_Jacket").Value;
+                Texture2D texture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/VanityAccessories/Shrug_Jacket").Value;
                 if(jacket.type == ModContent.ItemType<Jacket>())
                 {
-                    texture = Request<Texture2D>("QwertyMod/Content/Items/Equipment/VanityAccessories/Jacket_Jacket").Value;
+                    texture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/VanityAccessories/Jacket_Jacket").Value;
                 }
 
                 Vector2 vector = new Vector2((int)(drawInfo.Position.X - Main.screenPosition.X - (float)(drawInfo.drawPlayer.bodyFrame.Width / 2) + (float)(drawInfo.drawPlayer.width / 2)), (int)(drawInfo.Position.Y - Main.screenPosition.Y + (float)drawInfo.drawPlayer.height - (float)drawInfo.drawPlayer.bodyFrame.Height + 4f)) + drawInfo.drawPlayer.bodyPosition + new Vector2(drawInfo.drawPlayer.bodyFrame.Width / 2, drawInfo.drawPlayer.bodyFrame.Height / 2);
@@ -164,10 +162,10 @@ namespace QwertyMod.Common.Playerlayers
             {
                 Color color12 = drawInfo.colorArmorBody;
 
-                Texture2D texture = Request<Texture2D>("QwertyMod/Content/Items/Equipment/VanityAccessories/Shrug_Jacket").Value;
+                Texture2D texture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/VanityAccessories/Shrug_Jacket").Value;
                 if(jacket.type == ModContent.ItemType<Jacket>())
                 {
-                    texture = Request<Texture2D>("QwertyMod/Content/Items/Equipment/VanityAccessories/Jacket_Jacket").Value;
+                    texture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/VanityAccessories/Jacket_Jacket").Value;
                 }
             
 

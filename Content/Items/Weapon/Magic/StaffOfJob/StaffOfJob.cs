@@ -7,7 +7,7 @@ using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Magic.StaffOfJob
 {
@@ -51,7 +51,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.StaffOfJob
         }
         public override void AddRecipes()
         {
-            CreateRecipe(1).AddIngredient(ItemType<Etims>(), 12)
+            CreateRecipe(1).AddIngredient(ModContent.ItemType<Etims>(), 12)
                 .AddTile(TileID.Anvils)
                 .Register();
         }

@@ -5,12 +5,11 @@ using QwertyMod.Content.Dusts;
 using QwertyMod.Content.Items.Consumable.Tiles.Bars;
 using System;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 //copied from example javelin forom example mod
 namespace QwertyMod.Content.Items.Weapon.Melee.Javelin.Rhuthinium
@@ -19,8 +18,6 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin.Rhuthinium
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Rhuthinium Javelin");
-            //Tooltip.SetDefault("Each javelin stuck in the enemy causes them to take 1 extra damage\nMax: 10");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -46,12 +43,12 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin.Rhuthinium
 
             Item.UseSound = SoundID.Item1;
 
-            Item.shoot = ProjectileType<RhuthiniumJavelinP>();
+            Item.shoot = ModContent.ProjectileType<RhuthiniumJavelinP>();
         }
 
         public override void AddRecipes()
         {
-            CreateRecipe(1).AddIngredient(ItemType<RhuthiniumBar>(), 8)
+            CreateRecipe(1).AddIngredient(ModContent.ItemType<RhuthiniumBar>(), 8)
                 .AddTile(TileID.Anvils)
                 .Register();
         }
@@ -69,10 +66,6 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin.Rhuthinium
 
     public class RhuthiniumJavelinP : Javelin
     {
-        public override void SetStaticDefaults()
-        {
-            //DisplayName,SetDefault("RhuthiniumJavelin");
-        }
 
 
         public override void SetDefaults()
@@ -86,7 +79,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin.Rhuthinium
             Projectile.GetGlobalProjectile<ImplaingProjectile>().CanImpale = true;
             Projectile.GetGlobalProjectile<ImplaingProjectile>().damagePerImpaler = 12;
             maxStickingJavelins = 10;
-            dropItem = ItemType<RhuthiniumJavelin>();
+            dropItem = ModContent.ItemType<RhuthiniumJavelin>();
             rotationOffset = MathF.PI / 4;
         }
 
@@ -104,7 +97,7 @@ namespace QwertyMod.Content.Items.Weapon.Melee.Javelin.Rhuthinium
             for (int i = 0; i < 18; i++)
             {
                 Vector2 dustPos = Projectile.Center + QwertyMethods.PolarVector(Main.rand.Next(80), Projectile.rotation + MathF.PI / 4);
-                Dust d = Main.dust[Dust.NewDust(dustPos, Projectile.width, Projectile.height, DustType<RhuthiniumDust>())];
+                Dust d = Main.dust[Dust.NewDust(dustPos, Projectile.width, Projectile.height, ModContent.DustType<RhuthiniumDust>())];
                 d.noGravity = true;
             }
         }

@@ -10,7 +10,7 @@ using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.NPCs.Fortress
 {
@@ -18,7 +18,6 @@ namespace QwertyMod.Content.NPCs.Fortress
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Guard Tile");
             Main.npcFrameCount[NPC.type] = 8;
         }
 
@@ -48,7 +47,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             NPC.buffImmune[20] = true;
             NPC.buffImmune[24] = true;
             Banner = NPC.type;
-            BannerItem = ItemType<GuardTileBanner>();
+            BannerItem = ModContent.ItemType<GuardTileBanner>();
             NPC.buffImmune[BuffID.Confused] = false;
         }
         
@@ -68,7 +67,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             {
                 for (int i = 0; i < 90; i++)
                 {
-                    int dustType = DustType<FortressDust>();
+                    int dustType = ModContent.DustType<FortressDust>();
                     int dustIndex = Dust.NewDust(NPC.position, NPC.width, NPC.height, dustType);
                     Dust dust = Main.dust[dustIndex];
                     dust.velocity.X = dust.velocity.X + Main.rand.Next(-50, 51) * 0.01f;
@@ -78,7 +77,7 @@ namespace QwertyMod.Content.NPCs.Fortress
             }
             for (int i = 0; i < 9; i++)
             {
-                int dustType = DustType<FortressDust>(); ;
+                int dustType = ModContent.DustType<FortressDust>(); ;
                 int dustIndex = Dust.NewDust(NPC.position, NPC.width, NPC.height, dustType);
                 Dust dust = Main.dust[dustIndex];
                 dust.velocity.X = dust.velocity.X + Main.rand.Next(-50, 51) * 0.01f;
@@ -88,13 +87,13 @@ namespace QwertyMod.Content.NPCs.Fortress
         }
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
-            npcLoot.Add(ItemDropRule.Common(ItemType<FortressBrick>(), 1, 7, 20));
-            npcLoot.Add(ItemDropRule.Common(ItemType<TileStaff>(), 6, 1, 1));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<FortressBrick>(), 1, 7, 20));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<TileStaff>(), 6, 1, 1));
         }
 
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
-            if (spawnInfo.Player.InModBiome(GetInstance<FortressBiome>()) && Main.hardMode)
+            if (spawnInfo.Player.InModBiome(ModContent.GetInstance<FortressBiome>()) && Main.hardMode)
             {
                 return 40f;
             }

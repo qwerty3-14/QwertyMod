@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Consumable.Ammo.Dart.Rhuthinium
 {
@@ -22,7 +22,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Dart.Rhuthinium
             Item.damage = 7;
             Item.DamageType = DamageClass.Ranged;
             Item.ammo = AmmoID.Dart;
-            Item.shoot = ProjectileType<RhuthiniumDartP>();
+            Item.shoot = ModContent.ProjectileType<RhuthiniumDartP>();
             Item.shootSpeed = 3;
             Item.knockBack = 0;
             Item.rare = ItemRarityID.Orange;
@@ -32,7 +32,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Dart.Rhuthinium
 
         public override void AddRecipes()
         {
-            CreateRecipe(100).AddIngredient(ItemType<RhuthiniumBar>())
+            CreateRecipe(100).AddIngredient(ModContent.ItemType<RhuthiniumBar>())
                 .Register();
         }
     }

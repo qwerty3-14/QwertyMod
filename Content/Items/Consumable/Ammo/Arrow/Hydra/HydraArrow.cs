@@ -1,7 +1,7 @@
 ﻿using QwertyMod.Content.Items.MiscMaterials;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 using Terraria.GameContent.Creative;
 
 namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Hydra
@@ -26,14 +26,14 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Hydra
             Item.shootSpeed = 6;
 
             Item.consumable = true;
-            Item.shoot = ProjectileType<HydraArrowP>();
+            Item.shoot = ModContent.ProjectileType<HydraArrowP>();
             Item.ammo = 40;
             Item.maxStack = 9999;
         }
 
         public override void AddRecipes()
         {
-            CreateRecipe(111).AddIngredient(ItemType<HydraScale>())
+            CreateRecipe(111).AddIngredient(ModContent.ItemType<HydraScale>())
                 .AddTile(TileID.MythrilAnvil)
                 .Register();
         }

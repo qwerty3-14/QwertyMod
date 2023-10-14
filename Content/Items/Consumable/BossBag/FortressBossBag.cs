@@ -7,13 +7,11 @@ using QwertyMod.Content.Items.Weapon.Magic.RestlessSun;
 using QwertyMod.Content.Items.Weapon.Melee.Misc;
 using QwertyMod.Content.Items.Weapon.Minion.Priest;
 using QwertyMod.Content.Items.Weapon.Ranged.Bow.HolyExiler;
-using QwertyMod.Content.NPCs.Bosses.FortressBoss;
 using Terraria;
-using Terraria.ID;
-using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
+using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 using Terraria.GameContent.ItemDropRules;
 
 namespace QwertyMod.Content.Items.Consumable.BossBag

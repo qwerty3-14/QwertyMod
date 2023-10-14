@@ -6,7 +6,7 @@ using Terraria.GameContent.Creative;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
 {
@@ -14,8 +14,6 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Vitallum Core");
-            //Tooltip.SetDefault("Uncharged, kill enemies to charge it.\nWhen charged can be used in crafting, removing the charge. \n");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -46,7 +44,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
             if (charge > maxCharge)
             {
                 Item.TurnToAir();
-                player.QuickSpawnItem(new EntitySource_Misc("Recipe"), ItemType<VitallumCoreCharged>(), 1);
+                player.QuickSpawnItem(new EntitySource_Misc("Recipe"), ModContent.ItemType<VitallumCoreCharged>(), 1);
             }
         }
 
@@ -67,8 +65,6 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Vitallum Core");
-            //Tooltip.SetDefault("Charged, ready for crafting.");
             Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(10, 6));
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
@@ -120,7 +116,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
                 LeadingConditionRule notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
 
                 //Notice we use notExpertRule.OnSuccess instead of npcLoot.Add so it only applies in normal mode
-                notExpertRule.OnSuccess(ItemDropRule.Common(ItemType<VitallumCoreUncharged>()));
+                notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<VitallumCoreUncharged>()));
                 //Finally add the leading rule
                 npcLoot.Add(notExpertRule);
             }
@@ -133,7 +129,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
         {
             if(item.type == ItemID.FishronBossBag)
             {
-                itemLoot.Add(ItemDropRule.Common(ItemType<VitallumCoreUncharged>()));
+                itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<VitallumCoreUncharged>()));
             }
         }
     }

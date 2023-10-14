@@ -2,7 +2,7 @@
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 namespace QwertyMod.Content.Items.Consumable.Ammo.Dart.Venom
 {
     public class VenomDartP : ModProjectile
@@ -32,7 +32,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Dart.Venom
             Projectile.localNPCImmunity[target.whoAmI] = -1;
             target.immune[Projectile.owner] = 0;
             target.AddBuff(BuffID.Venom, 60 * 30);
-            Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, QwertyMethods.PolarVector(Main.rand.NextFloat(), Main.rand.NextFloat(-MathF.PI, MathF.PI)), ProjectileType<VenomCloud>(), (int)(.5f * Projectile.damage), Projectile.knockBack, Projectile.owner);
+            Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center, QwertyMethods.PolarVector(Main.rand.NextFloat(), Main.rand.NextFloat(-MathF.PI, MathF.PI)), ModContent.ProjectileType<VenomCloud>(), (int)(.5f * Projectile.damage), Projectile.knockBack, Projectile.owner);
         }
     }
 }

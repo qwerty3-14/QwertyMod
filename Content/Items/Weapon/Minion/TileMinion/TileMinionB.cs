@@ -1,7 +1,7 @@
 ﻿using QwertyMod.Common;
 using Terraria;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 
 namespace QwertyMod.Content.Items.Weapon.Minion.TileMinion
 {
@@ -9,8 +9,6 @@ namespace QwertyMod.Content.Items.Weapon.Minion.TileMinion
     {
         public override void SetStaticDefaults()
         {
-            //DisplayName,SetDefault("Tile Minion");
-            //Description.SetDefault("Up up down down left right left right...");
             Main.buffNoSave[Type] = true;
             Main.buffNoTimeDisplay[Type] = true;
         }
@@ -18,7 +16,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.TileMinion
         public override void Update(Player player, ref int buffIndex)
         {
             MinionManager modPlayer = player.GetModPlayer<MinionManager>();
-            if (player.ownedProjectileCounts[ProjectileType<TileMinion>()] > 0)
+            if (player.ownedProjectileCounts[ ModContent.ProjectileType<TileMinion>()] > 0)
             {
                 modPlayer.TileMinion = true;
             }

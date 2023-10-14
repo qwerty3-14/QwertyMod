@@ -1,10 +1,9 @@
 using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Common.PlayerLayers;
 using Terraria;
-using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Terraria.ModLoader.ModContent;
+
 using QwertyMod.Common.Fortress;
 
 namespace QwertyMod.Content.Items.Tool
@@ -26,7 +25,7 @@ namespace QwertyMod.Content.Items.Tool
             Item.useTurn = true;
             if (!Main.dedServ)
             {
-                Item.GetGlobalItem<ItemUseGlow>().glowTexture = Request<Texture2D>("QwertyMod/Content/Items/Tool/InvasionCaller_Glow").Value;
+                Item.GetGlobalItem<ItemUseGlow>().glowTexture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Tool/InvasionCaller_Glow").Value;
             }
         }
         

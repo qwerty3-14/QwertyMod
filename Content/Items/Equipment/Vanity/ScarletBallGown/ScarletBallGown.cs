@@ -2,7 +2,6 @@ using Terraria;
 using Terraria.ModLoader;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
-using System;
 
 namespace QwertyMod.Content.Items.Equipment.Vanity.ScarletBallGown
 {
