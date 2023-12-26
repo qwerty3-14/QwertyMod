@@ -259,7 +259,7 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
             float masterScale = 1.5f;
             for(int i = 0; i < 2; i++)
             {
-                gunDebrislife[i] = gunDebrislifeMax[i] = 14000;
+                gunDebrislife[i] = gunDebrislifeMax[i] = 9800;
                 if(Main.expertMode)
                 {
                     gunDebrislifeMax[i] = (int)(gunDebrislifeMax[i] * expertScale * bossAdjustment);
@@ -271,10 +271,10 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
                     gunDebrislife[i] = (int)(gunDebrislife[i] * masterScale);
                 }
             }
-            launcherDebrislife = launcherDebrislifeMax = 8000;
-            engineDebrislife = engineDebrislifeMax = 10000;
-            distressDebrislife = distressDebrislifeMax = 4000;
-            centerDebrisLife = centerDebrisLifeMax = 20000;
+            launcherDebrislife = launcherDebrislifeMax = 5600;
+            engineDebrislife = engineDebrislifeMax = 7000;
+            distressDebrislife = distressDebrislifeMax = 2800;
+            centerDebrisLife = centerDebrisLifeMax = 14000;
             if(Main.expertMode)
             {
                 launcherDebrislife = (int)(launcherDebrislife * expertScale * bossAdjustment);

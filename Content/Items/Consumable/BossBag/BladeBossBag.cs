@@ -1,6 +1,5 @@
 using QwertyMod.Content.Items.Equipment.Accessories.Expert.Sheath;
 using QwertyMod.Content.Items.Equipment.Accessories.Sword;
-using QwertyMod.Content.Items.MiscMaterials;
 using QwertyMod.Content.Items.Weapon.Magic.Swordpocalypse;
 using QwertyMod.Content.Items.Weapon.Melee.Javelin.Imperium;
 using QwertyMod.Content.Items.Weapon.Melee.Sword.ImperiousTheIV;
@@ -14,6 +13,7 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.ModLoader;
 using Terraria.ID;
 using QwertyMod.Content.Items.Equipment.Vanity.BossMasks;
+using QwertyMod.Content.Items.Equipment.Accessories.SuperArrow.BladedArrow;
 
 namespace QwertyMod.Content.Items.Consumable.BossBag
 {
@@ -49,7 +49,7 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<ImperiousSheath>(), 1));
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<ImperiousMask>(), 7, 1, 1));
             itemLoot.Add(ItemDropRule.Coins(150000, true));
-            itemLoot.Add(ItemDropRule.FewFromOptions(3, 1, ModContent.ItemType<BladedArrowShaft>(), ModContent.ItemType<ImperiousTheIV>(), ModContent.ItemType<Imperium>(), ModContent.ItemType<SwordStormStaff>(), ModContent.ItemType<Arsenal>(), ModContent.ItemType<Discipline>(), ModContent.ItemType<SwordMinionStaff>(), ModContent.ItemType<Swordquake>()));
+            itemLoot.Add(ItemDropRule.FewFromOptions(3, 1, ModContent.ItemType<BladedArrow>(), ModContent.ItemType<ImperiousTheIV>(), ModContent.ItemType<Imperium>(), ModContent.ItemType<SwordStormStaff>(), ModContent.ItemType<Arsenal>(), ModContent.ItemType<Discipline>(), ModContent.ItemType<SwordMinionStaff>(), ModContent.ItemType<Swordquake>()));
         }
     }
 }

@@ -30,8 +30,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.SuperArrow.BladedArrow
         }
         public override void AddRecipes()
         {
-            CreateRecipe().AddIngredient(ModContent.ItemType<Aqueous.Aqueous>())
-                .AddIngredient(ModContent.ItemType<BladedArrowShaft>())
+            CreateRecipe().AddIngredient(ModContent.ItemType<BladedArrowShaft>())
                 .AddTile(TileID.MythrilAnvil)
                 .Register();
         }

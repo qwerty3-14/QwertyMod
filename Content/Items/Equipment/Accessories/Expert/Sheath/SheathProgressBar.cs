@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using QwertyMod.Content.NPCs.Bosses.BladeBoss;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
@@ -26,7 +27,17 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.Sheath
                 Player drawPlayer = drawInfo.drawPlayer;
                 if(!drawPlayer.TryGetModPlayer<ImperiousEffect>(out ImperiousEffect modPlayer)){ return; }
                 if(!modPlayer.effect){ return; }
-
+                for(int p = 0; p < 1000; p++)
+                {
+                    if(Main.projectile[p].active && Main.projectile[p].type == ModContent.ProjectileType<ImperiousP>())
+                    {
+                        return;
+                    }
+                }
+                if(NPC.AnyNPCs(ModContent.NPCType<Imperious>()))
+                {
+                    return;
+                }
                 Texture2D texture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Equipment/Accessories/Expert/Sheath/SheathProgress").Value;
 
                 int drawX = (int)(drawPlayer.position.X - Main.screenPosition.X);

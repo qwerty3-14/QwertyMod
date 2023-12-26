@@ -1,4 +1,5 @@
 using QwertyMod.Content.Items.Consumable.Tiles.Bars;
+using QwertyMod.Content.Items.Equipment.Accessories.Expert.Sheath;
 using QwertyMod.Content.NPCs.Bosses.BladeBoss;
 using Terraria;
 using Terraria.Audio;
@@ -38,8 +39,16 @@ namespace QwertyMod.Content.Items.Consumable.BossSummon
 
         public override bool? UseItem(Player player)
         {
+            
             if (player.whoAmI == Main.myPlayer)
             {
+                for(int p = 0; p < 1000; p++)
+                {
+                    if(Main.projectile[p].active && Main.projectile[p].type == ModContent.ProjectileType<ImperiousP>())
+                    {
+                        return false;
+                    }
+                }
                 SoundEngine.PlaySound(SoundID.Roar, player.Center);
                 QwertyMethods.NPCSpawnOnPlayer(player, ModContent.NPCType<Imperious>());
                 return true;

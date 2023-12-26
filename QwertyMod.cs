@@ -110,6 +110,7 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
+using QwertyMod.Common.Fortress;
 
 
 
@@ -439,6 +440,12 @@ namespace QwertyMod
                         }
                     }
                     break;
+                case ModMessageType.SetFortressInvasionStatus:
+                    bool invaded = reader.ReadBoolean();
+                    bool initalInvasion = reader.ReadBoolean();
+                    SkyFortress.beingInvaded = invaded;
+                    SkyFortress.initalInvasion = initalInvasion;
+                    break;
             }
         }
     }
@@ -455,6 +462,7 @@ namespace QwertyMod
         AmmoEnchantArrowWarping,
         AmmoEnchantArrowHoming,
         AmmoEnchantQuantum,
-        SpawnQuantumRing
+        SpawnQuantumRing,
+        SetFortressInvasionStatus
     }
 }

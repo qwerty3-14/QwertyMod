@@ -63,6 +63,12 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
                 }
                 NPC.rotation = rotmultiplier * (float)Math.PI / 20f;
 
+                if(!NPC.AnyNPCs(ModContent.NPCType<InvaderBattleship>()) && MathF.Abs(aimAt.Center.X - NPC.Center.X) > 3000)
+                {
+                    NPC.active = false;
+                    return;
+                }
+
             }
         }
     }

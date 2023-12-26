@@ -9,6 +9,7 @@ using QwertyMod.Content.Items.Weapon.Ranged.Gun.SuperquantumRifle;
 using QwertyMod.Content.Items.Weapon.Minion.DVR;
 using QwertyMod.Content.Items.Weapon.Melee.Misc.FightKit;
 using QwertyMod.Content.Items.Equipment.Vanity.BossMasks;
+using QwertyMod.Content.Items.Tool;
 
 namespace QwertyMod.Content.Items.Consumable.BossBag
 {
@@ -40,6 +41,7 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
             itemLoot.Add(ItemDropRule.Coins(1000000, true));
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<InvaderPlating>(), 1, 100, 200));
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<InvaderIDCard>(), 1, 1, 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<InvasionCaller>(), 1));
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<InvaderMask>(), 7, 1, 1));
             itemLoot.Add(ItemDropRule.OneFromOptionsNotScalingWithLuck(1, ModContent.ItemType<SuperquantumRifle>(), ModContent.ItemType<DVRStaff>(), ModContent.ItemType<FightKit>()));
         }

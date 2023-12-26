@@ -39,7 +39,7 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
 
         public override void SetDefaults()
         {
-            NPC.lifeMax = 40000;
+            NPC.lifeMax = 28000;
             NPC.width = 150;
             NPC.height = 100;
             NPC.value = 100000;
@@ -48,7 +48,7 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
             NPC.boss = true;
             if (!Main.dedServ)
             {
-                Music = MusicLoader.GetMusicSlot(Mod, "Assets/Music/BuiltToDestroy");
+                Music = MusicLoader.GetMusicSlot(Mod, "Assets/Music/Accomplices");
             }
             NPC.knockBackResist = 0;
             NPC.HitSound = SoundID.NPCHit1;
@@ -247,6 +247,7 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
                     }
                     else
                     {
+                        
                         for(int i =0; i < Main.npc.Length; i++)
                         {
                             if(Main.npc[i].active && Main.npc[i].GetGlobalNPC<InvaderNPCGeneral>().invaderNPC)
@@ -254,7 +255,7 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
                                 Main.npc[i].ai[3] = 3;
                                 Main.npc[i].velocity = (NPC.Center - Main.npc[i].Center).SafeNormalize(Vector2.UnitY) * 30f;
                                 Main.npc[i].damage = 0;
-                                if((NPC.Center - Main.npc[i].Center).Length() < 30)
+                                if((NPC.Center - Main.npc[i].Center).Length() < 30 || !NPC.AnyNPCs(ModContent.NPCType<InvaderBattleship>()))
                                 {
                                     NPC.life += Main.npc[i].life;
                                     NPC.lifeMax += Main.npc[i].life;
@@ -262,6 +263,11 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
                                     Main.npc[i].StrikeInstantKill();
                                 }
                             }
+                        }
+                        if(!NPC.AnyNPCs(ModContent.NPCType<InvaderBattleship>()))
+                        {
+                            NPC.active = false;
+                            return;
                         }
                     }
                 }

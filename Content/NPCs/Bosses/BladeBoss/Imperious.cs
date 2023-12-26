@@ -3,9 +3,9 @@ using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Common;
 using QwertyMod.Content.Items.Consumable.BossBag;
 using QwertyMod.Content.Items.Consumable.Tiles.Trophy.Blade;
+using QwertyMod.Content.Items.Equipment.Accessories.SuperArrow.BladedArrow;
 using QwertyMod.Content.Items.Equipment.Accessories.Sword;
 using QwertyMod.Content.Items.Equipment.Vanity.BossMasks;
-using QwertyMod.Content.Items.MiscMaterials;
 using QwertyMod.Content.Items.Weapon.Magic.Swordpocalypse;
 using QwertyMod.Content.Items.Weapon.Melee.Javelin.Imperium;
 using QwertyMod.Content.Items.Weapon.Melee.Sword.ImperiousTheIV;
@@ -138,7 +138,7 @@ namespace QwertyMod.Content.NPCs.Bosses.BladeBoss
             LeadingConditionRule notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
 
             //Notice we use notExpertRule.OnSuccess instead of npcLoot.Add so it only applies in normal mode
-            notExpertRule.OnSuccess(ItemDropRule.OneFromOptionsNotScalingWithLuck(1, ModContent.ItemType<BladedArrowShaft>(), ModContent.ItemType<ImperiousTheIV>(), ModContent.ItemType<Imperium>(), ModContent.ItemType<SwordStormStaff>(), ModContent.ItemType<Arsenal>(), ModContent.ItemType<Discipline>(), ModContent.ItemType<SwordMinionStaff>(), ModContent.ItemType<Swordquake>()));
+            notExpertRule.OnSuccess(ItemDropRule.OneFromOptionsNotScalingWithLuck(1, ModContent.ItemType<BladedArrow>(), ModContent.ItemType<ImperiousTheIV>(), ModContent.ItemType<Imperium>(), ModContent.ItemType<SwordStormStaff>(), ModContent.ItemType<Arsenal>(), ModContent.ItemType<Discipline>(), ModContent.ItemType<SwordMinionStaff>(), ModContent.ItemType<Swordquake>()));
             notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<SwordsmanBadge>(), 5));
             //Finally add the leading rule
             npcLoot.Add(notExpertRule);

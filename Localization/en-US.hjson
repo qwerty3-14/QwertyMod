@@ -13,6 +13,7 @@ Mods: {
 		RhuthiniumScanNoSkeletron: No Rhutinium found, as expected since you haven't killed skeletron
 		RhuthiniumScanSuccess: " Rhuthnium found in this world, keep looking!"
 		FortressInvasion: The sky fortress is being invaded!
+		FortressBanished: The Invaders have been banished from the sky fortress!
 		CustomTooltipBindKey: Please go to conrols and bind the 'Yet another special ability key'
 		CustomTooltipSheathStart: After dealing 10,000 damage you can summon Imperious to fight for you breifly with the '
 		CustomTooltipSheathEnd: "' key"
@@ -2338,7 +2339,7 @@ Mods: {
 			}
 
 			InvasionCaller: {
-				Tooltip: ""
+				Tooltip: Calls back the fortress invasion!
 				DisplayName: Invasion Caller
 			}
 

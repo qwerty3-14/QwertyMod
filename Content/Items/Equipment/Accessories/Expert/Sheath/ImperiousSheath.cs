@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework;
+using QwertyMod.Content.NPCs.Bosses.BladeBoss;
 using System;
 using System.Collections.Generic;
 using Terraria;
@@ -70,9 +71,25 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.Sheath
         {
             effect = false;
         }
+        bool ImperiousActive()
+        {
+            for(int p = 0; p < 1000; p++)
+            {
+                if(Main.projectile[p].active && Main.projectile[p].type == ModContent.ProjectileType<ImperiousP>())
+                {
+                    return true;
+                }
+            }
+            if(NPC.AnyNPCs(ModContent.NPCType<Imperious>()))
+            {
+                return true;
+            }
+            return false;
+        }
 
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone) //runs when an npc is hit by the player's projectile
         {
+            if(ImperiousActive()) { return; }
             if (proj.owner == Player.whoAmI && effect && !target.immortal && proj.type != ModContent.ProjectileType<ImperiousP>()) //check if vallid npc and effect is active
             {
                 damageTally += damageDone; //count up
@@ -81,6 +98,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.Sheath
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) //runs when an npc is hit by an item (sword blade)
         {
+            if(ImperiousActive()) { return; }
             if (effect && !target.immortal)  //check if vallid npc  and effect is active
             {
                 damageTally += damageDone; //count up
@@ -97,6 +115,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.Sheath
 
         public override void ProcessTriggers(TriggersSet triggersSet) //runs hotkey effects
         {
+            if(ImperiousActive()) { return; }
             if (QwertyMod.YetAnotherSpecialAbility.JustPressed) //hotkey is pressed
             {
                 if (effect && damageTally >= damageTallyMax)

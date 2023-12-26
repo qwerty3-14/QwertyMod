@@ -7,6 +7,7 @@ using QwertyMod.Content.Items.Consumable.BossBag;
 using QwertyMod.Content.Items.Consumable.Tiles.Trophy.Invader;
 using QwertyMod.Content.Items.Equipment.Vanity.BossMasks;
 using QwertyMod.Content.Items.MiscMaterials;
+using QwertyMod.Content.Items.Tool;
 using QwertyMod.Content.Items.Weapon.Melee.Misc.FightKit;
 using QwertyMod.Content.Items.Weapon.Minion.DVR;
 using QwertyMod.Content.Items.Weapon.Ranged.Gun.SuperquantumRifle;
@@ -19,6 +20,7 @@ using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 
@@ -60,16 +62,35 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
         {
             NPC.SetEventFlagCleared(ref DownedBossSystem.downedBattleship, -1);
             SkyFortress.beingInvaded = false;
+            string key = Language.GetTextValue(Mod.GetLocalizationKey("FortressBanished"));
+            Color messageColor = Color.Green;
+            if (Main.netMode == NetmodeID.Server) // Server
+            {
+                Terraria.Chat.ChatHelper.BroadcastChatMessage(NetworkText.FromKey(key), messageColor);
+            }
+            else if (Main.netMode == NetmodeID.SinglePlayer) // Single Player
+            {
+                Main.NewText(Language.GetTextValue(key), messageColor);
+            }
+            
+            if(Main.netMode == NetmodeID.Server)
+            {
+                ModPacket packet = Mod.GetPacket();
+                packet.Write((byte)ModMessageType.SetFortressInvasionStatus);
+                packet.Write(SkyFortress.beingInvaded);
+                packet.Write(SkyFortress.initalInvasion);
+                packet.Send();
+            }
 
         }
 
         public override void SetDefaults()
         {
-            NPC.lifeMax = 70000;
+            NPC.lifeMax = 49000;
             NPC.width = 262;
             NPC.height = 92;
             NPC.value = 100000;
-            NPC.damage = 200;
+            NPC.damage = 172;
             NPC.noGravity = true;
             NPC.boss = true;
             if (!Main.dedServ)
@@ -120,8 +141,8 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
             ApplyPieceDifficultyScaling(numPlayers, balance, bossAdjustment);
         }
         public bool phaseTwo = false;
-        public const int normalDamage = 48;
-        public const int expertDamage = 35;
+        public const int normalDamage = 41;
+        public const int expertDamage = 30;
         
         public override void AI()
         {
@@ -248,6 +269,9 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
 
             notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
             notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<InvaderPlating>(), 1, 80, 140));
+            npcLoot.Add(notExpertRule);
+
+            notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<InvasionCaller>(), 1));
             npcLoot.Add(notExpertRule);
 
             //Boss masks are spawned with 1/7 chance

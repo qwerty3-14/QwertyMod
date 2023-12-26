@@ -134,6 +134,8 @@ namespace QwertyMod.Common.Fortress
             var flags = new BitsByte();
             flags[0] = beingInvaded;
             flags[1] = initalInvasion;
+            writer.Write(flags);
+            //QwertyMethods.ServerClientCheck("NetSend");
         }
 
         public override void NetReceive(BinaryReader reader)
@@ -142,6 +144,7 @@ namespace QwertyMod.Common.Fortress
             BitsByte flags = reader.ReadByte();
             beingInvaded = flags[0];
             initalInvasion = flags[1];
+            //QwertyMethods.ServerClientCheck("NetReceive");
         }
 
         public override void ResetNearbyTileEffects()
@@ -154,7 +157,7 @@ namespace QwertyMod.Common.Fortress
             {
                 beingInvaded = true;
                 initalInvasion = true;
-                
+                //QwertyMethods.ServerClientCheck("Invaded?: " + beingInvaded);
                 string key = Language.GetTextValue(Mod.GetLocalizationKey("FortressInvasion"));
                 Color messageColor = Color.Green;
                 if (Main.netMode == NetmodeID.Server) // Server
@@ -164,6 +167,15 @@ namespace QwertyMod.Common.Fortress
                 else if (Main.netMode == NetmodeID.SinglePlayer) // Single Player
                 {
                     Main.NewText(Language.GetTextValue(key), messageColor);
+                }
+                NetMessage.SendData(MessageID.WorldData);
+                if(Main.netMode == NetmodeID.Server)
+                {
+                    ModPacket packet = Mod.GetPacket();
+                    packet.Write((byte)ModMessageType.SetFortressInvasionStatus);
+                    packet.Write(beingInvaded);
+                    packet.Write(initalInvasion);
+                    packet.Send();
                 }
             }
         }

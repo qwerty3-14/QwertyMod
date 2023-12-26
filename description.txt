@@ -32,6 +32,22 @@ Extra thanks
 
 
 Changelog
+1.0.3
+-There is only one Imperious, any attempt within the mod to have multiples of Imperious active has been thwarted
+-Fixed a bug where data on the fortress' invasion status wasn't being sent.
+
+1.0.2
+-fixed Invader battleship not dropping the invasion caller
+-fixed the fortress' invasion status not syncing in multiplayer
+
+-Invader Battleship's health reduced by 30%
+-Invader Battleship's damage reduced by 14%
+
+1.0.1
+-Fixed bug where if Invader battleship transition to phase 3 outside of sky fortress it'd get stuck
+-Bladed arrow is now dropped directly from Imperious instead of bladed arrow shaft
+-Removed Aqueuos from the Bladed Arrow recipe, so people who obtained a bladed arrow shaft before this update can convert it into a bladed arrow.
+
 1.0.0
 I've been working on this mod since Fall of 2018, I want to move on with other projectiles
 I will continue to keep the mod up to date with tmodloader and fix occasional bugs but have no plans of adding more content in the future

@@ -20,7 +20,7 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
             NPC.lifeMax = 20000;
             NPC.width = 127;
             NPC.height = 88;
-            NPC.damage = 200;
+            NPC.damage = 172;
             NPC.noGravity = true;
             NPC.knockBackResist = 0;
             NPC.HitSound = new SoundStyle("QwertyMod/Assets/Sounds/invbattleship_hurt1");
