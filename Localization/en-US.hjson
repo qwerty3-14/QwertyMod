@@ -110,7 +110,7 @@ Mods: {
 
 			ImperialCourage: {
 				DisplayName: Imperial Courage
-				Description: 25% increased critical chance
+				Description: 20% increased critical chance
 			}
 
 			ArcanelyTuned: {
@@ -1194,7 +1194,7 @@ Mods: {
 
 			SkywardHilt: {
 				DisplayName: Skyward Hilt
-				Tooltip: Swords deal 30% more damage while airborne
+				Tooltip: Swords deal 20% more damage while airborne
 			}
 
 			SwordEnlarger: {
@@ -1208,14 +1208,14 @@ Mods: {
 					'''
 					Greatly enhances swordplay performance!
 					Makes your sword 25% larger
-					Hitting things with your sword while airborne does 25% more damage
-					Striking with a sword increases critical strike chance by 25%
+					Hitting things with your sword while airborne does 20% more damage
+					Striking with a sword increases critical strike chance by 20%
 					'''
 			}
 
 			SwordsmanBadge: {
 				DisplayName: Swordsman Badge
-				Tooltip: Striking with a sword increases critical strike chance by 25%
+				Tooltip: Striking with a sword increases critical strike chance by 20%
 			}
 
 			TheBlueSphere: {

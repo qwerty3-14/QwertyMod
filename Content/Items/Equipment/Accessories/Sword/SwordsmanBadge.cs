@@ -31,12 +31,22 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Sword
         {
             critOnHit = false;
         }
-        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            if (critOnHit)
+        public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)
+		{
+			if (critOnHit)
             {
                 Player.AddBuff(ModContent.BuffType<ImperialCourage>(), 240);
             }
-        }
+		}
+		public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
+		{
+			if(proj.aiStyle == 190)
+            {
+                if (critOnHit)
+                {
+                    Player.AddBuff(ModContent.BuffType<ImperialCourage>(), 240);
+                }
+            }
+		}
     }
 }

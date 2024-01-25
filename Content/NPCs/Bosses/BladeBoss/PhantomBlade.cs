@@ -50,6 +50,10 @@ namespace QwertyMod.Content.NPCs.Bosses.BladeBoss
         public override void AI()
         {
             Projectile.rotation = Projectile.ai[0];
+            if(!NPC.AnyNPCs(ModContent.NPCType<Imperious>()))
+            {
+                Projectile.Kill();
+            }
         }
     }
 }

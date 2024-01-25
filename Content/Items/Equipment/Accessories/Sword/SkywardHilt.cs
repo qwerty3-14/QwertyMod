@@ -38,18 +38,39 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Sword
         {
             effect = false;
         }
-
-        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
-        {
-            Point origin = Player.Bottom.ToTileCoordinates();
+		public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)
+		{
+			Point origin = Player.Bottom.ToTileCoordinates();
             Point point;
             if (effect && !WorldUtils.Find(origin, Searches.Chain(new Searches.Down(3), new GenCondition[]
                                         {
                                             new Conditions.IsSolid()
                                         }), out point) && Player.grappling[0] == -1)
             {
-                modifiers.FinalDamage *= 1.25f;
+                modifiers.FinalDamage *= 1.2f;
             }
+		}
+		public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
+		{
+			if(proj.aiStyle == 190)
+            {
+                Point origin = Player.Bottom.ToTileCoordinates();
+                Point point;
+                if (effect && !WorldUtils.Find(origin, Searches.Chain(new Searches.Down(3), new GenCondition[]
+                                            {
+                                                new Conditions.IsSolid()
+                                            }), out point) && Player.grappling[0] == -1)
+                {
+                    modifiers.FinalDamage *= 1.2f;
+                }
+            }
+		}
+
+		
+		
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            
         }
     }
 }

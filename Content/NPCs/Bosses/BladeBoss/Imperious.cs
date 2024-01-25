@@ -747,7 +747,6 @@ namespace QwertyMod.Content.NPCs.Bosses.BladeBoss
             NPC.height = 82;
             NPC.damage = 65;
             NPC.defense = 42;
-            NPC.boss = true;
             NPC.HitSound = SoundID.NPCHit4;
             NPC.DeathSound = SoundID.NPCDeath14;
             NPC.value = 0f;

@@ -14,7 +14,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Sword
 
         public override void Update(Player player, ref int buffIndex)
         {
-            player.GetCritChance(DamageClass.Generic) += 25;
+            player.GetCritChance(DamageClass.Generic) += 20;
         }
     }
 }
