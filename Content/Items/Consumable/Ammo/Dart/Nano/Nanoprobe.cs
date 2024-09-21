@@ -13,7 +13,7 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Dart.Nano
             Projectile.aiStyle = 1;
             AIType = ProjectileID.Bullet;
             Projectile.DamageType = DamageClass.Ranged;
-            Projectile.width = Projectile.height = 6;
+            Projectile.width = Projectile.height = 10;
             Projectile.extraUpdates = 5;
             Projectile.friendly = true;
             Projectile.timeLeft = 1200;
@@ -35,15 +35,17 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Dart.Nano
             if (runOnce)
             {
                 dir = Projectile.velocity.ToRotation();
+                Projectile.velocity = QwertyMethods.PolarVector(4.5f, dir);
                 runOnce = false;
             }
-            Projectile.velocity = QwertyMethods.PolarVector(4.5f, dir);
             counter++;
             if (counter > 40)
             {
                 if (QwertyMethods.ClosestNPC(ref target, 1000, Projectile.Center))
                 {
+                    dir = Projectile.velocity.ToRotation();
                     dir.SlowRotation((target.Center - Projectile.Center).ToRotation(), MathF.PI / 60f);
+                    Projectile.velocity = QwertyMethods.PolarVector(4.5f, dir);
                 }
             }
             Dust d = Dust.NewDustPerfect(Projectile.Center, 135, Vector2.Zero, 100);
@@ -64,7 +66,6 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Dart.Nano
             {
                 Projectile.velocity.Y = -velocityChange.Y;
             }
-            Projectile.damage = (int)(Projectile.damage * 1.5f);
             return false;
         }
     }

@@ -48,7 +48,7 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
             NPC.boss = true;
             if (!Main.dedServ)
             {
-                Music = MusicLoader.GetMusicSlot(Mod, "Assets/Music/Accomplices");
+                Music = MusicLoader.GetMusicSlot(Mod, "Assets/Music/UngodlyDivision");
             }
             NPC.knockBackResist = 0;
             NPC.HitSound = SoundID.NPCHit1;

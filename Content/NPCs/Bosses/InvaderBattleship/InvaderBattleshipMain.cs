@@ -47,6 +47,7 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
             
             NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Poisoned] = true;
             NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Ichor] = true;
+            NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
         }
         public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
         {
@@ -95,11 +96,11 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
             NPC.boss = true;
             if (!Main.dedServ)
             {
-                Music = MusicLoader.GetMusicSlot(Mod, "Assets/Music/Accomplices");
+                Music = MusicLoader.GetMusicSlot(Mod, "Assets/Music/UngodlyDivision");
             }
             NPC.knockBackResist = 0;
-            NPC.HitSound = new SoundStyle("QwertyMod/Assets/Sounds/invbattleship_hurt1");
-            NPC.DeathSound = new SoundStyle("QwertyMod/Assets/Sounds/invbattleship_hurt1");
+            NPC.HitSound = new SoundStyle("QwertyMod/Assets/Sounds/InvaderBattleshipHurt");
+            NPC.DeathSound = new SoundStyle("QwertyMod/Assets/Sounds/InvaderBattleshipHurt");
             NPC.noTileCollide = true;
             NPC.aiStyle = -1;
         }

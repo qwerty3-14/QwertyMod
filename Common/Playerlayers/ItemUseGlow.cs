@@ -158,7 +158,10 @@ namespace QwertyMod.Common.PlayerLayers
                         Vector2 vector3 = new Vector2(itemTexture.Width / 2, itemTexture.Height / 2);
                         Vector2 vector4 = Main.DrawPlayerItemPos(drawInfo.drawPlayer.gravDir, itemID);
                         num12 = (int)vector4.X;
-                        vector3.Y = vector4.Y;
+                        vector3 = vector4;
+                        vector3.X += -1 * vector4.X;
+                        //vector3.X -= drawInfo.drawPlayer.width;
+                        //vector3.X += Main.DrawPlayerItemPos(drawInfo.drawPlayer.gravDir, itemID).X * 2;
                         Vector2 origin6 = new Vector2(-num12, itemTexture.Height / 2);
                         if (drawInfo.drawPlayer.direction == -1)
                         {

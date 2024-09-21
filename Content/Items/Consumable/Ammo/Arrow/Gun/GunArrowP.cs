@@ -64,7 +64,6 @@ namespace QwertyMod.Content.Items.Consumable.Ammo.Arrow.Gun
             {
                 Projectile.velocity.Y = -velocityChange.Y;
             }
-            Projectile.damage = (int)(Projectile.damage * 1.5f);
             return false;
         }
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)

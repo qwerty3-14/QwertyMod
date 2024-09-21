@@ -66,14 +66,7 @@ namespace QwertyMod.Content.NPCs.Invader
             {
                 if(Main.netMode != NetmodeID.Server && Main.rand.NextBool(12000))
                 {
-                    if(Main.rand.NextBool(2))
-                    {
-                        SoundEngine.PlaySound(new SoundStyle("QwertyMod/Assets/Sounds/invcrawler_idle1"), NPC.Center);
-                    }
-                    else
-                    {
-                        SoundEngine.PlaySound(new SoundStyle("QwertyMod/Assets/Sounds/invcrawler_idle2"), NPC.Center);
-                    }
+                    SoundEngine.PlaySound(new SoundStyle("QwertyMod/Assets/Sounds/InvaderCasterHurt"), NPC.Center);
                 }
                 NPC.dontTakeDamage = false;
                 shotCounter--;

@@ -934,7 +934,7 @@ Mods: {
 			}
 
 			MusicBoxHeavenlyFortress: {
-				DisplayName: Music Box (Energised Planetary Incineration Climax)
+				DisplayName: Music Box (Heavenly Fortress)
 				Tooltip: ""
 			}
 
@@ -2434,7 +2434,7 @@ Mods: {
 			}
 
 			MusicBoxAcomplices: {
-				DisplayName: Music Box Acomplices
+				DisplayName: Music Box Ungodly Division
 				Tooltip: ""
 			}
 

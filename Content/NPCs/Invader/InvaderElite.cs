@@ -35,8 +35,8 @@ namespace QwertyMod.Content.NPCs.Invader
             NPC.lifeMax = 4000;
             NPC.value = 6000;
             //NPC.alpha = 100;
-            NPC.HitSound = new SoundStyle("QwertyMod/Assets/Sounds/invfighter_hurt2");
-            NPC.DeathSound = new SoundStyle("QwertyMod/Assets/Sounds/invfighter_hurt1");;
+            NPC.HitSound = new SoundStyle("QwertyMod/Assets/Sounds/InvaderEliteHurt");
+            NPC.DeathSound = new SoundStyle("QwertyMod/Assets/Sounds/InvaderDestroy");;
             NPC.knockBackResist = 0f;
             NPC.noGravity = true;
             NPC.noTileCollide = false;
@@ -56,6 +56,10 @@ namespace QwertyMod.Content.NPCs.Invader
         {
             NPC.damage = 0;
             target = InvaderNPCGeneral.FindTarget(NPC, true);
+            if(Main.netMode != NetmodeID.Server && Main.rand.NextBool(6000))
+            {
+                SoundEngine.PlaySound(new SoundStyle("QwertyMod/Assets/Sounds/InvaderEliteIdle"), NPC.Center);
+            }
             if(spear != null && !spear.active)
             {
                 spear = null;

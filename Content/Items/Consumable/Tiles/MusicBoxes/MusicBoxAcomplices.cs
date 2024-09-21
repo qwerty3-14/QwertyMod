@@ -14,7 +14,7 @@ namespace QwertyMod.Content.Items.Consumable.Tiles.MusicBoxes
 
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
 
-            MusicLoader.AddMusicBox(Mod, MusicLoader.GetMusicSlot(Mod, "Assets/Music/Accomplices"), ModContent.ItemType<MusicBoxAcomplices>(), ModContent.TileType<MusicBoxAcomplicesT>());
+            MusicLoader.AddMusicBox(Mod, MusicLoader.GetMusicSlot(Mod, "Assets/Music/UngodlyDivision"), ModContent.ItemType<MusicBoxAcomplices>(), ModContent.TileType<MusicBoxAcomplicesT>());
         }
 
         public override void SetDefaults()

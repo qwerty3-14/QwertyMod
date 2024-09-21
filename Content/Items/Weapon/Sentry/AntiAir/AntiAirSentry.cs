@@ -97,8 +97,7 @@ namespace QwertyMod.Content.Items.Weapon.Sentry.AntiAir
             if (QwertyMethods.ClosestNPC(ref validTarget, 2000, Projectile.Center, false, Main.player[Projectile.owner].MinionAttackTargetNPC, delegate (NPC possibleTarget) { Point origin = possibleTarget.Center.ToTileCoordinates(); Point point; return !WorldUtils.Find(origin, Searches.Chain(new Searches.Down(12), new GenCondition[] { new Conditions.IsSolid() }), out point) && Math.Abs(possibleTarget.Center.X - Projectile.Center.X) < maxDistanceX && Projectile.Center.Y - possibleTarget.Center.Y > minimumHeight; }) && timer > ReloadTime)
             {
                 playAttackFrame = true;
-                if (Main.netMode != NetmodeID.MultiplayerClient)
-                    Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center.X + (16 * secondShot), Projectile.Center.Y - 30, 0, -5f, ModContent.ProjectileType<SentryAntiAir>(), Projectile.damage, Projectile.knockBack, Main.myPlayer, validTarget.Center.Y, rocketDirection);
+                Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center.X + (16 * secondShot), Projectile.Center.Y - 30, 0, -5f, ModContent.ProjectileType<SentryAntiAir>(), Projectile.damage, Projectile.knockBack, Projectile.owner, validTarget.Center.Y, rocketDirection);
 
                 secondShot *= -1;
 

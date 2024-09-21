@@ -32,6 +32,16 @@ Extra thanks
 
 
 Changelog
+1.0.5
+-Most invader sound effect have been changed (Thanks Kweequ)
+-Invader battleship's theme has been updated (Thanks Kweequ)
+
+-Fixed Nanodart probes and gun arrows gaining damage on bounce
+-Fixed nanodart probes sliding on intead of bouncing off tiles (when combined with previous bug nano darts could build up astronomical damage)
+-Fixed Gun glowmasks being offset
+-Invader battleship is now immune to confusion
+
+
 1.0.4
 -Fixed skyward hilt effect and swordsman badge effect working on ALL attacks
 -nerfed skyward hilt damage and swordsman badge crit chance 25% -> 20%, 
@@ -81,84 +91,5 @@ Overhauls, polish, and balance changes
 -Imperious will wait half a second after the phantom ring attack before starting to swing
 -Added descriptions to mod commands that didn't have them
 
-
-0.10.0
-New content
--Added Vulgar Dictionary
--added Auto Summoner
--added piercing whetstone
-
-Bug Fixes
--Fixed Ancient machine and its minions visually drifting in multiplayer
--fixed Sky fortress causing some players' games to freeze in multiplayer (I think)
--Ancient Machine's teleport locations are further from the player to reduce the chance of telefragging
--Fixed high preist multiplayer desyncs
--Fixed divine light multiplayer desyncs
--fixed preist and higher preist minion position gaps in multiplayer when multiple players used them
--fixed Rhuthinium barrage multiplayer desync
--fixed Chrome shotgun mode switching multiplayer desync
--fixed hydra barrage head rotation multiplayer desync
--fixed SoEF, Holy exiler, divine banishment, and Possesing bow not syncing projectile modifying effects
--fixed rhuthinium boomerang multiplayer desync
--fixed runic wave multiplayer desync
--fixed ancient longbow and rune longbow's arrow desync (other players would see a second arrow with no velocity spawn)
--fixed lune archer and mech crossbow minion's arrow desync (Other players would see the bows instantly fire arrows upon the minion retrieving one)
--fixed invader battleship beams ocasionally leavuing behind duplicates in multiplayer
--fixed invader noehtnap not doing its death animation when killed in the cycle attack
--fixed sould rod and Shotgun of excessuive force not syncing the players velocity in multiplayer
--fixed the massacre's right click animations not syncing in multiplayer
-
--fixed ancient machine not using its boss head (and by extension boss bar)
--Fixed Trophies dropping doubles
--Fixed fortress furniture dropping doubles
--fixed relics dropping duobles
--Fixed Caelite pulse traps sometimes not dropping when broken
--Fixed caelite pulse traps and launchpads being placable in the air
--Caelite pulse traps and launchpads have thier items sprite match thier tile sprite
--fixed invaders an higher beings triggering the player's on hit effects when attacking each other
--fixed riptide dealing knockback
--Fixed preist minions despawning after 1 minute
--Fixed Doppleganger spawning with modifers
--fixed Vitalum headress leeching off freindly npcs
--fixed caelite wrath inflicted by flask of caelite wrath only lasting 10-19 frames, intead of 10-19 seconds
--the mod's banners can now be placed on unhammered platforms
--fixed overkill and The Massacre doing magic damage, and whetstones doing classless damage
--fixed hydra's bag only having a 20% chance to drop scales
--fixed OLORD's walls not dealing damage
--fixed chloro sniper staff only costing 1 chloro bar
--fixed many item hitboxes
--fixed swordmasters seal giving +100% weapons size instead of +25%
--fixed hitbox on plasma cannon projectiles
--fixed fortress bed being backwards
--Fized mant speling erors
-
-Overhauls, polish, and balance changes
--Hydra fight has been reworked completely
--Staff of Job now ignores 20 defense
--When TRAE is loaded Staff of Job's status last 1 minute but consumes mana (4 * mana reduction) on every hit
--Lune staff functions like a TRAE sidearm when it's loaded
--Ancient machine will reroute a teleport location if a player collides with the inital picked location
--ash fell sentry's missle recharge rate doubled (shoots slower), missile's Aoe does half damage and no knockback
--high preists are more combat ready when the fortress invasion happens
--all sentires can no benifit from whip tags like vanilla 1.4.4 sentires... excpet riptide for obvious reasons
--Rhuthinium arrows deal up to 50% more damage at 75 tile range
--Nano dart's probes now bounce off tiles
--Blue sphere's pierce damage falloff when hitting the same enemy 50%->75%
--Javelins will now say how much DoT they cause when stuck in enemies
--Rhuthinium javelins reduce enemy defense by 2 per javelin instead of adding 1 flat damage, max javelins cap 10->7;
--hydra javelins dr per javelin reduced (total goes from 24% to 15%) but works on projectiles shot by the effected enemy
--riptide sentry damage 4->3, but now has 10 innate armor penetration
--When TRAE is loaded Ruthinium magic's armor set bonus has a mana restoration cap
--Hydrent damage 100->50, damage of projectiles 40%->80% (I did not adjust the damage properly when I gave the hydrent TRAE spear AI)
--Ancient throw damage reduced 23->20
--gold lockboxes will give a random dungeon item from the mod
--Chrmoe shotgun's minion no longer consumes bullets
--Hydra barrage has more velocity
--invader catalyst damage 50->40, but now has an Aoe
--When TRAE is loaded invader catalyst buff last a full minute but charges 10 mana per hit
--Plasma cannon got some animation touch ups
--runic wave now has local immunity and more orbiting ice runes
--new sprite for Sky Disintigrator staff (Thanks Kweequ)
--Imperious The IV now has a sword aura
 
 
