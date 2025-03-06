@@ -8,6 +8,7 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.GameContent.Creative;
+using Terraria.UI;
 
 namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.ChromeShotgun
 {
@@ -180,6 +181,26 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.ChromeShotgun
             }
             return false;
         }
+        
+
+        public override Vector2? HoldoutOffset()
+        {
+            switch (Item.GetGlobalItem<ChromeGunToggle>().mode)
+            {
+                case 0:
+                    return DefaultHoldOffset;
+
+                case 1:
+                    return ReverseHoldOffset;
+
+                case 2:
+                    return TightHoldOffset;
+
+                case 3:
+                    return MinionHoldOffset;
+            }
+            return DefaultHoldOffset;
+        }
     }
 
     public class ShotgunMinion : ModProjectile
@@ -308,8 +329,9 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.ChromeShotgun
             player.itemAnimation = Projectile.timeLeft;
             player.bodyFrame.Y = player.bodyFrame.Height * 3;
             player.itemRotation = (float)(-Math.PI * 2f * player.direction) * ((float)Projectile.timeLeft / spinTime);
-            player.itemLocation.X = player.position.X + (float)player.width * 0.5f - (float)TextureAssets.Item[item.type].Value.Width * 0.5f - (float)(player.direction * 2);
+            player.itemLocation.X = player.position.X + (float)player.width * 0.5f ;
             player.itemLocation.Y = player.MountedCenter.Y - (float)TextureAssets.Item[item.type].Value.Height * 0.5f;
+            //player.itemLocation = Main.DrawPlayerItemPos(player.gravDir, player.HeldItem.type);
             if(Projectile.timeLeft == spinTime / 2)
             {
                 item.GetGlobalItem<ChromeGunToggle>().mode++;
@@ -375,6 +397,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.ChromeShotgun
                             texture = ModContent.Request<Texture2D>("QwertyMod/Content/Items/Weapon/Ranged/Gun/ChromeShotgun/ChromeShotgunMinionMode").Value;
                             break;
                     }
+                    /*
                     Vector2 zero2 = Vector2.Zero;
 
                     if (texture != null && drawPlayer.itemAnimation > 0)
@@ -390,7 +413,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.ChromeShotgun
                         vector10.Y = vector11.Y;
                         Color chromeGunColor = drawPlayer.inventory[drawPlayer.selectedItem].GetAlpha(Lighting.GetColor((int)((double)drawInfo.Position.X + (double)drawPlayer.width * 0.5) / 16, (int)(((double)drawInfo.Position.Y + (double)drawPlayer.height * 0.5) / 16.0)));
                         Vector2 value2 = drawInfo.ItemLocation;
-
+                        //value2.X -= 40;
                         Vector2 origin5 = new Vector2((float)(-(float)num107), (float)(TextureAssets.Item[item.type].Value.Height / 2));
                         if (drawPlayer.direction == -1)
                         {
@@ -406,6 +429,37 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.Gun.ChromeShotgun
                             item.scale,
                             drawInfo.itemEffect, 0);
                         drawInfo.DrawDataCache.Add(value);
+                    }
+                    */
+                    if (texture != null && drawPlayer.itemAnimation > 0)
+                    {
+                        Item heldItem = drawInfo.heldItem;
+                        float adjustedItemScale = drawInfo.drawPlayer.GetAdjustedItemScale(heldItem);
+                        int itemID = heldItem.type;
+                        ItemSlot.GetItemLight(ref drawInfo.itemColor, heldItem);
+                        DrawData drawData;
+                        Rectangle? sourceRect = new Rectangle(0, 0, texture.Width, texture.Height);
+                        
+                        int num12 = 10;
+                        Vector2 vector3 = new Vector2(texture.Width / 2, texture.Height / 2);
+                        Vector2 vector4 = Main.DrawPlayerItemPos(drawInfo.drawPlayer.gravDir, itemID);
+                        num12 = (int)vector4.X;
+                        vector3 = vector4;
+                        vector3.X += -1 * vector4.X;
+                        //vector3.X -= drawInfo.drawPlayer.width;
+                        //vector3.X += Main.DrawPlayerItemPos(drawInfo.drawPlayer.gravDir, itemID).X * 2;
+                        Vector2 origin6 = new Vector2(-num12, texture.Height / 2);
+                        if (drawInfo.drawPlayer.direction == -1)
+                        {
+                            origin6 = new Vector2(texture.Width + num12, texture.Height / 2);
+                        }
+                        drawData = new DrawData(texture, new Vector2((int)(drawInfo.ItemLocation.X - Main.screenPosition.X + vector3.X), (int)(drawInfo.ItemLocation.Y - Main.screenPosition.Y + vector3.Y)), sourceRect, drawInfo.itemColor, drawInfo.drawPlayer.itemRotation, origin6, adjustedItemScale, drawInfo.itemEffect, 0);
+                        drawInfo.DrawDataCache.Add(drawData);
+                        if (heldItem.color != default(Color))
+                        {
+                            drawData = new DrawData(texture, new Vector2((int)(drawInfo.ItemLocation.X - Main.screenPosition.X + vector3.X), (int)(drawInfo.ItemLocation.Y - Main.screenPosition.Y + vector3.Y)), sourceRect, drawInfo.itemColor, drawInfo.drawPlayer.itemRotation, origin6, adjustedItemScale, drawInfo.itemEffect, 0);
+                            drawInfo.DrawDataCache.Add(drawData);
+                        }
                     }
                 }
             }

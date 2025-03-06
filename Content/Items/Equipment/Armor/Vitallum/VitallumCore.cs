@@ -127,7 +127,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
     {
         public override void ModifyItemLoot(Item item, ItemLoot itemLoot)
         {
-            if(item.type == ItemID.FishronBossBag)
+            if(item.type == ItemID.PlanteraBossBag)
             {
                 itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<VitallumCoreUncharged>()));
             }

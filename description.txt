@@ -32,6 +32,17 @@ Extra thanks
 
 
 Changelog
+1.0.6
+-Invader caster minion tweaks
+    -Spheres shot from the casters are capped at zapping 4 times before disapearing
+        -this means perfect accuracy with the sphere attack should result in equal dps to its close ranged attack
+    -Range on the caster's close range attack increased from 240 to 300
+    -damage increased 64->70
+-fixed vitalum core dropping from duke fishron bags instead of Plantera bags
+-fixed chrome shotgun draw offset
+-fixed gale armor setbonus description
+-fixed a lot of spelling errors
+
 1.0.5
 -Most invader sound effect have been changed (Thanks Kweequ)
 -Invader battleship's theme has been updated (Thanks Kweequ)

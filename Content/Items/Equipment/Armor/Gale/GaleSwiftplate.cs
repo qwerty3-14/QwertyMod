@@ -38,7 +38,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Gale
 
         public override void UpdateArmorSet(Player player)
         {
-            player.setBonus = Language.GetTextValue("Mods.QwertysRandomContent.GaleSet");
+            player.setBonus = "Generates gale rings over time\nEach ring increases dodge chance by 1%\nDouble right click to convert the rings into knives flung at your cursor";
             player.GetModPlayer<GaleSetBonus>().setBonus = true;
         }
 

@@ -1,3 +1,4 @@
+using Microsoft.Build.Evaluation;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using QwertyMod.Common;
@@ -26,7 +27,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.InvaderCaster
 
         public override void SetDefaults()
         {
-            Item.damage = 64;
+            Item.damage = 70;
             Item.mana = 20;
             Item.width = 32;
             Item.height = 32;
@@ -245,7 +246,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.InvaderCaster
 				if (projectile.owner == Main.myPlayer && projectile.ai[1] <=0)
 				{
 					Vector2 shootFrom = projectile.Top + Vector2.UnitY * 8;
-                    if ((target.Center - shootFrom).Length() < 240)
+                    if ((target.Center - shootFrom).Length() < 300)
                     {
                         if (Main.netMode != NetmodeID.MultiplayerClient)
                         {
@@ -507,6 +508,7 @@ namespace QwertyMod.Content.Items.Weapon.Minion.InvaderCaster
             Projectile.CloneDefaults(ProjectileID.MagnetSphereBall);
             Projectile.aiStyle = -1;
             Projectile.timeLeft = 600;
+			Projectile.penetrate = 4;
         }
         int counter;
         public override void AI()
@@ -515,8 +517,9 @@ namespace QwertyMod.Content.Items.Weapon.Minion.InvaderCaster
             if (counter % 10 == 1)
             {
                 NPC target = null;
-                if (QwertyMethods.ClosestNPC(ref target, 200, Projectile.Center))
+                if (QwertyMethods.ClosestNPC(ref target, 200, Projectile.Center) && Projectile.penetrate > 0)
                 {
+					Projectile.penetrate--;
 					Projectile.velocity *= 0.4f;
                     Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, QwertyMethods.PolarVector(3, (target.Center - Projectile.Center).ToRotation()), ModContent.ProjectileType<MinionInvaderZap>(), Projectile.damage, 0, Projectile.owner);
                 }
@@ -551,8 +554,8 @@ namespace QwertyMod.Content.Items.Weapon.Minion.InvaderCaster
             Projectile.width = Projectile.height = 2;
             Projectile.penetrate = -1;
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.timeLeft = 75;
-            Projectile.extraUpdates = 74;
+            Projectile.timeLeft = 100;
+            Projectile.extraUpdates = 99;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Summon;
         }

@@ -7,14 +7,14 @@ Mods: {
 		CommandDescriptionRhuthiniumGen: Adds Rhuthinium ore to generate in your world
 		CommandDescriptionDungeonLoot: Adds dungeon loot
 		CommandDescriptionLuneGen: Adds Lune ore to sky islands
-		CommandDescriptionCreateFrozenDen: Create's a den in the underground tundra and places the polar exterminator in it
+		CommandDescriptionCreateFrozenDen: Creates a den in the underground tundra and places the polar exterminator in it
 		CommandDescriptionFortressGen: Clears a large area in the sky and builds the sky fortress in it
-		RhuthiniumScanFailure: No Rhutinium found, something went wrong
-		RhuthiniumScanNoSkeletron: No Rhutinium found, as expected since you haven't killed skeletron
-		RhuthiniumScanSuccess: " Rhuthnium found in this world, keep looking!"
+		RhuthiniumScanFailure: No Rhuthinium found, something went wrong
+		RhuthiniumScanNoSkeletron: No Rhuthinium found, as expected since you haven't killed skeletron
+		RhuthiniumScanSuccess: " Rhuthinium found in this world, keep looking!"
 		FortressInvasion: The sky fortress is being invaded!
 		FortressBanished: The Invaders have been banished from the sky fortress!
-		CustomTooltipBindKey: Please go to conrols and bind the 'Yet another special ability key'
+		CustomTooltipBindKey: Please go to controls and bind the 'Yet another special ability key'
 		CustomTooltipSheathStart: After dealing 10,000 damage you can summon Imperious to fight for you breifly with the '
 		CustomTooltipSheathEnd: "' key"
 		CustomTooltipWhetDamage: " magic damage"
@@ -60,7 +60,7 @@ Mods: {
 
 			HealingHalt: {
 				DisplayName: Healing Halt
-				Description: Can't regenrate life or get over your potion sickness
+				Description: Can't regenerate life or get over your potion sickness
 			}
 
 			Impaled: {
@@ -134,7 +134,7 @@ Mods: {
 			}
 
 			RhuthiniumMight: {
-				DisplayName: Rhuthinium Berzerk
+				DisplayName: Rhuthinium Berserk
 				Description: 20% increased melee damage and max move speed
 			}
 
@@ -255,7 +255,7 @@ Mods: {
 
 			DVRB: {
 				DisplayName: Dimension Violating Railgun
-				Description: The foolish gods think they're safe in thier pocket realms
+				Description: The foolish gods think they're safe in their pocket realms
 			}
 
 			Hitstun: {
@@ -291,14 +291,14 @@ Mods: {
 			SlidingPenguinGeneric.DisplayName: Sliding Penguin
 			AggroRuneFriendly.DisplayName: Aggro Rune Friendly
 			AggroStrikeFriendly.DisplayName: Aggro Strike Friendly
-			IceRuneFreindly.DisplayName: Ice Rune Freindly
-			LeechRuneFreindly.DisplayName: Leech Rune Freindly
-			PursuitRuneFreindly.DisplayName: Pursuit Rune Freindly
+			IceRuneFreindly.DisplayName: Ice Rune Friendly
+			LeechRuneFreindly.DisplayName: Leech Rune Friendly
+			PursuitRuneFreindly.DisplayName: Pursuit Rune Friendly
 			ArmCannonLaser.DisplayName: Arm Cannon Laser
 			GaleKnife.DisplayName: Gale Knife
 			PrismDazzle.DisplayName: Prism Dazzle
 			MoonTarget.DisplayName: Moon Target
-			RhuthimisWraith.DisplayName: RhuthimisWraith
+			RhuthimisWraith.DisplayName: Rhuthimis Wraith
 			LaunchingHookP.DisplayName: Launching Hook
 			LightlingP.DisplayName: Lightling
 			HydraBobber.DisplayName: Hydra Bobber
@@ -309,7 +309,7 @@ Mods: {
 			BlackHolePlayer.DisplayName: Black Hole
 			CatalystExplosion.DisplayName: explosion
 			EnlightenedConfusionP.DisplayName: Sacred Daze
-			MosquittoF.DisplayName: Mosquitto
+			MosquittoF.DisplayName: Mosquito
 			SnowFlakeF.DisplayName: Snow Flake
 			BeamHead.DisplayName: Beam Head
 			HeadBeam.DisplayName: Hydra Beam
@@ -318,8 +318,8 @@ Mods: {
 			HydraMissileSmall.DisplayName: Hydra Missile Small
 			LuneCrest.DisplayName: Lune Crest
 			PenguinFall.DisplayName: Penguin Fall
-			EPexplosion.DisplayName: EP explosion
-			EPShot.DisplayName: EPShot
+			EPexplosion.DisplayName: Plasma
+			EPShot.DisplayName: Plasma
 			PursuitRuneBlast.DisplayName: Rune Blast
 			PursuitRuneMissile.DisplayName: Pursuit Rune Missile
 			CaeliteMagicProjectile.DisplayName: Restless Sun
@@ -328,11 +328,11 @@ Mods: {
 			IceRuneTome.DisplayName: Ice Rune Tome
 			RunicWaveP.DisplayName: Runic Wave
 			SacredDazeP.DisplayName: Sacred Daze
-			SwordDrop.DisplayName: Sworddrop
+			SwordDrop.DisplayName: Sword drop
 			CaeliteBoomerangP.DisplayName: Caelite Boomerang
 			LuneBoomerangP.DisplayName: Lune Boomerang
 			RhuthiniumBoomerangP.DisplayName: RhuthiniumBoomerang
-			AnkylosaurusTail.DisplayName: Ankylosaurus Tail
+			AnkylosaurusTail.DisplayName: Ankylosaurs Tail
 			HydraJavelinP.DisplayName: Hydra Javelin
 			ImperiumP.DisplayName: Imperium
 			RhuthiniumJavelinP.DisplayName: RhuthiniumJavelin
@@ -371,7 +371,7 @@ Mods: {
 			MiniTankBlast.DisplayName: Tank!!
 			MiniTankCannonBallFreindly.DisplayName: Tank!!
 			PriestMinion.DisplayName: Priest Minion
-			PriestPulse.DisplayName: Preist Pulse
+			PriestPulse.DisplayName: Priest Pulse
 			ShieldMinion.DisplayName: Shield Minion
 			FighterLaser.DisplayName: Fighter Laser
 			SpaceFighter.DisplayName: Space Fighter
@@ -381,7 +381,7 @@ Mods: {
 			Fusion.DisplayName: Fusion Blast
 			AncientFallout.DisplayName: Ancient Fallout
 			AncientNukeMorph.DisplayName: Ancient Nuke
-			HydraBarrageBase.DisplayName: HydraBarrage Barrage Base
+			HydraBarrageBase.DisplayName: Hydra Barrage Base
 			HydraBarrageBreath.DisplayName: Barrage Breath
 			HydraBarrageHead.DisplayName: Hydra Barrage Head
 			RhuthiniumBarrageDart.DisplayName: Rhuthinium Barrage
@@ -400,7 +400,7 @@ Mods: {
 			DinoVulcanP.DisplayName: Dino Vulcan
 			Shell.DisplayName: Shell
 			DoomBreath.DisplayName: Doom Breath
-			Trickshot.DisplayName: Trickshot
+			Trickshot.DisplayName: Trick shot
 			SlidingPenguinRanged.DisplayName: Sliding Penguin
 			AqueousP.DisplayName: Aqueous
 			BladedArrowP.DisplayName: Bladed Arrow
@@ -441,7 +441,7 @@ Mods: {
 			InvaderRay.DisplayName: Invader Battleship Shot
 			SpellBeam.DisplayName: Invader Battleship Beam
 			StrikeDroneBeam.DisplayName: Invader Battleship Beam
-			BlackHole.DisplayName: BlackHole
+			BlackHole.DisplayName: Black Hole
 			BlackHoleSeed.DisplayName: Pew Pew
 			BurstShot.DisplayName: Pew Pew
 			BurstShot2.DisplayName: Pew Pew
@@ -460,11 +460,11 @@ Mods: {
 			LeechRune.DisplayName: Leech Rune
 			PursuitRune.DisplayName: Pursuit Rune
 			AntiAirRocket.DisplayName: Anti Air Rocket
-			DinoBomb.DisplayName: DinoBomb
+			DinoBomb.DisplayName: Dino Bomb
 			DinoBombExplosion.DisplayName: Dino Bomb Explosion
 			MeteorFall.DisplayName: Meteor
 			MeteorLaunch.DisplayName: Meteor
-			SnowFlake.DisplayName: SnowFlake
+			SnowFlake.DisplayName: Snowflake
 			TankCannonBall.DisplayName: Triceratank's cannon
 			TankCannonBallExplosion.DisplayName: Tank Cannon Ball Explosion
 			FortressHarpyProjectile.DisplayName: Fortress Harpy Projectile
@@ -493,14 +493,14 @@ Mods: {
 			ThrowShield.DisplayName: Throw Shield
 			EtimsSphere.DisplayName: Etims Sphere
 			RailSphere.DisplayName: Rail Sphere
-			Judgement.DisplayName: Judgement
-			FinalJudgement.DisplayName: Final Judgement
+			Judgement.DisplayName: Judgment
+			FinalJudgement.DisplayName: Final Judgment
 			ShooterBeam.DisplayName: Shooter Beam
 			Heresy.DisplayName: Invader Elite
 			SpinSpearHitbox.DisplayName: Invader Elite
 			HigherPriestMinion.DisplayName: Higher Priest Minion
 			HigherPriestPulse.DisplayName: Higher Priest Pulse
-			SkyDisintigrator.DisplayName: Sky Disintigrator
+			SkyDisintigrator.DisplayName: Sky Disintegrator
 			SeraphimPredatorP.DisplayName: Seraphim Predator
 			BlessedMonsoonKnifeP.DisplayName: Blessed Monsoon Knife
 			LargeHydraBreath.DisplayName: Large Hydra Breath
@@ -525,7 +525,7 @@ Mods: {
 
 			CobaltArrow: {
 				DisplayName: Cobalt Arrow
-				Tooltip: Remains stationarry until you right click, which sends it flying at your cursor
+				Tooltip: Remains stationary until you right click, which sends it flying at your cursor
 			}
 
 			GunArrow: {
@@ -705,7 +705,7 @@ Mods: {
 
 			CasterBanner: {
 				DisplayName: High Preist Banner
-				Tooltip: Nearby players get a bonus against: High Preist
+				Tooltip: Nearby players get a bonus against: High Priest
 			}
 
 			CrawlerBanner: {
@@ -929,7 +929,7 @@ Mods: {
 			}
 
 			MusicBoxEPIC: {
-				DisplayName: Music Box (Energised Planetary Incineration Climax)
+				DisplayName: Music Box (Energized Planetary Incineration Climax)
 				Tooltip: ""
 			}
 
@@ -1009,7 +1009,7 @@ Mods: {
 			}
 
 			TyrantRelic: {
-				DisplayName: The Great Tyranasaurous Relic
+				DisplayName: The Great Tyrannosaurus Relic
 				Tooltip: ""
 			}
 
@@ -1063,7 +1063,7 @@ Mods: {
 				Tooltip:
 					'''
 					Doubles magic damage
-					What normaly drains mana drains you instead!
+					What normally drains mana drains you instead!
 					'''
 			}
 
@@ -1073,7 +1073,7 @@ Mods: {
 					'''
 					Melee attacks ingnite enemies
 					Melee attacks do an extra magic damage
-					Magic damage is 30% the weapon's base damage then modifed by magic bonuses
+					Magic damage is 30% the weapon's base damage then modified by magic bonuses
 					Enemies immune to fire are immune to the extra damage.
 					'''
 			}
@@ -1109,7 +1109,7 @@ Mods: {
 				Tooltip:
 					'''
 					Melee attacks do an extra magic damage
-					Magic damage is 20% the weapon's base damage then modifed by magic bonuses
+					Magic damage is 20% the weapon's base damage then modified by magic bonuses
 					'''
 			}
 
@@ -1122,8 +1122,8 @@ Mods: {
 				DisplayName: Doppleganger
 				Tooltip:
 					'''
-					Pretends to be the accesory placed above it.
-					The gods forbid equiping the same accesory twice!
+					Pretends to be the accessory placed above it.
+					The gods forbid equipping the same accessory twice!
 					Tampering with such an unusual artifact is not advised.
 					'''
 			}
@@ -1156,7 +1156,7 @@ Mods: {
 				DisplayName: Gravity Be Gone
 				Tooltip:
 					'''
-					Makes you uneffected by gravity
+					Makes you unaffected by gravity
 					Grants immunity to fall damage
 					Method of going down not included.
 					'''
@@ -1189,7 +1189,7 @@ Mods: {
 
 			PursuitScroll: {
 				DisplayName: Pursuit Scroll
-				Tooltip: Minions ocasionaly shoot pursuit runes
+				Tooltip: Minions occasionally shoot pursuit runes
 			}
 
 			SkywardHilt: {
@@ -1203,7 +1203,7 @@ Mods: {
 			}
 
 			SwordmastersSeal: {
-				DisplayName: Swordmasters Seal
+				DisplayName: Sword master’s Seal
 				Tooltip:
 					'''
 					Greatly enhances swordplay performance!
@@ -1276,7 +1276,7 @@ Mods: {
 			}
 
 			CaeliteGreaves: {
-				DisplayName: Caelite Reinforcmentss
+				DisplayName: Caelite Reinforcements
 				Tooltip: Melee and magic attacks hasten the cooldown for healing potions
 			}
 
@@ -1342,7 +1342,7 @@ Mods: {
 				DisplayName: Hydra Maw
 				Tooltip:
 					'''
-					+0.5 life/sec regen rate
+					+0.5 life/sec regeneration rate
 					+10% summon damage
 					'''
 			}
@@ -1351,7 +1351,7 @@ Mods: {
 				DisplayName: Hydra Extensions
 				Tooltip:
 					'''
-					+0.5 life/sec regen rate
+					+0.5 life/sec regeneration rate
 					+10% summon damage and movement speed
 					'''
 			}
@@ -1360,7 +1360,7 @@ Mods: {
 				DisplayName: Hydra Scalemail
 				Tooltip:
 					'''
-					+0.5 life/sec regen rate
+					+0.5 life/sec regeneration rate
 					+1 max minions
 					'''
 			}
@@ -1381,7 +1381,7 @@ Mods: {
 					'''
 					10% increased damage and critical strike chance
 					Increases maximum mana by 80
-					Reduces mana useage by 15%
+					Reduces mana usage by 15%
 					'''
 			}
 
@@ -1446,7 +1446,7 @@ Mods: {
 				Tooltip:
 					'''
 					10% increased magic critical chance 
-					10% reduced mana useage
+					10% reduced mana usage
 					'''
 			}
 
@@ -1503,7 +1503,7 @@ Mods: {
 			}
 
 			VitallumHeadress: {
-				DisplayName: Vitallum Headress
+				DisplayName: Vitallum Headdress
 				Tooltip:
 					'''
 					Increases max life by 80 
@@ -1553,7 +1553,7 @@ Mods: {
 
 			RunicRobe: {
 				DisplayName: Ancient Runic Robe
-				Tooltip: remeber this?
+				Tooltip: remember this?
 			}
 
 			ExpertChalice: {
@@ -1561,7 +1561,7 @@ Mods: {
 				Tooltip:
 					'''
 					Reusable
-					Gives you 2 seconds of invinsibility after drinking
+					Gives you 2 seconds of invincibility after drinking
 					'''
 			}
 
@@ -1671,7 +1671,7 @@ Mods: {
 
 			EnlightenedConfusion: {
 				DisplayName: Enlightened Confusion
-				Tooltip: Doesd not actually inflict confusion, confusing.
+				Tooltip: Does not actually inflict confusion, confusing.
 			}
 
 			TheTyrantsExtinctionGun: {
@@ -1749,7 +1749,11 @@ Mods: {
 
 			StaffOfJob: {
 				DisplayName: Staff Of Job
-				Tooltip: Inflicts grave misery at the victim near your cursor!
+				Tooltip:
+					'''
+					Inflicts grave misery at the victim near your cursor!
+					Ignores 20 enemy defense
+					'''
 			}
 
 			SwordStormStaff: {
@@ -1841,7 +1845,7 @@ Mods: {
 
 			ImperiousTheIV: {
 				DisplayName: Imperious The IV
-				Tooltip: Hitting enemies launches richoching swords
+				Tooltip: Hitting enemies launches ricocheting swords
 			}
 
 			Overkill: {
@@ -1953,7 +1957,7 @@ Mods: {
 				DisplayName: Mech Crossbow Staff
 				Tooltip:
 					'''
-					Summons a mechanised crossbow to shoot arrows from your inventory at enemies
+					Summons a mechanized crossbow to shoot arrows from your inventory at enemies
 					Wooden arrows are converted into tagging bolts
 					'''
 			}
@@ -2028,7 +2032,7 @@ Mods: {
 			}
 
 			B4Bow: {
-				DisplayName: Possesing Bow
+				DisplayName: Possessing Bow
 				Tooltip: Arrows fired from this will chase your enemies!
 			}
 
@@ -2109,7 +2113,7 @@ Mods: {
 			}
 
 			LuneTrickshooter: {
-				DisplayName: Lune Trickshooter
+				DisplayName: Lune Trick Shooter
 				Tooltip:
 					'''
 					Musket balls are converted to Lune trick shots!
@@ -2179,9 +2183,9 @@ Mods: {
 				DisplayName: Riptide Sentry Staff
 				Tooltip:
 					'''
-					Fires low damage hitscan streams at 10Hz
+					Fires low damage hit scan streams at 10Hz
 					Ignores 10 enemy defense
-					Can not benifit from whip tags
+					Can not benefit from whip tags
 					'''
 			}
 
@@ -2236,17 +2240,17 @@ Mods: {
 
 			FaceMask: {
 				DisplayName: Face Mask
-				Tooltip: Vanity Accesory
+				Tooltip: Vanity Accessory
 			}
 
 			Shrug: {
 				DisplayName: Shrug
-				Tooltip: Vanity Accesory
+				Tooltip: Vanity Accessory
 			}
 
 			Jacket: {
 				DisplayName: Jacket
-				Tooltip: Vanity Accesory
+				Tooltip: Vanity Accessory
 			}
 
 			Corset: {
@@ -2274,7 +2278,7 @@ Mods: {
 				Tooltip:
 					'''
 					Shoes use your default shoe color
-					Shoes use the dye from your first accesory slot
+					Shoes use the dye from your first accessory slot
 					'''
 			}
 
@@ -2299,7 +2303,7 @@ Mods: {
 			}
 
 			SkyDisintigratorStaff: {
-				DisplayName: Sky Disintigrator Staff
+				DisplayName: Sky Disintegrator Staff
 				Tooltip: ""
 			}
 
@@ -2345,7 +2349,7 @@ Mods: {
 
 			PreistCloak: {
 				Tooltip: The Higher Beings will see you as one of their own and not attack you
-				DisplayName: Preist Cloak
+				DisplayName: Priest Cloak
 			}
 
 			InvaderIDCard: {
@@ -2380,14 +2384,14 @@ Mods: {
 
 			EternalFountain: {
 				DisplayName: Eternal Fountain
-				Tooltip: Continously creates water
+				Tooltip: Continuously creates water
 			}
 
 			PiercingWhetstone: {
 				Tooltip:
 					'''
 					Melee attacks do an extra magic damage
-					Magic damage is 20% the weapon's base damage then modifed by magic bonuses
+					Magic damage is 20% the weapon's base damage then modified by magic bonuses
 					Whetstone damage bonus ignores 12 enemy defense
 					'''
 				DisplayName: Piercing Whetstone
@@ -2397,11 +2401,11 @@ Mods: {
 				DisplayName: Auto Summoner
 				Tooltip:
 					'''
-					While in your inventory will automaticly summon minions based on laodout
+					While in your inventory will automatically summon minions based on laodout
 					The minion staff placed above will be default for all loadouts
 					The minion staff  placed to the right/below/left will override the default for loadout 1/2/3
-					Switching loadouts will desummon your minions if they're assigned different staffs
-					KNOWN BUG: Occasionally in multiplayer other players will see you stuck in the summon animation, desummon your minions if this happens
+					Switching loadouts will de summon your minions if they're assigned different staffs
+					KNOWN BUG: Occasionally in multiplayer other players will see you stuck in the summon animation, de summon your minions if this happens
 					'''
 			}
 
@@ -2411,7 +2415,7 @@ Mods: {
 					50% chance not to consume ammo
 					Don't understand quantum mechanics? The gods don't either.
 					'''
-				DisplayName: Superquantum Rifle
+				DisplayName: Super Quantum Rifle
 			}
 
 			DVRStaff: {
@@ -2419,7 +2423,7 @@ Mods: {
 				Tooltip:
 					'''
 					Requires 10 minion slots
-					Targets the healtiest enemy
+					Targets the healthiest enemy
 					'''
 			}
 
@@ -2429,7 +2433,7 @@ Mods: {
 					'''
 					Has a variety of different attacks based on right click/right click and directions pressed
 					Enemies when hit will briefly have their contact damage turned off
-					Improves mobility signifcantly, I'd recommend not using mobility items with this at first
+					Improves mobility significantly, I'd recommend not using mobility items with this at first
 					'''
 			}
 
@@ -2559,7 +2563,7 @@ Mods: {
 					$parentVal: Invader Battleship
 				}
 
-				BossChecklistIntegration.SpawnInfo: Revist the Sky fortress after Plantera is slain
+				BossChecklistIntegration.SpawnInfo: Revisit the Sky fortress after Plantera is slain
 			}
 
 			OLORDv2: {
@@ -2626,7 +2630,7 @@ Mods: {
 			FortressDoorClosed.MapEntry: Fortress Door
 			FortressDoorOpen.MapEntry: Fortress Door
 			FortressLampT.MapEntry: Fortress Lamp
-			FortressLanternT.MapEntry: Fortress Latern
+			FortressLanternT.MapEntry: Fortress Lantern
 			FortressPianoT.MapEntry: Fortress Piano
 			FortressSinkT.MapEntry: Fortress Sink
 			FortressTableT.MapEntry: Fortress Table
