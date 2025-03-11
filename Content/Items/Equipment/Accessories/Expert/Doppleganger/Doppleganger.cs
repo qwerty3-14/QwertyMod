@@ -121,6 +121,12 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.Doppleganger
             {
                 if (!Player.armor[a].IsAir && Player.armor[a].GetGlobalItem<DoppleItem>().isDoppleganger)
                 {
+                    if(Player.armor[a].prefix != 0)
+                    {
+                        Player.armor[a].prefix = 0;
+                        Player.armor[a].ResetPrefix();
+
+                    }
                     if (!Player.armor[a - 1].IsAir && Player.armor[a - 1].type > ItemID.Count)
                     {
                         ItemLoader.UpdateAccessory(Player.armor[a - 1], Player, Player.hideVisibleAccessory[a]);

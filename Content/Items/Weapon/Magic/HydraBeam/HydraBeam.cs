@@ -106,11 +106,11 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraBeam
 
             }
             Projectile.frameCounter++;
-            if (player.channel && player.CheckMana((int)((float)player.inventory[player.selectedItem].mana), !player.GetModPlayer<BloodMedalionEffect>().effect && Projectile.frameCounter % 20 == 0))
+            if (player.channel && player.CheckMana((int)((float)player.inventory[player.selectedItem].mana), !(player.GetModPlayer<BloodMedalionEffect>().effect > 0) && Projectile.frameCounter % 20 == 0))
             {
-                if (player.GetModPlayer<BloodMedalionEffect>().effect)
+                if (player.GetModPlayer<BloodMedalionEffect>().effect > 0)
                 {
-                    player.statLife -= (int)(player.inventory[player.selectedItem].mana * player.manaCost);
+                    player.statLife -= (int)(player.inventory[player.selectedItem].mana * player.manaCost * player.GetModPlayer<BloodMedalionEffect>().effect);
                     if (player.statLife <= 0)
                     {
                         player.KillMe(PlayerDeathReason.ByCustomReason(player.name + " madly drained " + (player.Male ? "his " : "her") + " lifeforce!"), (int)(player.inventory[player.selectedItem].mana * player.manaCost), 0);

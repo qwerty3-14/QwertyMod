@@ -26,7 +26,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.Sheath
                 
                 Player drawPlayer = drawInfo.drawPlayer;
                 if(!drawPlayer.TryGetModPlayer<ImperiousEffect>(out ImperiousEffect modPlayer)){ return; }
-                if(!modPlayer.effect){ return; }
+                if(!(modPlayer.effect > 0)){ return; }
                 for(int p = 0; p < 1000; p++)
                 {
                     if(Main.projectile[p].active && Main.projectile[p].type == ModContent.ProjectileType<ImperiousP>())

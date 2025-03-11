@@ -32,7 +32,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.GetModPlayer<ScrollEffects>().ice = true;
+            player.GetModPlayer<ScrollEffects>().ice++;
         }
     }
 
@@ -49,14 +49,15 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            Projectile.localNPCImmunity[target.whoAmI] = 30;
+            Projectile.localNPCImmunity[target.whoAmI] = Main.player[Projectile.owner].GetModPlayer<ScrollEffects>().ice > 0 ? (30 / Main.player[Projectile.owner].GetModPlayer<ScrollEffects>().ice) : 30;
             target.immune[Projectile.owner] = 0;
         }
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
-            for (int i = 0; i < 2; i++)
+            int count = Main.player[Projectile.owner].GetModPlayer<ScrollEffects>().ice * 2;
+            for (int i = 0; i < count; i++)
             {
-                if (Collision.CheckAABBvAABBCollision(targetHitbox.TopLeft(), targetHitbox.Size(), Projectile.Center + QwertyMethods.PolarVector(dist, Projectile.rotation + i * MathF.PI) + new Vector2(-18, -18), new Vector2(36, 36)))
+                if (Collision.CheckAABBvAABBCollision(targetHitbox.TopLeft(), targetHitbox.Size(), Projectile.Center + QwertyMethods.PolarVector(dist, Projectile.rotation + i * ((MathF.PI * 2) / count)) + new Vector2(-18, -18), new Vector2(36, 36)))
                 {
                     return true;
                 }
@@ -68,12 +69,12 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
         public override void AI()
         {
             Player player = Main.player[Projectile.owner];
-            if (player.GetModPlayer<ScrollEffects>().ice)
+            if (player.GetModPlayer<ScrollEffects>().ice > 0)
             {
                 Projectile.timeLeft = 2;
             }
             timer++;
-            Projectile.rotation += MathF.PI / 30f;
+            Projectile.rotation = timer * (MathF.PI / 30f);
             Projectile.Center = player.Center;
         }
         public override void OnKill(int timeLeft)
@@ -90,7 +91,8 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            for (int i = 0; i < 2; i++)
+            int count = Main.player[Projectile.owner].GetModPlayer<ScrollEffects>().ice * 2;
+            for (int i = 0; i < count; i++)
             {
                 float c = (timer / 60f);
                 if (c > 1f)
@@ -102,7 +104,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
                 {
                     frame = 19;
                 }
-                Main.EntitySpriteDraw(RuneSprites.runeTransition[(int)Runes.IceRune][frame], Projectile.Center + QwertyMethods.PolarVector(dist, Projectile.rotation + i * MathF.PI) - Main.screenPosition, null, new Color(c, c, c, c), Projectile.rotation, new Vector2(9, 9), Vector2.One * 2, 0, 0);
+                Main.EntitySpriteDraw(RuneSprites.runeTransition[(int)Runes.IceRune][frame], Projectile.Center + QwertyMethods.PolarVector(dist, Projectile.rotation + i * ((2 * MathF.PI) / count)) - Main.screenPosition, null, new Color(c, c, c, c), Projectile.rotation, new Vector2(9, 9), Vector2.One * 2, 0, 0);
             }
 
             return false;

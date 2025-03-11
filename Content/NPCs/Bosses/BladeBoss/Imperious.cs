@@ -1008,8 +1008,6 @@ namespace QwertyMod.Content.NPCs.Bosses.BladeBoss
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
             float CP = 0;
-            Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(-bladeLength + Projectile.width / 2 + bladeStart, Projectile.rotation), 15);
-            Dust.NewDustPerfect(Projectile.Center + QwertyMethods.PolarVector(Projectile.width / 2, Projectile.rotation), 15);
             return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), Projectile.Center + QwertyMethods.PolarVector(-bladeLength + Projectile.width / 2 + bladeStart, Projectile.rotation), Projectile.Center + QwertyMethods.PolarVector(Projectile.width / 2, Projectile.rotation), Projectile.width, ref CP);
         }
 

@@ -28,7 +28,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.GetModPlayer<ScrollEffects>().pursuit = true;
+            player.GetModPlayer<ScrollEffects>().pursuit++;
         }
     }
 
@@ -99,9 +99,9 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
         {
             Player player = Main.player[projectile.owner];
             ScrollEffects modPlayer = player.GetModPlayer<ScrollEffects>();
-            if ((projectile.minion && projectile.minionSlots > 0 || projectile.sentry) && modPlayer.pursuit)
+            if ((projectile.minion && projectile.minionSlots > 0 || projectile.sentry) && modPlayer.pursuit > 0)
             {
-                runeCounter++;
+                runeCounter += modPlayer.pursuit;
                 if (runeCounter >= 120 / projectile.minionSlots || (runeCounter >= 120 && projectile.sentry))
                 {
                     if (QwertyMethods.ClosestNPC(ref target, 1000, projectile.Center, false, player.MinionAttackTargetNPC))

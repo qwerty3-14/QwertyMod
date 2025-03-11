@@ -27,27 +27,27 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Sword
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.GetModPlayer<SkywardHiltEffect>().effect = true;
+            player.GetModPlayer<SkywardHiltEffect>().effect++;
         }
     }
     public class SkywardHiltEffect : ModPlayer
     {
-        public bool effect;
+        public int effect = 0;
 
         public override void ResetEffects()
         {
-            effect = false;
+            effect = 0;
         }
 		public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)
 		{
 			Point origin = Player.Bottom.ToTileCoordinates();
             Point point;
-            if (effect && !WorldUtils.Find(origin, Searches.Chain(new Searches.Down(3), new GenCondition[]
+            if (effect > 0 && !WorldUtils.Find(origin, Searches.Chain(new Searches.Down(3), new GenCondition[]
                                         {
                                             new Conditions.IsSolid()
                                         }), out point) && Player.grappling[0] == -1)
             {
-                modifiers.FinalDamage *= 1.2f;
+                modifiers.FinalDamage *= 1 + (0.2f * effect);
             }
 		}
 		public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
@@ -56,12 +56,12 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Sword
             {
                 Point origin = Player.Bottom.ToTileCoordinates();
                 Point point;
-                if (effect && !WorldUtils.Find(origin, Searches.Chain(new Searches.Down(3), new GenCondition[]
+                if (effect > 0 && !WorldUtils.Find(origin, Searches.Chain(new Searches.Down(3), new GenCondition[]
                                             {
                                                 new Conditions.IsSolid()
                                             }), out point) && Player.grappling[0] == -1)
                 {
-                    modifiers.FinalDamage *= 1.2f;
+                    modifiers.FinalDamage *= 1 + (0.2f * effect);
                 }
             }
 		}

@@ -31,7 +31,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.GetModPlayer<ScrollEffects>().aggro = true;
+            player.GetModPlayer<ScrollEffects>().aggro++;
         }
     }
 
@@ -57,7 +57,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
         {
             Projectile.velocity = Vector2.Zero;
             Player player = Main.player[Projectile.owner];
-            if (player.GetModPlayer<ScrollEffects>().aggro)
+            if (player.GetModPlayer<ScrollEffects>().aggro > 0 &&  player.ownedProjectileCounts[ ModContent.ProjectileType<AggroRuneFriendly>()] <= player.GetModPlayer<ScrollEffects>().aggro)
             {
                 Projectile.timeLeft = 2;
             }

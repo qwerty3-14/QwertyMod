@@ -40,7 +40,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.Sheath
 
         public override void UpdateEquip(Player player)
         {
-            player.GetModPlayer<ImperiousEffect>().effect = true;
+            player.GetModPlayer<ImperiousEffect>().effect++;
         }
 
         //this changes the tooltip based on what the hotkey is configured to
@@ -63,13 +63,13 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.Sheath
 
     public class ImperiousEffect : ModPlayer
     {
-        public bool effect = false; //does the player get this effect
+        public int effect = 0; //does the player get this effect
         public int damageTally; //used to count as damage is dealt
         public int damageTallyMax = 10000;
 
         public override void ResetEffects() //used to reset if the player unequips the accesory
         {
-            effect = false;
+            effect = 0;
         }
         bool ImperiousActive()
         {
@@ -90,18 +90,18 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.Sheath
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone) //runs when an npc is hit by the player's projectile
         {
             if(ImperiousActive()) { return; }
-            if (proj.owner == Player.whoAmI && effect && !target.immortal && proj.type != ModContent.ProjectileType<ImperiousP>()) //check if vallid npc and effect is active
+            if (proj.owner == Player.whoAmI && effect > 0 && !target.immortal && proj.type != ModContent.ProjectileType<ImperiousP>()) //check if vallid npc and effect is active
             {
-                damageTally += damageDone; //count up
+                damageTally += damageDone * effect; //count up
             }
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) //runs when an npc is hit by an item (sword blade)
         {
             if(ImperiousActive()) { return; }
-            if (effect && !target.immortal)  //check if vallid npc  and effect is active
+            if (effect > 0 && !target.immortal)  //check if vallid npc  and effect is active
             {
-                damageTally += damageDone; //count up
+                damageTally += damageDone * effect; //count up
             }
         }
 
@@ -118,7 +118,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.Sheath
             if(ImperiousActive()) { return; }
             if (QwertyMod.YetAnotherSpecialAbility.JustPressed) //hotkey is pressed
             {
-                if (effect && damageTally >= damageTallyMax)
+                if (effect > 0 && damageTally >= damageTallyMax)
                 {
                     Projectile.NewProjectile(new EntitySource_Misc("Accesory_ImperiousSheath"), Player.Center, Vector2.Zero, ModContent.ProjectileType<ImperiousP>(), (int)(500f * Player.GetDamage(DamageClass.Summon).Multiplicative), 8f * Player.GetKnockback(DamageClass.Summon).Multiplicative, Player.whoAmI); //summons Imperious to fight!
                     damageTally = 0; //resets the tally

@@ -29,7 +29,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.GetModPlayer<PenguinEffect>().effect = true;
+            player.GetModPlayer<PenguinEffect>().effect++;
         }
     }
 
@@ -41,26 +41,26 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert
 
     public class PenguinEffect : ModPlayer
     {
-        public bool effect;
+        public int effect = 0;
         public bool noSound;
         public int buildUp;
         public int cooldown;
 
         public override void ResetEffects()
         {
-            effect = false;
+            effect = 0;
         }
         public override void PreUpdate()
         {
             if(cooldown > 0)
             {
-                cooldown--;
+                cooldown -= effect;
             }
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Main.rand.NextBool(12) && effect && !target.immortal && cooldown <= 0)
+            if (Main.rand.NextBool(12) && (effect > 0) && !target.immortal && cooldown <= 0)
             {
                 if(cooldown <= 0)
                 {
@@ -81,7 +81,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
             
-            if (Main.rand.NextBool(12) && effect && !target.immortal && cooldown <= 0)
+            if (Main.rand.NextBool(12) && (effect > 0) && !target.immortal && cooldown <= 0)
             {
                 if(cooldown <= 0)
                 {

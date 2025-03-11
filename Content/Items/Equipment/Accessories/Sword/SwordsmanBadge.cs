@@ -21,30 +21,30 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Sword
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.GetModPlayer<BadgeEffect>().critOnHit = true;
+            player.GetModPlayer<BadgeEffect>().critOnHit++;
         }
     }
     public class BadgeEffect : ModPlayer
     {
-        public bool critOnHit;
+        public int critOnHit = 0;
         public override void ResetEffects()
         {
-            critOnHit = false;
+            critOnHit = 0;
         }
         public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers)
 		{
-			if (critOnHit)
+			if (critOnHit > 0)
             {
-                Player.AddBuff(ModContent.BuffType<ImperialCourage>(), 240);
+                Player.AddBuff(ModContent.BuffType<ImperialCourage>(), 240 * critOnHit);
             }
 		}
 		public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
 		{
 			if(proj.aiStyle == 190)
             {
-                if (critOnHit)
+                if (critOnHit > 0)
                 {
-                    Player.AddBuff(ModContent.BuffType<ImperialCourage>(), 240);
+                    Player.AddBuff(ModContent.BuffType<ImperialCourage>(), 240 * critOnHit);
                 }
             }
 		}

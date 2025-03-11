@@ -2650,5 +2650,21 @@ Mods: {
 		}
 
 		"Keybinds.Yet Another Special Ability Key.DisplayName": Yet Another Special Ability
+
+		Configs: {
+			QwertyConfig: {
+				OLORDScreenShake: {
+					Tooltip: ""
+					Label: O L O R D Screen Shake
+				}
+
+				DisplayName: Qwerty Config
+
+				ImperiousScreenShake: {
+					Label: Imperious Screen Shake
+					Tooltip: ""
+				}
+			}
+		}
 	}
 }

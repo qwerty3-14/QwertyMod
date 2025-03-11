@@ -25,7 +25,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.GetModPlayer<AmuletOfPatienceEffect>().effect = true;
+            player.GetModPlayer<AmuletOfPatienceEffect>().effect++;
             if (!hideVisual && player.GetModPlayer<AmuletOfPatienceEffect>().patienceCount == 180 && Main.rand.NextBool(6))
             {
                 Dust d = Dust.NewDustPerfect(player.Center + new Vector2((2 * player.direction) + (player.direction == -1 ? -1 : 0), 0), DustID.DungeonWater);
@@ -38,15 +38,15 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
 
     public class AmuletOfPatienceEffect : ModPlayer
     {
-        public bool effect = false;
+        public int effect = 0;
         public int patienceCount;
         public override void ResetEffects()
         {
-            effect = false;
+            effect = 0;
         }
         public override void PreUpdate()
         {
-            if (effect && patienceCount < 180)
+            if (effect > 0 && patienceCount < 180)
             {
                 patienceCount++;
             }
@@ -55,7 +55,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
         {
             if (patienceCount > 60)
             {
-                modifiers.FinalDamage *= 1 + (((float)patienceCount - 60) / 60f);
+                modifiers.FinalDamage *= 1 + (((float)patienceCount - 60) / 60f) * effect;
             }
             patienceCount = 0;
         }

@@ -32,6 +32,19 @@ Extra thanks
 
 
 Changelog
+1.0.8
+-fixed bloody medalion doubling ALL damage instead of just magic damage
+-doppleganger will now cleanse itself of imperfections while equiped
+
+-Allowed many accessories that could not previously stack with thier tinkers or doppleganger to now stack
+    -Bloody medalion is now stackable (gives even more damage and a higher life cost)
+    -Amulet of Patience is now stackable
+    -Swordsman bage's effect is now stackable (increases duration of the buff it gives)
+    -Skyward Hilt's effect is now stackable
+    -Imperious Sheath is now stackable (meter builds up faster)
+    -All rune scrolls are now stackable
+    -Penguin Generator is now stackable
+
 1.0.7
 -fixed Polar exterminator treasure bag not dropping penguin launcher
 -added config options to turn off Imperious and OLORD screen shake

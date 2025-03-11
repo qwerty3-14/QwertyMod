@@ -24,9 +24,9 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Sword
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.GetModPlayer<SkywardHiltEffect>().effect = true;
+            player.GetModPlayer<SkywardHiltEffect>().effect++;
             player.GetModPlayer<CommonStats>().weaponSize += 0.25f;
-            player.GetModPlayer<BadgeEffect>().critOnHit = true;
+            player.GetModPlayer<BadgeEffect>().critOnHit++;
         }
         public override void AddRecipes()
         {

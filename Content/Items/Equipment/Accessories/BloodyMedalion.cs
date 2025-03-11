@@ -31,43 +31,29 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.GetModPlayer<BloodMedalionEffect>().effect = true;
+            player.GetModPlayer<BloodMedalionEffect>().effect++;
         }
     }
 
     public class BloodMedalionEffect : ModPlayer
     {
-        public bool effect;
+        public int effect = 0;
 
         public override void ResetEffects()
         {
-            effect = false;
+            effect = 0;
         }
 
         public override void PostUpdateEquips()
         {
-            if (effect)
+            if (effect > 0)
             {
                 Player.spaceGun = false;
-                /*
-                if (Player.HeldItem != null)
-                {
-                    if (Player.HeldItem.type == ItemID.CrimsonRod || Player.HeldItem.type == ItemID.NimbusRod || Player.HeldItem.type == ItemID.MagnetSphere)
-                    {
-                        Player.GetDamage(DamageClass.Magic) *= 1.4f;
-                    }
-                    else
-                    {
-                        Player.GetDamage(DamageClass.Magic) *= 2f;
-                    }
-                }
-                */
-
             }
         }
 		public override void PostItemCheck()
         {
-            if(Player.statMana < Player.statManaMax2 && effect && Player.itemAnimation > 0)
+            if(Player.statMana < Player.statManaMax2 && effect > 0 && Player.itemAnimation > 0)
             {
                 int amt = Player.statManaMax2 - Player.statMana;
                 int lifeDrain = BloodMedialionItemEffect.GetLifeCost(amt);
@@ -94,43 +80,24 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
         {
             return (int)MathHelper.Max(manaCost / (ModLoader.HasMod("TRAEProject") ? 2 : 1), 1);
         }
-		/*
-        public override void UseAnimation(Item item, Player player)
-        {
-            if (player.GetModPlayer<BloodMedalionEffect>().effect && item.mana > 0)
-            {
-                int lifeCost = GetLifeCost((int)(item.mana * player.manaCost));
-                if (lifeCost < 0)
-                {
-                    lifeCost = 0;
-                }
-                player.statLife -= lifeCost;
-                if (player.statLife <= 0)
-                {
-                    player.KillMe(PlayerDeathReason.ByCustomReason(player.name + " madly drained " + (player.Male ? "his" : "her") + " lifeforce!"), (int)(item.mana * player.manaCost), 0);
-                }
-                player.manaCost = 0f;
-            }
-        }
-        */
 		public override void ModifyWeaponDamage(Item item, Player player, ref StatModifier damage)
 		{
-			if(player.GetModPlayer<BloodMedalionEffect>().effect)
+			if(player.GetModPlayer<BloodMedalionEffect>().effect > 0 && item.DamageType == DamageClass.Magic)
             {
-                damage *= 2;
+                damage *= (1 + player.GetModPlayer<BloodMedalionEffect>().effect);
             }
 		}
         
         
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
-            if (!item.IsAir && Main.LocalPlayer.GetModPlayer<BloodMedalionEffect>().effect)
+            if (!item.IsAir && Main.LocalPlayer.GetModPlayer<BloodMedalionEffect>().effect > 0)
             {
                 foreach (TooltipLine line in tooltips) //runs through all tooltip lines
                 {
                     if (line.Mod == "Terraria" && line.Name == "UseMana") //this checks if it's the line we're interested in
                     {
-                        int lifeCost = GetLifeCost((int)(item.mana * Main.LocalPlayer.manaCost));
+                        int lifeCost = GetLifeCost((int)(item.mana * Main.LocalPlayer.manaCost)) * Main.LocalPlayer.GetModPlayer<BloodMedalionEffect>().effect;
                         if (lifeCost < 0)
                         {
                             lifeCost = 0;

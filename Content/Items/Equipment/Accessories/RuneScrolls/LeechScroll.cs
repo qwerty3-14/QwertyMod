@@ -29,7 +29,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.GetModPlayer<ScrollEffects>().leech = true;
+            player.GetModPlayer<ScrollEffects>().leech++;
         }
     }
 

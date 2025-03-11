@@ -8,36 +8,36 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.RuneScrolls
 {
     public class ScrollEffects : ModPlayer
     {
-        public bool aggro = false;
-        public bool ice = false;
-        public bool leech = false;
+        public int aggro = 0;
+        public int ice = 0;
+        public int leech = 0;
         int leechCooldown = 0;
-        public bool pursuit = false;
+        public int pursuit = 0;
         public override void ResetEffects()
         {
-            aggro = false;
-            ice = false;
-            leech = false;
-            pursuit = false;
+            aggro = 0;
+            ice = 0;
+            leech = 0;
+            pursuit = 0;
         }
         public override void PreUpdate()
         {
-            if (aggro && Player.ownedProjectileCounts[ ModContent.ProjectileType<AggroRuneFriendly>()] < 1)
+            if (aggro > 0 && Player.ownedProjectileCounts[ ModContent.ProjectileType<AggroRuneFriendly>()] < aggro)
             {
                 Projectile.NewProjectile(new EntitySource_Misc("Accesory_AggroRuneScroll"), Player.Center, Vector2.Zero, ModContent.ProjectileType<AggroRuneFriendly>(), (int)(500f * Player.GetDamage(DamageClass.Magic).Multiplicative), 0, Player.whoAmI);
             }
-            if (ice && Player.ownedProjectileCounts[ ModContent.ProjectileType<IceRuneFreindly>()] < 1)
+            if (ice > 0 && Player.ownedProjectileCounts[ ModContent.ProjectileType<IceRuneFreindly>()] < 1)
             {
                 Projectile.NewProjectile(new EntitySource_Misc("Accesory_IceRuneScroll"), Player.Center, Vector2.Zero, ModContent.ProjectileType<IceRuneFreindly>(), (int)(300f * Player.GetDamage(DamageClass.Melee).Multiplicative), 0, Player.whoAmI);
             }
             if (leechCooldown > 0)
             {
-                leechCooldown--;
+                leechCooldown -= leech;
             }
         }
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (leech && proj.CountsAsClass(DamageClass.Ranged) && proj.type != ModContent.ProjectileType<LeechRuneFreindly>() && leechCooldown == 0)
+            if (leech > 0 && proj.CountsAsClass(DamageClass.Ranged) && proj.type != ModContent.ProjectileType<LeechRuneFreindly>() && leechCooldown == 0)
             {
                 leechCooldown = 30;
                 float theta = MathHelper.ToRadians(Main.rand.Next(0, 360));
