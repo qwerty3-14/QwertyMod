@@ -1310,7 +1310,7 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
                     Main.screenPosition.Y = OLORD.position.Y - 100;
                 }
             }
-            if (shake)
+            if (shake && ModContent.GetInstance<QwertyConfig>().OLORDScreenShake)
             {
                 Main.screenPosition.X += Main.rand.Next(-20, 21);
                 Main.screenPosition.Y += Main.rand.Next(-20, 21);

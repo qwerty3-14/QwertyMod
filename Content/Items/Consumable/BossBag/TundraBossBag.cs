@@ -8,6 +8,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 
 using Terraria.GameContent.ItemDropRules;
+using QwertyMod.Content.Items.Weapon.Ranged.SpecialAmmo;
 
 namespace QwertyMod.Content.Items.Consumable.BossBag
 {
@@ -43,7 +44,7 @@ namespace QwertyMod.Content.Items.Consumable.BossBag
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<PolarMask>(), 7));
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<PenguinGenerator>(), 1));
             itemLoot.Add(ItemDropRule.Coins(40000, true));
-            itemLoot.Add(ItemDropRule.FewFromOptions(1, 1, ModContent.ItemType<PenguinClub>(), ModContent.ItemType<PenguinClub>(), ModContent.ItemType<PenguinWhistle>()));
+            itemLoot.Add(ItemDropRule.FewFromOptions(1, 1, ModContent.ItemType<PenguinClub>(), ModContent.ItemType<PenguinLauncher>(), ModContent.ItemType<PenguinWhistle>()));
         }
         
     }

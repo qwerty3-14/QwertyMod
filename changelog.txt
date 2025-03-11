@@ -1,4 +1,8 @@
 Changelog
+1.0.7
+-fixed Polar exterminator treasure bag not dropping penguin launcher
+-added config options to turn off Imperious and OLORD screen shake
+
 1.0.6
 -Invader caster minion tweaks
     -Spheres shot from the casters are capped at zapping 4 times before disapearing

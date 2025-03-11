@@ -23,7 +23,7 @@ namespace QwertyMod.Common
 
         public override void ModifyScreenPosition()
         {
-            if (NPC.AnyNPCs(ModContent.NPCType<Imperious>()))
+            if (NPC.AnyNPCs(ModContent.NPCType<Imperious>())  && ModContent.GetInstance<QwertyConfig>().ImperiousScreenShake)
             {
                 for (int i = 0; i < Main.npc.Length; i++)
                 {
