@@ -54,7 +54,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert
         {
             if(cooldown > 0)
             {
-                cooldown -= effect;
+                cooldown --;
             }
         }
 
@@ -67,28 +67,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert
                     cooldown = 60;
                     for (int i = 0; i < 2; i++)
                     {
-                        Projectile penguin = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc("Accesory_PenguinGenerator"), Player.Center, new Vector2(6 - 12 * i, 0), ModContent.ProjectileType<SlidingPenguinGeneric>(), damageDone + buildUp, 0, Player.whoAmI)];
-                        penguin.GetGlobalProjectile<PenguinLimit>().realeasedPenguin = true;
-                        buildUp = 0;
-                    }
-                }
-                else
-                {
-                    buildUp += damageDone;
-                }
-            }
-        }
-        public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            
-            if (Main.rand.NextBool(12) && (effect > 0) && !target.immortal && cooldown <= 0)
-            {
-                if(cooldown <= 0)
-                {
-                    cooldown = 60;
-                    for (int i = 0; i < 2; i++)
-                    {
-                        Projectile penguin = Main.projectile[Projectile.NewProjectile(Projectile.InheritSource(proj), Player.Center, new Vector2(6 - 12 * i, 0), ModContent.ProjectileType<SlidingPenguinGeneric>(), damageDone + buildUp, 0, Player.whoAmI)];
+                        Projectile penguin = Main.projectile[Projectile.NewProjectile(new EntitySource_Misc("Accesory_PenguinGenerator"), Player.Center, new Vector2(6 - 12 * i, 0), ModContent.ProjectileType<SlidingPenguinGeneric>(), (damageDone + buildUp) * effect, 0, Player.whoAmI)];
                         penguin.GetGlobalProjectile<PenguinLimit>().realeasedPenguin = true;
                         buildUp = 0;
                     }

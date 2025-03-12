@@ -93,14 +93,6 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Combined
             }
 			base.OnHitNPC(target, hit, damageDone);
 		}
-		public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
-		{
-            if(fireOnHit && hit.DamageType == DamageClass.Melee)
-            {
-                target.AddBuff(BuffID.OnFire, 10 * 60);
-            }
-			base.OnHitNPCWithProj(proj, target, hit, damageDone);
-		}
     }
 
     public class FieryWhetstoneTooltips : GlobalItem

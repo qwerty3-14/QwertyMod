@@ -61,28 +61,6 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Caelite
             }
         }
 
-        public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            if (hasEffect && (proj.CountsAsClass(DamageClass.Melee) || proj.CountsAsClass(DamageClass.Magic)) && Player.HasBuff(BuffID.PotionSickness))
-            {
-                int healAmount = damageDone / 2;
-                if (healAmount > healLimiter)
-                {
-                    healAmount = healLimiter;
-                    healLimiter = 0;
-                }
-                else
-                {
-                    healLimiter -= healAmount;
-                }
-                if (Player.GetModPlayer<CaeliteSetBonus>().setBonus)
-                {
-                    healAmount = (int)(healAmount * 1.25f);
-                }
-                Player.buffTime[Player.FindBuffIndex(BuffID.PotionSickness)] -= healAmount;
-            }
-        }
-
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (hasEffect && (hit.DamageType == DamageClass.Melee && Player.HasBuff(BuffID.PotionSickness)))

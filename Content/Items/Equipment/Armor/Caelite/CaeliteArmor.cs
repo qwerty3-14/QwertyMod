@@ -73,14 +73,13 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Caelite
         {
             setBonus = false;
         }
-
-        public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            if (Player.GetModPlayer<CaeliteHelmEffect>().hasEffect && damageDone > target.life && (proj.CountsAsClass(DamageClass.Magic) || proj.CountsAsClass(DamageClass.Melee)))
+		public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+		{
+			if (Player.GetModPlayer<CaeliteHelmEffect>().hasEffect && damageDone > target.life && (hit.DamageType.CountsAsClass(DamageClass.Magic) || hit.DamageType.CountsAsClass(DamageClass.Melee)))
             {
                 target.value = (int)(target.value * 1.25f);
             }
-        }
+		}
     }
 
     public class CaeliteArmorEffect : GlobalProjectile

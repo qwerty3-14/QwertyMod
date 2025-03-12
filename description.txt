@@ -32,6 +32,10 @@ Extra thanks
 
 
 Changelog
+1.0.9
+-Fixed a lot of effects activating twice when hitting with projectiles
+-changed how penguin generator stacked
+
 1.0.8
 -fixed bloody medalion doubling ALL damage instead of just magic damage
 -doppleganger will now cleanse itself of imperfections while equiped

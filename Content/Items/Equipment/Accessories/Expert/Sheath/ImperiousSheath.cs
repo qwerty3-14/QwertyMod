@@ -87,15 +87,6 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.Sheath
             return false;
         }
 
-        public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone) //runs when an npc is hit by the player's projectile
-        {
-            if(ImperiousActive()) { return; }
-            if (proj.owner == Player.whoAmI && effect > 0 && !target.immortal && proj.type != ModContent.ProjectileType<ImperiousP>()) //check if vallid npc and effect is active
-            {
-                damageTally += damageDone * effect; //count up
-            }
-        }
-
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) //runs when an npc is hit by an item (sword blade)
         {
             if(ImperiousActive()) { return; }

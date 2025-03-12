@@ -101,13 +101,8 @@ namespace QwertyMod.Common
         {
             ProcessCriticalFailure();
         }
-        public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
-        {
-                ProcessCritChanceNegatable(ref modifiers);
-        }
         public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            ProcessCriticalFailure();
             if(target.HasBuff<ForkTag>() && proj.owner == Player.whoAmI && (proj.minion || ProjectileID.Sets.MinionShot[proj.type]))
             {
                 Projectile.NewProjectile(proj.GetSource_FromThis(), target.Center, (target.Center - Player.Center).SafeNormalize(-Vector2.UnitY) * 8, ModContent.ProjectileType<TagMissile>(), (int)(damageDone * 0.5f), 0, Player.whoAmI);

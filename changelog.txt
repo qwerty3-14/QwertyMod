@@ -1,4 +1,7 @@
 Changelog
+1.0.9
+-tweaked the way penguin generator stacks
+
 1.0.8
 -fixed bloody medalion doubling ALL damage instead of just magic damage
 -doppleganger will now cleanse itself of imperfections while equiped
@@ -11,7 +14,7 @@ Changelog
     -Imperious Sheath is now stackable (meter builds up faster)
     -All rune scrolls are now stackable
     -Penguin Generator is now stackable
-    
+
 1.0.7
 -fixed Polar exterminator treasure bag not dropping penguin launcher
 -added config options to turn off Imperious and OLORD screen shake

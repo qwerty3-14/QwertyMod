@@ -40,16 +40,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Rhuthinium
             {
                 Player.AddBuff(ModContent.BuffType<RhuthiniumMight>(), 300);
             }
-            RhuthimisWraith(target.Center);
-        }
-
-        public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            if (proj.CountsAsClass(DamageClass.Melee) && meleeSet && target.life < damageDone)
-            {
-                Player.AddBuff(ModContent.BuffType<RhuthiniumMight>(), 300);
-            }
-            if (proj.CountsAsClass(DamageClass.Magic) && magicSet && hit.Crit)
+            if (hit.DamageType.CountsAsClass(DamageClass.Magic) && magicSet && hit.Crit)
             {
                 if(manaLimiter > 0)
                 {
