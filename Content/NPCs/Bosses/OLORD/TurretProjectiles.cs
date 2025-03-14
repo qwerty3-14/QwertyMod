@@ -5,6 +5,8 @@ using Terraria;
 using Terraria.ModLoader;
 
 using Terraria.ID;
+using Terraria.GameContent;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace QwertyMod.Content.NPCs.Bosses.OLORD
 {
@@ -34,6 +36,11 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
             {
                 int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<B4PDust>());
             }
+        }
+        public override bool PreDraw(ref Color drawColor)
+        {
+            drawColor = Color.White;
+            return true;
         }
     }
 
@@ -82,6 +89,11 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
                 QwertyMethods.ProjectileSpread(Projectile.GetSource_FromThis(), Projectile.Center, 4, shotSpeed, ModContent.ProjectileType<TurretShot>(), Projectile.damage, Projectile.knockBack, Main.myPlayer);
                 QwertyMethods.ProjectileSpread(Projectile.GetSource_FromThis(), Projectile.Center, 4, shotSpeed * 1.5f, ModContent.ProjectileType<TurretShot>(), Projectile.damage, Projectile.knockBack, Main.myPlayer, rotation: MathF.PI / 4);
             }
+        }
+        public override bool PreDraw(ref Color drawColor)
+        {
+            drawColor = Color.White;
+            return true;
         }
     }
 
@@ -138,6 +150,11 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
             }
             closest = 10000;
         }
+        public override bool PreDraw(ref Color drawColor)
+        {
+            drawColor = Color.White;
+            return true;
+        }
     }
 
     public class MagicMineLayer : ModProjectile
@@ -181,6 +198,11 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
             {
                 Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center.X, Projectile.Center.Y, 0, 0, ModContent.ProjectileType<MagicMine>(), Projectile.damage, 0, Main.myPlayer);
             }
+        }
+        public override bool PreDraw(ref Color drawColor)
+        {
+            drawColor = Color.White;
+            return true;
         }
     }
 
@@ -227,6 +249,11 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
                     Projectile.frame = 0;
                 }
             }
+        }
+        public override bool PreDraw(ref Color drawColor)
+        {
+            drawColor = Color.White;
+            return true;
         }
     }
 }

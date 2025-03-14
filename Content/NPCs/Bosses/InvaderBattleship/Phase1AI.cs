@@ -308,11 +308,6 @@ namespace QwertyMod.Content.NPCs.Bosses.InvaderBattleship
                             Vector2 spawnHere = Main.player[NPC.target].Center + QwertyMethods.PolarVector(Main.rand.NextFloat() * 700, Main.rand.NextFloat() * MathF.PI * 2f);
                             NPC.NewNPC(NPC.GetSource_FromAI(), (int)spawnHere.X, (int)spawnHere.Y, ModContent.NPCType<Invader.InvaderCaster>());
                         }
-                        if(Main.rand.NextBool(2))
-                        {
-                            Vector2 spawnHere = Main.player[NPC.target].Center;
-                            NPC.NewNPC(NPC.GetSource_FromAI(), (int)spawnHere.X, (int)spawnHere.Y, ModContent.NPCType<Invader.InvaderBehemoth>());
-                        }
                     }
                     distressFrame = ((distressCounter / 6) % 4) + 1;
 

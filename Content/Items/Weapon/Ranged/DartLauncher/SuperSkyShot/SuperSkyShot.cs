@@ -23,7 +23,7 @@ namespace QwertyMod.Content.Items.Weapon.Ranged.DartLauncher.SuperSkyShot
             Item.damage = 40;
             Item.DamageType = DamageClass.Ranged;
             Item.knockBack = 1;
-            Item.value = 50000;
+            Item.value = GearStats.TrueCaeliteWeaponValue;
             Item.rare = ItemRarityID.Orange;
             Item.width = 38;
             Item.height = 32;

@@ -32,6 +32,12 @@ Extra thanks
 
 
 Changelog
+1.0.10
+-Invader Battleship can no longer summon invader behemoths
+-OLORD and all its projectile now glow in the dark
+-fixed super sky shot's sell value
+-Guide to critter companionship will now prevent vitalum headress from sucking the life out of critters
+
 1.0.9
 -Fixed a lot of effects activating twice when hitting with projectiles
 -changed how penguin generator stacked

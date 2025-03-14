@@ -658,6 +658,7 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
         }
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
+            drawColor = Color.White;
             if (activeWalls)
             {
                 Texture2D Walls = TextureAssets.Projectile[ ModContent.ProjectileType<SideLaser>()].Value;
@@ -676,31 +677,20 @@ namespace QwertyMod.Content.NPCs.Bosses.OLORD
             Main.EntitySpriteDraw(BK, new Vector2(NPC.Center.X, NPC.position.Y - (backgroundOffset * NPC.scale)) - Main.screenPosition,
                           BK.Frame(), drawColor, NPC.rotation,
                            BK.Size() / 2, NPC.scale, SpriteEffects.None, 0);
-            return true;
+            
+            spriteBatch.Draw(TextureAssets.Npc[NPC.type].Value, NPC.Center - screenPos,
+                        NPC.frame, drawColor, NPC.rotation,
+                        new Vector2(NPC.width * 0.5f, NPC.height * 0.5f), 1f, SpriteEffects.None, 0f);
+            return false;
         }
         public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
             for (int t = 0; t < turret.Length; t++)
             {
                 spriteBatch.Draw(ModContent.Request<Texture2D>("QwertyMod/Content/NPCs/Bosses/OLORD/Turret").Value, NPC.Center + turretPos[t] * NPC.scale - screenPos,
-                           new Rectangle(0, (int)turret[t].Y * 78, 142, 78), drawColor, turret[t].X,
+                           new Rectangle(0, (int)turret[t].Y * 78, 142, 78), Color.White, turret[t].X,
                            new Vector2(142 * 0.5f, 78 * 0.5f), NPC.scale, SpriteEffects.None, 0f);
             }
-            /*
-            int num33 = (int)((NPC.position.X - 8f) / 16f);
-            int num34 = (int)((NPC.position.X + (float)NPC.width + 8f) / 16f);
-            int num35 = (int)((NPC.position.Y - 8f) / 16f);
-            int num36 = (int)((NPC.position.Y + (float)NPC.height + 8f) / 16f);
-            for (int l = num33; l <= num34; l++)
-            {
-                for (int m = num35; m <= num36; m++)
-                {
-                    if (Lighting.Brightness(l, m) == 0f)
-                    {
-                        color9 = Microsoft.Xna.Framework.Color.Black;
-                    }
-                }
-            }*/
         }
 
         public override void FindFrame(int frameHeight)

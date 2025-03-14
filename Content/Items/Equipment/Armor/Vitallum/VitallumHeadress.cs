@@ -142,7 +142,7 @@ namespace QwertyMod.Content.Items.Equipment.Armor.Vitallum
             {
                 for (int i = 0; i < Main.npc.Length; i++)
                 {
-                    if (Main.npc[i].active && !Main.npc[i].immortal && !Main.npc[i].dontTakeDamage && (Main.npc[i].Center - Player.Center).Length() < 400 && !Main.npc[i].friendly)
+                    if (Main.npc[i].active && !Main.npc[i].immortal && !Main.npc[i].dontTakeDamage && (Main.npc[i].Center - Player.Center).Length() < 400 && !Main.npc[i].friendly && !(Main.npc[i].CountsAsACritter && Player.dontHurtCritters))
                     {
                         Main.npc[i].AddBuff(151, 30);
                         Player.soulDrain++;
