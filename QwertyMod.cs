@@ -166,33 +166,33 @@ namespace QwertyMod
             FortressBlocks = SoundID.Tink;
             if (!Main.dedServ)
             {
-                hydraLegMale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Hydra/HydraLeggings_Legs", EquipType.Legs, ModContent.GetModItem(ModContent.ItemType<HydraLeggings>()));
-                hydraLegFemale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Hydra/HydraLeggings_FemaleLegs", EquipType.Legs, ModContent.GetModItem(ModContent.ItemType<HydraLeggings>()));
-                shamaLegMale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Shaman/ShamanLegs_Legs", EquipType.Legs, ModContent.GetModItem(ModContent.ItemType<ShamanLegs>()));
-                shamanLegFemale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Shaman/ShamanLegs_FemaleLegs", EquipType.Legs, ModContent.GetModItem(ModContent.ItemType<ShamanLegs>()));
-                LuneLegMale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Lune/LuneLeggings_Legs", EquipType.Legs, ModContent.GetModItem(ModContent.ItemType<LuneLeggings>()));
-                LuneLegFemale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Lune/LuneLeggings_FemaleLegs", EquipType.Legs, ModContent.GetModItem(ModContent.ItemType<LuneLeggings>()));
-                RhuthiniumLegMale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Rhuthinium/RhuthiniumGreaves_Legs", EquipType.Legs, ModContent.GetModItem(ModContent.ItemType<RhuthiniumGreaves>()));
-                RhuthiniumLegFemale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Rhuthinium/RhuthiniumGreaves_FemaleLegs", EquipType.Legs, ModContent.GetModItem(ModContent.ItemType<RhuthiniumGreaves>()));
-                CaeliteLegMale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Caelite/CaeliteGreaves_Legs", EquipType.Legs, ModContent.GetModItem(ModContent.ItemType<CaeliteGreaves>()));
-                CaeliteLegFemale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Caelite/CaeliteGreaves_FemaleLegs", EquipType.Legs, ModContent.GetModItem(ModContent.ItemType<CaeliteGreaves>()));
-                GaleLegMale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Gale/GaleSwiftRobes_Legs", EquipType.Legs, ModContent.GetModItem(ModContent.ItemType<GaleSwiftRobes>()));
-                GaleLegFemale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Gale/GaleSwiftRobes_FemaleLegs", EquipType.Legs, ModContent.GetModItem(ModContent.ItemType<GaleSwiftRobes>()));
-                VitLegMale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Vitallum/VitallumJeans_Legs", EquipType.Legs, ModContent.GetModItem(ModContent.ItemType<VitallumJeans>()));
-                VitLegFemale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Vitallum/VitallumJeans_FemaleLegs", EquipType.Legs, ModContent.GetModItem(ModContent.ItemType<VitallumJeans>()));
-                BionicLegMale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Bionic/BionicLimbs_Legs", EquipType.Legs, ModContent.GetModItem(ModContent.ItemType<BionicLimbs>()));
-                BionicLegFemale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Bionic/BionicLimbs_FemaleLegs", EquipType.Legs, ModContent.GetModItem(ModContent.ItemType<BionicLimbs>()));
-                invaderLanderMale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Invader/InvaderLanders_Legs", EquipType.Legs, ModContent.GetModItem(ModContent.ItemType<InvaderLanders>()));
-                invaderLanderFemale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Invader/InvaderLanders_FemaleLegs", EquipType.Legs, ModContent.GetModItem(ModContent.ItemType<InvaderLanders>()));
-                RuneLegMale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Vanity/RunicRobe/RunicRobe_Legs", EquipType.Legs, ModContent.GetModItem(ModContent.ItemType<RunicRobe>()));
-                RuneLegFemale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Vanity/RunicRobe/RunicRobe_FemaleLegs", EquipType.Legs, ModContent.GetModItem(ModContent.ItemType<RunicRobe>()));
+                hydraLegMale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Hydra/HydraLeggings_Legs", EquipType.Legs, name: "HydraLeggingsMale");
+                hydraLegFemale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Hydra/HydraLeggings_FemaleLegs", EquipType.Legs, name: "HydraLeggingsFemale");
+                shamaLegMale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Shaman/ShamanLegs_Legs", EquipType.Legs, name: "ShamanLegsMale");
+                shamanLegFemale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Shaman/ShamanLegs_FemaleLegs", EquipType.Legs, name: "ShamanLegsFemal");
+                LuneLegMale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Lune/LuneLeggings_Legs", EquipType.Legs, name: "LuneLegsMale");
+                LuneLegFemale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Lune/LuneLeggings_FemaleLegs", EquipType.Legs, name: "LuneLegsFemale");
+                RhuthiniumLegMale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Rhuthinium/RhuthiniumGreaves_Legs", EquipType.Legs, name: "RhuthiniumLegsMale");
+                RhuthiniumLegFemale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Rhuthinium/RhuthiniumGreaves_FemaleLegs", EquipType.Legs, name: "RhuthiniumLegsFemale");
+                CaeliteLegMale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Caelite/CaeliteGreaves_Legs", EquipType.Legs, name: "CaeliteLegsMale");
+                CaeliteLegFemale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Caelite/CaeliteGreaves_FemaleLegs", EquipType.Legs, name: "CaeliteLegsFemale");
+                GaleLegMale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Gale/GaleSwiftRobes_Legs", EquipType.Legs, name: "GaleLegsMale");
+                GaleLegFemale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Gale/GaleSwiftRobes_FemaleLegs", EquipType.Legs, name: "GaleLegsFemale");
+                VitLegMale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Vitallum/VitallumJeans_Legs", EquipType.Legs, name: "VitallumLegsMale");
+                VitLegFemale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Vitallum/VitallumJeans_FemaleLegs", EquipType.Legs, name: "VitallumLegsFemale");
+                BionicLegMale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Bionic/BionicLimbs_Legs", EquipType.Legs, name: "BionicLegsMale");
+                BionicLegFemale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Bionic/BionicLimbs_FemaleLegs", EquipType.Legs, name: "BionicLegsFemale");
+                invaderLanderMale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Invader/InvaderLanders_Legs", EquipType.Legs, name: "InvaderLegsMale");
+                invaderLanderFemale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Invader/InvaderLanders_FemaleLegs", EquipType.Legs, name: "InvaderLegsFemale");
+                RuneLegMale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Vanity/RunicRobe/RunicRobe_Legs", EquipType.Legs, name: "RuneLegsMale");
+                RuneLegFemale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Vanity/RunicRobe/RunicRobe_FemaleLegs", EquipType.Legs, name: "RuneLegsFemale");
 
                 HeroShieldHandOn = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Hero/HeroShield_HandsOn", EquipType.HandsOn, ModContent.GetModItem(ModContent.ItemType<HeroShield>()));
                 HeroShieldShield = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Hero/HeroShield_Shield", EquipType.Shield, ModContent.GetModItem(ModContent.ItemType<HeroShield>()));
                 HeroShieldShieldUp = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Hero/HeroShield_ShieldUp", EquipType.Shield, name: "ShieldUp");
 
-                HeroPantsMale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Hero/HeroPants_Legs", EquipType.Legs, ModContent.GetModItem(ModContent.ItemType<HeroPants>()));
-                HeroPantsFemale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Hero/HeroPants_FemaleLegs", EquipType.Legs, ModContent.GetModItem(ModContent.ItemType<HeroPants>()));
+                HeroPantsMale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Hero/HeroPants_Legs", EquipType.Legs, name: "HeroPantsMale");
+                HeroPantsFemale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/Armor/Hero/HeroPants_FemaleLegs", EquipType.Legs, name: "HeroPantsFemale");
 
                 CorsetMale = EquipLoader.AddEquipTexture(this, "QwertyMod/Content/Items/Equipment/VanityAccessories/Corset/Corset_WaistMale", EquipType.Waist, name: "CorsetMale");
 

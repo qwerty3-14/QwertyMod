@@ -32,6 +32,9 @@ Extra thanks
 
 
 Changelog
+1.0.11
+-Fixed mod not working on latest tmodloader version
+
 1.0.10
 -Invader Battleship can no longer summon invader behemoths
 -OLORD and all its projectile now glow in the dark

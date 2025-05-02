@@ -8,6 +8,7 @@ using Terraria.Enums;
 using Terraria.GameContent;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 
@@ -113,7 +114,7 @@ namespace QwertyMod.Content.Items.Weapon.Magic.HydraBeam
                     player.statLife -= (int)(player.inventory[player.selectedItem].mana * player.manaCost * player.GetModPlayer<BloodMedalionEffect>().effect);
                     if (player.statLife <= 0)
                     {
-                        player.KillMe(PlayerDeathReason.ByCustomReason(player.name + " madly drained " + (player.Male ? "his " : "her") + " lifeforce!"), (int)(player.inventory[player.selectedItem].mana * player.manaCost), 0);
+                        player.KillMe(PlayerDeathReason.ByCustomReason(NetworkText.FromLiteral(player.name + " madly drained " + (player.Male ? "his " : "her") + " lifeforce!")), (int)(player.inventory[player.selectedItem].mana * player.manaCost), 0);
                     }
                 }
                 player.itemTime = player.itemAnimation = 10;

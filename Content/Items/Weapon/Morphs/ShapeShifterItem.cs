@@ -30,7 +30,7 @@ namespace QwertyMod.Content.Items.Weapon.Morphs
                         player.statLife -= ouchAmt;
                         if(player.statLife < 0)
                         {
-                            player.KillMe(PlayerDeathReason.ByCustomReason(player.name + " morphed into nothing!"), ouchAmt, 0);
+                            player.KillMe(PlayerDeathReason.ByCustomReason(NetworkText.FromLiteral(player.name + " morphed into nothing!")), ouchAmt, 0);
                         }
                         return true;
                     }

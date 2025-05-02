@@ -6,6 +6,7 @@ using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 
@@ -42,7 +43,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories.Expert.Doppleganger
             Player player = Main.LocalPlayer;
             if (player.difficulty != 2)
             {
-                player.KillMe(PlayerDeathReason.ByCustomReason(player.name + " tampered with forces beyond " + (player.Male ? "his" : "her") + " control!"), 1000, 0);
+                player.KillMe(PlayerDeathReason.ByCustomReason(NetworkText.FromLiteral(player.name + " tampered with forces beyond " + (player.Male ? "his" : "her") + " control!")), 1000, 0);
             }
             else
             {

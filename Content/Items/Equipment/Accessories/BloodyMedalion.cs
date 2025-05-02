@@ -61,7 +61,7 @@ namespace QwertyMod.Content.Items.Equipment.Accessories
                 Player.statLife -= lifeDrain;
                 if (Player.statLife <= 0)
                 {
-                    Player.KillMe(PlayerDeathReason.ByCustomReason(Player.name + " madly drained " + (Player.Male ? "his" : "her") + " lifeforce!"), lifeDrain, 0);
+                    Player.KillMe(PlayerDeathReason.ByCustomReason(NetworkText.FromLiteral(Player.name + " madly drained " + (Player.Male ? "his" : "her") + " lifeforce!")), lifeDrain, 0);
                 }
                 
 
